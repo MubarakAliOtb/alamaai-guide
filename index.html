@@ -4719,6 +4719,7 @@ button.dw-v:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .dw-pairs li{grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:14px;border-color:var(--t-teal);background:var(--okbg)}
 .dw-pairs li b{color:var(--t-teal)}
 .dw-pairs li span{font-weight:400}
+.dw-easy{margin:6px 0 0;font-size:clamp(14.5px,1.35vw,20px);color:var(--ink2);font-weight:700}
 .dw-ans{border-inline-start:5px solid var(--t-teal);background:var(--okbg);border-radius:14px;padding:12px 16px}
 .dw-ans>b{font-size:14px;color:var(--t-teal)}
 .dw-ans p{margin:4px 0 0;font-size:clamp(17px,1.75vw,27px);line-height:1.8;color:var(--ink)}
@@ -11421,7 +11422,7 @@ function stClipOn(id,bar,timed){const my=stSeq,box=$('#stSlide .st-clip'),v=box&
    لا حركة دائمة ولا إشعارات: الحركة عند الإنجاز والتفاعل فقط، وتُحذف مع «تقليل الحركة». */
 const HY_GOAL=5;
 /* الجديد في الدليل، الأحدث أولًا: [رقم الإصدار، النص، تبويب أو رابط] */
-const HY_REL=[[91,'واجهة أوضح: أزرار وشرائح بمقاس واحد في كل الأدوات، وأهداف لمس أكبر على الهاتف والشاشة الذكية','#tools'],[90,'نسخة عامة من الدليل: التنزيل والطباعة فيها مباشرة لكل من يفتحها، بلا حساب','#about'],[89,'تنزيل الملفات: نافذة تبيّن السبب لمن لا تتيح صلاحيته التنزيل، ومعها محتوى الملف للنسخ أو صفحاته صورًا','#about'],[88,'الاختبار القصير: «أكمل الحديث»، ثم صواب وخطأ، واختيار من متعدد، وثلاثة فراغات (مصطلح أو إكمال أو ثلاث نقاط)، مع خلط البدائل في النموذجين','#tk/quiz'],[84,'عروض الدروس: عرض تفاعلي لكل حصة على الشاشة الذكية، تختار الصف وتفتح العرض مباشرة','#tk/decks'],[83,'حقيبة المعلم: «رحلة الصف» بمحطاتها وتحدي الأسبوع والفِرق ولوحة الصف، وملاحظات الطالب وورقة لقاء ولي الأمر','#bag/quest'],[81,'«خلاصة الدليل»: الدليل النظري كله في قراءة واحدة، بسؤال كل جزء وفكرته الحاكمة، ونسخة PDF','#brief'],[78,'منصة «الحلول البصرية» صارت داخل الدليل: المختبر والنماذج والأدوات والحقائب التدريبية','#vs'],[76,'ثلاث أدوات للاختبار على مؤلفات التوجيه: القصير والنهائي والمخصص، وتنزيلها PDF','#tk/final'],[76,'«ركّب المعنى»: بطاقات تحدٍّ للدرس بقطع ورقية ومهارات التفكير العليا','#tk/build'],[75,'الاختبار القصير على نموذج التوجيه: «الأحاديث المقرر حفظها» و٩ + ١١ = ٢٠ في ورقتين','#tk/quiz'],[75,'ديوانية الأسئلة: السحب والإفلات، ولونا الفريقين على الخيارات، وأسئلة من أكثر من صف','#tk/diwan'],[74,'هدف «أسبوعك»، والاحتفاء بالإنجاز، وزر «جرّبتها في صفي» على كل بطاقة',''],[73,'سبعة عشر مقطعًا حركيًا في تبويب «مقاطع» وفي الستوري','clips'],[70,'لعبة «ديوانية الأسئلة» في ألعاب الصف','#tk/diwan']];
+const HY_REL=[[94,'الاختبار القصير: النموذج (ب) بأسئلة غير أسئلة (أ)، وكل اختبار جديد بأسئلة أخرى؛ وملفات Word بلا صفحة فارغة','#tk/quiz'],[91,'واجهة أوضح: أزرار وشرائح بمقاس واحد في كل الأدوات، وأهداف لمس أكبر على الهاتف والشاشة الذكية','#tools'],[90,'نسخة عامة من الدليل: التنزيل والطباعة فيها مباشرة لكل من يفتحها، بلا حساب','#about'],[89,'تنزيل الملفات: نافذة تبيّن السبب لمن لا تتيح صلاحيته التنزيل، ومعها محتوى الملف للنسخ أو صفحاته صورًا','#about'],[88,'الاختبار القصير: «أكمل الحديث»، ثم صواب وخطأ، واختيار من متعدد، وثلاثة فراغات (مصطلح أو إكمال أو ثلاث نقاط)، مع خلط البدائل في النموذجين','#tk/quiz'],[84,'عروض الدروس: عرض تفاعلي لكل حصة على الشاشة الذكية، تختار الصف وتفتح العرض مباشرة','#tk/decks'],[83,'حقيبة المعلم: «رحلة الصف» بمحطاتها وتحدي الأسبوع والفِرق ولوحة الصف، وملاحظات الطالب وورقة لقاء ولي الأمر','#bag/quest'],[81,'«خلاصة الدليل»: الدليل النظري كله في قراءة واحدة، بسؤال كل جزء وفكرته الحاكمة، ونسخة PDF','#brief'],[78,'منصة «الحلول البصرية» صارت داخل الدليل: المختبر والنماذج والأدوات والحقائب التدريبية','#vs'],[76,'ثلاث أدوات للاختبار على مؤلفات التوجيه: القصير والنهائي والمخصص، وتنزيلها PDF','#tk/final'],[76,'«ركّب المعنى»: بطاقات تحدٍّ للدرس بقطع ورقية ومهارات التفكير العليا','#tk/build'],[75,'الاختبار القصير على نموذج التوجيه: «الأحاديث المقرر حفظها» و٩ + ١١ = ٢٠ في ورقتين','#tk/quiz'],[75,'ديوانية الأسئلة: السحب والإفلات، ولونا الفريقين على الخيارات، وأسئلة من أكثر من صف','#tk/diwan'],[74,'هدف «أسبوعك»، والاحتفاء بالإنجاز، وزر «جرّبتها في صفي» على كل بطاقة',''],[73,'سبعة عشر مقطعًا حركيًا في تبويب «مقاطع» وفي الستوري','clips'],[70,'لعبة «ديوانية الأسئلة» في ألعاب الصف','#tk/diwan']];
 const HY_COL=['#2563EB','#14B8A6','#FF7A1A','#FFB26B','#EEF4FF'];
 const HY_SV='fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
 const HY_IC={try:`<svg class="ic" viewBox="0 0 24 24" ${HY_SV}><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>`,
@@ -12628,12 +12629,15 @@ function tpQuran(L,sv,gi){const memo=L[1]==='الحفظ والتدبر';const tm
 function fdPlanDoc(key){const L=fdLessonOf(key);if(!L)return null;const [gi,wi,li]=key.split('.').map(Number);const sv=(fdPrefs.pl||{})[key]||{};
   const isQ=L[0]==='قرآن';const land=!isQ;
   const nextL=(()=>{const all=[];(FD_PLANS[gi]||[]).forEach((ws,i)=>ws.forEach((x,j)=>{if(x[0]===L[0])all.push([i,j,x])}));const k=all.findIndex(a=>a[0]===wi&&a[1]===li);const n=all.slice(k+1).find(a=>a[2][2]!==L[2]);return n?n[2][2]:''})();
-  const body=(isQ?tpQuran(L,sv,gi):tpIslamic(L,sv,gi,nextL))+tpGap();
+  const body=(isQ?tpQuran(L,sv,gi):tpIslamic(L,sv,gi,nextL));
   const name=(isQ?'قرآن':'إسلامية')+'_ث'+gi+'_'+L[2].split('·')[0].trim().replace(/\s+/g,'-')+'.docx';
   return {body,land,m:isQ?567:720,name,L,gi,wi,li}}
 const fdSect=(land,m)=>{const W=land?16838:11906,H=land?11906:16838,M=m||850;return `<w:sectPr><w:pgSz w:w="${W}" w:h="${H}"${land?' w:orient="landscape"':''}/><w:pgMar w:top="${M}" w:right="${M}" w:bottom="${M}" w:left="${M}" w:header="400" w:footer="400" w:gutter="0"/><w:bidi/></w:sectPr>`};
 const fdCW=land=>(land?16838:11906)-1700;
-async function fdDocx(sections){const JSZip=await fdLoadZip();let body='';sections.forEach((sc,i)=>{body+=sc.body;if(i<sections.length-1)body+=`<w:p><w:pPr>${fdSect(sc.land,sc.m)}</w:pPr></w:p>`});
+/* v94: فقرة بارتفاع ١ نقطة تحمل فاصل القسم (وتختم الملف)، فلا تنتقل وحدها إلى صفحة جديدة؛ وتُحذف الفقرات الفارغة في آخر كل قسم */
+const FD_TINY=x=>`<w:p><w:pPr><w:bidi/><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/><w:rPr><w:sz w:val="2"/><w:szCs w:val="2"/></w:rPr>${x||''}</w:pPr></w:p>`;
+const fdTrimEnd=b=>{let t=b,p;do{p=t;t=t.replace(/(<w:p\/>|<w:p><w:pPr><w:bidi\/><w:spacing w:before="0" w:after="0" w:line="180" w:lineRule="exact"\/><\/w:pPr><\/w:p>)$/,'')}while(t!==p);return t};
+async function fdDocx(sections){const JSZip=await fdLoadZip();let body='';sections.forEach((sc,i)=>{body+=fdTrimEnd(sc.body)+FD_TINY(i<sections.length-1?fdSect(sc.land,sc.m):'')});
   const doc=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><w:body>${body}${fdSect(sections[sections.length-1].land,sections[sections.length-1].m)}</w:body></w:document>`;
   const z=new JSZip();z.file('[Content_Types].xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>');
   z.file('_rels/.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>');
@@ -14459,7 +14463,7 @@ NB_R.cv=()=>{const ttl=`${nbIsG()?'معلمة':'معلم'} ${nbSubjAnd()}`;
  ${nbH('التكريمات')}<div class="nb-lines">${nbRows(4,i=>nbB('cv.h.'+i,''))}</div>`};
 /* ---------- CSS الصفحات (يُستعمل في المعاينة والطباعة والملف المصدَّر) ---------- */
 const NB_PCSS=`
-.nbp{box-sizing:border-box;width:210mm;height:297mm;padding:10mm 12mm 14mm;background:#fff;color:#0D1B3D;direction:rtl;text-align:right;font-family:Sym,"Alm Sans Arabic",Tahoma,sans-serif;font-size:9pt;line-height:1.5;position:relative;overflow:hidden;display:flex;flex-direction:column;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-weight:400}
+.nbp{box-sizing:border-box;width:210mm;height:297mm;padding:10mm 12mm 14mm;background:#fff;color:#0D1B3D;direction:rtl;text-align:right;font-family:Sym,"Alm Sans Arabic",Tahoma,sans-serif;font-size:9pt;line-height:1.5;position:relative;overflow:hidden;contain:paint;clip-path:inset(0);display:flex;flex-direction:column;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-weight:400}
 .nbp *{box-sizing:border-box}.nbp h1,.nbp h2,.nbp h3,.nbp h4,.nbp p,.nbp ul,.nbp ol{margin:0;padding:0;font-family:inherit;letter-spacing:0}.nbp ul,.nbp ol{list-style:none}
 .nbp b,.nbp strong{font-weight:700}.nbp small{font-size:.86em}.nbp em{font-style:normal}
 .nbp .ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
@@ -14518,7 +14522,7 @@ span.nbf{display:inline-block;min-width:24mm;max-width:100%;border-bottom:.3mm d
 .nbc-spec{position:absolute;inset:auto 0 0 0;height:4mm;background:linear-gradient(225deg,#0D1B3D 0%,#2563EB 50%,#14B8A6 100%)}
 /* الفاصل والمحتويات */
 .nbp-div{background:linear-gradient(225deg,#EEF4FF 0%,#E7F8F5 55%,#FFF3E8 100%);justify-content:center;padding:20mm}
-.nbp-div>i{position:absolute;border-radius:50%;border:.5mm solid rgba(37,99,235,.18)}.nbd-o1{width:170mm;height:170mm;left:-70mm;top:-60mm}.nbd-o2{width:110mm;height:110mm;right:-40mm;bottom:-30mm;border-color:rgba(20,184,166,.25)!important}
+.nbp-div>i{position:absolute;border-radius:50%;border:.5mm solid rgba(37,99,235,.18)}.nbd-o1{width:170mm;height:170mm;left:-70mm;top:-60mm}.nbd-o2{width:110mm;height:110mm;right:-40mm;bottom:-6mm;border-color:rgba(20,184,166,.25)!important}
 .nbd{position:relative;display:flex;flex-direction:column;gap:2mm}.nbd-k{font-size:12pt;color:#4A5878;font-weight:700}.nbd-n{font-size:72pt;line-height:1;color:#FF7A1A}.nbd h2{font-size:30pt;color:#0D1B3D;line-height:1.2;margin-top:2mm}.nbd p{font-size:11pt;color:#4A5878}
 .nbd ul{margin-top:8mm;display:flex;flex-direction:column;gap:2.2mm;max-width:130mm}.nbd li{display:flex;justify-content:space-between;gap:4mm;font-size:10.5pt;border-bottom:.3mm dashed #B9C9E8;padding-bottom:1.4mm}.nbd li b{color:#1D4ED8;white-space:nowrap}.nbd li small{display:block;font-size:7.6pt;color:#4A5878;font-weight:400}
 .nbd-f{position:absolute;bottom:10mm;inset-inline:20mm;font-size:8pt;color:#4A5878}
@@ -14725,7 +14729,7 @@ async function nbExport(){nbToast('يُجهَّز الملف…');const [n,h]=nb
   try{const [r,b,s]=await Promise.all(['fonts/AlmSansArabic-Regular.woff2','fonts/AlmSansArabic-Bold.woff2','fonts/amiri-sym.woff2'].map(nbDataURL));fonts=`@font-face{font-family:"Alm Sans Arabic";src:url(${r}) format("woff2");font-weight:400}@font-face{font-family:"Alm Sans Arabic";src:url(${b}) format("woff2");font-weight:700}@font-face{font-family:Sym;src:url(${s}) format("woff2");unicode-range:U+FDFA,U+FD3E-FD3F}`}catch(e){}
   const ids=[...new Set([...h.matchAll(/href="#([\w-]+)"/g)].map(m=>m[1]))];const sym=ids.map(id=>{const x=document.getElementById(id);return x&&x.tagName.toLowerCase()==='symbol'?x.outerHTML:''}).join('');
   const title='دفتر المعلم'+(NB.t.name?' – '+NB.t.name:'');
-  const doc=`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${nbE(title)}</title><style>${fonts}html,body{margin:0;background:#E9EEF8}body{font-family:"Alm Sans Arabic",Tahoma,sans-serif}.nbx-bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px;background:#0D1B3D;color:#fff;font-size:14px}.nbx-bar b{font-size:16px}.nbx-bar span{flex:1;color:#C9D6F2;min-width:200px}.nbx-bar button{font:inherit;font-weight:700;background:#FF7A1A;color:#0D1B3D;border:0;border-radius:999px;padding:8px 18px;cursor:pointer}.nbx-pages{display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px 0 40px}.nbx-pages .nbp{box-shadow:0 6px 18px rgba(13,27,61,.18)}@media (max-width:820px){.nbx-pages{zoom:calc(100vw / 820px)}}${NB_PCSS}@page{size:A4 portrait;margin:0}@media print{html,body{background:#fff}.nbx-bar{display:none}.nbx-pages{display:block;padding:0;zoom:1}.nbx-pages .nbp{box-shadow:none;break-after:page;page-break-after:always}.nbx-pages .nbp:last-child{break-after:auto;page-break-after:auto}}</style></head><body><div class="nbx-bar"><b>${nbE(title)}</b><span>${nbA(n)} صفحة A4. للطباعة أو الحفظ PDF: الورق A4، والهوامش «بلا»، مع «رسومات الخلفية». ويمكنك الكتابة في الخانات المنقطة قبل الطباعة.</span><button onclick="print()">اطبع</button></div><svg width="0" height="0" style="position:absolute" aria-hidden="true">${sym}</svg><main class="nbx-pages">${h}</main></body></html>`;
+  const doc=`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${nbE(title)}</title><style>${fonts}html,body{margin:0;background:#E9EEF8}body{font-family:"Alm Sans Arabic",Tahoma,sans-serif}.nbx-bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px;background:#0D1B3D;color:#fff;font-size:14px}.nbx-bar b{font-size:16px}.nbx-bar span{flex:1;color:#C9D6F2;min-width:200px}.nbx-bar button{font:inherit;font-weight:700;background:#FF7A1A;color:#0D1B3D;border:0;border-radius:999px;padding:8px 18px;cursor:pointer}.nbx-pages{display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px 0 40px}.nbx-pages .nbp{box-shadow:0 6px 18px rgba(13,27,61,.18)}@media (max-width:820px){.nbx-pages{zoom:calc(100vw / 820px)}}${NB_PCSS}@page{size:A4 portrait;margin:0}@media print{html,body{background:#fff}.nbx-bar{display:none}.nbx-pages{display:block;padding:0;zoom:1}.nbx-pages .nbp{box-shadow:none;break-after:page;page-break-after:always;height:296.6mm}.nbx-pages .nbp:last-child{break-after:auto;page-break-after:auto}}</style></head><body><div class="nbx-bar"><b>${nbE(title)}</b><span>${nbA(n)} صفحة A4. للطباعة أو الحفظ PDF: الورق A4، والهوامش «بلا»، مع «رسومات الخلفية». ويمكنك الكتابة في الخانات المنقطة قبل الطباعة.</span><button onclick="print()">اطبع</button></div><svg width="0" height="0" style="position:absolute" aria-hidden="true">${sym}</svg><main class="nbx-pages">${h}</main></body></html>`;
   const name=`دفتر-المعلم${NB.t.name?'-'+NB.t.name.replace(/[\\/:*?"<>|]+/g,'').trim().replace(/\s+/g,'-'):''}.html`;
   nbSaveFile(new Blob([doc],{type:'text/html'}),name,'نُزّل الدفتر')}
 function nbSaveFile(blob,name,msg){if(typeof fdSaveBlob==='function'){fdSaveBlob(blob,name,msg);return}const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);nbToast(msg)}
@@ -15408,7 +15412,7 @@ const qzIsSup=Q=>Q.subj==='islamic'&&tkCur!=='custom';
 const qzTtl=()=>TK.qz.subj==='quran'?'ورقة تدريب':tkCur==='custom'?'اختبار':'الاختبار القصير';
 function qzQ(){const Q=TK.qz;if(!FD_PLANS[Q.g])Q.g=tkGrades()[0]||8;if(!['islamic','quran'].includes(Q.subj))Q.subj='islamic';const sp=(fdPrefs&&fdPrefs.spec)||{};
   Q.fmt=tkCur==='custom'?'spec':'sup';if(!Array.isArray(Q.ty)||!Q.ty.length)Q.ty=['mcq','tf','fill','match','order'];if(!['auto','mcq','tf','fill','match'].includes(Q.ta))Q.ta='auto';if(!['auto','mcq','tf','fill','match'].includes(Q.tb))Q.tb='auto';if(!['auto','term','fillw','list','open'].includes(Q.tc))Q.tc='auto';if(!Array.isArray(Q.hsel))Q.hsel=[];
-  if(Q.sp&&(typeof Q.sp!=='object'||!Array.isArray(Q.sp.h)||!Array.isArray(Q.sp.a)||!Array.isArray(Q.sp.b)||!Array.isArray(Q.sp.c)))Q.sp=null;if(Q.sp)Q.sp.h=[0,1].map(m=>Array.isArray(Q.sp.h[m])?Q.sp.h[m].filter(i=>Number.isInteger(i)):[]);
+  if(Q.sp&&(typeof Q.sp!=='object'||!Array.isArray(Q.sp.h)||!Array.isArray(Q.sp.a)||!Array.isArray(Q.sp.b)||!Array.isArray(Q.sp.c)))Q.sp=null;if(Q.sp&&Q.sp.B&&!(typeof Q.sp.B==='object'&&['a','b','c'].every(k=>Array.isArray(Q.sp.B[k]))))delete Q.sp.B;if(Q.sp)Q.sp.h=[0,1].map(m=>Array.isArray(Q.sp.h[m])?Q.sp.h[m].filter(i=>Number.isInteger(i)):[]);
   if(!Array.isArray(Q.pc)||Q.pc.length!==3)Q.pc=Array.isArray(sp.pc)&&sp.pc.length===3?sp.pc.map(Number):[30,40,30];if(!Q.tot)Q.tot=+sp.tot||20;if(!Q.ver)Q.ver=2;if(!Q.dur)Q.dur=20;if(!Array.isArray(Q.paper))Q.paper=[];if(!Q.seed)Q.seed=Math.floor(Math.random()*1e9);return Q}
 /* دروس الصف في الخطة بأوزانها (عدد الحصص) ومجالها */
 function qzLessons(g,subj){const W=FD_PLANS[g]||[];const cnt={},order=[],wk={},dm={};W.forEach((ws,wi)=>{const isl=ws.filter(x=>x[0]==='إسلامية');const per=isl.length===1?2:1;ws.forEach(x=>{const ok=subj==='quran'?x[0]==='قرآن':x[0]==='إسلامية'&&x[1]!=='مراجعة';if(!ok)return;const k=x[2];if(!(k in cnt)){cnt[k]=0;order.push(k);wk[k]=wi;dm[k]=x[1]}cnt[k]+=subj==='quran'?1:per})});return order.map(k=>({k,w:cnt[k],wi:wk[k],d:dm[k]}))}
@@ -15464,7 +15468,9 @@ function qzGiven(x,G){if(!G||!G.length||x.src==='o'||!x.k)return false;const I=q
 function qzLeaks(x,LS){if(x.src==='o')return false;if(LS.length){const q=qzGet(x);if(!q)return false;const t=' '+qzNm([q.q,...(q.opts||[]),...((q.pairs||[]).flat()),...(q.items||[])].join(' ')).s.trim()+' ';if(LS.some(k=>t.includes(k)))return true}return qzGiven(x,LS.G)}
 const qzSupLS=S=>qzLeakSet(TK.qz.g,[...(S.h[0]||[]),...(TK.qz.ver>1?(S.h[1]||[]):[])]);
 const qzPartN=(L,t)=>t==='match'?L.reduce((a,x)=>{const q=qzGet(x);return a+((q&&q.pairs)||[]).length},0):L.length;
-function qzSupUsed(S){return new Set([...S.a,...S.b,...S.c].map(qzKey))}
+function qzSupUsed(S){return new Set([...S.a,...S.b,...S.c,...(S.B?[...S.B.a,...S.B.b,...S.B.c]:[])].map(qzKey))}
+/* v94: النموذج (ب) أسئلته الخاصة (S.B) في الجزئيات الثلاث؛ وورقة قديمة بلا S.B يأخذ (ب) فيها أسئلة (أ) بترتيب آخر كما كانت */
+const qzSupForm=(S,m)=>m&&S.B?Object.assign({},S,{a:S.B.a,b:S.B.b,c:S.B.c}):S;
 /* ---------- v88: تقارب البنود، والاختيار ---------- */
 /* تقارب بندين: من درس واحد وكلماتهما الظاهرة متداخلة (سؤالان عن معلومة واحدة)، أو يظهر في أحدهما جواب الآخر؛ أو فراغان جوابهما واحد.
    تقدير آلي بالكلمات يُتجنب به التكرار عند الاختيار، ولا يغني عن مراجعة المعلم */
@@ -15504,7 +15510,9 @@ function qzSupBuild(){const Q=TK.qz,g=Q.g;const H=qzHad(g);const hs=[...new Set(
   if(hs.length<3)notes.push(`اخترت ${lxCnt(hs.length,'حديثًا واحدًا','حديثين','أحاديث','حديثًا')} من الأحاديث المقرر حفظها، والسؤال الأول ثلاثة أحاديث (٣ + ٣ + ٣)؛ فاختر ثلاثة على الأقل.`);
   else if(hs.length<6&&Q.ver>1)notes.push('الأحاديث المختارة أقل من ستة، فيشترك النموذجان في بعض أحاديث السؤال الأول.');
   /* السؤال الثاني: (أ) و(ب) موضوعيتان بأربع جزئيات. التلقائي: (أ) صواب وخطأ و(ب) اختيار من متعدد؛ وإن لم يكفِ البنك فالنوع الذي يليه */
-  const sel=(Q.sel||[]).slice();const LS=qzLeakSet(g,Q.ver>1?[...A,...B]:A);const nl=x=>!qzLeaks(x,LS);const bank=t=>qzBank(g,sel,t).filter(nl);const N=t=>t==='tf'&&!qzTfOk(bank(t),4)?0:bank(t).length;const need=t=>t==='match'?1:4;
+  const sel=(Q.sel||[]).slice();const LS=qzLeakSet(g,Q.ver>1?[...A,...B]:A);const rec=new Set(Array.isArray(Q.hist)?Q.hist:[]);const nl=x=>!qzLeaks(x,LS);const bank0=t=>qzBank(g,sel,t).filter(nl);
+  /* v94: ما ظهر في آخر الاختبارات المولَّدة على هذا الجهاز يُترك ما دام البنك يكفي النموذجين بدونه */
+  const fresh=(L,n)=>{const F=L.filter(x=>!rec.has(qzKey(x)));return F.length>=n*(Q.ver>1?2:1)?F:L};const bank=t=>fresh(bank0(t),t==='match'?1:4);const N=t=>t==='tf'&&!qzTfOk(bank(t),4)?0:bank(t).length;const need=t=>t==='match'?1:4;
   /* الصواب والخطأ للجزئيتين معًا: يلزم ما يكفي ثلاثًا وواحدة في كل منهما */
   const tf2=()=>{const B=bank('tf');const T=B.filter(x=>qzGet(x).a===true).length,F=B.length-T;return (T>=4&&F>=4)||(T>=6&&F>=2)||(F>=6&&T>=2)};const ok=(t,extra)=>t==='tf'&&extra?tf2():N(t)>=need(t)+(extra||0);
   let ta=Q.ta!=='auto'?Q.ta:'',tb=Q.tb!=='auto'?Q.tb:'';
@@ -15514,28 +15522,38 @@ function qzSupBuild(){const Q=TK.qz,g=Q.g;const H=qzHad(g);const hs=[...new Set(
   if(!ta)ta=FA.find(t=>t!==tb&&ok(t))||FA.find(t=>ok(t,need(t)))||'';
   if(!tb)tb=FB.find(t=>t!==ta&&ok(t))||(ta&&ok(ta,need(ta))?ta:'');
   /* (ج) ثلاثة فراغات مقالية بأحد الأشكال الثلاثة من بنك «فهم الحديث» الإضافي؛ وإن لم يكن للدروس المختارة بنود فيه فأسئلة مقالية قصيرة من صفحات الدروس */
-  const xb=f=>qzXPool(g,sel,f).filter(nl);const cn=f=>f==='list'?1:3;const cok=f=>f==='open'||xb(f).length>=cn(f);
+  const xb=f=>fresh(qzXPool(g,sel,f).filter(nl),f==='list'?1:3);const cn=f=>f==='list'?1:3;const cok=f=>f==='open'||xb(f).length>=cn(f);
   let tc=Q.tc!=='auto'?Q.tc:'';if(tc&&!cok(tc)){notes.push(`لا تكفي بنود «${QZ_CF[tc]}» في بنك الدروس المختارة للجزئية (ج)، فاختير شكل آخر.`);tc=''}
   /* الاختيار: يُبدأ بالجزئية الأضيق بنكًا، ويُتجنب في كل جزئية ما يقارب بندًا سبق اختياره. ويُعاد الاختيار مرات (وبشكل آخر للجزئية (ج) إن كان تلقائيًا)
      حتى تكتمل الجزئيات بلا بندين متقاربين؛ وإن لم يكفِ البنك أُخذ أكملها ثم أقلها تقاربًا ونُبّه المعلم */
   const PA=ta?bank(ta):[],PB=tb?bank(tb):[];const XC={};const xbc=f=>XC[f]||(XC[f]=xb(f));const near=L=>{let n=0;for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++)if(qzConf(L[i],L[j]))n++;return n};
-  const forms=tc?[tc]:(F=>F.length?F:['open'])(tkShuffle(['term','fillw','list'].filter(cok)));let best=null;
+  const forms=tc?[tc]:(F=>F.length?F:['open'])(tkShuffle(['term','fillw','list'].filter(cok)));
   /* (ج) بالشكل السابق: يُقدَّم التقويم والتطبيق والتحليل، ومن دروس مختلفة ما أمكن، مع تجنب ما يقارب بندًا في (أ) أو (ب) */
-  const EP=qzEss(g,sel).filter(nl);const pickOpen=ab=>{const E=tkShuffle(EP).sort((x,y)=>y.r-x.r);const c=[],lk=new Set(),ll=new Set();const clash=x=>[...ab,...c].some(y=>qzConf(x,y));
+  const EP=qzEss(g,sel).filter(nl);const pickOpen=(ab,ex)=>{const E=tkShuffle(EP.filter(x=>!(ex&&ex.has(qzKey({src:'l',k:x.k,id:x.id,qi:x.qi,t:'open'}))))).sort((x,y)=>y.r-x.r);const c=[],lk=new Set(),ll=new Set();const clash=x=>[...ab,...c].some(y=>qzConf(x,y));
     [0,1,2,3].forEach(pass=>E.forEach(x=>{if(c.length>=3||c.includes(x))return;const r=Math.ceil(x.r);if(pass<3&&clash(x))return;if(pass===0&&(lk.has(x.k)||ll.has(r)))return;if(pass===1&&lk.has(x.k)&&ll.has(r))return;c.push(x);lk.add(x.k);ll.add(r)}));
     return c.map(x=>({src:'l',k:x.k,id:x.id,qi:x.qi,t:'open'}))};
   const tfBad=(L,t)=>{if(t!=='tf'||L.length!==4)return 0;const n=L.filter(x=>qzGet(x).a===true).length;return n===1||n===3?0:1};
-  for(const f of forms){for(let k=0;k<14;k++){const chosen=[];const R={a:[],b:[],c:[]};
+  const pickSet=(pre,forms)=>{let best=null;const ex=new Set(pre.map(qzKey));
+  for(const f of forms){for(let k=0;k<14;k++){const chosen=pre.slice();const R={a:[],b:[],c:[]};
       let parts=[{p:'a',t:ta,P:PA,n:ta?need(ta):1},{p:'b',t:tb,P:PB,n:tb?need(tb):1},{p:'c',t:f==='open'?'':f,P:f==='open'?[]:xbc(f),n:cn(f)}];parts=k<5?parts.sort((x,y)=>x.P.length/x.n-y.P.length/y.n):tkShuffle(parts);
       parts.forEach(o=>{if(!o.t)return;const L=o.t==='tf'?qzSupTf(o.P,o.n,chosen):qzSupPick(o.P,o.n,chosen);R[o.p]=L;chosen.push(...L)});
-      if(f==='open')R.c=pickOpen(chosen);
-      const cf=near([...chosen,...(f==='open'?R.c:[])]),ub=tfBad(R.a,ta)+tfBad(R.b,tb),full=(qzPartN(R.a,ta)>=4?1:0)+(qzPartN(R.b,tb)>=4?1:0)+(qzCM(R.c)>=3?1:0);
+      if(f==='open')R.c=pickOpen(chosen,ex);
+      const cf=near([...chosen.slice(pre.length),...(f==='open'?R.c:[])]),ub=tfBad(R.a,ta)+tfBad(R.b,tb),full=(qzPartN(R.a,ta)>=4?1:0)+(qzPartN(R.b,tb)>=4?1:0)+(qzCM(R.c)>=3?1:0);
       if(!best||full>best.full||(full===best.full&&(ub<best.ub||(ub===best.ub&&cf<best.cf))))best={R,cf,ub,f,full};if(!cf&&!ub&&full===3)break}
     if(!best.cf&&!best.ub&&best.full===3)break}
-  const R=best.R;tc=best.f;const st={forced:best.cf>0,ub:best.ub>0};
+  return best};
+  let best=pickSet([],forms);const R=best.R;tc=best.f;const st={forced:best.cf>0,ub:best.ub>0};
+  /* النموذج (ب): الأنواع نفسها، وأسئلة غير أسئلة (أ). وإن لم يكفِ البنك أُكملت الجزئية الناقصة من أسئلة (أ) ونُبّه المعلم */
+  let RB=null;if(Q.ver>1){const pre=[...R.a,...R.b,...R.c];const AK=new Set(pre.map(qzKey));const bb=pickSet(pre,[tc]);RB=bb.R;if(tc==='open'&&RB.c.length<3)RB.c=[...RB.c,...R.c.filter(x=>!RB.c.some(y=>qzKey(y)===qzKey(x)))].slice(0,3);
+    [['a',ta],['b',tb],['c',tc==='open'?'':tc]].forEach(([p,t])=>{if(!t)return;const n=p==='c'?(t==='list'?1:3):t==='match'?1:4;const have=p==='c'?qzCM(RB.c)>=3:qzPartN(RB[p],t)>=4;if(have)return;
+      const others=['a','b','c'].filter(z=>z!==p).flatMap(z=>RB[z]);const add=(t==='tf'?qzSupTf:qzSupPick)(p==='c'?xbc(t):p==='a'?PA:PB,n,others).filter(x=>!RB[p].some(y=>qzKey(y)===qzKey(x)));
+      RB[p]=[...RB[p],...add].slice(0,n)});
+    const sh=[...RB.a,...RB.b,...RB.c].filter(x=>AK.has(qzKey(x))).length;
+    if(sh)notes.push(`بنك الدروس المختارة لا يكفي لنموذجين مختلفين تمامًا، فاشترك النموذجان في ${lxCnt(sh,'بند واحد','بندين','بنود','بندًا')}: أضف درسًا ليختلفا كليًّا.`)}
   if(ta&&ta===tb)notes.push('بنك الدروس المختارة لا يكفي لنوعين مختلفين من الأسئلة الموضوعية، فجاءت (أ) و(ب) من نوع واحد.');
   if(Q.tc==='auto'&&tc==='open')notes.push('ليس للدروس المختارة بنود في بنك «فهم الحديث» الإضافي (وهو لدروس مجال الحديث)، فجاءت (ج) أسئلة مقالية قصيرة من صفحات الدروس.');
-  Q.sp={g,h:[asc(A),asc(B)],a:R.a,b:R.b,c:R.c,ta,tb,tc,v:88};
+  Q.sp={g,h:[asc(A),asc(B)],a:R.a,b:R.b,c:R.c,ta,tb,tc,v:94};if(RB)Q.sp.B={a:RB.a,b:RB.b,c:RB.c};
+  Q.hist=[...qzSupUsed(Q.sp),...(Array.isArray(Q.hist)?Q.hist:[])].filter((x,i,a)=>a.indexOf(x)===i).slice(0,60);
   if(qzPartN(R.a,ta)<4)notes.push('الجزئية (أ) أقل من أربع: أضف درسًا إلى دروس الاختبار.');if(qzPartN(R.b,tb)<4)notes.push('الجزئية (ب) أقل من أربع: أضف درسًا إلى دروس الاختبار.');if(qzCM(R.c)<3)notes.push('الجزئية (ج) أقل من ثلاث درجات: أضف درسًا، أو أضف سؤالًا من عندك.');
   if(st.forced)notes.push('بنك الدروس المختارة صغير، فتقاربت بنود في المعلومة: راجعها، وبدّل ما يكشف منها جواب غيره.');
   if(st.ub)notes.push('لم يتيسر في جزئية الصواب والخطأ أن تكون ثلاث عبارات من نوع وواحدة من الآخر: بدّل عبارة منها، أو اختر للجزئية نوعًا آخر.');
@@ -15592,7 +15610,7 @@ function qzSpecPage(){const Q=TK.qz;const {L,fl}=qzCells();const act=L.map(r=>[0
 function qzSup(ver){const Q=TK.qz,S=Q.sp;const H=qzHad(Q.g);const r=qzRng(Q.seed+ver*7919);const m=ver&&Q.ver>1?1:0;
   const hs=(S.h[m]||[]).map((i,j)=>({h:H[i],j})).filter(o=>o.h&&o.h.ok);
   const part=(L,base)=>{let A=L.map((x,i)=>({x:Object.assign({m:x.t==='list'?3:1},x),ix:base+i,q:qzGet(x),nom:1})).filter(o=>o.q);if(ver)A=qzSh(A,r);return qzPrepAll(A,ver,null,null,!S.v)};
-  const a=part(S.a,100),b=part(S.b,200),c=part(S.c,300);const cf=qzCForm(c);c.forEach(o=>{o.solo=cf==='list'&&c.length===1;o.lead=cf==='mix'});
+  const F=qzSupForm(S,m);const a=part(F.a,100),b=part(F.b,200),c=part(F.c,300);const cf=qzCForm(c);c.forEach(o=>{o.solo=cf==='list'&&c.length===1;o.lead=cf==='mix'});
   return {m,hs,a,b,c,cf,ch:qzCHead(c,cf),ta:S.ta,tb:S.tb}}
 const qzSupTot=()=>{const S=TK.qz.sp;if(!S)return 0;return 3*Math.max((S.h[0]||[]).length,0)+qzPartN(S.a,S.ta)+qzPartN(S.b,S.tb)+qzCM(S.c)};
 function qzSupHead(ver,page){const Q=TK.qz;nbLoad();bgLoad();const sch=(NB.t&&NB.t.school)||BG.school||'';const mdl=Q.ver>1?`<span>النموذج (${ver?'ب':'أ'})</span>`:'';
@@ -15690,14 +15708,13 @@ function qzSupSetup(Q,L){const g=Q.g,w=tkWeek();const H=qzHad(g);const HL=L.filt
      ${anyH?H.map(h=>h.ok?`<label class="tk-ck"><input type="checkbox" data-tki="hsel" value="${h.i}"${Q.hsel.includes(h.i)?' checked':''}><span><b class="qz-hop">«${esc(h.text.slice(h.a,h.b))}…»</b> <small>${esc(h.title)}، الأسبوع ${FD_WK[h.wi]||''}${h.wi>w?'، لم يُدرَّس بعد':''}${/…/.test(h.text)?'، ونصه في صفحة الدرس ينتهي بعلامة حذف':''}</small></span></label>`:`<p class="tk-warn">تعذّر العثور على نص حديث «${esc(h.op)}…» في صفحة درس «${esc(h.title)}».</p>`).join(''):'<p class="tk-warn">تعذّر تحميل صفحات الدروس، ونصوص الأحاديث تؤخذ منها. حدّث الصفحة ثم حاول مرة أخرى.</p>'}</div>
    <p class="tk-tip">يُسأل في كل نموذج عن ثلاثة من الأحاديث المختارة: يُعطى السند ومطلع الحديث كما في خطة التوزيع، ويكتب المتعلم تتمته. ونص كل حديث من صفحة درسه في الدليل كما نُقل من كتاب الطالب.</p>
    <div class="tk-bar"><label class="tk-lb">نوع الجزئية (أ)${tkSel('qta',[['auto','تلقائي: صواب وخطأ'],...Object.entries(QZ_PTN)],Q.ta)}</label><label class="tk-lb">نوع الجزئية (ب)${tkSel('qtb',[['auto','تلقائي: اختيار من متعدد'],...Object.entries(QZ_PTN)],Q.tb)}</label><label class="tk-lb">شكل الجزئية (ج)${tkSel('qtc',[['auto','تلقائي: أحد الثلاثة'],...Object.entries(QZ_CF)],Q.tc)}</label></div>`}
-function qzSupOut(Q){const S=Q.sp;const tot=qzSupTot();const W=[];const nh=m=>(S.h[m]||[]).length;
+function qzSupOut(Q){const S0=Q.sp;const pv=Q.ver>1?qzPV:0;const S=qzSupForm(S0,pv);const fl=Q.ver>1?` في النموذج (${pv?'ب':'أ'})`:'';const tot=qzSupTot();const W=[];const nh=m=>(S.h[m]||[]).length;
   if(nh(0)!==3)W.push(`السؤال الأول في النموذج (أ) فيه ${lxCnt(nh(0),'حديث واحد','حديثان','أحاديث','حديثًا')}، والمطلوب ثلاثة.`);if(Q.ver>1&&nh(1)!==3)W.push(`السؤال الأول في النموذج (ب) فيه ${lxCnt(nh(1),'حديث واحد','حديثان','أحاديث','حديثًا')}، والمطلوب ثلاثة.`);
-  const pa=qzPartN(S.a,S.ta),pb=qzPartN(S.b,S.tb);if(pa!==4)W.push(`الجزئية (أ) فيها ${bgN(pa)}، والمطلوب أربع.`);if(pb!==4)W.push(`الجزئية (ب) فيها ${bgN(pb)}، والمطلوب أربع.`);{const pc=qzCM(S.c);if(pc!==3)W.push(`الجزئية (ج) درجاتها ${bgN(pc)}، والمطلوب ثلاث.`)}
+  const pa=qzPartN(S.a,S.ta),pb=qzPartN(S.b,S.tb);if(pa!==4)W.push(`الجزئية (أ)${fl} فيها ${bgN(pa)}، والمطلوب أربع.`);if(pb!==4)W.push(`الجزئية (ب)${fl} فيها ${bgN(pb)}، والمطلوب أربع.`);{const pc=qzCM(S.c);if(pc!==3)W.push(`الجزئية (ج)${fl} درجاتها ${bgN(pc)}، والمطلوب ثلاث.`)}
   if(!S.v&&[...S.a,...S.b].some(x=>x.t==='mcq'||x.t==='fill'))W.push(QZ_OLDW);
-  const LS=qzSupLS(S);[['a','أ'],['b','ب'],['c','ج']].forEach(([p,l])=>S[p].forEach((x,i)=>{if(qzLeaks(x,LS))W.push(`البند ${bgN(i+1)} في الجزئية (${l}) يكشف جزءًا من حديث مطلوب حفظه في السؤال الأول، أو يظهر جوابه في ما أُعطي من ذلك الحديث؛ استبدله.`)}));
-  const pv=Q.ver>1?qzPV:0;
+  const LS=qzSupLS(S0);[['a','أ'],['b','ب'],['c','ج']].forEach(([p,l])=>S[p].forEach((x,i)=>{if(qzLeaks(x,LS))W.push(`البند ${bgN(i+1)} في الجزئية (${l})${fl} يكشف جزءًا من حديث مطلوب حفظه في السؤال الأول، أو يظهر جوابه في ما أُعطي من ذلك الحديث؛ استبدله.`)}));
   return `<div class="tk-card"><div class="tk-card-h"><h3>${tkIc('ai-check2')}الاختبار جاهز: سؤالان، ${qzDeg(tot)}</h3><div class="tk-row-btns"><button class="tk-btn sm pri" data-tk="qpdf">${tkI('dl')}نزّل PDF</button><button class="tk-btn sm" data-tk="qdocx">${tkI('dl')}ملف Word</button><button class="tk-btn sm ghost" data-tk="qprint">${tkI('print')}اطبع</button>${Q.ver>1?`<button class="tk-btn sm ghost" data-tk="qshuf">${tkI('shuffle')}رتّب النموذج (ب) من جديد</button>`:''}</div></div>
-    ${W.length?`<ul class="qz-notes qz-warns">${W.map(x=>`<li>${x}</li>`).join('')}</ul>`:'<p class="tk-tip qz-okl">البناء موافق للضوابط: ٩ + ١١ = ٢٠ درجة في ورقتين. راجع الأسئلة، وبدّل ما تشاء بزر الاستبدال بجانب كل بند.</p>'}
+    ${W.length?`<ul class="qz-notes qz-warns">${W.map(x=>`<li>${x}</li>`).join('')}</ul>`:'<p class="tk-tip qz-okl">البناء موافق للضوابط: ٩ + ١١ = ٢٠ درجة في ورقتين. راجع الأسئلة، وبدّل ما تشاء بزر الاستبدال بجانب كل بند.'+(Q.ver>1&&S0.B?' وللنموذج (ب) أسئلته الخاصة؛ فراجعه من «المعاينة».':'')+'</p>'}
     ${(Q.notes||[]).length?`<ul class="qz-notes">${Q.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul>`:''}
     <details class="qz-own"><summary>${tkI('plus')}أضف سؤالًا مقاليًا من عندك إلى الجزئية (ج)</summary><div class="tk-bar">${qzStems()}</div><div class="tk-bar"><label class="tk-lb tk-grow">نص السؤال<textarea class="tk-in" data-tki="qoq" rows="2" maxlength="400" placeholder="مثل: اكتب المصطلح الدال على: …"></textarea></label><label class="tk-lb tk-grow">الإجابة النموذجية<textarea class="tk-in" data-tki="qoa" rows="2" maxlength="400"></textarea></label></div>
      <div class="tk-bar"><button class="tk-btn sm pri" data-tk="sown">${tkI('plus')}أضف</button><span class="tk-tip">كل جزئية في فهم الحديث بدرجة واحدة. وأسئلة المفاهيم تُصاغ بطلب المصطلح لا تعريفه.</span></div></details></div>
@@ -15749,18 +15766,18 @@ TK_PAGES.quiz={render(M){const Q=qzQ();const g=Q.g;
   if(a==='qown'){const q=(($('[data-tki="qoq"]')||{}).value||'').trim();if(!q){toast('اكتب نص السؤال');return}Q.paper.push({src:'o',uid:tkUid(),t:'open',q:q.slice(0,400),a:(($('[data-tki="qoa"]')||{}).value||'').trim().slice(0,400),m:Math.max(1,Math.min(6,+(($('[data-tki="qom"]')||{}).value)||2)),cl:+(($('[data-tki="qol"]')||{}).value||2),k:($('[data-tki="qok"]')||{}).value||Q.sel[0]||'',lv:+(($('[data-tki="qol"]')||{}).value||2)});tkSave();tkRe();toast('أضيف سؤالك');return}
   /* ----- نموذج التوجيه: استبدال وحذف وإضافة ----- */
   if(a==='sswap'||a==='sdel'||a==='sown'){if(!sup||!S)return;const keep=()=>{const y=window.scrollY;tkSave();tkRe();window.scrollTo(0,y)};const p=t.dataset.p,ix=+t.dataset.ix;
-    if(a==='sown'){const q=(($('[data-tki="qoq"]')||{}).value||'').trim();if(!q){toast('اكتب نص السؤال');return}S.c.push({src:'o',uid:tkUid(),t:'open',q:q.slice(0,400),a:(($('[data-tki="qoa"]')||{}).value||'').trim().slice(0,400)});keep();toast('أضيف سؤالك إلى الجزئية (ج)');return}
+    if(a==='sown'){const q=(($('[data-tki="qoq"]')||{}).value||'').trim();if(!q){toast('اكتب نص السؤال');return}const an=(($('[data-tki="qoa"]')||{}).value||'').trim().slice(0,400);S.c.push({src:'o',uid:tkUid(),t:'open',q:q.slice(0,400),a:an});if(S.B)S.B.c.push({src:'o',uid:tkUid(),t:'open',q:q.slice(0,400),a:an});keep();toast(S.B?'أضيف سؤالك إلى الجزئية (ج) في النموذجين':'أضيف سؤالك إلى الجزئية (ج)');return}
     if(p==='h'){const m=Q.ver>1?qzPV:0;const A=S.h[m]||(S.h[m]=[]);if(!(ix>=0&&ix<A.length))return;
       if(a==='sdel'){A.splice(ix,1);keep();return}
       const H=qzHad(Q.g);const oth=new Set(S.h[1-m]||[]);const C=tkShuffle((Q.hsel||[]).filter(i=>H[i]&&H[i].ok&&!A.includes(i)));const y=C.find(i=>!oth.has(i));const z=y!=null?y:C[0];
       if(z==null){toast('لا حديث آخر بين الأحاديث المختارة؛ اختر أحاديث أكثر من الخانة');return}A[ix]=z;A.sort((x,y)=>x-y);keep();return}
-    const P=p==='a'?S.a:p==='b'?S.b:p==='c'?S.c:null;if(!P||!(ix>=0&&ix<P.length))return;
+    const T=Q.ver>1&&qzPV&&S.B?S.B:S;const P=p==='a'?T.a:p==='b'?T.b:p==='c'?T.c:null;if(!P||!(ix>=0&&ix<P.length))return;
     if(a==='sdel'){P.splice(ix,1);keep();return}
-    const x=P[ix];if(x.src==='o'){toast('هذا سؤالك؛ احذفه أو أضف غيره');return}const used=qzSupUsed(S);
+    const x=P[ix];if(x.src==='o'){toast('هذا سؤالك؛ احذفه أو أضف غيره');return}const used=new Set([...T.a,...T.b,...T.c].map(qzKey));const O=T===S?S.B:S;const inO=new Set(O?[...O.a,...O.b,...O.c].map(qzKey):[]);
     /* البديل من النوع نفسه (وفي الصواب والخطأ بالحكم نفسه ليبقى النوعان غير متساويين)، ويُقدَّم ما لا يقارب بندًا آخر في الورقة */
-    const LS=qzSupLS(S);const cx=p==='c'&&x.src==='x';const oth=[...S.a,...S.b,...S.c].filter(y=>y!==x);const tv=x.t==='tf'?(qzGet(x)||{}).a:null;
+    const LS=qzSupLS(S);const cx=p==='c'&&x.src==='x';const oth=[...T.a,...T.b,...T.c].filter(y=>y!==x);const tv=x.t==='tf'?(qzGet(x)||{}).a:null;
     const C=tkShuffle(cx?qzXPool(Q.g,Q.sel||[],x.t):p==='c'?qzEss(Q.g,Q.sel||[]):qzBank(Q.g,Q.sel||[],x.t)).filter(y=>!used.has(qzKey(y))&&!qzLeaks(y,LS));
-    const sc=y=>(tv!=null&&(qzGet(y)||{}).a===tv?4:0)+(oth.some(z=>qzConf(y,z))?0:2)+(y.k!==x.k?1:0);const y=C.map(y=>[sc(y),y]).sort((a,b)=>b[0]-a[0]).map(r=>r[1])[0];
+    const sc=y=>(inO.has(qzKey(y))?0:8)+(tv!=null&&(qzGet(y)||{}).a===tv?4:0)+(oth.some(z=>qzConf(y,z))?0:2)+(y.k!==x.k?1:0);const y=C.map(y=>[sc(y),y]).sort((a,b)=>b[0]-a[0]).map(r=>r[1])[0];
     if(!y){toast('لا بديل من النوع نفسه في بنك الدروس المختارة');return}P[ix]=p==='c'&&!cx?{src:'l',k:y.k,id:y.id,qi:y.qi,t:'open'}:y;keep();return}
   if(a==='qprint'){const vers=Q.ver>1?[0,1]:[0];if(sup){if(!S)return;fdPrint(qzSupFit(vers.map(v=>qzSupPaper(v,false)).join('')+vers.map(v=>qzSupKey(v)).join(''))+qzSupSpec());return}fdPrint(vers.map(v=>qzPaper(v,false)).join('')+vers.map(v=>qzKeyPage(v)).join('')+qzSpecPage());return}
   if(a==='qpdf'){const vers=Q.ver>1?[0,1]:[0];const nm=(sup?'اختبار-قصير':Q.subj==='quran'?'ورقة-تدريب-قرآن':'اختبار-مخصص')+'_الصف-'+FD_GRN[Q.g]+'.pdf';
@@ -16832,7 +16849,13 @@ function dwQ(q,src){const L=Math.min(.45,String(q.q||'').length/400);
   if(q.t==='match'&&Array.isArray(q.pairs)&&q.pairs.length>1)return {k:'m',q:q.q,pairs:q.pairs,why:q.why||'',src,d:3.4+L,x:q.pairs.map(p=>p.join('→')).join('¦')};
   if(q.t==='order'&&Array.isArray(q.items)&&q.items.length>1)return {k:'r',q:q.q,items:q.items,qr:q.qr?1:0,why:q.why||'',src,d:3.8+L,x:q.items.join('¦')};
   return null}
-const dwOpen=(q,src)=>q&&q.q&&q.a?{k:'o',q:q.q,a:q.a,lv:q.level||'',src,d:DW_LV[q.level]||3.2,x:''}:null;
+/* v94: أسئلة صفحات الدروس المفتوحة في اللعبة أيسر قليلًا: لا تدخلها أسئلة الإبداع والإثراء (مشروعات وتصميم وما زاد على الكتاب)،
+   ولا أسئلة التحليل والتقويم والاستنتاج التي جوابها النموذجي طويل أو تطلب مهمتين في سؤال واحد، ولا سؤال جوابه أطول من فقرة قصيرة.
+   وما بقي من أسئلة التفكير يُقبل فيه جواب مختصر بفكرة صحيحة (dwOk). */
+const DW_NOGAME=new Set(['إثراء','إبداع']);
+const dwTwoTasks=t=>/[:،؛]\s*(ثم\s+|و)?(اقترح|علّل|علل|استدل|استخرج|بيّن|وضّح|قارن|حدّد|صحّح|اذكر)/.test(t)||(String(t).match(/(^|\s)(و)?(اقترح|علّل|علل|استدل|استخرج|بيّن|وضّح|قارن|حدّد|صحّح|اذكر|شخّص|حلّل)(\s|$)/g)||[]).length>=2;
+const dwOk=q=>{const lv=q.level||'',a=String(q.a||''),t=String(q.q||'');if(DW_NOGAME.has(lv))return false;if(a.length>260)return false;if(DW_HI.has(lv)&&(a.length>170||dwTwoTasks(t)))return false;return true};
+const dwOpen=(q,src)=>q&&q.q&&q.a&&dwOk(q)?{k:'o',q:q.q,a:q.a,lv:q.level||'',src,d:DW_LV[q.level]||3.2,x:''}:null;
 /* عنوان الدرس في خطة التوزيع: به تُربط صفحة الدرس (بجزأيها إن كان في حصتين) بمرحلتها في بنك الأسئلة */
 const dwPlanT=(g,id,C)=>{const c=(C||{})[id]||[];if(c[7])return c[7];try{const key=lsKeyOf(id);if(!key)return '';const p=key.split('.');const x=((FD_PLANS[g]||[])[+p[1]]||[])[+p[2]];return x?x[2]:''}catch(e){return ''}};
 const dwSurah=t=>{const p=String(t).split(' · ')[1];return p?p.replace(/[\s\d٠-٩–\-]+$/,'').replace(/^خواتيم\s+/,'').trim():''};
@@ -16973,7 +16996,7 @@ function dwQBody(q,c,R){const show=c.show;const M=dwMk(c);
     const A=dwAr(q,c);
     return `<p class="dw-qt">${gmQ(q.q)}</p>${c.tch?'':`<p class="dw-dh">${tkI('hand')}<span>اسحب العناصر ورتّبها من الأول إلى الأخير، أو استعمل السهمين.</span></p>`}
       <ol class="dw-ord dw-sort${n>4?' two':''}" style="--rows:${Math.ceil(n/2)}">${A.map((k,i)=>`<li class="dw-si" data-k="${k}" data-dwd="r"><b class="dw-sn">${bgN(i+1)}</b><span>${dwT(q.items[k],q.qr)}</span><span class="dw-sb"><button type="button" data-tk="dwmv" data-i="${i}" data-d="-1" aria-label="قدّم هذا العنصر"${i?'':' disabled'}>${tkSvg('M6 15l6-6 6 6')}</button><button type="button" data-tk="dwmv" data-i="${i}" data-d="1" aria-label="أخّر هذا العنصر"${i<n-1?'':' disabled'}>${tkSvg('M6 9l6 6 6-6')}</button></span></li>`).join('')}</ol>`}
-  return `<p class="dw-qt">${lsRich(q.q)}</p>${show?`<div class="dw-ans"><b>الإجابة النموذجية</b><p>${lsRich(q.a)}</p></div>`:''}`}
+  return `<p class="dw-qt">${lsRich(q.q)}</p>${DW_HI.has(q.lv)?'<p class="dw-easy">يكفي جواب مختصر بفكرة صحيحة واحدة.</p>':''}${show?`<div class="dw-ans"><b>الإجابة النموذجية</b><p>${lsRich(q.a)}</p></div>`:''}`}
 const fxTwo=(c,R,nx,M)=>c.fx.two&&nx===R.turn?(M.length?' (الجواب الثاني)':' (الجواب الأول)'):'';
 function dwQView(R){const c=R.cur,cat=R.cats[c.c],x=cat.cells[c.i],q=x.q,t=R.turn,o=1-t,fx=c.fx,T=R.teams[t];const usedOne=Object.keys(fx).length>0;
   const tag=fx.pit?'pit':fx.two?'two':fx.book?'book':fx.rest?'rest':fx.trap?'trap':'';
