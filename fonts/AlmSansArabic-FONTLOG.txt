@@ -1,0 +1,22 @@
+Alm Sans Arabic (Regular, Bold)
+================================
+These two files are a Modified Version of IBM Plex Sans Arabic 1.005
+(Copyright 2019 IBM Corp., with Reserved Font Name "Plex"), distributed under
+the SIL Open Font License, Version 1.1. The full license is in
+AlmSansArabic-OFL.txt next to this file.
+
+Source: the official npm package @ibm/plex-sans-arabic 1.1.0
+(fonts/complete/woff2/IBMPlexSansArabic-Regular.woff2 and -Bold.woff2).
+
+Changes (the glyph outlines are untouched):
+- unitsPerEm changed from 1000 to 1111, which scales the whole font uniformly to 90%.
+- Vertical metrics (hhea, OS/2 typo and win) set so that a line of text takes the
+  same space as in the layout this site was designed for; USE_TYPO_METRICS is set.
+- Four very wide glyphs removed: U+FDFD, U+FDFB, U+0601 and U+0604 (up to 7.6 em
+  wide). Browsers size text fields from the widest glyph of a font, so these made
+  every unsized field about 100px wider. xAvgCharWidth is set for the same reason.
+  The site does not use these characters; if they appear, the system font draws them.
+- Family renamed to "Alm Sans Arabic", because the license does not allow a
+  Modified Version to keep the Reserved Font Name.
+
+Built by fontsrc/mkalm.py with fontTools.

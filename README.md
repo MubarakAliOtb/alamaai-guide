@@ -6,3 +6,9 @@
 - جمع وتطوير: أ. مبارك علي العتيبي
 
 هذا المستودع يحمل ملفات الموقع المبنية كما تُعرض. ما يكتبه المعلم في الأدوات يُحفظ في متصفحه وحده، ولا يُرسل الموقع شيئًا.
+
+## الخطوط
+- خط الواجهة «Alm Sans Arabic»: نسخة مشتقة من IBM Plex Sans Arabic (© IBM Corp.) برخصة SIL Open Font License 1.1. نص الرخصة في `fonts/AlmSansArabic-OFL.txt`، وبيان التعديل في `fonts/AlmSansArabic-FONTLOG.txt`.
+- خط المصحف: KFGQPC HAFS Uthmanic Script (© مجمع الملك فهد لطباعة المصحف الشريف)، ورخصته داخل ملف الخط.
+- رموز ﷺ والقوسان القرآنيان: من خط Amiri (رخصة SIL OFL 1.1).
+- التفاصيل في `fonts/README.txt`.

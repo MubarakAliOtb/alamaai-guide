@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>مركز الاستشارات والحلول البصرية</title>
 <style>
-@font-face{font-family:"Greta Arabic AR LT";src:url("../fonts/greta-regular.ttf") format("truetype");font-weight:400;font-display:swap}
-@font-face{font-family:"Greta Arabic AR LT";src:url("../fonts/greta-bold.ttf") format("truetype");font-weight:700;font-display:swap}
+@font-face{font-family:"Alm Sans Arabic";src:url("../fonts/AlmSansArabic-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Alm Sans Arabic";src:url("../fonts/AlmSansArabic-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
 /* Layout concept: ice ground, navy + blue lead, teal for inquiry, one orange spark; idea-drop cards (pointed top-right where Arabic reading starts), orbit rings, spectrum track; one reading column, bottom tabs on phones. */
 :root{
   --navy-950:#0A1530;--navy-900:#0D1B3D;--navy-800:#16264D;--navy-700:#22345F;--navy-600:#334A7A;
@@ -26,7 +26,7 @@
   --brand:var(--blue-500);--on-brand:var(--white);--accent:var(--teal-500);--on-accent:var(--navy-900);--energy:var(--orange-500);--on-energy:var(--navy-900);
   --anchor:var(--navy-900);--on-anchor:var(--white);--highlight:var(--orange-100);--on-highlight:var(--navy-900);--focus:var(--blue-600);
   --ok:var(--teal-700);--okbg:var(--teal-50);--bad:var(--orange-700);--badbg:var(--orange-50);
-  --font:"Greta Arabic AR LT","Greta Arabic AR + LT","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --font:"Alm Sans Arabic",Tahoma,sans-serif;
   --r-xs:8px;--r-sm:14px;--r-md:20px;--r-lg:28px;--r-xl:44px;--r-pill:999px;
   --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;
   --shadow-soft:0 8px 22px rgba(13,27,61,.10);--shadow-lift:0 18px 40px rgba(13,27,61,.16);--shadow-glow:0 10px 28px rgba(255,122,26,.35);
@@ -1094,7 +1094,7 @@ function mailBody(o){return 'الأستاذ الفاضل مبارك علي ال�
 function mailBox(id,note){return '<div class="mailbox only-teacher"><p><b>'+ic('mail')+' رسالة بريد جاهزة</b></p><p class="mb-s" data-msub></p><div class="row"><button class="btn btn-ghost btn-sm" type="button" data-act="msub" data-for="'+id+'">'+ic('copy')+' انسخ الموضوع</button><button class="btn btn-sm" type="button" data-act="mail" data-for="'+id+'">'+ic('copy')+' انسخ نص الرسالة</button></div><p class="note">'+note+'</p></div>'}
 function loadImg(src){return new Promise(function(res){var im=new Image();im.onload=function(){res(im.naturalWidth?im:null)};im.onerror=function(){res(null)};im.src=src})}
 function ticketPNG(t){
-  var F='"Greta Arabic AR LT",Tahoma,sans-serif',W=1080,pad=64;
+  var F='"Alm Sans Arabic",Tahoma,sans-serif',W=1080,pad=64;
   function render(logo){
     var c=document.createElement('canvas'),ctx=c.getContext('2d');
     function wrap(text,font,maxW){ctx.font=font;var out=[];String(text).split('\n').forEach(function(par){var ws=par.split(/\s+/),cur='';ws.forEach(function(w){var tst=cur?cur+' '+w:w;if(ctx.measureText(tst).width>maxW&&cur){out.push(cur);cur=w}else cur=tst});if(cur)out.push(cur)});return out}
@@ -1114,7 +1114,7 @@ function ticketPNG(t){
     return new Promise(function(res,rej){try{c.toBlob(function(b){if(b)res(b);else rej(new Error('empty'))},'image/png')}catch(e){rej(e)}});
   }
   var fonts=Promise.resolve();
-  try{if(document.fonts&&document.fonts.load)fonts=Promise.all([document.fonts.load('400 34px "Greta Arabic AR LT"','ابجد'),document.fonts.load('700 34px "Greta Arabic AR LT"','ابجد')]).catch(function(){})}catch(e){}
+  try{if(document.fonts&&document.fonts.load)fonts=Promise.all([document.fonts.load('400 34px "Alm Sans Arabic"','ابجد'),document.fonts.load('700 34px "Alm Sans Arabic"','ابجد')]).catch(function(){})}catch(e){}
   return fonts.then(function(){return render(null)}).catch(function(){toast('تعذّر تجهيز الصورة. انسخ النص بدلًا من ذلك.');return null});
 }
 
@@ -1576,10 +1576,10 @@ TOOLS.submit=function(el){
 };
 
 /* ================= VIZ: محرك القوالب (SVG على الشاشة + Canvas للحفظ) ================= */
-var VW=1200,VH=900,VFONT='"Greta Arabic AR LT","IBM Plex Sans Arabic",Tahoma,sans-serif';
+var VW=1200,VH=900,VFONT='"Alm Sans Arabic",Tahoma,sans-serif';
 var MC=document.createElement('canvas').getContext('2d');
 var FONTS=Promise.resolve();
-try{if(document.fonts&&document.fonts.load)FONTS=Promise.all([document.fonts.load('400 30px "Greta Arabic AR LT"','ابجد'),document.fonts.load('700 30px "Greta Arabic AR LT"','ابجد')]).catch(function(){})}catch(e){}
+try{if(document.fonts&&document.fonts.load)FONTS=Promise.all([document.fonts.load('400 30px "Alm Sans Arabic"','ابجد'),document.fonts.load('700 30px "Alm Sans Arabic"','ابجد')]).catch(function(){})}catch(e){}
 var PALS={
  lab:{n:'سماء',bg:'#FFFFFF',pan:'#EEF4FF',ink:'#0D1B3D',mut:'#4A5878',ln:'#B9CDFB',c:['#2563EB','#14B8A6','#FF7A1A','#0D1B3D'],on:['#FFFFFF','#0D1B3D','#0D1B3D','#FFFFFF'],t:['#DCE7FF','#C6EFE9','#FFE1C7','#D5E0F2']},
  sea:{n:'واحة',bg:'#FFFFFF',pan:'#E7F8F5',ink:'#0D1B3D',mut:'#4A5878',ln:'#5FD3C5',c:['#0B7C70','#2563EB','#FF7A1A','#0D1B3D'],on:['#FFFFFF','#FFFFFF','#0D1B3D','#FFFFFF'],t:['#C6EFE9','#DCE7FF','#FFE1C7','#D5E0F2']},
