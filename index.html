@@ -10949,6 +10949,38 @@ body.dw-dragging,body.dw-dragging *{cursor:grabbing!important;user-select:none!i
 </div>
 <div class="toast" id="toast" role="status"></div>
 
+<style id="lxtCss">
+/* v95: أدوات الحصة داخل العرض — لوحة فاتحة فوق الشاشة الذكية، بألوان الدليل وخطه وأزراره */
+#lsOv .lxt{position:fixed;inset:0;z-index:96;display:grid;grid-template-rows:auto auto minmax(0,1fr);background:var(--bg);color:var(--ink);font-family:var(--f-body);direction:rtl;text-align:start}
+#lsOv .lxt:focus{outline:none}
+.lxt .lxt-top{display:flex;align-items:center;gap:12px;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));padding-top:calc(10px + env(safe-area-inset-top,0px));background:var(--surface);border-bottom:1px solid var(--line)}
+.lxt .lxt-badge{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:var(--anchor);color:var(--on-anchor)}
+.lxt .lxt-badge svg{width:24px;height:24px}
+.lxt .lxt-ttl{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.4}
+.lxt .lxt-ttl b{font-family:var(--f-display);font-size:19px;font-weight:700}
+.lxt .lxt-ttl small{font-size:13.5px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lxt .lxt-x{flex:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 20px;border:0;border-radius:22px;background:var(--brand);color:var(--on-brand);font:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.lxt .lxt-x svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transform:scaleX(-1)}
+.lxt .lxt-x:focus-visible,.lxt .lxt-chip:focus-visible,.lxt .lxt-card:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.lxt .lxt-chips{display:flex;gap:8px;overflow-x:auto;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line);background:var(--surface);scrollbar-width:thin}
+.lxt .lxt-chip{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 14px;border:1px solid var(--line);border-radius:20px;background:var(--bg);color:var(--ink);font:inherit;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap}
+.lxt .lxt-chip svg{width:18px;height:18px;flex:none}
+.lxt .lxt-chip[aria-pressed="true"]{background:var(--anchor);border-color:var(--anchor);color:var(--on-anchor)}
+@media (pointer:coarse){.lxt .lxt-chip{min-height:44px}}
+.lxt .lxt-body{overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:14px max(16px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lxt .lxt-body .tk-backs{display:none}
+.lxt .lxt-home{max-width:1100px;margin-inline:auto;display:flex;flex-direction:column;gap:18px}
+.lxt .lxt-lead{margin:0;color:var(--ink2);font-size:15px}
+.lxt .lxt-sec h3{margin:0 0 10px;font-family:var(--f-display);font-size:17px}
+.lxt .lxt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.lxt .lxt-card{display:flex;align-items:flex-start;gap:12px;text-align:start;padding:14px;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer;min-width:0}
+.lxt .lxt-card:hover{border-color:var(--brand)}
+.lxt .lxt-card .lxt-ic{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--bg);color:var(--t-brand)}
+.lxt .lxt-card .lxt-ic svg{width:24px;height:24px}
+.lxt .lxt-card b{display:block;font-size:15.5px;line-height:1.45}
+.lxt .lxt-card small{display:block;margin-top:3px;font-size:13px;line-height:1.6;color:var(--ink2)}
+@media (max-width:560px){.lxt .lxt-x span{display:none}.lxt .lxt-x{padding:8px 12px}.lxt .lxt-ttl small{display:none}}
+</style>
 <style id="uiLayer">
 /* ===== v91: طبقة الواجهة الموحدة (تدخل آخر الأنماط، قبل الشيفرة) =====
    قاعدة واحدة لكل الوحدات: الأزرار حبّات (pill) بارتفاع واحد ووزن واحد، والحقول مستطيلات بزوايا ١٢،
@@ -11422,7 +11454,7 @@ function stClipOn(id,bar,timed){const my=stSeq,box=$('#stSlide .st-clip'),v=box&
    لا حركة دائمة ولا إشعارات: الحركة عند الإنجاز والتفاعل فقط، وتُحذف مع «تقليل الحركة». */
 const HY_GOAL=5;
 /* الجديد في الدليل، الأحدث أولًا: [رقم الإصدار، النص، تبويب أو رابط] */
-const HY_REL=[[94,'الاختبار القصير: النموذج (ب) بأسئلة غير أسئلة (أ)، وكل اختبار جديد بأسئلة أخرى؛ وملفات Word بلا صفحة فارغة','#tk/quiz'],[91,'واجهة أوضح: أزرار وشرائح بمقاس واحد في كل الأدوات، وأهداف لمس أكبر على الهاتف والشاشة الذكية','#tools'],[90,'نسخة عامة من الدليل: التنزيل والطباعة فيها مباشرة لكل من يفتحها، بلا حساب','#about'],[89,'تنزيل الملفات: نافذة تبيّن السبب لمن لا تتيح صلاحيته التنزيل، ومعها محتوى الملف للنسخ أو صفحاته صورًا','#about'],[88,'الاختبار القصير: «أكمل الحديث»، ثم صواب وخطأ، واختيار من متعدد، وثلاثة فراغات (مصطلح أو إكمال أو ثلاث نقاط)، مع خلط البدائل في النموذجين','#tk/quiz'],[84,'عروض الدروس: عرض تفاعلي لكل حصة على الشاشة الذكية، تختار الصف وتفتح العرض مباشرة','#tk/decks'],[83,'حقيبة المعلم: «رحلة الصف» بمحطاتها وتحدي الأسبوع والفِرق ولوحة الصف، وملاحظات الطالب وورقة لقاء ولي الأمر','#bag/quest'],[81,'«خلاصة الدليل»: الدليل النظري كله في قراءة واحدة، بسؤال كل جزء وفكرته الحاكمة، ونسخة PDF','#brief'],[78,'منصة «الحلول البصرية» صارت داخل الدليل: المختبر والنماذج والأدوات والحقائب التدريبية','#vs'],[76,'ثلاث أدوات للاختبار على مؤلفات التوجيه: القصير والنهائي والمخصص، وتنزيلها PDF','#tk/final'],[76,'«ركّب المعنى»: بطاقات تحدٍّ للدرس بقطع ورقية ومهارات التفكير العليا','#tk/build'],[75,'الاختبار القصير على نموذج التوجيه: «الأحاديث المقرر حفظها» و٩ + ١١ = ٢٠ في ورقتين','#tk/quiz'],[75,'ديوانية الأسئلة: السحب والإفلات، ولونا الفريقين على الخيارات، وأسئلة من أكثر من صف','#tk/diwan'],[74,'هدف «أسبوعك»، والاحتفاء بالإنجاز، وزر «جرّبتها في صفي» على كل بطاقة',''],[73,'سبعة عشر مقطعًا حركيًا في تبويب «مقاطع» وفي الستوري','clips'],[70,'لعبة «ديوانية الأسئلة» في ألعاب الصف','#tk/diwan']];
+const HY_REL=[[95,'أدوات الحصة داخل العرض: زر في شريط الشاشة الذكية يفتح عُدّة الصف والأسئلة والألعاب على درسك دون مغادرة العرض','#tk/decks'],[94,'الاختبار القصير: النموذج (ب) بأسئلة غير أسئلة (أ)، وكل اختبار جديد بأسئلة أخرى؛ وملفات Word بلا صفحة فارغة','#tk/quiz'],[91,'واجهة أوضح: أزرار وشرائح بمقاس واحد في كل الأدوات، وأهداف لمس أكبر على الهاتف والشاشة الذكية','#tools'],[90,'نسخة عامة من الدليل: التنزيل والطباعة فيها مباشرة لكل من يفتحها، بلا حساب','#about'],[89,'تنزيل الملفات: نافذة تبيّن السبب لمن لا تتيح صلاحيته التنزيل، ومعها محتوى الملف للنسخ أو صفحاته صورًا','#about'],[88,'الاختبار القصير: «أكمل الحديث»، ثم صواب وخطأ، واختيار من متعدد، وثلاثة فراغات (مصطلح أو إكمال أو ثلاث نقاط)، مع خلط البدائل في النموذجين','#tk/quiz'],[84,'عروض الدروس: عرض تفاعلي لكل حصة على الشاشة الذكية، تختار الصف وتفتح العرض مباشرة','#tk/decks'],[83,'حقيبة المعلم: «رحلة الصف» بمحطاتها وتحدي الأسبوع والفِرق ولوحة الصف، وملاحظات الطالب وورقة لقاء ولي الأمر','#bag/quest'],[81,'«خلاصة الدليل»: الدليل النظري كله في قراءة واحدة، بسؤال كل جزء وفكرته الحاكمة، ونسخة PDF','#brief'],[78,'منصة «الحلول البصرية» صارت داخل الدليل: المختبر والنماذج والأدوات والحقائب التدريبية','#vs'],[76,'ثلاث أدوات للاختبار على مؤلفات التوجيه: القصير والنهائي والمخصص، وتنزيلها PDF','#tk/final'],[76,'«ركّب المعنى»: بطاقات تحدٍّ للدرس بقطع ورقية ومهارات التفكير العليا','#tk/build'],[75,'الاختبار القصير على نموذج التوجيه: «الأحاديث المقرر حفظها» و٩ + ١١ = ٢٠ في ورقتين','#tk/quiz'],[75,'ديوانية الأسئلة: السحب والإفلات، ولونا الفريقين على الخيارات، وأسئلة من أكثر من صف','#tk/diwan'],[74,'هدف «أسبوعك»، والاحتفاء بالإنجاز، وزر «جرّبتها في صفي» على كل بطاقة',''],[73,'سبعة عشر مقطعًا حركيًا في تبويب «مقاطع» وفي الستوري','clips'],[70,'لعبة «ديوانية الأسئلة» في ألعاب الصف','#tk/diwan']];
 const HY_COL=['#2563EB','#14B8A6','#FF7A1A','#FFB26B','#EEF4FF'];
 const HY_SV='fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
 const HY_IC={try:`<svg class="ic" viewBox="0 0 24 24" ${HY_SV}><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>`,
@@ -13708,7 +13740,7 @@ function lsScrOpen(id,n,dir){const s=lsView(id);if(!s)return;const L=lsL(id);con
   const ae=document.activeElement;let fk=null;if(!fresh&&ae&&ov.contains(ae)&&ae.dataset&&ae.dataset.ls)fk=ae.classList.contains('lx-nb')?['nb',ae.classList.contains('lx-nx')?'1':'0']:[ae.dataset.ls,ae.dataset.i||'',ae.dataset.c||''];
   const nk=!fresh&&!moved&&ae&&ov.contains(ae)&&ae.dataset&&ae.dataset.dk==='note'?[ae.selectionStart,ae.selectionEnd]:null;
   const keep=moved?null:[...ov.querySelectorAll('.lx-fit')].map(x=>x.scrollTop);const bsc=moved?0:((ov.querySelector('.lx-body')||{}).scrollTop||0);
-  ov.innerHTML=lsScrHTML(id);if(bsc){const nb=ov.querySelector('.lx-body');if(nb)nb.scrollTop=bsc}document.body.classList.add('ls-on');if(fresh)lxInert(true);
+  ov.innerHTML=lsScrHTML(id);if(bsc){const nb=ov.querySelector('.lx-body');if(nb)nb.scrollTop=bsc}document.body.classList.add('ls-on');if(fresh)lxInert(true);lxtKeep(ov);
   const lx=ov.querySelector('.lx');if(lx&&moved)lx.classList.add(fresh?'lx-enter':(dir||(L.screen>=was?'lx-fwd':'lx-back')));
   const ta=nk&&lx?lx.querySelector('[data-dk="note"]'):null;
   if(ta){try{ta.focus({preventScroll:true});ta.setSelectionRange(nk[0],nk[1])}catch(e){}}
@@ -13726,7 +13758,7 @@ function lsFit(keep){const go=()=>{const ov=document.getElementById('lsOv');if(!
 window.addEventListener('resize',()=>{if(document.body.classList.contains('ls-on')){lsFit();lxPenInit()}});
 /* ما خلف العرض لا يستقبل التركيز ما دام العرض مفتوحًا */
 function lxInert(on){try{[...document.body.children].forEach(el=>{if(el.id==='lsOv'||el.id==='toast'||el.tagName==='SCRIPT'||el.tagName==='STYLE')return;if(on){if(!el.inert){el.inert=true;el.dataset.lxInert='1'}}else if(el.dataset.lxInert){el.inert=false;delete el.dataset.lxInert}})}catch(e){}}
-function lsScrClose(){lxInert(false);lxAudStop();lxTch=false;lxZoom=false;const ov=document.getElementById('lsOv');if(document.fullscreenElement)try{document.exitFullscreen()}catch(e){}if(ov){ov.innerHTML='';ov.className=''}lxPen=false;lxOv=false;document.body.classList.remove('ls-on');if(/^#bag\/lesson\//.test(location.hash))fdRender()}
+function lsScrClose(){lxtClose(true);lxInert(false);lxAudStop();lxTch=false;lxZoom=false;const ov=document.getElementById('lsOv');if(document.fullscreenElement)try{document.exitFullscreen()}catch(e){}if(ov){ov.innerHTML='';ov.className=''}lxPen=false;lxOv=false;document.body.classList.remove('ls-on');if(/^#bag\/lesson\//.test(location.hash))fdRender()}
 /* بنك أسئلة الدرس في مسابقة الكأس (للتقويم اللحظي والألعاب) */
 function lxBank(id){try{const g=lsG(id),key=lsKeyOf(id);if(!key)return [];const [,w,j]=key.split('.').map(Number);const x=((FD_PLANS[g]||[])[w]||[])[j];return x?((FD_CUP[g]||{})[x[2]]||[]):[]}catch(e){return []}}
 /* أنشطة هذا الدرس في الأدوات: يظهر منها ما له مادة في هذا الدرس، ويفتح على الدرس مباشرة */
@@ -13813,7 +13845,7 @@ function lsScrHTML(id){const s=lsView(id),M=lsMeta(id),L=lsL(id),cur=L.screen,N=
   return `<div class="lx lx-m-${mode} lx-sc-${scene} lx-kd-${K[0]} ${typeof LSA_DARK!=='undefined'&&LSA_DARK.has(scene)?'lx-art-dark':'lx-art-light'} ${lxPen?'lx-penon':''} ${lxTch?'lx-tchon':''}" role="dialog" aria-modal="true" aria-label="الشاشة الذكية" tabindex="-1" data-id="${id}">
    <div class="lx-top"><div class="lx-ttl"><span class="lx-badge">${lxI(K[1])}</span><div><b>${esc(M.title)}</b><small>${esc(M.sub)}</small></div></div>${track}
     <div class="lx-tools"><button class="lx-timer ls-tbtn ${lsT&&lsT.running?'b-run':''}" data-ls="ttoggle" aria-label="مؤقت المرحلة"><span class="b-tb">${lsSvg(lsT&&lsT.running?'pause':'play','')}</span><span class="b-num" data-lstv>${lsMMSS(lsRem())}</span></button><button class="lx-tb" data-ls="treset" data-id="${id}" aria-label="أعد مؤقت المرحلة" title="أعد المؤقت">${lsSvg('reset','lx-ic')}</button>
-     ${hasCls?`<button class="lx-tb" data-ls="pick" aria-label="من يجيب؟" title="من يجيب؟">${lxI('hand')}</button>`:''}<button class="lx-tb ${lxPen?'lx-act':''}" data-ls="pen" aria-pressed="${lxPen}" aria-label="قلم الشاشة" title="اكتب على الشاشة">${lxI('pen')}</button><button class="lx-tb ${lxTch?'lx-act':''}" data-ls="tch" aria-pressed="${lxTch}" aria-label="للمعلم: الاستراتيجية والملاحظات" title="للمعلم (مفتاح M)">${lxI('user')}</button>${hasAud?`<button class="lx-tb ${lxAudOn?'lx-act':''}" data-ls="aud" aria-pressed="${lxAudOn}" aria-label="تلاوة من جهازي" title="تلاوة من جهازي">${lxI('speaker')}</button>`:''}<button class="lx-tb ${lxOv?'lx-act':''}" data-ls="over" aria-label="الشاشات وأنشطة الدرس" title="الشاشات وأنشطة الدرس">${lxI('grid')}</button><button class="lx-tb" data-ls="fs" aria-label="ملء الشاشة" title="ملء الشاشة">${lxI('full')}</button><button class="lx-tb lx-x" data-ls="close" aria-label="إغلاق الشاشة">${lsSvg('close','lx-ic')}</button></div></div>
+     ${hasCls?`<button class="lx-tb" data-ls="pick" aria-label="من يجيب؟" title="من يجيب؟">${lxI('hand')}</button>`:''}<button class="lx-tb" data-ls="tools" data-id="${id}" aria-label="أدوات الحصة" title="أدوات الحصة: عُدّة الصف والأسئلة والألعاب">${tkIc('ai-toolbox','lx-ic')}</button><button class="lx-tb ${lxPen?'lx-act':''}" data-ls="pen" aria-pressed="${lxPen}" aria-label="قلم الشاشة" title="اكتب على الشاشة">${lxI('pen')}</button><button class="lx-tb ${lxTch?'lx-act':''}" data-ls="tch" aria-pressed="${lxTch}" aria-label="للمعلم: الاستراتيجية والملاحظات" title="للمعلم (مفتاح M)">${lxI('user')}</button>${hasAud?`<button class="lx-tb ${lxAudOn?'lx-act':''}" data-ls="aud" aria-pressed="${lxAudOn}" aria-label="تلاوة من جهازي" title="تلاوة من جهازي">${lxI('speaker')}</button>`:''}<button class="lx-tb ${lxOv?'lx-act':''}" data-ls="over" aria-label="الشاشات وأنشطة الدرس" title="الشاشات وأنشطة الدرس">${lxI('grid')}</button><button class="lx-tb" data-ls="fs" aria-label="ملء الشاشة" title="ملء الشاشة">${lxI('full')}</button><button class="lx-tb lx-x" data-ls="close" aria-label="إغلاق الشاشة">${lsSvg('close','lx-ic')}</button></div></div>
    ${body}
    <div class="lx-foot"><div class="lx-keys">${(s.keys||[]).map(k=>`<span class="${L.keys.includes(k.name)?'lx-on':''}" title="مفتاح «${esc(k.name)}»">${lxI(L.keys.includes(k.name)?'unlock':'lock')}<b>${esc(k.name)}</b></span>`).join('')}</div>
     <div class="lx-mid"><div class="lx-dots" role="tablist" aria-label="شاشات العرض">${s.screens.map(x=>`<button role="tab" aria-selected="${x.n===cur}" aria-label="الشاشة ${bgN(x.n)}: ${esc(x.title)}" class="${x.n===cur?'lx-cur':x.n<cur?'lx-done':''} lx-k-${(LX_KIND[x.kind]||['blue'])[0]}" data-ls="go" data-id="${id}" data-n="${x.n}"></button>`).join('')}</div><span class="lx-by">جمع وتطوير: أ. مبارك علي العتيبي</span></div>
@@ -13986,6 +14018,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-ls]');if(!
   if(a==='over'){lxOv=!lxOv;lsScrOpen(id,lsL(id).screen);return}
   if(a==='fs'){lxFs();return}
   if(a==='pick'){lxPick();return}
+  if(a==='tools'){lxtOpen(id);return}
   if(a==='pickx'){const el=document.getElementById('lxPick');if(el)el.hidden=true;return}
   if(a==='act'){lsScrClose();return}
   if(a==='toplan'){lsToPlan(id);return}
@@ -14031,7 +14064,7 @@ const dkIn=e=>{const t=e.target.closest&&e.target.closest('[data-dk]');if(!t)ret
   delete lsViewMemo[id];tkSave()};
 document.addEventListener('input',dkIn);document.addEventListener('change',dkIn);
 /* لوحة المفاتيح وجهاز العرض: المسافة و«التالي» في جهاز العرض يكشفان الجزء التالي إن بقي، وإلا ينتقلان؛ والسهمان للتنقل وحده */
-document.addEventListener('keydown',e=>{if(!document.body.classList.contains('ls-on'))return;const lx=document.querySelector('#lsOv .lx');if(!lx)return;const id=lx.dataset.id;const L=lsL(id);const s=lsView(id);if(!s)return;
+document.addEventListener('keydown',e=>{if(!document.body.classList.contains('ls-on'))return;if(lxtIsOpen()){if(e.key==='Escape'&&!document.fullscreenElement?.closest?.('.lxt-body .tk')&&!/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement||{}).tagName||'')){e.preventDefault();lxtClose()}return}const lx=document.querySelector('#lsOv .lx');if(!lx)return;const id=lx.dataset.id;const L=lsL(id);const s=lsView(id);if(!s)return;
   if(e.ctrlKey||e.metaKey||e.altKey)return;const ae=document.activeElement;
   /* أثناء الكتابة في ملاحظة المعلم لا تُخطف المفاتيح؛ و«Esc» يخرج من الحقل */
   if(ae&&lx.contains(ae)&&/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)){if(e.key==='Escape'){e.preventDefault();ae.blur();try{lx.focus({preventScroll:true})}catch(_){}}return}
@@ -18156,6 +18189,46 @@ function uiFix(){let roots;try{roots=[...document.querySelectorAll(UI_SCOPE)]}ca
 let uiFixT=0,uiTblN=0;
 try{new MutationObserver(()=>{clearTimeout(uiFixT);uiFixT=setTimeout(uiFix,140)}).observe(document.body,{childList:true,subtree:true})}catch(e){}
 setTimeout(uiFix,400);
+/* ================= v95: أدوات الحصة داخل العرض =================
+   زر «أدوات الحصة» في شريط الشاشة الذكية يفتح لوحة فوق العرض نفسه (داخل #lsOv، فتبقى في ملء الشاشة)،
+   فيها أدوات «في الحصة» والألعاب التفاعلية على درس العرض. تُستعمل صفحات الأدوات نفسها: تُنقل حاوية الأدوات #tkRoot
+   إلى اللوحة ما دامت مفتوحة، ثم تُعاد إلى مكانها عند الإغلاق. لا يتغير عنوان الصفحة، فيبقى المعلم في عرضه وشاشته. */
+const LXT_IDS=['kit','probe','live','cases','build','timeline','hifzd','seat','stations','jar','review','diwan','hive','summit','pairs','arena'];
+let lxtOn=null;
+const lxtTools=()=>LXT_IDS.map(id=>TK_T.find(t=>t[0]===id)).filter(t=>t&&TK_PAGES[t[0]]);
+function lxtIsOpen(){return !!lxtOn}
+function lxtChips(cur){return `<div class="lxt-chips" role="toolbar" aria-label="أدوات الحصة">${[['','الأدوات كلها','ai-grid']].concat(lxtTools().map(t=>[t[0],t[1],t[2]])).map(([id,n,ic])=>`<button type="button" class="lxt-chip" data-lxt="go" data-t="${id}" aria-pressed="${id===cur}">${id?tkIc(ic):tkSvg('M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z')}<span>${n}</span></button>`).join('')}</div>`}
+function lxtHome(){const T=lxtTools();const sec=(m,h)=>{const L=T.filter(t=>t[5]===m);return L.length?`<section class="lxt-sec"><h3>${h}</h3><div class="lxt-grid">${L.map(t=>`<button type="button" class="lxt-card" data-lxt="go" data-t="${t[0]}"><span class="lxt-ic">${tkIc(t[2])}</span><span><b>${t[1]}</b><small>${t[3]}</small></span></button>`).join('')}</div></section>`:''};
+  return `<div class="lxt-home"><p class="lxt-lead">اختر أداة، فتفتح على درس هذا العرض. وزر «عودة إلى العرض» يرجعك إلى الشاشة التي كنت فيها.</p>${sec('d','في الحصة')}${sec('g','الألعاب التفاعلية')}</div>`}
+function lxtPaint(){if(!lxtOn)return;const P=lxtOn.el;P.querySelector('.lxt-chips').outerHTML=lxtChips(lxtOn.tool);
+  const B=P.querySelector('.lxt-body');const R=document.getElementById('tkRoot');
+  if(!lxtOn.tool){if(R)R.hidden=true;let h=B.querySelector('.lxt-home');if(!h){B.insertAdjacentHTML('afterbegin',lxtHome())}else h.hidden=false}
+  else{const h=B.querySelector('.lxt-home');if(h)h.hidden=true;if(R)R.hidden=false}}
+function lxtGo(tool){if(!lxtOn)return;const R=document.getElementById('tkRoot');if(!R)return;
+  if(!tool){try{tkLeave()}catch(e){}lxtOn.tool='';R.innerHTML='';tkCur='';lxtPaint();return}
+  lxtOn.tool=tool;lxtPaint();tkRender(tool+(lxtOn.id&&LS_BUILT.has(lxtOn.id)?'/'+lxtOn.id:''));
+  const B=lxtOn.el.querySelector('.lxt-body');B.scrollTop=0;
+  try{const c=lxtOn.el.querySelector(`.lxt-chip[data-t="${tool}"]`);c&&c.scrollIntoView({block:'nearest',inline:'nearest'})}catch(e){}}
+function lxtOpen(id){const ov=document.getElementById('lsOv');const R=document.getElementById('tkRoot');if(!ov||!R)return;if(lxtOn){lxtOn.el.querySelector('.lxt-x').focus();return}
+  const mark=document.createComment('tkRoot');R.parentNode.insertBefore(mark,R);
+  const t=(lsMeta(id)||{}).title||'';
+  const el=document.createElement('section');el.id='lxTools';el.className='lxt';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-labelledby','lxtT');el.tabIndex=-1;
+  el.innerHTML=`<header class="lxt-top"><span class="lxt-badge">${tkIc('ai-toolbox')}</span><div class="lxt-ttl"><b id="lxtT">أدوات الحصة</b>${t?`<small>${esc(t)}</small>`:''}</div><button type="button" class="lxt-x" data-lxt="close">${tkSvg('M15 6l-6 6 6 6')}<span>عودة إلى العرض</span></button></header>${lxtChips('')}<div class="lxt-body"></div>`;
+  lxtOn={id,el,mark,tool:'',cur:tkCur,args:tkArgs,html:R.innerHTML,hid:R.hidden};
+  el.querySelector('.lxt-body').appendChild(R);R.innerHTML='';tkCur='';
+  ov.appendChild(el);lxtKeep(ov);lxtPaint();
+  try{el.querySelector('.lxt-x').focus({preventScroll:true})}catch(e){}}
+/* يُستدعى بعد كل رسم للعرض: اللوحة تبقى فوقه، والعرض خلفها لا يأخذ التركيز */
+function lxtKeep(ov){if(!lxtOn||!ov)return;if(lxtOn.el.parentNode!==ov)ov.appendChild(lxtOn.el);const lx=ov.querySelector('.lx');if(lx)lx.inert=true}
+function lxtClose(quiet){if(!lxtOn)return;const o=lxtOn;lxtOn=null;try{tkLeave()}catch(e){}
+  const R=document.getElementById('tkRoot');if(R){R.hidden=o.hid;o.mark.parentNode.insertBefore(R,o.mark)}o.mark.remove();o.el.remove();
+  if(location.hash.startsWith('#tk/')){tkCur='';tkRender(location.hash.slice(4))}else{if(R)R.innerHTML=o.html;tkCur=o.cur;tkArgs=o.args}
+  const ov=document.getElementById('lsOv');const lx=ov&&ov.querySelector('.lx');if(lx){lx.inert=false;if(!quiet){const b=lx.querySelector('[data-ls="tools"]');try{(b||lx).focus({preventScroll:true})}catch(e){}}}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-lxt]');if(!b||!lxtOn||!lxtOn.el.contains(b))return;const a=b.dataset.lxt;
+  if(a==='close'){lxtClose();return}if(a==='go'){lxtGo(b.dataset.t||'');return}});
+/* رابط داخل أداة يغيّر عنوان الصفحة: تُغلق اللوحة قبل أن يرسم الموجّه الصفحة الجديدة */
+window.addEventListener('hashchange',()=>{if(lxtOn){lxtClose(true);try{lsScrClose()}catch(e){}}});
+
 /* ================= router ================= */
 let views=$$('.view');
 function show(name){views.forEach(v=>v.hidden=v.dataset.view!==name);
