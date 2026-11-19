@@ -11290,6 +11290,15 @@ button.rg-c:active{transform:scale(.98)}
 body.ls-on .of-pill,body.fd-printing .of-pill{display:none}
 @media (prefers-reduced-motion:reduce){.of-bar i{transition:none}}
 @media print{.of-card,.of-pill{display:none}}
+/* v97: سطر «لم تُحمَّل دروس الصف» أعلى الصفحة (feed/tkcore.js: lsMissPaint)، في النسختين */
+.ls-miss-w{margin-top:14px}
+.ls-miss{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:12px 16px;border:1.5px solid var(--warnline);border-radius:16px;background:var(--warnbg);color:var(--ink)}
+.ls-miss p{margin:0;flex:1 1 280px;min-width:0;font-size:14.5px;line-height:1.85;font-weight:700}
+.ls-miss a{color:inherit;text-decoration:underline}
+.ls-miss.ok{border-color:var(--line);background:var(--okbg)}
+.ls-miss .tk-btn{flex:none;min-height:44px}
+body.fd-printing .ls-miss-w{display:none}
+@media print{.ls-miss-w{display:none}}
 </style>
 <style id="uiLayer">
 /* ===== v91: طبقة الواجهة الموحدة (تدخل آخر الأنماط، قبل الشيفرة) =====
@@ -13888,7 +13897,9 @@ let lsGW={};
 function lsLoad(id){if(id in lsCache)return Promise.resolve(lsCache[id]);const g=lsG(id);
   if(!lsGW[g])lsGW[g]=fetch(`ls/s${g}.json`).then(r=>r.ok?r.json():null).catch(()=>null).then(d=>{if(!d){delete lsGW[g];return null}return d});
   if(!lsWait[id])lsWait[id]=lsGW[g].then(d=>{if(!d){delete lsWait[id];return null}lsCache[id]=d[id]||null;return lsCache[id]});return lsWait[id]}
-function lsAfter(id){if(!(id in lsCache))lsLoad(id).then(()=>{if(location.hash==='#bag/lesson/'+id)fdRender()});lsStartTick()}
+let lsBad={};
+function lsAfter(id){const g=lsG(id);if(!(id in lsCache)&&!lsBad[g])lsLoad(id).then(()=>{if(!(id in lsCache))lsBad[g]=1;else lsMiss(g,false);if(location.hash==='#bag/lesson/'+id)fdRender()});lsStartTick()}
+window.addEventListener('online',()=>{const m=/^#bag\/lesson\/(.+)$/.exec(location.hash);if(m&&lsBad[lsG(m[1])]){lsBad={};fdRender()}});
 function lsBtn(key){const id=lsIdOf(key);return id&&LS_BUILT.has(id)?`<a class="b-btn b-sm b-primary" href="#bag/lesson/${id}">صفحة الدرس</a>`:''}
 const LS_FK={prep:'التحضير الكتابي',appendix:'التكملة والملحق',cards:'البطاقات'};
 /* ملف PDF واحد لكل حصة ls/f<الصف>/<id>.pdf (التحضير ثم التكملة والملحق ثم البطاقات)، وLS_PDF[id] عدد صفحات كل جزء؛
@@ -13923,7 +13934,7 @@ function lsPaintTimer(full){const r=lsRem();const over=lsT&&lsT.running&&Date.no
 function lsStartTick(){if(lsTick)return;lsTick=setInterval(()=>{if(lsT&&lsT.running&&document.querySelector('[data-lstv]'))lsPaintTimer(false)},1000)}
 /* ---------- صفحة الدرس ---------- */
 function lsHTML(id){const M=lsMeta(id);const back=`<a class="b-btn" href="#bag/sessions">${bgSvg('list')} الحصص</a>`;
-  if(!(id in lsCache))return bgHead(esc(M.title),esc(M.sub),back)+`<div class="b-card"><p class="b-note">جارٍ تحميل صفحة الدرس…</p></div>`;
+  if(!(id in lsCache))return bgHead(esc(M.title),esc(M.sub),back)+(lsBad[M.g]?`<div class="b-card b-empty" role="alert" data-ls-bad><h3>لم تُحمَّل هذه الحصة</h3><p class="b-note">${LS_MISS[M.g]===1?'السبب في التنبيه أعلى الصفحة.':lsMissWhy([M.g])}</p><button type="button" class="b-btn b-primary" data-ls="reload" data-id="${id}">أعد المحاولة</button></div>`:`<div class="b-card"><p class="b-note">جارٍ تحميل صفحة الدرس…</p></div>`);
   const s=lsCache[id];if(!s)return bgHead(esc(M.title),esc(M.sub),back)+`<div class="b-card b-empty"><h3>هذه الحصة لم تُبنَ بعد</h3><p class="b-note">تظهر هنا مراحلها وشاشاتها وتحضيرها عند اكتمالها. وتحضيرها متاح الآن في «مخطط حصتي».</p>${M.key?`<a class="b-btn b-primary" href="#plan/${M.key}">حضّر في مخطط حصتي</a>`:''}</div>`;
   lxResume(id);const T=lsTimerEnsure(id);const L=lsL(id);const cur=L.screen=Math.max(1,Math.min(L.screen,(lsView(id)||s).screens.length));const si=T?T.si:0;const total=s.stages.reduce((a,x)=>a+x.min,0);const isQ=s.subject==='quran';
   const c=bgCls();const d=c?bgD():null;const S=c?bgStu():[];const taught=d&&M.key?d.taught[M.key]:null;
@@ -14325,7 +14336,8 @@ function lxFs(){const ov=document.getElementById('lsOv');if(!ov)return;try{if(do
 document.addEventListener('fullscreenchange',()=>{if(document.body.classList.contains('ls-on')){lsFit();lxPenInit()}});
 document.addEventListener('click',e=>{const t=e.target.closest('[data-ls]');if(!t)return;const a=t.dataset.ls;const lx=t.closest('.lx');const id=t.dataset.id||(lx&&lx.dataset.id)||'';
   if(a==='screen'){e.preventDefault();lsScrOpen(id,+t.dataset.n||1);return}
-  if(a==='play'){e.preventDefault();if(!LS_BUILT.has(id)){toast('هذه الحصة لم تُبنَ بعد');return}t.classList.add('busy');lsLoad(id).then(s=>{t.classList.remove('busy');if(s){lxResume(id);lsScrOpen(id,lsL(id).screen)}else toast('تعذّر تحميل الحصة. تحقّق من اتصال الإنترنت ثم أعد المحاولة.')});return}
+  if(a==='reload'){e.preventDefault();delete lsBad[lsG(id)];fdRender();return}
+  if(a==='play'){e.preventDefault();if(!LS_BUILT.has(id)){toast('هذه الحصة لم تُبنَ بعد');return}t.classList.add('busy');lsLoad(id).then(s=>{t.classList.remove('busy');if(s){lxResume(id);lsScrOpen(id,lsL(id).screen)}else toast(id in lsCache?'تعذّر تحميل الحصة. تحقّق من اتصال الإنترنت ثم أعد المحاولة.':lsMissWhy([lsG(id)],true))});return}
   if(a==='go'){lxOv=false;lsScrOpen(id,+t.dataset.n);return}
   if(a==='close'){lsScrClose();return}
   if(a==='playgo'){lxPlayGo(id,t.dataset.t);return}
@@ -15158,7 +15170,24 @@ const tkLsHref=id=>LS_BUILT.has(id)?'#bag/lesson/'+id:'';
 /* مقطع حفظ الأسبوع لصف من خطة التوزيع */
 function tkSegOf(g,w){const W=(FD_PLANS[g]||[])[w]||[];const x=W.find(x=>x[0]==='قرآن'&&x[1]==='الحفظ والتدبر');return x?(x[2].split('·')[1]||x[2]).trim():''}
 /* بيانات منصة الدروس للصف كله (ls/s<الصف>.json)، تُجلب مرة وتُشارك مع صفحات الدروس */
-function tkGrade(g){if(!lsGW[g])lsGW[g]=fetch(`ls/s${g}.json`).then(r=>r.ok?r.json():null).catch(()=>null).then(d=>{if(!d){delete lsGW[g];return null}return d});return lsGW[g]}
+/* v97: دروس صف لم تُحمَّل (انقطاع، أو صف لم يُحفظ للعمل بلا إنترنت): سطر أعلى الصفحة يقول السبب ويعرض إعادة المحاولة، فلا تبقى أداة بمحتوى ناقص بلا تفسير.
+   يظهر لما تطلبه أداة؛ التحميل المسبق في الخلفية (tkPrefetch) صامت، وصفحة الدرس تعرض بطاقتها هي.
+   LS_MISS[الصف]: ١ = تعذّر تحميله الآن؛ ٢ = حُمّل بعد أن تعذّر، والأدوات التي فُتحت قبل ذلك ما زالت بلا بياناته (كل أداة تحتفظ بما جلبته)، فيُطلب إعادة تحميل الصفحة. */
+const LS_MISS={};
+function lsMissWhy(gs,plain){const n=gs.map(g=>FD_GRN[g]||g).join(' و'),w=(gs.length>1?'الصفوف ':'الصف ')+n,off=navigator.onLine===false,pub=typeof ofCan==='function'&&ofCan();
+  if(!off)return `تعذّر تحميل دروس ${w} الآن. تحقق من اتصالك ثم أعد المحاولة.`;
+  if(!pub)return `أنت بلا إنترنت، ودروس ${w} تُحمَّل من الشبكة. اتصل ثم أعد المحاولة.`;
+  return `أنت بلا إنترنت، ودروس ${w} غير محفوظة على هذا الجهاز. اتصل بالإنترنت ثم أعد المحاولة؛ ولتعمل بعدها بلا إنترنت جهّزها من ${plain?'«عن الأداة»':'<a href="#about">عن الأداة</a>'}.`}
+function lsMissPaint(){let b=document.getElementById('lsMiss');const all=Object.keys(LS_MISS).map(Number).sort();if(!all.length){if(b)b.hidden=true;return}
+  if(!b){const m=document.getElementById('main');if(!m)return;b=document.createElement('div');b.id='lsMiss';b.className='wrap ls-miss-w';m.insertBefore(b,m.firstChild)}
+  const bad=all.filter(g=>LS_MISS[g]===1),gs=bad.length?bad:all,n=gs.map(g=>FD_GRN[g]||g).join(' و');
+  b.innerHTML=bad.length?`<div class="ls-miss" role="alert"><p>${lsMissWhy(gs)}</p><button type="button" class="tk-btn" data-lsmiss>أعد المحاولة</button></div>`
+    :`<div class="ls-miss ok" role="status"><p>حُمِّلت دروس ${gs.length>1?'الصفوف':'الصف'} ${n} الآن. أعد تحميل الصفحة لتظهر في الأدوات التي فتحتها قبل ذلك.</p><button type="button" class="tk-btn" data-lsmiss>أعد تحميل الصفحة</button></div>`;b.hidden=false}
+function lsMiss(g,bad){const was=LS_MISS[g]||0,now=bad?1:(was?2:0);if(now===was)return;if(now)LS_MISS[g]=now;else delete LS_MISS[g];lsMissPaint()}
+document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('[data-lsmiss]'))location.reload()});
+window.addEventListener('online',()=>{if(Object.keys(LS_MISS).length)lsMissPaint()});window.addEventListener('offline',()=>{if(Object.keys(LS_MISS).length)lsMissPaint()});
+function tkGrade(g,quiet){if(!lsGW[g])lsGW[g]=fetch(`ls/s${g}.json`).then(r=>r.ok?r.json():null).catch(()=>null).then(d=>{if(!d){delete lsGW[g];return null}return d});
+  const p=lsGW[g];p.then(d=>{if(d)lsMiss(g,false);else if(!quiet)lsMiss(g,true)});return p}
 /* ---------- العرض على الشاشة ---------- */
 function tkPresent(el){if(!el)return;if(document.fullscreenElement){document.exitFullscreen().catch(()=>{});return}
   if(document.body.classList.contains('tk-pres')){tkUnpresent();return}
@@ -17085,7 +17114,7 @@ function sySectionHTML(){const I=syInfo;const st=!I?'جارٍ التحقق من 
 const tkPre={};
 function tkPreWanted(){try{tkLoad();bgLoad();return TK.me.grades.length>0||BG.classes.length>0||!!FD_PLANS[fdPrefs.gr]}catch(e){return false}}
 function tkPrefetch(force){try{tkLoad();if(!force){if(TK.pref.noPre||!tkPreWanted())return;const c=navigator.connection;if(c&&(c.saveData||/(^|-)2g$/.test(c.effectiveType||'')))return}
-    const w=fdWeekIdx();tkGrades().slice(0,4).forEach((g,i)=>{if(tkPre[g]==='ok'||tkPre[g]==='wait')return;tkPre[g]='wait';setTimeout(()=>{tkGrade(g).then(d=>{tkPre[g]=d?'ok':'bad';
+    const w=fdWeekIdx();tkGrades().slice(0,4).forEach((g,i)=>{if(tkPre[g]==='ok'||tkPre[g]==='wait')return;tkPre[g]='wait';setTimeout(()=>{tkGrade(g,true).then(d=>{tkPre[g]=d?'ok':'bad';
         if(d&&w>=0)tkPeriods(g,w).forEach(id=>((d[id]||{}).screens||[]).forEach(sc=>{if(sc.img&&sc.img.src){const im=new Image();im.src='ls/'+sc.img.src}}));
         if(tkCur==='check'&&location.hash.startsWith('#tk/check'))tkRe()})},force?0:i*1500)})}catch(e){}}
 setTimeout(()=>{try{(window.requestIdleCallback||(f=>setTimeout(f,1)))(()=>tkPrefetch())}catch(e){}},3500);
@@ -18952,7 +18981,9 @@ function thKeyPage(B){const I=thFixItems(B.id,(B.seed||{})[B.id]);if(!thFixOk(I)
 const thDoc=(L,B)=>{const s=thSheet(L,B);return s?`<section class="ps th-ps" data-fit>${s}</section>`+(B.t==='fix'&&B.key!==0?thKeyPage(B):''):''};
 function thFit(){const p=$('#thPaper');if(!p)return;const box=p.parentNode,w=box.clientWidth;if(!w)return;const k=Math.min(1,w/TH_PW);p.style.transform=k<1?'scale('+k.toFixed(4)+')':'';box.style.height=Math.ceil(p.offsetHeight*k)+'px';
   const n=$('#thLong');if(n)n.hidden=p.scrollHeight<=TH_PH+2}
-function thPaint(){const B=TK.th,L=(nwD(B.g)||{})[B.id],p=$('#thPaper');if(!p||!L)return;const s=thSheet(L,B);
+function thPaint(){const B=TK.th,L=(nwD(B.g)||{})[B.id],p=$('#thPaper');if(!p)return;
+  if(!L){p.innerHTML=`<div class="th-none"><b>لم تُحمَّل بيانات هذا الدرس</b><span>${LS_MISS[B.g]===1?lsMissWhy([B.g],true):'أعد تحميل الصفحة لتظهر بيانات الدرس.'}</span></div>`;thFit();$$('[data-thneed]').forEach(b=>{b.disabled=true});return}
+  const s=thSheet(L,B);
   p.innerHTML=s||'<div class="th-none"><b>لا بنود كافية لهذا القالب في هذا الدرس</b><span>يحتاج إلى ثلاثة بنود على الأقل، يصلح اثنان منها لزرع خطأ؛ ولا يُزرع الخطأ في بند فيه آية أو حديث. اختر قالبًا آخر أو درسًا آخر.</span></div>';
   thFit();$$('[data-thneed]').forEach(b=>{b.disabled=!s})}
 const TH_F={map:[['b0','الفرع الأول'],['b1','الفرع الثاني'],['b2','الفرع الثالث'],['b3','الفرع الرابع'],['q0','السؤال الأول',1],['q1','السؤال الثاني',1]],
@@ -19000,7 +19031,10 @@ const ofSW=()=>{try{return navigator.serviceWorker.controller||(OF.reg&&(OF.reg.
 /* رسالة إلى ملف الخدمة وجوابها (أو أجوبته المتتابعة حتى end) */
 function ofAsk(msg,onStep){return new Promise((ok,no)=>{const sw=ofSW();if(!sw){no(new Error('no-sw'));return}const ch=new MessageChannel();let tm=setTimeout(()=>no(new Error('timeout')),msg.t==='keep'?600000:20000);
   ch.port1.onmessage=e=>{const d=e.data||{};if(msg.t==='keep'&&!d.end){if(onStep)onStep(d);return}clearTimeout(tm);ok(d)};try{sw.postMessage(msg,[ch.port2])}catch(e){clearTimeout(tm);no(e)}})}
-const ofMine=()=>{let g=[];try{g=tkGrades().filter(x=>OF_GN[x])}catch(e){}if(!g.length)g=[6,7,8,9];return g.sort()};
+/* هل اختار المعلم صفوفه؟ شعبة في الحقيبة أو الدفتر، أو صفوف في «إعدادي»، أو صف في «ملفي» بالرئيسية، أو صفوف الدفتر إن غيّرها. (tkGrades تعيد الثامن لمن لم يختر شيئًا، فلا يُعتمد عليها وحدها هنا) */
+const ofOwn=()=>{try{tkLoad();const n=(typeof NB!=='undefined'&&NB&&NB.gr||[]).map(Number);return tkClasses().length>0||(TK.me.grades||[]).length>0||(typeof fdPrefs!=='undefined'&&!!fdPrefs&&!!FD_PLANS[fdPrefs.gr])||(n.length>0&&!(n.length===1&&n[0]===8))}catch(e){return false}};
+/* صفوف التجهيز: صفوف المعلم إن اختار، وإلا الصفوف الأربعة */
+const ofMine=()=>{let g=[];try{if(ofOwn())g=tkGrades().filter(x=>OF_GN[x])}catch(e){}if(!g.length)g=[6,7,8,9];return g.sort()};
 const ofUrls=keys=>{const out=[],seen=new Set();keys.forEach(k=>{const G=OF.man&&OF.man.groups[k];if(G)G.u.forEach(u=>{if(!seen.has(u)){seen.add(u);out.push(u)}})});return out};
 const ofBytes=keys=>keys.reduce((s,k)=>s+((OF.man&&OF.man.groups[k]&&OF.man.groups[k].b)||0),0);
 async function ofCheck(){if(!OF.man||!OF.on)return;const keys=Object.keys(OF.man.groups);const have={};
@@ -19029,7 +19063,7 @@ function ofState(){if(OF.fail)return ['bad','تعذّر تفعيل العمل ب
   const mine=ofMine(),ready=OF.have.core&&mine.every(g=>OF.have['g'+g]);const off=!OF.net?'أنت الآن بلا إنترنت. ':'';
   if(ready)return ['ok',off+'جاهز: يفتح الدليل ودروس صفوفك وأدواته وألعابه بلا إنترنت على هذا الجهاز.'];
   return ['mid',off+'الصفحة محفوظة وتفتح بلا إنترنت، ومعها الأدوات والألعاب. جهّز دروس صفوفك ليعمل العرض وصفحات الدروس كذلك.']}
-function ofInner(){if(!OF.sup)return '';const st=ofState(),M=OF.man,mine=ofMine(),busy=!!OF.job,can=OF.on&&M&&!busy&&OF.net;
+function ofInner(){if(!OF.sup)return '';const st=ofState(),M=OF.man,mine=ofMine(),own=ofOwn(),busy=!!OF.job,can=OF.on&&M&&!busy&&OF.net;
   const row=(k,label,sub)=>{const G=M.groups[k];if(!G)return '';const on=!!OF.have[k];return `<li class="${on?'on':''}"><i aria-hidden="true">${on?tkI('check'):''}</i><span><b>${label}</b>${sub?`<small>${sub}</small>`:''}</span><em>${on?'محفوظ':ofMB(G.b)}</em></li>`};
   const prepK=['core',...mine.map(g=>'g'+g)],prepNeed=M?prepK.filter(k=>!OF.have[k]):[],moreNeed=M?OF_MORE.filter(k=>!OF.have[k]):[];
   const any=M&&Object.keys(M.groups).some(k=>k!=='core'&&OF.have[k])||(M&&OF.have.core);
@@ -19038,13 +19072,13 @@ function ofInner(){if(!OF.sup)return '';const st=ofState(),M=OF.man,mine=ofMine(
    <p class="of-st ${st[0]}" role="status" tabindex="-1" data-of-st>${st[1]}</p>
    ${busy&&!OF.job.drop?`<div class="of-bar" role="progressbar" aria-label="تقدّم الحفظ" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}" data-of-bar><i style="width:${pct}%"></i></div>`:''}
    ${M?`<ul class="of-list">${row('core','الأساس','الصفحة وخطوطها، وصور الدروس، وفهرس البحث، ومكتبات تنزيل PDF و PowerPoint و Excel')}
-     ${[6,7,8,9].map(g=>row('g'+g,'دروس الصف '+OF_GN[g],mine.includes(g)&&mine.length<4?'من صفوفك':'')).join('')}
+     ${[6,7,8,9].map(g=>row('g'+g,'دروس الصف '+OF_GN[g],own&&mine.includes(g)?'من صفوفك':'')).join('')}
      ${row('guide','فصول الدليل كاملة','تُحفظ كذلك فصلًا فصلًا كلما فتحت واحدًا')}${row('vsc','الحلول البصرية','')}${row('vid','المقاطع القصيرة','')}</ul>
    <div class="of-acts"><button type="button" class="tk-btn pri" data-of="prep"${can&&prepNeed.length?'':' disabled'}>${tkI('down')}${prepNeed.length?'جهّز صفوفي للعمل بلا إنترنت · '+ofMB(ofBytes(prepNeed)):'صفوفك مجهّزة'}</button>
     <button type="button" class="tk-btn" data-of="more"${can&&moreNeed.length?'':' disabled'}>${moreNeed.length?'أضف الدليل والحلول البصرية والمقاطع · '+ofMB(ofBytes(moreNeed)):'الدليل والحلول البصرية والمقاطع محفوظة'}</button>
     <button type="button" class="tk-btn ghost" data-of="drop"${OF.on&&!busy&&any?'':' disabled'}>احذف المحفوظ</button></div>
    ${OF.note?`<p class="of-warn" role="alert">${esc(OF.note)}</p>`:''}
-   <p class="of-note">${mine.length<4?`صفوفك من <a href="#tk/setup">إعدادي</a>: ${mine.map(g=>OF_GN[g]).join('، ')}. `:`لم تختر صفوفك في <a href="#tk/setup">إعدادي</a> بعد، فتُجهَّز الصفوف الأربعة. `}لا تُحفظ الحقائب التدريبية ولا ملفات الدروس <bdi>PDF</bdi>: تُنزَّل إلى جهازك عند طلبها. وصفوفك وطلابك ودرجاتهم في متصفحك أصلًا، ولا تحتاج إلى إنترنت.${OF.use?` المساحة التي يستعملها الدليل على هذا الجهاز الآن: نحو ${ofMB(OF.use)}.`:''}</p>
+   <p class="of-note">${own?`صفوفك من <a href="#tk/setup">إعدادي</a>: ${mine.map(g=>OF_GN[g]).join('، ')}. `:`لم تختر صفوفك في <a href="#tk/setup">إعدادي</a> بعد، فتُجهَّز الصفوف الأربعة. `}لا تُحفظ الحقائب التدريبية ولا ملفات الدروس <bdi>PDF</bdi>: تُنزَّل إلى جهازك عند طلبها. وصفوفك وطلابك ودرجاتهم في متصفحك أصلًا، ولا تحتاج إلى إنترنت.${OF.use?` المساحة التي يستعملها الدليل على هذا الجهاز الآن: نحو ${ofMB(OF.use)}.`:''}</p>
    <p class="of-note">ثبّت الدليل تطبيقًا (من قائمة المتصفح) ليبقى المحفوظ ولا يمحوه المتصفح إن طال تركه. والمحفوظ خاص بهذا المتصفح على هذا الجهاز.</p>`:''}`}
 const ofCard=()=>OF.sup?`<section class="of-card" data-of-card aria-labelledby="ofH">${ofInner()}</section>`:'';
 function ofPaint(){if(!OF.sup)return;$$('[data-of-card]').forEach(el=>{const a=document.activeElement,k=a&&el.contains(a)&&a.dataset?a.dataset.of:'';el.innerHTML=ofInner();if(k){const b=el.querySelector('[data-of="'+k+'"]'),t=b&&!b.disabled?b:el.querySelector('[data-of-st]');try{t&&t.focus({preventScroll:true})}catch(e){}}});ofPill()}
