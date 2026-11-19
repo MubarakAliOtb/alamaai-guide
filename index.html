@@ -13,6 +13,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
+<meta name="alm:offline" content="sw.js">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="المعلم الألمعي">
 <link rel="preload" as="font" type="font/woff2" href="fonts/AlmSansArabic-Regular.woff2" crossorigin>
@@ -1410,7 +1411,7 @@ a.mini:hover{transform:translateY(-2px)}a.mini p{color:var(--t-accent)!important
   <symbol id="ai-quote" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 0 0-2 2v4h6V6zM20 6h-4a2 2 0 0 0-2 2v4h6V6zM4 12c0 3.5 1.5 5.5 5 6M14 12c0 3.5 1.5 5.5 5 6"/></symbol>
   <symbol id="ai-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
   <symbol id="ai-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9.5 9.5h5v5h-5zM9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
-  <symbol id="ai-hex" viewBox="0 0 24 24"><path d="M12 2.5l4 2.3v4.6l-4 2.3-4-2.3V4.8zM8 11.7l4 2.3v4.6l-4 2.3-4-2.3V14zM16 11.7l4 2.3v4.6l-4 2.3-4-2.3V14z"/></symbol><symbol id="ai-peak" viewBox="0 0 24 24"><path d="M3 20l6-10 3 4.5 2.5-3.5L21 20zM9 10V4l4 1.5L9 7"/></symbol><symbol id="ai-seat" viewBox="0 0 24 24"><path d="M4 5h4v4H4zM10 5h4v4h-4zM16 5h4v4h-4zM4 12h4v4H4zM10 12h4v4h-4zM16 12h4v4h-4zM3 20h18"/></symbol><symbol id="ai-stations" viewBox="0 0 24 24"><path d="M12 4a8 8 0 0 1 7.5 5.2M20 4v5h-5M12 20a8 8 0 0 1-7.5-5.2M4 20v-5h5M12 9.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></symbol><symbol id="ai-jar" viewBox="0 0 24 24"><path d="M8 3h8M9 3v3l-2 2.5V19a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V8.5L15 6V3M7 13h10M10 16.5h.01M13.5 17.5h.01"/></symbol><symbol id="ai-choice" viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18M10.5 12l1 1 2-2"/></symbol><symbol id="ai-mindmap" viewBox="0 0 24 24"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM12 9V4M12 20v-5M9.4 13.5L5 16M14.6 13.5L19 16M9.4 10.5L5 8M14.6 10.5L19 8"/></symbol><symbol id="ai-diwan" viewBox="0 0 24 24"><path d="M4 4h10a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H9l-3.5 3v-3H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM19 9h1a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1.5v3L15 17h-3a2 2 0 0 1-2-2"/></symbol><symbol id="ai-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 21h7M10 17h4"/></symbol>
+  <symbol id="ai-hex" viewBox="0 0 24 24"><path d="M12 2.5l4 2.3v4.6l-4 2.3-4-2.3V4.8zM8 11.7l4 2.3v4.6l-4 2.3-4-2.3V14zM16 11.7l4 2.3v4.6l-4 2.3-4-2.3V14z"/></symbol><symbol id="ai-peak" viewBox="0 0 24 24"><path d="M3 20l6-10 3 4.5 2.5-3.5L21 20zM9 10V4l4 1.5L9 7"/></symbol><symbol id="ai-seat" viewBox="0 0 24 24"><path d="M4 5h4v4H4zM10 5h4v4h-4zM16 5h4v4h-4zM4 12h4v4H4zM10 12h4v4h-4zM16 12h4v4h-4zM3 20h18"/></symbol><symbol id="ai-stations" viewBox="0 0 24 24"><path d="M12 4a8 8 0 0 1 7.5 5.2M20 4v5h-5M12 20a8 8 0 0 1-7.5-5.2M4 20v-5h5M12 9.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></symbol><symbol id="ai-jar" viewBox="0 0 24 24"><path d="M8 3h8M9 3v3l-2 2.5V19a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V8.5L15 6V3M7 13h10M10 16.5h.01M13.5 17.5h.01"/></symbol><symbol id="ai-choice" viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18M10.5 12l1 1 2-2"/></symbol><symbol id="ai-mindmap" viewBox="0 0 24 24"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM12 9V4M12 20v-5M9.4 13.5L5 16M14.6 13.5L19 16M9.4 10.5L5 8M14.6 10.5L19 8"/></symbol><symbol id="ai-diwan" viewBox="0 0 24 24"><path d="M4 4h10a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H9l-3.5 3v-3H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM19 9h1a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1.5v3L15 17h-3a2 2 0 0 1-2-2"/></symbol><symbol id="ai-think" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM15 3v4h4M12 9.6a2.9 2.9 0 0 0-1.7 5.2v1.5h3.4v-1.5A2.9 2.9 0 0 0 12 9.6zM10.8 18.6h2.4"/></symbol><symbol id="ai-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 21h7M10 17h4"/></symbol>
   <symbol id="ai-home2" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M12 13.5c-1.2-1.2-3-.4-3 1 0 1.6 3 3.5 3 3.5s3-1.9 3-3.5c0-1.4-1.8-2.2-3-1z"/></symbol>
   <symbol id="ai-ladder" viewBox="0 0 24 24"><path d="M7 3v18M17 3v18M7 7h10M7 12h10M7 17h10"/></symbol>
   <symbol id="ai-rocket" viewBox="0 0 24 24"><path d="M12 3c3.5 2 5 5.5 5 9.5L15 16H9l-2-3.5C7 8.5 8.5 5 12 3z"/><circle cx="12" cy="10" r="1.8"/><path d="M9 16l-2.5 3.5M15 16l2.5 3.5M12 17v4"/></symbol>
@@ -11020,6 +11021,276 @@ a.tk-ctx-tag:hover span{text-decoration:underline}
   .tk-ctx-chips.many .tk-ctx-chip{flex:none;width:78%;max-width:300px;scroll-snap-align:start}}
 @media print{.tk-ctxbox{display:none}}
 </style>
+<style id="tkplayCss">
+/* v97: الشرائح التفاعلية الثلاث (feed/tkplay.js): شبكة الاستدعاء، مبارزة السبورة، اكتشف الخطأ. تبني على أصناف الألعاب (.gm-* و .ar-*) */
+/* --- شبكة الاستدعاء --- */
+.rg-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.rg-c{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:clamp(96px,20vh,210px);border-radius:18px;border:2px solid transparent;background:#0D1B3D;color:#fff;font:inherit;cursor:pointer;padding:10px;transition:transform .12s ease,box-shadow .12s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.rg-c small{font-size:clamp(13px,1.2vw,18px);font-weight:700;color:#B9C8EA}
+.rg-c b{font-family:var(--f-display);font-size:clamp(34px,5vw,76px);line-height:1.1;font-variant-numeric:tabular-nums}
+button.rg-c:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(13,27,61,.28)}
+button.rg-c:active{transform:scale(.98)}
+.rg-c.used{background:var(--bg);color:var(--ink2);border-color:var(--line);cursor:default}
+.rg-c.used small{color:var(--ink2)}.rg-c.used b{font-size:clamp(24px,3vw,44px)}
+.rg-c.used.won{border-color:var(--tc);color:var(--ink)}
+.rg-q .gm-opts{max-width:980px}
+.rg-why{margin:8px 0 0!important;font-size:clamp(14px,1.3vw,19px)!important;color:var(--ink)}
+.rg-why b{color:var(--t-teal);font-size:inherit}
+.gm-stage.tk-pres-on .rg-grid,.gm-stage:fullscreen .rg-grid{flex:1;grid-auto-rows:1fr}
+.gm-stage.tk-pres-on .rg-c,.gm-stage:fullscreen .rg-c{min-height:0}
+/* --- مبارزة السبورة --- */
+.du-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,190px) minmax(0,1fr);gap:12px;align-items:stretch}
+.du-half{display:flex;flex-direction:column;gap:10px;border:3px solid var(--tc);border-radius:20px;padding:14px;background:var(--bg);min-width:0;transition:opacity .15s ease,box-shadow .15s ease}
+.du-half header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.du-n{display:grid;place-items:center;min-width:2em;height:2em;border-radius:50%;background:var(--tc);color:var(--tco);font-family:var(--f-display);font-size:clamp(20px,2vw,30px);font-variant-numeric:tabular-nums}
+.du-q{margin:0;font-size:clamp(17px,1.7vw,27px);line-height:1.7;font-weight:700;color:var(--ink);text-wrap:pretty}
+.du-opts{display:grid;gap:8px;margin-top:auto}
+.du-opt{min-height:clamp(54px,8vh,84px)}
+.du-half.lock{opacity:.5}
+.du-half.won{box-shadow:0 0 0 5px var(--tc)}
+.du-st{margin:0;min-height:1.6em;font-size:14.5px;font-weight:700;color:var(--ink2)}
+.du-half.won .du-st{color:var(--ink)}
+.du-mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;min-width:0}
+.du-rd{font-family:var(--f-display);font-size:clamp(18px,1.8vw,26px);font-weight:700;color:var(--ink)}
+.du-mid small{font-size:12.5px;font-weight:700;color:var(--ink2)}
+.du-mid .gm-clock{margin:0}
+.du-why{font-size:clamp(13px,1.1vw,16px);text-align:start}
+.du-goal{margin:0;align-self:center}
+.gm-stage.tk-pres-on .du-wrap,.gm-stage:fullscreen .du-wrap{flex:1}
+@media (max-width:820px){.du-wrap{grid-template-columns:minmax(0,1fr)}.du-mid{flex-direction:row;flex-wrap:wrap;order:0}.du-opt{min-height:54px}}
+/* --- اكتشف الخطأ --- */
+.sp-wrap{display:flex;flex-direction:column;gap:14px;max-width:1020px;width:100%;margin-inline:auto}
+.sp-no{font-weight:700;font-size:14.5px;background:var(--sunk);color:var(--ink);border-radius:999px;padding:4px 14px}
+.sp-card{position:relative;border:2px solid var(--line);border-radius:20px;padding:16px 18px;background:var(--bg);transition:border-color .15s ease}
+.sp-card small{display:block;font-size:13px;font-weight:700;color:var(--ink2)}
+.sp-q{margin:2px 0 12px;font-size:clamp(18px,1.9vw,29px);line-height:1.7;font-weight:700;color:var(--ink);text-wrap:pretty}
+.sp-claim{margin:2px 0 0;font-size:clamp(21px,2.4vw,36px);line-height:1.65;font-weight:700;color:var(--t-brand);text-wrap:pretty}
+.sp-card.bad{border-color:var(--t-bad)}.sp-card.good{border-color:var(--t-teal)}
+.sp-stamp{position:absolute;inset-inline-end:14px;top:12px;border-radius:999px;padding:3px 14px;font-weight:700;font-size:14.5px}
+.sp-card.bad .sp-stamp{background:var(--badbg);color:var(--t-bad)}.sp-card.good .sp-stamp{background:var(--okbg);color:var(--t-teal)}
+.sp-card.bad .sp-claim{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--t-bad)}
+.sp-ask{display:grid;gap:10px}
+.sp-ask>b{font-size:clamp(17px,1.7vw,25px);color:var(--ink)}
+.sp-btns{display:flex;flex-wrap:wrap;gap:12px}
+.sp-btns .tk-btn{flex:1 1 200px;min-height:clamp(60px,9vh,92px);font-size:clamp(18px,1.9vw,28px);justify-content:center;border-width:2px}
+.sp-ok{border-color:var(--t-teal)!important;color:var(--t-teal)!important}.sp-bad{border-color:var(--t-bad)!important;color:var(--t-bad)!important}
+.sp-ok:hover{background:var(--okbg)!important}.sp-bad:hover{background:var(--badbg)!important}
+.sp-res{margin:0;font-size:clamp(17px,1.7vw,25px);font-weight:700}
+.sp-res.ok{color:var(--t-teal)}.sp-res.no{color:var(--t-bad)}
+.gm-stage.tk-pres-on .sp-wrap,.gm-stage:fullscreen .sp-wrap{flex:1;justify-content:center}
+.pl-win{align-self:stretch}
+@media (max-width:560px){.rg-grid{gap:8px}.rg-c{min-height:92px;border-radius:14px}.sp-stamp{position:static;display:inline-block;margin-top:10px}}
+@media (prefers-reduced-motion:reduce){.rg-c,.du-half,.sp-card{transition:none}button.rg-c:hover,button.rg-c:active{transform:none}}
+/* --- شاشة تفاعلية داخل العرض، وإضافتها في «نسختي من العرض» --- */
+.lx-play{display:grid;gap:12px;justify-items:start}
+.lx-play-t{font-size:1.05em;line-height:1.7;font-weight:700}
+.lx-play small{font-size:.78em;opacity:.85;line-height:1.7}
+.lx-play-ic{display:grid;place-items:center;width:3em;height:3em;border-radius:1em;background:#FF7A1A;color:#0D1B3D}
+.lx-play-ic .ic{width:1.7em;height:1.7em}
+.dk-newp{margin-top:8px}
+.dk-plays{flex-wrap:wrap}
+.dk-plays .ic{width:18px;height:18px}
+.g-grid .tk-ga{background:linear-gradient(210deg,#1E3A8A,#0B7C70)}
+.g-duel .tk-ga{background:linear-gradient(210deg,#1D4ED8,#16264D)}
+.g-spot .tk-ga{background:linear-gradient(210deg,#0B7C70,#334A7A)}
+</style>
+<style id="lxteamsCss">
+/* v97: فِرق الصف داخل العرض ومنصة التتويج (feed/lxteams.js). ألوان ثابتة كألوان الشاشة الذكية نفسها، فلا تتبدل مع سمة الصفحة */
+#lsOv .ltm{position:fixed;top:64px;inset-inline:0;margin-inline:auto;z-index:93;width:min(1180px,calc(100% - 20px));display:grid;gap:6px;background:#fff;color:#0D1B3D;border-radius:18px;border:2px solid #FF7A1A;box-shadow:0 14px 40px rgba(0,0,0,.45);padding:8px 10px;font-family:var(--f-body);direction:rtl;text-align:start;font-size:15px}
+.ltm-row{display:flex;align-items:center;gap:8px;min-width:0}
+.ltm-cls{font-size:14px;font-weight:700;color:#334A7A;white-space:nowrap;flex:none}
+.ltm-msg{margin:0;flex:1;min-width:0;font-size:14.5px;line-height:1.7;font-weight:700}
+.ltm-teams{display:flex;gap:6px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none;padding:2px}
+.ltm-teams::-webkit-scrollbar{display:none}
+.ltm-t{display:inline-flex;align-items:center;gap:7px;flex:none;min-height:46px;border-radius:999px;border:2px solid var(--tc,#334A7A);background:#fff;color:#0D1B3D;font:inherit;font-weight:700;font-size:15.5px;padding:4px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.ltm-t[aria-expanded="true"]{background:var(--tc,#334A7A);color:#fff}
+.ltm-t[aria-expanded="true"] .ltm-dot{background:#fff}
+.ltm-dot{width:.75em;height:.75em;border-radius:50%;background:var(--tc,#334A7A);flex:none}
+.ltm-t b{font-variant-numeric:tabular-nums;font-size:14.5px;color:#0B7C70;min-width:0}
+.ltm-t[aria-expanded="true"] b{color:#fff}
+.ltm-t.all{--tc:#334A7A;border-style:dashed}
+.ltm-b{display:inline-flex;align-items:center;gap:6px;flex:none;min-height:46px;border-radius:999px;border:0;background:#0D1B3D;color:#fff;font:inherit;font-weight:700;font-size:14.5px;padding:4px 16px;cursor:pointer;touch-action:manipulation}
+.ltm-b .ic{width:18px;height:18px}
+.ltm-b.pod{background:#FF7A1A;color:#0D1B3D}
+.ltm-mk{display:flex;gap:6px;flex:none}
+.ltm-x{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;border:0;background:#EEF4FF;color:#0D1B3D;cursor:pointer}
+.ltm-x .ic{width:18px;height:18px}
+.ltm-why{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:6px 4px 2px;border-top:1px solid #D5E0F2}
+.ltm-why>span{font-size:14px;font-weight:700;color:#334A7A;flex:1 1 100%}
+.ltm-r{display:inline-flex;align-items:center;gap:8px;min-height:48px;border-radius:14px;border:0;background:var(--tc,#334A7A);color:#fff;font:inherit;font-weight:700;font-size:15px;padding:6px 14px;cursor:pointer;touch-action:manipulation}
+.ltm-r b{font-family:var(--f-display);font-size:18px;font-variant-numeric:tabular-nums}
+.ltm-r.all{--tc:#334A7A}
+.ltm-flash{margin:0;display:flex;align-items:center;gap:10px;min-height:0;font-size:14.5px;font-weight:700;color:#0B7C70}
+.ltm-flash:empty{display:none}
+.ltm-u{border:1px solid #B9C9E8;background:#fff;color:#0D1B3D;border-radius:999px;font:inherit;font-weight:700;font-size:13.5px;min-height:44px;padding:2px 16px;cursor:pointer}
+.ltm button:focus-visible,.ltp button:focus-visible{outline:3px solid #FF7A1A;outline-offset:2px}
+.lx .lx-podb{margin-bottom:4px;min-height:44px;background:#FF7A1A;color:#0D1B3D;font-size:calc(var(--lx-u)*.62)}
+.lx .lx-podb .ic{width:1.2em;height:1.2em}
+/* --- منصة التتويج --- */
+#lsOv .ltp{position:fixed;inset:0;z-index:97;display:grid;place-items:center;overflow:auto;background:radial-gradient(circle at 50% 0%,#1E3A8A 0%,#0A1530 62%);color:#EEF4FF;font-family:var(--f-body);direction:rtl;text-align:center;padding:max(18px,env(safe-area-inset-top,0px)) 16px 18px}
+.ltp-in{position:relative;display:grid;gap:clamp(12px,2.2vh,26px);justify-items:center;width:min(1100px,100%)}
+.ltp-eye{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:clamp(14px,1.4vw,20px);color:#FFB26B}
+.ltp-eye .ic{width:1.3em;height:1.3em}
+.ltp-h h2{margin:2px 0;font-family:var(--f-display);font-size:clamp(30px,5vw,68px);line-height:1.25;color:#fff}
+.ltp-h p{margin:0;font-size:clamp(14px,1.5vw,21px);color:#B9C9E8;font-weight:700}
+.ltp-sum{display:grid;gap:2px}
+.ltp-sum b{font-family:var(--f-display);font-size:clamp(52px,10vw,128px);line-height:1.05;color:#FFB26B;font-variant-numeric:tabular-nums}
+.ltp-sum span{font-size:clamp(15px,1.7vw,24px);font-weight:700}
+/* منصة واحدة مستوية: الفِرق متساوية الارتفاع وبترتيبها الثابت */
+.ltp-stage{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;width:100%;background:#16264D;border-radius:22px 22px 8px 8px;border-bottom:10px solid #FF7A1A;overflow:hidden}
+.ltp-team{display:grid;gap:4px;justify-items:center;align-content:start;padding:clamp(12px,2vh,22px) 10px;border-inline-start:1px solid rgba(255,255,255,.12);min-width:0}
+.ltp-team:first-child{border-inline-start:0}
+.ltp-dot{width:clamp(16px,1.8vw,26px);height:clamp(16px,1.8vw,26px);border-radius:50%;background:var(--tc);box-shadow:0 0 0 4px rgba(255,255,255,.14)}
+.ltp-team b{font-family:var(--f-display);font-size:clamp(18px,2.2vw,32px);color:#fff;line-height:1.3;overflow-wrap:anywhere}
+.ltp-team span{font-family:var(--f-display);font-size:clamp(24px,3.4vw,48px);color:#5FD3C5;font-variant-numeric:tabular-nums;line-height:1.1}
+.ltp-team small{font-size:clamp(12.5px,1.15vw,16px);color:#B9C9E8;font-weight:700;line-height:1.6;min-height:1.6em}
+.ltp-note{margin:0;font-size:clamp(13px,1.2vw,17px);color:#B9C9E8;font-weight:700}
+.ltp-note:empty{display:none}
+.ltp-jr{display:grid;gap:6px;justify-items:center;width:min(560px,100%);font-size:clamp(14px,1.4vw,19px);font-weight:700}
+.ltp-jr b{color:#FFB26B}
+.ltp-bar{width:100%;height:10px;border-radius:999px;background:rgba(255,255,255,.16);overflow:hidden}
+.ltp-bar i{display:block;height:100%;background:#5FD3C5;border-radius:999px}
+.ltp-jr small{color:#B9C9E8}
+.ltp-acts .lx-btn{display:inline-flex;align-items:center;gap:.5em;border:0;border-radius:999px;padding:.55em 1.4em;font:inherit;font-weight:700;font-size:clamp(16px,1.5vw,21px);min-height:52px;background:#fff;color:#0D1B3D;cursor:pointer}
+.ltp-acts .lx-ic{width:1.2em;height:1.2em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ltp-conf{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.ltp-conf i{position:absolute;top:-24px;left:var(--x);width:11px;height:18px;border-radius:3px;background:var(--c);animation:ltpFall 2.4s var(--d) cubic-bezier(.3,.6,.6,1) forwards}
+@keyframes ltpFall{to{transform:translateY(108vh) rotate(620deg)}}
+@media (prefers-reduced-motion:reduce){.ltp-conf{display:none}}
+@media (max-width:640px){#lsOv .ltm{top:104px;font-size:14px}.ltm-row{flex-wrap:wrap}.ltm-cls{flex:1 1 auto}.ltm-teams{flex:1 1 100%;order:3}.ltm-b.pod span{display:none}.ltm-b.pod{padding:4px 14px}.ltm-r{flex:1 1 100%}}
+/* الشاشة الضيقة تخفي وسط التذييل (النقاط)؛ وفي آخر شاشة يبقى منه زر المنصة سطرًا كاملًا فوق أزرار التنقل */
+@media (max-width:820px),(max-aspect-ratio:1/1){.lx .lx-mid.lx-mid-pod{display:grid;grid-column:1/-1;grid-row:1}.lx .lx-mid.lx-mid-pod .lx-dots,.lx .lx-mid.lx-mid-pod .lx-by{display:none}.lx .lx-mid.lx-mid-pod .lx-podb{margin:0;justify-self:stretch;justify-content:center}}
+@media print{#lsOv .ltm,#lsOv .ltp{display:none}}
+</style>
+<style id="tkthinkCss">
+/* v97: «أوراق تُفكّر» (feed/tkthink.js): واجهة الأداة، ثم الورقة نفسها (تُرسم بالأصناف نفسها في المعاينة وفي الطباعة وفي ملف PDF) */
+.th-pick{margin:12px 0 14px}
+.th-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.th-tabs button{display:grid;gap:2px;align-content:start;text-align:start;min-height:68px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);font:inherit;padding:10px 12px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.th-tabs button b{font-size:15px;line-height:1.5}
+.th-tabs button small{font-size:12.5px;font-weight:400;line-height:1.6;color:var(--ink2)}
+.th-tabs button:hover{border-color:var(--brand)}
+.th-tabs button[aria-pressed="true"]{border-color:var(--brand);box-shadow:inset 0 0 0 1.5px var(--brand);background:var(--infobg)}
+.th-tabs button[aria-pressed="true"] b{color:var(--t-brand)}
+.th-grid{display:grid;grid-template-columns:minmax(260px,360px) minmax(0,1fr);gap:16px;align-items:start}
+.th-ed{gap:10px}
+.th-ed textarea.tk-in{min-height:58px}
+.th-chk{display:flex;align-items:center;gap:8px;min-height:44px;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
+.th-chk input{width:20px;height:20px;flex:none;accent-color:var(--brand)}
+.th-acts{margin-top:4px}
+.th-long{color:var(--t-accent);font-weight:700}
+.th-prev{min-width:0;border:1px solid var(--line);border-radius:14px;background:var(--sunk);padding:12px}
+.th-scale{position:relative;overflow:hidden;min-width:0}
+/* الورقة في المعاينة بمقاسها الحقيقي (A4 عند ٩٦ نقطة في البوصة) ثم تُصغَّر بالتحويل، فما يراه المعلم هو ما يُطبع */
+.th-paper.ps-prev{width:794px;min-height:1123px;box-sizing:border-box;padding:45px 49px;margin:0 auto;border:0;border-radius:2px;background:#fff;overflow:visible;transform-origin:top right;box-shadow:0 1px 0 #B9C9E8,0 8px 22px rgba(13,27,61,.14)}
+.th-none{display:grid;gap:6px;justify-items:center;text-align:center;padding:120px 40px;color:#4A5878;font-size:15px;line-height:1.8}
+.th-none b{font-size:17px;color:#0D1B3D}
+@media (max-width:900px){.th-grid{grid-template-columns:minmax(0,1fr)}.th-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.th-prev{padding:8px}}
+
+/* ---------- الورقة: ألوان ثابتة (الورق أبيض مهما كانت سمة الشاشة)، وخطوط رفيعة بلا تعبئة ---------- */
+.th-sheet{display:flex;flex-direction:column;gap:9px;box-sizing:border-box;min-height:1033px;color:#0D1B3D;font-size:14.5px;line-height:1.7;text-align:start;overflow-wrap:anywhere}
+#fdPrint .th-sheet{min-height:258mm}
+.th-sheet .ps-h{margin-bottom:2px}
+.th-sheet .ps-ft{margin-top:auto}
+.th-sheet p{margin:0}
+.th-step{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin-top:3px}
+.th-step>i{font-style:normal;flex:none;display:inline-block;box-sizing:border-box;width:24px;height:24px;line-height:21px;text-align:center;border:1.5px solid #0D1B3D;border-radius:50%;font-size:13px;font-weight:700}
+.th-step>b{font-size:16px}
+.th-step>span{font-size:13px;color:#4A5878}
+.th-lines{display:flex;flex-direction:column;flex:1 1 auto}
+.th-lines i{display:block;flex:1 1 30px;min-height:28px;max-height:42px;border-bottom:1px solid #8E9BB5}
+.th-q{display:flex;flex-direction:column}
+.th-q p{font-weight:700}
+.th-q .th-lines,.th-end .th-lines,.th-3 .th-lines{flex:none}
+.th-q .th-lines i,.th-end .th-lines i,.th-3 .th-lines i{flex:none;height:30px}
+.th-end{display:flex;align-items:flex-end;gap:8px;border-top:1px dashed #8E9BB5;padding-top:6px;margin-top:2px}
+.th-end b{flex:none;font-size:14px}
+.th-end .th-lines{flex:1 1 auto}
+/* خريطة الاستدعاء */
+.th-web{display:flex;flex-direction:column;align-items:stretch;flex:1 1 auto}
+.th-core{align-self:center;position:relative;max-width:82%;border:2px solid #0D1B3D;border-radius:999px;padding:5px 28px;font-size:17px;font-weight:700;text-align:center;line-height:1.5;margin-bottom:14px}
+.th-core::after{content:"";position:absolute;top:100%;left:50%;height:14px;border-left:1.5px solid #0D1B3D}
+.th-br{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;flex:1 1 auto;border-top:1.5px solid #0D1B3D;padding-top:9px}
+.th-br.n1{grid-template-columns:minmax(0,1fr)}
+.th-br.n3 section:last-child{grid-column:1/-1}
+.th-br section{display:flex;flex-direction:column;min-width:0;border:1.2px solid #0D1B3D;border-radius:12px;padding:7px 12px 10px}
+.th-br h4{margin:0;font-size:14.5px;line-height:1.55}
+/* مصفوفة المقارنة */
+.th-mx{width:100%;border-collapse:collapse;table-layout:fixed}
+.th-mx th,.th-mx td{border:1.2px solid #0D1B3D;padding:6px 8px;vertical-align:top;font-size:14px;line-height:1.55}
+.th-mx thead th{font-weight:700;text-align:center;vertical-align:middle;border-bottom-width:2px;height:34px}
+.th-mx thead th:first-child{width:23%;border-top-color:transparent;border-inline-start-color:transparent}
+.th-mx tbody th{font-weight:700;text-align:start;vertical-align:middle}
+.th-mx tbody td{height:118px}
+.th-mx.r3 tbody td{height:158px}.th-mx.r2 tbody td{height:236px}.th-mx.r1 tbody td{height:300px}
+.th-3{display:flex;flex-direction:column;gap:5px}
+.th-3>div{display:flex;flex-direction:column}
+.th-3 b{font-size:14px}
+/* اكتشف الخطأ وصحّحه */
+.th-fx{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;flex:1 1 auto}
+.th-fx li{display:flex;gap:9px;align-items:stretch;flex:1 1 auto;border:1.2px solid #0D1B3D;border-radius:12px;padding:7px 11px 10px}
+.th-no{font-style:normal;flex:none;align-self:flex-start;display:inline-block;box-sizing:border-box;width:24px;height:24px;line-height:21px;text-align:center;border:1.5px solid #0D1B3D;border-radius:50%;font-size:13px;font-weight:700;margin-top:1px}
+.th-fb{display:flex;flex-direction:column;gap:3px;flex:1 1 auto;min-width:0}
+.th-st{font-weight:700}
+.th-st small,.th-sa small{font-size:12.5px;font-weight:400;color:#4A5878}
+.th-sa b{border-bottom:1.5px solid #0D1B3D;padding-bottom:1px}
+.th-ck{display:flex;align-items:flex-end;flex-wrap:wrap;gap:4px 16px;margin-top:3px;font-size:13.5px}
+.th-ck>span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.th-box{display:inline-block;box-sizing:border-box;width:15px;height:15px;border:1.5px solid #0D1B3D;border-radius:3px;flex:none}
+.th-cor{flex:1 1 220px}
+.th-cor b{font-size:13.5px}
+.th-ln{display:block;flex:1 1 auto;height:20px;border-bottom:1px solid #8E9BB5}
+.th-fx .th-lines{flex:1 1 auto}
+.th-fx .th-lines i{flex:1 1 28px;min-height:26px;max-height:44px}
+.th-fx.th-kx{flex:none}
+.th-kx li{flex:none;padding-bottom:8px}
+.th-kv{font-size:13.5px;line-height:1.7;border-top:1px dashed #8E9BB5;padding-top:4px;margin-top:3px}
+.th-kv b{font-weight:700}
+.th-kv.bad b::before{content:"✗ "}.th-kv.ok b::before{content:"✓ "}
+/* السبب والنتيجة */
+.th-ch{display:flex;flex-direction:column;gap:10px;flex:1 1 auto}
+.th-link{display:flex;align-items:stretch;gap:8px;flex:1 1 auto}
+.th-b{display:flex;flex-direction:column;flex:1 1 0;min-width:0;border:1.2px solid #0D1B3D;border-radius:12px;padding:6px 12px 10px}
+.th-b small{font-size:12.5px;font-weight:700;color:#4A5878}
+.th-b p{font-weight:700;font-size:15px;line-height:1.7;margin:auto 0}
+.th-ar{position:relative;flex:none;align-self:center;width:42px;height:0;border-top:1.5px solid #0D1B3D}
+.th-ar::after{content:"";position:absolute;left:-2px;top:-6px;width:0;height:0;border-top:5.5px solid transparent;border-bottom:5.5px solid transparent;border-right:9px solid #0D1B3D}
+.th-sheet .gm-ay{font-size:1.15em;line-height:1.8}
+@media print{.th-sheet{-webkit-print-color-adjust:exact;print-color-adjust:exact}.th-fx li,.th-link,.th-br section,.th-q,.th-end,.th-mx tr{break-inside:avoid}}
+</style>
+<style id="offlineCss">
+/* v97: بطاقة «العمل بلا إنترنت» في «عن الأداة» (النسخة العامة وحدها)، وشارة الانقطاع. feed/offline.js */
+.of-card{display:flex;flex-direction:column;gap:10px;margin:14px 0 4px;padding:16px;border:1.5px solid var(--line);border-radius:18px;background:var(--bg)}
+.of-card h3{display:flex;align-items:center;gap:8px;margin:0!important;font-size:17px;color:var(--ink)}
+.of-card h3 .ic{width:24px;height:24px;color:var(--t-teal);flex:none}
+.of-st{margin:0;font-size:14.5px;line-height:1.8;font-weight:700;border-radius:12px;padding:8px 12px;background:var(--infobg);color:var(--ink)}
+.of-st.ok{background:var(--okbg)}.of-st.bad{background:var(--warnbg)}
+.of-st:focus{outline:none}.of-st:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.of-bar{height:10px;border-radius:999px;background:var(--sunk);overflow:hidden}
+.of-bar i{display:block;height:100%;border-radius:999px;background:var(--brand);transition:width .2s linear}
+.about .of-list,.of-list{list-style:none;margin:0;padding:0;display:grid;gap:0;font-size:14.5px;line-height:1.6}
+.of-list li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 2px;border-top:1px solid var(--line)}
+.of-list li:first-child{border-top:0}
+.of-list li>i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);color:var(--on-brand);font-style:normal}
+.of-list li.on>i{background:var(--t-teal);border-color:var(--t-teal)}
+.of-list li>i .ic{width:14px;height:14px;stroke-width:3}
+.of-list span{display:grid;gap:1px;min-width:0}
+.of-list b{font-size:14.5px;color:var(--ink)}
+.of-list small{font-size:12.5px;color:var(--ink2);line-height:1.6}
+.of-list em{font-style:normal;font-size:13px;font-weight:700;color:var(--ink2);white-space:nowrap}
+.of-list li.on em{color:var(--t-teal)}
+.of-acts{display:flex;flex-wrap:wrap;gap:8px}
+.of-acts .tk-btn{white-space:normal;text-align:center;line-height:1.5;min-height:44px}
+.of-acts .tk-btn .ic{flex:none}
+.of-acts .tk-btn:disabled{opacity:.55;cursor:default}
+.of-warn{margin:0;font-size:14px;font-weight:700;color:var(--t-accent)}
+.of-note{margin:0;font-size:13px;line-height:1.85;color:var(--ink2)}
+.of-pill{position:fixed;inset-inline-start:max(12px,env(safe-area-inset-left,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:60;max-width:calc(100vw - 24px);background:#0D1B3D;color:#fff;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;line-height:1.5;box-shadow:0 6px 18px rgba(13,27,61,.3);pointer-events:none}
+@media (min-width:900px){.of-pill{bottom:16px}}
+body.ls-on .of-pill,body.fd-printing .of-pill{display:none}
+@media (prefers-reduced-motion:reduce){.of-bar i{transition:none}}
+@media print{.of-card,.of-pill{display:none}}
+</style>
 <style id="uiLayer">
 /* ===== v91: طبقة الواجهة الموحدة (تدخل آخر الأنماط، قبل الشيفرة) =====
    قاعدة واحدة لكل الوحدات: الأزرار حبّات (pill) بارتفاع واحد ووزن واحد، والحقول مستطيلات بزوايا ١٢،
@@ -11493,7 +11764,7 @@ function stClipOn(id,bar,timed){const my=stSeq,box=$('#stSlide .st-clip'),v=box&
    لا حركة دائمة ولا إشعارات: الحركة عند الإنجاز والتفاعل فقط، وتُحذف مع «تقليل الحركة». */
 const HY_GOAL=5;
 /* الجديد في الدليل، الأحدث أولًا: [رقم الإصدار، النص، تبويب أو رابط] */
-const HY_REL=[[96,'«حصتي الآن» في أدواتي: اختر حصتك مرة واحدة، أو أدخل جدولك، فتفتح الأدوات والألعاب كلها على درسها','#tools'],[96,'الحلول البصرية: «محاكي الصف الأخير» يريك وسيلتك كما يراها طالب آخر الصف، وبعد آلة التصوير، ولمن لا يميّز الألوان','#vs-tool-backrow'],[95,'أدوات الحصة داخل العرض: زر في شريط الشاشة الذكية يفتح عُدّة الصف والأسئلة والألعاب على درسك دون مغادرة العرض','#tk/decks'],[94,'الاختبار القصير: النموذج (ب) بأسئلة غير أسئلة (أ)، وكل اختبار جديد بأسئلة أخرى؛ وملفات Word بلا صفحة فارغة','#tk/quiz'],[91,'واجهة أوضح: أزرار وشرائح بمقاس واحد في كل الأدوات، وأهداف لمس أكبر على الهاتف والشاشة الذكية','#tools'],[90,'نسخة عامة من الدليل: التنزيل والطباعة فيها مباشرة لكل من يفتحها، بلا حساب','#about'],[89,'تنزيل الملفات: نافذة تبيّن السبب لمن لا تتيح صلاحيته التنزيل، ومعها محتوى الملف للنسخ أو صفحاته صورًا','#about'],[88,'الاختبار القصير: «أكمل الحديث»، ثم صواب وخطأ، واختيار من متعدد، وثلاثة فراغات (مصطلح أو إكمال أو ثلاث نقاط)، مع خلط البدائل في النموذجين','#tk/quiz'],[84,'عروض الدروس: عرض تفاعلي لكل حصة على الشاشة الذكية، تختار الصف وتفتح العرض مباشرة','#tk/decks'],[83,'حقيبة المعلم: «رحلة الصف» بمحطاتها وتحدي الأسبوع والفِرق ولوحة الصف، وملاحظات الطالب وورقة لقاء ولي الأمر','#bag/quest'],[81,'«خلاصة الدليل»: الدليل النظري كله في قراءة واحدة، بسؤال كل جزء وفكرته الحاكمة، ونسخة PDF','#brief'],[78,'منصة «الحلول البصرية» صارت داخل الدليل: المختبر والنماذج والأدوات والحقائب التدريبية','#vs'],[76,'ثلاث أدوات للاختبار على مؤلفات التوجيه: القصير والنهائي والمخصص، وتنزيلها PDF','#tk/final'],[76,'«ركّب المعنى»: بطاقات تحدٍّ للدرس بقطع ورقية ومهارات التفكير العليا','#tk/build'],[75,'الاختبار القصير على نموذج التوجيه: «الأحاديث المقرر حفظها» و٩ + ١١ = ٢٠ في ورقتين','#tk/quiz'],[75,'ديوانية الأسئلة: السحب والإفلات، ولونا الفريقين على الخيارات، وأسئلة من أكثر من صف','#tk/diwan'],[74,'هدف «أسبوعك»، والاحتفاء بالإنجاز، وزر «جرّبتها في صفي» على كل بطاقة',''],[73,'سبعة عشر مقطعًا حركيًا في تبويب «مقاطع» وفي الستوري','clips'],[70,'لعبة «ديوانية الأسئلة» في ألعاب الصف','#tk/diwan']];
+const HY_REL=[[97,'ثلاث ألعاب جديدة من أسئلة درسك: شبكة الاستدعاء، ومبارزة السبورة، واكتشف الخطأ؛ وتُضاف شاشةً في «نسختي من العرض»','#tools'],[97,'فِرق الصف داخل العرض: نقاط بمعايير معلنة من شريط الشاشة الذكية، و«حصاد حصتنا» على منصة التتويج في آخر الحصة','#tk/decks'],[97,'«أوراق تُفكّر»: ورقة عمل ذهنية للدرس في صفحة واحدة بأربعة قوالب، تطبعها أو تنزّلها PDF','#tk/think'],...(document.querySelector('meta[name="alm:offline"]')?[[97,'الدليل يعمل الآن بلا إنترنت: تُحفظ الصفحة وأدواتها على جهازك، وتجهّز دروس صفوفك من «عن الأداة»','#about']]:[]),[97,'الحلول البصرية: «قبل وبعد» بفاصل يُسحب بين النسختين، ودبابيس مرقّمة تشخّص كل موضع','#vs-sol-ba'],[96,'«حصتي الآن» في أدواتي: اختر حصتك مرة واحدة، أو أدخل جدولك، فتفتح الأدوات والألعاب كلها على درسها','#tools'],[96,'الحلول البصرية: «محاكي الصف الأخير» يريك وسيلتك كما يراها طالب آخر الصف، وبعد آلة التصوير، ولمن لا يميّز الألوان','#vs-tool-backrow'],[95,'أدوات الحصة داخل العرض: زر في شريط الشاشة الذكية يفتح عُدّة الصف والأسئلة والألعاب على درسك دون مغادرة العرض','#tk/decks'],[94,'الاختبار القصير: النموذج (ب) بأسئلة غير أسئلة (أ)، وكل اختبار جديد بأسئلة أخرى؛ وملفات Word بلا صفحة فارغة','#tk/quiz'],[91,'واجهة أوضح: أزرار وشرائح بمقاس واحد في كل الأدوات، وأهداف لمس أكبر على الهاتف والشاشة الذكية','#tools'],[90,'نسخة عامة من الدليل: التنزيل والطباعة فيها مباشرة لكل من يفتحها، بلا حساب','#about'],[89,'تنزيل الملفات: نافذة تبيّن السبب لمن لا تتيح صلاحيته التنزيل، ومعها محتوى الملف للنسخ أو صفحاته صورًا','#about'],[88,'الاختبار القصير: «أكمل الحديث»، ثم صواب وخطأ، واختيار من متعدد، وثلاثة فراغات (مصطلح أو إكمال أو ثلاث نقاط)، مع خلط البدائل في النموذجين','#tk/quiz'],[84,'عروض الدروس: عرض تفاعلي لكل حصة على الشاشة الذكية، تختار الصف وتفتح العرض مباشرة','#tk/decks'],[83,'حقيبة المعلم: «رحلة الصف» بمحطاتها وتحدي الأسبوع والفِرق ولوحة الصف، وملاحظات الطالب وورقة لقاء ولي الأمر','#bag/quest'],[81,'«خلاصة الدليل»: الدليل النظري كله في قراءة واحدة، بسؤال كل جزء وفكرته الحاكمة، ونسخة PDF','#brief'],[78,'منصة «الحلول البصرية» صارت داخل الدليل: المختبر والنماذج والأدوات والحقائب التدريبية','#vs'],[76,'ثلاث أدوات للاختبار على مؤلفات التوجيه: القصير والنهائي والمخصص، وتنزيلها PDF','#tk/final'],[76,'«ركّب المعنى»: بطاقات تحدٍّ للدرس بقطع ورقية ومهارات التفكير العليا','#tk/build'],[75,'الاختبار القصير على نموذج التوجيه: «الأحاديث المقرر حفظها» و٩ + ١١ = ٢٠ في ورقتين','#tk/quiz'],[75,'ديوانية الأسئلة: السحب والإفلات، ولونا الفريقين على الخيارات، وأسئلة من أكثر من صف','#tk/diwan'],[74,'هدف «أسبوعك»، والاحتفاء بالإنجاز، وزر «جرّبتها في صفي» على كل بطاقة',''],[73,'سبعة عشر مقطعًا حركيًا في تبويب «مقاطع» وفي الستوري','clips'],[70,'لعبة «ديوانية الأسئلة» في ألعاب الصف','#tk/diwan']];
 const HY_COL=['#2563EB','#14B8A6','#FF7A1A','#FFB26B','#EEF4FF'];
 const HY_SV='fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
 const HY_IC={try:`<svg class="ic" viewBox="0 0 24 24" ${HY_SV}><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>`,
@@ -12255,7 +12526,7 @@ function fdHelloHTML(){hyQ();const h=new Date(Date.now()+3*3600e3).getUTCHours()
   <div class="fd-tiles t6"><a class="fd-tile" href="#do"><i class="lv3" style="--k:0" aria-hidden="true"></i><b>ماذا أفعل؟</b><small>حلّ سريع لموقف في صفك</small></a>
   <button class="fd-tile" data-tile="week"><i class="lv3" style="--k:1" aria-hidden="true"></i><b>حصص الأسبوع</b><small>بطاقات لدرسك القادم</small></button>
   <a class="fd-tile" href="#tools"><i class="lv3" style="--k:2" aria-hidden="true"></i><b>أدواتي</b><small>مخطط الحصة، والتغذية الراجعة، والمزيد</small></a>
-  <a class="fd-tile fd-tile-g" href="#tools" data-tkjump="g"><i class="lv3" style="--k:3" aria-hidden="true"></i><b>ألعاب الصف</b><small>ست ألعاب تفاعلية على الشاشة</small></a>
+  <a class="fd-tile fd-tile-g" href="#tools" data-tkjump="g"><i class="lv3" style="--k:3" aria-hidden="true"></i><b>ألعاب الصف</b><small>تسع ألعاب تفاعلية على الشاشة</small></a>
   <a class="fd-tile" href="#nb"><i class="lv3" style="--k:10" aria-hidden="true"></i><b>دفتر تحضيري</b><small>دفتر المعلم للعام: الخطط والمهام والقوائم</small></a>
   <a class="fd-tile" href="#vs"><i class="lv3" style="--k:11" aria-hidden="true"></i><b>الحلول البصرية</b><small>وسائل تُفهم في ثوانٍ: مختبر ونماذج وحقائب تدريبية</small></a></div>
   ${fdTodayHTML()}
@@ -12438,8 +12709,8 @@ function fdAboutHTML(){const url='https://claude.ai/artifact/GTN8TtNPpFEXtWdSrj6
   <h3>الحلول البصرية</h3><p>منصة «مركز الاستشارات والحلول البصرية» جزء من هذا الدليل: مختبر تنفيذي يحوّل مشكلة التعلّم إلى وسيلة مختبَرة، ونماذج وأدوات وأدلة، وحقائب تدريبية تُحفظ وتُطبع. <a href="#vs">افتح الحلول البصرية</a>.</p>
   <h3>الإصدار</h3><p>الإصدار الأول التجريبي، نوفمبر ٢٠٢٦. والأداة تتطوّر بملاحظات مستعمليها.</p>
   ${FD_SV_FRAMED?`<h3>تنزيل الملفات ومشاركة الدليل</h3>
-  <ul>${FD_PUB_ON?`<li><b>النسخة العامة من الدليل</b> ينزّل منها الجميع ويطبعون مباشرة، بلا حساب: <a href="${FD_PUB}" target="_blank" rel="noopener"><bdi dir="ltr">${FD_PUB_SHOW}</bdi></a>. شارك هذا الرابط مع زملائك.</li>`:''}<li>${FD_PUB_ON?'هنا في <bdi>Claude</bdi>: ':''}أزرار <bdi>Word</bdi> و<bdi>PDF</bdi> و<bdi>Excel</bdi> والصور تحفظ الملف بعد نافذة تأكيد من <bdi>Claude</bdi>: اختر <bdi>Save file</bdi>.</li><li>من يفتح نسخة <bdi>Claude</bdi> من رابطها العام يدخل بصلاحية المشاهدة <bdi>(Can view)</bdi>، ولا يتيح له <bdi>Claude</bdi> تنزيل الملفات؛ فتُفتح له عند زر التنزيل نافذة فيها ${FD_PUB_ON?'رابط النسخة العامة، و':''}محتوى الملف لينسخه أو صفحاته صورًا.</li><li>وليتمكن زميل من التنزيل هنا في <bdi>Claude</bdi>: ادعه ببريده من زر <bdi>Share</bdi> أعلى الصفحة <bdi>(Invite people by email)</bdi> بصلاحية <bdi>Commenter</bdi>؛ ثم يفتح الدليل بحساب <bdi>Claude</bdi> المسجَّل بذلك البريد. وتغيير المشاركة من المتصفح أو تطبيق سطح المكتب، لا من تطبيق الهاتف.</li><li>الطباعة المباشرة لا تعمل داخل عارض <bdi>Claude</bdi>؛ نزّل الملف ثم اطبعه من جهازك${FD_PUB_ON?'، أو اطبع من النسخة العامة':''}.</li></ul>`:`<h3>هذه النسخة العامة من الدليل</h3>
-  <ul><li>التنزيل (<bdi>Word</bdi> و<bdi>PDF</bdi> و<bdi>Excel</bdi> والصور والعروض) والطباعة يعملان هنا مباشرة لكل من يفتح الرابط، بلا حساب.</li><li>لتثبيت الدليل تطبيقًا على الهاتف أو الحاسوب أو الشاشة الذكية: من قائمة المتصفح اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». ويبقى محتاجًا إلى الاتصال بالإنترنت.</li><li>ما يعتمد على حساب <bdi>Claude</bdi> يعمل في نسخة <bdi>Claude</bdi> وحدها: الجواب المكتوب في «اسأل الدليل» والمسودات الآلية، و«أفادني» والتعليقات وتجارب الزملاء، ومزامنة إعداداتك في الحساب. و«جرّبتها» هنا علامة خاصة بك على هذا الجهاز. <a href="${FD_CLAUDE}" target="_blank" rel="noopener">افتح نسخة Claude</a>.</li><li>ما تكتبه في الأدوات (صفوفك وجدولك وطلابك) يُحفظ في متصفحك، ولكل نسخة حفظها. لنقله من نسخة إلى أخرى: <a href="#tk/backup">النسخة الاحتياطية الشاملة</a>، احفظها في نسخة ثم استعدها في الأخرى.</li></ul>`}
+  <ul>${FD_PUB_ON?`<li><b>النسخة العامة من الدليل</b> ينزّل منها الجميع ويطبعون مباشرة، بلا حساب: <a href="${FD_PUB}" target="_blank" rel="noopener"><bdi dir="ltr">${FD_PUB_SHOW}</bdi></a>. شارك هذا الرابط مع زملائك.</li><li>والنسخة العامة تعمل <b>بلا إنترنت</b> بعد أول فتح: تُحفظ الصفحة وأدواتها على الجهاز، وتُجهَّز دروس الصفوف من «عن الأداة» فيها.</li>`:''}<li>${FD_PUB_ON?'هنا في <bdi>Claude</bdi>: ':''}أزرار <bdi>Word</bdi> و<bdi>PDF</bdi> و<bdi>Excel</bdi> والصور تحفظ الملف بعد نافذة تأكيد من <bdi>Claude</bdi>: اختر <bdi>Save file</bdi>.</li><li>من يفتح نسخة <bdi>Claude</bdi> من رابطها العام يدخل بصلاحية المشاهدة <bdi>(Can view)</bdi>، ولا يتيح له <bdi>Claude</bdi> تنزيل الملفات؛ فتُفتح له عند زر التنزيل نافذة فيها ${FD_PUB_ON?'رابط النسخة العامة، و':''}محتوى الملف لينسخه أو صفحاته صورًا.</li><li>وليتمكن زميل من التنزيل هنا في <bdi>Claude</bdi>: ادعه ببريده من زر <bdi>Share</bdi> أعلى الصفحة <bdi>(Invite people by email)</bdi> بصلاحية <bdi>Commenter</bdi>؛ ثم يفتح الدليل بحساب <bdi>Claude</bdi> المسجَّل بذلك البريد. وتغيير المشاركة من المتصفح أو تطبيق سطح المكتب، لا من تطبيق الهاتف.</li><li>الطباعة المباشرة لا تعمل داخل عارض <bdi>Claude</bdi>؛ نزّل الملف ثم اطبعه من جهازك${FD_PUB_ON?'، أو اطبع من النسخة العامة':''}.</li></ul>`:`<h3>هذه النسخة العامة من الدليل</h3>
+  <ul><li>التنزيل (<bdi>Word</bdi> و<bdi>PDF</bdi> و<bdi>Excel</bdi> والصور والعروض) والطباعة يعملان هنا مباشرة لكل من يفتح الرابط، بلا حساب.</li><li>لتثبيت الدليل تطبيقًا على الهاتف أو الحاسوب أو الشاشة الذكية: من قائمة المتصفح اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». ${ofCan()?'وبعد أول فتح يعمل بلا إنترنت: الصفحة وأدواتها وألعابها تُحفظ على جهازك، ودروس صفوفك تجهّزها من بطاقة «العمل بلا إنترنت» أدناه.':'ويبقى محتاجًا إلى الاتصال بالإنترنت.'}</li><li>ما يعتمد على حساب <bdi>Claude</bdi> يعمل في نسخة <bdi>Claude</bdi> وحدها: الجواب المكتوب في «اسأل الدليل» والمسودات الآلية، و«أفادني» والتعليقات وتجارب الزملاء، ومزامنة إعداداتك في الحساب. و«جرّبتها» هنا علامة خاصة بك على هذا الجهاز. <a href="${FD_CLAUDE}" target="_blank" rel="noopener">افتح نسخة Claude</a>.</li><li>ما تكتبه في الأدوات (صفوفك وجدولك وطلابك) يُحفظ في متصفحك، ولكل نسخة حفظها. لنقله من نسخة إلى أخرى: <a href="#tk/backup">النسخة الاحتياطية الشاملة</a>، احفظها في نسخة ثم استعدها في الأخرى.</li></ul>${ofCard()}`}
   <h3>كيف تستشهد بها</h3><p class="about-cite" dir="rtl">العتيبي، مبارك علي. (٢٠٢٦). <i>دليل المعلم الألمعي: أداة تطبيقية لمعلمي التربية الإسلامية والقرآن الكريم للموهوبين</i> [أداة رقمية]. <bdi>${esc(url)}</bdi></p>
   <div class="about-acts"><a class="btn sm" href="#refs">المراجع (APA)</a>${FD_FORM?`<a class="btn accent sm" href="${FD_FORM}" target="_blank" rel="noopener">اكتب ملاحظتك</a>`:''}</div>
   </article>`}
@@ -13779,7 +14050,7 @@ function lsScrOpen(id,n,dir){const s=lsView(id);if(!s)return;const L=lsL(id);con
   const ae=document.activeElement;let fk=null;if(!fresh&&ae&&ov.contains(ae)&&ae.dataset&&ae.dataset.ls)fk=ae.classList.contains('lx-nb')?['nb',ae.classList.contains('lx-nx')?'1':'0']:[ae.dataset.ls,ae.dataset.i||'',ae.dataset.c||''];
   const nk=!fresh&&!moved&&ae&&ov.contains(ae)&&ae.dataset&&ae.dataset.dk==='note'?[ae.selectionStart,ae.selectionEnd]:null;
   const keep=moved?null:[...ov.querySelectorAll('.lx-fit')].map(x=>x.scrollTop);const bsc=moved?0:((ov.querySelector('.lx-body')||{}).scrollTop||0);
-  ov.innerHTML=lsScrHTML(id);if(bsc){const nb=ov.querySelector('.lx-body');if(nb)nb.scrollTop=bsc}document.body.classList.add('ls-on');if(fresh)lxInert(true);lxtKeep(ov);
+  ov.innerHTML=lsScrHTML(id);if(bsc){const nb=ov.querySelector('.lx-body');if(nb)nb.scrollTop=bsc}document.body.classList.add('ls-on');if(fresh)lxInert(true);lxtKeep(ov);ltKeep(ov,id);
   const lx=ov.querySelector('.lx');if(lx&&moved)lx.classList.add(fresh?'lx-enter':(dir||(L.screen>=was?'lx-fwd':'lx-back')));
   const ta=nk&&lx?lx.querySelector('[data-dk="note"]'):null;
   if(ta){try{ta.focus({preventScroll:true});ta.setSelectionRange(nk[0],nk[1])}catch(e){}}
@@ -13797,7 +14068,7 @@ function lsFit(keep){const go=()=>{const ov=document.getElementById('lsOv');if(!
 window.addEventListener('resize',()=>{if(document.body.classList.contains('ls-on')){lsFit();lxPenInit()}});
 /* ما خلف العرض لا يستقبل التركيز ما دام العرض مفتوحًا */
 function lxInert(on){try{[...document.body.children].forEach(el=>{if(el.id==='lsOv'||el.id==='toast'||el.tagName==='SCRIPT'||el.tagName==='STYLE')return;if(on){if(!el.inert){el.inert=true;el.dataset.lxInert='1'}}else if(el.dataset.lxInert){el.inert=false;delete el.dataset.lxInert}})}catch(e){}}
-function lsScrClose(){lxtClose(true);lxInert(false);lxAudStop();lxTch=false;lxZoom=false;const ov=document.getElementById('lsOv');if(document.fullscreenElement)try{document.exitFullscreen()}catch(e){}if(ov){ov.innerHTML='';ov.className=''}lxPen=false;lxOv=false;document.body.classList.remove('ls-on');if(/^#bag\/lesson\//.test(location.hash))fdRender()}
+function lsScrClose(){ltShut();lxtClose(true);lxInert(false);lxAudStop();lxTch=false;lxZoom=false;const ov=document.getElementById('lsOv');if(document.fullscreenElement)try{document.exitFullscreen()}catch(e){}if(ov){ov.innerHTML='';ov.className=''}lxPen=false;lxOv=false;document.body.classList.remove('ls-on');if(/^#bag\/lesson\//.test(location.hash))fdRender()}
 /* بنك أسئلة الدرس في مسابقة الكأس (للتقويم اللحظي والألعاب) */
 function lxBank(id){try{const g=lsG(id),key=lsKeyOf(id);if(!key)return [];const [,w,j]=key.split('.').map(Number);const x=((FD_PLANS[g]||[])[w]||[])[j];return x?((FD_CUP[g]||{})[x[2]]||[]):[]}catch(e){return []}}
 /* أنشطة هذا الدرس في الأدوات: يظهر منها ما له مادة في هذا الدرس، ويفتح على الدرس مباشرة */
@@ -13813,6 +14084,9 @@ function lxActs(id){const out=[];const g=lsG(id),s=lsCache[id],C=(lsCatOf(g)||{}
       if(TK_PAGES.summit&&closed>=6)out.push(['#tk/summit/'+id,'flag','سلّم القمة','عشر درجات ووسائل مساعدة']);
       if(TK_PAGES.pairs&&B.some(q=>q.t==='match'))out.push(['#tk/pairs/'+id,'grid','بطاقات الذاكرة','طابق كل بطاقة بقرينتها']);
       if(TK_PAGES.diwan&&B.length>=6)out.push(['#tk/diwan/'+id,'chat','ديوانية الأسئلة','هذا الدرس فئةً في لوحة الفئات']);
+      if(TK_PAGES.grid&&closed>=6)out.push(['#tk/grid/'+id,'grid','شبكة الاستدعاء','ست بطاقات لختام الحصة']);
+      if(TK_PAGES.duel&&B.filter(q=>q.t==='mcq'||q.t==='fill').length>=6)out.push(['#tk/duel/'+id,'bolt','مبارزة السبورة','طالبان ونصفا الشاشة']);
+      if(TK_PAGES.spot&&typeof plPlain==='function'&&B.filter(q=>q.t==='tf'||plPlain(q)).length>=4)out.push(['#tk/spot/'+id,'q','اكتشف الخطأ','صحيح أم فيه خطأ؟']);
     }
   }catch(e){}return out}
 const lxCnt=(n,one,two,few,many)=>n===1?one:n===2?two:(n>=3&&n<=10?`${bgN(n)} ${few}`:`${bgN(n)} ${many}`);
@@ -13828,7 +14102,13 @@ function lxThumbs(id,s,cur){const d=dkOf(id);const iv=it=>({reveal:'كشف تد�
       return `<button class="lx-thumb lx-k-${k[0]} ${lxSel===key?'lx-sel':''} ${hid?'lx-hid':''}" data-ls="dksel" data-id="${id}" data-key="${key}" aria-pressed="${lxSel===key}"><i>${mine?lxI('pen'):bgN(x.n)}</i><span>${lxI(k[1])}${mine?'شاشتي':(LS_KIND[x.kind]||'')}</span><b>${esc(x.title||'بلا عنوان')}</b><small>${[hid?'مخفية':'',hasImg?'صورة':'',note?'ملاحظة':''].filter(Boolean).join(' · ')}</small></button>`}).join('')}</div>${dkPanel(id,s,d)}`}
   const v=lsView(id)||s;
   return `<div class="lx-thumbs">${v.screens.map(sc=>{const k=LX_KIND[sc.kind]||['blue','spark'];const tag=[iv(sc.interaction),sc.skill?esc(sc.skill):'',sc.uimg?'صورة من جهازي':''].filter(Boolean).join(' · ');return `<button class="lx-thumb lx-k-${k[0]} ${sc.n===cur?'b-cur':''}" data-ls="screen" data-id="${id}" data-n="${sc.n}"><i>${bgN(sc.n)}</i><span>${lxI(k[1])}${LS_KIND[sc.kind]||''}</span><b>${esc(sc.title)}</b>${tag?`<small>${tag}</small>`:''}</button>`}).join('')}</div>`}
-function lxActsCard(id){const A=lxActs(id);return A.length?`<div class="b-card"><h3>أنشطة هذا الدرس</h3><p class="b-note" style="margin-bottom:8px">أدوات وألعاب تفتح على هذا الدرس مباشرة.</p><div class="lx-lacts">${A.map(a=>`<a href="${a[0]}">${lxI(a[1])}<span><b>${a[2]}</b><small>${a[3]}</small></span></a>`).join('')}</div></div>`:''}
+/* أوراق تُطبع للطالب على هذا الدرس (v97): تظهر في صفحة الدرس وحدها، لا داخل العرض */
+function lxPrints(id){const out=[];try{if(typeof TK_PAGES!=='undefined'&&LS_BUILT.has(id)){
+    if(TK_PAGES.think)out.push(['#tk/think/'+id,'pen','أوراق تُفكّر','استدعاء، ومقارنة، واكتشف الخطأ، وسبب ونتيجة']);
+    if(TK_PAGES.lmap)out.push(['#tk/lmap/'+id,'list','خريطة الدرس','منظّم بياني للدرس في صفحة']);
+    if(TK_PAGES.choice)out.push(['#tk/choice/'+id,'grid','لوحة الاختيارات','تسع مهام يختار منها الطالب ثلاثًا'])}}catch(e){}return out}
+function lxActsCard(id){const A=lxActs(id),P=lxPrints(id);const li=a=>`<a href="${a[0]}">${lxI(a[1])}<span><b>${a[2]}</b><small>${a[3]}</small></span></a>`;
+  return A.length||P.length?`<div class="b-card"><h3>أنشطة هذا الدرس</h3>${A.length?`<p class="b-note" style="margin-bottom:8px">أدوات وألعاب تفتح على هذا الدرس مباشرة.</p><div class="lx-lacts">${A.map(li).join('')}</div>`:''}${P.length?`<p class="b-note" style="margin:${A.length?'12px':'0'} 0 8px">أوراق تُطبع للطالب على هذا الدرس.</p><div class="lx-lacts lx-lprints">${P.map(li).join('')}</div>`:''}</div>`:''}
 /* مؤقت النشاط (حلقة): مستقل عن مؤقت المرحلة، فلا يُفسد أحدهما الآخر */
 let lxR=null,lxRT=null;
 const lxRRem=()=>!lxR?0:lxR.running?Math.max(0,(lxR.end-Date.now())/1000):lxR.rem;
@@ -13854,6 +14134,7 @@ function lsScrHTML(id){const s=lsView(id),M=lsMeta(id),L=lsL(id),cur=L.screen,N=
     w=`${revBox}<button class="lx-keybtn ${has?'lx-got':''}" data-ls="key" data-id="${id}" ${has?'disabled':''}><span class="lx-lock">${lxI(has?'unlock':'lock')}</span><span class="lx-kt"><small>${has?'حصلنا على مفتاح':'امنح الصف مفتاح'}</small><b>${esc(it.key)}</b></span>${has?lxI('check','lx-ok'):lsSvg('key','lx-ic')}</button>`}
   else if(it.type==='steps'){const done=L.steps[cur]||{};const st=it.steps||[];const dn=st.filter((x,i)=>done[i]).length;const nx=st.findIndex((x,i)=>!done[i]);
     w=`<div class="lx-steps">${st.map((x,i)=>`<button class="lx-step ${done[i]?'lx-done':''} ${i===nx?'lx-next':''}" data-ls="step" data-id="${id}" data-i="${i}"><i>${done[i]?lxI('check'):bgN(i+1)}</i><span>${esc(x)}</span></button>`).join('')}<div class="lx-prog" role="progressbar" aria-valuenow="${dn}" aria-valuemax="${st.length}"><i style="width:${st.length?Math.round(dn/st.length*100):0}%"></i><span>${bgN(dn)} من ${bgN(st.length)}</span></div></div>`}
+  else if(it.type==='play')w=lxPlayHTML(id,it.play);
   else if(it.type==='timer')w=lxRingHTML(id,cur,+it.seconds||60,false);
   else if(it.type==='reveal')w=(it.seconds?lxRingHTML(id,cur,+it.seconds,true):'')+revBox;
   const ayah=sc.kind==='verse'||sc.ayah;const tl=(sc.text||'').length;const um=sc.uimg?(mdUrls.get(sc.uimg)||''):'';const img=um?{src:um,alt:'صورة أضافها المعلم',mine:1}:(sc.img?{...sc.img,src:'ls/'+sc.img.src}:null);
@@ -13884,10 +14165,10 @@ function lsScrHTML(id){const s=lsView(id),M=lsMeta(id),L=lsL(id),cur=L.screen,N=
   return `<div class="lx lx-m-${mode} lx-sc-${scene} lx-kd-${K[0]} ${typeof LSA_DARK!=='undefined'&&LSA_DARK.has(scene)?'lx-art-dark':'lx-art-light'} ${lxPen?'lx-penon':''} ${lxTch?'lx-tchon':''}" role="dialog" aria-modal="true" aria-label="الشاشة الذكية" tabindex="-1" data-id="${id}">
    <div class="lx-top"><div class="lx-ttl"><span class="lx-badge">${lxI(K[1])}</span><div><b>${esc(M.title)}</b><small>${esc(M.sub)}</small></div></div>${track}
     <div class="lx-tools"><button class="lx-timer ls-tbtn ${lsT&&lsT.running?'b-run':''}" data-ls="ttoggle" aria-label="مؤقت المرحلة"><span class="b-tb">${lsSvg(lsT&&lsT.running?'pause':'play','')}</span><span class="b-num" data-lstv>${lsMMSS(lsRem())}</span></button><button class="lx-tb" data-ls="treset" data-id="${id}" aria-label="أعد مؤقت المرحلة" title="أعد المؤقت">${lsSvg('reset','lx-ic')}</button>
-     ${hasCls?`<button class="lx-tb" data-ls="pick" aria-label="من يجيب؟" title="من يجيب؟">${lxI('hand')}</button>`:''}<button class="lx-tb" data-ls="tools" data-id="${id}" aria-label="أدوات الحصة" title="أدوات الحصة: عُدّة الصف والأسئلة والألعاب">${tkIc('ai-toolbox','lx-ic')}</button><button class="lx-tb ${lxPen?'lx-act':''}" data-ls="pen" aria-pressed="${lxPen}" aria-label="قلم الشاشة" title="اكتب على الشاشة">${lxI('pen')}</button><button class="lx-tb ${lxTch?'lx-act':''}" data-ls="tch" aria-pressed="${lxTch}" aria-label="للمعلم: الاستراتيجية والملاحظات" title="للمعلم (مفتاح M)">${lxI('user')}</button>${hasAud?`<button class="lx-tb ${lxAudOn?'lx-act':''}" data-ls="aud" aria-pressed="${lxAudOn}" aria-label="تلاوة من جهازي" title="تلاوة من جهازي">${lxI('speaker')}</button>`:''}<button class="lx-tb ${lxOv?'lx-act':''}" data-ls="over" aria-label="الشاشات وأنشطة الدرس" title="الشاشات وأنشطة الدرس">${lxI('grid')}</button><button class="lx-tb" data-ls="fs" aria-label="ملء الشاشة" title="ملء الشاشة">${lxI('full')}</button><button class="lx-tb lx-x" data-ls="close" aria-label="إغلاق الشاشة">${lsSvg('close','lx-ic')}</button></div></div>
+     ${hasCls?`<button class="lx-tb" data-ls="pick" aria-label="من يجيب؟" title="من يجيب؟">${lxI('hand')}</button>`:''}<button class="lx-tb" data-ls="tools" data-id="${id}" aria-label="أدوات الحصة" title="أدوات الحصة: عُدّة الصف والأسئلة والألعاب">${tkIc('ai-toolbox','lx-ic')}</button>${ltHas(id)?`<button class="lx-tb" data-ls="teams" data-id="${id}" aria-pressed="false" aria-label="فِرق الصف ونقاطها" title="فِرق الصف ونقاطها، ومنصة التتويج">${tkIc('ai-people','lx-ic')}</button>`:''}<button class="lx-tb ${lxPen?'lx-act':''}" data-ls="pen" aria-pressed="${lxPen}" aria-label="قلم الشاشة" title="اكتب على الشاشة">${lxI('pen')}</button><button class="lx-tb ${lxTch?'lx-act':''}" data-ls="tch" aria-pressed="${lxTch}" aria-label="للمعلم: الاستراتيجية والملاحظات" title="للمعلم (مفتاح M)">${lxI('user')}</button>${hasAud?`<button class="lx-tb ${lxAudOn?'lx-act':''}" data-ls="aud" aria-pressed="${lxAudOn}" aria-label="تلاوة من جهازي" title="تلاوة من جهازي">${lxI('speaker')}</button>`:''}<button class="lx-tb ${lxOv?'lx-act':''}" data-ls="over" aria-label="الشاشات وأنشطة الدرس" title="الشاشات وأنشطة الدرس">${lxI('grid')}</button><button class="lx-tb" data-ls="fs" aria-label="ملء الشاشة" title="ملء الشاشة">${lxI('full')}</button><button class="lx-tb lx-x" data-ls="close" aria-label="إغلاق الشاشة">${lsSvg('close','lx-ic')}</button></div></div>
    ${body}
    <div class="lx-foot"><div class="lx-keys">${(s.keys||[]).map(k=>`<span class="${L.keys.includes(k.name)?'lx-on':''}" title="مفتاح «${esc(k.name)}»">${lxI(L.keys.includes(k.name)?'unlock':'lock')}<b>${esc(k.name)}</b></span>`).join('')}</div>
-    <div class="lx-mid"><div class="lx-dots" role="tablist" aria-label="شاشات العرض">${s.screens.map(x=>`<button role="tab" aria-selected="${x.n===cur}" aria-label="الشاشة ${bgN(x.n)}: ${esc(x.title)}" class="${x.n===cur?'lx-cur':x.n<cur?'lx-done':''} lx-k-${(LX_KIND[x.kind]||['blue'])[0]}" data-ls="go" data-id="${id}" data-n="${x.n}"></button>`).join('')}</div><span class="lx-by">جمع وتطوير: أ. مبارك علي العتيبي</span></div>
+    <div class="lx-mid${cur>=N&&N>1&&ltHas(id)?' lx-mid-pod':''}"><div class="lx-dots" role="tablist" aria-label="شاشات العرض">${s.screens.map(x=>`<button role="tab" aria-selected="${x.n===cur}" aria-label="الشاشة ${bgN(x.n)}: ${esc(x.title)}" class="${x.n===cur?'lx-cur':x.n<cur?'lx-done':''} lx-k-${(LX_KIND[x.kind]||['blue'])[0]}" data-ls="go" data-id="${id}" data-n="${x.n}"></button>`).join('')}</div>${cur>=N&&N>1&&ltHas(id)?`<button class="lx-btn lx-podb" data-ls="podium" data-id="${id}">${tkIc('ai-trophy','ic')}<span>منصة التتويج</span></button>`:''}<span class="lx-by">جمع وتطوير: أ. مبارك علي العتيبي</span></div>
     <div class="lx-nav"><button class="lx-nb" data-ls="go" data-id="${id}" data-n="${cur-1}" ${cur<=1?'disabled':''} aria-label="السابق">${lsSvg('prev','lx-ic')}</button><span class="lx-count b-num" aria-live="polite">${bgN(cur)} / ${bgN(N)}</span><button class="lx-nb lx-nx" data-ls="go" data-id="${id}" data-n="${cur+1}" ${cur>=N?'disabled':''} aria-label="التالي">${lsSvg('next','lx-ic')}</button></div></div>
    <div class="lx-penw"><canvas class="lx-pen" id="lxPen"></canvas></div>${lxPen?`<div class="lx-pentools">${['#FF7A1A','#2563EB','#14B8A6','#FFFFFF','#0D1B3D'].map(c=>`<button data-ls="penc" data-c="${c}" class="${c===lxPenC?'lx-cur':''}" style="--c:${c}" aria-label="لون القلم"></button>`).join('')}<button class="lx-pt" data-ls="penclr">${lxI('trash')}امسح</button><button class="lx-pt" data-ls="pen">${lxI('check')}تم</button></div>`:''}
    ${lxTch?lxTchHTML(id,s,sc,si,it):''}${lxAudOn&&hasAud?lxAudBar(id,dk):''}${lxOld&&cur===1&&!lxOv?`<button class="lx-resume" data-ls="resume" data-id="${id}" data-n="${lxOld}">${lsSvg('next','lx-ic')}<span>توقف آخر عرض عند الشاشة ${bgN(lxOld)}: تابع من هناك</span></button>`:''}
@@ -13932,7 +14213,7 @@ const dkKey=sc=>sc.cid?'c'+sc.cid:'o'+(sc.orig||sc.n);
 function lsView(id){const s=lsCache[id];if(!s)return null;let d=null;try{d=dkOf(id)}catch(e){}if(!dkHas(d))return s;
   const ver=JSON.stringify([d.hide,d.add,d.img]);const m=lsViewMemo[id];if(m&&m.ver===ver&&m.src===s)return m.v;
   const N=s.screens.length;const stOf=n=>(s.screens[Math.max(0,Math.min(N,n)-1)]||s.screens[0]||{}).stageId;const out=[];
-  const mk=a=>({kind:'mine',title:a.title||'شاشتي',text:a.text||'',stageId:stOf(+a.after||1),interaction:a.rev?{type:'reveal',reveal:a.rev}:{type:'none'},cid:a.id,uimg:a.img||''});
+  const mk=a=>({kind:'mine',title:a.title||'شاشتي',text:a.text||'',stageId:stOf(+a.after||1),interaction:a.play?{type:'play',play:a.play}:(a.rev?{type:'reveal',reveal:a.rev}:{type:'none'}),cid:a.id,uimg:a.img||''});
   const adds=after=>d.add.filter(a=>Math.min(N,Math.max(0,+a.after||0))===after).forEach(a=>out.push(mk(a)));
   adds(0);s.screens.forEach(sc=>{if(!d.hide.includes(sc.n))out.push({...sc,orig:sc.n,uimg:d.img[sc.n]||''});adds(sc.n)});
   if(!out.length)return s;out.forEach((sc,i)=>{sc.n=i+1});const v={...s,screens:out};lsViewMemo[id]={ver,src:s,v};return v}
@@ -13957,7 +14238,10 @@ function lxOldOf(id,N){const p=lxSessOf(id);return p&&p.n>1&&p.n<N?p:null}
 /* --- صفحة الدرس: رأس بطاقة الشاشات، ولوحة التخصيص --- */
 function lxDeckHead(id,s){const v=lsView(id)||s;const d=dkOf(id);return `<div class="lx-dh"><h3>شاشات العرض · ${bgN(v.screens.length)}${dkHas(d)?' <em class="lx-mine">مخصّص</em>':''}</h3><button class="b-btn ${lxEdit?'b-primary':''}" data-ls="dkedit" data-id="${id}">${lxI(lxEdit?'check':'edit')} ${lxEdit?'تم':'خصّص عرضي'}</button></div>${lxEdit?'<p class="b-note" style="margin-bottom:10px">اختر شاشة لتخفيها أو تضع لها صورة أو ملاحظة، أو أضف شاشة من عندك. تعديلاتك تُحفظ على هذا الجهاز ولا تغيّر الحصة الأصلية.</p>':''}`}
 function dkPanel(id,s,d){const key=lxSel;let body='<p class="b-note">اختر شاشة من الأعلى.</p>';const img=k=>k&&mdUrls.get(k)?`<img class="dk-pv" src="${mdUrls.get(k)}" alt="">`:'';
-  if(key&&key[0]==='c'){const a=(d?d.add:[]).find(x=>x.id===key.slice(1));if(a)body=`<div class="dk-row"><b>شاشتك: ${esc(a.title||'بلا عنوان')}</b></div>
+  if(key&&key[0]==='c'){const a=(d?d.add:[]).find(x=>x.id===key.slice(1));if(a&&a.play)body=`<div class="dk-row"><b>شاشة تفاعلية: ${esc(a.title||'')}</b></div><p class="b-note" style="margin-top:6px">${esc(a.text||'')}</p>
+      <div class="dk-grid"><label class="dk-f">موضعها${dkAfterSel(id,s,'cafter',a.after,key)}</label></div>
+      <div class="dk-acts"><button class="b-btn" data-ls="dkdel" data-id="${id}" data-key="${key}">${lxI('trash')} احذف الشاشة</button></div>`;
+    else if(a)body=`<div class="dk-row"><b>شاشتك: ${esc(a.title||'بلا عنوان')}</b></div>
       <div class="dk-grid"><label class="dk-f">موضعها${dkAfterSel(id,s,'cafter',a.after,key)}</label><label class="dk-f">العنوان<input data-dk="ctitle" data-id="${id}" data-key="${key}" maxlength="90" value="${esc(a.title||'')}"></label></div>
       <label class="dk-f">النص الذي يراه الطلاب<textarea data-dk="ctext" data-id="${id}" data-key="${key}" rows="3" maxlength="900">${esc(a.text||'')}</textarea></label>
       <label class="dk-f">ما يُكشف بعد النقاش (اختياري)<textarea data-dk="crev" data-id="${id}" data-key="${key}" rows="2" maxlength="900">${esc(a.rev||'')}</textarea></label>
@@ -13973,6 +14257,7 @@ function dkPanel(id,s,d){const key=lxSel;let body='<p class="b-note">اختر ش
      <label class="dk-f">النص الذي يراه الطلاب<textarea id="dkNx" rows="3" maxlength="900" placeholder="سؤال أو مهمة أو تنبيه لطلابك"></textarea></label>
      <label class="dk-f">ما يُكشف بعد النقاش (اختياري)<textarea id="dkNr" rows="2" maxlength="900"></textarea></label>
      <div class="dk-acts"><button class="b-btn b-primary" data-ls="dkadd" data-id="${id}">${lxI('plus')} أضف الشاشة</button><span class="b-note">تضيف لها صورة من جهازك بعد إنشائها.</span></div></details>
+   ${typeof dkPlayNew==='function'?dkPlayNew(id,s):''}
    ${any?`<div class="dk-acts"><button class="b-btn" data-ls="dkreset" data-id="${id}">${lsSvg('reset','lx-ic')} أعد العرض الأصلي</button></div>`:''}`}
 const dkAfterSel=(id,s,name,val,key)=>`<select ${key?`data-dk="${name}" data-id="${id}" data-key="${key}"`:`id="dkNa"`}><option value="0"${+val===0?' selected':''}>في أول العرض</option>${s.screens.map(o=>`<option value="${o.n}"${+val===o.n?' selected':''}>بعد ${bgN(o.n)}: ${esc(String(o.title).slice(0,34))}</option>`).join('')}</select>`;
 /* --- درج المعلم أثناء العرض: ما في صفحة الدرس عن هذه المرحلة، وملاحظته الخاصة --- */
@@ -14043,6 +14328,8 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-ls]');if(!
   if(a==='play'){e.preventDefault();if(!LS_BUILT.has(id)){toast('هذه الحصة لم تُبنَ بعد');return}t.classList.add('busy');lsLoad(id).then(s=>{t.classList.remove('busy');if(s){lxResume(id);lsScrOpen(id,lsL(id).screen)}else toast('تعذّر تحميل الحصة. تحقّق من اتصال الإنترنت ثم أعد المحاولة.')});return}
   if(a==='go'){lxOv=false;lsScrOpen(id,+t.dataset.n);return}
   if(a==='close'){lsScrClose();return}
+  if(a==='playgo'){lxPlayGo(id,t.dataset.t);return}
+  if(a==='dkaddp'){dkPlayAdd(id,t.dataset.t);return}
   if(a==='ttoggle'){lsTimerToggle();return}
   if(a==='treset'){const s=lsView(id);if(s){lsTimerSet(id,lsT&&lsT.id===id?lsT.si:Math.max(0,lsStageOf(s,lsL(id).screen)));lsPaintTimer(true)}return}
   if(a==='stage'){lsTimerSet(id,+t.dataset.i);lsTimerToggle();fdRender();return}
@@ -14058,6 +14345,8 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-ls]');if(!
   if(a==='fs'){lxFs();return}
   if(a==='pick'){lxPick();return}
   if(a==='tools'){lxtOpen(id);return}
+  if(a==='teams'){ltOpen(id);return}
+  if(a==='podium'){ltPodOpen(id);return}
   if(a==='pickx'){const el=document.getElementById('lxPick');if(el)el.hidden=true;return}
   if(a==='act'){lsScrClose();return}
   if(a==='toplan'){lsToPlan(id);return}
@@ -14103,7 +14392,7 @@ const dkIn=e=>{const t=e.target.closest&&e.target.closest('[data-dk]');if(!t)ret
   delete lsViewMemo[id];tkSave()};
 document.addEventListener('input',dkIn);document.addEventListener('change',dkIn);
 /* لوحة المفاتيح وجهاز العرض: المسافة و«التالي» في جهاز العرض يكشفان الجزء التالي إن بقي، وإلا ينتقلان؛ والسهمان للتنقل وحده */
-document.addEventListener('keydown',e=>{if(!document.body.classList.contains('ls-on'))return;if(lxtIsOpen()){if(e.key==='Escape'&&!document.fullscreenElement?.closest?.('.lxt-body .tk')&&!/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement||{}).tagName||'')){e.preventDefault();lxtClose()}return}const lx=document.querySelector('#lsOv .lx');if(!lx)return;const id=lx.dataset.id;const L=lsL(id);const s=lsView(id);if(!s)return;
+document.addEventListener('keydown',e=>{if(!document.body.classList.contains('ls-on'))return;if(ltPodIsOpen()){if(e.key==='Escape'){e.preventDefault();ltPodClose()}return}if(lxtIsOpen()){if(e.key==='Escape'&&!document.fullscreenElement?.closest?.('.lxt-body .tk')&&!/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement||{}).tagName||'')){e.preventDefault();lxtClose()}return}const lx=document.querySelector('#lsOv .lx');if(!lx)return;const id=lx.dataset.id;const L=lsL(id);const s=lsView(id);if(!s)return;
   if(e.ctrlKey||e.metaKey||e.altKey)return;const ae=document.activeElement;
   /* أثناء الكتابة في ملاحظة المعلم لا تُخطف المفاتيح؛ و«Esc» يخرج من الحقل */
   if(ae&&lx.contains(ae)&&/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)){if(e.key==='Escape'){e.preventDefault();ae.blur();try{lx.focus({preventScroll:true})}catch(_){}}return}
@@ -14919,6 +15208,7 @@ const TK_T=[
  ['custom','اختبار مخصص','ai-tasks','اختبار حر بجدول المواصفات: تختار دروسه ودرجته ونسب مستوياته وأنواع أسئلته، للتربية الإسلامية أو ورقة تدريب للقرآن، وتنزيل PDF','#tk/custom','b',2],
  ['choice','لوحة الاختيارات','ai-choice','تسع مهام متمايزة على درسك يختار منها الطالب ثلاثًا في خط واحد: تعدّلها وتطبعها ورقة للطالب','#tk/choice','b',1],
  ['lmap','خريطة الدرس','ai-mindmap','منظّم بياني للدرس في صفحة: الفكرة الكبرى والمحاور والأدلة والقيمة، مكتملًا للمراجعة أو فارغًا للتعبئة','#tk/lmap','b',1],
+ ['think','أوراق تُفكّر','ai-think','ورقة عمل ذهنية للدرس في صفحة واحدة مقتصدة الحبر: خريطة استدعاء، أو مصفوفة مقارنة، أو اكتشف الخطأ، أو سبب ونتيجة؛ تعدّلها وتطبعها أو تنزّلها PDF','#tk/think','b',2],
  ['spec',0,0,0,'#spec','b'],['forms',0,0,0,'#forms','b'],['rubric',0,0,0,'#rubric','b'],['kid',0,0,0,'#kid','b'],['book',0,0,0,'#tools','b'],['ask',0,0,0,'#ask','b'],
  ['check','افحص جهازي','ai-shield','فحص سريع لجهازك وشاشة الصف: الشاشة واللمس والخطوط والصوت والتخزين، ومعه قائمة تجربة للسبورة الذكية في عشر دقائق','#tk/check','b',2],
  ['run',0,0,0,'#plan','d'],
@@ -14940,6 +15230,9 @@ const TK_T=[
  ['summit','سلّم القمة','ai-peak','عشر درجات إلى القمة بمخيمين وحبلَي أمان وثلاث وسائل مساعدة، للصف كله أو لفريقين','#tk/summit','g',1],
  ['pairs','بطاقات الذاكرة','ai-cards','اقلب بطاقتين وطابق الكلمة بمعناها والآية بدلالتها؛ لمن عرف المعنى وحفظ الموضع','#tk/pairs','g',1],
  ['arena','ميدان التحدي','ai-board','لوحة أسئلة مفتوحة بدرجات ترتقي مع مستوى التفكير، تحكم فيها أنت بالإجابة النموذجية','#tk/arena','g',1],
+ ['grid','شبكة الاستدعاء','ai-grid','ست بطاقات من أسئلة الدرس لختام الحصة في خمس دقائق: بالخيارات، ثم من الذاكرة، ثم مع التعليل','#tk/grid','g',2],
+ ['duel','مبارزة السبورة','ai-dual','السؤال نفسه في نصفي الشاشة: طالبان يتسابقان إلى الجواب الصحيح، ومن أخطأ أُقفل نصفه','#tk/duel','g',2],
+ ['spot','اكتشف الخطأ','ai-lens','سؤال وجواب معروض: صحيح هو أم فيه خطأ؟ يحكم الصف، ومن كشف الخطأ صوّبه','#tk/spot','g',2],
  ['log','سجل الوقائع','ai-note','الموقف في ثوانٍ بتاريخه ودرسه، إيجابيًا كان أو يحتاج متابعة: دليل موثّق للسلوك والتواصل','#tk/log','a',1],
  ['report','التقرير الدوري','ai-doc','تقرير لكل طالب بعناصر الدليل الخمسة، يُبنى من درجاته وحفظه ونقاطه ووقائعه (م٥٧/٥)','#tk/report','a',1],
  ['fbk',0,0,0,'#fbk','a'],['hifz',0,0,0,'#hifz','a'],['parent',0,0,0,'#parent','a'],['wcard',0,0,0,'#wcard','a'],
@@ -14955,7 +15248,7 @@ function tkToolsHTML(){const pins=tkPins();const all=TK_T.map(tkTool);const cnt=
   const top=(typeof tkBkNagHTML==='function'?tkBkNagHTML():'')+(typeof tkSetupCta==='function'?tkSetupCta():'')+(typeof tkCtxBarHTML==='function'?tkCtxBarHTML():'');
   return `<div class="do-head"><h2>أدواتي</h2><p>أدوات تختصر عملًا يتكرر كل يوم، مرتبة بلحظات يومك: قبل الحصة، وفيها، وبعدها، ومعها ألعاب تفاعلية لشاشة الصف. ثبّت ما تستعمله كثيرًا بالنجمة فيظهر في الأعلى. وما تكتبه فيها يبقى على جهازك.</p></div>${top}
   <div class="tk-find"><label class="tk-find-in">${tkI('search')}<input type="search" data-tkfind placeholder="ابحث عن أداة أو لعبة…" aria-label="ابحث في الأدوات والألعاب" autocomplete="off" enterkeyhint="search"></label><nav class="tk-jump" aria-label="أقسام الأدوات">${TK_M.map(([m,h])=>`<button type="button" data-tkjump="${m}">${h}<i>${bgN(cnt(m))}</i></button>`).join('')}</nav></div>
-  <div class="tk-heroes" data-tkhide>${hero('','#bag/map','ai-toolbox','حقيبة المعلم','طلابك ودرجاتهم ونقاطهم وأوسمتهم وشهاداتهم، ورحلة الصف وفِرقه، لكل صفوفك. بياناتك على جهازك وحده.','افتح الحقيبة')}${hero('tg-hero2','#tools','ai-trophy','الألعاب التفاعلية','ست ألعاب على شاشة الصف: مسابقة الكأس، وديوانية الأسئلة، وخلية المعرفة، وسلّم القمة، وبطاقات الذاكرة، وميدان التحدي.','إلى الألعاب',' data-tkjump="g"')}${hero('tg-hero3','#nb','ai-books','دفتر المعلم','دفترك للعام باسمك وصفوفك: الأنظمة والخطط والمهام والقوائم، للطباعة والتصدير.','افتح الدفتر')}${hero('tg-hero4','#vs','ai-layout','الحلول البصرية','من معلومة معقّدة إلى وسيلة تُفهم في ثوانٍ: مختبر تنفيذي ونماذج وأدوات وأدلة، وحقائب تدريبية.','افتح المنصة')}</div>
+  <div class="tk-heroes" data-tkhide>${hero('','#bag/map','ai-toolbox','حقيبة المعلم','طلابك ودرجاتهم ونقاطهم وأوسمتهم وشهاداتهم، ورحلة الصف وفِرقه، لكل صفوفك. بياناتك على جهازك وحده.','افتح الحقيبة')}${hero('tg-hero2','#tools','ai-trophy','الألعاب التفاعلية','تسع ألعاب على شاشة الصف: مسابقة الكأس، وديوانية الأسئلة، وخلية المعرفة، وسلّم القمة، وبطاقات الذاكرة، وميدان التحدي، وشبكة الاستدعاء، ومبارزة السبورة، واكتشف الخطأ.','إلى الألعاب',' data-tkjump="g"')}${hero('tg-hero3','#nb','ai-books','دفتر المعلم','دفترك للعام باسمك وصفوفك: الأنظمة والخطط والمهام والقوائم، للطباعة والتصدير.','افتح الدفتر')}${hero('tg-hero4','#vs','ai-layout','الحلول البصرية','من معلومة معقّدة إلى وسيلة تُفهم في ثوانٍ: مختبر تنفيذي ونماذج وأدوات وأدلة، وحقائب تدريبية.','افتح المنصة')}</div>
   <div id="tkFindNone" class="tk-empty" hidden><b>لا أداة بهذا الاسم</b><span>جرّب كلمة أخرى، مثل: اختبار، حفظ، لعبة، مجموعات، مقاعد.</span></div>
   ${pins.length?`<section class="tg tk-pinned" data-tksec><h3 class="tg-h">أدواتك المثبتة</h3><div class="tg-grid">${pins.map(id=>{const t=all.find(t=>t.id===id);return t.m==='g'?tkGameCard(t,pins):tkCard(t,pins)}).join('')}</div></section>`:`<p class="tk-pinhint" data-tkhide>${tkSvg(TK_P.star)}<span>اضغط النجمة على أي أداة لتثبيتها هنا.</span></p>`}
   ${TK_M.map(([m,h,s])=>`<section class="tg tk-mom tk-mom-${m}" id="tkSec-${m}" data-tksec><h3 class="tg-h">${h}<small>${s}</small></h3><div class="${m==='g'?'tk-ggrid':'tg-grid'}">${all.filter(t=>t.m===m).map(t=>m==='g'?tkGameCard(t,pins):tkCard(t,pins)).join('')}</div></section>`).join('')}`}
@@ -16665,7 +16958,7 @@ function meTTHTML(){let n=0;const cell=(d,p)=>{const P=tdParse(TK.tt[d+'.'+p]);i
 const ME_TOUR=[['ai-home2','الرئيسية','«حصتي الآن» في أعلى الصفحة تعرف حصتك من جدولك، وتفتح عرضها بضغطة واحدة.','#home','إلى الرئيسية'],
  ['ai-screen','صفحة الدرس','فيها التحضير بالقالب الرسمي والشاشات وملفات PDF. ومن «خصّص عرضي» تخفي شاشة، أو تضيف شاشتك وصورتك وملاحظتك.','#bag/sessions','كل الحصص'],
  ['ai-layout','على شاشة الصف','المسافة تكشف ثم تنتقل، والسهمان للتنقل. ومفتاح M لدرج المعلم، ومفتاح P للقلم، ومفتاح O لكل الشاشات، ومفتاح F لملء الشاشة.','',''],
- ['ai-toolbox','أدواتي والألعاب','أدوات لما قبل الحصة وفيها وبعدها، وست ألعاب لشاشة الصف، وكلها تفتح على درسك مباشرة.','#tools','أدواتي'],
+ ['ai-toolbox','أدواتي والألعاب','أدوات لما قبل الحصة وفيها وبعدها، وتسع ألعاب لشاشة الصف، وكلها تفتح على درسك مباشرة.','#tools','أدواتي'],
  ['ai-box','بياناتك عندك','أسماء طلابك ودرجاتهم على جهازك وحده. خذ «نسخة احتياطية شاملة» كل أسبوعين وقبل تغيير الجهاز.','#tk/backup','النسخة الشاملة']];
 TK_PAGES.setup={render(M){const E=meInit();const tt=Object.values(TK.tt).filter(Boolean).length;const nc=BG.classes.length;const nst=BG.classes.reduce((a,c)=>a+meStuN(c),0);
   const step=(ok,t)=>`<span class="me-st${ok?' ok':''}">${tkI(ok?'check':'minus')}${t}</span>`;const ttH=meTTHTML();
@@ -18240,7 +18533,7 @@ setTimeout(uiFix,400);
    زر «أدوات الحصة» في شريط الشاشة الذكية يفتح لوحة فوق العرض نفسه (داخل #lsOv، فتبقى في ملء الشاشة)،
    فيها أدوات «في الحصة» والألعاب التفاعلية على درس العرض. تُستعمل صفحات الأدوات نفسها: تُنقل حاوية الأدوات #tkRoot
    إلى اللوحة ما دامت مفتوحة، ثم تُعاد إلى مكانها عند الإغلاق. لا يتغير عنوان الصفحة، فيبقى المعلم في عرضه وشاشته. */
-const LXT_IDS=['kit','probe','live','cases','build','timeline','hifzd','seat','stations','jar','review','diwan','hive','summit','pairs','arena'];
+const LXT_IDS=['kit','probe','live','cases','build','timeline','hifzd','seat','stations','jar','review','grid','duel','spot','diwan','hive','summit','pairs','arena'];
 let lxtOn=null;
 const lxtTools=()=>LXT_IDS.map(id=>TK_T.find(t=>t[0]===id)).filter(t=>t&&TK_PAGES[t[0]]);
 function lxtIsOpen(){return !!lxtOn}
@@ -18283,7 +18576,7 @@ window.addEventListener('hashchange',()=>{if(lxtOn){lxtClose(true);try{lsScrClos
    ثم تبقى على ما يغيّره المعلم فيها إلى أن تتغير الحصة. والرابط المباشر ‎#tk/<الأداة>/<الدرس>‎ يسبق السياق دائمًا.
    كل شيء على الجهاز (tk.v1)، والاختيار اليدوي يُمحى في اليوم التالي. */
 let tkCtxSeen={},tkCtxOpen=null;
-const TKX_L=['probe','live','cases','build','timeline','hifzd','review','choice','lmap','diwan','hive','summit','pairs','arena'];
+const TKX_L=['probe','live','cases','build','timeline','hifzd','review','choice','lmap','think','diwan','hive','summit','pairs','arena','grid','duel','spot'];
 const TKX_C=['kit','seat','jar','log'];
 /* حصة الجدول: أول حصة لها صف، اليوم من الحصة الجارية أو القادمة، ثم أول يوم دراسي تالٍ */
 function tkCtxTT(){try{if(!tdHasTT())return null;const w=fdWeekIdx();if(w<0)return null;const now=tdNow(),d=new Date();
@@ -18355,6 +18648,428 @@ function tkCtxChip(id,from){try{const c=tkCtx();if(!c)return '';
     if(id==='diwan'){const R=TK.dw&&TK.dw.run;if(R&&!R.over)return ''}else if(typeof gmRun!=='undefined'&&gmRun[id]&&!gmRun[id].over)return '';
     if(TKX_L.includes(id)&&c.id&&c.L){if(c.id===from)return '';return `<a class="tk-back tk-ctx-tag" href="#tk/${id}/${c.id}" title="افتح الأداة على درس حصتك">${tkIc('ai-clock')}<span>${tkCtxName(c)}: ${esc(c.L.title)}</span></a>`}
     if(TKX_C.includes(id)&&c.ck&&!(from&&lsG(from)!==c.g))return `<span class="tk-ctx-tag">${tkIc('ai-clock')}<span>${tkCtxName(c)}: ${esc(tkShort(c.name))}</span></span>`}catch(e){}return ''}
+
+/* ================= v97: ثلاث شرائح تفاعلية من أسئلة الدرس =================
+   شبكة الاستدعاء (grid): ست بطاقات مقلوبة لختام الحصة، وقيمة البطاقة بقدر ما يُطلب من الذاكرة: تعرُّف بالخيارات، ثم استدعاء بلا خيارات، ثم استدعاء وتعليل.
+   مبارزة السبورة (duel): السؤال نفسه في نصفي الشاشة، ولكل طالب نصفه وأزراره؛ من لمس الصواب أولًا أخذ الجولة، ومن أخطأ أُقفل نصفه.
+   اكتشف الخطأ (spot): سؤال وجوابٌ معروض، قد يكون صحيحًا وقد يكون فيه خطأ؛ يحكم الصف، وإن كشف الخطأ صوّبه.
+   كلها على بنك أسئلة المنهج نفسه (FD_CUP) بدوال الألعاب (tkgames.js)، بلا أجهزة للطلاب. وتُفتح من «أدواتي»، ومن لوحة «أدوات الحصة» داخل العرض، وتُضاف شاشةً في «نسختي من العرض».
+   النص القرآني والحديث لا يُركَّب منهما جواب خاطئ: «اكتشف الخطأ» يأخذ أسئلة الاختيار التي ليست إكمال نص، وأسئلة الصواب والخطأ. وحالة اللعب في الذاكرة وحدها. */
+try{Object.assign(TK_GART,{grid:'M3 5h5v6H3zM9.5 5h5v6h-5zM16 5h5v6h-5zM3 13h5v6H3zM9.5 13h5v6h-5zM16 13h5v6h-5z',duel:'M3 5h18v14H3zM12 5v14M6 9.5h3M6 12.5h3M15 9.5h3M15 12.5h3',spot:'M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5L21 21M8.3 8.3l4.4 4.4M12.7 8.3l-4.4 4.4'})}catch(e){}
+const PL_OPTDEP=/مما يأتي|مما يلي|ممّا يأتي|ممّا يلي|من الآتي|فيما يأتي|فيما يلي|الآتية|التالية|ما عدا|عدا واحد|جميع ما سبق|كل ما سبق|أيٌّ من|أيّ من|أي من|واحدة مما|واحد مما|ليس من|ليست من/;
+/* سؤال اختيار يصلح أن يُعرض معه أحدُ خياراته جوابًا (plPlain): ليس نصًّا قرآنيًّا، ولا يتوقف على خياراته، وليس في خياراته آية ولا حديث ولا قول منقول بين علامتي تنصيص،
+   وليس إكمالًا لنص منقول (نص بين علامتين فيه حذف «…»). وما في نص سؤاله آية أو حديث أو قول منقول (plKeep) يُعرض بجوابه الصحيح دائمًا: لا يُزرع فيه خطأ، فلا يُنسب إلى نص معنًى ليس له */
+const PL_SCR=/[﴿﴾«»"“”]/,PL_GAP=/…|\.\.|‥/;
+const plPlain=q=>q.t==='mcq'&&!q.qr&&Array.isArray(q.opts)&&q.opts.length>2&&!PL_OPTDEP.test(q.q)&&!q.opts.some(o=>PL_SCR.test(String(o)))&&!(PL_SCR.test(String(q.q))&&PL_GAP.test(String(q.q)));
+const plKeep=q=>PL_SCR.test(String(q.q));
+const plFree=q=>!q.tf&&!PL_OPTDEP.test(q.q);                               /* يُجاب عنه بلا خيارات */
+const plWhy=q=>plFree(q)&&!q.qr&&!q.fill&&String(q.why||'').trim().length>=25;  /* يُعلَّل */
+const plRight=q=>(q.o.find(o=>o.ok)||{}).t||'';
+const plAns=(q,t)=>q.qr&&!q.tf?`<span class="gm-ay">${q.fill?'… ':''}${esc(t)}</span>`:gmQ(t);
+const plTeamsSeg=(name,opts,v)=>`<div class="tk-lb">الفِرق${tkSeg(name,opts,v)}</div>`;
+const plWinHTML=(sc,again,label)=>{const mx=Math.max(...sc);const w=sc.indexOf(mx);const tie=sc.length>1&&sc.filter(s=>s===mx).length>1;
+  return `<div class="gm-win pl-win" style="${gmTS(w)}"><small>${label}</small><b>${sc.length===1?'رصيد الصف: '+bgN(mx):(tie?'تعادل في الصدارة':'فاز '+esc(gmTeam(w)))}</b>${sc.length>1?`<span>${sc.map((s,i)=>esc(gmTeam(i))+': '+bgN(s)).join(' — ')}</span>`:''}<div class="tk-row-btns"><button class="tk-btn pri big" data-tk="${again}">${tkI('reset')}جولة أخرى</button></div></div>`};
+const plMiss=(R,q)=>{if(!R.miss.includes(q)){R.miss.push(q);try{tkMissAdd(TK.gm.g,q)}catch(e){}}};
+
+/* ---------- ١) شبكة الاستدعاء ---------- */
+const RG_MODE={100:['تعرُّف','اختاروا الجواب من الخيارات'],200:['استدعاء','أجيبوا من الذاكرة، بلا خيارات'],300:['استدعاء وتعليل','أجيبوا من الذاكرة، ثم علّلوا']};
+function rgBuild(all){const pool=tkShuffle(all),used=new Set(),take=f=>{const q=pool.find(x=>!used.has(x)&&f(x))||pool.find(x=>!used.has(x))||pool[Math.floor(Math.random()*pool.length)];used.add(q);return q};
+  /* الأصعب يختار أولًا ما يصلح له؛ والباقي يملأ ما دونه */
+  const hi=[take(plWhy),take(plWhy)],mid=[take(plFree),take(plFree)],lo=[take(()=>true),take(()=>true)];
+  const mk=(q,v)=>{const m=v===300&&!plWhy(q)?(plFree(q)?200:100):(v===200&&!plFree(q)?100:v);return {v:m,m,q:{...q,o:q.tf?q.o:tkShuffle(q.o)},used:false,won:-1,got:0}};   /* القيمة تتبع ما يُطلب فعلًا: إن لم يصلح السؤال للاستدعاء الحر نزلت البطاقة إلى ما يصلح له */
+  return [mk(lo[0],100),mk(mid[0],200),mk(hi[0],300),mk(lo[1],100),mk(mid[1],200),mk(hi[1],300)]}
+function rgStage(R){const c=R.cur;const left=R.cells.filter(x=>!x.used).length;let body;
+  if(R.over)body=plWinHTML(R.sc,'rgagain','اكتملت الشبكة')+gmMissHTML(R.miss);
+  else if(c){const x=R.cells[c.i],q=x.q,t=R.turn;const head=`<div class="ar-qh"><span class="ar-pts">${bgN(x.v)}</span><div><b>${RG_MODE[x.m][0]}${R.nt>1?' · يجيب '+esc(gmTeam(t)):''}</b><small>${esc(q.src)}</small></div>${gmClkHTML()}${c.done?'':`<button class="tk-ib" data-tk="rgback" title="عُد إلى الشبكة دون احتساب">${tkI('close')}</button>`}</div>`;
+    if(x.m===100)body=`<div class="ar-q rg-q">${head}${gmQHTML({q,dis:[],done:c.done,pick:c.pick})}${c.done?`<div class="tk-row-btns gm-acts"><button class="tk-btn pri big" data-tk="rgnext">${tkI('next')}تابع</button></div>`:''}</div>`;
+    else body=`<div class="ar-q rg-q">${head}<p class="ar-qt">${gmQ(q.q)}</p>
+      ${c.show?`<div class="ar-ans"><b>الجواب</b><p>${plAns(q,plRight(q))}</p>${q.why?`<p class="rg-why"><b>${x.m===300?'التعليل':'لماذا؟'}</b> ${gmQ(q.why)}</p>`:''}</div>
+        ${c.done?`<div class="tk-row-btns gm-acts"><button class="tk-btn pri big" data-tk="rgnext">${tkI('next')}تابع</button></div>`
+          :`<div class="ar-give"><span class="tk-lbl">كيف كان جوابهم؟</span><div class="ar-teams"><button class="ar-tb" style="${gmTS(t)}" data-tk="rgjudge" data-v="1">${x.m===300?'أصابوا وعلّلوا':'أصابوا'}<small>+${bgN(x.v)}</small></button>${x.m===300?`<button class="ar-tb" style="${gmTS(t)}" data-tk="rgjudge" data-v="half">أصابوا بلا تعليل<small>+${bgN(x.v/2)}</small></button>`:''}<button class="ar-tb none" data-tk="rgjudge" data-v="0">لم يصيبوا</button></div></div>`}`
+       :`<div class="tk-row-btns gm-acts"><button class="tk-btn pri big" data-tk="rgshow">${tkI('eye')}اكشف الجواب</button></div><p class="tk-tip">${RG_MODE[x.m][1]}، ثم نكشف ونحكم معًا.</p>`}</div>`}
+  else body=`<div class="rg-grid" role="group" aria-label="شبكة الاستدعاء">${R.cells.map((x,i)=>x.used?`<span class="rg-c used${x.won>=0?' won':''}"${x.won>=0?` style="${gmTS(x.won)}"`:''}><small>${RG_MODE[x.m][0]}</small><b>${x.got?'+'+bgN(x.got):'—'}</b></span>`
+      :`<button class="rg-c" data-tk="rgcell" data-i="${i}" aria-label="بطاقة ${bgN(i+1)}: ${bgN(x.v)} نقطة، ${RG_MODE[x.m][0]}"><small>${RG_MODE[x.m][0]}</small><b>${bgN(x.v)}</b></button>`).join('')}</div>
+     <div class="ar-foot"><span class="tk-tip">${R.nt>1?`الدور لـ<b>${esc(gmTeam(R.turn))}</b>: اختاروا بطاقة. `:'اختاروا بطاقة. '}بقي ${lxCnt(left,'بطاقة واحدة','بطاقتان','بطاقات','بطاقة')}. كلما علت القيمة قلّ العون: بالخيارات، ثم بلا خيارات، ثم مع التعليل.</span>${left<6?`<button class="tk-btn sm" data-tk="rgend">${tkI('check')}أنهِ وأعلن النتيجة</button>`:''}</div>`;
+  return `<div class="tk-stbar"><div class="gm-score">${R.sc.map((s,i)=>`<span class="gm-sc${!R.over&&R.nt>1&&R.turn===i?' on':''}" style="${gmTS(i)}"><i class="gm-dot"></i>${R.nt>1?esc(gmTeam(i)):'رصيد الصف'}<b>${bgN(s)}</b></span>`).join('')}</div>${gmTools()}</div>${body}`}
+function rgRe(){const S=$('#gmStage'),R=gmRun.grid;if(!S||!R){tkRe();return}S.innerHTML=rgStage(R);gmClkPaint()}
+function rgClose(R,won,got){const c=R.cur,x=R.cells[c.i];x.used=true;x.won=won;x.got=got;if(won>=0)R.sc[won]+=got;c.done=true;gmClkStop()}
+TK_PAGES.grid={render(M){gmDeep('grid');const G=gmS();const R=gmRun.grid;
+  if(R){M.innerHTML=`<div class="tk-stage gm-stage rg-stage" id="gmStage">${rgStage(R)}</div>`;gmClkPaint();return}
+  const P=gmClosed(gmScope());if(![1,2,3,4].includes(+G.rgn))G.rgn=2;
+  M.innerHTML=`<section class="tk-card">${gmBar()}<div class="tk-bar">${plTeamsSeg('rgn',[[1,'الصف كله'],[2,'فريقان'],[3,'٣ فِرق'],[4,'٤ فِرق']],G.rgn)}${gmSecHTML()}</div>${G.rgn>1?gmTeamsHTML(+G.rgn):''}${gmPoolTip(P.length,6)}
+    <div class="tk-row-btns"><button class="tk-btn pri big" data-tk="rgstart"${P.length?'':' disabled'}>${tkI('play')}ابدأ الشبكة</button></div></section>
+   ${gmRules(['ست بطاقات مقلوبة من أسئلة الدرس، تكفيها خمس دقائق في ختام الحصة.','بطاقة ١٠٠ بالخيارات، وبطاقة ٢٠٠ يُجاب عنها من الذاكرة بلا خيارات، وبطاقة ٣٠٠ من الذاكرة مع التعليل.','في بطاقتي ٢٠٠ و٣٠٠ يجيب الفريق شفويًّا، ثم يُكشف الجواب وتحكم أنت.','من أخطأ لا يخسر شيئًا، والسؤال يعود في «المراجعة السريعة» أول الحصة التالية.'])}`},
+ leave(){gmClkStop()},
+ act(a,t){const G=TK.gm;if(gmAct('grid',a,t))return;const R=gmRun.grid;
+  if(a==='rgn'){G.rgn=+t.dataset.v;tkSave();tkRe();return}
+  if(a==='rgstart'||a==='rgagain'){const all=gmClosed(gmScope());if(!all.length)return;const nt=a==='rgagain'&&R?R.nt:Math.max(1,+G.rgn||2);gmRun.grid={nt,sc:Array(nt).fill(0),cells:rgBuild(all),turn:a==='rgagain'&&R?(R.first+1)%nt:0,first:a==='rgagain'&&R?(R.first+1)%nt:0,cur:null,miss:[],over:false};gmClkStop();if(a==='rgstart')tkRe();else rgRe();return}
+  if(!R)return;const c=R.cur;
+  if(a==='rgcell'){if(c||R.over)return;const i=+t.dataset.i;if(!R.cells[i]||R.cells[i].used)return;R.cur={i,show:false,done:false,pick:-1};gmClkStart();rgRe();return}
+  if(a==='rgback'){if(!c||c.done)return;R.cur=null;gmClkStop();rgRe();return}
+  if(a==='gmopt'){if(!c||c.done)return;const x=R.cells[c.i];if(x.m!==100)return;const j=+t.dataset.j;c.pick=j;if(x.q.o[j].ok){rgClose(R,R.turn,x.v);gmSnd(1)}else{rgClose(R,-1,0);plMiss(R,x.q);gmSnd(0)}rgRe();return}
+  if(a==='rgshow'){if(!c||c.done)return;c.show=true;gmClkStop();rgRe();return}
+  if(a==='rgjudge'){if(!c||c.done||!c.show)return;const x=R.cells[c.i],v=t.dataset.v;if(v==='1'){rgClose(R,R.turn,x.v);gmSnd(1)}else if(v==='half'){rgClose(R,R.turn,x.v/2);gmSnd(1)}else{rgClose(R,-1,0);plMiss(R,x.q);gmSnd(0)}rgRe();return}
+  if(a==='rgnext'){if(!c||!c.done)return;R.cur=null;R.turn=(R.turn+1)%R.nt;if(R.cells.every(x=>x.used)){R.over=true;gmSnd(2)}rgRe();return}
+  if(a==='rgend'){if(c&&!c.done)return;if(!tkSure(t,'اضغط ثانيةً لإنهاء الشبكة'))return;R.cur=null;R.over=true;gmSnd(2);rgRe();return}},
+ input(n,t,e){gmInput(n,t,e)}};
+
+/* ---------- ٢) مبارزة السبورة ---------- */
+const duPool=()=>gmClosed(gmScope()).filter(q=>!q.tf&&q.o.length>=3);
+function duHalf(R,s){const c=R.cur,q=c.q,lock=c.lock[s],won=c.done&&c.win===s;
+  return `<section class="du-half${lock&&!c.done?' lock':''}${won?' won':''}" style="${gmTS(s)}" aria-label="${esc(gmTeam(s))}">
+    <header><span class="gm-turn"><i class="gm-dot"></i>${esc(gmTeam(s))}</span><b class="du-n" aria-label="نقاط ${esc(gmTeam(s))}">${bgN(R.sc[s])}</b></header>
+    <p class="du-q">${gmQ(q.q)}</p>
+    <div class="du-opts">${q.o.map((o,j)=>{const cls=c.done?(o.ok?' ok':(c.pick[s]===j?' no':' dim')):(c.pick[s]===j?' no':'');return `<button class="gm-opt du-opt${cls}" data-tk="duopt" data-s="${s}" data-j="${j}"${c.done||lock?' disabled':''}><i>${GM_L[j]}</i><span>${plAns(q,o.t)}</span></button>`}).join('')}</div>
+    <p class="du-st" role="status">${c.done?(won?'أخذ الجولة':(c.win<0?'لم تُحسم':'')):(lock?'أُقفل هذا النصف: الجواب خطأ':'')}</p></section>`}
+function duStage(R){const c=R.cur;let body;
+  if(R.over)body=plWinHTML(R.sc,'duagain','انتهت المبارزة')+gmMissHTML(R.miss);
+  else body=`<div class="du-wrap">${duHalf(R,0)}<div class="du-mid"><span class="du-rd">الجولة ${bgN(R.round)}</span>${gmClkHTML()}${c.done?`${c.q.why?`<p class="gm-why du-why"><b>لماذا؟</b> ${gmQ(c.q.why)}</p>`:''}<button class="tk-btn pri big" data-tk="dunext">${tkI('next')}${Math.max(...R.sc)>=R.n?'النتيجة':'الجولة التالية'}</button><small>يتقدم مبارزان جديدان</small>`:`<button class="tk-btn ghost" data-tk="duskip">${tkI('shuffle')}سؤال آخر</button>`}</div>${duHalf(R,1)}</div>`;
+  return `<div class="tk-stbar"><div class="gm-score">${[0,1].map(i=>`<span class="gm-sc" style="${gmTS(i)}"><i class="gm-dot"></i>${esc(gmTeam(i))}<b>${bgN(R.sc[i])}</b></span>`).join('')}<span class="tk-tip du-goal">الفوز لمن يبلغ ${bgN(R.n)} أولًا</span></div>${gmTools()}</div>${body}`}
+function duRe(){const S=$('#gmStage'),R=gmRun.duel;if(!S||!R){tkRe();return}S.innerHTML=duStage(R);gmClkPaint()}
+const duDraw=R=>({q:gmDraw(R),lock:[false,false],pick:[-1,-1],done:false,win:-1});
+TK_PAGES.duel={render(M){gmDeep('duel');const G=gmS();const R=gmRun.duel;
+  if(R){M.innerHTML=`<div class="tk-stage gm-stage du-stage" id="gmStage">${duStage(R)}</div>`;gmClkPaint();return}
+  const P=duPool();if(![3,5,7].includes(+G.dun))G.dun=3;
+  M.innerHTML=`<section class="tk-card">${gmBar()}<div class="tk-bar"><div class="tk-lb">الفوز عند${tkSeg('dun',[[3,'٣ جولات'],[5,'٥ جولات'],[7,'٧ جولات']],G.dun)}</div>${gmSecHTML()}</div>${gmTeamsHTML(2)}${gmPoolTip(P.length,8)}
+    <div class="tk-row-btns"><button class="tk-btn pri big" data-tk="dustart"${P.length?'':' disabled'}>${tkI('play')}ابدأ المبارزة</button></div></section>
+   ${gmRules(['يقف طالبان أمام السبورة، لكل واحد نصفها. السؤال نفسه في النصفين، ولكل نصف أزراره.','من لمس الجواب الصحيح أولًا أخذ الجولة لفريقه.','من لمس جوابًا خطأ أُقفل نصفه في هذه الجولة، وبقيت الفرصة لزميله.','بعد كل جولة يتقدم مبارزان جديدان، فيشارك أكبر عدد من الطلاب.'])}`},
+ leave(){gmClkStop()},
+ act(a,t){const G=TK.gm;if(gmAct('duel',a,t))return;const R=gmRun.duel;
+  if(a==='dun'){G.dun=+t.dataset.v;tkSave();tkRe();return}
+  if(a==='dustart'||a==='duagain'){const all=duPool();if(!all.length)return;const R2={n:a==='duagain'&&R?R.n:+G.dun,sc:[0,0],all,pool:[],round:1,miss:[],over:false};R2.cur=duDraw(R2);gmRun.duel=R2;gmClkStart();if(a==='dustart')tkRe();else duRe();return}
+  if(!R)return;const c=R.cur;
+  if(a==='duopt'){if(R.over||!c||c.done)return;const s=+t.dataset.s,j=+t.dataset.j;if(c.lock[s])return;c.pick[s]=j;
+    if(c.q.o[j].ok){c.done=true;c.win=s;R.sc[s]++;gmClkStop();gmSnd(1)}else{c.lock[s]=true;plMiss(R,c.q);gmSnd(0);if(c.lock[0]&&c.lock[1]){c.done=true;c.win=-1;gmClkStop()}}
+    duRe();return}
+  if(a==='duskip'){if(R.over||!c||c.done)return;R.cur=duDraw(R);gmClkStart();duRe();return}
+  if(a==='dunext'){if(!c||!c.done)return;if(Math.max(...R.sc)>=R.n){R.over=true;gmSnd(2)}else{R.round++;R.cur=duDraw(R);gmClkStart()}duRe();return}},
+ input(n,t,e){gmInput(n,t,e)}};
+
+/* ---------- ٣) اكتشف الخطأ ---------- */
+/* الجواب المعروض يُؤخذ من خيارات السؤال نفسه؛ ولا يُعرض نص قرآني ولا حديث ولا قول منقول جوابًا خاطئًا (تُستبعد أسئلة الإكمال، وما رُسم بخط المصحف، وما في خياراته آية أو نص بين علامتي تنصيص: plPlain) */
+function spPool(){const out=[];gmScope().forEach(st=>st.B.forEach(q=>{
+    if(q.t==='tf')out.push({tf:1,q:q.q,bad:q.a===false,why:q.why||'',src:st.t,o:[{t:'صواب',ok:q.a===true},{t:'خطأ',ok:q.a===false}]});
+    else if(plPlain(q))out.push({q:q.q,why:q.why||'',src:st.t,o:q.opts.map((t,j)=>({t,ok:j===q.a}))})}));return out}
+function spBuild(all,n){const A=tkShuffle(all);n=Math.min(n,A.length);const can=x=>x.tf?x.bad:!plKeep(x);
+  /* نحو ثلثي البنود فيها خطأ، والباقي صحيح: فلا يكفي أن يقول الصف «خطأ» دائمًا. والخطأ لا يُزرع إلا في بند ليس في نصه آية ولا حديث */
+  const bad=A.filter(can).slice(0,Math.round(n*2/3));const left=A.filter(x=>!bad.includes(x));const rest=[...left.filter(x=>!(x.tf&&x.bad)),...left.filter(x=>x.tf&&x.bad)].slice(0,n-bad.length);
+  return tkShuffle([...bad.map(x=>[x,true]),...rest.map(x=>[x,false])]).map(([x,b])=>{if(x.tf)return {...x,shown:''};const wrong=tkShuffle(x.o.filter(o=>!o.ok));return {...x,bad:b,shown:b?wrong[0].t:plRight(x),o:tkShuffle(x.o)}})}
+function spStage(R){const it=R.items[R.i],c=R.cur,t=R.turn;let body;
+  if(R.over)body=plWinHTML(R.sc,'spagain','انتهت البنود')+gmMissHTML(R.miss);
+  else{const said=c.verdict;const right=said&&((said==='bad')===it.bad);
+    const card=`<div class="sp-card${c.st!=='judge'?(it.bad?' bad':' good'):''}">${it.tf?`<small>عبارة</small><p class="sp-claim">${gmQ(it.q)}</p>`:`<small>السؤال</small><p class="sp-q">${gmQ(it.q)}</p><small>الجواب المعروض</small><p class="sp-claim">${gmQ(it.shown)}</p>`}${c.st!=='judge'?`<span class="sp-stamp">${it.bad?'فيه خطأ':'صحيح'}</span>`:''}</div>`;
+    let act;
+    if(c.st==='judge')act=`<div class="sp-ask"><b>${R.nt>1?esc(gmTeam(t))+': ':''}هل في ${it.tf?'العبارة':'الجواب'} خطأ؟</b><div class="sp-btns"><button class="tk-btn big sp-ok" data-tk="spsay" data-v="ok">${tkI('check')}صحيح</button><button class="tk-btn big sp-bad" data-tk="spsay" data-v="bad">${tkI('close')}فيه خطأ</button></div></div>`;
+    else if(c.st==='fix')act=`<div class="sp-ask"><b>أحسنتم كشفَه. ما الصواب؟</b>${it.tf?`<div class="tk-row-btns gm-acts"><button class="tk-btn pri big" data-tk="spreveal">${tkI('eye')}اكشف الصواب</button></div><p class="tk-tip">صوّبوا العبارة شفويًّا، ثم نكشف.</p>`:`<div class="gm-opts">${it.o.map((o,j)=>o.t===it.shown?'':`<button class="gm-opt" data-tk="spfix" data-j="${j}"><i>${GM_L[j]}</i><span>${gmQ(o.t)}</span></button>`).join('')}</div>`}</div>`;
+    else if(c.st==='tfjudge')act=`<div class="ar-ans"><b>الصواب</b><p>${gmQ(it.why)}</p></div><div class="ar-give"><span class="tk-lbl">هل صوّبوها؟</span><div class="ar-teams"><button class="ar-tb" style="${gmTS(t)}" data-tk="sptf" data-v="1">صوّبوها<small>+${bgN(1)}</small></button><button class="ar-tb none" data-tk="sptf" data-v="0">لم يصوّبوها</button></div></div>`;
+    else act=`<p class="sp-res ${right?'ok':'no'}" role="status">${right?(it.bad?(c.fixed?'كشفتم الخطأ وصوّبتموه':'كشفتم الخطأ، ولم يُصوَّب'):'نعم، الجواب صحيح'):(it.bad?'فات الخطأ هذه المرة':'الجواب كان صحيحًا')}${c.gain?` · +${bgN(c.gain)}`:''}</p>
+       ${it.tf?(it.why?`<p class="gm-why"><b>${it.bad?'الصواب:':'لماذا؟'}</b> ${gmQ(it.why)}</p>`:''):`<p class="gm-why"><b>الصواب:</b> ${gmQ(plRight(it))}${it.why?' — '+gmQ(it.why):''}</p>`}
+       <div class="tk-row-btns gm-acts"><button class="tk-btn pri big" data-tk="spnext">${tkI('next')}${R.i+1>=R.items.length?'النتيجة':'البند التالي'}</button></div>`;
+    body=`<div class="sp-wrap"><div class="gm-qh"><span class="sp-no">البند ${bgN(R.i+1)} من ${bgN(R.items.length)}</span><small>${esc(it.src)}</small>${gmClkHTML()}</div>${card}${act}</div>`}
+  return `<div class="tk-stbar"><div class="gm-score">${R.sc.map((s,i)=>`<span class="gm-sc${!R.over&&R.nt>1&&R.turn===i?' on':''}" style="${gmTS(i)}"><i class="gm-dot"></i>${R.nt>1?esc(gmTeam(i)):'رصيد الصف'}<b>${bgN(s)}</b></span>`).join('')}</div>${gmTools()}</div>${body}`}
+function spRe(){const S=$('#gmStage'),R=gmRun.spot;if(!S||!R){tkRe();return}S.innerHTML=spStage(R);gmClkPaint()}
+const spCur=()=>({st:'judge',verdict:'',fixed:false,gain:0});
+function spDone(R,gain){const c=R.cur;c.st='done';c.gain=gain;R.sc[R.turn]+=gain;gmClkStop();gmSnd(gain?1:0)}
+TK_PAGES.spot={render(M){gmDeep('spot');const G=gmS();const R=gmRun.spot;
+  if(R){M.innerHTML=`<div class="tk-stage gm-stage sp-stage" id="gmStage">${spStage(R)}</div>`;gmClkPaint();return}
+  const P=spPool();if(![1,2].includes(+G.spn))G.spn=1;if(![6,8,10].includes(+G.spc))G.spc=6;
+  M.innerHTML=`<section class="tk-card">${gmBar()}<div class="tk-bar">${plTeamsSeg('spn',[[1,'الصف كله'],[2,'فريقان']],G.spn)}<div class="tk-lb">عدد البنود${tkSeg('spc',[[6,'٦'],[8,'٨'],[10,'١٠']],G.spc)}</div>${gmSecHTML()}</div>${G.spn>1?gmTeamsHTML(2):''}${gmPoolTip(P.length,+G.spc)}
+    <div class="tk-row-btns"><button class="tk-btn pri big" data-tk="spstart"${P.length?'':' disabled'}>${tkI('play')}ابدأ</button></div></section>
+   ${gmRules(['يظهر سؤال من الدرس ومعه جواب معروض: قد يكون صحيحًا، وقد يكون فيه خطأ.','يحكم الصف: «صحيح» أم «فيه خطأ»؟ نقطة لكل حكم صائب.','من كشف الخطأ صوّبه من الخيارات، وله نقطة ثانية.','لا تُعرض آية ولا حديث ولا قول منقول جوابًا خاطئًا، والبند الذي في نصه آية أو حديث يُعرض بجوابه الصحيح دائمًا.'])}`},
+ leave(){gmClkStop()},
+ act(a,t){const G=TK.gm;if(gmAct('spot',a,t))return;const R=gmRun.spot;
+  if(a==='spn'){G.spn=+t.dataset.v;tkSave();tkRe();return}
+  if(a==='spc'){G.spc=+t.dataset.v;tkSave();tkRe();return}
+  if(a==='spstart'||a==='spagain'){const all=spPool();if(!all.length)return;const nt=a==='spagain'&&R?R.nt:Math.max(1,+G.spn||1);gmRun.spot={nt,sc:Array(nt).fill(0),items:spBuild(all,a==='spagain'&&R?R.items.length:+G.spc),i:0,turn:0,cur:spCur(),miss:[],over:false};gmClkStart();if(a==='spstart')tkRe();else spRe();return}
+  if(!R||R.over)return;const c=R.cur,it=R.items[R.i];
+  if(a==='spsay'){if(c.st!=='judge')return;c.verdict=t.dataset.v;const right=(c.verdict==='bad')===it.bad;
+    if(!right){plMiss(R,{...it,o:it.o});spDone(R,0)}else if(it.bad){c.st='fix';R.sc[R.turn]+=1;c.gain=1;gmSnd(1)}else spDone(R,1);spRe();return}
+  if(a==='spfix'){if(c.st!=='fix'||it.tf)return;const ok=it.o[+t.dataset.j].ok;c.fixed=ok;if(!ok)plMiss(R,{...it,o:it.o});c.st='done';if(ok){R.sc[R.turn]+=1;c.gain+=1}gmClkStop();gmSnd(ok?1:0);spRe();return}
+  if(a==='spreveal'){if(c.st!=='fix'||!it.tf)return;c.st='tfjudge';gmClkStop();spRe();return}
+  if(a==='sptf'){if(c.st!=='tfjudge')return;const ok=t.dataset.v==='1';c.fixed=ok;c.st='done';if(ok){R.sc[R.turn]+=1;c.gain+=1}gmSnd(ok?1:0);spRe();return}
+  if(a==='spnext'){if(c.st!=='done')return;if(R.i+1>=R.items.length){R.over=true;gmSnd(2)}else{R.i++;R.turn=(R.turn+1)%R.nt;R.cur=spCur();gmClkStart()}spRe();return}},
+ input(n,t,e){gmInput(n,t,e)}};
+
+/* ---------- في العرض: شاشة تفاعلية يضيفها المعلم إلى «نسختي من العرض» ---------- */
+const LX_PLAY={grid:['شبكة الاستدعاء','ست بطاقات من أسئلة الدرس لختام الحصة: بالخيارات، ثم من الذاكرة، ثم مع التعليل.','ai-grid'],duel:['مبارزة السبورة','السؤال نفسه في نصفي الشاشة: طالبان يتسابقان إلى الجواب الصحيح.','ai-dual'],spot:['اكتشف الخطأ','سؤال وجواب معروض: صحيح هو أم فيه خطأ؟ ومن كشف الخطأ صوّبه.','ai-lens']};
+function lxPlayHTML(id,k){const P=LX_PLAY[k];if(!P)return '';return `<div class="lx-play"><span class="lx-play-ic">${tkIc(P[2],'ic')}</span><b class="lx-play-t">نشاط تفاعلي من أسئلة هذا الدرس</b><button class="lx-btn lx-pri" data-ls="playgo" data-id="${id}" data-t="${k}">${lsSvg('play','lx-ic')}<span>ابدأ النشاط</span></button><small>يفتح فوق العرض، وزر «عودة إلى العرض» يرجعك إلى هذه الشاشة.</small></div>`}
+function lxPlayGo(id,k){if(!LX_PLAY[k]||!TK_PAGES[k])return;try{lxtOpen(id);lxtGo(k)}catch(e){}}
+function dkPlayNew(id,s){return `<details class="dk-new dk-newp"><summary>${lxI('plus')} أضف شاشة تفاعلية من أسئلة الدرس</summary><p class="b-note">تظهر شاشةً في عرضك عند الموضع الذي تختاره، وزرّها يفتح النشاط على أسئلة هذا الدرس.</p>
+   <label class="dk-f">موضعها<select id="dkPa"><option value="0">في أول العرض</option>${s.screens.map(o=>`<option value="${o.n}"${o.n===s.screens.length?' selected':''}>بعد ${bgN(o.n)}: ${esc(String(o.title).slice(0,34))}</option>`).join('')}</select></label>
+   <div class="dk-acts dk-plays">${Object.keys(LX_PLAY).map(k=>`<button class="b-btn" data-ls="dkaddp" data-id="${id}" data-t="${k}">${tkIc(LX_PLAY[k][2],'ic')} ${LX_PLAY[k][0]}</button>`).join('')}</div></details>`}
+function dkPlayAdd(id,k){const P=LX_PLAY[k];if(!P)return;const d=dkOf(id,1);if(d.add.length>=12){toast('أقصى ما يُضاف اثنتا عشرة شاشة للحصة');return}const nid=tkUid();const sel=document.getElementById('dkPa');
+  d.add.push({id:nid,after:+(sel&&sel.value)||0,title:P[0],text:P[1],play:k});lxSel='c'+nid;dkTouch(id);toast('أُضيفت «'+P[0]+'» إلى عرضك')}
+
+/* ================= v97: فِرق الصف داخل العرض، ومنصة التتويج =================
+   زر «فِرق الصف» في شريط الشاشة الذكية يُظهر شريطًا فوق العرض بفِرق الصف كما هي في حقيبة المعلم («رحلة الصف»):
+   تُمنح منه نقاط الفريق كله بالمعايير الثلاثة المعلنة نفسها (BQ_TR)، ونقاط «إنجاز للصف كله» (JR_WHY)، وتُكتب في الحقيبة نفسها (d.tb) فتدخل رحلة الصف.
+   و«منصة التتويج» في ختام الحصة: حصاد الحصة الجماعي وإسهام كل فريق فيه. الفِرق كلها على منصة واحدة وبترتيبها الثابت، بلا مراكز ولا ترتيب،
+   على ما قرّرته الحقيبة من نص الميثاق: «لا تقارن المتعلمين علنًا، ولا تعلّق لوحة ترتيب». لا أرقام أفراد على الشاشة.
+   وأرقام إسهام كل فريق لا تظهر (في الشريط ولا على المنصة) إلا إذا فعّل المعلم «أظهر إسهام الفِرق على لوحة الصف» في «رحلة الصف» (d.tm.show)، كما في لوحة الصف نفسها؛ والمجموع الجماعي يظهر دائمًا.
+   وكل شيء على الجهاز (fdBag.v1). */
+let ltOn=null,ltPod=null;const ltT0={};
+/* صف العرض: شعبة «حصتي الآن» إن كانت من صف الدرس، ثم الصف المفتوح في الحقيبة إن كان من صفه، ثم أول شعبة لهذا الصف */
+function ltClass(id){try{bgLoad();if(!BG||!Array.isArray(BG.classes))return null;const g=lsG(id);let c=null;
+    try{const x=typeof tkCtx==='function'?tkCtx():null;if(x&&x.ck&&x.ck.startsWith('b:'))c=BG.classes.find(k=>k.id===x.ck.slice(2)&&+k.grade===g)||null}catch(e){}
+    if(!c){const a=bgCls();if(a&&+a.grade===g)c=a}
+    return c||BG.classes.find(k=>+k.grade===g)||null}catch(e){return null}}
+function ltD(cid){const d=BG.data[cid]||(BG.data[cid]={});d.students=d.students||[];d.log=d.log||[];d.tb=d.tb||[];return d}
+const ltTeams=d=>d.tm&&Array.isArray(d.tm.list)?d.tm.list:[];
+const ltShow=d=>!!(d.tm&&d.tm.show);
+const ltHas=id=>{const c=ltClass(id);return !!(c&&ltD(c.id).students.length)};
+/* بداية الحصة لهذا الدرس وهذه الشعبة: تبقى ساعةً، فلا يضيع الحصاد إن أُغلق العرض وأُعيد فتحه */
+function ltSince(id,cid){const k=id+'|'+cid,o=ltT0[k];if(o&&Date.now()-o.ms<3600e3)return o.iso;const n=new Date();ltT0[k]={ms:n.getTime(),iso:n.toISOString()};return ltT0[k].iso}
+function ltGain(d,x,t0){const mem=new Set(x.m||[]);return d.log.filter(l=>l.d>0&&(l.date||'')>=t0&&mem.has(l.sid)).reduce((a,l)=>a+l.d,0)+d.tb.filter(b=>b.tid===x.id&&(b.date||'')>=t0).reduce((a,b)=>a+b.d,0)}
+const ltAll=(d,t0)=>d.tb.filter(b=>b.tid==='*'&&(b.date||'')>=t0).reduce((a,b)=>a+b.d,0);
+const ltTotal=(d,t0)=>d.log.filter(l=>l.d>0&&(l.date||'')>=t0).reduce((a,l)=>a+l.d,0)+d.tb.filter(b=>(b.date||'')>=t0).reduce((a,b)=>a+b.d,0);
+/* رحلة الصف لهذه الشعبة (كحساب bqJr، لصف بعينه لا للصف المفتوح في الحقيبة) */
+function ltJr(d){const j=d.jr;if(!j||!j.since)return null;const per=Math.max(10,+j.per||60),a=j.since,last=BQ_ST.length-1;
+  const pts=d.log.filter(l=>l.d>0&&(l.date||'')>=a).reduce((x,l)=>x+l.d,0)+d.tb.filter(b=>(b.date||'')>=a).reduce((x,b)=>x+b.d,0)+10*(d.chlog||[]).filter(c=>(c.date||'')>=a).length;
+  const st=Math.min(last,Math.floor(pts/per));return {per,pts,st,into:st>=last?per:pts-st*per,done:st>=last}}
+const ltPts=n=>'+'+bgN(n);
+function ltHTML(){const o=ltOn;const c=ltClass(o.id);
+  if(!c)return `<div class="ltm-row"><p class="ltm-msg">لا شعبة لهذا الصف في حقيبة المعلم. أضف صفك وطلابك هناك لتظهر فِرقه هنا.</p><button type="button" class="ltm-x" data-lt="close" aria-label="أخفِ شريط الفِرق">${tkI('close')}</button></div>`;
+  const d=ltD(c.id),T=ltTeams(d),t0=ltSince(o.id,c.id),jr=!!(d.jr&&d.jr.since);o.cid=c.id;
+  const x=()=>`<button type="button" class="ltm-x" data-lt="close" aria-label="أخفِ شريط الفِرق">${tkI('close')}</button>`;
+  if(!T.length){const n=d.students.length;return `<div class="ltm-row"><b class="ltm-cls">${esc(c.name)}</b><p class="ltm-msg">${n>=4?'لا فِرق لهذه الشعبة بعد. وزّعها الآن بقرعة متوازنة:':'يلزم أربعة طلاب على الأقل في هذه الشعبة لتكوين الفِرق.'}</p>${n>=4?`<div class="ltm-mk">${[2,3,4].filter(k=>n>=k*2).map(k=>`<button type="button" class="ltm-b" data-lt="make" data-n="${k}">${k===2?'فريقان':bgN(k)+' فِرق'}</button>`).join('')}</div>`:''}${x()}</div>`}
+  const sel=o.sel,sx=sel==='*'?null:T.find(t=>t.id===sel);const fl=o.flash&&Date.now()-o.flash.at<6000?o.flash:null;
+  return `<div class="ltm-row"><b class="ltm-cls">${esc(c.name)}</b><div class="ltm-teams" role="group" aria-label="فِرق الصف">${T.map(t=>{const g=ltGain(d,t,t0);return `<button type="button" class="ltm-t" data-lt="team" data-tid="${t.id}" aria-expanded="${sel===t.id}" style="--tc:${esc(t.c||'#2563EB')}"><i class="ltm-dot"></i><span>${esc(t.n)}</span>${ltShow(d)?`<b class="b-num">${g?ltPts(g):''}</b>`:''}</button>`}).join('')}${jr?`<button type="button" class="ltm-t all" data-lt="team" data-tid="*" aria-expanded="${sel==='*'}"><span>الصف كله</span><b class="b-num">${ltAll(d,t0)?ltPts(ltAll(d,t0)):''}</b></button>`:''}</div>
+     <button type="button" class="ltm-b pod" data-lt="podium">${tkIc('ai-trophy')}<span>منصة التتويج</span></button>${x()}</div>
+   ${sx?`<div class="ltm-why" role="group" aria-label="نقاط لفريق ${esc(sx.n)}"><span>نقاط لفريق <b>${esc(sx.n)}</b> كله:</span>${BQ_TR.map((r,k)=>`<button type="button" class="ltm-r" data-lt="give" data-tid="${sx.id}" data-k="${k}" style="--tc:${esc(sx.c||'#2563EB')}"><b>${ltPts(r.d)}</b>${r.t}</button>`).join('')}</div>`:''}
+   ${sel==='*'&&jr?`<div class="ltm-why" role="group" aria-label="إنجاز للصف كله"><span>إنجاز <b>للصف كله</b>:</span>${JR_WHY.map((r,k)=>`<button type="button" class="ltm-r all" data-lt="give" data-tid="*" data-k="${k}"><b>${ltPts(BQ_ALL)}</b>${r}</button>`).join('')}</div>`:''}
+   <p class="ltm-flash" role="status">${fl?`<span>${esc(fl.txt)}</span>${o.last?'<button type="button" class="ltm-u" data-lt="undo">تراجع</button>':''}`:''}</p>`}
+function ltPaint(){if(!ltOn)return;ltOn.el.innerHTML=ltHTML()}
+function ltOpen(id){const ov=document.getElementById('lsOv');if(!ov)return;if(ltOn){ltClose();return}
+  const el=document.createElement('aside');el.id='lxTeams';el.className='ltm';el.setAttribute('role','region');el.setAttribute('aria-label','فِرق الصف');
+  ltOn={id,el,sel:'',flash:null,last:null,cid:''};ov.appendChild(el);ltPaint();const b=el.querySelector('.ltm-t,.ltm-b,.ltm-x');try{b&&b.focus({preventScroll:true})}catch(e){}ltMark(ov)}
+function ltClose(){if(!ltOn)return;const o=ltOn;ltOn=null;o.el.remove();const ov=document.getElementById('lsOv');ltMark(ov);const b=ov&&ov.querySelector('.lx [data-ls="teams"]');try{b&&b.focus({preventScroll:true})}catch(e){}}
+const ltMark=ov=>{const b=ov&&ov.querySelector('.lx [data-ls="teams"]');if(b){b.setAttribute('aria-pressed',String(!!ltOn));b.classList.toggle('lx-act',!!ltOn)}};
+/* بعد كل رسم للعرض: الشريط والمنصة يبقيان فوقه، وتُحفظ بداية الحصة */
+function ltKeep(ov,id){try{if(!ov)return;const c=ltClass(id);if(c)ltSince(id,c.id);if(ltOn){if(ltOn.id!==id){ltOn.id=id;ltOn.sel=''}if(ltOn.el.parentNode!==ov)ov.appendChild(ltOn.el);if(!ltOn.el.contains(document.activeElement))ltPaint()}ltMark(ov);
+    if(ltPod){if(ltPod.parentNode!==ov)ov.appendChild(ltPod);const lx=ov.querySelector('.lx');if(lx)lx.inert=true}}catch(e){}}
+function ltGive(tid,k){const o=ltOn;if(!o||!o.cid)return;const d=ltD(o.cid);let e,txt;
+  if(tid==='*'){const r=JR_WHY[k];if(!r||!(d.jr&&d.jr.since))return;e={tid:'*',d:BQ_ALL,r,date:bqIso()};txt=`${ltPts(BQ_ALL)} للصف كله · ${r}`}
+  else{const x=ltTeams(d).find(t=>t.id===tid),r=BQ_TR[k];if(!x||!r)return;e={tid:x.id,d:r.d,r:r.t,date:bqIso()};txt=`${ltPts(r.d)} لفريق ${x.n} · ${r.t}`}
+  d.tb.push(e);if(d.tb.length>600)d.tb=d.tb.slice(-600);bgSave();o.last=e;o.flash={txt,at:Date.now()};o.sel='';
+  /* بلوغ محطة يُثبَّت بدالة الحقيبة نفسها إن كانت هذه الشعبة هي المفتوحة فيها؛ وإلا ثُبّت عند فتحها هناك */
+  try{const a=bgCls();if(a&&a.id===o.cid){const m=bqTick();if(m.length)o.flash.txt+=' · '+m[m.length-1]}}catch(e2){}
+  ltPaint();clearTimeout(ltGive.t);ltGive.t=setTimeout(()=>{if(ltOn&&ltOn.flash&&Date.now()-ltOn.flash.at>=5900){ltOn.flash=null;ltPaint()}},6100)}
+function ltUndo(){const o=ltOn;if(!o||!o.last||!o.cid)return;const d=ltD(o.cid);const i=d.tb.lastIndexOf(o.last);if(i>=0){d.tb.splice(i,1);bgSave()}o.last=null;o.flash={txt:'أُلغيت آخر نقاط',at:Date.now()-3500};ltPaint()}
+function ltMake(n){const o=ltOn;if(!o||!o.cid)return;const d=ltD(o.cid);if(ltTeams(d).length)return;n=Math.min(4,Math.max(2,+n||2));const S=d.students.map(s=>s.id);if(S.length<n*2)return;
+  for(let i=S.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[S[i],S[j]]=[S[j],S[i]]}
+  d.tm={since:bqIso(),show:false,list:Array.from({length:n},(_,k)=>({id:bgUid(),n:BQ_TN[k],c:BQ_TC[k],m:S.filter((_,i)=>i%n===k)}))};bgSave();o.last=null;o.flash={txt:'وُزّعت الشعبة على '+(n===2?'فريقين':bgN(n)+' فِرق')+'. الأسماء والأعضاء تعدّلها من «رحلة الصف» في الحقيبة.',at:Date.now()};ltPaint()}
+/* ---------- منصة التتويج ---------- */
+function ltPodHTML(id){const c=ltClass(id),M=lsMeta(id)||{};if(!c)return '';const d=ltD(c.id),T=ltTeams(d),t0=ltSince(id,c.id),tot=ltTotal(d,t0),J=ltJr(d);
+  const top=x=>{const cnt={};d.tb.filter(b=>b.tid===x.id&&(b.date||'')>=t0).forEach(b=>{cnt[b.r]=(cnt[b.r]||0)+1});const k=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0];return k||''};
+  const conf=tot?`<div class="ltp-conf" aria-hidden="true">${Array.from({length:22},(_,k)=>`<i style="--x:${(k*41)%100}%;--d:${(k%7)*.11}s;--c:${['#FF7A1A','#5FD3C5','#8DB0F7','#FFB26B'][k%4]}"></i>`).join('')}</div>`:'';
+  const nx=J&&!J.done?BQ_ST[Math.min(BQ_ST.length-1,J.st+1)][0]:'';
+  return `${conf}<div class="ltp-in"><header class="ltp-h"><span class="ltp-eye">${tkIc('ai-trophy')}منصة التتويج</span><h2 id="ltpT">حصاد حصتنا</h2><p>${esc(M.title||'')} · ${esc(c.name)}</p></header>
+    <div class="ltp-sum"><b class="b-num">${tot?ltPts(tot):bgN(0)}</b><span>${tot?'نقاط جمعناها معًا في هذه الحصة':'لم تُسجَّل نقاط في هذه الحصة بعد'}</span></div>
+    ${T.length?`<div class="ltp-stage" role="list" aria-label="فِرق الصف على منصة واحدة">${T.map(x=>{const g=ltGain(d,x,t0),w=top(x);return `<div class="ltp-team" role="listitem" style="--tc:${esc(x.c||'#2563EB')}"><i class="ltp-dot"></i><b>${esc(x.n)}</b>${ltShow(d)?`<span class="b-num">${g?ltPts(g):'—'}</span>`:''}<small>${w?'تميّز في: '+esc(w):(g?'أسهم بنقاط أعضائه':'')}</small></div>`}).join('')}</div><p class="ltp-note">كل الفِرق على منصة واحدة، بترتيبها الثابت: الرحلة للصف كله.</p>`
+      :`<p class="ltp-note">${tot?'':'امنح الصف نقاطه من شريط «فِرق الصف» أو من حقيبة المعلم، فتظهر هنا.'}</p>`}
+    ${J?`<div class="ltp-jr"><span>${J.done?'أتمّ الصف رحلته: عاد بالدانة':'محطتنا في رحلة الصف: <b>'+BQ_ST[J.st][0]+'</b>'}</span>${J.done?'':`<div class="ltp-bar" role="img" aria-label="${bgN(J.into)} من ${bgN(J.per)} إلى محطة ${nx}"><i style="width:${Math.round(J.into/J.per*100)}%"></i></div><small class="b-num">بقي ${bgN(Math.max(0,J.per-J.into))} إلى «${nx}»</small>`}</div>`:''}
+    <div class="ltp-acts"><button type="button" class="lx-btn lx-pri" data-lt="podx">${lsSvg('prev','lx-ic')}<span>عودة إلى العرض</span></button></div></div>`}
+function ltPodOpen(id){const ov=document.getElementById('lsOv');if(!ov||ltPod)return;const el=document.createElement('section');el.id='lxPodium';el.className='ltp';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-labelledby','ltpT');el.tabIndex=-1;
+  el.innerHTML=ltPodHTML(id);if(!el.innerHTML)return;ltPod=el;ov.appendChild(el);const lx=ov.querySelector('.lx');if(lx)lx.inert=true;if(ltOn)ltOn.el.inert=true;
+  try{el.querySelector('[data-lt="podx"]').focus({preventScroll:true})}catch(e){}try{if(el.querySelector('.ltp-conf')&&typeof hyTick==='function')hyTick()}catch(e){}}
+function ltPodClose(quiet){if(!ltPod)return;ltPod.remove();ltPod=null;const ov=document.getElementById('lsOv');const lx=ov&&ov.querySelector('.lx');if(lx&&!(typeof lxtIsOpen==='function'&&lxtIsOpen()))lx.inert=false;if(ltOn)ltOn.el.inert=false;
+  if(!quiet&&lx){const b=lx.querySelector('[data-ls="podium"]')||lx.querySelector('[data-ls="teams"]');try{(b||lx).focus({preventScroll:true})}catch(e){}}}
+const ltPodIsOpen=()=>!!ltPod;
+function ltShut(){ltPodClose(true);if(ltOn){ltOn.el.remove();ltOn=null}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-lt]');if(!b)return;const a=b.dataset.lt;
+  if(a==='podx'){ltPodClose();return}
+  if(!ltOn||!ltOn.el.contains(b))return;
+  if(a==='close'){ltClose();return}
+  if(a==='team'){ltOn.sel=ltOn.sel===b.dataset.tid?'':b.dataset.tid;ltPaint();const n=ltOn.el.querySelector(ltOn.sel?'.ltm-r':`.ltm-t[data-tid="${b.dataset.tid}"]`);try{n&&n.focus({preventScroll:true})}catch(e2){}return}
+  if(a==='give'){ltGive(b.dataset.tid,+b.dataset.k);return}
+  if(a==='undo'){ltUndo();return}
+  if(a==='make'){ltMake(+b.dataset.n);return}
+  if(a==='podium'){ltPodOpen(ltOn.id);return}});
+
+/* ================= v97: «أوراق تُفكّر» =================
+   ورقة عمل ذهنية للدرس في صفحة A4 واحدة، قليلة الكلمات ومقتصدة الحبر (خطوط رفيعة بلا تعبئة)، بأربعة قوالب:
+   خريطة الاستدعاء (يكتب الطالب من ذاكرته ثم يتحقق)، ومصفوفة المقارنة، واكتشف الخطأ وصحّحه، والسبب والنتيجة.
+   تُبنى من بيانات صفحة الدرس نفسها (المحاور، والقيمة ومظاهرها، وأسئلة الدرس) ومن بنك أسئلة المنهج (FD_CUP)، فلا يُكتب فيها نص شرعي من خارجها؛
+   و«اكتشف الخطأ» لا يعرض آية ولا حديثًا ولا قولًا منقولًا جوابًا خاطئًا (plPlain في tkplay.js: أسئلة الاختيار التي ليست إكمال نص وليس في خياراتها نص منقول، وأسئلة الصواب والخطأ).
+   المعلم يعدّل نصوصها، وتعديله يُحفظ لهذا الدرس على جهازه (tk.v1). وتُطبع بلا اسم معلم ولا شعار. */
+const TH_T=[['map','خريطة الاستدعاء','أغلق كتابك واكتب من ذاكرتك، ثم تحقّق وصحّح'],['matrix','مصفوفة المقارنة','قارن على معايير واحدة، ثم استنتج القاعدة'],['fix','اكتشف الخطأ وصحّحه','احكم على كل بند، ثم صوّب الخطأ'],['cause','السبب والنتيجة','اربط كل سبب بنتيجته، ثم اسأل: ماذا لو؟']];
+const TH_PH=1123,TH_PW=794;
+const thLines=n=>`<span class="th-lines">${'<i></i>'.repeat(n)}</span>`;
+function thRng(seed){let h=2166136261;for(let i=0;i<seed.length;i++){h^=seed.charCodeAt(i);h=Math.imul(h,16777619)}let a=h>>>0;return ()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296}}
+const thShuf=(a,r)=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+/* محاور الدرس: المراحل التي لها حقيقة مستخلصة، بلا التمهيد والتقويم إن بقي بعدها محوران */
+function thAxes(L){const ST=(L&&L.stages)||[];let AX=ST.filter(s=>String(s.fact||'').trim());if(AX.length<2)AX=ST.slice(1,-1);const core=AX.filter(s=>!/تمهيد|الدعاء|التقويم|الختام|الخاتمة/.test(s.name||''));if(core.length>=2)AX=core;
+  return AX.slice(0,4).map(s=>String(lsShort(s.name)||'').replace(/^المحور\s+\S+\s*[:：]\s*/,'').replace(/^التطبيق\s*[:：]\s*/,'').trim()).filter(Boolean)}
+/* سؤالان للاستدعاء الحر من أسئلة الدرس: التذكر والفهم أولًا، وبلا ما يحتاج إلى خيارات أو جدول أو تلاوة */
+const TH_NOQ=/^(?:صواب أم خطأ|ضع\s*\(|ضع علامة|أكمل جدول|أكمل الجدول|اتلُ|اتل\s|صِل|صل بين|اختر|رتّب|رتب)/;
+const thQs=L=>{const Q=((L&&L.questions)||[]).filter(q=>q&&q.q&&!TH_NOQ.test(String(q.q).trim()));const clean=q=>String(q.q).replace(/\s*\((?:تقويم|نشاط|من)[^()]*ص[^()]*\)\s*[.؟]?\s*$/,'').trim();const a=Q.filter(q=>/تذكر|فهم/.test(q.level||''));const pick=(a.length>=2?a:Q).slice(0,2).map(clean);return [pick[0]||'ما أهم ما تعلمته في هذا الدرس؟',pick[1]||'اذكر دليلًا من الدرس، وبيّن على ماذا يدل.']};
+function thDefaults(L,id,t){const T=nwTopic(id),AX=thAxes(L),V=(L&&L.value)||{};const d={};
+  if(t==='map'){for(let i=0;i<4;i++)d['b'+i]=AX[i]||'';if(AX.length<2){d.b0=d.b0||'أهم الأفكار';d.b1=d.b1||'الأدلة';d.b2='أمثلة من الحياة'}const q=thQs(L);d.q0=q[0];d.q1=q[1]}
+  else if(t==='matrix'){for(let i=0;i<4;i++)d['r'+i]=AX[i]||'';if(AX.length<2){d.r0=d.r0||'المفهوم الأول';d.r1=d.r1||'المفهوم الثاني'}d.c0='أهم فكرة فيه';d.c1='دليل أو مثال';d.c2='أثره في حياتي'}
+  else if(t==='cause'){d.a0=(V.behaviors&&V.behaviors[0])||`العمل بما تعلمناه في «${T}»`;d.e1=V.name?V.name:`أثر «${T}» في حياتي`;d.x='لو غاب السبب الأول، فماذا يتغيّر؟'}
+  return d}
+const thVals=(B,L)=>{const d=thDefaults(L,B.id,B.t),e=((B.E||{})[B.id]||{})[B.t]||{};const o={};Object.keys(d).forEach(k=>{o[k]=e[k]!=null?String(e[k]):d[k]});return o};
+/* بنود «اكتشف الخطأ»: ثابتة لكل درس ورقم تبديل، فلا تتغير الورقة كلما رُسمت. نحو ثلاثة أخماسها فيها خطأ، والباقي صحيح.
+   والخطأ لا يُزرع إلا في بند ليس في نصه آية ولا حديث ولا قول منقول (plKeep)؛ وعبارات الصواب والخطأ تُعرض كما هي في البنك */
+function thFixItems(id,seed){const B=lxBank(id);const P=[];B.forEach(q=>{
+    if(q.t==='tf')P.push({tf:1,q:q.q,bad:q.a===false,why:q.why||''});
+    else if(plPlain(q))P.push({q:q.q,why:q.why||'',right:q.opts[q.a],wrong:q.opts.filter((_,j)=>j!==q.a),keep:plKeep(q)})});
+  const r=thRng(id+'|'+(seed||0));const A=thShuf(P,r);const n=Math.min(5,A.length);const can=x=>x.tf?x.bad:!x.keep;
+  const bad=A.filter(can).slice(0,Math.round(n*.6));const left=A.filter(x=>!bad.includes(x));const rest=[...left.filter(x=>!(x.tf&&x.bad)),...left.filter(x=>x.tf&&x.bad)].slice(0,n-bad.length);
+  return thShuf([...bad.map(x=>[x,true]),...rest.map(x=>[x,false])],r).map(([x,b])=>x.tf?{...x,shown:''}:{...x,bad:b,shown:b?thShuf(x.wrong,r)[0]:x.right})}
+/* تصلح الورقة إن كان فيها ثلاثة بنود على الأقل، في اثنين منها خطأ */
+const thFixOk=I=>I.length>=3&&I.filter(x=>x.bad).length>=2;
+const thStmt=it=>it.tf?`<p class="th-st"><small>عبارة:</small> ${gmQ(it.q)}</p>`:`<p class="th-st">${gmQ(it.q)}</p><p class="th-sa"><small>الجواب المعروض:</small> <b>${gmQ(it.shown)}</b></p>`;
+function thBody(L,B){const v=thVals(B,L),T=nwTopic(B.id),e=x=>esc(String(x||''));
+  if(B.t==='map'){const br=[0,1,2,3].map(i=>v['b'+i]).filter(x=>String(x).trim());
+    return `<div class="th-step"><i>١</i><b>من ذاكرتي</b><span>أغلق كتابك، واكتب تحت كل فرع ما تتذكره عنه.</span></div>
+     <div class="th-web"><div class="th-core">${e(T)}</div>${br.length?`<div class="th-br n${br.length}">${br.map(x=>`<section><h4>${e(x)}</h4>${thLines(br.length>2?5:12)}</section>`).join('')}</div>`:''}</div>
+     <div class="th-step"><i>٢</i><b>أتحقق وأصحّح</b><span>افتح كتابك، وصحّح بلون آخر، وأضف ما فاتك.</span></div>
+     <div class="th-step"><i>٣</i><b>سؤالان من الذاكرة</b></div>
+     ${[v.q0,v.q1].filter(x=>String(x).trim()).map(q=>`<div class="th-q"><p>${gmQ(q)}</p>${thLines(2)}</div>`).join('')}
+     <div class="th-end"><b>أكثر ما احتجتُ إلى مراجعته:</b>${thLines(1)}</div>`}
+  if(B.t==='matrix'){const rows=[0,1,2,3].map(i=>v['r'+i]).filter(x=>String(x).trim());const cols=[0,1,2].map(i=>v['c'+i]).filter(x=>String(x).trim());
+    return `<div class="th-step"><i>١</i><b>أملأ المصفوفة</b><span>كلمات قليلة في كل خانة: المعنى لا النص.</span></div>
+     <table class="th-mx r${rows.length} c${cols.length}"><thead><tr><th></th>${cols.map(c=>`<th>${e(c)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr><th>${e(r)}</th>${cols.map(()=>'<td></td>').join('')}</tr>`).join('')}</tbody></table>
+     <div class="th-step"><i>٢</i><b>أقرأ المصفوفة</b><span>انظر إليها عمودًا عمودًا، ثم أكمل.</span></div>
+     <div class="th-3"><div><b>وجه شبه:</b>${thLines(2)}</div><div><b>وجه اختلاف:</b>${thLines(2)}</div><div><b>القاعدة التي أستنتجها:</b>${thLines(2)}</div></div>`}
+  if(B.t==='fix'){const I=thFixItems(B.id,(B.seed||{})[B.id]);if(!thFixOk(I))return '';
+    return `<div class="th-step"><i>١</i><b>أحكم ثم أصوّب</b><span>قد يكون البند صحيحًا، وقد يكون فيه خطأ.</span></div>
+     <ol class="th-fx">${I.map((it,i)=>`<li><i class="th-no">${bgN(i+1)}</i><div class="th-fb">${thStmt(it)}<div class="th-ck"><span><i class="th-box"></i>صحيح</span><span><i class="th-box"></i>فيه خطأ</span><span class="th-cor"><b>التصويب أو الدليل:</b><i class="th-ln"></i></span></div>${thLines(I.length>4?1:I.length>3?2:3)}</div></li>`).join('')}</ol>
+     <div class="th-end"><b>الخطأ الذي كدتُ أقع فيه:</b>${thLines(1)}</div>`}
+  return `<div class="th-step"><i>١</i><b>أكمل السلسلة</b><span>السهم يعني: «يؤدي إلى».</span></div>
+     <div class="th-ch"><div class="th-link"><div class="th-b"><small>السبب</small><p>${gmQ(v.a0)}</p></div><i class="th-ar" aria-hidden="true"></i><div class="th-b"><small>النتيجة</small>${thLines(4)}</div></div>
+      <div class="th-link"><div class="th-b"><small>السبب</small>${thLines(4)}</div><i class="th-ar" aria-hidden="true"></i><div class="th-b"><small>النتيجة</small><p>${gmQ(v.e1)}</p></div></div>
+      <div class="th-link"><div class="th-b"><small>سبب آخر من الدرس</small>${thLines(4)}</div><i class="th-ar" aria-hidden="true"></i><div class="th-b"><small>نتيجته</small>${thLines(4)}</div></div></div>
+     <div class="th-step"><i>٢</i><b>ماذا لو؟</b></div>
+     <div class="th-q"><p>${gmQ(v.x)}</p>${thLines(3)}</div>
+     <div class="th-end"><b>خلاصتي في جملة:</b>${thLines(1)}</div>`}
+function thSheet(L,B){const t=TH_T.find(x=>x[0]===B.t)||TH_T[0];const body=thBody(L,B);if(!body)return '';
+  return `<div class="th-sheet th-${B.t}">${fdSheetHead(t[1]+': '+nwTopic(B.id),'الصف '+FD_GRN[B.g]+' · '+t[2])}${body}${fdSheetFoot}</div>`}
+function thKeyPage(B){const I=thFixItems(B.id,(B.seed||{})[B.id]);if(!thFixOk(I))return '';
+  return `<section class="ps th-ps" data-fit><div class="th-sheet th-key"><header class="ps-h"><div><b>مفتاح المعلم: اكتشف الخطأ وصحّحه</b><span>${esc(nwTopic(B.id))} · الصف ${FD_GRN[B.g]} · للمعلم، لا يُوزَّع</span></div></header>
+    <ol class="th-fx th-kx">${I.map((it,i)=>`<li><i class="th-no">${bgN(i+1)}</i><div class="th-fb">${thStmt(it)}<p class="th-kv ${it.bad?'bad':'ok'}"><b>${it.bad?'فيه خطأ':'صحيح'}</b>${it.bad?(it.tf?(it.why?' · الصواب: '+gmQ(it.why):''):' · الصواب: '+gmQ(it.right)+(it.why?' — '+gmQ(it.why):'')):(it.why?' · '+gmQ(it.why):'')}</p></div></li>`).join('')}</ol>${fdSheetFoot}</div></section>`}
+const thDoc=(L,B)=>{const s=thSheet(L,B);return s?`<section class="ps th-ps" data-fit>${s}</section>`+(B.t==='fix'&&B.key!==0?thKeyPage(B):''):''};
+function thFit(){const p=$('#thPaper');if(!p)return;const box=p.parentNode,w=box.clientWidth;if(!w)return;const k=Math.min(1,w/TH_PW);p.style.transform=k<1?'scale('+k.toFixed(4)+')':'';box.style.height=Math.ceil(p.offsetHeight*k)+'px';
+  const n=$('#thLong');if(n)n.hidden=p.scrollHeight<=TH_PH+2}
+function thPaint(){const B=TK.th,L=(nwD(B.g)||{})[B.id],p=$('#thPaper');if(!p||!L)return;const s=thSheet(L,B);
+  p.innerHTML=s||'<div class="th-none"><b>لا بنود كافية لهذا القالب في هذا الدرس</b><span>يحتاج إلى ثلاثة بنود على الأقل، يصلح اثنان منها لزرع خطأ؛ ولا يُزرع الخطأ في بند فيه آية أو حديث. اختر قالبًا آخر أو درسًا آخر.</span></div>';
+  thFit();$$('[data-thneed]').forEach(b=>{b.disabled=!s})}
+const TH_F={map:[['b0','الفرع الأول'],['b1','الفرع الثاني'],['b2','الفرع الثالث'],['b3','الفرع الرابع'],['q0','السؤال الأول',1],['q1','السؤال الثاني',1]],
+  matrix:[['r0','الصف الأول'],['r1','الصف الثاني'],['r2','الصف الثالث'],['r3','الصف الرابع'],['c0','المعيار الأول'],['c1','المعيار الثاني'],['c2','المعيار الثالث']],
+  cause:[['a0','السبب المعطى',1],['e1','النتيجة المعطاة',1],['x','سؤال «ماذا لو؟»',1]],fix:[]};
+TK_PAGES.think={render(M){const B=nwS('th');B.E=B.E||{};B.seed=B.seed||{};if(!TH_T.some(x=>x[0]===B.t))B.t='map';const g=B.g;
+  if(!nwD(g)){M.innerHTML='<div class="tk-empty"><b>تُحمَّل دروس الصف…</b></div>';nwLoad(g,'think');return}
+  const L=nwD(g)[B.id];const v=thVals(B,L);const F=TH_F[B.t]||[];const edited=!!Object.keys(((B.E||{})[B.id]||{})[B.t]||{}).length;const t=TH_T.find(x=>x[0]===B.t);
+  M.innerHTML=`<div class="tk-bar"><label class="tk-lb">الصف${tkSel('thg',tkGradeOpts(),g)}</label><label class="tk-lb tk-grow">الدرس${tkSel('thid',nwLessonOpts(g),B.id)}</label></div>
+   <div class="tk-lb th-pick">القالب<div class="th-tabs" role="group" aria-label="قالب الورقة">${TH_T.map(x=>`<button type="button" data-tk="tht" data-v="${x[0]}" aria-pressed="${x[0]===B.t}"><b>${x[1]}</b><small>${x[2]}</small></button>`).join('')}</div></div>
+   <div class="th-grid"><section class="tk-card th-ed">${F.length?`<h3>نصوص الورقة</h3><p class="tk-tip">مقترحة من صفحة الدرس. عدّل ما شئت، واترك الخانة فارغة لتحذفها من الورقة.</p>${F.map(([k,l,big])=>`<label class="tk-lb">${l}${big?`<textarea class="tk-in" rows="2" maxlength="220" data-tki="thx" data-k="${k}">${esc(v[k])}</textarea>`:`<input class="tk-in" maxlength="60" data-tki="thx" data-k="${k}" value="${esc(v[k])}">`}</label>`).join('')}`
+       :`<h3>بنود الورقة</h3><p class="tk-tip">حتى خمسة بنود من أسئلة هذا الدرس: بعضها صحيح وبعضها فيه خطأ. لا تُعرض آية ولا حديث ولا قول منقول جوابًا خاطئًا، والبند الذي في نصه آية أو حديث يُعرض بجوابه الصحيح دائمًا. راجع البنود قبل الطباعة، وبدّلها إن شئت.</p><div class="tk-row-btns"><button class="tk-btn" data-tk="thmix" data-thneed>${tkI('shuffle')}بدّل البنود</button></div><label class="th-chk"><input type="checkbox" data-tki="thkey"${B.key!==0?' checked':''}><span>أضف صفحة «مفتاح المعلم» بعد ورقة الطالب</span></label>`}
+      <div class="tk-row-btns th-acts"><button class="tk-btn pri" data-tk="thprint" data-thneed>${tkI('print')}اطبع الورقة</button><button class="tk-btn" data-tk="thpdf" data-thneed>${tkI('down')}نزّل PDF</button><button class="tk-btn ghost" data-tk="threset" id="thReset"${edited?'':' hidden'}>${tkI('reset')}استعد النص المقترح</button></div>
+      <p class="tk-tip th-long" id="thLong" hidden>الورقة أطول من صفحة واحدة: اختصر النصوص أو احذف فرعًا، وإلا صُغّر خطها في ملف PDF.</p>
+      <p class="tk-tip">صفحة A4 واحدة بخطوط رفيعة بلا تعبئة، فتُصوَّر بالأبيض والأسود بلا خسارة. وتعديلك يُحفظ لهذا الدرس على جهازك.${LS_BUILT.has(B.id)?` <a href="#bag/lesson/${B.id}">صفحة الدرس</a>`:''}</p></section>
+     <div class="th-prev"><div class="th-scale"><div class="ps ps-prev th-ps th-paper" id="thPaper" role="img" aria-label="معاينة الورقة: ${esc(t[1])}"></div></div></div></div>`;
+  thPaint()},
+ act(a,t){const B=TK.th;if(!B)return;const L=(nwD(B.g)||{})[B.id];
+  if(a==='tht'){B.t=t.dataset.v;tkSave();tkRe();const b=$(`.th-tabs [data-v="${B.t}"]`);try{b&&b.focus({preventScroll:true})}catch(e){}return}
+  if(a==='thmix'){B.seed[B.id]=((B.seed[B.id]||0)+1)%50;tkSave();thPaint();return}
+  if(a==='threset'){if(!tkSure(t,'اضغط ثانيةً لحذف تعديلاتك'))return;if(B.E[B.id]){delete B.E[B.id][B.t];if(!Object.keys(B.E[B.id]).length)delete B.E[B.id]}tkSave();tkRe();return}
+  if(a==='thprint'||a==='thpdf'){if(!L)return;const h=thDoc(L,B);if(!h)return;if(a==='thprint'){fdPrint(h);return}
+    const tn=(TH_T.find(x=>x[0]===B.t)||TH_T[0])[1];tkPdf(h,'ورقة-تفكّر_'+tn.replace(/\s+/g,'-')+'_'+nwTopic(B.id).replace(/[\\/:*?"<>|·]/g,' ').trim().replace(/\s+/g,'-').slice(0,40)+'.pdf',{title:'أوراق تُفكّر: '+tn+' · '+nwTopic(B.id)});return}},
+ input(n,t,e){const B=TK.th;if(!B)return;
+  if(n==='thx'){const L=(nwD(B.g)||{})[B.id];const d=thDefaults(L,B.id,B.t);const k=t.dataset.k;const E=(B.E[B.id]=B.E[B.id]||{});const X=(E[B.t]=E[B.t]||{});const v=t.value.slice(0,220);if(v!==d[k])X[k]=v;else delete X[k];if(!Object.keys(X).length)delete E[B.t];if(!Object.keys(E).length)delete B.E[B.id];tkSave();thPaint();const rb=$('#thReset');if(rb)rb.hidden=!Object.keys(((B.E||{})[B.id]||{})[B.t]||{}).length;return}
+  if(n==='thkey'){B.key=t.checked?1:0;tkSave();return}
+  if(e.type!=='change')return;
+  if(n==='thg'){B.g=+t.value;B.id='';tkSave();tkRe();return}
+  if(n==='thid'){B.id=t.value;tkSave();tkRe();return}}};
+window.addEventListener('resize',()=>{if(tkCur==='think')thFit()});
+
+/* ================= v97: العمل بلا إنترنت (النسخة العامة وحدها) =================
+   ملف الخدمة sw.js (يضيفه النشر إلى الموقع العام، alm/public/sw.js) يحفظ الصفحة وما يُفتح من ملفاتها. وهذه واجهته: تسجيله، وبطاقة «العمل بلا إنترنت» في «عن الأداة»،
+   وتجهيز دروس الصفوف وباقي المحتوى من قائمة offline.json (يولّدها alm/mkoffline.py)، وإشعار الانقطاع.
+   لا شيء من هذا في نسخة Claude: الصفحة فيها داخل إطار، ولا ملف خدمة (ofCan يعيد false)، فتبقى البطاقة مخفية والجملة القديمة في «عن الأداة».
+   سجل ما جُهّز في المتصفح (fdOff.v1: رقم النشرة والمجموعات)، والملفات نفسها في مخزن المتصفح (Cache Storage: alm-v1). لا يُحفظ فيه شيء من بيانات المعلم ولا طلابه. */
+const OF_KEY='fdOff.v1',OF_MORE=['guide','vsc','vid'],OF_GN={6:'السادس',7:'السابع',8:'الثامن',9:'التاسع'};
+const OF={sup:false,reg:null,on:false,fail:false,noman:false,man:null,have:{},page:false,job:null,note:'',use:0,net:true};
+/* العلامة meta[name="alm:offline"] يضعها mkpublic.py في رأس النسخة العامة وحدها: بلا العلامة لا يُسجَّل شيء ولا تظهر البطاقة (نسخة Claude، وأي نسخة تُفتح بلا ملف الخدمة) */
+const ofCan=()=>{try{return !!document.querySelector('meta[name="alm:offline"]')&&UI_PUB()&&'serviceWorker' in navigator&&typeof caches!=='undefined'&&window.isSecureContext!==false&&/^https?:$/.test(location.protocol)}catch(e){return false}};
+const ofRec=()=>{let r=null;try{r=JSON.parse(localStorage.getItem(OF_KEY)||'null')}catch(e){}if(!r||typeof r!=='object')r={};if(!r.groups||typeof r.groups!=='object')r.groups={};return r};
+const ofRecSave=r=>{try{localStorage.setItem(OF_KEY,JSON.stringify(r))}catch(e){}};
+const ofMB=b=>{const m=b/1048576;return bgN(m>=10?Math.round(m):Math.max(.1,Math.round(m*10)/10))+' م.ب'};
+const ofSW=()=>{try{return navigator.serviceWorker.controller||(OF.reg&&(OF.reg.active||OF.reg.waiting||OF.reg.installing))||null}catch(e){return null}};
+/* رسالة إلى ملف الخدمة وجوابها (أو أجوبته المتتابعة حتى end) */
+function ofAsk(msg,onStep){return new Promise((ok,no)=>{const sw=ofSW();if(!sw){no(new Error('no-sw'));return}const ch=new MessageChannel();let tm=setTimeout(()=>no(new Error('timeout')),msg.t==='keep'?600000:20000);
+  ch.port1.onmessage=e=>{const d=e.data||{};if(msg.t==='keep'&&!d.end){if(onStep)onStep(d);return}clearTimeout(tm);ok(d)};try{sw.postMessage(msg,[ch.port2])}catch(e){clearTimeout(tm);no(e)}})}
+const ofMine=()=>{let g=[];try{g=tkGrades().filter(x=>OF_GN[x])}catch(e){}if(!g.length)g=[6,7,8,9];return g.sort()};
+const ofUrls=keys=>{const out=[],seen=new Set();keys.forEach(k=>{const G=OF.man&&OF.man.groups[k];if(G)G.u.forEach(u=>{if(!seen.has(u)){seen.add(u);out.push(u)}})});return out};
+const ofBytes=keys=>keys.reduce((s,k)=>s+((OF.man&&OF.man.groups[k]&&OF.man.groups[k].b)||0),0);
+async function ofCheck(){if(!OF.man||!OF.on)return;const keys=Object.keys(OF.man.groups);const have={};
+  for(const k of keys){try{const r=await ofAsk({t:'has',urls:OF.man.groups[k].u});have[k]=Array.isArray(r.have)&&r.have.length>0&&r.have.every(Boolean)}catch(e){have[k]=false}}
+  /* الصفحة نفسها: يحفظها ملف الخدمة عند تثبيته، ويُتحقق منها هنا قبل أي وعد بأنها تفتح بلا إنترنت */
+  let page=false;try{const r=await ofAsk({t:'has',urls:['./']});page=!!(Array.isArray(r.have)&&r.have[0])}catch(e){}
+  OF.have=have;OF.page=page;try{if(navigator.storage&&navigator.storage.estimate){const e=await navigator.storage.estimate();OF.use=e&&e.usage||0}}catch(e){}ofPaint()}
+/* يحفظ المجموعات المطلوبة. quiet: تحديث صامت بعد نشرة جديدة */
+async function ofKeep(keys,quiet){if(OF.job||!OF.man||!OF.on)return;keys=keys.filter(k=>OF.man.groups[k]);if(!keys.length)return;const urls=ofUrls(keys);
+  OF.job={keys,done:0,total:urls.length,quiet:!!quiet};OF.note='';ofPaint();let res=null;
+  try{res=await ofAsk({t:'keep',urls},d=>{if(OF.job){OF.job.done=d.done||0;ofStep()}})}catch(e){res={error:true}}
+  const bad=!res||res.error||res.fail>0;OF.job=null;
+  if(!bad){const r=ofRec();keys.forEach(k=>{r.groups[k]=Date.now()});r.ver=OF.man.v;ofRecSave(r);try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{})}catch(e){}}
+  OF.note=bad?(navigator.onLine===false?'انقطع الاتصال قبل أن يكتمل الحفظ. أعد المحاولة حين يعود.':'لم يكتمل حفظ بعض الملفات'+(res&&res.fail?' ('+bgN(res.fail)+')':'')+'. أعد المحاولة.'):'';
+  await ofCheck();if(!quiet)toast(bad?'لم يكتمل الحفظ: أعد المحاولة':'تم الحفظ: يعمل ما جهّزته بلا إنترنت على هذا الجهاز')}
+async function ofDrop(){if(OF.job||!OF.on)return;OF.job={keys:[],done:0,total:0,drop:true};ofPaint();try{await ofAsk({t:'drop'})}catch(e){}OF.job=null;const r=ofRec();r.groups={};ofRecSave(r);OF.note='';await ofCheck();toast(OF.page?'حُذف المحفوظ. الصفحة نفسها باقية لتفتح بلا إنترنت':'حُذف المحفوظ')}
+/* الصفحة لم تُحفظ عند التثبيت (انقطاع عابر): تُحفظ الآن إن كان الاتصال قائمًا */
+async function ofFix(){if(!OF.on||!OF.man||OF.page||!OF.net||OF.job)return;try{await ofAsk({t:'keep',urls:['./']})}catch(e){}await ofCheck()}
+/* ---------- البطاقة ---------- */
+const OF_IC='M7 18.5a4.5 4.5 0 0 1-.6-8.96 6 6 0 0 1 11.47-1.2A4.6 4.6 0 0 1 17.5 18.5zM9.5 13l2 2 3.5-4';
+function ofState(){if(OF.fail)return ['bad','تعذّر تفعيل العمل بلا إنترنت في هذا المتصفح. قد يكون في وضع التصفح الخاص، أو يمنع حفظ بيانات المواقع.'];
+  if(OF.noman)return ['bad','تعذّرت قراءة قائمة الملفات. أعد فتح الصفحة وأنت متصل بالإنترنت.'];
+  if(!OF.on||!OF.man)return ['wait','يُجهَّز الحفظ على هذا الجهاز…'];
+  if(OF.job)return ['wait',OF.job.drop?'يُحذف المحفوظ…':'يُحفظ الآن: '+bgN(OF.job.done)+' من '+bgN(OF.job.total)+' ملفًا. أبقِ الصفحة مفتوحة.'];
+  if(!OF.page)return ['wait',OF.net?'لم يكتمل حفظ الصفحة على هذا الجهاز بعد. أبقِها مفتوحة لحظات، ثم أعد فتحها مرة وأنت متصل.':'أنت الآن بلا إنترنت، والصفحة لم تُحفظ على هذا الجهاز بعد. افتحها مرة وأنت متصل لتعمل بعدها بلا إنترنت.'];
+  const mine=ofMine(),ready=OF.have.core&&mine.every(g=>OF.have['g'+g]);const off=!OF.net?'أنت الآن بلا إنترنت. ':'';
+  if(ready)return ['ok',off+'جاهز: يفتح الدليل ودروس صفوفك وأدواته وألعابه بلا إنترنت على هذا الجهاز.'];
+  return ['mid',off+'الصفحة محفوظة وتفتح بلا إنترنت، ومعها الأدوات والألعاب. جهّز دروس صفوفك ليعمل العرض وصفحات الدروس كذلك.']}
+function ofInner(){if(!OF.sup)return '';const st=ofState(),M=OF.man,mine=ofMine(),busy=!!OF.job,can=OF.on&&M&&!busy&&OF.net;
+  const row=(k,label,sub)=>{const G=M.groups[k];if(!G)return '';const on=!!OF.have[k];return `<li class="${on?'on':''}"><i aria-hidden="true">${on?tkI('check'):''}</i><span><b>${label}</b>${sub?`<small>${sub}</small>`:''}</span><em>${on?'محفوظ':ofMB(G.b)}</em></li>`};
+  const prepK=['core',...mine.map(g=>'g'+g)],prepNeed=M?prepK.filter(k=>!OF.have[k]):[],moreNeed=M?OF_MORE.filter(k=>!OF.have[k]):[];
+  const any=M&&Object.keys(M.groups).some(k=>k!=='core'&&OF.have[k])||(M&&OF.have.core);
+  const pct=busy&&OF.job.total?Math.round(100*OF.job.done/OF.job.total):0;
+  return `<h3 id="ofH">${tkSvg(OF_IC,'ic')}العمل بلا إنترنت</h3>
+   <p class="of-st ${st[0]}" role="status" tabindex="-1" data-of-st>${st[1]}</p>
+   ${busy&&!OF.job.drop?`<div class="of-bar" role="progressbar" aria-label="تقدّم الحفظ" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}" data-of-bar><i style="width:${pct}%"></i></div>`:''}
+   ${M?`<ul class="of-list">${row('core','الأساس','الصفحة وخطوطها، وصور الدروس، وفهرس البحث، ومكتبات تنزيل PDF و PowerPoint و Excel')}
+     ${[6,7,8,9].map(g=>row('g'+g,'دروس الصف '+OF_GN[g],mine.includes(g)&&mine.length<4?'من صفوفك':'')).join('')}
+     ${row('guide','فصول الدليل كاملة','تُحفظ كذلك فصلًا فصلًا كلما فتحت واحدًا')}${row('vsc','الحلول البصرية','')}${row('vid','المقاطع القصيرة','')}</ul>
+   <div class="of-acts"><button type="button" class="tk-btn pri" data-of="prep"${can&&prepNeed.length?'':' disabled'}>${tkI('down')}${prepNeed.length?'جهّز صفوفي للعمل بلا إنترنت · '+ofMB(ofBytes(prepNeed)):'صفوفك مجهّزة'}</button>
+    <button type="button" class="tk-btn" data-of="more"${can&&moreNeed.length?'':' disabled'}>${moreNeed.length?'أضف الدليل والحلول البصرية والمقاطع · '+ofMB(ofBytes(moreNeed)):'الدليل والحلول البصرية والمقاطع محفوظة'}</button>
+    <button type="button" class="tk-btn ghost" data-of="drop"${OF.on&&!busy&&any?'':' disabled'}>احذف المحفوظ</button></div>
+   ${OF.note?`<p class="of-warn" role="alert">${esc(OF.note)}</p>`:''}
+   <p class="of-note">${mine.length<4?`صفوفك من <a href="#tk/setup">إعدادي</a>: ${mine.map(g=>OF_GN[g]).join('، ')}. `:`لم تختر صفوفك في <a href="#tk/setup">إعدادي</a> بعد، فتُجهَّز الصفوف الأربعة. `}لا تُحفظ الحقائب التدريبية ولا ملفات الدروس <bdi>PDF</bdi>: تُنزَّل إلى جهازك عند طلبها. وصفوفك وطلابك ودرجاتهم في متصفحك أصلًا، ولا تحتاج إلى إنترنت.${OF.use?` المساحة التي يستعملها الدليل على هذا الجهاز الآن: نحو ${ofMB(OF.use)}.`:''}</p>
+   <p class="of-note">ثبّت الدليل تطبيقًا (من قائمة المتصفح) ليبقى المحفوظ ولا يمحوه المتصفح إن طال تركه. والمحفوظ خاص بهذا المتصفح على هذا الجهاز.</p>`:''}`}
+const ofCard=()=>OF.sup?`<section class="of-card" data-of-card aria-labelledby="ofH">${ofInner()}</section>`:'';
+function ofPaint(){if(!OF.sup)return;$$('[data-of-card]').forEach(el=>{const a=document.activeElement,k=a&&el.contains(a)&&a.dataset?a.dataset.of:'';el.innerHTML=ofInner();if(k){const b=el.querySelector('[data-of="'+k+'"]'),t=b&&!b.disabled?b:el.querySelector('[data-of-st]');try{t&&t.focus({preventScroll:true})}catch(e){}}});ofPill()}
+/* أثناء الحفظ: يتحرك الشريط والعدّ وحدهما، فلا تُعاد قراءة البطاقة كلها على قارئ الشاشة مع كل ملف */
+function ofStep(){if(!OF.job)return;const pct=OF.job.total?Math.round(100*OF.job.done/OF.job.total):0;$$('[data-of-card]').forEach(el=>{const b=el.querySelector('[data-of-bar]');if(!b){el.innerHTML=ofInner();return}b.setAttribute('aria-valuenow',String(pct));b.firstElementChild.style.width=pct+'%';
+  const s=el.querySelector('[data-of-st]');if(s&&(OF.job.done===OF.job.total||OF.job.done%10===0))s.textContent=ofState()[1]})}
+/* شارة «بلا إنترنت» أسفل الصفحة ما دام الاتصال غائبًا */
+function ofPill(){let p=document.getElementById('ofPill');if(OF.net||!OF.sup){if(p)p.hidden=true;return}if(!p){p=document.createElement('div');p.id='ofPill';p.className='of-pill';p.setAttribute('role','status');document.body.appendChild(p)}p.textContent='بلا إنترنت · يعمل الدليل بالمحفوظ على هذا الجهاز';p.hidden=false}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-of]');if(!b||b.disabled)return;const a=b.dataset.of;
+  if(a==='prep'){ofKeep(['core',...ofMine().map(g=>'g'+g)].filter(k=>!OF.have[k]));return}
+  if(a==='more'){ofKeep(OF_MORE.filter(k=>!OF.have[k]));return}
+  if(a==='drop'){if(typeof tkSure==='function'&&!tkSure(b,'اضغط ثانيةً لحذف المحفوظ'))return;ofDrop()}});
+async function ofInit(){OF.on=true;ofPaint();
+  try{const r=await fetch('offline.json');OF.man=r.ok?await r.json():null}catch(e){OF.man=null}
+  if(!OF.man||!OF.man.groups){OF.man=null;OF.noman=true;ofPaint();return}
+  await ofCheck();if(!OF.page)await ofFix();const rec=ofRec();
+  if(!rec.seen){if(!OF.page)return;rec.seen=Date.now();ofRecSave(rec);if(OF.net)toast('حُفظ الدليل على هذا الجهاز: يفتح بعد الآن بلا إنترنت. وجهّز دروس صفوفك من «عن الأداة»')}
+  /* نشرة جديدة: ما جُهّز من قبل يُحدَّث في الخلفية، فلا تبقى دروس قديمة مع صفحة جديدة */
+  else if(OF.net&&rec.ver&&rec.ver!==OF.man.v){const ks=Object.keys(rec.groups).filter(k=>OF.man.groups[k]);if(ks.length)ofKeep(ks,true)}}
+function ofBoot(){if(!ofCan())return;OF.sup=true;OF.net=navigator.onLine!==false;
+  window.addEventListener('offline',()=>{OF.net=false;ofPaint();toast('انقطع الاتصال: يعمل الدليل بما حُفظ على هذا الجهاز')});
+  window.addEventListener('online',()=>{OF.net=true;ofPaint();toast('عاد الاتصال بالإنترنت');ofFix()});
+  const go=()=>{navigator.serviceWorker.register('sw.js').then(r=>{OF.reg=r;return navigator.serviceWorker.ready}).then(()=>ofInit()).catch(()=>{OF.fail=true;ofPaint()})};
+  if(document.readyState==='complete')go();else window.addEventListener('load',go,{once:true});ofPill()}
+try{ofBoot()}catch(e){}
 
 /* ================= router ================= */
 let views=$$('.view');
