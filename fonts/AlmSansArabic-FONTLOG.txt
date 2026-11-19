@@ -8,7 +8,7 @@ AlmSansArabic-OFL.txt next to this file.
 Source: the official npm package @ibm/plex-sans-arabic 1.1.0
 (fonts/complete/woff2/IBMPlexSansArabic-Regular.woff2 and -Bold.woff2).
 
-Changes (the glyph outlines are untouched):
+Changes (one glyph is redrawn; all other outlines are untouched):
 - unitsPerEm changed from 1000 to 1111, which scales the whole font uniformly to 90%.
 - Vertical metrics (hhea, OS/2 typo and win) set so that a line of text takes the
   same space as in the layout this site was designed for; USE_TYPO_METRICS is set.
@@ -16,6 +16,10 @@ Changes (the glyph outlines are untouched):
   wide). Browsers size text fields from the widest glyph of a font, so these made
   every unsized field about 100px wider. xAvgCharWidth is set for the same reason.
   The site does not use these characters; if they appear, the system font draws them.
+- The middle dot (U+00B7) is redrawn as a short dash, centred where the dot was and
+  with the same advance width (Alm 1.1). In the original it has almost the size and
+  height of the Arabic-Indic zero (U+0660), so a separator before a number read as a
+  trailing zero: "40 minutes" after a middle dot looked like "400 minutes".
 - Family renamed to "Alm Sans Arabic", because the license does not allow a
   Modified Version to keep the Reserved Font Name.
 
