@@ -869,21 +869,26 @@ body.st-rvon{overflow:hidden}
 .wp-rul{fill:var(--text-muted)}
 .wp-eye{fill:var(--teal-500);opacity:.16}
 .wp-eyel{stroke:var(--text-teal)}
-.wp-eyet{fill:var(--text-teal);font-weight:700}
 .wp-ada{stroke:var(--text-muted)}
-.wp-adat{fill:var(--text-muted)}
 .wp-hb{fill:var(--surface-soft)}
 .wp-hl{stroke:var(--ink-300)}
 .wp-fx{stroke:var(--text-muted)}
 .wp-fxt,.wp-dimt{fill:var(--text);font-weight:700;paint-order:stroke;stroke:var(--surface-raised);stroke-linejoin:round}
-.wp-lab{paint-order:stroke;stroke:var(--surface-raised);stroke-linejoin:round;pointer-events:none}
 .wp-it{cursor:grab;touch-action:none;outline:none}
 .wp-halo{fill:none;stroke:none}
 .wp-it.bad .wp-halo{stroke:var(--energy)}
 .wp-it.on .wp-halo,.wp-it:focus-visible .wp-halo{stroke:var(--focus)}
 .wp-box.dragging .wp-it{cursor:grabbing}
 .wp-dim{stroke:var(--energy)}
+.wp-dimx{stroke:none}
 .wp-dim,.wp-dimt,.wp-eye,.wp-eyel,.wp-ada{pointer-events:none}
+.wp-cap{display:flex;flex-wrap:wrap;gap:4px 18px;margin:0;font-size:13.5px;line-height:1.6;color:var(--text-muted)}
+.wp-capi{display:inline-flex;gap:8px;align-items:center;min-width:0}
+.wp-sw{flex:none;display:inline-block;width:28px;height:12px;position:relative}
+.wp-sw.eye{background:rgba(20,184,166,.2);border-radius:2px}
+.wp-sw.eye::after{content:"";position:absolute;inset-inline:0;top:5px;border-top:2px dashed var(--text-teal)}
+.wp-sw.ada{height:10px;border-block:2px dotted var(--text-muted)}
+.wp-sw.bad{width:22px;height:14px;border:2px dashed var(--energy);border-radius:4px}
 .wp-live{min-height:1.7em;font-size:14.5px;color:var(--text-muted);margin:0}
 .wp-bar{gap:8px}
 .wp-panel{background:var(--surface-soft);border-radius:var(--r-md);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s3);min-width:0}
@@ -3075,6 +3080,8 @@ function stReveal(scene,label){var gs=stGroups(scene),n=gs.length,on={},last=doc
   paint();try{$('[data-rv="next"]',o).focus()}catch(e){}
   return {next:next,prev:prev,all:all,none:none,close:close}}
 
+/* العدد مع معدوده: واحد، ومثنى، وجمع لثلاثة إلى عشرة، ومفرد لما فوقها (تستعمله الأداتان) */
+function stCount(n,one,two,few,many){return n===1?one:n===2?two:n>=3&&n<=10?arn(n)+' '+few:arn(n)+' '+many}
 /* ---------- تنظيف مشروع مفتوح من ملف ---------- */
 function stS(v){return v==null?'':String(v).slice(0,400)}
 function stClean(t,d){var T=TPL[t],o={title:stS(d.title),sub:stS(d.sub)};if(d.ltr)o.ltr=true;
@@ -3143,14 +3150,14 @@ TOOLS.studio=function(el){
   function paintInfo(){var o=out[st.f],h='',m,pt,r1,r2,d;if(!o){$('[data-info]',el).innerHTML='';return}m=o.m;
     if(st.f==='board'){pt=Math.round(m.min*.8);d=st.d;r1=reach(m.title);r2=reach(m.min);var g=stGroups(o.s).length;
       h='<p class="big num">أصغر نص يعادل '+arn(pt)+' نقطة</p><p><span class="verdict '+(pt>=24?'ok':'no')+'">'+(pt>=24?'ضمن قاعدة الشريحة':'دون قاعدة الشريحة')+'</span> القاعدة: ٢٤ نقطة فأكثر لمتن الشريحة.</p>'
-       +'<dl class="kv"><dt>العنوان</dt><dd class="num">'+reachDD(r1,d)+'</dd><dt>أصغر نص</dt><dd class="num">'+reachDD(r2,d)+'</dd><dt>الكشف المتدرج</dt><dd class="num">'+(g?arn(g)+(g<=10&&g>2?' مراحل':g===1?' مرحلة':g===2?' مرحلتان':' مرحلة'):'لا مراحل')+'</dd></dl>'
+       +'<dl class="kv"><dt>العنوان</dt><dd class="num">'+reachDD(r1,d)+'</dd><dt>أصغر نص</dt><dd class="num">'+reachDD(r2,d)+'</dd><dt>الكشف المتدرج</dt><dd class="num">'+(g?stCount(g,'مرحلة واحدة','مرحلتان','مراحل','مرحلة'):'لا مراحل')+'</dd></dl>'
        +'<p>'+(r2.far+.001>=d?'كل ما في اللوحة يصل إلى أبعد طالب على شاشة '+arn(st.scr)+' بوصة من '+stM(d)+' م.':r1.far+.001>=d?'العنوان يصل إلى أبعد طالب، وما تحته يُقرأ من الصفوف الأولى. اقرأ التفاصيل بصوتك، أو اختصر البنود ليكبر الخط، وضع الورقة في يد الطالب.':'على شاشة '+arn(st.scr)+' بوصة لا يصل هذا المحتوى إلى '+stM(d)+' م. اختصر البنود ليكبر الخط، أو اكشفها واحدًا واحدًا واقرأها بصوتك، وضع الورقة في يد الطالب.')+'</p>'+cutH(o)}
     else if(st.f==='sheet'){pt=Math.round(m.min*mmU()/25.4*72);
       h='<p class="big num">أصغر نص '+arn(pt)+' نقطة</p><p><span class="verdict '+(pt>=12?'ok':'no')+'">'+(pt>=12?'ضمن قاعدة ورقة العمل':'دون قاعدة ورقة العمل')+'</span> القاعدة: ١٢–١٤ نقطة لمتن الورقة.'+(pt<12?' اختصر البنود ليكبر الخط، أو اطبعها على A3.':'')+'</p>'
-       +'<dl class="kv"><dt>الورق</dt><dd class="num">'+paperTxt('a4',!st.sq)+'</dd><dt>النسخة</dt><dd class="num">'+ST_SV[st.sv][0]+(o.blanks?': '+arn(o.blanks)+(o.blanks<=10&&o.blanks>2?' خانات':' خانة')+' يكملها الطالب':'')+'</dd>'+inkH(o)+'</dl>'+cutH(o)}
+       +'<dl class="kv"><dt>الورق</dt><dd class="num">'+paperTxt('a4',!st.sq)+'</dd><dt>النسخة</dt><dd class="num">'+ST_SV[st.sv][0]+(o.blanks?': يكمل الطالب '+stCount(o.blanks,'خانة واحدة','خانتين','خانات','خانة'):'')+'</dd>'+inkH(o)+'</dl>'+cutH(o)}
     else if(st.f==='poster'){d=st.pd;r1=reach(m.title);r2=reach(m.min);var need=adaMM(d)/(m.min*ST_ALIF)*1200,fit=null;['a3','a2','a1'].forEach(function(k){if(!fit&&ST_PAP[k][1]>=need)fit=k});
       var px=stPx(ST_PAP[st.pz][1],o.s.W/o.s.H),dpi=Math.round(px/(ST_PAP[st.pz][1]/25.4));
-      h='<dl class="kv"><dt>العنوان</dt><dd class="num">'+reachDD(r1,d)+'</dd><dt>أصغر نص</dt><dd class="num">'+reachDD(r2,d)+'</dd><dt>الورق</dt><dd class="num">'+paperTxt(st.pz,true)+'</dd><dt>ملف الطباعة</dt><dd class="num">'+arn(dpi)+' نقطة في البوصة'+(dpi<290?'، وللطباعة الأدق في المطبعة خذ ملف SVG':'')+'</dd></dl>'
+      h='<dl class="kv"><dt>العنوان</dt><dd class="num">'+reachDD(r1,d)+'</dd><dt>أصغر نص</dt><dd class="num">'+reachDD(r2,d)+'</dd><dt>الورق</dt><dd class="num">'+paperTxt(st.pz,true)+'</dd><dt>ملف الطباعة</dt><dd class="num">'+arn(dpi)+' نقطة في البوصة'+(dpi<250?'، وللطباعة الأدق في المطبعة خذ ملف SVG':'')+'</dd></dl>'
        +'<p>'+(r2.far+.001>=d?'كل ما في اللوحة يُقرأ من '+stM(d)+' م على '+st.pz.toUpperCase()+'.':'ليُقرأ أصغر نص من '+stM(d)+' م يلزم ورق بعرض '+brCm(need)+' سم'+(fit?': '+fit.toUpperCase()+' يكفي.':'، وهو أكبر من A1. اختصر النص ليكبر الخط، أو اجعل اللوحة تُقرأ عن قرب: '+(r2.far?'أصغر نص فيها يُقرأ حتى '+stM(r2.far)+' م.':'أصغر نص فيها دون أدنى المعيار.')))+'</p>'+cutH(o)}
     else{pt=m.min*mmU()/25.4*72;var two=!!o.front,per=st.cz==='a6'?4:2,p2=two?o.front.m.min*mmU()/25.4*72:pt,mn=Math.round(Math.min(pt,p2));
       h='<p class="big num">أصغر نص '+arn(mn)+' نقطة</p><p><span class="verdict '+(mn>=12?'ok':'no')+'">'+(mn>=12?'ضمن قاعدة ورقة العمل':'دون قاعدة ورقة العمل')+'</span> البطاقة تُقرأ باليد، فنقيسها بقاعدة متن الورقة: ١٢–١٤ نقطة.'+(mn<12?(st.cz==='a6'?' اختر A5، أو اختصر البنود ليكبر الخط.':' اختصر البنود ليكبر الخط.'):'')+'</p>'
@@ -3289,7 +3296,7 @@ function wpChecks(P){var out=[],med=wpMed(P.eye),it=P.it,n=it.length,cv=wpCover(
 
 /* ---------- الرسم التفاعلي: وحدة الرسم سنتيمتر، و px عرض الرسم على الشاشة (لضبط حجم التسميات) ---------- */
 function wpItemLabel(t,i){var c=WP_CAT[t.c];return 'اللوحة '+arn(i+1)+': '+wpName(t)+'، '+c[0]+'، '+wpF(t.w)+' في '+wpF(t.h)+' سم، على بُعد '+wpF(t.x)+' سم من اليمين و'+wpF(t.y)+' سم عن الأرض'}
-function wpSvg(P,sel,px,bad){var W=P.w,H=P.h,m=Math.max(22,W*.045),vw=W+2*m,vh=H+m*2,k=vw/px,f=function(n){return vR(n*k)},med=wpMed(P.eye),h,t,x,y;
+function wpSvg(P,sel,px,bad){var W=P.w,H=P.h,m=Math.max(22,W*.045),vw=W+2*m,k=vw/px,vh=H+m*.6+Math.max(m*1.4,50*k),f=function(n){return vR(n*k)},med=wpMed(P.eye),h,t,x,y;
   h='<svg class="wp-svg" viewBox="'+vR(-m)+' '+vR(-m*.6)+' '+vR(vw)+' '+vR(vh)+'" width="'+px+'" height="'+Math.round(vh/k)+'" role="group" aria-label="'+esc('رسم الجدار بمقياس: '+P.name)+'">'
    +'<defs><pattern id="wpHatch" width="'+f(9)+'" height="'+f(9)+'" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="'+f(9)+'" height="'+f(9)+'" class="wp-hb"/><line x1="0" y1="0" x2="0" y2="'+f(9)+'" class="wp-hl" stroke-width="'+f(2.2)+'"/></pattern></defs>'
    +'<rect class="wp-wall" data-wall="1" x="0" y="0" width="'+W+'" height="'+H+'" stroke-width="'+f(2)+'"/>';
@@ -3301,24 +3308,37 @@ function wpSvg(P,sel,px,bad){var W=P.w,H=P.h,m=Math.max(22,W*.045),vw=W+2*m,vh=H
   for(t=0;t<=W;t+=50){x=W-t;h+='<line class="wp-tick" x1="'+x+'" x2="'+x+'" y1="'+H+'" y2="'+vR(H+(t%100?5:9)*k)+'" stroke-width="'+f(1.2)+'"/>';if(t%100===0&&(W<=1200||t%200===0))h+='<text class="wp-t wp-rul" x="'+x+'" y="'+vR(H+24*k)+'" font-size="'+f(11.5)+'" text-anchor="middle">'+arn(t/100)+(t===0?' م':'')+'</text>'}
   for(t=50;t<=H;t+=50){y=H-t;h+='<line class="wp-tick" x1="'+W+'" x2="'+vR(W+(t%100?5:9)*k)+'" y1="'+y+'" y2="'+y+'" stroke-width="'+f(1.2)+'"/>';if(t%100===0)h+='<text class="wp-t wp-rul" x="'+vR(W+13*k)+'" y="'+vR(y+4*k)+'" font-size="'+f(11.5)+'" text-anchor="end">'+arn(t/100)+'</text>'}
   h+='<line class="wp-floor" x1="'+vR(-m*.5)+'" x2="'+vR(W+m*.5)+'" y1="'+H+'" y2="'+H+'" stroke-width="'+f(3.5)+'"/>';
+  /* قياسا اللوحة المحدَّدة بخط واحد عند حافتها اليمنى، من أسفلها إلى ما تحت الأرض قليلًا: طوله ارتفاعها عن الأرض، وقدمه على مسطرة الأرض بُعدها عن الحافة اليمنى.
+     الخط يُرسم قبل الثوابت واللوحات فتغطيه. تسمية الارتفاع بجواره إن كان ظاهرًا كله وخلا ما بجواره (يساره أولًا ثم يمينه)، وإلا فلا تُكتب.
+     وتسمية البُعد تحت أرقام المسطرة خارج الجدار، فلا تركب لوحة. والسطر تحت الرسم يذكر الرقمين دائمًا. */
+  var dimT='',ts=null;P.it.forEach(function(q){if(q.id===sel)ts=q});
+  if(ts){var xe=W-ts.x,yb=H-ts.y,pad=3*k,txt,lw,xl,
+      bx=P.it.filter(function(q){return q!==ts}).concat(P.fx).map(function(r){return [W-r.x-r.w,H-r.y-r.h,W-r.x,H-r.y]});/* [يسار، أعلى، يمين، أسفل] */
+    h+='<line class="wp-dim" x1="'+vR(xe)+'" x2="'+vR(xe)+'" y1="'+vR(yb)+'" y2="'+vR(H+13*k)+'" stroke-width="'+f(1.5)+'"/>';
+    if(ts.y>=22*k){txt=wpF(ts.y)+' سم';lw=(vmw(txt,12,700)+12)*k;
+      /* [أيسر التسمية، أيمنها، المحاذاة]: يسار الخط أولًا، ثم يمينه. يحجبها ما يقطع الخط أو موضع التسمية تحت أسفل اللوحة */
+      [[xe-6*k-lw,xe-6*k,'start'],[xe+6*k,xe+6*k+lw,'end']].some(function(sd){var a=Math.min(sd[0],xe-pad),b=Math.max(sd[1],xe+pad);
+        if(sd[0]<0||sd[1]>W)return false;
+        if(bx.some(function(q){return q[0]<b&&q[2]>a&&q[3]>yb+.5&&q[1]<H-.5}))return false;
+        dimT+='<text class="wp-t wp-dimt" x="'+vR(sd[2]==='start'?sd[1]:sd[0])+'" y="'+vR((yb+H)/2+4*k)+'" font-size="'+f(12)+'" stroke-width="'+f(4)+'" text-anchor="'+sd[2]+'">'+txt+'</text>';return true})}
+    if(ts.x>0){txt='من اليمين '+wpF(ts.x)+' سم';lw=(vmw(txt,12,700)+8)*k;xl=wpClamp(xe,-m+lw/2,W+m-lw/2);
+      dimT+='<text class="wp-t wp-dimt wp-dimx" x="'+vR(xl)+'" y="'+vR(H+41*k)+'" font-size="'+f(12)+'" text-anchor="middle">'+txt+'</text>'}}
   P.fx.forEach(function(r){var L=W-r.x-r.w,T=H-r.y-r.h;h+='<rect class="wp-fx" x="'+vR(L)+'" y="'+vR(T)+'" width="'+r.w+'" height="'+r.h+'" fill="url(#wpHatch)" stroke-width="'+f(1.5)+'"/>';
     if(r.w/k>=54&&r.h/k>=20)h+='<text class="wp-t wp-fxt" x="'+vR(L+r.w/2)+'" y="'+vR(T+r.h/2+4*k)+'" font-size="'+f(12)+'" stroke-width="'+f(4)+'" text-anchor="middle">'+WP_FT[r.k][0]+'</text>'});
   P.it.forEach(function(t,i){var c=WP_CAT[t.c],L=W-t.x-t.w,T=H-t.y-t.h,pw=t.w/k,ph=t.h/k,on=t.id===sel,g,ls,j,y0;
     g='<g class="wp-it'+(on?' on':'')+(bad&&bad[t.id]?' bad':'')+'" data-id="'+t.id+'" tabindex="0" role="button" aria-pressed="'+on+'" aria-label="'+esc(wpItemLabel(t,i))+'" transform="translate('+vR(L)+' '+vR(T)+')">'
       +'<rect class="wp-halo" x="'+f(-4)+'" y="'+f(-4)+'" width="'+vR(t.w+8*k)+'" height="'+vR(t.h+8*k)+'" rx="'+f(6)+'" stroke-width="'+f(on?3:2.5)+'"'+(!on&&bad&&bad[t.id]?' stroke-dasharray="'+f(6)+' '+f(4)+'"':'')+'/>'
       +'<rect class="wp-r" width="'+t.w+'" height="'+t.h+'" rx="'+f(3)+'" fill="'+c[3]+'" stroke="'+c[2]+'" stroke-width="'+f(2)+'"'+(c[4]?' stroke-dasharray="'+c[4].split(' ').map(function(v){return f(+v)}).join(' ')+'"':'')+'/>';
-    if(pw>=64&&ph>=38){ls=vwrap(wpName(t),12,700,pw-12).slice(0,Math.max(1,Math.floor((ph-24)/15)));y0=t.h/2-(ls.length-1)*7.5*k+(ph>=60?2:5)*k;
-      for(j=0;j<ls.length;j++)g+='<text class="wp-t" x="'+vR(t.w/2)+'" y="'+vR(y0+j*15*k)+'" font-size="'+f(12)+'" font-weight="700" fill="#0D1B3D" text-anchor="middle">'+esc(ls[j])+'</text>';
-      if(ph>=60)g+='<text class="wp-t" x="'+vR(t.w/2)+'" y="'+vR(t.h-7*k)+'" font-size="'+f(10.5)+'" fill="#4A5878" text-anchor="middle">'+wpF(t.w)+' × '+wpF(t.h)+'</text>'}
+    /* الاسم بأكبر خط يتسع له (١٢ ثم ١٠٫٥) بلا قطع ولا خروج عن اللوحة، وإلا يكفي حرف الفئة (والاسم في لوحة التعديل وفي تسمية القارئ).
+       اللوحة القصيرة (شريط) سطر واحد بجوار الحرف؛ وغيرها يبدأ اسمها تحت صف الحرف. القياسات هنا بالبكسل ثم تُضرب في k */
+    var sr=ph>=60&&pw>=64,tp=ph<38?2:16,bt=ph-(sr?17:3),mw=ph<38?pw-46:pw-10,fs=0;
+    if(mw>=28&&bt-tp>=13)[12,10.5].some(function(sz){var q;ls=vwrap(wpName(t),sz,700,mw);if(!ls.length||ls.length*(sz+3)>bt-tp+1)return false;for(q=0;q<ls.length;q++)if(vmw(ls[q],sz,700)>mw+1)return false;fs=sz;return true});
+    if(fs){y0=((tp+bt)/2-(ls.length-1)*(fs+3)/2+fs*.36)*k;
+      for(j=0;j<ls.length;j++)g+='<text class="wp-t" x="'+vR(t.w/2)+'" y="'+vR(y0+j*(fs+3)*k)+'" font-size="'+f(fs)+'" font-weight="700" fill="#0D1B3D" text-anchor="middle">'+esc(ls[j])+'</text>'}
+    if(sr)g+='<text class="wp-t" x="'+vR(t.w/2)+'" y="'+vR(t.h-7*k)+'" font-size="'+f(10.5)+'" fill="#4A5878" text-anchor="middle">'+wpF(t.w)+' × '+wpF(t.h)+'</text>';
     if(pw>=20&&ph>=18)g+='<text class="wp-t" x="'+vR(t.w-5*k)+'" y="'+vR(14*k)+'" font-size="'+f(12)+'" font-weight="700" fill="'+c[2]+'" text-anchor="start">'+c[1]+'</text>';
     h+=g+'</g>'});
-  if(med!=null)h+='<text class="wp-t wp-eyet wp-lab" x="'+f(8)+'" y="'+vR(H-med-15-5*k)+'" font-size="'+f(12)+'" stroke-width="'+f(4)+'" text-anchor="end">مستوى العين '+wpF(med)+' سم، ونطاقه ١٥ سم فوقه وتحته</text>';
-  else h+='<text class="wp-t wp-adat wp-lab" x="'+f(8)+'" y="'+vR(H-178-5*k)+'" font-size="'+f(11.5)+'" stroke-width="'+f(4)+'" text-anchor="end">مرجع البالغين في معيار اللوحات: ١٠١٫٥–١٧٨ سم. قِس عيون طلابك</text>';
-  t=null;P.it.forEach(function(q){if(q.id===sel)t=q});
-  if(t){var L=W-t.x-t.w,T=H-t.y-t.h,my=T+t.h/2,mx=L+t.w/2;
-    if(t.x>0)h+='<line class="wp-dim" x1="'+vR(L+t.w)+'" x2="'+W+'" y1="'+vR(my)+'" y2="'+vR(my)+'" stroke-width="'+f(1.5)+'"/>'+(t.x/k>=52?'<text class="wp-t wp-dimt" x="'+vR(L+t.w+t.x/2)+'" y="'+vR(my-5*k)+'" font-size="'+f(12)+'" stroke-width="'+f(4)+'" text-anchor="middle">'+wpF(t.x)+' سم</text>':'');
-    if(t.y>0)h+='<line class="wp-dim" x1="'+vR(mx)+'" x2="'+vR(mx)+'" y1="'+vR(T+t.h)+'" y2="'+H+'" stroke-width="'+f(1.5)+'"/>'+(t.y/k>=26?'<text class="wp-t wp-dimt" x="'+vR(mx-6*k)+'" y="'+vR(T+t.h+t.y/2+4*k)+'" font-size="'+f(12)+'" stroke-width="'+f(4)+'" text-anchor="start">'+wpF(t.y)+' سم</text>':'')}
-  return h+'</svg>'}
+  return h+dimT+'</svg>'}
 
 /* ---------- خطة التعليق: مشاهد للطباعة (A4 عرضية)، والأولى فيها الرسم ---------- */
 function wpPlanScenes(P,by){var med=wpMed(P.eye),cv=wpCover(P),it=P.it,n=it.length,FX={},pages=[],one=n<=5,per2=20,done=0,pg=0;
@@ -3328,15 +3348,15 @@ function wpPlanScenes(P,by){var med=wpMed(P.eye),cv=wpCover(P),it=P.it,n=it.leng
     for(i=a;i<b;i++){r=it[i];var c=WP_CAT[r.c],cy=y+(i-a)*30+15,pap=wpPaper(r.w,r.h);
       if((i-a)%2)s.rect(60,cy-15,1080,30,p.pan,6);
       s.circ(1140-28,cy,12,c[3],c[2],2);s.box(vn(s,i+1),1140-28,cy,24,24,[17],{w:700});
-      s.box(wpName(r)+(r.holy?' (نص شرعي)':''),1072,cy,292,28,[20,18,16,14],{w:700,a:'s'});
+      s.box(wpName(r)+(r.holy&&wpName(r).indexOf('نص شرعي')<0?' (نص شرعي)':''),1072,cy,292,28,[20,18,16,14],{w:700,a:'s'});
       s.box(c[1]+' · '+c[0],764,cy,188,28,[19,17,15,13],{a:'s'});
       s.box(wpF(r.w)+' × '+wpF(r.h)+(pap?' · '+pap.split(' ')[0]:''),564-75,cy,144,28,[19,17,15]);
       s.box(wpF(r.x),406-56,cy,104,28,[20]);s.box(wpF(r.y),286-56,cy,104,28,[20]);s.box(FX[r.m],166-53,cy,100,28,[19,17,15,13])}
     return y+(b-a)*30}
-  function foot(s){var p=s.p,t='الخالي من الجدار '+arn(Math.round(cv.free))+'٪ (القاعدة: ٢٠–٥٠٪) · '+(med!=null?'مستوى العين '+wpF(med)+' سم من '+arn(P.eye.length)+' قياسًا':'مستوى العين لم يُقس بعد')+' · القياسات بالسنتيمتر: من حافة الجدار اليمنى، ومن الأرض إلى أسفل اللوحة';
+  function foot(s){var p=s.p,t='الخالي من الجدار '+arn(Math.round(cv.free))+'٪ (القاعدة: ٢٠–٥٠٪) · '+(med!=null?'مستوى العين '+wpF(med)+' سم من '+stCount(P.eye.length,'قياس واحد','قياسين','قياسات','قياسًا'):'مستوى العين لم يُقس بعد')+' · القياسات بالسنتيمتر: من حافة الجدار اليمنى، ومن الأرض إلى أسفل اللوحة';
     s.box(t,600,s.H-74,1080,34,[19,17,15,13],{f:p.mut});s.box('اطبع على سطح مطفأ غير لامع. التثبيت الدائم يُرفع عبر الإدارة قبل تثبيته. راجع القياس على الجدار قبل الثقب أو اللصق.',600,s.H-44,1080,30,[18,16,14,12],{f:p.mut});
     if(by){s.txt('إعداد: '+by,60,s.H-14,18,{f:p.mut,a:'e'})}}
-  function first(){var s=new Scene('lab',false,VW,849),p=s.p,y0=vhead(s,{title:'خطة تعليق: '+P.name,sub:WP_KIND[P.kind][0]+' · '+wpF(P.w/100)+' × '+wpF(P.h/100)+' م · '+arn(n)+(n>10||n<3?' لوحة':' لوحات')},44),top=y0+6,
+  function first(){var s=new Scene('lab',false,VW,849),p=s.p,y0=vhead(s,{title:'خطة تعليق: '+P.name,sub:WP_KIND[P.kind][0]+' · '+wpF(P.w/100)+' × '+wpF(P.h/100)+' م · '+(n?stCount(n,'لوحة واحدة','لوحتان','لوحات','لوحة'):'بلا لوحات')},44),top=y0+6,
       avH=Math.max(180,(n&&one?360:520)-(y0-150)),k=Math.min(1040/P.w,avH/P.h),ox=600-P.w*k/2,oy=top,W=P.w*k,H=P.h*k;
     s.rect(ox,oy,W,H,'#FFFFFF',0,p.ink,2.5);
     if(med!=null){s.rect(ox,oy+H-(med+15)*k,W,30*k,'#E7F8F5',0);s.line(ox,oy+H-med*k,ox+W,oy+H-med*k,'#0B7C70',2,'8 6')}
@@ -3348,11 +3368,11 @@ function wpPlanScenes(P,by){var med=wpMed(P.eye),cv=wpCover(P),it=P.it,n=it.leng
     if(n&&one){table(s,oy+H+44,0,n);done=n}
     foot(s);return s}
   pages.push(first());
-  while(done<n){var s=new Scene('lab',false,VW,849),y0=vhead(s,{title:'خطة تعليق: '+P.name,sub:'تتمة جدول اللوحات'},44),b=Math.min(n,done+per2);table(s,y0+4,done,b);done=b;foot(s);pages.push(s);if(++pg>3)break}
+  while(done<n){var s=new Scene('lab',false,VW,849),y0=vhead(s,{title:'خطة تعليق: '+P.name,sub:pg?'تتمة جدول اللوحات':'جدول اللوحات'},44),b=Math.min(n,done+per2);table(s,y0+4,done,b);done=b;foot(s);pages.push(s);if(++pg>3)break}
   return pages}
 function wpText(P){var med=wpMed(P.eye),cv=wpCover(P),o=['خطة تعليق: '+P.name+' ('+WP_KIND[P.kind][0]+'، '+wpF(P.w/100)+' × '+wpF(P.h/100)+' م)','القياسات بالسنتيمتر: من حافة الجدار اليمنى، ومن الأرض إلى أسفل اللوحة.',''];
-  P.it.forEach(function(t,i){var pap=wpPaper(t.w,t.h);o.push(arn(i+1)+'. '+wpName(t)+(t.holy?' (نص شرعي)':'')+' · '+WP_CAT[t.c][0]+' · '+wpF(t.w)+' × '+wpF(t.h)+(pap?' ('+pap+')':'')+' · من اليمين '+wpF(t.x)+'، عن الأرض '+wpF(t.y)+' · '+WP_FIX[t.m][0])});
-  o.push('','الخالي من الجدار: '+arn(Math.round(cv.free))+'٪ (القاعدة ٢٠–٥٠٪).',med!=null?'مستوى العين: '+wpF(med)+' سم (وسيط '+arn(P.eye.length)+' قياسًا).':'مستوى العين: لم يُقس بعد.');
+  P.it.forEach(function(t,i){var pap=wpPaper(t.w,t.h);o.push(arn(i+1)+'. '+wpName(t)+(t.holy&&wpName(t).indexOf('نص شرعي')<0?' (نص شرعي)':'')+' · '+WP_CAT[t.c][0]+' · '+wpF(t.w)+' × '+wpF(t.h)+(pap?' ('+pap+')':'')+' · من اليمين '+wpF(t.x)+'، عن الأرض '+wpF(t.y)+' · '+WP_FIX[t.m][0])});
+  o.push('','الخالي من الجدار: '+arn(Math.round(cv.free))+'٪ (القاعدة ٢٠–٥٠٪).',med!=null?'مستوى العين: '+wpF(med)+' سم (وسيط '+stCount(P.eye.length,'قياس واحد','قياسين','قياسات','قياسًا')+').':'مستوى العين: لم يُقس بعد.');
   wpChecks(P).filter(function(c){return c.s==='warn'}).forEach(function(c){o.push('تنبيه: '+c.t)});
   return o.join('\n')}
 
@@ -3365,7 +3385,7 @@ TOOLS.wallplan=function(el){
   function fitIn(p){p.it.concat(p.fx).forEach(function(t){t.w=Math.min(t.w,p.w);t.h=Math.min(t.h,p.h);t.x=wpClamp(t.x,0,p.w-t.w);t.y=wpClamp(t.y,0,p.h-t.h)})}
   el.innerHTML='<div class="wp-walls"><div class="seg scrollseg" role="group" aria-label="جدراني" data-walls></div><span class="row" data-wadd></span></div>'
     +'<div class="grid c2 wp-set" data-set></div>'
-    +'<div class="wp-stage"><div class="wp-box" data-box tabindex="-1"></div><p class="wp-live num" data-live aria-live="polite"></p>'
+    +'<div class="wp-stage"><div class="wp-box" data-box tabindex="-1"></div><p class="wp-cap" data-cap></p><p class="wp-live num" data-live aria-live="polite"></p>'
     +'<div class="row wp-bar"><button class="btn btn-soft btn-sm" type="button" data-wp="undo">'+ic('refresh')+' تراجع</button><button class="btn btn-soft btn-sm" type="button" data-wp="tidy">'+ic('rows')+' <span data-tidyt></span></button><button class="btn btn-ghost btn-sm" type="button" data-wp="clear">'+ic('trash')+' <span data-cleart>أفرغ الجدار</span></button></div></div>'
     +'<div class="wp-panel" data-panel></div>'
     +'<div class="field"><span class="flabel">أضف لوحة من المكتبة</span><div class="wp-lib" data-libbox></div><span class="hint">المقاسات مبدئية: عدّل كل لوحة بمقاسها الحقيقي بعد إضافتها. اسحب اللوحة لتحريكها، أو حرّكها بالأسهم بعد تحديدها (خمسة سنتيمترات في الضغطة، وسنتيمتر واحد مع Shift).</span></div>'
@@ -3386,7 +3406,9 @@ TOOLS.wallplan=function(el){
      +fld('عرض الجدار بالمتر','<input class="in num" inputmode="decimal" data-ws="w" value="'+wpF(p.w/100)+'" aria-label="عرض الجدار بالمتر">')
      +fld('ارتفاعه بالمتر','<input class="in num" inputmode="decimal" data-ws="h" value="'+wpF(p.h/100)+'" aria-label="ارتفاع الجدار بالمتر">')
      +'<div class="field wp-wide"><span class="flabel">من أي مسافة يُقرأ؟</span><input class="range" type="range" min="1" max="12" step="0.5" value="'+p.d+'" data-ws="d" aria-label="مسافة القراءة بالمتر"><span class="hint num" data-dl>'+stM(p.d)+' متر</span></div>'}
-  function paintDraw(refocus){var p=P(),ch=wpChecks(p),px=Math.max(620,(box.clientWidth||636)-16);box.innerHTML=wpSvg(p,sel,px,badMap(ch));
+  function paintDraw(refocus){var p=P(),ch=wpChecks(p),px=Math.max(620,(box.clientWidth||636)-16),med=wpMed(p.eye);box.innerHTML=wpSvg(p,sel,px,badMap(ch));
+    $('[data-cap]',el).innerHTML='<span class="wp-capi">'+(med!=null?'<i class="wp-sw eye" aria-hidden="true"></i><span>الشريط الأفقي: مستوى العين '+wpF(med)+' سم، ونطاقه ١٥ سم فوقه وتحته.</span>':'<i class="wp-sw ada" aria-hidden="true"></i><span>الخطان المنقّطان: مرجع البالغين في معيار اللوحات (١٠١٫٥–١٧٨ سم)، لا مقاس طلابك. قِس عيون طلابك.</span>')+'</span>'
+      +(ch.some(function(c){return c.s==='warn'&&c.ids&&c.ids.length})?'<span class="wp-capi"><i class="wp-sw bad" aria-hidden="true"></i><span>الإطار المتقطع حول لوحة: عليها تنبيه في «الفحص» أسفل الأداة.</span></span>':'');
     $('[data-checks]',el).innerHTML='<b>الفحص</b><ul class="wp-checks">'+ch.map(function(c,i){return '<li class="'+c.s+'">'+ic(c.s==='ok'?'check':c.s==='warn'?'flag':'info')+'<span>'+esc(c.t)+'</span>'+(c.ids&&c.ids.length?'<button class="btn btn-ghost btn-sm" type="button" data-show="'+c.ids[0].id+'">أرِني</button>':'')+'</li>'}).join('')+'</ul>'
       +'<p class="wp-legend">'+Object.keys(WP_CAT).filter(function(k){return p.it.some(function(t){return t.c===k})}).map(function(k){var c=WP_CAT[k];return '<span><i style="background:'+c[3]+';border-color:'+c[2]+(c[4]?';border-style:dashed':'')+'">'+c[1]+'</i>'+c[0]+'</span>'}).join('')+'</p>';
     $('[data-tidyt]',el).textContent=wpMed(p.eye)!=null?'رتّبها صفًّا عند مستوى العين':'رتّبها صفًّا في وسط الجدار';
@@ -3409,7 +3431,7 @@ TOOLS.wallplan=function(el){
     Object.keys(WP_CAT).forEach(function(k){if(!by[k])return;var c=WP_CAT[k];h+='<div class="wp-lg"><span class="wp-lt"><i class="wp-code" style="background:'+c[3]+';border-color:'+c[2]+(c[4]?';border-style:dashed':'')+'">'+c[1]+'</i>'+c[0]+'</span>'+by[k].map(function(i){var l=WP_LIB[i];return '<button class="opt" type="button" data-lib="'+i+'">'+ic('plus')+' '+l[0]+' <small class="num">'+wpF(l[2])+' × '+wpF(l[3])+'</small></button>'}).join('')+'</div>'});
     $('[data-libbox]',el).innerHTML=h}
   function paintEye(){var p=P(),med=wpMed(p.eye),ta=$('[data-eye]',el);if(document.activeElement!==ta)ta.value=p.eye.map(function(n){return wpF(n)}).join('، ');
-    $('[data-eyeout]',el).innerHTML=med==null?'لا قياسات بعد. الخطان المنقّطان في الرسم مرجع البالغين في معيار اللوحات، لا مقاس طلابك.':'<b>الوسيط '+wpF(med)+' سم</b> من '+arn(p.eye.length)+(p.eye.length>10||p.eye.length<3?' قياسًا':' قياسات')+'. مركز اللوحة عنده، والنص الأساسي بين '+wpF(med-15)+' و'+wpF(med+15)+' سم.'+(p.eye.length<10?' العيّنة صغيرة: زدها إلى ١٠–١٥ طالبًا.':'')}
+    $('[data-eyeout]',el).innerHTML=med==null?'لا قياسات بعد. الخطان المنقّطان في الرسم مرجع البالغين في معيار اللوحات، لا مقاس طلابك.':'<b>الوسيط '+wpF(med)+' سم</b> من '+stCount(p.eye.length,'قياس واحد','قياسين','قياسات','قياسًا')+'. مركز اللوحة عنده، والنص الأساسي بين '+wpF(med-15)+' و'+wpF(med+15)+' سم.'+(p.eye.length<10?' العيّنة صغيرة: زدها إلى ١٠–١٥ طالبًا.':'')}
   function paintFx(){var p=P();$('[data-fx]',el).innerHTML=p.fx.length?p.fx.map(function(f,i){return '<div class="rowed wp-fxr"><b>'+WP_FT[f.k][0]+'</b><input class="in num" inputmode="decimal" data-fx="x" data-i="'+i+'" value="'+wpF(f.x)+'" aria-label="بُعد '+WP_FT[f.k][0]+' عن الحافة اليمنى بالسنتيمتر" title="من اليمين"><input class="in num" inputmode="decimal" data-fx="y" data-i="'+i+'" value="'+wpF(f.y)+'" aria-label="ارتفاع أسفله عن الأرض بالسنتيمتر" title="عن الأرض"><input class="in num" inputmode="decimal" data-fx="w" data-i="'+i+'" value="'+wpF(f.w)+'" aria-label="عرضه بالسنتيمتر" title="العرض"><input class="in num" inputmode="decimal" data-fx="h" data-i="'+i+'" value="'+wpF(f.h)+'" aria-label="ارتفاعه بالسنتيمتر" title="الارتفاع"><button class="icon-btn" type="button" data-fxdel="'+i+'" aria-label="احذف '+WP_FT[f.k][0]+'">'+ic('x')+'</button></div>'}).join('')+'<p class="hint">الخانات بالترتيب: من اليمين، عن الأرض، العرض، الارتفاع (سم).</p>':'<p class="note">لا ثوابت على هذا الجدار.</p>';
     $('[data-fxadd]',el).innerHTML=p.fx.length<8?Object.keys(WP_FT).map(function(k){return '<button class="btn btn-soft btn-sm" type="button" data-fxnew="'+k+'">'+ic('plus')+' '+WP_FT[k][0]+'</button>'}).join(''):''}
   function all(refocus){paintWalls();paintSet();paintDraw(refocus);paintPanel();paintEye();paintFx()}
@@ -3450,6 +3472,7 @@ TOOLS.wallplan=function(el){
     if(t.matches('[data-eye]')){push('eye');p.eye=wpEyeParse(t.value);save();paintEye();paintDraw();paintPanel()}});
   el.addEventListener('change',function(e){var t=e.target,p=P(),k,it;
     if(t.matches('[data-wpfile]')){openFile(t.files&&t.files[0]);t.value='';return}
+    if(t.matches('[data-eye]')){t.value=p.eye.map(function(n){return wpF(n)}).join('، ');return}/* عند مغادرة الحقل: يظهر ما فُهم من القياسات، وما لم يُفهم يُحذف */
     if((k=t.dataset.ws)){if(k==='kind'&&WP_KIND[t.value]){push();p.kind=t.value;save();paintDraw();return}if(k==='w'||k==='h')t.value=wpF(p[k]/100);else if(k==='name'){if(!p.name){p.name=WP_KIND[p.kind][0];save()}t.value=p.name;var wb=$('[data-walls] [data-w="'+S.cur+'"]',el);if(wb)wb.textContent=p.name}return}
     if((k=t.dataset.it)&&(it=sel?item(sel):null)){
       if(k==='c'&&WP_CAT[t.value]){push();it.c=t.value;commit();foc('[data-it="c"]');return}
