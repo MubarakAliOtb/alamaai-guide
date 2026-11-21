@@ -11308,6 +11308,46 @@ body.fd-printing .ls-miss-w{display:none}
 .sv-acts{display:flex;gap:8px;flex-wrap:wrap}
 .sv-acts .tk-btn{text-decoration:none}
 </style>
+<style id="safe103Css">
+/* v103: سلامة البيانات (feed/safe103.js): بطاقة سفاري، وتأكيد وصول ملف النسخة، ومعاينة الاستعادة ونتيجتها، و«امسح بياناتي»، وشريط النافذة الأخرى */
+.sv-saf{background:var(--warnbg);border:1.5px solid var(--orange-300);border-radius:16px;padding:12px 16px;margin:0 0 14px;color:var(--ink);display:grid;gap:6px;text-align:start}
+.sv-saf-h{display:flex;align-items:center;gap:8px}
+.sv-saf-h .ic{width:20px;height:20px;color:var(--t-accent);flex:none}
+.sv-saf-h b{font-size:15.5px;color:var(--ink)}
+.sv-saf p{margin:0;font-size:14px;line-height:1.8;color:var(--ink)}
+.sv-saf ol{margin:0;padding-inline-start:24px;list-style:arabic-indic;font-size:14px;line-height:1.85;color:var(--ink)}
+.sv-saf ol .ic{width:17px;height:17px;vertical-align:-3px;color:var(--t-brand)}
+.sv-saf .sv-saf-n{display:flex;gap:6px;font-size:13px;color:var(--ink2)}
+.sv-saf-n .ic{flex:none;width:16px;height:16px;margin-top:5px;color:var(--t-accent)}
+.sv-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sv-try{background:var(--infobg,var(--sunk));border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:10px 0;display:grid;gap:8px;text-align:start}
+.sv-try p{margin:0;font-size:13.5px;line-height:1.8;color:var(--ink)}
+.bk-cmp li{align-items:start}
+.bk-cmp small+small{margin-top:2px}
+.bk-pick{display:grid;place-items:center;width:28px;height:28px;cursor:pointer}
+.bk-pick input{width:20px;height:20px;accent-color:var(--brand);cursor:pointer;margin:0}
+.bk-cmp li.bk-fl{border-color:var(--orange-300);background:var(--warnbg)}
+.bk-flag{display:inline-block;font-size:12px;font-weight:700;color:var(--t-accent);background:var(--surface);border:1px solid var(--orange-300);border-radius:999px;padding:1px 8px;white-space:nowrap}
+.bk-mode{display:grid;gap:4px;margin-top:6px;font-size:13px;color:var(--ink)}
+.bk-mode label{display:flex;gap:6px;align-items:flex-start;cursor:pointer;line-height:1.6;min-height:28px}
+.bk-mode input{margin-top:4px;accent-color:var(--brand);width:18px;height:18px;flex:none}
+.bk-alert{border:1.5px solid var(--orange-300)}
+.bk-err{margin:0;font-size:13.5px;line-height:1.8;font-weight:700;color:var(--tk-bad);background:var(--surface);border:1.5px solid var(--tk-bad);border-radius:10px;padding:8px 10px}
+.bk-paste{margin-top:12px;border-top:1px dashed var(--line);padding-top:6px}
+.bk-paste summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--t-brand);min-height:44px;display:flex;align-items:center}
+.bk-paste textarea{width:100%;min-height:96px;direction:ltr;text-align:left;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
+.bk-res{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin:0 0 14px;display:grid;gap:10px}
+.bk-res .tk-tip,.bk-res .tk-row-btns{margin:0}
+.sv-wipe .tk-tip{margin:0 0 10px}
+.sv-sync{position:fixed;bottom:calc(88px + env(safe-area-inset-bottom,0px));inset-inline:12px;z-index:2147482000;max-width:560px;margin-inline:auto;background:var(--surface);color:var(--ink);border:1.5px solid var(--brand);border-radius:14px;padding:10px 12px;box-shadow:var(--shadow);display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px;direction:rtl}
+.sv-sync[hidden]{display:none}
+.sv-sync span{flex:1 1 220px;line-height:1.7}
+@media (min-width:1024px){.sv-sync{bottom:16px}}
+.svx-steps{margin:0 0 10px;padding-inline-start:24px;list-style:arabic-indic;line-height:1.9;font-size:14px}
+.bg-restore{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);display:grid;gap:6px;justify-items:start}
+.bg-restore b{font-size:15px;color:var(--ink)}
+.bg-restore .b-note{margin:0}
+</style>
 <style id="uiLayer">
 /* ===== v91: طبقة الواجهة الموحدة (تدخل آخر الأنماط، قبل الشيفرة) =====
    قاعدة واحدة لكل الوحدات: الأزرار حبّات (pill) بارتفاع واحد ووزن واحد، والحقول مستطيلات بزوايا ١٢،
@@ -11781,7 +11821,7 @@ function stClipOn(id,bar,timed){const my=stSeq,box=$('#stSlide .st-clip'),v=box&
    لا حركة دائمة ولا إشعارات: الحركة عند الإنجاز والتفاعل فقط، وتُحذف مع «تقليل الحركة». */
 const HY_GOAL=5;
 /* الجديد في الدليل، الأحدث أولًا: [رقم الإصدار، النص، تبويب أو رابط] */
-const HY_REL=[[102,'ملفات الحصص من جديد: آيات القرآن كلها بخط المصحف، والصلاة على النبي ﷺ بخط واضح، وخط الدليل نفسه في ملفات الحصص الـ١٥٦ وعروض الحقائب الثلاث','#bag'],[101,'نصوص شرعية أدق: السكون في آيات «القلم ١–٧»، والصلاة على النبي ﷺ في «الدليل»، وأحاديث الجزء السابع عشر، وتعليل ترتيب الآيات في المسابقة','#bag/lesson/qur-w03'],[101,'حفظ أصدق: إن امتلأت مساحة الحفظ ظهرت لافتة ثابتة بدل رسالة النجاح، ويُطلب من المتصفح حفظ بياناتك حفظًا دائمًا','#tk/backup'],[99,'الحلول البصرية: «استوديو المقاسات» يخرج وسيلتك بأربعة مقاسات: شاشة بكشف متدرج، وورقة يكملها الطالب، ولوحة جدارية، وبطاقة استذكار','#vs-tool-studio'],[99,'الحلول البصرية: «مخطِّط الجدار» يرسم جدارك بمقياس، ويفحص ما يبقى خاليًا ومستوى عيون طلابك، ويخرج خطة تعليق بالأرقام','#vs-tool-wallplan'],[97,'ثلاث ألعاب جديدة من أسئلة درسك: شبكة الاستدعاء، ومبارزة السبورة، واكتشف الخطأ؛ وتُضاف شاشةً في «نسختي من العرض»','#tools'],[97,'فِرق الصف داخل العرض: نقاط بمعايير معلنة من شريط الشاشة الذكية، و«حصاد حصتنا» على منصة التتويج في آخر الحصة','#tk/decks'],[97,'«أوراق تُفكّر»: ورقة عمل ذهنية للدرس في صفحة واحدة بأربعة قوالب، تطبعها أو تنزّلها PDF','#tk/think'],...(document.querySelector('meta[name="alm:offline"]')?[[97,'الدليل يعمل الآن بلا إنترنت: تُحفظ الصفحة وأدواتها على جهازك، وتجهّز دروس صفوفك من «عن الأداة»','#about']]:[]),[97,'الحلول البصرية: «قبل وبعد» بفاصل يُسحب بين النسختين، ودبابيس مرقّمة تشخّص كل موضع','#vs-sol-ba'],[96,'«حصتي الآن» في أدواتي: اختر حصتك مرة واحدة، أو أدخل جدولك، فتفتح الأدوات والألعاب كلها على درسها','#tools'],[96,'الحلول البصرية: «محاكي الصف الأخير» يريك وسيلتك كما يراها طالب آخر الصف، وبعد آلة التصوير، ولمن لا يميّز الألوان','#vs-tool-backrow'],[95,'أدوات الحصة داخل العرض: زر في شريط الشاشة الذكية يفتح عُدّة الصف والأسئلة والألعاب على درسك دون مغادرة العرض','#tk/decks'],[94,'الاختبار القصير: النموذج (ب) بأسئلة غير أسئلة (أ)، وكل اختبار جديد بأسئلة أخرى؛ وملفات Word بلا صفحة فارغة','#tk/quiz'],[91,'واجهة أوضح: أزرار وشرائح بمقاس واحد في كل الأدوات، وأهداف لمس أكبر على الهاتف والشاشة الذكية','#tools'],[90,'نسخة عامة من الدليل: التنزيل والطباعة فيها مباشرة لكل من يفتحها، بلا حساب','#about'],[89,'تنزيل الملفات: نافذة تبيّن السبب لمن لا تتيح صلاحيته التنزيل، ومعها محتوى الملف للنسخ أو صفحاته صورًا','#about'],[88,'الاختبار القصير: «أكمل الحديث»، ثم صواب وخطأ، واختيار من متعدد، وثلاثة فراغات (مصطلح أو إكمال أو ثلاث نقاط)، مع خلط البدائل في النموذجين','#tk/quiz'],[84,'عروض الدروس: عرض تفاعلي لكل حصة على الشاشة الذكية، تختار الصف وتفتح العرض مباشرة','#tk/decks'],[83,'حقيبة المعلم: «رحلة الصف» بمحطاتها وتحدي الأسبوع والفِرق ولوحة الصف، وملاحظات الطالب وورقة لقاء ولي الأمر','#bag/quest'],[81,'«خلاصة الدليل»: الدليل النظري كله في قراءة واحدة، بسؤال كل جزء وفكرته الحاكمة، ونسخة PDF','#brief'],[78,'منصة «الحلول البصرية» صارت داخل الدليل: المختبر والنماذج والأدوات والحقائب التدريبية','#vs'],[76,'ثلاث أدوات للاختبار على مؤلفات التوجيه: القصير والنهائي والمخصص، وتنزيلها PDF','#tk/final'],[76,'«ركّب المعنى»: بطاقات تحدٍّ للدرس بقطع ورقية ومهارات التفكير العليا','#tk/build'],[75,'الاختبار القصير على نموذج التوجيه: «الأحاديث المقرر حفظها» و٩ + ١١ = ٢٠ في ورقتين','#tk/quiz'],[75,'ديوانية الأسئلة: السحب والإفلات، ولونا الفريقين على الخيارات، وأسئلة من أكثر من صف','#tk/diwan'],[74,'هدف «أسبوعك»، والاحتفاء بالإنجاز، وزر «جرّبتها في صفي» على كل بطاقة',''],[73,'سبعة عشر مقطعًا حركيًا في تبويب «مقاطع» وفي الستوري','clips'],[70,'لعبة «ديوانية الأسئلة» في ألعاب الصف','#tk/diwan']];
+const HY_REL=[[103,'نسخة احتياطية شاملة واحدة من الحقيبة ومن «النسخة الاحتياطية»، واستعادة آمنة: ترى ما في الملف مقارنةً بجهازك، وتُحفظ لقطة قبلها فتتراجع إن شئت','#tk/backup'],[103,'شاشة الطلاب بلا نقاط ولا «دون ٩٠٪» حتى تختار عرضها، و«امسح بياناتي من هذا الجهاز» للأجهزة المشتركة، وبطاقة تحمي بياناتك في سفاري','#bag/students'],[102,'ملفات الحصص من جديد: آيات القرآن كلها بخط المصحف، والصلاة على النبي ﷺ بخط واضح، وخط الدليل نفسه في ملفات الحصص الـ١٥٦ وعروض الحقائب الثلاث','#bag'],[101,'نصوص شرعية أدق: السكون في آيات «القلم ١–٧»، والصلاة على النبي ﷺ في «الدليل»، وأحاديث الجزء السابع عشر، وتعليل ترتيب الآيات في المسابقة','#bag/lesson/qur-w03'],[101,'حفظ أصدق: إن امتلأت مساحة الحفظ ظهرت لافتة ثابتة بدل رسالة النجاح، ويُطلب من المتصفح حفظ بياناتك حفظًا دائمًا','#tk/backup'],[99,'الحلول البصرية: «استوديو المقاسات» يخرج وسيلتك بأربعة مقاسات: شاشة بكشف متدرج، وورقة يكملها الطالب، ولوحة جدارية، وبطاقة استذكار','#vs-tool-studio'],[99,'الحلول البصرية: «مخطِّط الجدار» يرسم جدارك بمقياس، ويفحص ما يبقى خاليًا ومستوى عيون طلابك، ويخرج خطة تعليق بالأرقام','#vs-tool-wallplan'],[97,'ثلاث ألعاب جديدة من أسئلة درسك: شبكة الاستدعاء، ومبارزة السبورة، واكتشف الخطأ؛ وتُضاف شاشةً في «نسختي من العرض»','#tools'],[97,'فِرق الصف داخل العرض: نقاط بمعايير معلنة من شريط الشاشة الذكية، و«حصاد حصتنا» على منصة التتويج في آخر الحصة','#tk/decks'],[97,'«أوراق تُفكّر»: ورقة عمل ذهنية للدرس في صفحة واحدة بأربعة قوالب، تطبعها أو تنزّلها PDF','#tk/think'],...(document.querySelector('meta[name="alm:offline"]')?[[97,'الدليل يعمل الآن بلا إنترنت: تُحفظ الصفحة وأدواتها على جهازك، وتجهّز دروس صفوفك من «عن الأداة»','#about']]:[]),[97,'الحلول البصرية: «قبل وبعد» بفاصل يُسحب بين النسختين، ودبابيس مرقّمة تشخّص كل موضع','#vs-sol-ba'],[96,'«حصتي الآن» في أدواتي: اختر حصتك مرة واحدة، أو أدخل جدولك، فتفتح الأدوات والألعاب كلها على درسها','#tools'],[96,'الحلول البصرية: «محاكي الصف الأخير» يريك وسيلتك كما يراها طالب آخر الصف، وبعد آلة التصوير، ولمن لا يميّز الألوان','#vs-tool-backrow'],[95,'أدوات الحصة داخل العرض: زر في شريط الشاشة الذكية يفتح عُدّة الصف والأسئلة والألعاب على درسك دون مغادرة العرض','#tk/decks'],[94,'الاختبار القصير: النموذج (ب) بأسئلة غير أسئلة (أ)، وكل اختبار جديد بأسئلة أخرى؛ وملفات Word بلا صفحة فارغة','#tk/quiz'],[91,'واجهة أوضح: أزرار وشرائح بمقاس واحد في كل الأدوات، وأهداف لمس أكبر على الهاتف والشاشة الذكية','#tools'],[90,'نسخة عامة من الدليل: التنزيل والطباعة فيها مباشرة لكل من يفتحها، بلا حساب','#about'],[89,'تنزيل الملفات: نافذة تبيّن السبب لمن لا تتيح صلاحيته التنزيل، ومعها محتوى الملف للنسخ أو صفحاته صورًا','#about'],[88,'الاختبار القصير: «أكمل الحديث»، ثم صواب وخطأ، واختيار من متعدد، وثلاثة فراغات (مصطلح أو إكمال أو ثلاث نقاط)، مع خلط البدائل في النموذجين','#tk/quiz'],[84,'عروض الدروس: عرض تفاعلي لكل حصة على الشاشة الذكية، تختار الصف وتفتح العرض مباشرة','#tk/decks'],[83,'حقيبة المعلم: «رحلة الصف» بمحطاتها وتحدي الأسبوع والفِرق ولوحة الصف، وملاحظات الطالب وورقة لقاء ولي الأمر','#bag/quest'],[81,'«خلاصة الدليل»: الدليل النظري كله في قراءة واحدة، بسؤال كل جزء وفكرته الحاكمة، ونسخة PDF','#brief'],[78,'منصة «الحلول البصرية» صارت داخل الدليل: المختبر والنماذج والأدوات والحقائب التدريبية','#vs'],[76,'ثلاث أدوات للاختبار على مؤلفات التوجيه: القصير والنهائي والمخصص، وتنزيلها PDF','#tk/final'],[76,'«ركّب المعنى»: بطاقات تحدٍّ للدرس بقطع ورقية ومهارات التفكير العليا','#tk/build'],[75,'الاختبار القصير على نموذج التوجيه: «الأحاديث المقرر حفظها» و٩ + ١١ = ٢٠ في ورقتين','#tk/quiz'],[75,'ديوانية الأسئلة: السحب والإفلات، ولونا الفريقين على الخيارات، وأسئلة من أكثر من صف','#tk/diwan'],[74,'هدف «أسبوعك»، والاحتفاء بالإنجاز، وزر «جرّبتها في صفي» على كل بطاقة',''],[73,'سبعة عشر مقطعًا حركيًا في تبويب «مقاطع» وفي الستوري','clips'],[70,'لعبة «ديوانية الأسئلة» في ألعاب الصف','#tk/diwan']];
 const HY_COL=['#2563EB','#14B8A6','#FF7A1A','#FFB26B','#EEF4FF'];
 const HY_SV='fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
 const HY_IC={try:`<svg class="ic" viewBox="0 0 24 24" ${HY_SV}><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>`,
@@ -12721,13 +12761,14 @@ function fdAboutHTML(){const url='https://claude.ai/artifact/GTN8TtNPpFEXtWdSrj6
   <h3>ما هي، وما ليست</h3>
   <ul><li>أداة للاستعمال اليومي في التخطيط والتدريس، لا كتاب يُقرأ من أوله إلى آخره.</li><li>ليست وثيقة رسمية ولا بديلًا عن اللوائح والتعاميم؛ وعند أي اختلاف فالنص الرسمي هو الحاكم.</li><li>ليست مرجعًا أكاديميًا؛ وما فيها من نظريات مأخوذ من مصادرها، وتجد قائمتها في «المراجع».</li></ul>
   <h3>كيف بُني المحتوى</h3>
-  <ul><li>من دليل المعلم الألمعي، ومن النصوص الرسمية وخطط التوزيع وكتب الطالب، ومن أدبيات تعليم الموهوبين وعلم التعلّم.</li><li>على كل بطاقة وسم يبيّن قوة السند وراءها: مرجع رسمي، أو نص شرعي، أو بحث قوي، أو بحث واعد، أو خبرة ميدانية.</li><li>الآيات بإحالتها إلى السورة ورقم الآية، والأحاديث بتخريجها.</li><li>استُعين بأدوات رقمية وأدوات الذكاء الاصطناعي في الإخراج والصياغة، وروجع المحتوى مراجعة بشرية.</li></ul>
+  <ul><li>من دليل المعلم الألمعي، ومن النصوص الرسمية وخطط التوزيع وكتب الطالب، ومن أدبيات تعليم الموهوبين وعلم التعلّم.</li><li>على كل بطاقة وسم يبيّن قوة السند وراءها: مرجع رسمي، أو نص شرعي، أو بحث قوي، أو بحث واعد، أو خبرة ميدانية.</li><li>الآيات بإحالتها إلى السورة ورقم الآية، والأحاديث بتخريجها.</li><li>نص القرآن الكريم من مشروع تنزيل <bdi>(Tanzil Project)</bdi> برواية حفص: <a href="https://tanzil.net/" target="_blank" rel="noopener"><bdi dir="ltr">tanzil.net</bdi></a>، برخصة <bdi dir="ltr">CC BY 3.0</bdi>. وحُوِّل ترميز علامتي السكون والصفر المستدير ليوافق خط مجمع الملك فهد، والرسم المرئي محفوظ.</li><li>استُعين بأدوات رقمية وأدوات الذكاء الاصطناعي في الإخراج والصياغة، وروجع المحتوى مراجعة بشرية.</li></ul>
   <h3>خلاصة الدليل</h3><p>الدليل النظري في قراءة واحدة: لكل جزء سؤاله وفكرته الحاكمة ونقطة على الأقل لكل قسم فيه، بإحالة إلى صفحته. تختصر ولا تُغني عن النص الكامل. <a href="#brief">افتح الخلاصة</a>.</p>
   <h3>الحلول البصرية</h3><p>منصة «مركز الاستشارات والحلول البصرية» جزء من هذا الدليل: مختبر تنفيذي يحوّل مشكلة التعلّم إلى وسيلة مختبَرة، ونماذج وأدوات وأدلة، وحقائب تدريبية تُحفظ وتُطبع. <a href="#vs">افتح الحلول البصرية</a>.</p>
   <h3>الإصدار</h3><p>الإصدار الأول التجريبي، نوفمبر ٢٠٢٦. والأداة تتطوّر بملاحظات مستعمليها.</p>
   ${FD_SV_FRAMED?`<h3>تنزيل الملفات ومشاركة الدليل</h3>
   <ul>${FD_PUB_ON?`<li><b>النسخة العامة من الدليل</b> ينزّل منها الجميع ويطبعون مباشرة، بلا حساب: <a href="${FD_PUB}" target="_blank" rel="noopener"><bdi dir="ltr">${FD_PUB_SHOW}</bdi></a>. شارك هذا الرابط مع زملائك.</li><li>والنسخة العامة تعمل <b>بلا إنترنت</b> بعد أول فتح: تُحفظ الصفحة وأدواتها على الجهاز، وتُجهَّز دروس الصفوف من «عن الأداة» فيها.</li>`:''}<li>${FD_PUB_ON?'هنا في <bdi>Claude</bdi>: ':''}أزرار <bdi>Word</bdi> و<bdi>PDF</bdi> و<bdi>Excel</bdi> والصور تحفظ الملف بعد نافذة تأكيد من <bdi>Claude</bdi>: اختر <bdi>Save file</bdi>.</li><li>من يفتح نسخة <bdi>Claude</bdi> من رابطها العام يدخل بصلاحية المشاهدة <bdi>(Can view)</bdi>، ولا يتيح له <bdi>Claude</bdi> تنزيل الملفات؛ فتُفتح له عند زر التنزيل نافذة فيها ${FD_PUB_ON?'رابط النسخة العامة، و':''}محتوى الملف لينسخه أو صفحاته صورًا.</li><li>وليتمكن زميل من التنزيل هنا في <bdi>Claude</bdi>: ادعه ببريده من زر <bdi>Share</bdi> أعلى الصفحة <bdi>(Invite people by email)</bdi> بصلاحية <bdi>Commenter</bdi>؛ ثم يفتح الدليل بحساب <bdi>Claude</bdi> المسجَّل بذلك البريد. وتغيير المشاركة من المتصفح أو تطبيق سطح المكتب، لا من تطبيق الهاتف.</li><li>الطباعة المباشرة لا تعمل داخل عارض <bdi>Claude</bdi>؛ نزّل الملف ثم اطبعه من جهازك${FD_PUB_ON?'، أو اطبع من النسخة العامة':''}.</li></ul>`:`<h3>هذه النسخة العامة من الدليل</h3>
   <ul><li>التنزيل (<bdi>Word</bdi> و<bdi>PDF</bdi> و<bdi>Excel</bdi> والصور والعروض) والطباعة يعملان هنا مباشرة لكل من يفتح الرابط، بلا حساب.</li><li>لتثبيت الدليل تطبيقًا على الهاتف أو الحاسوب أو الشاشة الذكية: من قائمة المتصفح اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». ${ofCan()?'وبعد أول فتح يعمل بلا إنترنت: الصفحة وأدواتها وألعابها تُحفظ على جهازك، ودروس صفوفك تجهّزها من بطاقة «العمل بلا إنترنت» أدناه.':'ويبقى محتاجًا إلى الاتصال بالإنترنت.'}</li><li>ما يعتمد على حساب <bdi>Claude</bdi> يعمل في نسخة <bdi>Claude</bdi> وحدها: الجواب المكتوب في «اسأل الدليل» والمسودات الآلية، و«أفادني» والتعليقات وتجارب الزملاء، ومزامنة إعداداتك في الحساب. و«جرّبتها» هنا علامة خاصة بك على هذا الجهاز. <a href="${FD_CLAUDE}" target="_blank" rel="noopener">افتح نسخة Claude</a>.</li><li>ما تكتبه في الأدوات (صفوفك وجدولك وطلابك) يُحفظ في متصفحك، ولكل نسخة حفظها. لنقله من نسخة إلى أخرى: <a href="#tk/backup">النسخة الاحتياطية الشاملة</a>، احفظها في نسخة ثم استعدها في الأخرى.</li></ul>${ofCard()}`}
+  <h3>بياناتك</h3><ul><li>ما تكتبه في الأدوات والحقيبة والدفتر يبقى في متصفح هذا الجهاز وحده، ولا يُرسل إلى أي مكان. خذ <a href="#tk/backup">نسخة احتياطية شاملة</a> كل أسبوع.</li><li>تستعمل جهازًا مشتركًا؟ امسح بياناتك منه قبل أن تتركه: «امسح بياناتي من هذا الجهاز» في صفحة <a href="#tk/backup">النسخة الاحتياطية الشاملة</a>.</li></ul>
   <h3>كيف تستشهد بها</h3><p class="about-cite" dir="rtl">العتيبي، مبارك علي. (٢٠٢٦). <i>دليل المعلم الألمعي: أداة تطبيقية لمعلمي التربية الإسلامية والقرآن الكريم للموهوبين</i> [أداة رقمية]. <bdi>${esc(url)}</bdi></p>
   <div class="about-acts"><a class="btn sm" href="#refs">المراجع (APA)</a>${FD_FORM?`<a class="btn accent sm" href="${FD_FORM}" target="_blank" rel="noopener">اكتب ملاحظتك</a>`:''}</div>
   </article>`}
@@ -13507,14 +13548,15 @@ function fdBagHTML(){bgLoad();const c=bgCls();if(/^cup\/[6-9](\/[12])?$/.test(bg
    <div class="b-top-tools">${BG.classes.length?`<select class="b-in bg-cls" data-bgin="cls" aria-label="الصف">${BG.classes.map(x=>`<option value="${x.id}"${x.id===BG.active?' selected':''}>${esc(x.name)}</option>`).join('')}</select>`:''}<button class="b-btn b-sm bg-ontop" data-bg="newcls">${bgSvg('plus')} صف</button>
    <div class="b-seg" role="group" aria-label="الفصل الدراسي">${Object.entries(BG_TERMS).map(([k,v])=>`<button data-bg="term" data-v="${k}" aria-pressed="${bgTerm===k}">${v}</button>`).join('')}</div></div></div>
    <nav class="b-tabs" aria-label="أقسام الحقيبة">${NAV.map(([r,t,ic])=>`<a class="b-tab" href="#bag/${r}" aria-current="${(bgView===r||(lsV&&r==='sessions'))?'page':'false'}">${bgSvg(ic)}${t}</a>`).join('')}</nav></header>`;
-  const bk=BG.backupAt?new Date(BG.backupAt):null;const stale=!bk||(Date.now()-bk)>7*864e5;
-  const ban=!bgOk?`<div class="b-banner bg-warn">هذا المتصفح لا يحفظ البيانات هنا. نزّل نسخة احتياطية قبل أن تغلق الصفحة.</div>`:(c&&bgD().students.length&&stale?`<div class="b-banner">بياناتك محفوظة على هذا الجهاز وحده. ${bk?'آخر نسخة احتياطية: '+bk.toLocaleDateString('ar-EG',{day:'numeric',month:'long'})+'.':'لم تنزّل نسخة احتياطية بعد.'} <button class="b-btn b-sm" data-bg="backup">نزّل نسخة الآن</button></div>`:'');
+  const bkS=store.get('bkAt','');const bk=bkS?new Date(bkS):null;const stale=!bk||(Date.now()-bk)>bkEvery()*864e5;
+  const saf=lsV||bgView==='cup'?'':svSafHTML('bag');
+  const ban=saf+bkTryHTML()+(!bgOk?`<div class="b-banner bg-warn" role="alert">لم يُحفظ آخر تغيير: مساحة الحفظ في هذا المتصفح ممتلئة أو محجوبة. نزّل نسخة احتياطية شاملة قبل أن تغلق الصفحة.</div>`:(!saf&&c&&bgD().students.length&&stale?`<div class="b-banner">بياناتك محفوظة على هذا الجهاز وحده. ${bk?'آخر نسخة احتياطية شاملة: '+bk.toLocaleDateString('ar-EG',{day:'numeric',month:'long'})+'.':'لم تنزّل نسخة احتياطية شاملة بعد.'} <button class="b-btn b-sm" data-bg="backup">نزّل نسخة الآن</button></div>`:''));
   let body;if(lsV)body=lsHTML(lsV);else if(bgView==='cup')body=cpHTML();else if(!c)body=bgOnboard();else body=({charter:bgVCharter,map:bgVMap,sessions:bgVSessions,students:bgVStudents,quest:bgVQuest,certs:bgVCerts,export:bgVExport})[bgView]();
   return `<div class="bag" id="bagRoot">${top}<div class="b-main"><div class="b-view">${ban}${body}</div></div><dialog id="bgDlg" class="bg-dlg"></dialog></div>`}
 function fdBagAfter(){if(/^lesson\//.test(bgView))lsAfter(bgView.slice(7));if(bgView==='certs'&&bgCls())bgDrawCert();if(bgView==='cup')cpAfter();const tb=document.querySelector('#bagRoot .b-tab[aria-current="page"]'),nv=tb&&tb.parentElement;if(nv&&nv.scrollWidth>nv.clientWidth+2){const r=tb.getBoundingClientRect(),q=nv.getBoundingClientRect();if(r.left<q.left||r.right>q.right)nv.scrollLeft+=(r.left+r.width/2)-(q.left+q.width/2)}}
 function bgOnboard(){return `<div class="b-card"><h3>صفّك الأول</h3><p class="b-note">اختر الصف واكتب رقم الشعبة. تُبنى خريطة الفصل وحصصه من خطة التوزيع تلقائيًا، وتضيف طلابك بعدها.</p>
   <div class="b-form-grid bg-row">${bgClsForm()}</div><button class="b-btn b-primary" data-bg="addcls">إنشاء الصف</button>
-  <p class="b-note">كل ما تكتبه هنا يبقى على هذا الجهاز وحده، ولا يُرسل إلى أحد. نزّل نسخة احتياطية من «التصدير» بين حين وآخر.</p></div>`}
+  <p class="b-note">كل ما تكتبه هنا يبقى على هذا الجهاز وحده، ولا يُرسل إلى أحد. نزّل نسخة احتياطية شاملة من «التصدير» كل أسبوع.</p><div class="bg-restore"><b>عندك نسخة احتياطية؟</b><p class="b-note">إن انتقلت إلى جهاز جديد أو مُسحت بيانات المتصفح فاستعد نسختك بدل أن تبدأ من جديد: النسخة الشاملة، أو نسخة الحقيبة القديمة.</p><button type="button" class="b-btn" data-bg="restorepick">${bgSvg('up')} استعد من نسخة</button></div></div>`}
 const bgClsForm=()=>`<div class="b-field"><label for="bgG">الصف</label><select class="b-in" id="bgG">${[6,7,8,9].map(g=>`<option value="${g}"${g===8?' selected':''}>الصف ${FD_GRN[g]}</option>`).join('')}</select></div><div class="b-field"><label for="bgS">الشعبة</label><input class="b-in" id="bgS" maxlength="12" placeholder="مثل: ٢"></div>`;
 /* ---------- ١. ميثاق الفصل ---------- */
 function bgVCharter(){const {items,idx,mode,sig,draft}=bgCharter();const S=bgStu();
@@ -13549,16 +13591,15 @@ function bgVSessions(){const W=bgWeeks();const d=bgD();const list=W.flatMap(w=>w
 /* ---------- ٤. الطلاب ---------- */
 function bgAddForm(){return `<div class="b-card"><h3>أضف طلابك</h3><p class="b-note">الصق الأسماء، اسمًا في كل سطر، أو ارفع ملف Excel أو CSV فيه عمود الأسماء. تبقى الأسماء على هذا الجهاز وحده.</p>
   <textarea class="b-in" id="bgNames" rows="6" placeholder="الاسم الأول&#10;الاسم الثاني"></textarea>
-  <div class="b-chips" style="margin-top:10px"><button class="b-btn b-primary" data-bg="addnames">${bgSvg('plus')} أضف الأسماء</button><label class="b-btn">${bgSvg('doc')} ارفع ملف Excel أو CSV<input type="file" accept=".xlsx,.xls,.csv,.txt" data-bgin="roster" hidden></label></div></div>`}
+  <div class="b-chips" style="margin-top:10px"><button class="b-btn b-primary" data-bg="addnames">${bgSvg('plus')} أضف الأسماء</button><button type="button" class="b-btn" data-bg="rosterpick">${bgSvg('doc')} ارفع ملف Excel أو CSV</button></div></div>`}
 function bgVStudents(){const S=bgStu();if(!S.length)return bgHead('الطلاب','')+bgAddForm();const g=bgGoal();
   const tabs=[['points','النقاط والأوسمة'],['grades','رصد الدرجات'],['hifz','الحفظ'],['roster','القائمة']];
   const body={points:bgTPoints,grades:bgTGrades,hifz:bgTHifz,roster:bgTRoster}[bgStuTab]();
-  return bgHead('الطلاب','اضغط بطاقة الطالب لنقاطه وأوسمته. الترتيب ثابت بالأسماء، ولا مقارنة بين الطلاب: كل طالب يُقارَن بنفسه.',`<a class="b-btn b-navy" href="#bag/quest">${bgSvg('sail')} رحلة الصف</a><button class="b-btn b-reward" data-bg="fair">${bgSvg('hand')} اختيار عادل لمن يجيب</button>`)
+  return bgHead('الطلاب',BG_SHOWPTS?'اضغط بطاقة الطالب لنقاطه وأوسمته. الترتيب ثابت بالأسماء، ولا مقارنة بين الطلاب: كل طالب يُقارَن بنفسه.':'النقاط والأوسمة مخفية في هذه الشاشة لأنها قد تُعرض على الصف: اضغط بطاقة الطالب لنقاطه وأوسمته، أو «اعرض النقاط». الترتيب ثابت بالأسماء، ولا مقارنة بين الطلاب.',`<a class="b-btn b-navy" href="#bag/quest">${bgSvg('sail')} رحلة الصف</a><button class="b-btn b-reward" data-bg="fair">${bgSvg('hand')} اختيار عادل لمن يجيب</button><button class="b-btn" data-bg="showpts" aria-pressed="${BG_SHOWPTS}">${bgSvg(BG_SHOWPTS?'eyeoff':'eye')} ${BG_SHOWPTS?'أخفِ النقاط':'اعرض النقاط'}</button>`)
   +bqStrip(`<div class="b-goal"><div class="b-ring">${bgRing(g.pct)}<b class="b-num">${bgN(g.pct)}٪</b></div><div><span class="b-eyebrow" style="color:#A9BCE6">هدف مشترك يبنيه طلاب الصف معًا</span><h3>${esc(g.title)}</h3><p class="b-num">${bgN(g.got)} من ${bgN(g.target)} نقطة جماعية</p></div><button class="b-btn" data-bg="goal">تعديل الهدف</button></div>`)
   +`<div class="b-tiles">${S.map(s=>{const lv=bgLevel(s.points||0);const sc=bgSelf(s.id);const ci=bgCalc(s.id,'islamic'),cq=bgCalc(s.id,'quran');
-    return `<button class="b-tile" data-bg="stu" data-id="${s.id}" style="${bgPicked===s.id?'border-color:var(--energy);box-shadow:0 0 0 3px var(--orange-100)':''}">${bgAv(s,64)}<div class="b-nm">${esc(s.name)}</div><div class="b-ptsline"><span class="b-pill b-blue">${lv.L.name}</span><span><span class="b-pts b-num">${bgN(s.points||0)}</span> نقطة</span></div>
-     <div class="b-self-cmp"><span>هذا الأسبوع<b class="b-num">${bgN(sc.cur)}</b></span><span>الأسبوع الماضي<b class="b-num">${bgN(sc.last)}</b></span></div><div class="b-mini-b">${(s.badges||[]).slice(-5).map(k=>BG_BMAP[k]?bgBadgeSvg(BG_BMAP[k]):'').join('')}</div>
-     ${[ci,cq].some(c=>c.pct!=null&&c.pct<90)?'<span class="b-pill b-bad">دون ٩٠٪</span>':''}</button>`}).join('')}</div>`
+    return `<button class="b-tile" data-bg="stu" data-id="${s.id}" style="${bgPicked===s.id?'border-color:var(--energy);box-shadow:0 0 0 3px var(--orange-100)':''}">${bgAv(s,64)}<div class="b-nm">${esc(s.name)}</div>${BG_SHOWPTS?`<div class="b-ptsline"><span class="b-pill b-blue">${lv.L.name}</span><span><span class="b-pts b-num">${bgN(s.points||0)}</span> نقطة</span></div>
+     <div class="b-self-cmp"><span>هذا الأسبوع<b class="b-num">${bgN(sc.cur)}</b></span><span>الأسبوع الماضي<b class="b-num">${bgN(sc.last)}</b></span></div><div class="b-mini-b">${(s.badges||[]).slice(-5).map(k=>BG_BMAP[k]?bgBadgeSvg(BG_BMAP[k]):'').join('')}</div>`:''}</button>`}).join('')}</div>`
   +`<div class="b-chips">${tabs.map(([k,t])=>`<button class="b-chip" data-bg="stutab" data-v="${k}" aria-pressed="${bgStuTab===k}">${t}</button>`).join('')}</div>`+body}
 function bgTPoints(){return `<div class="b-card"><h3>النقاط والأوسمة</h3><p class="b-note">النقاط للتشجيع فقط: لا خصم منها، ولا صلة لها بالدرجات. والأوسمة على الاستراتيجية والمثابرة وجودة السؤال والإتقان والأثر.</p>
   <div class="b-badge-shelf">${BG_BADGES.map(b=>{const n=bgStu().filter(s=>(s.badges||[]).includes(b.key)).length;return `<div class="b-bdg">${bgBadgeSvg(b)}<b>${b.name}</b><small>${b.desc}</small><span class="b-pill b-blue">${bgN(n)} طالب</span></div>`}).join('')}</div>
@@ -13623,9 +13664,8 @@ async function bgCertBlob(s,typ){const cv=document.createElement('canvas');cv.wi
 function bgVExport(){const c=bgCls();const d=bgD();
   return bgHead('التصدير','ملف Excel لدرجات الصف ونقاطه وحفظه، ونسخة احتياطية تستعيد بها بياناتك على هذا الجهاز أو غيره.','')
   +`<div class="b-grid2"><div class="b-card"><h3>Excel للصف ${esc(c.name)}</h3><p class="b-note">ورقة لكل مادة في ${BG_TERMS[bgTerm]}، وورقة للنقاط والأوسمة، وأخرى للحفظ، ورابعة للقائمة.</p><button class="b-btn b-primary" data-bg="xlsx">${bgSvg('export')} نزّل ملف Excel</button></div>
-   <div class="b-card"><h3>النسخة الاحتياطية</h3><p class="b-note">ملف واحد فيه كل صفوفك وطلابك ودرجاتهم. احفظه في مكان آمن، واستعده متى شئت.${BG.backupAt?' آخر نسخة: '+new Date(BG.backupAt).toLocaleDateString('ar-EG',{day:'numeric',month:'long'})+'.':''}</p>
-    <div class="b-chips"><button class="b-btn b-primary" data-bg="backup">${bgSvg('export')} نزّل نسخة احتياطية</button><label class="b-btn">استعد من نسخة<input type="file" accept=".json,application/json" data-bgin="restore" hidden></label></div>
-    ${bgImp?`<div class="b-banner" style="margin-top:10px">في الملف ${bgN(bgImp.classes.length)} صف. الاستعادة تستبدل كل ما على هذا الجهاز. <button class="b-btn b-sm b-primary" data-bg="restoreok">استبدل</button> <button class="b-btn b-sm" data-bg="restoreno">إلغاء</button></div>`:''}</div>
+   <div class="b-card"><h3>النسخة الاحتياطية الشاملة</h3><p class="b-note">ملف واحد فيه كل ما على هذا الجهاز: صفوفك وطلابك ودرجاتهم، ودفترك وجدولك وسجل الوقائع والتقارير. احفظه في مكان آمن، واستعده هنا أو من «النسخة الاحتياطية» على أي جهاز.${bkLastLine()}</p>
+    <div class="b-chips"><button class="b-btn b-primary" data-bg="backup">${bgSvg('export')} نزّل النسخة الشاملة</button><button type="button" class="b-btn" data-bg="restorepick">${bgSvg('up')} استعد من نسخة</button></div>${bkTryHTML()}</div>
    <div class="b-card"><h3>بيانات الشهادات</h3><div class="b-form-grid"><div class="b-field"><label for="bgTn">اسم المعلم</label><input class="b-in" id="bgTn" data-bgin="teacher" value="${esc(BG.teacher)}" maxlength="60" placeholder="أ. ..."></div><div class="b-field"><label for="bgSc">اسم المدرسة (اختياري)</label><input class="b-in" id="bgSc" data-bgin="school" value="${esc(BG.school)}" maxlength="80"></div></div></div>
    <div class="b-card"><h3>الصفوف</h3><div class="b-rows">${BG.classes.map(x=>`<div class="b-row"><span class="b-bubble">${bgN(x.grade)}</span><div class="b-meta"><b>${esc(x.name)}</b><small>${bgN(((BG.data[x.id]||{}).students||[]).length)} طالب</small></div><button class="b-btn b-sm b-danger" data-bg="clsdel" data-id="${x.id}">حذف</button></div>`).join('')}</div>
     <div class="b-form-grid" style="margin-top:10px">${bgClsForm()}</div><button class="b-btn" data-bg="addcls" style="margin-top:8px">${bgSvg('plus')} أضف صفًّا</button></div></div>`}
@@ -13650,6 +13690,9 @@ document.addEventListener('click',async e=>{const ov=e.target.closest('[data-bgo
   if(a==='subj'){bgSubj=t.dataset.v;fdRender();return}
   if(a==='stutab'){bgStuTab=t.dataset.v;fdRender();return}
   if(a==='backup'){bgBackup();return}
+  if(a==='restorepick'){bkPick();return}
+  if(a==='rosterpick'){tkPickFile('.xlsx,.xls,.csv,.txt',f=>bgRoster(f));return}
+  if(a==='showpts'){BG_SHOWPTS=!BG_SHOWPTS;fdRender();return}
   if(a==='restoreok'){if(bgImp){BG=bgImp;bgImp=null;bgSave();toast('استُعيدت النسخة');fdRender()}return}
   if(a==='restoreno'){bgImp=null;fdRender();return}
   if(a==='xlsx'){bgXlsx();return}
@@ -15662,14 +15705,14 @@ function lgListHTML(){const L=lgFiltered();const cnt={pos:0,fu:0,gift:0,com:0};L
 TK_PAGES.log={render(M){lgLoad();const C=tkClasses();const P=TK.pref;const cc=tkTakeClass();if(cc&&P.lgck!==cc){P.lgck=cc;P.lgles=undefined;lgSel.clear()}if(!P.lgck||!tkClass(P.lgck))P.lgck=C[0]?C[0].k:'';const ck=P.lgck;
   if(!C.length){M.innerHTML=`<div class="tk-empty"><b>أضف صفك أولًا</b><span>السجل يحتاج أسماء طلابك. أضفها في حقيبة المعلم أو في دفتر المعلم، فتظهر هنا.</span><a class="tk-btn pri" href="#bag/export">افتح حقيبة المعلم</a></div>`;return}
   const S=tkStudents(ck);const LS=lgLessons(ck);if(P.lgles===undefined||!LS.o.some(o=>o[0]===P.lgles))P.lgles=LS.def||'';const cat=LOG_CM[lgCat];const isBag=ck.startsWith('b:');
-  M.innerHTML=`<section class="tk-card lg-new"><div class="tk-card-h"><h3>${tkI('edit')}واقعة جديدة</h3><span class="tk-tip">${esc(tkFmtDate(new Date()))}</span></div>
+  M.innerHTML=`${svSafHTML('log')}<section class="tk-card lg-new"><div class="tk-card-h"><h3>${tkI('edit')}واقعة جديدة</h3><span class="tk-tip">${esc(tkFmtDate(new Date()))}</span></div>
    <div class="tk-bar"><label class="tk-lb">الصف${tkSel('lgck',C.map(c=>[c.k,c.name]),ck)}</label><label class="tk-lb tk-grow">الدرس${tkSel('lgles',[['','بلا درس'],...LS.o],P.lgles)}</label></div>
    ${S.length?`<div class="lg-sec"><b>الطالب</b><small>اختر طالبًا أو أكثر</small></div><div class="kit-chips lg-stus">${S.map(s=>`<button data-tk="lgs" data-sid="${s.id}" aria-pressed="${lgSel.has(s.id)}">${esc(s.name)}</button>`).join('')}</div>`:`<p class="tk-tip">لا أسماء في هذا الصف بعد. <a href="${isBag?'#bag/students':'#nb'}">أضف الأسماء</a>.</p>`}
    <div class="lg-cats">${Object.entries(LOG_T).map(([t,v])=>`<div class="lg-cg"><b class="lg-${v[1]}">${v[0]}</b><div class="kit-chips">${LOG_C.filter(c=>c.t===t).map(c=>`<button class="lg-c lg-${v[1]}" data-tk="lgc" data-k="${c.k}" aria-pressed="${lgCat===c.k}">${esc(c.n)}${c.pts?`<small>+${bgN(c.pts)}</small>`:''}</button>`).join('')}</div></div>`).join('')}</div>
    <label class="tk-lb">ملاحظة (اختيارية)<textarea class="tk-in" data-tki="lgn" maxlength="600" rows="2" placeholder="ما الذي حدث بالضبط؟ اكتب الوصف لا الحكم."></textarea></label>
    <div class="lg-foot">${isBag&&cat&&cat.pts?`<label class="tk-ck"><input type="checkbox" data-tki="lgpts"${P.lgpts!==false?' checked':''}>أضف ${bgN(cat.pts)} ${cat.pts>2?'نقاط':'نقطة'} في حقيبة المعلم</label>`:''}${cat&&cat.t!=='fu'?`<label class="tk-ck"><input type="checkbox" data-tki="lgfu">تحتاج متابعة</label>`:''}<button class="tk-btn pri" data-tk="lgadd"${lgSel.size&&lgCat?'':' disabled'}>${tkI('check')}سجّل${lgSel.size>1?' لـ'+bgN(lgSel.size)+' طلاب':''}</button></div></section>
-   <section class="tk-card lg-view"><div class="tk-card-h"><h3>${tkIc('ai-note')}السجل</h3><div class="tk-row-btns"><button class="tk-btn sm" data-tk="lgcsv">${tkI('dl')}ملف Excel</button><button class="tk-btn sm" data-tk="lgbak">${tkI('dl')}نسخة احتياطية</button><button class="tk-btn sm ghost" data-tk="lgres">${tkI('ul')}استعادة</button></div></div>
-   <p class="tk-priv">${tkI('eyeoff')}<span>السجل على هذا الجهاز وحده، ولا يُرسل إلى أي مكان. نزّل نسخة احتياطية كل أسبوع. واكتب الواقعة وصفًا لا حكمًا، فهي دليل موثّق: «لا ترصد درجة دون دليل موثّق» (الميثاق: رابعًا).</span></p>
+   <section class="tk-card lg-view"><div class="tk-card-h"><h3>${tkIc('ai-note')}السجل</h3><div class="tk-row-btns"><button class="tk-btn sm" data-tk="lgcsv">${tkI('dl')}ملف Excel</button><button class="tk-btn sm" data-tk="lgbak">${tkI('dl')}نسخة السجل</button><button class="tk-btn sm ghost" data-tk="lgres">${tkI('ul')}استعادة</button></div></div>
+   <p class="tk-priv">${tkI('eyeoff')}<span>السجل على هذا الجهاز وحده، ولا يُرسل إلى أي مكان. خذ <a href="#tk/backup">نسخة احتياطية شاملة</a> كل أسبوع. واكتب الواقعة وصفًا لا حكمًا، فهي دليل موثّق: «لا ترصد درجة دون دليل موثّق» (الميثاق: رابعًا).</span></p>
    <div id="lgList">${lgListHTML()}</div></section>`},
  act(a,t){const P=TK.pref;
   if(a==='lgs'){const id=t.dataset.sid;if(lgSel.has(id))lgSel.delete(id);else lgSel.add(id);t.setAttribute('aria-pressed',String(lgSel.has(id)));lgFootUpd();return}
@@ -16998,7 +17041,7 @@ const ME_TOUR=[['ai-home2','الرئيسية','«حصتي الآن» في أعل
  ['ai-screen','صفحة الدرس','فيها التحضير بالقالب الرسمي والشاشات وملفات PDF. ومن «خصّص عرضي» تخفي شاشة، أو تضيف شاشتك وصورتك وملاحظتك.','#bag/sessions','كل الحصص'],
  ['ai-layout','على شاشة الصف','المسافة تكشف ثم تنتقل، والسهمان للتنقل. ومفتاح M لدرج المعلم، ومفتاح P للقلم، ومفتاح O لكل الشاشات، ومفتاح F لملء الشاشة.','',''],
  ['ai-toolbox','أدواتي والألعاب','أدوات لما قبل الحصة وفيها وبعدها، وتسع ألعاب لشاشة الصف، وكلها تفتح على درسك مباشرة.','#tools','أدواتي'],
- ['ai-box','بياناتك عندك','أسماء طلابك ودرجاتهم على جهازك وحده. خذ «نسخة احتياطية شاملة» كل أسبوعين وقبل تغيير الجهاز.','#tk/backup','النسخة الشاملة']];
+ ['ai-box','بياناتك عندك','أسماء طلابك ودرجاتهم على جهازك وحده. خذ «نسخة احتياطية شاملة» كل أسبوع وقبل تغيير الجهاز.','#tk/backup','النسخة الشاملة']];
 TK_PAGES.setup={render(M){const E=meInit();const tt=Object.values(TK.tt).filter(Boolean).length;const nc=BG.classes.length;const nst=BG.classes.reduce((a,c)=>a+meStuN(c),0);
   const step=(ok,t)=>`<span class="me-st${ok?' ok':''}">${tkI(ok?'check':'minus')}${t}</span>`;const ttH=meTTHTML();
   M.innerHTML=`<div class="me-steps" aria-label="ما اكتمل من الإعداد">${step(E.grades.length>0,'صفوفي')}${step(nc>0,'شُعبي')}${step(tt>0,'جدولي')}${step(nst>0,'طلابي')}</div>
@@ -17083,9 +17126,9 @@ function tkBkDue(){try{tkLoad();bgLoad();let has=BG.classes.some(c=>meStuN(c)>0)
     if(last){const days=Math.floor((Date.now()-new Date(last).getTime())/864e5);return days>=14?days:0}
     return Math.floor((Date.now()-new Date(TK.me.t0).getTime())/864e5)>=7?-1:0}catch(e){return 0}}
 function tkBkNagHTML(){const d=tkBkDue();if(!d)return '';
-  return `<div class="tk-nag" role="status" data-tkhide>${tkIc('ai-box')}<span><b>${d<0?'لم تأخذ نسخة احتياطية بعد':'آخر نسخة احتياطية قبل '+lxCnt(d,'يوم','يومين','أيام','يومًا')}</b><small>بيانات طلابك وتحضيرك على هذا الجهاز وحده، وتضيع إن مُسحت بيانات المتصفح أو تغيّر الجهاز.</small></span><a class="tk-btn pri sm" href="#tk/backup">انسخ الآن</a><button type="button" class="tk-btn sm ghost" data-tknag="later">ذكّرني بعد أسبوع</button></div>`}
+  return `<div class="tk-nag" role="status" data-tkhide>${tkIc('ai-box')}<span><b>${d<0?'لم تأخذ نسخة احتياطية بعد':'آخر نسخة احتياطية قبل '+lxCnt(d,'يوم','يومين','أيام','يومًا')}</b><small>بيانات طلابك وتحضيرك على هذا الجهاز وحده، وتضيع إن مُسحت بيانات المتصفح أو تغيّر الجهاز.</small></span><a class="tk-btn pri sm" href="#tk/backup">انسخ الآن</a><button type="button" class="tk-btn sm ghost" data-tknag="later">ذكّرني بعد ${svEnv().risk?'ثلاثة أيام':'أسبوع'}</button></div>`}
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-tknag]');if(!b)return;tkLoad();
-  if(b.dataset.tknag==='later'){const d=new Date();d.setDate(d.getDate()+7);TK.pref.bkSnooze=tkISO(d);tkSave();document.querySelectorAll('.tk-nag').forEach(n=>n.remove());toast('سنذكّرك بعد أسبوع');return}
+  if(b.dataset.tknag==='later'){const r=svEnv().risk;const d=new Date();d.setDate(d.getDate()+(r?3:7));TK.pref.bkSnooze=tkISO(d);tkSave();document.querySelectorAll('.tk-nag').forEach(n=>n.remove());toast(r?'سنذكّرك بعد ثلاثة أيام':'سنذكّرك بعد أسبوع');return}
   if(b.dataset.tknag==='cta'){TK.pref.noCta=1;tkSave();document.querySelectorAll('.tk-cta').forEach(n=>n.remove());toast('تجد «إعدادي» في أدواتي متى شئت')}});
 
 /* ---------- ٥) مزامنة الإعدادات بين أجهزة المعلم (اختيارية ويدوية) ----------
@@ -17150,17 +17193,23 @@ async function ckRun(){if(ckBusy)return;ckBusy=true;const R={t:Date.now()};
   try{let n=0;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);n+=k.length+(localStorage.getItem(k)||'').length}R.lsn=n}catch(e){R.lsn=0}
   try{const db=await mdOpen();R.idb=!!db;if(db){const ks=await mdTx('readonly',st=>st.getAllKeys());R.media=Array.isArray(ks)?ks.length:0}}catch(e){R.idb=false}
   try{if(navigator.storage&&navigator.storage.estimate){const e=await navigator.storage.estimate();R.quota=e.quota||0;R.usage=e.usage||0}}catch(e){}
+  try{R.pers=navigator.storage&&navigator.storage.persisted?await navigator.storage.persisted():null;if(R.pers!=null)SV_PERS=!!R.pers}catch(e){R.pers=null}
+  if(R.ls){try{const c=svCapProbe();R.cap=c.cap;R.lsn=c.used}catch(e){}}else R.cap=svCapKnown();
   ckR=R;ckBusy=false;if(tkCur==='check')tkRe()}
 function ckRows(){const R=ckR;if(!R)return [];const mb=n=>bgN(Math.round(n/1048576));const rows=[];const add=(k,t,st,v,hint)=>rows.push({k,t,st,v,hint});
   const big=R.w>=1180&&R.h>=600;add('scr','الشاشة',big?'ok':'warn',`${ar(R.w)}×${ar(R.h)}${R.dpr!==1?' · تكبير ×'+ar(R.dpr):''}`,big?'مساحة تكفي لعرض الدرس على الصف.':'مساحة صغيرة: تصلح للتحضير. وللعرض على الصف افتح الدليل على السبورة أو على حاسوب موصول بها، وكبّر نافذة المتصفح.');
   add('touch','اللمس',R.touch?'ok':'info',R.touch?'شاشة لمس':'بلا لمس',R.touch?'العرض يستجيب للّمس والسحب، والقلم يكتب بالإصبع.':'تتحكم بالفأرة ولوحة المفاتيح أو جهاز العرض: المسافة للتالي، والسهمان للتنقل.');
   add('fs','ملء الشاشة',R.fsOk===true||(R.fs&&R.fsOk!==false)?'ok':'warn',R.fsOk===true?'جُرّب ويعمل':R.fsOk===false?'لم يعمل هنا':R.fs?'متاح':'غير متاح هنا',R.fs&&R.fsOk!==false?'زر ملء الشاشة في شريط العرض، أو مفتاح F.':'استعمل مفتاح F11 في المتصفح لملء الشاشة.');
   add('font','الخطوط',R.uif&&R.hafs?'ok':'warn',`خط الواجهة ${R.uif?'✓':'✗'} · خط المصحف ${R.hafs?'✓':'✗'}`,R.uif&&R.hafs?'تظهر الآيات بخط المصحف، والنصوص بخط الدليل.':'تعذّر تحميل خط: قد تحجبه شبكة المدرسة. الآيات تبقى صحيحة النص لكن بخط بديل. حدّث الصفحة على شبكة أخرى مرة، ثم جرّب.');
-  add('store','التخزين على الجهاز',R.ls&&R.idb?(R.lsn>3600000?'warn':'ok'):'bad',`${R.ls?'يحفظ':'لا يحفظ'} · المستعمل ${bgN(Math.round(R.lsn/1024))} ك.ب${R.quota?' · المتاح للمتصفح '+mb(R.quota)+' م.ب':''}`,!R.ls?'هذا المتصفح لا يحفظ هنا (تصفح خاص؟): ما تكتبه يضيع عند الإغلاق.':!R.idb?'مخزن الصور والتلاوات غير متاح: إضافة صورة أو تلاوة من جهازك لن تعمل.':R.lsn>3600000?'اقترب التخزين من حدّه: خذ نسخة شاملة، ثم احذف ما لا تحتاجه من سجلات قديمة.':`يحفظ بياناتك${R.media?'، وفيه '+lxCnt(R.media,'مرفق واحد','مرفقان','مرفقات','مرفقًا')+' من صورك وتلاواتك':''}.`);
+  {const cap=R.cap||0,pct=cap?Math.min(100,R.lsn/cap*100):0,full=!R.ls&&R.lsn>0,wk=svEnv().wk;
+   add('store','التخزين على الجهاز',full||!R.ls||pct>=90?'bad':pct>=70?'warn':'ok',full?`ممتلئ · المستعمل ${svChars(R.lsn)}`:!R.ls?'لا يحفظ':cap?`المستعمل ${svChars(R.lsn)} من نحو ${svChars(cap)} (${ar(Math.round(pct))}٪)`:`يحفظ · المستعمل ${svChars(R.lsn)}`,
+    full?'مساحة الحفظ امتلأت: ما تكتبه الآن لا يُحفظ. نزّل نسخة احتياطية شاملة فورًا، ثم احذف ما لا تحتاجه من سجلات قديمة.':!R.ls?'هذا المتصفح لا يحفظ هنا (تصفح خاص؟): ما تكتبه يضيع عند الإغلاق.':pct>=90?'المساحة شبه ممتلئة: خذ نسخة شاملة الآن، ثم خفّف السجلات القديمة؛ وإلا ضاع ما تكتبه بعد امتلائها.':pct>=70?'اقتربت المساحة من حدّها: خذ نسخة شاملة، ثم احذف ما لا تحتاجه من سجلات قديمة.':'المساحة تتسع لبياناتك.'+(wk?' وفي سفاري تتسع لنحو نصف ما تتسع له في Chrome من النص العربي.':''))}
+  add('media','الصور والتلاوات',R.idb?'ok':'warn',R.idb?(R.media?lxCnt(R.media,'مرفق واحد','مرفقان','مرفقات','مرفقًا'):'لا مرفقات بعد')+(R.quota?' · المتاح لها '+mb(R.quota)+' م.ب':''):'غير متاح',R.idb?'مخزن منفصل لما تضيفه إلى عروضك من صور وتلاوات، ولا يدخل في النسخة الاحتياطية.':'مخزن الصور والتلاوات غير متاح: إضافة صورة أو تلاوة من جهازك لن تعمل.');
+  add('pers','الحفظ الدائم',R.pers===true?'ok':R.pers===false?'warn':'info',R.pers===true?'ممنوح':R.pers===false?'غير ممنوح':'غير معروف',R.pers===true?'لا يحذف المتصفح بياناتك وحده إن ضاقت مساحة الجهاز.':svEnv().risk?'في سفاري تُحذف بيانات الموقع إن لم تفتحه سبعة أيام: أضف الدليل إلى الشاشة الرئيسية، وخذ نسخة شاملة كل أسبوع.':'قد يحذف المتصفح بياناتك إن ضاقت مساحة الجهاز: خذ نسخة شاملة كل أسبوع. ويُمنح الحفظ الدائم غالبًا بعد تثبيت الدليل تطبيقًا.');
   add('web','المتصفح',R.cq&&R.inert?'ok':'warn',R.cq&&R.inert?'حديث':'قديم',R.cq&&R.inert?'يدعم كل ما في العرض والألعاب.':'متصفح قديم: قد يختل ترتيب بعض الشاشات. حدّث المتصفح، أو استعمل Chrome أو Edge حديثًا.');
   add('net','الشبكة',R.online?(R.ms?(R.ms<2500?'ok':'warn'):'info'):'warn',R.online?(R.ms?`تحميل دروس صف كامل في ${bgN(Math.round(R.ms/100)/10)} ث`:'متصلة'):'غير متصلة',R.ms?(R.ms<2500?'سرعة مناسبة.':'الشبكة بطيئة: افتح الدليل قبل الحصة بدقائق ليكتمل تحميل دروسك.'):'اضغط «قِس السرعة» لتعرف زمن تحميل دروس صف كامل.');
   return rows}
-function ckReport(){const R=ckR||{};const m=TK.chk.m||{};const L=['تقرير فحص الجهاز — دليل المعلم الألمعي','التاريخ: '+new Date().toLocaleString('ar-EG'),`الشاشة: ${R.w}×${R.h} (تكبير ×${R.dpr}) · شاشة الجهاز ${R.sw}×${R.sh} · اللمس: ${R.touch?'نعم':'لا'}`,`ملء الشاشة: ${R.fsOk===true?'جُرّب ويعمل':R.fsOk===false?'لم يعمل':R.fs?'متاح':'غير متاح'}`,`الخطوط: الواجهة ${R.uif?'✓':'✗'} · المصحف ${R.hafs?'✓':'✗'}`,`التخزين: ${R.ls?'يحفظ':'لا يحفظ'} · مخزن المرفقات ${R.idb?'✓':'✗'} · المستعمل ${Math.round((R.lsn||0)/1024)} ك.ب`,`المتصفح: ${R.cq&&R.inert?'حديث':'قديم'} · ${navigator.userAgent}`,`الشبكة: ${R.online?'متصلة':'غير متصلة'}${R.ms?' · تحميل صف في '+Math.round(R.ms)+' مللي ثانية':''}`,`الصوت: ${TK.chk.snd===1?'سُمع':TK.chk.snd===2?'لم يُسمع':'لم يُجرَّب'} · الطباعة: ${TK.chk.prn===1?'تعمل':TK.chk.prn===2?'لا تعمل':'لم تُجرَّب'}`,`الدروس المحمّلة مسبقًا: ${tkGrades().map(g=>g+(tkPre[g]==='ok'?'✓':tkPre[g]==='bad'?'✗':'…')).join(' ')}`,'','— تجربة السبورة الذكية —'];
+function ckReport(){const R=ckR||{};const m=TK.chk.m||{};const L=['تقرير فحص الجهاز — دليل المعلم الألمعي','التاريخ: '+new Date().toLocaleString('ar-EG'),`الشاشة: ${R.w}×${R.h} (تكبير ×${R.dpr}) · شاشة الجهاز ${R.sw}×${R.sh} · اللمس: ${R.touch?'نعم':'لا'}`,`ملء الشاشة: ${R.fsOk===true?'جُرّب ويعمل':R.fsOk===false?'لم يعمل':R.fs?'متاح':'غير متاح'}`,`الخطوط: الواجهة ${R.uif?'✓':'✗'} · المصحف ${R.hafs?'✓':'✗'}`,`التخزين: ${R.ls?'يحفظ':'لا يحفظ'} · مخزن المرفقات ${R.idb?'✓':'✗'} · المستعمل ${R.lsn||0} حرف${R.cap?' من نحو '+R.cap:''} · الحفظ الدائم: ${R.pers===true?'ممنوح':R.pers===false?'غير ممنوح':'غير معروف'}`,`المتصفح: ${R.cq&&R.inert?'حديث':'قديم'} · ${navigator.userAgent}`,`الشبكة: ${R.online?'متصلة':'غير متصلة'}${R.ms?' · تحميل صف في '+Math.round(R.ms)+' مللي ثانية':''}`,`الصوت: ${TK.chk.snd===1?'سُمع':TK.chk.snd===2?'لم يُسمع':'لم يُجرَّب'} · الطباعة: ${TK.chk.prn===1?'تعمل':TK.chk.prn===2?'لا تعمل':'لم تُجرَّب'}`,`الدروس المحمّلة مسبقًا: ${tkGrades().map(g=>g+(tkPre[g]==='ok'?'✓':tkPre[g]==='bad'?'✗':'…')).join(' ')}`,'','— تجربة السبورة الذكية —'];
   CK_M.forEach((x,i)=>L.push(`${i+1}. ${x[0]}: ${m[i]===1?'يعمل ✓':m[i]===2?'فيه مشكلة ✗':'لم يُجرَّب'}`));if((TK.chk.note||'').trim())L.push('','ملاحظات: '+TK.chk.note.trim());return L.join('\n')}
 TK_PAGES.check={render(M){tkLoad();if(!ckR&&!ckBusy)ckRun();const rows=ckRows();const m=TK.chk.m=TK.chk.m||{};const G=tkGrades();const dn=CK_M.filter((x,i)=>m[i]).length,bad=CK_M.filter((x,i)=>m[i]===2).length;
   const ic={ok:'check',warn:'bell',bad:'close',info:'eye'};
@@ -18409,15 +18458,21 @@ const fdSvKB=n=>n<1024?ar(n)+' بايت':n<1048576?ar(Math.max(1,Math.round(n/10
 function fdSvToast(msg,ms){const t=$('#toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),ms||6000)}
 async function fdSvCap(name,ms){if(!window.claude||typeof window.claude.use!=='function')return null;
   try{return await Promise.race([window.claude.use(name),new Promise(r=>setTimeout(()=>r(null),ms||11000))])}catch(e){return null}}
-async function fdSaveBlob(blob,name,msg,alt){
+/* v103: FD_SV_HOW طريقة آخر حفظ ناجح: 'claude' أو 'picker' (نافذة الحفظ في الحاسوب) أو 'anchor' (تنزيل المتصفح، لا يُعرف أوصل).
+   opt.pick: نافذة الحفظ في الحاسوب حيث تتاح خارج العارض (Chrome وEdge)، ليُعرف أن الملف حُفظ فعلًا (النسخة الشاملة) */
+let FD_SV_HOW='';
+async function fdSaveBlob(blob,name,msg,alt,opt){FD_SV_HOW='';
   try{const dl=await fdSvCap('downloads');
     if(dl&&typeof dl.save==='function'){fdSvToast('نافذة تأكيد من Claude: اختر «Save file» ليُحفظ الملف',45000);
-      try{await dl.save({filename:name,data:blob});toast(msg||'حُفظ الملف');return true}
+      try{await dl.save({filename:name,data:blob});FD_SV_HOW='claude';toast(msg||'حُفظ الملف');return true}
       catch(e){const c=String((e&&e.code)||'unavailable');
         if(c==='declined'){fdSvToast('لم يُحفظ الملف. اضغط الزر مرة أخرى، ثم اختر «Save file» في نافذة التأكيد');return false}
         if(c==='rate_limited'){fdSvToast('نافذة حفظ سابقة لم تُغلق، أو تتابعت الطلبات. انتظر لحظات ثم أعد المحاولة');return false}
         await fdSvFail(blob,name,c,alt);return false}}
-    if(!FD_SV_FRAMED){const url=URL.createObjectURL(blob);const A=document.createElement('a');A.href=url;A.download=name;document.body.appendChild(A);A.click();A.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);return true}
+    if(!FD_SV_FRAMED){if(opt&&opt.pick&&typeof window.showSaveFilePicker==='function'){try{const ext=(String(name).match(/\.([A-Za-z0-9]+)$/)||[0,'bin'])[1].toLowerCase();
+        const h=await window.showSaveFilePicker({suggestedName:name,types:[{description:opt.desc||'ملف',accept:{[blob.type||'application/octet-stream']:['.'+ext]}}]});const w=await h.createWritable();await w.write(blob);await w.close();FD_SV_HOW='picker';if(msg)toast(msg);return true}
+        catch(e){if(e&&e.name==='AbortError'){fdSvToast('لم يُحفظ الملف: أُغلقت نافذة الحفظ');return false}}}
+      const url=URL.createObjectURL(blob);const A=document.createElement('a');A.href=url;A.download=name;document.body.appendChild(A);A.click();A.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);FD_SV_HOW='anchor';return true}
     await fdSvFail(blob,name,'no_cap',alt);return false}
   catch(e){console.error(e);try{fdSvToast('تعذّر حفظ الملف الآن')}catch(_){}return false}}
 
@@ -18479,30 +18534,31 @@ const FD_SV_WHY={
 const FD_SV_FIX='<section class="svx-fix"><h4>'+(FD_PUB_ON?'أو ليعمل التنزيل هنا في نسخة <bdi>Claude</bdi>':'ليعمل التنزيل عندك')+'</h4><ol><li>يدعوك صاحب الدليل ببريدك الإلكتروني: زر <bdi>Share</bdi> أعلى الصفحة، ثم <bdi>Invite people by email</bdi>، ويختار لك صلاحية <bdi>Commenter</bdi>.</li><li>تفتح الدليل بحساب <bdi>Claude</bdi> المسجَّل بذلك البريد نفسه، وتضغط زر التنزيل، ثم تختار <bdi>Save file</bdi> في نافذة التأكيد.</li></ol><p>أو يرسل إليك صاحب الدليل الملف نفسه.</p></section>';
 const fdSvPub=()=>'<section class="svx-pub"><h4>الأسرع: النسخة العامة من الدليل</h4><p>فيها الأدوات نفسها، والتنزيل والطباعة يعملان فيها مباشرة لكل من يفتحها، بلا حساب. وما أعددته هنا لا ينتقل إليها، فأنشئ الملف هناك من جديد.</p><div class="svx-acts"><a class="btn accent sm" href="'+esc(fdPubHref())+'" target="_blank" rel="noopener">افتح النسخة العامة</a><button type="button" class="btn sm" data-svx="cppub">انسخ الرابط</button></div><p class="svx-url"><bdi dir="ltr">'+FD_PUB_SHOW+'</bdi></p></section>';
 const FD_SV_IMGTIP='انسخ الصورة بالزر ثم الصقها حيث تشاء. أو احفظها من الصورة نفسها: ضغطة مطولة عليها في الهاتف ثم «حفظ الصورة»، وزر الفأرة الأيمن في الحاسوب ثم «حفظ الصورة باسم».';
-async function fdSvAlt(blob,ext,alt){const imgs=[];
+async function fdSvAlt(blob,ext,alt,name){const imgs=[];
   if(/^(png|jpe?g|webp|gif)$/.test(ext))imgs.push({blob});
   else if(ext==='pdf'&&alt&&Array.isArray(alt.imgs))alt.imgs.forEach(im=>{if(im&&im.bytes)imgs.push({blob:new Blob([im.bytes],{type:'image/jpeg'})});else if(im&&im.url)imgs.push({url:im.url})});
   if(imgs.length)return {t:'img',imgs,pages:ext==='pdf'};
   if(ext==='docx'){try{const d=await fdDocxHtml(blob);return {t:'doc',html:d.html,land:d.land}}catch(e){console.error(e)}}
   if(ext==='xlsx'){try{const d=await fdXlsxHtml(blob);return {t:'doc',html:d.html,sheet:true}}catch(e){console.error(e)}}
-  if(/^(csv|json|txt|md)$/.test(ext)&&blob.size<=3e6){try{return {t:'txt',text:(await blob.text()).replace(/^﻿/,'')}}catch(e){}}
+  if(/^(csv|json|txt|md)$/.test(ext)){if(blob.size<=(FD_SV_BKRE.test(String(name||''))?12e6:3e6)){try{return {t:'txt',text:(await blob.text()).replace(/^﻿/,'')}}catch(e){}}else return {t:'none',big:true}}
   return {t:'none'}}
 async function fdSvFail(blob,name,code,alt){let own=false;
   try{const u=await fdSvCap('user',1500);if(u)own=!!((await u.isOwner())||(await u.canEdit()))}catch(e){}
   const ext=(String(name).match(/\.([A-Za-z0-9]+)$/)||[0,''])[1].toLowerCase();
   const kind=code==='no_cap'?(own?'host':'view'):/^(rejected_extension|extension_not_enabled)$/.test(code)?'ext':code==='too_large'?'big':/^(bad_request|transform_error|request_unknown|not_signed)$/.test(code)?'bug':'off';
-  let A={t:'none'};try{A=await fdSvAlt(blob,ext,alt)}catch(e){console.error(e)}
+  let A={t:'none'};try{A=await fdSvAlt(blob,ext,alt,name)}catch(e){console.error(e)}
   fdSvOpen({name:String(name),size:blob&&blob.size||0,code,kind,A})}
-function fdSvOpen(o){fdSvClose(true);const A=o.A||{t:'none'};const urls=[];let alt='';
+function fdSvOpen(o){fdSvClose(true);const A=o.A||{t:'none'};const urls=[];let alt='';const BKX=A.t==='txt'&&FD_SV_BKRE.test(o.name);
   if(A.t==='img'){A.imgs.forEach(im=>{if(im.blob){im.url=URL.createObjectURL(im.blob);urls.push(im.url)}});const n=A.imgs.length;
     alt='<section class="svx-alt"><h4>'+(A.pages?'صفحات الملف صورًا، بلا تنزيل':'الصورة نفسها، بلا تنزيل')+'</h4><p class="svx-tip">'+FD_SV_IMGTIP+'</p><p class="svx-st" id="fdSvxSt" role="status" aria-live="polite"></p><div class="svx-pgs">'
       +A.imgs.map((im,i)=>'<figure class="svx-pg"><figcaption>'+(A.pages?'<span>الصفحة '+ar(i+1)+' من '+ar(n)+'</span>':'')+'<button type="button" class="btn sm" data-svx="cpimg" data-i="'+i+'">انسخ الصورة</button></figcaption><img src="'+im.url+'" alt="'+(A.pages?'الصفحة '+ar(i+1)+' من '+ar(n):esc(o.name))+'"'+(i?' loading="lazy"':'')+'></figure>').join('')+'</div></section>'}
   else if(A.t==='doc'){alt='<section class="svx-alt"><h4>محتوى الملف، بلا تنزيل</h4><p class="svx-tip">انسخ المحتوى بالزر، ثم الصقه في '+(A.sheet?'<bdi>Excel</bdi>':'<bdi>Word</bdi>')+'.'+(A.land?' واجعل الصفحة أفقية قبل اللصق؛ فالجدول عريض.':'')+'</p><div class="svx-acts"><button type="button" class="btn accent sm" data-svx="cpdoc">انسخ المحتوى</button><p class="svx-st" id="fdSvxSt" role="status" aria-live="polite"></p></div><div class="svx-doc" id="fdSvxDoc" tabindex="0" role="region" aria-label="محتوى الملف">'+A.html+'</div></section>'}
+  else if(BKX){alt=svxBkAlt()}
   else if(A.t==='txt'){alt='<section class="svx-alt"><h4>محتوى الملف، بلا تنزيل</h4><p class="svx-tip">انسخ المحتوى بالزر، ثم الصقه في ملف نصي واحفظه بالاسم نفسه.</p><div class="svx-acts"><button type="button" class="btn accent sm" data-svx="cptxt">انسخ المحتوى</button><p class="svx-st" id="fdSvxSt" role="status" aria-live="polite"></p></div></section>'}
-  else alt='<p class="svx-tip">هذا النوع من الملفات لا يُعرض داخل الصفحة.</p>';
+  else alt='<p class="svx-tip">'+(A.big?'الملف أكبر من أن يُعرض نصًّا هنا.':'هذا النوع من الملفات لا يُعرض داخل الصفحة.')+'</p>';
   const el=document.createElement('div');el.id='fdSvx';el.className='svx-bg';el.dataset.kind=o.kind;el.dataset.code=o.code||'';el.dataset.alt=A.t;
   el.innerHTML='<div class="svx" role="dialog" aria-modal="true" aria-labelledby="fdSvxT" tabindex="-1"><header class="svx-h"><h3 id="fdSvxT">لم يُحفظ الملف</h3><button type="button" class="svx-x" data-svx="close" aria-label="إغلاق"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></header>'
-    +'<div class="svx-b"><p class="svx-file"><bdi>'+esc(o.name)+'</bdi><span>'+fdSvKB(o.size)+'</span></p><p class="svx-why">'+FD_SV_WHY[o.kind]+'</p>'+(FD_PUB_ON&&FD_SV_FRAMED&&o.kind!=='bug'?fdSvPub():'')+(o.kind==='view'?FD_SV_FIX:'')+alt+'</div></div>';
+    +'<div class="svx-b"><p class="svx-file"><bdi>'+esc(o.name)+'</bdi><span>'+fdSvKB(o.size)+'</span></p><p class="svx-why">'+FD_SV_WHY[o.kind]+'</p>'+(!BKX&&FD_PUB_ON&&FD_SV_FRAMED&&o.kind!=='bug'?fdSvPub():'')+(!BKX&&o.kind==='view'?FD_SV_FIX:'')+alt+'</div></div>';
   fdSvx={urls,imgs:A.imgs||[],html:A.html||'',text:A.text||'',back:document.activeElement,ov:document.body.style.overflow};
   {const t=document.getElementById('toast');if(t){clearTimeout(toastT);t.classList.remove('show')}}
   document.body.appendChild(el);document.body.style.overflow='hidden';
@@ -19119,7 +19175,7 @@ try{ofBoot()}catch(e){}
    كل كتابة إلى localStorage تمر من هنا ولا يتغير مفتاح ولا بنية:
    - إن فشلت الكتابة ظهرت لافتة ثابتة (role=alert) لا تخفيها رسالة بعدها، وتُستبدل رسالة النجاح التي تأتي في الثانيتين التاليتين.
    - عند أول كتابة ناجحة لبيانات المعلم يُطلب التخزين الدائم (navigator.storage.persist) إن لم يكن ممنوحًا. */
-let SV_ERR=0,SV_ASKED=false;
+let SV_ERR=0,SV_ASKED=false,SV_QUIET=0;   /* v103: SV_QUIET>0 أثناء كتابة يُتوقَّع فشلها ويُعالَج (الاستعادة الذرّية وقياس سعة التخزين)، فلا تظهر اللافتة */
 const SV_DATA=/^(fdBag|tk\.|nb\.|dms:|vsc\.|fdCup)/;
 function svAskPersist(){if(SV_ASKED)return;SV_ASKED=true;try{const S=navigator.storage;if(S&&S.persisted&&S.persist)S.persisted().then(p=>p||S.persist()).catch(()=>{})}catch(e){}}
 function svBanner(){let b=document.getElementById('svBad');
@@ -19129,7 +19185,7 @@ function svBanner(){let b=document.getElementById('svBad');
   b.hidden=false}
 function svFail(){SV_ERR=Date.now();try{svBanner()}catch(e){}}
 (function(){try{const P=Storage.prototype,o=P.setItem;if(o.__sv)return;
-  const w=function(k,v){let r;try{r=o.call(this,k,v)}catch(e){if(this===window.localStorage)svFail();throw e}
+  const w=function(k,v){let r;try{r=o.call(this,k,v)}catch(e){if(this===window.localStorage&&!SV_QUIET)svFail();throw e}
     if(this===window.localStorage&&SV_DATA.test(String(k)))svAskPersist();return r};
   w.__sv=1;P.setItem=w}catch(e){}})();
 (function(){if(typeof toast!=='function'||toast.__sv)return;const t0=toast;
@@ -19137,6 +19193,257 @@ function svFail(){SV_ERR=Date.now();try{svBanner()}catch(e){}}
     if(Date.now()-SV_ERR<2500&&/^(حُفظ|حفظ|سُجّل|سجّل|سُجل)/.test(m))return t0('لم يُحفظ: مساحة الحفظ في هذا المتصفح ممتلئة أو محجوبة. نزّل نسخة احتياطية الآن');
     return t0(msg)};
   toast.__sv=1})();
+
+/* ---------- v103: سلامة البيانات (مراجعة النشرة ٩٩، الدفعة الأولى: البنود ١٫٣ و١٫٤ و١٫٥ و١٫٦ من خارطة التطوير) ----------
+   - نسخة احتياطية شاملة واحدة: زر الحقيبة ينزّل النسخة الشاملة نفسها، والاستعادة الشاملة تقبل نسخة الحقيبة القديمة ونسخة سجل الوقائع،
+     وزر الاستعادة زر حقيقي يصل إليه مفتاح Tab (A1-10، A5-01).
+   - استعادة آمنة: مقارنة كل قسم بما على الجهاز (العدد وآخر تعديل) وتنبيه إن كان الملف أقدم أو أصغر، ودمج الوقائع بلا تكرار، واختيار الأقسام،
+     ولقطة مما على الجهاز في IndexedDB (قاعدة alm-safe) قبل الاستعادة وزر «تراجع»، وكتابة ذرّية تعيد كل شيء كما كان إن لم تتسع المساحة (A7-6، A7-7)؛
+     ومربع «الصق نص النسخة»، ونافذة نقل النسخة الشاملة من نسخة Claude إلى النسخة العامة (A7-18).
+   - تاريخ نسخة صادق: لا يُسجَّل «آخر نسخة» إلا بعد حفظ مؤكَّد: نافذة الحفظ في الحاسوب، أو حفظ Claude، أو تأكيد المعلم أو فحصه للملف (A7-9)؛
+     و«افحص جهازي» يقيس سعة التخزين المحلي فعلًا ويعرض المستعمل منها، والحفظ الدائم، ومخزن الصور وحده (A7-5).
+   - سفاري: بطاقة «أضف الدليل إلى الشاشة الرئيسية» في سفاري غير المثبَّت، والتذكير بالنسخ كل ٥ أيام فيه وكل ٧ ما لم يُمنح الحفظ الدائم وكل ١٤ إن مُنح (A7-8)؛
+     وتنبيه حين تتغير البيانات من نافذة أخرى، مع إعادة قراءتها ودمج ما لم يُحفظ بعد في هذه النافذة (A7-12).
+   - «امسح بياناتي من هذا الجهاز» للجهاز المشترك (A7-10)، وشاشة الطلاب بلا نقاط ولا «دون ٩٠٪» إلا باختيار المعلم (A7-11).
+   لا يتغير مفتاح ولا بنية. المفاتيح الجديدة إضافية: dms:bkTry (نسخة نُزّلت ولم يُتأكد وصولها) وdms:bkRes (نتيجة آخر استعادة)
+   وdms:lsCap (سعة التخزين المقيسة) وdms:svSaf (إخفاء بطاقة سفاري مؤقتًا)، وقاعدة IndexedDB جديدة alm-safe للقطة ما قبل الاستعادة. */
+let SV_PERS=null,BG_SHOWPTS=false,SV_CAP=null;
+(function(){try{const S=navigator.storage;if(S&&S.persisted)S.persisted().then(p=>{SV_PERS=!!p}).catch(()=>{})}catch(e){}})();
+BG_IC.eye=TK_P.eye;BG_IC.eyeoff=TK_P.eyeoff;
+/* البيئة: iPhone وiPad (كل متصفحاتها WebKit ويحذف ما تكتبه المواقع بعد سبعة أيام استعمال بلا زيارة)، وسفاري في Mac، والتثبيت على الشاشة الرئيسية */
+function svEnv(){const ua=navigator.userAgent||'';const ios=/iP(hone|od|ad)/.test(ua)||(/Macintosh/.test(ua)&&(navigator.maxTouchPoints||0)>1);
+  const mac=!ios&&/Macintosh/.test(ua);const saf=/Safari\//.test(ua)&&!/(Chrome|Chromium|CriOS|FxiOS|EdgiOS|OPiOS|GSA\/|Edg\/|OPR\/|Firefox|Android|SamsungBrowser)/.test(ua);
+  let inst=false;try{inst=navigator.standalone===true||['standalone','fullscreen','minimal-ui'].some(m=>matchMedia('(display-mode: '+m+')').matches)}catch(e){}
+  return {ios,mac,saf,inst,wk:ios||saf,risk:!inst&&(ios||(mac&&saf))}}
+/* كل كم يومًا يُذكَّر المعلم بالنسخة الشاملة */
+const bkEvery=()=>svEnv().risk?5:SV_PERS===true?14:7;
+function svHas(){try{bgLoad();if(BG.classes.some(c=>meStuN(c)>0))return true;lgLoad();if(LG.items.length)return true;tkLoad();if(Object.keys(TK.deck).length||tdHasTT())return true;nbLoad();return NB.cls.length>0}catch(e){return false}}
+const bkDay=iso=>{try{return new Intl.DateTimeFormat('ar-EG',{day:'numeric',month:'long'}).format(new Date(iso))}catch(e){return ''}};
+const bkFileName=d=>'دليل-المعلم_نسخة-شاملة_'+String(d).slice(0,10)+'.json';
+const bkNameHTML=n=>esc(n).replace(/([0-9][0-9.\-]*\.[A-Za-z0-9]+|\.[A-Za-z0-9]+)$/,'<bdi dir="ltr">$1</bdi>');
+const bkPartOf=k=>{const p=BK_PARTS.find(x=>bkPre(x[0])?k.startsWith(x[0]):k===x[0]);return p?p[0]:''};
+const bkPartName=p=>(BK_PARTS.find(x=>x[0]===p)||[0,p])[1];
+/* مفاتيح تخص هذا الجهاز وحده: لا تدخل في ملف النسخة، ولا تُستعاد من ملف */
+const BK_LOCAL=new Set(['dms:bkTry','dms:bkRes','dms:lsCap','dms:svSaf','dms:bkDone']);
+const bkFileKeys=()=>{const k=bkCollect();BK_LOCAL.forEach(x=>delete k[x]);return k};
+
+/* ---------- بطاقة سفاري ---------- */
+const SV_SHARE='<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4M6 11H5v10h14V11h-1"/></svg>';
+function svSafSnoozed(){const s=store.get('svSaf','');return !!s&&s>tkToday()}
+function svSafHTML(where){const E=svEnv();if(!E.risk)return '';if(where!=='backup'&&(svSafSnoozed()||!svHas()))return '';
+  const nm=E.saf?'سفاري':'المتصفح';
+  const how=FD_SV_FRAMED?`<li>خذ نسخة احتياطية شاملة كل أسبوع على الأقل.</li><li>أو انقل عملك إلى النسخة العامة من الدليل وأضفها إلى ${E.mac?'Dock':'الشاشة الرئيسية'}: نزّل النسخة الشاملة هنا، ثم استعدها هناك.</li>`
+    :E.mac?`<li>أضف الدليل إلى Dock: من قائمة «ملف» في سفاري اختر «إضافة إلى Dock»، ثم افتحه منه دائمًا.</li><li>خذ نسخة احتياطية شاملة كل أسبوع.</li>`
+    :`<li>أضف الدليل إلى الشاشة الرئيسية: زر المشاركة ${SV_SHARE} في ${nm}، ثم «إضافة إلى الشاشة الرئيسية». وافتحه بعدها من أيقونته دائمًا.</li><li>خذ نسخة احتياطية شاملة كل أسبوع.</li>`;
+  return `<div class="sv-saf" role="note"><div class="sv-saf-h">${tkI('lock')}<b>${nm} قد يحذف بياناتك</b></div>
+   <p>${E.saf?'يحذف سفاري':'في iPhone وiPad يحذف المتصفح'} ما تحفظه المواقع على الجهاز إذا مرّت سبعة أيام استعملته فيها ولم تفتح الدليل، ومعه صفوفك وطلابك ودرجاتهم وسجلاتك. احمِها:</p><ol>${how}</ol>
+   ${FD_SV_FRAMED?'':`<p class="sv-saf-n">${tkI('bell')}<span>الدليل المثبَّت لا يرى ما حُفظ هنا في ${nm}: نزّل نسختك الشاملة هنا أولًا، ثم استعدها داخل الدليل المثبَّت.</span></p>`}
+   <div class="sv-acts"><button type="button" class="tk-btn sm pri" data-svsaf="bk">${tkI('dl')}نزّل النسخة الشاملة</button>${where==='backup'?'':'<button type="button" class="tk-btn sm ghost" data-svsaf="later">أخفِها ثلاثة أيام</button>'}</div></div>`}
+
+/* ---------- النسخة الشاملة: حفظ لا يُسجَّل إلا إذا تأكد ---------- */
+function bkFlush(){try{if(TK){clearTimeout(tkST);localStorage.setItem(TK_KEY,JSON.stringify(TK))}}catch(e){}try{if(NB&&SV_DIRTY.nb){clearTimeout(nbST);localStorage.setItem(NB_KEY,JSON.stringify(NB))}}catch(e){}}
+function bkMark(d){store.set('bkAt',d);store.set('bkTry',null);try{bgLoad();BG.backupAt=d;localStorage.setItem(BAG_KEY,JSON.stringify(BG))}catch(e){}}
+/* 'ok' حُفظ يقينًا (نافذة الحفظ في الحاسوب، أو حفظ Claude)، و'unsure' نُزّل بالمتصفح ولا يُعرف أوصل، وfalse لم يُحفظ */
+async function bkWriteFile(blob,name,msg){const ok=await fdSaveBlob(blob,name,msg,null,{pick:true,desc:'نسخة احتياطية'});return ok?(FD_SV_HOW==='anchor'?'unsure':'ok'):false}
+async function bkSaveNow(){bkFlush();const keys=bkFileKeys();if(!Object.keys(keys).length){toast('لا بيانات على هذا الجهاز بعد');return false}const d=new Date().toISOString();
+  const r=await bkWriteFile(new Blob([JSON.stringify({app:'دليل المعلم الألمعي',kind:'alm-backup',v:1,savedAt:d,keys})],{type:'application/json'}),bkFileName(d),'حُفظت النسخة الشاملة');
+  if(r==='ok')bkMark(d);else if(r==='unsure'){store.set('bkTry',{at:d});toast('نُزّل ملف النسخة. تأكد أنه وصل إلى جهازك، ثم أكّد ذلك')}
+  return r}
+function bkTryHTML(){let t=null;try{t=store.get('bkTry',null)}catch(e){}if(!t||!t.at||Date.now()-new Date(t.at).getTime()>3*864e5)return '';const E=svEnv();
+  return `<div class="sv-try" role="status"><p><b>هل وصل ملف النسخة إلى جهازك؟</b> ${E.ios?'تجده في تطبيق «الملفات» ← «التنزيلات»؛ وإن سألك سفاري فاختر «تنزيل».':'تجده في مجلد «التنزيلات» باسم «'+bkNameHTML(bkFileName(t.at))+'».'} لا تُحسب نسخةً حتى تؤكد وصولها.</p><div class="sv-acts"><button type="button" class="tk-btn sm pri" data-svbk="yes">${tkI('check')}نعم، الملف عندي</button><button type="button" class="tk-btn sm" data-svbk="check">${tkI('ul')}تحقّق من الملف</button><button type="button" class="tk-btn sm ghost" data-svbk="no">لم أجده</button></div></div>`}
+function bkLastLine(){const at=store.get('bkAt','');return at?' آخر نسخة شاملة: '+bkDay(at)+'.':' لم تنزّل نسخة شاملة بعد.'}
+
+/* ---------- سعة التخزين المحلي: تُقاس مرة بنص عربي على مفتاح مؤقت (سفاري يحسب الحرف العربي بايتين) ---------- */
+function svUsed(){let n=0;try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);n+=k.length+(localStorage.getItem(k)||'').length}}catch(e){}return n}
+function svCapProbe(){const K='__almcap';const used=svUsed();let lo=0,hi=65536;
+  const fits=n=>{try{localStorage.setItem(K,'ب'.repeat(n));return true}catch(e){return false}};
+  SV_QUIET++;try{while(hi<16e6&&fits(hi)){lo=hi;hi*=2}while(hi-lo>4096){const m=Math.floor((lo+hi)/2);if(fits(m))lo=m;else hi=m}}finally{try{localStorage.removeItem(K)}catch(e){}SV_QUIET--}
+  SV_CAP={cap:used+lo,used,ua:navigator.userAgent};try{store.set('lsCap',{cap:SV_CAP.cap,at:Date.now(),ua:SV_CAP.ua})}catch(e){}return SV_CAP}
+function svCapKnown(){if(SV_CAP)return SV_CAP.cap;const c=store.get('lsCap',null);return c&&c.ua===navigator.userAgent&&c.cap>0?c.cap:0}
+const svChars=n=>n<1e6?bgN(Math.max(1,Math.round(n/1000)))+' ألف حرف':bgN(Math.round(n/1e5)/10)+' مليون حرف';
+
+/* ---------- لقطة ما قبل الاستعادة: IndexedDB (alm-safe)، لا localStorage الذي قد يكون ممتلئًا ---------- */
+let sfDB=null;
+function sfOpen(){if(sfDB)return Promise.resolve(sfDB);return new Promise(res=>{try{const r=indexedDB.open('alm-safe',1);r.onupgradeneeded=()=>{try{r.result.createObjectStore('s')}catch(e){}};r.onsuccess=()=>{sfDB=r.result;res(sfDB)};r.onerror=()=>res(null);r.onblocked=()=>res(null)}catch(e){res(null)}})}
+function sfTx(mode,fn){return sfOpen().then(db=>db?new Promise(res=>{try{const tx=db.transaction('s',mode);const q=fn(tx.objectStore('s'));tx.oncomplete=()=>res(mode==='readonly'?(q.result===undefined?null:q.result):true);tx.onerror=()=>res(null);tx.onabort=()=>res(null)}catch(e){res(null)}}):null)}
+const sfPut=(k,v)=>sfTx('readwrite',st=>st.put(v,k));
+const sfGet=k=>sfTx('readonly',st=>st.get(k));
+
+/* ---------- كتابة ذرّية: كلها أو لا شيء. الأقسام التي تصغر أولًا، وعند أي فشل يعود كل مفتاح كما كان بايتًا ببايت ---------- */
+function bkWriteAtomic(set,del){const ks=[...new Set([...Object.keys(set),...(del||[])])];const prev={};ks.forEach(k=>{try{prev[k]=localStorage.getItem(k)}catch(e){prev[k]=null}});
+  const ops=[];(del||[]).forEach(k=>{if(!(k in set)&&prev[k]!=null)ops.push([k,null])});
+  Object.keys(set).sort((a,b)=>(set[a].length-(prev[a]||'').length)-(set[b].length-(prev[b]||'').length)).forEach(k=>{if(prev[k]!==set[k])ops.push([k,set[k]])});
+  const done=[];SV_QUIET++;
+  try{for(const [k,v] of ops){try{if(v==null)localStorage.removeItem(k);else localStorage.setItem(k,v);done.push(k)}
+      catch(e){for(let i=done.length-1;i>=0;i--){const x=done[i];try{if(prev[x]==null)localStorage.removeItem(x);else localStorage.setItem(x,prev[x])}catch(_){}}
+        const dirty=ks.filter(x=>{try{return localStorage.getItem(x)!==prev[x]}catch(_){return true}});return {ok:false,key:k,len:String(v||'').length,dirty}}}}
+  finally{SV_QUIET--}
+  return {ok:true,n:done.length}}
+
+/* ---------- قراءة ملف أو نص ملصق: النسخة الشاملة، أو نسخة الحقيبة القديمة، أو نسخة سجل الوقائع ---------- */
+function bkParse(txt,name){let o=null;try{o=JSON.parse(String(txt||'').replace(/^﻿/,'').trim())}catch(e){}
+  if(!o||typeof o!=='object')return 'هذا ليس نسخة من هذا الدليل: لم نتعرّف على محتواه';
+  const keys={};let from='full',savedAt=typeof o.savedAt==='string'?o.savedAt:'';
+  if(o.kind==='alm-backup'&&o.keys&&typeof o.keys==='object'){Object.entries(o.keys).forEach(([k,v])=>{if(typeof k==='string'&&bkIs(k)&&!BK_LOCAL.has(k)&&typeof v==='string'&&v.length<8e6){try{JSON.parse(v);keys[k]=v}catch(e){}}})}
+  else if(o.v===1&&Array.isArray(o.classes)){const b=Object.assign({},o);delete b.app;delete b.savedAt;if(!b.data||typeof b.data!=='object')b.data={};keys['fdBag.v1']=JSON.stringify(b);from='bag'}
+  else if(o.kind==='tk-log'&&Array.isArray(o.items)){keys['tk.log.v1']=JSON.stringify({v:1,items:o.items.filter(x=>x&&x.id&&x.ts)});from='log';savedAt=typeof o.at==='string'?o.at:''}
+  else return 'هذا الملف ليس نسخة شاملة ولا نسخة من حقيبة المعلم';
+  if(!Object.keys(keys).length)return 'لا بيانات صالحة في هذا الملف';
+  return {name:String(name||'نص ملصق'),savedAt,keys,from,sel:new Set(Object.keys(keys).map(bkPartOf)),logMode:'merge',err:'',noSnap:false}}
+function bkPick(){tkPickFile('.json,application/json',f=>{if(f.size>12e6){toast('الملف أكبر من المتوقع؛ ليس نسخة من هذا الدليل');return}
+  f.text().then(t=>{const r=bkParse(t,f.name);if(typeof r==='string'){toast(r);return}bkIn=r;if(location.hash==='#tk/backup'&&tkCur==='backup')tkRe();else location.hash='#tk/backup'}).catch(()=>toast('تعذّرت قراءة الملف'))})}
+
+/* ---------- ملخص كل قسم: العدد وآخر تعديل، للمقارنة بين الملف والجهاز ---------- */
+function bkStat(p,keys){const ks=Object.keys(keys).filter(k=>bkPartOf(k)===p);if(!ks.length)return null;const J=k=>{try{return JSON.parse(keys[k])}catch(e){return null}};
+  let n=null,lbl='',at='';const bytes=ks.reduce((a,k)=>a+String(keys[k]).length,0);
+  try{if(p==='fdBag.v1'){const b=J(p)||{};const nc=(b.classes||[]).length;n=Object.values(b.data||{}).reduce((a,d)=>a+((d&&d.students)||[]).length,0);lbl=`${lxCnt(nc,'صف واحد','صفان','صفوف','صفًّا')} · ${lxCnt(n,'طالب واحد','طالبان','طلاب','طالبًا')}`;at=b.changedAt||''}
+    else if(p==='tk.log.v1'){const l=J(p)||{};const it=Array.isArray(l.items)?l.items:[];n=it.length;lbl=n?lxCnt(n,'واقعة واحدة','واقعتان','وقائع','واقعة'):'لا وقائع';at=it.reduce((m,x)=>x&&typeof x.ts==='string'&&x.ts>m?x.ts:m,'')}
+    else if(p==='tk.rep.v1'){const r=J(p)||{};n=Object.keys(r.f||{}).length;lbl=n?lxCnt(n,'تقرير واحد','تقريران','تقارير','تقريرًا'):'لا تقارير'}
+    else if(p==='nb.v1'){const d=J(p)||{};const c=Array.isArray(d.cls)?d.cls:[];n=c.reduce((a,x)=>a+((x&&x.st)||[]).length,0);lbl=`${lxCnt(c.length,'صف واحد','صفان','صفوف','صفًّا')} · ${lxCnt(n,'اسم واحد','اسمان','أسماء','اسمًا')}`}
+    else if(p==='tk.v1'){const t=J(p)||{};n=Object.values(t.tt||{}).filter(Boolean).length;lbl=n?'جدول من '+lxCnt(n,'حصة واحدة','حصتين','حصص','حصة'):'بلا جدول';const dk=Object.keys(t.deck||{}).length;if(dk)lbl+=' · '+lxCnt(dk,'عرض مخصَّص','عرضان مخصَّصان','عروض مخصَّصة','عرضًا مخصَّصًا')}
+    else if(p==='fdCup.v1'){const c=J(p)||{};n=Object.keys(c.pl||{}).length;lbl=lxCnt(n,'لاعب واحد','لاعبان','لاعبين','لاعبًا')}
+    else{n=ks.length;lbl=lxCnt(n,'عنصر واحد','عنصران','عناصر','عنصرًا')}}catch(e){}
+  return {n,lbl,at,bytes}}
+function bkFlag(f,d){if(!f||!d)return '';const old=!!(f.at&&d.at&&f.at<d.at);const small=f.n!=null&&d.n!=null&&f.n<d.n;return old&&small?'الملف أقدم وأصغر':old?'الملف أقدم':small?'في الملف أقل':''}
+/* دمج الوقائع بالمعرّف: يبقى كل ما على الجهاز، ويُضاف من الملف ما ليس فيه */
+function bkMergeLog(devRaw,fileRaw){let a=null,b=null;try{a=JSON.parse(devRaw)}catch(e){}try{b=JSON.parse(fileRaw)}catch(e){}
+  const A=a&&Array.isArray(a.items)?a.items:[],B=b&&Array.isArray(b.items)?b.items:[];const have=new Set(A.map(x=>x&&x.id));let added=0;const out=A.slice();
+  B.forEach(x=>{if(x&&x.id&&x.ts&&!have.has(x.id)){out.push(x);have.add(x.id);added++}});out.sort((x,y)=>String(x.ts).localeCompare(String(y.ts)));
+  return {raw:JSON.stringify({v:1,items:out.slice(-5000)}),added}}
+
+/* ---------- معاينة الاستعادة ---------- */
+function bkPreviewHTML(I){const dev=bkCollect();const parts=BK_PARTS.filter(([p])=>Object.keys(I.keys).some(k=>bkPartOf(k)===p));let warn=false;
+  const rows=parts.map(([p,name])=>{const f=bkStat(p,I.keys),d=bkStat(p,dev);const mrg=bkPre(p);const fl=mrg?'':bkFlag(f,d);const on=I.sel.has(p);if(fl&&on&&!(p==='tk.log.v1'&&I.logMode!=='replace'))warn=true;
+    return `<li class="on${fl?' bk-fl':''}"><label class="bk-pick"><input type="checkbox" data-tki="bksec" value="${p}"${on?' checked':''} aria-label="استعد ${esc(name)}"></label><div><b>${name}</b><small>في الملف: ${f.lbl||bkKB(f.bytes)}${f.at?' · آخر تعديل '+esc(bkDay(f.at)):''}</small><small>على هذا الجهاز: ${d?(d.lbl||bkKB(d.bytes))+(d.at?' · آخر تعديل '+esc(bkDay(d.at)):''):'لا شيء'}${mrg?' · يُدمج ولا يُحذف منه شيء':''}</small>${p==='tk.log.v1'&&d&&d.n?`<span class="bk-mode" role="radiogroup" aria-label="طريقة استعادة سجل الوقائع"><label><input type="radio" name="bklog" data-tki="bklog" value="merge"${I.logMode!=='replace'?' checked':''}>ادمج: يبقى ما على الجهاز ويُضاف ما في الملف</label><label><input type="radio" name="bklog" data-tki="bklog" value="replace"${I.logMode==='replace'?' checked':''}>استبدل بما في الملف</label></span>`:''}</div><em>${fl?`<span class="bk-flag">${fl}</span>`:bkKB(f.bytes)}</em></li>`}).join('');
+  return `<p class="bk-file"><b>${bkNameHTML(I.name)}</b><small>${I.savedAt?'حُفظ '+esc(tkFmtDate(I.savedAt)):'بلا تاريخ'}${I.from==='bag'?' · نسخة قديمة من حقيبة المعلم وحدها':I.from==='log'?' · نسخة من سجل الوقائع وحده':''}</small></p>
+   ${warn?`<p class="bk-warn bk-alert">${tkI('bell')}<span><b>انتبه:</b> في الملف أقسام أقدم أو أقل مما على هذا الجهاز (المعلَّمة أدناه). استعادتها تستبدل الأحدث بالأقدم؛ فألغِ اختيارها، أو اختر «ادمج» في سجل الوقائع.</span></p>`:''}
+   <ul class="bk-list bk-cmp">${rows}</ul>
+   <p class="bk-warn">${tkI('bell')}<span>تستبدل الاستعادة الأقسام المختارة بما في الملف، وتُدمج التفضيلات والحلول البصرية فلا يُحذف منها شيء، ولا تمسّ الأقسام غير الموجودة في الملف. وقبلها تُحفظ لقطة مما على هذا الجهاز، فتستطيع التراجع بعدها.</span></p>
+   ${I.noSnap?`<p class="bk-warn bk-alert">${tkI('bell')}<span>تعذّر حفظ لقطة مما على هذا الجهاز قبل الاستعادة (مخزن المتصفح غير متاح)، فلن تستطيع التراجع. نزّل نسخة شاملة مما على الجهاز أولًا، أو اضغط «استعد» مرة أخرى لتتابع بلا لقطة.</span></p>`:''}
+   ${I.err?`<p class="bk-err" role="alert">${I.err}</p>`:''}
+   <div class="tk-row-btns"><button class="tk-btn warn big" data-tk="bkapply">${tkI('ul')}استعد الأقسام المختارة</button><button class="tk-btn" data-tk="bkcancel">${tkI('close')}ألغِ</button></div>`}
+async function bkApply(t){const I=bkIn;if(!I)return;
+  if(!I.noSnapOk&&!tkSure(t,'اضغط ثانيةً لتستعيد الأقسام المختارة'))return;
+  bkFlush();const dev=bkCollect();const set={},res=[];
+  BK_PARTS.forEach(([p,name])=>{const fk=Object.keys(I.keys).filter(k=>bkPartOf(k)===p);if(!fk.length)return;
+    if(!I.sel.has(p)){res.push({p,name,st:'skip'});return}
+    if(p==='tk.log.v1'&&I.logMode!=='replace'&&dev[p]){const m=bkMergeLog(dev[p],I.keys[p]);set[p]=m.raw;res.push({p,name,st:'merge',n:m.added});return}
+    fk.forEach(k=>set[k]=I.keys[k]);res.push({p,name,st:'ok'})});
+  if(!Object.keys(set).length){I.err='اختر قسمًا واحدًا على الأقل لتستعيده.';tkRe();return}
+  const snapAt=new Date().toISOString();let snap=false;
+  if(!I.noSnapOk){snap=!!(await sfPut('pre',{at:snapAt,keys:dev}));if(!snap){I.noSnap=true;I.noSnapOk=true;I.err='';tkRe();return}}
+  const w=bkWriteAtomic(set,[]);
+  if(!w.ok){const p=bkPartOf(w.key),nm=bkPartName(p);I.sel.delete(p);I.noSnapOk=false;
+    I.err=(w.dirty&&w.dirty.length?'تعذّرت الاستعادة، وتعذّر إرجاع بعض البيانات كما كانت: استعد اللقطة بزر «تراجع» بعد تحديث الصفحة. ':'لم تُستعد النسخة، ولم يتغير شيء على هذا الجهاز: ')
+      +`مساحة الحفظ في هذا المتصفح لا تتسع لقسم «${esc(nm)}» (${bkKB(w.len)}).${svEnv().wk?' وفي سفاري تتسع المساحة لنحو نصف ما تتسع له في Chrome من النص العربي.':''} ألغينا اختيار هذا القسم: اضغط «استعد» لتستعيد الباقي، أو استعد النسخة كاملة على حاسوب بمتصفح Chrome أو Edge.`;
+    tkRe();return}
+  clearTimeout(tkST);try{clearTimeout(nbST)}catch(e){}TK=null;bkIn=null;
+  store.set('bkRes',{at:new Date().toISOString(),from:I.name,saved:I.savedAt,res,snap:snap?snapAt:''});store.set('bkDone',0);store.set('bkTry',null);
+  if(I.from==='full'&&/^\d{4}-\d\d-\d\dT/.test(I.savedAt)&&!isNaN(new Date(I.savedAt)))store.set('bkAt',I.savedAt);
+  try{location.reload()}catch(e){toast('استُعيدت بياناتك. حدّث الصفحة لتظهر.')}}
+async function bkUndo(){const S=await sfGet('pre');if(!S||!S.keys){toast('لا لقطة محفوظة للتراجع عنها');return}bkFlush();
+  const now=bkCollect();const del=Object.keys(now).filter(k=>!(k in S.keys));const w=bkWriteAtomic(S.keys,del);
+  if(!w.ok){toast('تعذّر التراجع: مساحة الحفظ لا تكفي. نزّل ما كان قبل الاستعادة ملفًّا واحفظه');return}
+  clearTimeout(tkST);try{clearTimeout(nbST)}catch(e){}TK=null;store.set('bkRes',{at:new Date().toISOString(),undo:true,snap:S.at||''});
+  try{location.reload()}catch(e){toast('عادت بياناتك كما كانت. حدّث الصفحة.')}}
+function bkResHTML(){let R=null;try{R=store.get('bkRes',null)}catch(e){}if(!R||!R.at)return '';
+  if(R.undo)return `<div class="bk-res" role="status"><p class="bk-done">${tkI('undo')}<span>عادت بيانات هذا الجهاز كما كانت قبل الاستعادة${R.snap?' (لقطة '+esc(bkDay(R.snap))+')':''}.</span></p><div class="tk-row-btns"><button class="tk-btn sm ghost" data-tk="bkresx">${tkI('close')}أخفِ</button></div></div>`;
+  const L={ok:['check','استُعيد'],merge:['check','دُمج'],skip:['minus','لم يُختر، فبقي كما كان على الجهاز'],fail:['close','لم يُستعد']};
+  return `<div class="bk-res" role="status"><p class="bk-done">${tkI('check')}<span>استُعيدت بياناتك على هذا الجهاز${R.saved?' من نسخة '+esc(bkDay(R.saved)):''}.</span></p><ul class="bk-list">${(R.res||[]).map(x=>`<li class="${x.st==='skip'?'':'on'}"><span>${tkI((L[x.st]||L.ok)[0])}</span><div><b>${esc(x.name)}</b><small>${(L[x.st]||L.ok)[1]}${x.st==='merge'?(x.n?': أُضيف '+lxCnt(x.n,'واقعة واحدة','واقعتان','وقائع','واقعة')+' إلى ما كان على الجهاز':': لا وقائع جديدة في الملف'):''}</small></div><em></em></li>`).join('')}</ul>
+   ${R.snap?`<p class="tk-tip">قبل الاستعادة حُفظت لقطة مما كان على هذا الجهاز. إن لم تكن هذه النسخة ما تريده فتراجع عنها.</p><div class="tk-row-btns"><button class="tk-btn warn sm" data-tk="bkundo">${tkI('undo')}تراجع عن الاستعادة</button><button class="tk-btn sm" data-tk="bksnapdl">${tkI('dl')}نزّل ما كان قبلها</button><button class="tk-btn sm ghost" data-tk="bkresx">${tkI('close')}أخفِ</button></div>`:`<div class="tk-row-btns"><button class="tk-btn sm ghost" data-tk="bkresx">${tkI('close')}أخفِ</button></div>`}</div>`}
+
+/* ---------- «امسح بياناتي من هذا الجهاز» ---------- */
+function svWipeHTML(S,any){const have=S.filter(p=>p.has).map(p=>p.name);
+  return `<section class="tk-card sv-wipe"><div class="tk-card-h"><h3>${tkI('trash')}جهاز مشترك؟ امسح بياناتك منه</h3></div>
+   <p class="tk-tip">قبل أن تترك جهازًا يستعمله غيرك (حاسوب المختبر، أو غرفة المعلمين، أو حاسوب السبورة): نزّل نسختك الشاملة، ثم امسح بياناتك. يُمسح من هذا المتصفح: ${have.length?have.join('، '):'ما تكتبه في الأدوات'}، والصور والتلاوات التي أضفتها إلى عروضك، ولقطة ما قبل آخر استعادة. ويبقى الدليل نفسه ودروسه المحفوظة للعمل بلا إنترنت.${FD_SV_FRAMED?' ولا يمسّ ما حفظته في حسابك في Claude.':''}</p>
+   <div class="tk-row-btns"><button class="tk-btn" data-tk="bksave"${any?'':' disabled'}>${tkI('dl')}١. نزّل النسخة الشاملة</button><button class="tk-btn warn" data-tk="svwipe">${tkI('trash')}٢. امسح بياناتي من هذا الجهاز</button></div></section>`}
+async function svWipe(){const ks=[];try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&(bkIs(k)||k==='alm.term.v1'))ks.push(k)}}catch(e){}
+  clearTimeout(tkST);try{clearTimeout(nbST)}catch(e){}
+  ks.forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});TK=null;
+  try{if(mdDB){mdDB.close();mdDB=null}}catch(e){}try{if(sfDB){sfDB.close();sfDB=null}}catch(e){}
+  await Promise.all(['alm-media','alm-safe'].map(n=>new Promise(r=>{try{const q=indexedDB.deleteDatabase(n);q.onsuccess=q.onerror=q.onblocked=()=>r();setTimeout(r,3000)}catch(e){r()}})));
+  try{sessionStorage.setItem('svWiped','1')}catch(e){}
+  try{location.reload()}catch(e){}}
+try{if(sessionStorage.getItem('svWiped')){sessionStorage.removeItem('svWiped');setTimeout(()=>toast('مُسحت بياناتك من هذا الجهاز'),900)}}catch(e){}
+
+/* ---------- صفحة «النسخة الاحتياطية الشاملة» ---------- */
+{const BK0=TK_PAGES.backup;
+TK_PAGES.backup={render(M){if(!syInfo&&syBusy!=='peek'){syBusy='peek';syPeek().then(r=>{syInfo=r;syBusy='';if(tkCur==='backup')tkRe()})}
+  if(store.get('bkDone',0))store.set('bkDone',0);
+  const keys=bkCollect();const S=bkSizes(keys);const at=store.get('bkAt','');const any=S.some(p=>p.has);const E=svEnv();
+  M.innerHTML=`${bkResHTML()}${svSafHTML('backup')}<div class="bk-grid"><section class="tk-card"><div class="tk-card-h"><h3>${tkI('dl')}نسخة من كل ما على هذا الجهاز</h3></div>${bkList(S)}
+     ${bkTryHTML()}<div class="tk-row-btns"><button class="tk-btn pri big" data-tk="bksave"${any?'':' disabled'}>${tkI('dl')}نزّل النسخة الشاملة</button></div>
+     <p class="tk-tip">${at?'آخر نسخة شاملة: '+esc(tkFmtDate(at))+'. ':'لم تنزّل نسخة شاملة بعد. '}انسخ ملفك مرة كل أسبوع، وقبل تغيير الجهاز أو المتصفح أو مسح بياناته.${E.ios&&!FD_SV_FRAMED?' في iPhone وiPad: اختر «تنزيل» حين يسألك المتصفح، فتجد الملف في تطبيق «الملفات».':''} وما أضفته إلى عروضك من صور وتلاوات يبقى على هذا الجهاز ولا يدخل في الملف: أعد إضافته على الجهاز الجديد.</p></section>
+    <section class="tk-card"><div class="tk-card-h"><h3>${tkI('ul')}استعادة من ملف</h3></div>
+     ${bkIn?bkPreviewHTML(bkIn)
+       :`<p class="tk-tip">اختر ملف النسخة الشاملة (ينتهي بـ ‎.json‎) الذي نزّلته من هذه الصفحة أو من حقيبة المعلم، على هذا الجهاز أو غيره. وتُقبل نسخة الحقيبة القديمة ونسخة سجل الوقائع أيضًا. وقبل أي استعادة ترى ما في الملف مقارنةً بما على الجهاز.</p><div class="tk-row-btns"><button class="tk-btn big" data-tk="bkpick">${tkI('ul')}اختر ملف النسخة</button></div>
+        <details class="bk-paste"><summary>أو الصق نص النسخة</summary><p class="tk-tip">إن نسخت محتوى النسخة نصًّا (من نسخة Claude مثلًا) فالصقه هنا.</p><textarea class="tk-in" data-tki="bkpaste" rows="4" dir="ltr" spellcheck="false" aria-label="نص النسخة الشاملة" placeholder="{&quot;app&quot;:&quot;دليل المعلم الألمعي&quot;,&quot;kind&quot;:&quot;alm-backup&quot;, …}"></textarea><div class="tk-row-btns"><button class="tk-btn" data-tk="bkpasteok">${tkI('check')}اقرأ النص</button></div></details>`}</section></div>
+   ${sySectionHTML()}${svWipeHTML(S,any)}
+   <p class="tk-priv">${tkI('lock')}<span>الملف يُحفظ عندك وحدك ولا يُرفع إلى أي مكان. وفيه أسماء طلابك ودرجاتهم، فاحفظه في مكان آمن ولا تشاركه.</span></p>`},
+ leave(){bkIn=null;syInfo=null},
+ async act(a,t){
+  if(a==='sypush'||a==='sypull')return BK0.act(a,t);
+  if(a==='bksave'){await bkSaveNow();if(tkCur==='backup')tkRe();return}
+  if(a==='bkpick'){bkPick();return}
+  if(a==='bkpasteok'){const ta=$('[data-tki="bkpaste"]');const v=ta?ta.value:'';if(!v.trim()){toast('الصق نص النسخة أولًا');return}const r=bkParse(v,'نص ملصق');if(typeof r==='string'){toast(r);return}bkIn=r;tkRe();return}
+  if(a==='bkcancel'){bkIn=null;tkRe();return}
+  if(a==='bkapply'){await bkApply(t);return}
+  if(a==='bkundo'){if(!tkSure(t,'اضغط ثانيةً: تعود بيانات الجهاز كما كانت قبل الاستعادة'))return;await bkUndo();return}
+  if(a==='bksnapdl'){const S=await sfGet('pre');if(!S||!S.keys){toast('لا لقطة محفوظة');return}const sk=Object.assign({},S.keys);BK_LOCAL.forEach(x=>delete sk[x]);await fdSaveBlob(new Blob([JSON.stringify({app:'دليل المعلم الألمعي',kind:'alm-backup',v:1,savedAt:S.at,keys:sk})],{type:'application/json'}),'دليل-المعلم_قبل-الاستعادة_'+String(S.at).slice(0,10)+'.json','حُفظ ما كان على الجهاز قبل الاستعادة');return}
+  if(a==='bkresx'){store.set('bkRes',null);tkRe();return}
+  if(a==='svwipe'){const at=store.get('bkAt','');const fresh=at&&Date.now()-new Date(at).getTime()<864e5;
+    if(!tkSure(t,fresh?'اضغط ثانيةً: يُمسح كل ما سبق من هذا الجهاز':'لم تنزّل نسخة شاملة اليوم. اضغط ثانيةً لتمسح بلا نسخة'))return;await svWipe();return}},
+ input(n,t){if(!bkIn)return;if(n==='bksec'){if(t.checked)bkIn.sel.add(t.value);else bkIn.sel.delete(t.value);bkIn.err='';return}if(n==='bklog'){bkIn.logMode=t.value==='replace'?'replace':'merge'}}};}
+
+/* ---------- تذكير النسخة الشاملة: من النسخة الشاملة وحدها، وكل ٥ أيام في سفاري غير المثبَّت، وكل ٧ ما لم يُمنح الحفظ الدائم ---------- */
+tkBkDue=function(){try{tkLoad();bgLoad();let has=BG.classes.some(c=>meStuN(c)>0)||Object.keys(TK.deck).length>0||tdHasTT();if(!has){try{lgLoad();has=LG.items.length>0}catch(e){}}if(!has){try{nbLoad();has=NB.cls.length>0}catch(e){}}if(!has)return 0;
+    const sn=TK.pref.bkSnooze;if(sn&&sn>tkToday())return 0;const lim=bkEvery();const last=store.get('bkAt','');
+    if(last){const days=Math.floor((Date.now()-new Date(last).getTime())/864e5);return days>=lim?days:0}
+    return Math.floor((Date.now()-new Date(TK.me.t0).getTime())/864e5)>=Math.min(lim,7)?-1:0}catch(e){return 0}};
+bgBackup=async function(){const r=await bkSaveNow();if(r)fdRender()};
+
+/* ---------- نافذتان مفتوحتان: كل وحدة تحمل بياناتها في الذاكرة؛ فإن كتبت نافذة أخرى المفتاح نفسه أُعيدت قراءته هنا،
+   وما لم يُحفظ بعد في هذه النافذة (الأدوات والدفتر يحفظان بعد لحظة) يُدمج مع الجديد بمقارنة ثلاثية بدل أن يكتب فوقه ---------- */
+const SV_DIRTY={tk:false,nb:false};
+{const t0=tkSave;tkSave=function(){SV_DIRTY.tk=true;return t0.apply(this,arguments)};const n0=nbSave;nbSave=function(){SV_DIRTY.nb=true;return n0.apply(this,arguments)}}
+(function(){try{const P=Storage.prototype,o=P.setItem;if(o.__sv103)return;const w=function(k,v){const r=o.call(this,k,v);if(this===window.localStorage){if(k===TK_KEY)SV_DIRTY.tk=false;else if(k===NB_KEY)SV_DIRTY.nb=false}return r};w.__sv103=1;if(o.__sv)w.__sv=o.__sv;P.setItem=w}catch(e){}})();
+function svMerge3(base,ours,theirs,depth){const isO=x=>!!x&&typeof x==='object'&&!Array.isArray(x);if(!isO(base)||!isO(ours)||!isO(theirs))return ours;const out={};
+  new Set([...Object.keys(base),...Object.keys(ours),...Object.keys(theirs)]).forEach(k=>{const b=JSON.stringify(base[k]),o=JSON.stringify(ours[k]),t=JSON.stringify(theirs[k]);
+    const v=o===b?theirs[k]:(t===b||t===o)?ours[k]:(depth>0?svMerge3(base[k],ours[k],theirs[k],depth-1):ours[k]);if(v!==undefined)out[k]=v});return out}
+const SV_AUTO=/^#(home|me|tools|nb|bag(\/(students|export|map|sessions|charter|quest|certs))?|tk\/(log|report|backup|setup|today|check))?$/;
+let svNoteT=0;
+function svRerender(){const h=location.hash||'#home';try{if(h.startsWith('#tk/'))tkRe();else if(h==='#nb')nbRender();else if(/^#(home|me|tools|bag|feed)/.test(h)||h==='#')fdRender()}catch(e){console.error(e)}}
+function svBar(manual){let b=document.getElementById('svSync');if(!b){b=document.createElement('div');b.id='svSync';b.className='sv-sync';b.setAttribute('role','status');document.body.appendChild(b);
+    b.addEventListener('click',e=>{const x=e.target.closest('[data-svsync]');if(!x)return;if(x.dataset.svsync==='show')svRerender();b.hidden=true})}
+  b.innerHTML=`<span>تحدّثت بياناتك من نافذة أخرى مفتوحة للدليل${manual?'، ولم نُعِد رسم هذه الصفحة حتى لا يضيع ما تكتبه أو تعرضه':''}.</span>${manual?'<button type="button" class="tk-btn sm pri" data-svsync="show">اعرض الأحدث</button>':''}<button type="button" class="tk-btn sm ghost" data-svsync="close">إغلاق</button>`;
+  b.hidden=false;clearTimeout(b._t);if(!manual)b._t=setTimeout(()=>{b.hidden=true},6000)}
+function svNote(){clearTimeout(svNoteT);svNoteT=setTimeout(()=>{const a=document.activeElement;const typing=!!a&&a.matches&&a.matches('input,textarea,select,[contenteditable="true"],[contenteditable=""]')&&!a.matches('[type=checkbox],[type=radio],[type=button],[type=submit]');
+  const busy=typing||!!document.querySelector('dialog[open],#fdSvx')||!!document.fullscreenElement||!SV_AUTO.test(location.hash||'#home');
+  if(!busy)svRerender();svBar(busy)},250)}
+window.addEventListener('storage',e=>{try{if(e.storageArea&&e.storageArea!==localStorage)return;const k=e.key;
+  const all=k===null;
+  if(all||k===TK_KEY){let m=null;if(!all&&TK&&SV_DIRTY.tk&&e.newValue&&e.oldValue){try{m=svMerge3(JSON.parse(e.oldValue),TK,JSON.parse(e.newValue),1)}catch(_){m=null}}if(m)TK=m;else{TK=null;tkLoad()}}
+  if(all||k===NB_KEY){let m=null;if(!all&&NB&&SV_DIRTY.nb&&e.newValue&&e.oldValue){try{m=svMerge3(JSON.parse(e.oldValue),NB,JSON.parse(e.newValue),2)}catch(_){m=null}}if(m)NB=nbFix(m);else if(NB){NB=null;SV_DIRTY.nb=false;clearTimeout(nbST);nbLoad()}}
+  if(all||k===BAG_KEY){BG=null;bgLoad()}
+  if(all||k===LOG_KEY){LG=null;lgLoad()}
+  if(all||k===RP_KEY){RP=null;rpLoad()}
+  if(all||k===CP_KEY){cpLd=false;CP={v:1,pl:{},cur:{},open:{},sound:false};cpLoad()}
+  if(all||[TK_KEY,NB_KEY,BAG_KEY,LOG_KEY,RP_KEY,CP_KEY].includes(k))svNote()}catch(err){console.error(err)}});
+
+/* ---------- أزرار البطاقات خارج صفحات الأدوات (الحقيبة وسجل الوقائع) ---------- */
+document.addEventListener('click',async e=>{const b=e.target.closest&&e.target.closest('[data-svsaf],[data-svbk]');if(!b)return;e.preventDefault();e.stopPropagation();
+  if(b.dataset.svsaf==='later'){const d=new Date();d.setDate(d.getDate()+3);store.set('svSaf',tkISO(d));document.querySelectorAll('.sv-saf').forEach(n=>n.remove());toast('سنذكّرك بعد ثلاثة أيام');return}
+  if(b.dataset.svsaf==='bk'){await bkSaveNow();svRerender();return}
+  const a=b.dataset.svbk;
+  if(a==='yes'){const t=store.get('bkTry',null);if(t&&t.at)bkMark(t.at);toast('سُجّلت نسختك الشاملة');svRerender();return}
+  if(a==='no'){store.set('bkTry',null);toast(svEnv().ios?'نزّلها مرة أخرى، واختر «تنزيل» حين يسألك المتصفح':'نزّلها مرة أخرى، وتأكد أن المتصفح يسمح بتنزيل الملفات');svRerender();return}
+  if(a==='check'){tkPickFile('.json,application/json',f=>{f.text().then(x=>{let o=null;try{o=JSON.parse(x)}catch(_){}const t=store.get('bkTry',null)||{};
+      if(o&&o.kind==='alm-backup'&&o.keys&&typeof o.savedAt==='string'){if(!t.at||o.savedAt===t.at){bkMark(o.savedAt);toast('تحقّقنا من الملف: نسختك الشاملة سليمة')}else toast('هذا ملف نسخة أخرى حُفظت '+tkFmtDate(o.savedAt)+'. اختر الملف الذي نزّلته الآن')}
+      else toast('هذا الملف ليس نسخة شاملة من هذا الدليل');svRerender()}).catch(()=>toast('تعذّرت قراءة الملف'))});return}},true);
+
+/* ---------- نافذة «لم يُحفظ الملف» للنسخة الشاملة في نسخة Claude: خطوات نقلها إلى النسخة العامة باللصق ---------- */
+const FD_SV_BKRE=/^دليل-المعلم_(نسخة-شاملة|قبل-الاستعادة)/;
+function svxBkAlt(){return '<section class="svx-alt"><h4>انقل نسختك إلى النسخة العامة من الدليل</h4><ol class="svx-steps"><li>انسخ محتوى النسخة بالزر أدناه.</li><li>افتح النسخة العامة'+(FD_PUB_ON?' في <a href="'+esc(FD_PUB+'#tk/backup')+'" target="_blank" rel="noopener">صفحة «النسخة الاحتياطية الشاملة»</a>':'')+'.</li><li>في «استعادة من ملف» افتح «أو الصق نص النسخة»، والصق ما نسخته، ثم «اقرأ النص» و«استعد».</li></ol><div class="svx-acts"><button type="button" class="btn accent sm" data-svx="cptxt">انسخ المحتوى</button><p class="svx-st" id="fdSvxSt" role="status" aria-live="polite"></p></div><p class="svx-tip">ويعمل في النسخة العامة التنزيل والاستعادة من ملف أيضًا. وما تنسخه فيه أسماء طلابك ودرجاتهم، فلا تلصقه في غير الدليل.</p></section>'}
 
 /* ================= router ================= */
 let views=$$('.view');
