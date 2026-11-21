@@ -1,13 +1,15 @@
-/* دليل المعلم الألمعي — ملف الخدمة: العمل بلا إنترنت (v97). للنسخة العامة وحدها (GitHub Pages)؛ نسخة Claude لا تحمله.
+/* دليل المعلم الألمعي — ملف الخدمة: العمل بلا إنترنت (v97؛ v104: المهلة على الصفحة كاملة، والطلب المسبق). للنسخة العامة وحدها (GitHub Pages)؛ نسخة Claude لا تحمله.
    ما يُحفظ: الصفحة نفسها وخطوطها وأيقوناتها عند التثبيت، ثم كل ما يُفتح من ملفات الموقع ومكتبات التصدير (cdnjs و jsDelivr) عند أول طلب،
    وما يطلبه المعلم صراحة من بطاقة «العمل بلا إنترنت» (رسالة keep من الصفحة: دروس صفوفه، ثم الدليل والحلول البصرية والمقاطع).
-   - الصفحة وبياناتها (دروس الصفوف، وفهرس البحث، وفصول الدليل، وقائمة الملفات): الأحدث من الشبكة أولًا، والمحفوظ إن غابت الشبكة أو أبطأت أكثر من أربع ثوانٍ.
+   - الصفحة وبياناتها (دروس الصفوف، وفهرس البحث، وفصول الدليل، وقائمة الملفات): الأحدث من الشبكة أولًا، والمحفوظ إن غابت الشبكة أو لم يكتمل وصول الملف كله
+     خلال ثلاث ثوانٍ (v104: كانت المهلة على أول الاستجابة لا على جسمها، فيعلق المعلم على الشبكة البطيئة بعد كل نشرة). والجديد يُحفظ في الخلفية فيظهر في الزيارة التالية.
+     ولا يُعاد حفظ ملف لم يتغير (ETag نفسه). وطلب الصفحة يبدأ مع تشغيل ملف الخدمة (navigation preload) حيث يتاح.
    - الخطوط والصور والمكتبات: المحفوظ أولًا، ويُحدَّث في الخلفية.
    - المقاطع: تُجاب طلبات المدى (Range) من الملف المحفوظ كاملًا إن وُجد، وإلا فمن الشبكة.
    - لا تُعترض: الحقائب التدريبية وملفات الدروس PDF (كبيرة، وتُنزَّل إلى الجهاز عند طلبها)، ولا أي موقع آخر، ولا أي طلب غير GET.
    اسم المخزن ثابت (alm-v1) فلا يضيع المحفوظ عند تحديث هذا الملف؛ يتغير الاسم فقط إن تغيّرت بنية المحفوظ. لا يُحفظ فيه شيء من بيانات المعلم ولا طلابه. */
 'use strict';
-const SW_VER = '97.1';
+const SW_VER = '104.1';
 const CACHE = 'alm-v1';
 const ROOT = new URL('./', self.location).pathname;
 const CDN = ['https://cdnjs.cloudflare.com', 'https://cdn.jsdelivr.net'];
@@ -15,7 +17,7 @@ const CORE = ['./', 'offline.json', 'manifest.webmanifest', 'icon-192.png', 'ico
   'fonts/AlmSansArabic-Regular.woff2', 'fonts/AlmSansArabic-Bold.woff2', 'fonts/hafs.woff2', 'fonts/amiri-sym.woff2'];
 const FRESH = /^(?:ls\/s\d\.json|data\/search\.json|data\/parts\/\d+\.html|offline\.json)$/;
 const SKIP = /^(?:vsc\/kits\/|ls\/f\d\/|sw\.js$)/;
-const WAIT = 4000;
+const WAIT = 3000;
 
 /* مفتاح الحفظ لملف من الموقع: بلا استعلام، و x/index.html هو x/ */
 const keyOf = u => { let p = u.pathname; if (p.endsWith('/index.html')) p = p.slice(0, -10); return u.origin + p; };
@@ -37,6 +39,7 @@ self.addEventListener('install', e => {
 
 self.addEventListener('activate', e => {
   e.waitUntil((async () => {
+    try { if (self.registration.navigationPreload) await self.registration.navigationPreload.enable(); } catch (_) {}
     const ks = await caches.keys();
     await Promise.all(ks.filter(k => k.startsWith('alm-') && k !== CACHE).map(k => caches.delete(k)));
     await self.clients.claim();
@@ -52,21 +55,35 @@ const OFFLINE_PAGE = '<!doctype html><html lang="ar" dir="rtl"><meta charset="ut
   '<script>addEventListener("online",function(){location.reload()})<\/script></body></html>';
 const offlinePage = () => new Response(OFFLINE_PAGE.replace('href="./"', 'href="' + ROOT + '"'), { status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
 
-/* الأحدث أولًا: الشبكة، ثم المحفوظ إن غابت أو أبطأت */
+/* الأحدث أولًا: الشبكة، ثم المحفوظ إن غابت أو لم يكتمل وصول الملف كله خلال WAIT.
+   v104: الطلب يبدأ قبل البحث في المخزن (والطلب المسبق للتصفح إن وُجد)، والسباق على جسم الاستجابة كله لا على رؤوسها،
+   فلا يعلق المعلم على شبكة بطيئة وعنده نسخة محفوظة؛ والملف الذي لم يتغير (ETag نفسه) لا يُكتب في المخزن من جديد. */
+const sameTag = (a, b) => { const x = a && a.headers.get('ETag'), y = b && b.headers.get('ETag'); return !!x && x === y; };
 async function fresh(e, req, u) {
-  const c = await caches.open(CACHE), key = keyOf(u);
+  const key = keyOf(u);
+  const pre = req.mode === 'navigate' && e.preloadResponse ? e.preloadResponse.catch(() => null) : null;
+  const res = (pre ? pre.then(r => r || fetch(req)) : fetch(req));
+  res.catch(() => {});
+  const c = await caches.open(CACHE);
   const hit = await c.match(key, { ignoreVary: true });
-  const net = fetch(req).then(r => { if (good(r)) e.waitUntil(store(c, key, r.clone())); return r; });
   if (!hit) {
-    try { return await net; } catch (_) { return req.mode === 'navigate' ? offlinePage() : Response.error(); }
+    try { const r = await res; if (good(r)) e.waitUntil(store(c, key, r.clone())); return r; }
+    catch (_) { return req.mode === 'navigate' ? offlinePage() : Response.error(); }
   }
+  const full = res.then(async r => {
+    if (!good(r)) return r;
+    const body = await r.arrayBuffer();
+    const x = new Response(body, { status: r.status, statusText: r.statusText, headers: r.headers });
+    if (!sameTag(hit, x)) e.waitUntil(c.put(key, x.clone()).catch(() => {}));
+    return x;
+  });
   let timer = 0;
-  const late = new Promise(res => { timer = setTimeout(() => res(null), WAIT); });
+  const late = new Promise(ok => { timer = setTimeout(() => ok(null), WAIT); });
   try {
-    const r = await Promise.race([net, late]);
+    const r = await Promise.race([full, late]);
     clearTimeout(timer);
     if (r && r.ok) return r;
-    if (!r) e.waitUntil(net.catch(() => {}));      // أبطأت الشبكة: يُعرض المحفوظ، ويكتمل التحديث في الخلفية
+    if (!r) e.waitUntil(full.catch(() => {}));     // لم يكتمل الملف في المهلة: يُعرض المحفوظ، ويكتمل الجديد في الخلفية للزيارة التالية
     return hit;
   } catch (_) { clearTimeout(timer); return hit; }
 }
