@@ -10,27 +10,28 @@ src = re.sub(r'<!--m2:start-->.*?<!--m2:end-->', '', src, flags=re.S)
 RAW = PAGE.endswith('.css'); NOPREFIX = len(sys.argv) > 3 and sys.argv[3] == 'noprefix'
 CSS = src if RAW else '\n'.join(re.findall(r'<style[^>]*>(.*?)</style>', src, re.S))
 
-INK = '#1A1A2E'
+INK = '#1E1B4B'
+# نموذج 2 البسيط: نيلي للنصوص والأسطح الداكنة، وبنفسجي للإجراء الرئيسي، ونعناعي للتمييز، ودرجاتها الفاتحة للأسطح
 FILL = {  # خلفيات وحدود وتعبئة
- '#0D1B3D': INK, '#0A1530': INK, '#16264D': INK, '#22345F': '#33334D', '#1E3A8A': INK, '#16306F': INK, '#1B3A86': INK, '#1B2D5C': INK, '#13111A': INK, '#1D1A2B': INK,
- '#334A7A': '#4A4A5E', '#4A5878': '#4A4A5E',
- '#2563EB': '#4D7CFE', '#1D4ED8': '#4D7CFE',
- '#14B8A6': '#2EC4A0', '#0B7C70': '#2EC4A0', '#0F766E': '#2EC4A0', '#5EEAD4': '#6FDCC0', '#5FD3C5': '#6FDCC0',
- '#FF7A1A': '#FF7A5C', '#FFB26B': '#FFD66B', '#B54E00': '#FF7A5C', '#FFB37A': '#FFD66B', '#FFB466': '#FFD66B', '#C2410C': '#FF7A5C', '#F2B84B': '#FFC93C', '#E9C46A': '#FFC93C',
- '#EEF4FF': '#FFF6E5', '#F1F5FF': '#FFF6E5', '#DCE7FF': '#E3EBFF', '#B9CDFB': '#C9D7FF', '#8DB0F7': '#93AEFF', '#A9BCE6': '#C9D7FF', '#B9C8EA': '#E6DCC8', '#C9D6F2': '#E6DCC8', '#C9D6F5': '#E6DCC8', '#9DB0DA': '#B8B2A6',
- '#E7F8F5': '#DDF6EE', '#C6EFE9': '#C4F0E3', '#FFF3E8': '#FFF0C4', '#FFE1C7': '#FFE7A3',
- '#B9C9E8': '#B8B2A6', '#D5E0F2': '#E6DCC8', '#AEBBD6': '#B8B2A6', '#8E9BB5': '#8A8578', '#9AA6BF': '#8A8578', '#8DA0C8': '#8A8578', '#6B80AD': '#6B6B7E', '#C9D3E6': '#E6DCC8',
+ '#0D1B3D': INK, '#0A1530': INK, '#16264D': INK, '#1E3A8A': INK, '#16306F': INK, '#1B3A86': INK, '#1B2D5C': INK, '#13111A': INK, '#1D1A2B': INK, '#22345F': '#2A2660',
+ '#334A7A': '#5B5880', '#4A5878': '#5B5880',
+ '#2563EB': '#6D28D9', '#1D4ED8': '#5B21B6',
+ '#14B8A6': '#34D399', '#0B7C70': '#047857', '#0F766E': '#047857', '#5EEAD4': '#6EE7B7', '#5FD3C5': '#6EE7B7',
+ '#FF7A1A': '#34D399', '#B54E00': '#047857', '#C2410C': '#047857', '#FFB26B': '#A7F3D0', '#FFB37A': '#A7F3D0', '#FFB466': '#A7F3D0', '#F2B84B': '#6EE7B7', '#E9C46A': '#6EE7B7',
+ '#EEF4FF': '#F7F6FB', '#F1F5FF': '#F7F6FB', '#DCE7FF': '#EDE9FE', '#B9CDFB': '#DDD6FE', '#8DB0F7': '#A78BFA', '#A9BCE6': '#C4B5FD', '#B9C8EA': '#E7E5F2', '#C9D6F2': '#E7E5F2', '#C9D6F5': '#E7E5F2', '#9DB0DA': '#A6A3C2',
+ '#E7F8F5': '#ECFDF5', '#C6EFE9': '#D1FAE5', '#FFF3E8': '#ECFDF5', '#FFE1C7': '#D1FAE5',
+ '#B9C9E8': '#D4D1E6', '#D5E0F2': '#E7E5F2', '#AEBBD6': '#C9C6DD', '#8E9BB5': '#8C89AB', '#9AA6BF': '#8C89AB', '#8DA0C8': '#8C89AB', '#6B80AD': '#6E6B8F', '#C9D3E6': '#E7E5F2',
 }
-TEXT = {  # لون النص: درجات تقرأ على الفاتح
+TEXT = {  # لون النص: درجات تقرأ على الفاتح، والفاتحة منها للنص فوق النيلي
  '#0D1B3D': INK, '#0A1530': INK, '#16264D': INK, '#1E3A8A': INK, '#1D1A2B': INK, '#22345F': INK, '#16306F': INK,
- '#334A7A': '#4A4A5E', '#4A5878': '#4A4A5E', '#6B80AD': '#5A5A6E',
- '#2563EB': '#2D4FCB', '#1D4ED8': '#2D4FCB',
- '#14B8A6': '#13806A', '#0B7C70': '#13806A', '#0F766E': '#13806A',
- '#FF7A1A': '#B23A1E', '#B54E00': '#B23A1E', '#C2410C': '#B23A1E',
- '#FFB26B': '#FFC93C', '#FFB37A': '#FFC93C', '#FFB466': '#FFC93C', '#5FD3C5': '#6FDCC0', '#5EEAD4': '#6FDCC0', '#8DB0F7': '#93AEFF', '#B9CDFB': '#C9D7FF',
- '#DCE7FF': '#FFF6E5', '#EEF4FF': '#FFF6E5', '#C9D6F2': '#E6DCC8', '#AEBBD6': '#D8D2C4', '#B9C9E8': '#D8D2C4',
+ '#334A7A': '#5B5880', '#4A5878': '#5B5880', '#6B80AD': '#6E6B8F',
+ '#2563EB': '#6D28D9', '#1D4ED8': '#5B21B6',
+ '#14B8A6': '#047857', '#0B7C70': '#047857', '#0F766E': '#047857',
+ '#FF7A1A': '#047857', '#B54E00': '#047857', '#C2410C': '#047857',
+ '#FFB26B': '#6EE7B7', '#FFB37A': '#6EE7B7', '#FFB466': '#6EE7B7', '#5FD3C5': '#6EE7B7', '#5EEAD4': '#6EE7B7', '#8DB0F7': '#C4B5FD', '#B9CDFB': '#DDD6FE',
+ '#DCE7FF': '#F5F3FF', '#EEF4FF': '#F5F3FF', '#C9D6F2': '#D4D1E6', '#AEBBD6': '#C9C6DD', '#B9C9E8': '#C9C6DD',
 }
-MID = {'#4D7CFE', '#2EC4A0', '#FFC93C', '#FFD66B', '#FF7A5C', '#6FDCC0', '#93AEFF', '#C9D7FF'}  # ألوان النص فوقها حبر
+MID = {'#34D399', '#6EE7B7', '#A7F3D0', '#A78BFA', '#C4B5FD', '#DDD6FE', '#EDE9FE', '#D1FAE5'}  # ألوان النص فوقها نيلي
 COLPROPS = {'background', 'background-color', 'background-image', 'border', 'border-color', 'border-top', 'border-bottom', 'border-left', 'border-right',
             'border-inline-start', 'border-inline-end', 'border-block-start', 'border-block-end', 'border-top-color', 'border-bottom-color', 'border-inline-start-color',
             'outline', 'outline-color', 'fill', 'stroke', 'caret-color', 'accent-color', 'text-decoration-color', 'column-rule', 'box-shadow', 'text-shadow', 'color', '--door', '--c', '--k', '--bg', '--fg', '--accent', '--tone', '--col'}
@@ -56,7 +57,7 @@ def mapval(prop, val):
         return m.group(0)
     val = HEX.sub(sub, val)
     if prop in ('box-shadow',) and 'rgba(13,27,61' in val.replace(' ', ''):
-        val = re.sub(r'rgba\(\s*13\s*,\s*27\s*,\s*61\s*,\s*([0-9.]+)\s*\)', lambda m: f'rgba(26,26,46,{m.group(1)})', val); changed = True
+        val = re.sub(r'rgba\(\s*13\s*,\s*27\s*,\s*61\s*,\s*([0-9.]+)\s*\)', lambda m: f'rgba(30,27,75,{m.group(1)})', val); changed = True
     return val, changed
 
 def sel_prefix(sel):

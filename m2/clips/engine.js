@@ -1,10 +1,12 @@
-/* محرّك مقاطع نموذج 2
-   مشاهد مسطّحة بحدّ داكن وظل صلب إلى أسفل اليسار، تُرسم لحظةً لحظة بالدالة render(t)
+/* محرّك مقاطع نموذج 2 (النمط البسيط)
+   مشاهد مسطّحة على خلفية بيضاء: خط نيلي رفيع بلا ظلال ولا زخارف، وثلاثة ألوان بصبغاتها
+   (النيلي للنص والخط، والبنفسجي، والنعناعي)، وحركة دخول هادئة بلا ارتداد. تُرسم لحظةً لحظة بالدالة render(t)
    فتُصوَّر إطارًا إطارًا (30 إطارًا في الثانية، 8 ثوانٍ، 1200×900). المقطع يتلاشى في آخره
    ليعود إلى الخلفية الفارغة فيتكرر بلا قفزة. */
-const NS = 'http://www.w3.org/2000/svg', INK = '#1A1A2E', DUR = 8, FO = 7.35;
-const C = { blue: '#4D7CFE', mint: '#2EC4A0', yel: '#FFC93C', coral: '#FF7A5C', lav: '#B9A6FF', sky: '#5CC8FF', pink: '#FF8FCF',
-  cream: '#FFF6E5', white: '#FFFFFF', bink: '#2D4FCB', soft: '#FFE9B0', water: '#BDE9FF', mute: '#4A4A5E' };
+const NS = 'http://www.w3.org/2000/svg', INK = '#1E1B4B', DUR = 8, FO = 7.35, SWK = .6, BOB = false;
+/* أسماء الألوان باقية كما تستعملها المشاهد، وقيمها صبغات من البنفسجي والنعناعي */
+const C = { blue: '#DDD6FE', mint: '#34D399', yel: '#A7F3D0', coral: '#C4B5FD', lav: '#A78BFA', sky: '#D1FAE5', pink: '#EDE9FE',
+  cream: '#FFFFFF', white: '#FFFFFF', bink: '#6D28D9', soft: '#ECFDF5', water: '#F5F3FF', mute: '#5B5880' };
 const S = document.getElementById('S');
 let R = S, ITEMS = [], HOOKS = [];
 
@@ -19,6 +21,7 @@ const E = {
   bounce: p => { const n = 7.5625, d = 2.75; if (p < 1 / d) return n * p * p; if (p < 2 / d) return n * (p -= 1.5 / d) * p + .75;
     if (p < 2.5 / d) return n * (p -= 2.25 / d) * p + .9375; return n * (p -= 2.625 / d) * p + .984375; }
 };
+E.back = E.out; E.bounce = E.out;
 
 function el(tag, a, p) { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); (p || R).appendChild(e); return e; }
 function G(p, a) { return el('g', a || {}, p); }
@@ -94,28 +97,17 @@ function chev(x, y, w, h, fill, label, size, at, first, parent) {
   if (at != null) add(g, at, .55, 'pop');
   return g;
 }
-function sparkle(x, y, s, fill, at, parent) {
-  const k = s * .2, d = `M${x} ${y - s}C${x + k} ${y - k} ${x + k} ${y - k} ${x + s} ${y}C${x + k} ${y + k} ${x + k} ${y + k} ${x} ${y + s}C${x - k} ${y + k} ${x - k} ${y + k} ${x - s} ${y}C${x - k} ${y - k} ${x - k} ${y - k} ${x} ${y - s}Z`;
-  const g = G(parent); el('path', { d, fill, stroke: INK, 'stroke-width': Math.max(4, s * .16), 'stroke-linejoin': 'round' }, g);
-  if (at != null) add(g, at, .5, 'pop', { bob: 5, per: 2.6 });
-  return g;
-}
+/* النمط البسيط بلا شرارات ولا زخارف زوايا */
+function sparkle() { return G(); }
 function plus(x, y, s, at) { const g = G(); el('path', { d: `M${x - s} ${y}h${2 * s}M${x} ${y - s}v${2 * s}`, stroke: INK, 'stroke-width': 6, 'stroke-linecap': 'round' }, g); if (at != null) add(g, at, .4, 'pop'); return g; }
 function dot(x, y, r, fill, at) { return disc({ cx: x, cy: y, r, fill, sh: 0, sw: 5, at }); }
-/* زخرفة الزوايا */
-function deco(spots) {
-  (spots || [[1112, 92, 's', C.white], [88, 92, 'd', C.pink], [1112, 808, 'p'], [88, 808, 's', C.yel]]).forEach(([x, y, k, f], i) => {
-    const at = .15 + i * .1;
-    if (k === 's') sparkle(x, y, 24, f, at); else if (k === 'd') dot(x, y, 13, f, at); else plus(x, y, 15, at);
-  });
-}
+function deco() {}
 /* شريط التعليق السفلي */
 function caption(parts, at, o) {
   o = o || {}; const size = o.size || 38, y = o.y || 818; if (typeof parts === 'string') parts = [[parts, INK]];
-  const full = parts.map(p => p[0]).join(''), w = tw(full, size, 800) + size * 1.6, h = size * 1.9;
-  const g = G(); el('rect', { x: 600 - w / 2 - 8, y: y - h / 2 + 8, width: w, height: h, rx: h / 2, fill: INK }, g);
-  rrect(g, 600 - w / 2, y - h / 2, w, h, h / 2, o.fill || C.white, 5);
-  const t = el('text', { x: 600, y: y + size * .06, 'font-size': size, 'text-anchor': 'middle', 'font-weight': 800, fill: INK }, g);
+  const full = parts.map(p => p[0]).join(''), w = tw(full, size, 700) + size * 1.6, h = size * 1.9;
+  const g = G(); el('rect', { x: 600 - w / 2, y: y - h / 2, width: w, height: h, rx: h / 2, fill: o.fill || '#F5F3FF' }, g);
+  const t = el('text', { x: 600, y: y + size * .06, 'font-size': size, 'text-anchor': 'middle', 'font-weight': 700, fill: INK }, g);
   parts.forEach(([s, f]) => { const sp = el('tspan', { fill: f || INK }, t); sp.textContent = s; });
   add(g, at, .6, 'up'); return g;
 }
@@ -182,9 +174,25 @@ function icon(p, name, cx, cy, size, o) {
   IC[name](g); return g;
 }
 
-function bg() {
-  el('rect', { x: 0, y: 0, width: 1200, height: 900, fill: C.cream }, S);
-  const g = G(S, { opacity: .1 }); for (let y = 30; y < 900; y += 40) for (let x = 30; x < 1200; x += 40) el('circle', { cx: x, cy: y, r: 2.4, fill: INK }, g);
+function bg() { el('rect', { x: 0, y: 0, width: 1200, height: 900, fill: '#FFFFFF' }, S); }
+
+/* تمرير النمط بعد بناء المشهد: يخفي الظلال الصلبة (شكل بلون الحبر بلا حد يليه الشكل نفسه بحدّ)،
+   ويرقّق الخطوط إلى 60٪ (عدا الأشرطة السميكة التي تتجاوز 12) */
+function theme(root) {
+  for (const e of root.querySelectorAll('*')) {
+    const tag = e.tagName;
+    if ((tag === 'rect' || tag === 'circle' || tag === 'path') && e.getAttribute('fill') === INK && !e.getAttribute('stroke')) {
+      const n = e.nextElementSibling;
+      if (n && n.tagName === tag && n.getAttribute('fill') !== INK && n.getAttribute('stroke')) {
+        const same = tag === 'circle' ? n.getAttribute('r') === e.getAttribute('r')
+          : tag === 'rect' ? n.getAttribute('width') === e.getAttribute('width') && n.getAttribute('height') === e.getAttribute('height')
+          : n.getAttribute('d') === e.getAttribute('d');
+        if (same) e.setAttribute('display', 'none');
+      }
+    }
+    const sw = parseFloat(e.getAttribute('stroke-width'));
+    if (sw && sw <= 12) e.setAttribute('stroke-width', +(sw * SWK).toFixed(2));
+  }
 }
 
 function render(t) {
@@ -193,16 +201,16 @@ function render(t) {
     if (it.anim === 'draw') { n.style.strokeDashoffset = n._L * (1 - E.out(p)); n.style.opacity = p > 0 ? 1 : 0; continue; }
     let s = 1, sx = 1, sy = 1, tx = 0, ty = 0, op = 1, rot = 0;
     switch (it.anim) {
-      case 'pop': case 'popb': s = p <= 0 ? 0 : E.back(p); op = p <= 0 ? 0 : 1; break;
+      case 'pop': case 'popb': s = p <= 0 ? 0 : .85 + .15 * E.out(p); op = p <= 0 ? 0 : E.out(Math.min(1, p * 1.6)); break;
       case 'up': ty = 46 * (1 - E.out(p)); op = E.out(p); break;
       case 'down': ty = -46 * (1 - E.out(p)); op = E.out(p); break;
       case 'drop': ty = -(it.dy || 620) * (1 - E.bounce(p)); op = p <= 0 ? 0 : 1; break;
       case 'grow': sy = p <= 0 ? 0 : E.back(p); op = p <= 0 ? 0 : 1; break;
       case 'slide': tx = (it.dx || 120) * (1 - E.out(p)); op = E.out(p); break;
       case 'fade': op = p; break;
-      case 'spin': s = p <= 0 ? 0 : E.back(p); rot = -120 * (1 - E.out(p)); op = p <= 0 ? 0 : 1; break;
+      case 'spin': s = p <= 0 ? 0 : .85 + .15 * E.out(p); rot = -40 * (1 - E.out(p)); op = p <= 0 ? 0 : E.out(Math.min(1, p * 1.6)); break;
     }
-    if (it.bob && p >= 1) ty += it.bob * Math.sin(2 * Math.PI * (t - it.at - it.dur) / (it.per || 2.4) + (it.ph || 0));
+    if (BOB && it.bob && p >= 1) ty += it.bob * Math.sin(2 * Math.PI * (t - it.at - it.dur) / (it.per || 2.4) + (it.ph || 0));
     n.style.opacity = op;
     n.style.transform = `translate(${tx}px,${ty}px) rotate(${rot}deg) scale(${s * sx},${s * sy})`;
   }

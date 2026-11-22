@@ -1,9 +1,12 @@
 # يحدّث offline.json (قائمة ما يُحفظ للعمل بلا إنترنت وأحجامه) بعد إضافة ملفات النموذج 2.
 import json, os, glob
 d = json.load(open('offline.json', encoding='utf-8'))
-add = sorted(glob.glob('fonts/Mikhak-DS1-*.woff2')) + sorted(glob.glob('fonts/m2d-*.woff2')) + ['m2/logo.svg', 'm2/logo.png', 'm2/lv3-m2.webp', 'm2/char/cobra-icon.webp']
+# النموذج 2 البسيط: خط واحد (Alm Sans) بأرقامه الإنجليزية، وشعاره، وأيقونات البلاطات، وصور رؤوس الأقسام
+add = sorted(glob.glob('fonts/m2d-alm-*.woff2')) + ['m2/logo.svg', 'm2/logo.png', 'm2/lv3-s.webp'] + sorted(glob.glob('m2/img/*.webp'))
 core = d['groups']['core']['u']
-core[:] = [u for u in core if not (u.startswith('m2/char/') and u not in add)]
+# ما لم يعد يُستعمل منذ النمط البسيط: خط ميخك وأرقامه، وأيقونات النمط السابق، ومجلد الشخصيات
+OLD = lambda u: u.startswith(('fonts/Mikhak-', 'fonts/m2d-mik-', 'm2/char/')) or u == 'm2/lv3-m2.webp'
+core[:] = [u for u in core if not OLD(u)]
 for f in add:
     if f not in core: core.append(f)
 # مقاطع النموذج 2 مع مقاطع النموذج 1 في مجموعة «المقاطع القصيرة»
@@ -17,6 +20,6 @@ def sz(u):
 def fp(u): return 'index.html' if u == './' else (u + 'index.html' if u.endswith('/') else u)
 for g in d['groups'].values():
     g['n'] = len(g['u']); g['b'] = sum(sz(u) for u in g['u'])
-d['v'] = 112
+d['v'] = 113
 json.dump(d, open('offline.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 print({k: (g['n'], g['b']) for k, g in d['groups'].items()})

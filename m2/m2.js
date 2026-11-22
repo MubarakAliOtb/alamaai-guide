@@ -20,7 +20,7 @@
     setMeta(m);
     var bs = document.querySelectorAll('[data-m2set]');
     for (var i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', String(bs[i].getAttribute('data-m2set') === m));
-    if (m === '2') M2Tag.start(); else M2Tag.stop();
+    if (m === '2') M2Tag.start(); else { M2Tag.stop(); mostOff(); }
     digits(m === '2');
     vids(m === '2');
     try { window.dispatchEvent(new CustomEvent('almmodel', { detail: { model: m, user: !!user } })); } catch (e) {}
@@ -36,9 +36,26 @@
     }
   }
   document.addEventListener('DOMContentLoaded', function () { vids(R.getAttribute('data-model') === '2'); });
-  var M2MAP = {'#0D1B3D':'#1A1A2E','#0A1530':'#1A1A2E','#16264D':'#1A1A2E','#1E3A8A':'#1A1A2E','#334A7A':'#4A4A5E','#4A5878':'#4A4A5E','#4D5B7C':'#4A4A5E',
-    '#2563EB':'#4D7CFE','#1D4ED8':'#2D4FCB','#14B8A6':'#2EC4A0','#0B7C70':'#13806A','#5EEAD4':'#6FDCC0','#5FD3C5':'#6FDCC0',
-    '#FF7A1A':'#FF7A5C','#FFB37A':'#FFC93C','#FFB26B':'#FFC93C','#B54E00':'#B23A1E','#EEF4FF':'#FFF6E5','#DCE7FF':'#E3EBFF','#D5E0F5':'#E6DCC8','#D5E0F2':'#E6DCC8','#B9C9E8':'#D8D2C4','#8DB0F7':'#93AEFF'};
+  /* «الأكثر استخدامًا»: يُعدّ على الجهاز ما يُفتح من أقسام، وتُعرض أكثرها في رأس الرئيسية في نموذج 2 */
+  var USE_K = 'alm:use', USE_DEF = ['lessons', 'tools', 'do', 'nb', 'vs'];
+  var USE_N = { lessons: 'دروسي', tools: 'أدواتي', guide: 'الدليل', do: 'حلول المواقف', nb: 'دفتر المعلم', vs: 'الحلول البصرية', bag: 'حقيبة الصف', me: 'ملفي وإعدادي',
+    map: 'خريطة الدليل', lab: 'التدرّب على المواقف', brief: 'خلاصة الدليل', 'tk/quiz': 'الاختبار القصير', 'tk/diwan': 'ديوانية الأسئلة', 'tk/decks': 'عروض الدروس', 'tk/setup': 'إعدادي', 'tk/backup': 'النسخة الاحتياطية' };
+  function useKey(h) { h = String(h || '').replace(/^#/, ''); if (!h || h === 'home' || h === 'feed') return ''; var p = h.split('/'), k = p[0] === 'tk' ? p.slice(0, 2).join('/') : p[0]; if (/^part-/.test(k)) k = 'guide'; return USE_N[k] ? k : ''; }
+  function useGet() { try { return JSON.parse(localStorage.getItem(USE_K) || '{}') || {}; } catch (e) { return {}; } }
+  window.addEventListener('hashchange', function () { var k = useKey(location.hash); if (!k) return; var u = useGet(); u[k] = (u[k] || 0) + 1; try { localStorage.setItem(USE_K, JSON.stringify(u)); } catch (e) {} });
+  function useTop() { var u = useGet(), ks = Object.keys(u).filter(function (k) { return USE_N[k]; }).sort(function (a, b) { return u[b] - u[a]; }); USE_DEF.forEach(function (k) { if (ks.indexOf(k) < 0) ks.push(k); }); return ks.slice(0, 5); }
+  function mostRow() {
+    if (R.getAttribute('data-model') !== '2') return;
+    var h = document.getElementById('fdHello'); if (!h || h.querySelector('.m2-most')) return;
+    var hello = h.querySelector('.fd-hello'); if (!hello) return;
+    var nav = document.createElement('nav'); nav.className = 'm2-most'; nav.setAttribute('aria-label', 'الأكثر استخدامًا');
+    nav.innerHTML = '<b>الأكثر استخدامًا</b><div>' + useTop().map(function (k) { return '<a href="#' + k + '">' + USE_N[k] + '</a>'; }).join('') + '</div>';
+    hello.insertAdjacentElement('afterend', nav);
+  }
+  function mostOff() { var ns = document.querySelectorAll('.m2-most'); for (var i = 0; i < ns.length; i++) ns[i].parentNode.removeChild(ns[i]); }
+  var M2MAP = {'#0D1B3D':'#1E1B4B','#0A1530':'#1E1B4B','#16264D':'#1E1B4B','#1E3A8A':'#1E1B4B','#334A7A':'#5B5880','#4A5878':'#5B5880','#4D5B7C':'#5B5880',
+    '#2563EB':'#6D28D9','#1D4ED8':'#5B21B6','#14B8A6':'#34D399','#0B7C70':'#047857','#5EEAD4':'#6EE7B7','#5FD3C5':'#6EE7B7',
+    '#FF7A1A':'#34D399','#FFB37A':'#A7F3D0','#FFB26B':'#A7F3D0','#B54E00':'#047857','#EEF4FF':'#F7F6FB','#DCE7FF':'#EDE9FE','#D5E0F5':'#E7E5F2','#D5E0F2':'#E7E5F2','#B9C9E8':'#D4D1E6','#8DB0F7':'#A78BFA'};
   window.m2c = function (h) { if (R.getAttribute('data-model') !== '2') return h; return M2MAP[String(h).toUpperCase()] || h; };
   /* الأرقام الإنجليزية: خطوط صغيرة تُضاف في آخر الصفحة بنطاق الأرقام المشرقية وحده، فتُرسم الأرقام كلها 0-9.
      خط المصحف (Hafs) خارجها، فتبقى أرقام الآيات كما في المصحف. */
@@ -49,7 +66,6 @@
     var f = function (fam, file, w) { return '@font-face{font-family:"' + fam + '";src:url("' + M2_BASE + 'fonts/m2d-' + file + '.woff2") format("woff2");font-weight:' + w + ';' + u + '}'; };
     var css = '';
     css += f('Alm Sans Arabic', 'alm-400', '400') + f('Alm Sans Arabic', 'alm-700', '700');
-    css += f('Mikhak', 'mik-400', '400') + f('Mikhak', 'mik-700', '500 700') + f('Mikhak', 'mik-800', '800') + f('Mikhak', 'mik-900', '900');
     [['Tahoma', 'local("Tahoma")', 'local("Tahoma Bold"),local("Tahoma-Bold")'], ['Arial', 'local("Arial"),local("ArialMT")', 'local("Arial Bold"),local("Arial-BoldMT")']].forEach(function (x) {
       css += '@font-face{font-family:"' + x[0] + '";src:' + x[1] + ';font-weight:400}@font-face{font-family:"' + x[0] + '";src:' + x[2] + ';font-weight:700}';
       css += f(x[0], 'alm-400', '400') + f(x[0], 'alm-700', '700');
@@ -111,7 +127,7 @@
       var ns = root.querySelectorAll ? root.querySelectorAll(SEL) : [];
       for (var i = 0; i < ns.length; i++) check(ns[i]);
     }
-    function flush() { sched = false; var q = queue; queue = []; for (var i = 0; i < q.length; i++) scan(q[i]); }
+    function flush() { sched = false; var q = queue; queue = []; for (var i = 0; i < q.length; i++) scan(q[i]); mostRow(); }
     function push(n) { queue.push(n); if (!sched) { sched = true; (window.requestAnimationFrame || setTimeout)(flush); } }
     return {
       start: function () {
