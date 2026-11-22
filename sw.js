@@ -9,12 +9,13 @@
    - لا تُعترض: الحقائب التدريبية وملفات الدروس PDF (كبيرة، وتُنزَّل إلى الجهاز عند طلبها)، ولا أي موقع آخر، ولا أي طلب غير GET.
    اسم المخزن ثابت (alm-v1) فلا يضيع المحفوظ عند تحديث هذا الملف؛ يتغير الاسم فقط إن تغيّرت بنية المحفوظ. لا يُحفظ فيه شيء من بيانات المعلم ولا طلابه. */
 'use strict';
-const SW_VER = '104.1';
+const SW_VER = '111';
 const CACHE = 'alm-v1';
 const ROOT = new URL('./', self.location).pathname;
 const CDN = ['https://cdnjs.cloudflare.com', 'https://cdn.jsdelivr.net'];
 const CORE = ['./', 'offline.json', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png',
-  'fonts/AlmSansArabic-Regular.woff2', 'fonts/AlmSansArabic-Bold.woff2', 'fonts/hafs.woff2', 'fonts/amiri-sym.woff2'];
+  'fonts/AlmSansArabic-Regular.woff2', 'fonts/AlmSansArabic-Bold.woff2', 'fonts/hafs.woff2', 'fonts/amiri-sym.woff2',
+  'fonts/Mikhak-DS1-Regular.woff2', 'fonts/Mikhak-DS1-Bold.woff2', 'fonts/Mikhak-DS1-ExtraBold.woff2', 'fonts/Mikhak-DS1-Black.woff2', 'm2/logo.svg'];
 const FRESH = /^(?:ls\/s\d\.json|data\/search\.json|data\/parts\/\d+\.html|offline\.json)$/;
 const SKIP = /^(?:vsc\/kits\/|ls\/f\d\/|sw\.js$)/;
 const WAIT = 3000;
