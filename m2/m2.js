@@ -21,12 +21,37 @@
     var bs = document.querySelectorAll('[data-m2set]');
     for (var i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', String(bs[i].getAttribute('data-m2set') === m));
     if (m === '2') M2Tag.start(); else M2Tag.stop();
+    digits(m === '2');
     try { window.dispatchEvent(new CustomEvent('almmodel', { detail: { model: m, user: !!user } })); } catch (e) {}
   }
   var M2MAP = {'#0D1B3D':'#1A1A2E','#0A1530':'#1A1A2E','#16264D':'#1A1A2E','#1E3A8A':'#1A1A2E','#334A7A':'#4A4A5E','#4A5878':'#4A4A5E','#4D5B7C':'#4A4A5E',
     '#2563EB':'#4D7CFE','#1D4ED8':'#2D4FCB','#14B8A6':'#2EC4A0','#0B7C70':'#13806A','#5EEAD4':'#6FDCC0','#5FD3C5':'#6FDCC0',
     '#FF7A1A':'#FF7A5C','#FFB37A':'#FFC93C','#FFB26B':'#FFC93C','#B54E00':'#B23A1E','#EEF4FF':'#FFF6E5','#DCE7FF':'#E3EBFF','#D5E0F5':'#E6DCC8','#D5E0F2':'#E6DCC8','#B9C9E8':'#D8D2C4','#8DB0F7':'#93AEFF'};
   window.m2c = function (h) { if (R.getAttribute('data-model') !== '2') return h; return M2MAP[String(h).toUpperCase()] || h; };
+  /* الأرقام الإنجليزية: خطوط صغيرة تُضاف في آخر الصفحة بنطاق الأرقام المشرقية وحده، فتُرسم الأرقام كلها 0-9.
+     خط المصحف (Hafs) خارجها، فتبقى أرقام الآيات كما في المصحف. */
+  var M2_BASE = '';
+  var DIG = null;
+  function digitsCss() {
+    var u = 'unicode-range:U+0660-066C,U+06F0-06F9;font-display:block';
+    var f = function (fam, file, w) { return '@font-face{font-family:"' + fam + '";src:url("' + M2_BASE + 'fonts/m2d-' + file + '.woff2") format("woff2");font-weight:' + w + ';' + u + '}'; };
+    var css = '';
+    css += f('Alm Sans Arabic', 'alm-400', '400') + f('Alm Sans Arabic', 'alm-700', '700');
+    css += f('Mikhak', 'mik-400', '400') + f('Mikhak', 'mik-700', '500 700') + f('Mikhak', 'mik-800', '800') + f('Mikhak', 'mik-900', '900');
+    [['Tahoma', 'local("Tahoma")', 'local("Tahoma Bold"),local("Tahoma-Bold")'], ['Arial', 'local("Arial"),local("ArialMT")', 'local("Arial Bold"),local("Arial-BoldMT")']].forEach(function (x) {
+      css += '@font-face{font-family:"' + x[0] + '";src:' + x[1] + ';font-weight:400}@font-face{font-family:"' + x[0] + '";src:' + x[2] + ';font-weight:700}';
+      css += f(x[0], 'alm-400', '400') + f(x[0], 'alm-700', '700');
+    });
+    return css;
+  }
+  function digits(on) {
+    if (on) {
+      if (!DIG) { DIG = document.createElement('style'); DIG.id = 'm2Digits'; DIG.textContent = digitsCss(); }
+      (document.body || document.head).appendChild(DIG);
+    } else if (DIG && DIG.parentNode) DIG.parentNode.removeChild(DIG);
+  }
+  window.m2Digits = function (s) { return String(s == null ? '' : s).replace(/[\u0660-\u0669]/g, function (c) { return c.charCodeAt(0) - 0x660; }).replace(/[\u06F0-\u06F9]/g, function (c) { return c.charCodeAt(0) - 0x6F0; }).replace(/\u066A/g, '%').replace(/\u066B/g, '.').replace(/\u066C/g, ','); };
+  window.m2Num = function (s) { return R.getAttribute('data-model') === '2' ? window.m2Digits(s) : s; };
   window.almModel = function () { return R.getAttribute('data-model') === '2' ? 2 : 1; };
   window.almSetModel = function (m) {
     m = String(m) === '2' ? '2' : '1';
@@ -52,6 +77,7 @@
       var rad = parseFloat(cs.borderTopLeftRadius) || 0; if (rad < 10) return;
       var bw = parseFloat(cs.borderTopWidth) || 0, bs = cs.borderTopStyle, hasBd = bw >= 1 && bs !== 'none';
       var bg = rgb(cs.backgroundColor), hasBg = bg && bg.a > 0.5;
+      if (!hasBg && /gradient/.test(cs.backgroundImage) && !/repeating/.test(cs.backgroundImage)) { var g1 = rgb(cs.backgroundImage); if (g1 && g1.a > 0.5) { bg = g1; hasBg = true; } }
       var dark = hasBg && L(bg) < 0.2;
       if (hasBg && !dark && L(bg) < 0.8) { var fc = rgb(cs.color); if (fc && L(fc) > 0.75) el.setAttribute('data-m2ink', ''); }
       var ondark = el.parentElement && el.parentElement.closest('[data-m2c="dark"],[data-m2c="ondark"]');
@@ -63,7 +89,9 @@
       if (rad >= 900 || (h && rad >= h / 2 - 1)) { el.setAttribute('data-m2c', 'pill'); return; }
       var nested = el.parentElement && el.parentElement.closest('[data-m2c="card"],[data-m2c="flat"]');
       var inRead = el.closest('.article');
-      el.setAttribute('data-m2c', (nested || inRead) ? 'flat' : 'card');
+      var kind = (nested || inRead) ? 'flat' : 'card';
+      el.setAttribute('data-m2c', kind);
+      if (kind === 'card') { var pe = el.parentElement, pc = pe && getComputedStyle(pe); if (pc && /grid|flex/.test(pc.display) && ((parseFloat(pc.columnGap) || 0) < 12 || (parseFloat(pc.rowGap) || 0) < 12)) pe.setAttribute('data-m2gap', ''); }
     }
     function scan(root) {
       if (root.nodeType !== 1) return;

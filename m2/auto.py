@@ -7,7 +7,8 @@ PAGE = sys.argv[1] if len(sys.argv) > 1 else 'index.html'
 OUT = sys.argv[2] if len(sys.argv) > 2 else 'm2/m2-auto.css'
 src = (R / PAGE).read_text(encoding='utf-8')
 src = re.sub(r'<!--m2:start-->.*?<!--m2:end-->', '', src, flags=re.S)
-CSS = '\n'.join(re.findall(r'<style[^>]*>(.*?)</style>', src, re.S))
+RAW = PAGE.endswith('.css'); NOPREFIX = len(sys.argv) > 3 and sys.argv[3] == 'noprefix'
+CSS = src if RAW else '\n'.join(re.findall(r'<style[^>]*>(.*?)</style>', src, re.S))
 
 INK = '#1A1A2E'
 FILL = {  # خلفيات وحدود وتعبئة
@@ -64,6 +65,7 @@ def sel_prefix(sel):
         p = part.strip()
         if not p or 'data-theme="dark"' in p or "data-theme='dark'" in p or 'data-model' in p: continue
         p = re.sub(r':root:not\(\[data-theme="light"\]\)', ':root', p)
+        if NOPREFIX: out.append(p); continue
         if p.startswith(':root'): p = 'html[data-model="2"]' + p[5:]
         elif p.startswith('html'): p = 'html[data-model="2"]' + p[4:]
         else: p = 'html[data-model="2"] ' + p
@@ -116,14 +118,14 @@ for media, rule in rules_out:
 if cur is not None: out.append('}')
 
 # الأنماط المكتوبة داخل الوسوم والقوالب
-inline = sorted(set(m for m in re.findall(r'(?:background|color|border-color|fill|stroke)\s*:\s*#[0-9A-Fa-f]{6}', src)))
+inline = [] if RAW else sorted(set(m for m in re.findall(r'(?:background|color|border-color|fill|stroke)\s*:\s*#[0-9A-Fa-f]{6}', src)))
 for decl in inline:
     prop, h = [x.strip() for x in decl.split(':')]
     n = (TEXT if prop == 'color' else FILL).get(norm(h))
     if not n or n.upper() == norm(h): continue
     out.append(f'html[data-model="2"] [style*="{prop}:{h}"]{{{prop}:{n}!important}}')
 svg = []
-for h0, n0 in FILL.items():
+for h0, n0 in ({} if RAW else FILL).items():
     if n0.upper() == h0: continue
     for a in ('fill', 'stroke', 'stop-color'):
         svg.append(f'html[data-model="2"] [{a}="{h0}" i]{{{a}:{n0}}}')

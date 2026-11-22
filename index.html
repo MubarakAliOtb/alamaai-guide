@@ -2285,6 +2285,12 @@ html[data-model="2"] [stop-color="#C9D3E6" i]{stop-color:#E6DCC8}
 @font-face{font-family:"Mikhak";src:url("fonts/Mikhak-DS1-Black.woff2") format("woff2");font-weight:900;font-display:swap}
 
 /* ---------- مبدّل النموذجين (في النموذجين) ---------- */
+.m2-menu-sw{display:none}
+@media (max-width:860px){
+  .top .m2-switch:not(.m2-in-menu){display:none}
+  .m2-menu-sw{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 12px;margin-bottom:6px;border-bottom:1px solid var(--line);font-weight:700;font-size:14px}
+  .m2-menu-sw .m2-switch button{min-width:44px;min-height:40px;font-size:15px}
+}
 .m2-switch{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--bg);flex:none}
 .m2-switch button{font:inherit;font-size:13px;font-weight:700;border:0;background:transparent;color:var(--ink2);padding:6px 11px;border-radius:999px;cursor:pointer;min-height:32px;white-space:nowrap}
 .m2-switch button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
@@ -2297,7 +2303,7 @@ html[data-model="2"]{
   --m2-blue:#4D7CFE; --m2-yellow:#FFC93C; --m2-coral:#FF7A5C; --m2-mint:#2EC4A0; --m2-lav:#B9A6FF; --m2-pink:#FF8FCF; --m2-sky:#5CC8FF;
   --m2-blue-s:#E3EBFF; --m2-yellow-s:#FFF0C4; --m2-coral-s:#FFE3DB; --m2-mint-s:#DDF6EE; --m2-lav-s:#EEE8FF; --m2-pink-s:#FFE6F4; --m2-sky-s:#DDF3FF;
   --m2-blue-ink:#2D4FCB; --m2-line:#E6DCC8;
-  --m2-sh-sm:-3px 3px 0 var(--m2-ink); --m2-sh:-5px 5px 0 var(--m2-ink); --m2-sh-lg:-8px 8px 0 var(--m2-ink); --m2-drop:0 4px 0 var(--m2-ink);
+  --m2-sh-sm:-3px 3px 0 var(--m2-ink); --m2-sh:-4px 4px 0 var(--m2-ink); --m2-sh-lg:-6px 6px 0 var(--m2-ink); --m2-drop:0 4px 0 var(--m2-ink);
   /* الألوان الأولية: يأخذها كل ما بُني عليها */
   --navy-950:#121222; --navy-900:#1A1A2E; --navy-800:#26263D; --navy-700:#33334D; --navy-600:#4A4A5E;
   --blue-50:#FFF6E5; --blue-100:#E3EBFF; --blue-200:#C9D7FF; --blue-300:#93AEFF; --blue-500:#4D7CFE; --blue-600:#2D4FCB; --blue-800:#24399A;
@@ -2351,9 +2357,10 @@ html[data-model="2"] .progress-line i{background:var(--m2-mint);height:4px}
 }
 
 /* ---------- البطاقات الموسومة آليًّا ---------- */
-html[data-model="2"] [data-m2c="card"]{border:2.5px solid var(--m2-ink)!important;box-shadow:var(--m2-sh)!important}
-html[data-model="2"] [data-m2c="flat"]{border:2px solid var(--m2-ink)!important;box-shadow:none!important}
-html[data-model="2"] [data-m2c="dark"]{background:var(--m2-ink)!important;border:2.5px solid var(--m2-ink)!important;box-shadow:-5px 5px 0 var(--m2-yellow)!important;color:var(--m2-cream)}
+html[data-model="2"] [data-m2c="card"]{border:2px solid var(--m2-ink)!important;box-shadow:var(--m2-sh)!important}
+html[data-model="2"] [data-m2gap]{gap:14px!important}
+html[data-model="2"] [data-m2c="flat"]{border:1.5px solid var(--m2-ink)!important;box-shadow:none!important}
+html[data-model="2"] [data-m2c="dark"]{background:var(--m2-ink)!important;border:2px solid var(--m2-ink)!important;box-shadow:-4px 4px 0 var(--m2-yellow)!important;color:var(--m2-cream)}
 html[data-model="2"] a[data-m2c="card"]:hover,html[data-model="2"] button[data-m2c="card"]:hover{transform:translate(2px,-2px);box-shadow:var(--m2-sh-lg)!important}
 html[data-model="2"] a[data-m2c="card"]{transition:transform .12s,box-shadow .12s}
 html[data-model="2"] [data-m2c="dark"] :is(h1,h2,h3,h4){color:#FFFFFF}
@@ -2505,7 +2512,249 @@ html[data-model="2"] .n5-lsh,html[data-model="2"] .tk-hero{padding-inline-end:10
   html[data-model="2"] .brand b{font-size:15px}
   html[data-model="2"] .m2-switch button{min-width:30px;padding:4px 8px;min-height:30px}
 }
-</style>
+
+/* ---------- عن الأداة، والتذييل، وتوقيع العرض ---------- */
+html[data-model="2"] .about-by{display:grid!important;grid-template-columns:76px 1fr;column-gap:14px;align-items:center;align-content:center;background:var(--m2-yellow)!important;color:var(--m2-ink)!important;border:2.5px solid var(--m2-ink);box-shadow:var(--m2-sh);border-radius:24px;padding:14px 18px;min-height:104px}
+html[data-model="2"] .about-by::before{content:"";grid-column:1;grid-row:1 / span 3;width:76px;height:76px;border-radius:50%;border:2.5px solid var(--m2-ink);background:#fff url("m2/char/cobra-icon.webp") center/cover no-repeat}
+html[data-model="2"] .about-by>*{grid-column:2}
+html[data-model="2"] .about-by span{opacity:1;font-family:var(--f-display);font-weight:800;font-size:13px}
+html[data-model="2"] .about-by b{font-weight:900;font-size:22px;line-height:1.3}
+html[data-model="2"] .about-by small{opacity:1;justify-self:start;background:var(--m2-paper);border:2px solid var(--m2-ink);border-radius:999px;padding:1px 12px;font-family:var(--f-display);font-weight:700;font-size:12.5px;margin-top:4px}
+html[data-model="2"] .about-cite{background:var(--m2-blue-s)!important;border:2px solid var(--m2-ink);border-radius:16px;padding:12px 14px}
+html[data-model="2"] .foot{margin-top:48px;padding-block:20px 28px;color:var(--m2-ink)}
+html[data-model="2"] .foot .wrap{align-items:center;gap:14px 24px}
+html[data-model="2"] .foot .wrap>span:first-child{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:700}
+html[data-model="2"] .foot .wrap>span:first-child::before{content:"";flex:none;width:34px;height:34px;background:url("m2/logo.svg") center/contain no-repeat}
+html[data-model="2"] .foot .wrap>span:last-child{color:var(--ink3);font-size:13px}
+html[data-model="2"] .lx .lx-by{font-family:var(--f-display);font-weight:700;border:1.5px solid rgba(255,246,229,.4);border-radius:999px;padding:2px 12px;color:var(--m2-cream)}
+html[data-model="2"] .lx .lx-credit{font-family:var(--f-display);background:var(--m2-ink)!important;border:1.5px solid var(--m2-cream);color:var(--m2-cream)}
+
+/* ---------- أيقونات البلاطات: نسخة مسطّحة بحدّ أسود ---------- */
+html[data-model="2"] .lv3{background-image:url("m2/lv3-m2.webp")!important;filter:none!important;animation:none!important}
+html[data-model="2"] .lv3-n{color:var(--m2-ink)!important;text-shadow:none!important;font-weight:900}
+
+/* ---------- التدرّجات المكتوبة داخل الوسوم (الصور الرمزية والحلقات): لون مسطّح ورمز بالحبر ---------- */
+html[data-model="2"] [style*="--av:linear-gradient(225deg,#2563EB,#0D1B3D)"]{--av:#4D7CFE!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="background:linear-gradient(225deg,#2563EB,#0D1B3D)"]{background:#4D7CFE!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="--av:linear-gradient(225deg,#FF7A1A,#FFB26B)"]{--av:#FF7A5C!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="background:linear-gradient(225deg,#FF7A1A,#FFB26B)"]{background:#FF7A5C!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="--av:linear-gradient(225deg,#0B7C70,#0D1B3D)"]{--av:#2EC4A0!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="background:linear-gradient(225deg,#0B7C70,#0D1B3D)"]{background:#2EC4A0!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="--av:linear-gradient(225deg,#2563EB,#14B8A6)"]{--av:#5CC8FF!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="background:linear-gradient(225deg,#2563EB,#14B8A6)"]{background:#5CC8FF!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="--av:linear-gradient(225deg,#FFB26B,#FF7A1A)"]{--av:#FFC93C!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="background:linear-gradient(225deg,#FFB26B,#FF7A1A)"]{background:#FFC93C!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="--av:linear-gradient(225deg,#FF7A1A,#B54E00)"]{--av:#FF7A5C!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="background:linear-gradient(225deg,#FF7A1A,#B54E00)"]{background:#FF7A5C!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="--av:linear-gradient(225deg,#0D1B3D,#2563EB)"]{--av:#B9A6FF!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="background:linear-gradient(225deg,#0D1B3D,#2563EB)"]{background:#B9A6FF!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="--av:linear-gradient(225deg,#FF7A1A,#2563EB)"]{--av:#FF8FCF!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="background:linear-gradient(225deg,#FF7A1A,#2563EB)"]{background:#FF8FCF!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="--av:linear-gradient(225deg,#FF7A1A,#0D1B3D)"]{--av:#FFC93C!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="background:linear-gradient(225deg,#FF7A1A,#0D1B3D)"]{background:#FFC93C!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="--av:linear-gradient(225deg,#14B8A6,#0D1B3D)"]{--av:#2EC4A0!important;color:#1A1A2E!important}
+html[data-model="2"] [style*="background:linear-gradient(225deg,#14B8A6,#0D1B3D)"]{background:#2EC4A0!important;color:#1A1A2E!important}
+
+html[data-model="2"] .av{border:2px solid var(--m2-ink)!important}
+html[data-model="2"] .fd-hello{min-height:92px;padding-inline-end:104px}
+html[data-model="2"] .fd-hello::after{top:0}
+
+/* ---------- القارئ على الشاشات الضيقة، ورأس الجزء ---------- */
+html[data-model="2"] .part-hero{background:var(--m2-yellow-s)!important;border:2px solid var(--m2-ink)!important;border-radius:24px!important;padding:20px 22px 22px!important;margin-bottom:22px}
+html[data-model="2"] .part-hero::after,html[data-model="2"] .part-hero::before{display:none!important}
+@media (max-width:640px){
+  html[data-model="2"] .article{border:0;background:transparent;padding:6px 2px 24px;border-radius:0}
+  html[data-model="2"] .part-hero{padding:16px!important;border-radius:20px!important}
+  html[data-model="2"] .part-hero h1{font-size:30px}
+  html[data-model="2"] .lede{font-size:17px}
+  html[data-model="2"] .b-head-row .b-chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;min-width:0}
+  html[data-model="2"] .b-head-row .b-chips>*{width:100%;min-width:0;justify-content:center;white-space:normal;text-align:center;line-height:1.35}
+  html[data-model="2"] :is(.btn,.b-btn,.tk-btn,.button){min-height:44px}
+}
+html[data-model="2"] .lx .lx-tbw{width:auto!important;flex:0 0 auto;padding-inline:.7em!important;white-space:nowrap}
+@media (max-width:640px){
+  html[data-model="2"] .lx .lx-tools{overflow-x:auto;scrollbar-width:none;max-width:100%}
+  html[data-model="2"] .lx .lx-tools::-webkit-scrollbar{display:none}
+  html[data-model="2"] :is(.seg.wrap,.tk-seg){flex-wrap:wrap;border-radius:18px;width:100%;box-sizing:border-box}
+  html[data-model="2"] :is(.seg.wrap,.tk-seg) button{flex:1 1 28%;text-align:center;justify-content:center;min-height:42px}
+}
+html[data-model="2"] .tk-seg{background:var(--m2-paper)!important;border:2px solid var(--m2-ink)!important}
+html[data-model="2"] .tk-seg button{font-family:var(--f-display);font-weight:700;color:var(--m2-ink)}
+html[data-model="2"] .tk-seg button:is([aria-pressed="true"],[aria-checked="true"],.on){background:var(--m2-yellow)!important;color:var(--m2-ink)!important;box-shadow:inset 0 0 0 2px var(--m2-ink)!important}
+/* مولَّد آليًّا من أنماط index.html بالأداة m2/auto.py: لا يُعدَّل باليد. */
+html[data-model="2"] .nbp{color:#1A1A2E}
+html[data-model="2"] .nbp-h{color:#4A4A5E;background:linear-gradient(#2EC4A0,#2EC4A0) bottom/100% .7mm no-repeat}
+html[data-model="2"] .nbp-hl b{color:#2D4FCB}
+html[data-model="2"] .nbp-hl span{border-inline-start:.3mm solid #B8B2A6}
+html[data-model="2"] .nbp-f{color:#4A4A5E}
+html[data-model="2"] .nbp-f b{background:#1A1A2E}
+html[data-model="2"] .nb-band{background:linear-gradient(#1A1A2E,#1A1A2E)}
+html[data-model="2"] .nb-bi{background:#FF7A5C;color:#1A1A2E}
+html[data-model="2"] .nb-band p{color:#E6DCC8}
+html[data-model="2"] .nb-h{color:#1A1A2E}
+html[data-model="2"] .nb-h::before{background:#2EC4A0;box-shadow:0 0 0 .8mm #C4F0E3}
+html[data-model="2"] .nb-h small{color:#4A4A5E}
+html[data-model="2"] .nb-ref{color:#4A4A5E}
+html[data-model="2"] .nb-ref b{color:#2D4FCB}
+html[data-model="2"] .nb-note{color:#1A1A2E;background:#FFF6E5}
+html[data-model="2"] .nb-note b{color:#2D4FCB}
+html[data-model="2"] .nb-hint{color:#B23A1E;background:#FFF0C4}
+html[data-model="2"] .nb-t th{background:#1A1A2E}
+html[data-model="2"] .nb-t th small{color:#E6DCC8}
+html[data-model="2"] .nb-t.blue th{background:#4D7CFE}
+html[data-model="2"] .nb-t td{border-top:.3mm solid #E6DCC8}
+html[data-model="2"] .nb-t td+td, html[data-model="2"] .nb-t th+th, html[data-model="2"] .nb-t td[rowspan]+td{border-inline-start:.3mm solid #E6DCC8}
+html[data-model="2"] .nb-t thead tr+tr th{border-top:.3mm solid #4A4A5E}
+html[data-model="2"] .nb-t .rh{background:#FFF6E5}
+html[data-model="2"] .nb-t .nb-sec{background:#E3EBFF;color:#1A1A2E}
+html[data-model="2"] .nb-ul li::before{background:#4D7CFE}
+html[data-model="2"] .nb-ol li>b{background:#E3EBFF;color:#1A1A2E}
+html[data-model="2"] .nb-card2 h4:not(:where(.a9-h5)), html[data-model="2"] .nb-card2 h3:where(.a9-h4), html[data-model="2"] .nb-card2 h2:where(.a9-h4){color:#2D4FCB}
+html[data-model="2"] .nb-card2 h4:not(:where(.a9-h5)) small, html[data-model="2"] .nb-card2 h3:where(.a9-h4) small, html[data-model="2"] .nb-card2 h2:where(.a9-h4) small{color:#4A4A5E}
+html[data-model="2"] .nb-card2 h4:not(:where(.a9-h5)) em, html[data-model="2"] .nb-card2 h3:where(.a9-h4) em, html[data-model="2"] .nb-card2 h2:where(.a9-h4) em{color:#B23A1E}
+html[data-model="2"] .nb-eye{background:linear-gradient(#FFF6E5,#FFF6E5)}
+html[data-model="2"] .nb-eye b{color:#1A1A2E}
+html[data-model="2"] .nb-quote{border-inline-start:1.4mm solid #FF7A5C;background:#FFF0C4}
+html[data-model="2"] .nb-quote span{color:#4A4A5E}
+html[data-model="2"] .nb-qt{color:#1A1A2E}
+html[data-model="2"] span.nbf{border-bottom:.3mm dotted #93AEFF}
+html[data-model="2"] .nb-box{border-bottom:.3mm dotted #93AEFF}
+html[data-model="2"] .nbx{color:#13806A}
+html[data-model="2"] .nb-dl{border-bottom:.3mm dotted #4A4A5E}
+html[data-model="2"] .nbc-sky{background:linear-gradient(#1A1A2E,#1A1A2E)}
+html[data-model="2"] .nbc-sky .o3{background:#FF7A5C}
+html[data-model="2"] .nbc-sky .o4{background:#2EC4A0}
+html[data-model="2"] .nbc-title p{color:#6FDCC0}
+html[data-model="2"] .nbc-bar{background:linear-gradient(#FF7A5C,#FF7A5C)}
+html[data-model="2"] .nbc-g{color:#2D4FCB}
+html[data-model="2"] .nbc-card span{color:#4A4A5E}
+html[data-model="2"] .nbc-card b{color:#1A1A2E}
+html[data-model="2"] .nbc-dots{border-bottom:.4mm dotted #93AEFF}
+html[data-model="2"] .nbc-spec{background:linear-gradient(#1A1A2E,#1A1A2E)}
+html[data-model="2"] .nbp-div{background:linear-gradient(#FFF6E5,#FFF6E5)}
+html[data-model="2"] .nbd-k{color:#4A4A5E}
+html[data-model="2"] .nbd-n{color:#2D4FCB}
+html[data-model="2"] .nbd h2:not(:where(.a9-h3, html[data-model="2"] .a9-h4)){color:#1A1A2E}
+html[data-model="2"] .nbd p{color:#4A4A5E}
+html[data-model="2"] .nbd li{border-bottom:.3mm dashed #B8B2A6}
+html[data-model="2"] .nbd li b{color:#2D4FCB}
+html[data-model="2"] .nbd li small{color:#4A4A5E}
+html[data-model="2"] .nbd-f{color:#4A4A5E}
+html[data-model="2"] .nb-tocn{background:#1A1A2E}
+html[data-model="2"] .nb-toct h3:not(:where(.a9-h4, html[data-model="2"] .a9-h5)), html[data-model="2"] .nb-toct h2:where(.a9-h3){color:#1A1A2E}
+html[data-model="2"] .nb-toct p{color:#4A4A5E}
+html[data-model="2"] .nb-toct li i{border-bottom:.3mm dotted #B8B2A6}
+html[data-model="2"] .nb-toct li b{color:#2D4FCB}
+html[data-model="2"] .nb-toct li small{color:#4A4A5E}
+html[data-model="2"] .nb-vk b{background:#4D7CFE;color:#1A1A2E!important}
+html[data-model="2"] .nb-val i{color:#2D4FCB}
+html[data-model="2"] .nb-val b{color:#2D4FCB}
+html[data-model="2"] .nb-gn small{color:#B23A1E}
+html[data-model="2"] .nb-gn b{color:#1A1A2E}
+html[data-model="2"] .nb-gm{background:#DDF6EE}
+html[data-model="2"] .nb-gm small{color:#13806A}
+html[data-model="2"] .nb-gm em{color:#4A4A5E}
+html[data-model="2"] .nb-gm .nb-box{border-bottom-color:#6FDCC0}
+html[data-model="2"] .nb-std2 li b{background:#1A1A2E}
+html[data-model="2"] .nb-qc h4:not(:where(.a9-h5)), html[data-model="2"] .nb-qc h3:where(.a9-h4), html[data-model="2"] .nb-qc h2:where(.a9-h4){background:#4D7CFE;color:#1A1A2E!important}
+html[data-model="2"] .nb-stats div{background:#1A1A2E}
+html[data-model="2"] .nb-stats b{color:#FFC93C}
+html[data-model="2"] .nb-stats span{color:#E6DCC8}
+html[data-model="2"] .nb-intro{background:linear-gradient(#FFF6E5,#FFF6E5)}
+html[data-model="2"] .nb-do th:first-child{background:#2EC4A0}
+html[data-model="2"] .nb-do th:last-child{background:#FF7A5C}
+html[data-model="2"] .nb-do td:last-child .nb-ul li::before{background:#FF7A5C}
+html[data-model="2"] .nb-do td:first-child .nb-ul li::before{background:#2EC4A0}
+html[data-model="2"] .nb-load{background:#1A1A2E}
+html[data-model="2"] .nb-load h4:not(:where(.a9-h5)), html[data-model="2"] .nb-load h3:where(.a9-h4), html[data-model="2"] .nb-load h2:where(.a9-h4){color:#FFC93C}
+html[data-model="2"] .nb-load h4:not(:where(.a9-h5)) em, html[data-model="2"] .nb-load h3:where(.a9-h4) em, html[data-model="2"] .nb-load h2:where(.a9-h4) em{color:#6FDCC0}
+html[data-model="2"] .nb-load p{color:#E6DCC8}
+html[data-model="2"] .nb-art h4:not(:where(.a9-h5)), html[data-model="2"] .nb-art h3:where(.a9-h4), html[data-model="2"] .nb-art h2:where(.a9-h4){color:#2D4FCB}
+html[data-model="2"] .nb-art h4:not(:where(.a9-h5)) em, html[data-model="2"] .nb-art h3:where(.a9-h4) em, html[data-model="2"] .nb-art h2:where(.a9-h4) em{color:#B23A1E}
+html[data-model="2"] .nb-gdb.a{background:#1A1A2E}
+html[data-model="2"] .nb-gdb.b{background:#4D7CFE}
+html[data-model="2"] .nb-gdb.c{background:#2EC4A0}
+html[data-model="2"] .nb-gdb i b{color:#FFC93C}
+html[data-model="2"] .nb-ymb h4:not(:where(.a9-h5)), html[data-model="2"] .nb-ymb h3:where(.a9-h4), html[data-model="2"] .nb-ymb h2:where(.a9-h4){background:#1A1A2E}
+html[data-model="2"] .nb-ymb th{background:#FFF6E5;color:#1A1A2E}
+html[data-model="2"] .nb-ymb tr+tr th, html[data-model="2"] .nb-ymb tr+tr td{border-top:.3mm solid #E6DCC8}
+html[data-model="2"] .nb-wkh{background:#1A1A2E}
+html[data-model="2"] .nb-wkh span{color:#E6DCC8}
+html[data-model="2"] .nb-wk li em{color:#2D4FCB}
+html[data-model="2"] .nb-wk li em.q{color:#13806A}
+html[data-model="2"] .nb-wk li small{color:#4A4A5E}
+html[data-model="2"] .nb-wk .nb-box{background:#FFF0C4;color:#B23A1E}
+html[data-model="2"] .nb-wkx{color:#4A4A5E;border-top:.3mm solid #FFF6E5}
+html[data-model="2"] .nb-wke{background:linear-gradient(#FFF6E5,#FFF6E5)}
+html[data-model="2"] .nb-wke p small{color:#4A4A5E}
+html[data-model="2"] .nb-wkc small{color:#4A4A5E}
+html[data-model="2"] .nb-hdn{background:#1A1A2E}
+html[data-model="2"] .nb-hdi{color:#4A4A5E}
+html[data-model="2"] .nb-hdx{color:#1A1A2E}
+html[data-model="2"] .nb-hdr{color:#4A4A5E}
+html[data-model="2"] .nb-hdl{background:#FFF6E5}
+html[data-model="2"] .nb-hdl small{color:#4A4A5E}
+html[data-model="2"] .nb-hdl b{color:#1A1A2E}
+html[data-model="2"] .nb-hdl span{color:#B23A1E}
+html[data-model="2"] .nb-in-dark{border-bottom-color:#93AEFF!important}
+html[data-model="2"] .nb-tt th small{color:#E6DCC8}
+html[data-model="2"] .nb-brk td{background:#FFF0C4!important;color:#B23A1E}
+html[data-model="2"] .nb-fn{background:#FFF6E5}
+html[data-model="2"] .nb-fn i{background:#FF7A5C;color:#1A1A2E!important}
+html[data-model="2"] .nb-face p{color:#4A4A5E}
+html[data-model="2"] .nb-photo{background:#FFF6E5 center/cover no-repeat;border:.3mm dashed #93AEFF;color:#2D4FCB}
+html[data-model="2"] .nb-leg{color:#4A4A5E}
+html[data-model="2"] .nb-leg b{color:#13806A}
+html[data-model="2"] .nb-hz th[colspan]{background:#4D7CFE}
+html[data-model="2"] .nb-flow b{color:#2D4FCB}
+html[data-model="2"] .nb-flow span{color:#1A1A2E}
+html[data-model="2"] .nb-flow>i{color:#B23A1E}
+html[data-model="2"] .nb-fh{background:linear-gradient(#FFF6E5,#FFF6E5)}
+html[data-model="2"] .nb-fhm small{color:#2D4FCB}
+html[data-model="2"] .nb-fhn i{background:#FF7A5C;color:#1A1A2E}
+html[data-model="2"] .nb-fhm p{color:#4A4A5E}
+html[data-model="2"] .nb-mt{background:linear-gradient(#1A1A2E,#1A1A2E)}
+html[data-model="2"] .nb-mtf i{border-bottom:.4mm dotted #93AEFF}
+html[data-model="2"] .nb-cvh{background:linear-gradient(#1A1A2E,#1A1A2E)}
+html[data-model="2"] .nb-cvh .nb-photo{border-color:#93AEFF;color:#E6DCC8}
+html[data-model="2"] .nb-cvh p{color:#E6DCC8}
+html[data-model="2"] .nb-cvh span.nbf{border-bottom-color:#93AEFF}
+html[data-model="2"] .nb-cvf small{color:#2D4FCB}
+html[data-model="2"] .nbp{color:#1A1A2E}
+html[data-model="2"] .nbp h1, html[data-model="2"] .nbp h2, html[data-model="2"] .nbp h3, html[data-model="2"] .nbp h4{font-family:Mikhak,"Alm Sans Arabic",Tahoma,sans-serif!important}
+html[data-model="2"] .nbp-h{background:repeating-linear-gradient(-45deg,#FFC93C 0 2mm,#1A1A2E 2mm 2.8mm) bottom/100% 1.2mm no-repeat!important;color:#4A4A5E}
+html[data-model="2"] .nbp-hl b{color:#1A1A2E!important;font-family:Mikhak,"Alm Sans Arabic",sans-serif;font-weight:800}
+html[data-model="2"] .nbp-hl span{border-inline-start-color:#E6DCC8!important}
+html[data-model="2"] .nb-band{background:#1A1A2E!important;border-radius:5mm!important;box-shadow:-1.4mm 1.4mm 0 #FFC93C}
+html[data-model="2"] .nb-band h2{font-weight:900!important}
+html[data-model="2"] .nb-band p{color:#E6DCC8!important}
+html[data-model="2"] .nb-bi{background:#FFC93C!important;border:.5mm solid #FFF6E5;color:#1A1A2E!important}
+html[data-model="2"] .nb-bs{background:#FFC93C!important;color:#1A1A2E!important;border:.35mm solid #FFF6E5}
+html[data-model="2"] .nb-h{font-family:Mikhak,"Alm Sans Arabic",sans-serif;font-weight:800!important;color:#1A1A2E!important}
+html[data-model="2"] .nb-h::before{background:#FFC93C!important;box-shadow:0 0 0 .5mm #1A1A2E!important}
+html[data-model="2"] .nb-ref b, html[data-model="2"] .nb-note b{color:#2D4FCB!important}
+html[data-model="2"] .nb-t{border:.5mm solid #1A1A2E!important;border-radius:2.6mm!important}
+html[data-model="2"] .nb-t th{background:#1A1A2E!important;color:#FFF6E5!important;font-family:Mikhak,"Alm Sans Arabic",sans-serif}
+html[data-model="2"] .nb-t th small{color:#E6DCC8!important}
+html[data-model="2"] .nb-t.blue th{background:#4D7CFE!important;color:#1A1A2E!important}
+html[data-model="2"] .nb-t td{border-top-color:#E6DCC8!important}
+html[data-model="2"] .nb-t td+td, html[data-model="2"] .nb-t th+th, html[data-model="2"] .nb-t td[rowspan]+td{border-inline-start-color:#E6DCC8!important}
+html[data-model="2"] .nb-t .rh{background:#FFF6E5!important}
+html[data-model="2"] .nb-t .nb-sec{background:#FFF0C4!important;color:#1A1A2E!important;font-family:Mikhak,"Alm Sans Arabic",sans-serif}
+html[data-model="2"] .nb-card2{border:.5mm solid #1A1A2E!important;border-radius:3mm!important;box-shadow:-.9mm .9mm 0 #1A1A2E}
+html[data-model="2"] .nb-card2 h2, html[data-model="2"] .nb-card2 h3, html[data-model="2"] .nb-card2 h4{color:#1A1A2E!important}
+html[data-model="2"] .nb-note{background:#E3EBFF!important;border:.35mm solid #1A1A2E;color:#1A1A2E!important}
+html[data-model="2"] .nb-hint{background:#FFF0C4!important;color:#1A1A2E!important;border:.35mm dashed #1A1A2E}
+html[data-model="2"] .nb-quote{border-inline-start:1.6mm solid #FF7A5C!important;background:#FFE3DB!important}
+html[data-model="2"] .nb-eye{background:#FFF6E5!important;border:.35mm solid #1A1A2E}
+html[data-model="2"] .nb-ol li>b{background:#FFC93C!important;color:#1A1A2E!important;border:.3mm solid #1A1A2E}
+html[data-model="2"] .nb-ul li::before{background:#1A1A2E!important}
+html[data-model="2"] .nbx{color:#13806A!important}
+html[data-model="2"] span.nbf, html[data-model="2"] .nb-box{border-bottom-color:#B8B2A6!important}
+html[data-model="2"] .nbp-f b{background:#FFC93C!important;color:#1A1A2E!important;border:.35mm solid #1A1A2E}
+html[data-model="2"] .nbc-sky{background:#1A1A2E!important}
+html[data-model="2"] .nbc-sky i{border-color:rgba(255,201,60,.45)!important}
+html[data-model="2"] .nbc-yr{background:#FFC93C!important;color:#1A1A2E!important}</style>
 <script id="m2Js">
 /* نموذجا التصميم: «نموذج 1» (الافتراضي) و«نموذج 2». الاختيار محفوظ في المتصفح (alm:model).
    يُحمَّل في رأس الصفحة قبل رسمها، فلا يومض النموذج الآخر. في النموذج 2 لا يوجد وضع داكن. */
@@ -2530,12 +2779,37 @@ html[data-model="2"] .n5-lsh,html[data-model="2"] .tk-hero{padding-inline-end:10
     var bs = document.querySelectorAll('[data-m2set]');
     for (var i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', String(bs[i].getAttribute('data-m2set') === m));
     if (m === '2') M2Tag.start(); else M2Tag.stop();
+    digits(m === '2');
     try { window.dispatchEvent(new CustomEvent('almmodel', { detail: { model: m, user: !!user } })); } catch (e) {}
   }
   var M2MAP = {'#0D1B3D':'#1A1A2E','#0A1530':'#1A1A2E','#16264D':'#1A1A2E','#1E3A8A':'#1A1A2E','#334A7A':'#4A4A5E','#4A5878':'#4A4A5E','#4D5B7C':'#4A4A5E',
     '#2563EB':'#4D7CFE','#1D4ED8':'#2D4FCB','#14B8A6':'#2EC4A0','#0B7C70':'#13806A','#5EEAD4':'#6FDCC0','#5FD3C5':'#6FDCC0',
     '#FF7A1A':'#FF7A5C','#FFB37A':'#FFC93C','#FFB26B':'#FFC93C','#B54E00':'#B23A1E','#EEF4FF':'#FFF6E5','#DCE7FF':'#E3EBFF','#D5E0F5':'#E6DCC8','#D5E0F2':'#E6DCC8','#B9C9E8':'#D8D2C4','#8DB0F7':'#93AEFF'};
   window.m2c = function (h) { if (R.getAttribute('data-model') !== '2') return h; return M2MAP[String(h).toUpperCase()] || h; };
+  /* الأرقام الإنجليزية: خطوط صغيرة تُضاف في آخر الصفحة بنطاق الأرقام المشرقية وحده، فتُرسم الأرقام كلها 0-9.
+     خط المصحف (Hafs) خارجها، فتبقى أرقام الآيات كما في المصحف. */
+  var M2_BASE = '';
+  var DIG = null;
+  function digitsCss() {
+    var u = 'unicode-range:U+0660-066C,U+06F0-06F9;font-display:block';
+    var f = function (fam, file, w) { return '@font-face{font-family:"' + fam + '";src:url("' + M2_BASE + 'fonts/m2d-' + file + '.woff2") format("woff2");font-weight:' + w + ';' + u + '}'; };
+    var css = '';
+    css += f('Alm Sans Arabic', 'alm-400', '400') + f('Alm Sans Arabic', 'alm-700', '700');
+    css += f('Mikhak', 'mik-400', '400') + f('Mikhak', 'mik-700', '500 700') + f('Mikhak', 'mik-800', '800') + f('Mikhak', 'mik-900', '900');
+    [['Tahoma', 'local("Tahoma")', 'local("Tahoma Bold"),local("Tahoma-Bold")'], ['Arial', 'local("Arial"),local("ArialMT")', 'local("Arial Bold"),local("Arial-BoldMT")']].forEach(function (x) {
+      css += '@font-face{font-family:"' + x[0] + '";src:' + x[1] + ';font-weight:400}@font-face{font-family:"' + x[0] + '";src:' + x[2] + ';font-weight:700}';
+      css += f(x[0], 'alm-400', '400') + f(x[0], 'alm-700', '700');
+    });
+    return css;
+  }
+  function digits(on) {
+    if (on) {
+      if (!DIG) { DIG = document.createElement('style'); DIG.id = 'm2Digits'; DIG.textContent = digitsCss(); }
+      (document.body || document.head).appendChild(DIG);
+    } else if (DIG && DIG.parentNode) DIG.parentNode.removeChild(DIG);
+  }
+  window.m2Digits = function (s) { return String(s == null ? '' : s).replace(/[\u0660-\u0669]/g, function (c) { return c.charCodeAt(0) - 0x660; }).replace(/[\u06F0-\u06F9]/g, function (c) { return c.charCodeAt(0) - 0x6F0; }).replace(/\u066A/g, '%').replace(/\u066B/g, '.').replace(/\u066C/g, ','); };
+  window.m2Num = function (s) { return R.getAttribute('data-model') === '2' ? window.m2Digits(s) : s; };
   window.almModel = function () { return R.getAttribute('data-model') === '2' ? 2 : 1; };
   window.almSetModel = function (m) {
     m = String(m) === '2' ? '2' : '1';
@@ -2561,6 +2835,7 @@ html[data-model="2"] .n5-lsh,html[data-model="2"] .tk-hero{padding-inline-end:10
       var rad = parseFloat(cs.borderTopLeftRadius) || 0; if (rad < 10) return;
       var bw = parseFloat(cs.borderTopWidth) || 0, bs = cs.borderTopStyle, hasBd = bw >= 1 && bs !== 'none';
       var bg = rgb(cs.backgroundColor), hasBg = bg && bg.a > 0.5;
+      if (!hasBg && /gradient/.test(cs.backgroundImage) && !/repeating/.test(cs.backgroundImage)) { var g1 = rgb(cs.backgroundImage); if (g1 && g1.a > 0.5) { bg = g1; hasBg = true; } }
       var dark = hasBg && L(bg) < 0.2;
       if (hasBg && !dark && L(bg) < 0.8) { var fc = rgb(cs.color); if (fc && L(fc) > 0.75) el.setAttribute('data-m2ink', ''); }
       var ondark = el.parentElement && el.parentElement.closest('[data-m2c="dark"],[data-m2c="ondark"]');
@@ -2572,7 +2847,9 @@ html[data-model="2"] .n5-lsh,html[data-model="2"] .tk-hero{padding-inline-end:10
       if (rad >= 900 || (h && rad >= h / 2 - 1)) { el.setAttribute('data-m2c', 'pill'); return; }
       var nested = el.parentElement && el.parentElement.closest('[data-m2c="card"],[data-m2c="flat"]');
       var inRead = el.closest('.article');
-      el.setAttribute('data-m2c', (nested || inRead) ? 'flat' : 'card');
+      var kind = (nested || inRead) ? 'flat' : 'card';
+      el.setAttribute('data-m2c', kind);
+      if (kind === 'card') { var pe = el.parentElement, pc = pe && getComputedStyle(pe); if (pc && /grid|flex/.test(pc.display) && ((parseFloat(pc.columnGap) || 0) < 12 || (parseFloat(pc.rowGap) || 0) < 12)) pe.setAttribute('data-m2gap', ''); }
     }
     function scan(root) {
       if (root.nodeType !== 1) return;
@@ -2602,6 +2879,8 @@ html[data-model="2"] .n5-lsh,html[data-model="2"] .tk-hero{padding-inline-end:10
   });
   document.addEventListener('DOMContentLoaded', function () { apply(R.getAttribute('data-model') || '1', false); });
 })();
+
+window.NB_PCSS_M2 = "/* مولَّد آليًّا من أنماط index.html بالأداة m2/auto.py: لا يُعدَّل باليد. */\n.nbp{color:#1A1A2E}\n.nbp-h{color:#4A4A5E;background:linear-gradient(#2EC4A0,#2EC4A0) bottom/100% .7mm no-repeat}\n.nbp-hl b{color:#2D4FCB}\n.nbp-hl span{border-inline-start:.3mm solid #B8B2A6}\n.nbp-f{color:#4A4A5E}\n.nbp-f b{background:#1A1A2E}\n.nb-band{background:linear-gradient(#1A1A2E,#1A1A2E)}\n.nb-bi{background:#FF7A5C;color:#1A1A2E}\n.nb-band p{color:#E6DCC8}\n.nb-h{color:#1A1A2E}\n.nb-h::before{background:#2EC4A0;box-shadow:0 0 0 .8mm #C4F0E3}\n.nb-h small{color:#4A4A5E}\n.nb-ref{color:#4A4A5E}\n.nb-ref b{color:#2D4FCB}\n.nb-note{color:#1A1A2E;background:#FFF6E5}\n.nb-note b{color:#2D4FCB}\n.nb-hint{color:#B23A1E;background:#FFF0C4}\n.nb-t th{background:#1A1A2E}\n.nb-t th small{color:#E6DCC8}\n.nb-t.blue th{background:#4D7CFE}\n.nb-t td{border-top:.3mm solid #E6DCC8}\n.nb-t td+td, .nb-t th+th, .nb-t td[rowspan]+td{border-inline-start:.3mm solid #E6DCC8}\n.nb-t thead tr+tr th{border-top:.3mm solid #4A4A5E}\n.nb-t .rh{background:#FFF6E5}\n.nb-t .nb-sec{background:#E3EBFF;color:#1A1A2E}\n.nb-ul li::before{background:#4D7CFE}\n.nb-ol li>b{background:#E3EBFF;color:#1A1A2E}\n.nb-card2 h4:not(:where(.a9-h5)), .nb-card2 h3:where(.a9-h4), .nb-card2 h2:where(.a9-h4){color:#2D4FCB}\n.nb-card2 h4:not(:where(.a9-h5)) small, .nb-card2 h3:where(.a9-h4) small, .nb-card2 h2:where(.a9-h4) small{color:#4A4A5E}\n.nb-card2 h4:not(:where(.a9-h5)) em, .nb-card2 h3:where(.a9-h4) em, .nb-card2 h2:where(.a9-h4) em{color:#B23A1E}\n.nb-eye{background:linear-gradient(#FFF6E5,#FFF6E5)}\n.nb-eye b{color:#1A1A2E}\n.nb-quote{border-inline-start:1.4mm solid #FF7A5C;background:#FFF0C4}\n.nb-quote span{color:#4A4A5E}\n.nb-qt{color:#1A1A2E}\nspan.nbf{border-bottom:.3mm dotted #93AEFF}\n.nb-box{border-bottom:.3mm dotted #93AEFF}\n.nbx{color:#13806A}\n.nb-dl{border-bottom:.3mm dotted #4A4A5E}\n.nbc-sky{background:linear-gradient(#1A1A2E,#1A1A2E)}\n.nbc-sky .o3{background:#FF7A5C}\n.nbc-sky .o4{background:#2EC4A0}\n.nbc-title p{color:#6FDCC0}\n.nbc-bar{background:linear-gradient(#FF7A5C,#FF7A5C)}\n.nbc-g{color:#2D4FCB}\n.nbc-card span{color:#4A4A5E}\n.nbc-card b{color:#1A1A2E}\n.nbc-dots{border-bottom:.4mm dotted #93AEFF}\n.nbc-spec{background:linear-gradient(#1A1A2E,#1A1A2E)}\n.nbp-div{background:linear-gradient(#FFF6E5,#FFF6E5)}\n.nbd-k{color:#4A4A5E}\n.nbd-n{color:#2D4FCB}\n.nbd h2:not(:where(.a9-h3, .a9-h4)){color:#1A1A2E}\n.nbd p{color:#4A4A5E}\n.nbd li{border-bottom:.3mm dashed #B8B2A6}\n.nbd li b{color:#2D4FCB}\n.nbd li small{color:#4A4A5E}\n.nbd-f{color:#4A4A5E}\n.nb-tocn{background:#1A1A2E}\n.nb-toct h3:not(:where(.a9-h4, .a9-h5)), .nb-toct h2:where(.a9-h3){color:#1A1A2E}\n.nb-toct p{color:#4A4A5E}\n.nb-toct li i{border-bottom:.3mm dotted #B8B2A6}\n.nb-toct li b{color:#2D4FCB}\n.nb-toct li small{color:#4A4A5E}\n.nb-vk b{background:#4D7CFE;color:#1A1A2E!important}\n.nb-val i{color:#2D4FCB}\n.nb-val b{color:#2D4FCB}\n.nb-gn small{color:#B23A1E}\n.nb-gn b{color:#1A1A2E}\n.nb-gm{background:#DDF6EE}\n.nb-gm small{color:#13806A}\n.nb-gm em{color:#4A4A5E}\n.nb-gm .nb-box{border-bottom-color:#6FDCC0}\n.nb-std2 li b{background:#1A1A2E}\n.nb-qc h4:not(:where(.a9-h5)), .nb-qc h3:where(.a9-h4), .nb-qc h2:where(.a9-h4){background:#4D7CFE;color:#1A1A2E!important}\n.nb-stats div{background:#1A1A2E}\n.nb-stats b{color:#FFC93C}\n.nb-stats span{color:#E6DCC8}\n.nb-intro{background:linear-gradient(#FFF6E5,#FFF6E5)}\n.nb-do th:first-child{background:#2EC4A0}\n.nb-do th:last-child{background:#FF7A5C}\n.nb-do td:last-child .nb-ul li::before{background:#FF7A5C}\n.nb-do td:first-child .nb-ul li::before{background:#2EC4A0}\n.nb-load{background:#1A1A2E}\n.nb-load h4:not(:where(.a9-h5)), .nb-load h3:where(.a9-h4), .nb-load h2:where(.a9-h4){color:#FFC93C}\n.nb-load h4:not(:where(.a9-h5)) em, .nb-load h3:where(.a9-h4) em, .nb-load h2:where(.a9-h4) em{color:#6FDCC0}\n.nb-load p{color:#E6DCC8}\n.nb-art h4:not(:where(.a9-h5)), .nb-art h3:where(.a9-h4), .nb-art h2:where(.a9-h4){color:#2D4FCB}\n.nb-art h4:not(:where(.a9-h5)) em, .nb-art h3:where(.a9-h4) em, .nb-art h2:where(.a9-h4) em{color:#B23A1E}\n.nb-gdb.a{background:#1A1A2E}\n.nb-gdb.b{background:#4D7CFE}\n.nb-gdb.c{background:#2EC4A0}\n.nb-gdb i b{color:#FFC93C}\n.nb-ymb h4:not(:where(.a9-h5)), .nb-ymb h3:where(.a9-h4), .nb-ymb h2:where(.a9-h4){background:#1A1A2E}\n.nb-ymb th{background:#FFF6E5;color:#1A1A2E}\n.nb-ymb tr+tr th, .nb-ymb tr+tr td{border-top:.3mm solid #E6DCC8}\n.nb-wkh{background:#1A1A2E}\n.nb-wkh span{color:#E6DCC8}\n.nb-wk li em{color:#2D4FCB}\n.nb-wk li em.q{color:#13806A}\n.nb-wk li small{color:#4A4A5E}\n.nb-wk .nb-box{background:#FFF0C4;color:#B23A1E}\n.nb-wkx{color:#4A4A5E;border-top:.3mm solid #FFF6E5}\n.nb-wke{background:linear-gradient(#FFF6E5,#FFF6E5)}\n.nb-wke p small{color:#4A4A5E}\n.nb-wkc small{color:#4A4A5E}\n.nb-hdn{background:#1A1A2E}\n.nb-hdi{color:#4A4A5E}\n.nb-hdx{color:#1A1A2E}\n.nb-hdr{color:#4A4A5E}\n.nb-hdl{background:#FFF6E5}\n.nb-hdl small{color:#4A4A5E}\n.nb-hdl b{color:#1A1A2E}\n.nb-hdl span{color:#B23A1E}\n.nb-in-dark{border-bottom-color:#93AEFF!important}\n.nb-tt th small{color:#E6DCC8}\n.nb-brk td{background:#FFF0C4!important;color:#B23A1E}\n.nb-fn{background:#FFF6E5}\n.nb-fn i{background:#FF7A5C;color:#1A1A2E!important}\n.nb-face p{color:#4A4A5E}\n.nb-photo{background:#FFF6E5 center/cover no-repeat;border:.3mm dashed #93AEFF;color:#2D4FCB}\n.nb-leg{color:#4A4A5E}\n.nb-leg b{color:#13806A}\n.nb-hz th[colspan]{background:#4D7CFE}\n.nb-flow b{color:#2D4FCB}\n.nb-flow span{color:#1A1A2E}\n.nb-flow>i{color:#B23A1E}\n.nb-fh{background:linear-gradient(#FFF6E5,#FFF6E5)}\n.nb-fhm small{color:#2D4FCB}\n.nb-fhn i{background:#FF7A5C;color:#1A1A2E}\n.nb-fhm p{color:#4A4A5E}\n.nb-mt{background:linear-gradient(#1A1A2E,#1A1A2E)}\n.nb-mtf i{border-bottom:.4mm dotted #93AEFF}\n.nb-cvh{background:linear-gradient(#1A1A2E,#1A1A2E)}\n.nb-cvh .nb-photo{border-color:#93AEFF;color:#E6DCC8}\n.nb-cvh p{color:#E6DCC8}\n.nb-cvh span.nbf{border-bottom-color:#93AEFF}\n.nb-cvf small{color:#2D4FCB}\n.nbp{color:#1A1A2E}\n.nbp h1,.nbp h2,.nbp h3,.nbp h4{font-family:Mikhak,\"Alm Sans Arabic\",Tahoma,sans-serif!important}\n.nbp-h{background:repeating-linear-gradient(-45deg,#FFC93C 0 2mm,#1A1A2E 2mm 2.8mm) bottom/100% 1.2mm no-repeat!important;color:#4A4A5E}\n.nbp-hl b{color:#1A1A2E!important;font-family:Mikhak,\"Alm Sans Arabic\",sans-serif;font-weight:800}\n.nbp-hl span{border-inline-start-color:#E6DCC8!important}\n.nb-band{background:#1A1A2E!important;border-radius:5mm!important;box-shadow:-1.4mm 1.4mm 0 #FFC93C}\n.nb-band h2{font-weight:900!important}\n.nb-band p{color:#E6DCC8!important}\n.nb-bi{background:#FFC93C!important;border:.5mm solid #FFF6E5;color:#1A1A2E!important}\n.nb-bs{background:#FFC93C!important;color:#1A1A2E!important;border:.35mm solid #FFF6E5}\n.nb-h{font-family:Mikhak,\"Alm Sans Arabic\",sans-serif;font-weight:800!important;color:#1A1A2E!important}\n.nb-h::before{background:#FFC93C!important;box-shadow:0 0 0 .5mm #1A1A2E!important}\n.nb-ref b,.nb-note b{color:#2D4FCB!important}\n.nb-t{border:.5mm solid #1A1A2E!important;border-radius:2.6mm!important}\n.nb-t th{background:#1A1A2E!important;color:#FFF6E5!important;font-family:Mikhak,\"Alm Sans Arabic\",sans-serif}\n.nb-t th small{color:#E6DCC8!important}\n.nb-t.blue th{background:#4D7CFE!important;color:#1A1A2E!important}\n.nb-t td{border-top-color:#E6DCC8!important}\n.nb-t td+td,.nb-t th+th,.nb-t td[rowspan]+td{border-inline-start-color:#E6DCC8!important}\n.nb-t .rh{background:#FFF6E5!important}\n.nb-t .nb-sec{background:#FFF0C4!important;color:#1A1A2E!important;font-family:Mikhak,\"Alm Sans Arabic\",sans-serif}\n.nb-card2{border:.5mm solid #1A1A2E!important;border-radius:3mm!important;box-shadow:-.9mm .9mm 0 #1A1A2E}\n.nb-card2 h2,.nb-card2 h3,.nb-card2 h4{color:#1A1A2E!important}\n.nb-note{background:#E3EBFF!important;border:.35mm solid #1A1A2E;color:#1A1A2E!important}\n.nb-hint{background:#FFF0C4!important;color:#1A1A2E!important;border:.35mm dashed #1A1A2E}\n.nb-quote{border-inline-start:1.6mm solid #FF7A5C!important;background:#FFE3DB!important}\n.nb-eye{background:#FFF6E5!important;border:.35mm solid #1A1A2E}\n.nb-ol li>b{background:#FFC93C!important;color:#1A1A2E!important;border:.3mm solid #1A1A2E}\n.nb-ul li::before{background:#1A1A2E!important}\n.nbx{color:#13806A!important}\nspan.nbf,.nb-box{border-bottom-color:#B8B2A6!important}\n.nbp-f b{background:#FFC93C!important;color:#1A1A2E!important;border:.35mm solid #1A1A2E}\n.nbc-sky{background:#1A1A2E!important}\n.nbc-sky i{border-color:rgba(255,201,60,.45)!important}\n.nbc-yr{background:#FFC93C!important;color:#1A1A2E!important}\n";
 </script><!--m2:end-->
 </head>
 <body dir="rtl">
@@ -2776,7 +3055,7 @@ html[data-model="2"] .n5-lsh,html[data-model="2"] .tk-hero{padding-inline-end:10
       <a href="#do" data-nav5="do"><svg class="ic" aria-hidden="true"><use href="#i-help"/></svg>ماذا أفعل؟</a>
     </nav>
     <div class="n5-more"><button type="button" class="n5-more-b" id="n5More" aria-expanded="false" aria-controls="n5Menu"><svg class="ic" aria-hidden="true"><use href="#i-more"/></svg><span class="n5-more-t">المزيد</span></button>
-      <div class="n5-menu" id="n5Menu" hidden><a href="#me" data-nav5="me"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>ملفي وإعدادي</a><a href="#tk/backup" data-nav5="tk/backup"><svg class="ic" aria-hidden="true"><use href="#i-save"/></svg>النسخة الاحتياطية</a><a href="#map" data-nav5="map"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg>خريطة الدليل</a><a href="#lab" data-nav5="lab"><svg class="ic" aria-hidden="true"><use href="#i-lab"/></svg>مختبر المواقف</a><a href="#challenge" data-nav5="challenge"><svg class="ic" aria-hidden="true"><use href="#i-flag"/></svg>تحدي ٢١ يومًا</a><a href="#about" data-nav5="about"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>عن الأداة</a><a href="https://forms.cloud.microsoft/r/Q8pY6i4ADv" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg>اكتب ملاحظتك<span class="sr-only"> (تُفتح في نافذة جديدة)</span></a></div></div>
+      <div class="n5-menu" id="n5Menu" hidden><div class="m2-menu-sw" role="group" aria-label="نموذج التصميم"><span>نموذج التصميم</span><span class="m2-switch m2-in-menu"><button type="button" data-m2set="1" aria-pressed="true">1</button><button type="button" data-m2set="2" aria-pressed="false">2</button></span></div><a href="#me" data-nav5="me"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>ملفي وإعدادي</a><a href="#tk/backup" data-nav5="tk/backup"><svg class="ic" aria-hidden="true"><use href="#i-save"/></svg>النسخة الاحتياطية</a><a href="#map" data-nav5="map"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg>خريطة الدليل</a><a href="#lab" data-nav5="lab"><svg class="ic" aria-hidden="true"><use href="#i-lab"/></svg>مختبر المواقف</a><a href="#challenge" data-nav5="challenge"><svg class="ic" aria-hidden="true"><use href="#i-flag"/></svg>تحدي ٢١ يومًا</a><a href="#about" data-nav5="about"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>عن الأداة</a><a href="https://forms.cloud.microsoft/r/Q8pY6i4ADv" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg>اكتب ملاحظتك<span class="sr-only"> (تُفتح في نافذة جديدة)</span></a></div></div>
     <a class="fb-btn" href="https://forms.cloud.microsoft/r/Q8pY6i4ADv" target="_blank" rel="noopener" aria-label="اكتب ملاحظتك على الأداة"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg><span>اكتب ملاحظتك</span></a><button class="search-btn" data-open-search aria-label="ابحث في الدليل" aria-keyshortcuts="Control+K Meta+K"><svg class="ic"><use href="#i-search"/></svg><span>ابحث في الدليل والبطاقات</span><kbd>Ctrl K</kbd></button>
     <div class="m2-switch" role="group" aria-label="نموذج التصميم"><button type="button" data-m2set="1" aria-pressed="true"><span class="m2-w">نموذج&nbsp;</span>1</button><button type="button" data-m2set="2" aria-pressed="false"><span class="m2-w">نموذج&nbsp;</span>2</button></div>
     <button class="theme-btn" id="themeBtn" aria-label="بدّل بين الوضعين الفاتح والداكن"><svg class="ic"><use href="#i-moon"/></svg></button>
@@ -14408,7 +14687,7 @@ function fdLoadZip(){return window.JSZip?Promise.resolve(window.JSZip):new Promi
 const fdMin=n=>ar(n)+(n>=3&&n<=10?' دقائق':' دقيقة');
 const xe=t=>String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const FD_DT={g:{hd:'0D1B3D',lb:'EEF4FF',cl:'FFFFFF',bd:'B9CDFB',f:'Alm Sans Arabic'}};let fdDT=FD_DT.g;/* هوية «الموهوب العبقري» لكل ملفات Word */
-function xr(t,o){o=o||{};const lines=String(t||'').split('\n');return lines.map((ln,i)=>`<w:r><w:rPr><w:rFonts w:ascii="${fdDT.f}" w:hAnsi="${fdDT.f}" w:cs="${fdDT.f}"/>${o.b?'<w:b/><w:bCs/>':''}${o.c?`<w:color w:val="${o.c}"/>`:''}<w:sz w:val="${o.sz||20}"/><w:szCs w:val="${o.sz||20}"/><w:rtl/></w:rPr>${i?'<w:br/>':''}<w:t xml:space="preserve">${xe(ln)}</w:t></w:r>`).join('')}
+function xr(t,o){o=o||{};const lines=(window.m2Num?m2Num(String(t||'')):String(t||'')).split('\n');return lines.map((ln,i)=>`<w:r><w:rPr><w:rFonts w:ascii="${fdDT.f}" w:hAnsi="${fdDT.f}" w:cs="${fdDT.f}"/>${o.b?'<w:b/><w:bCs/>':''}${o.c?`<w:color w:val="${o.c}"/>`:''}<w:sz w:val="${o.sz||20}"/><w:szCs w:val="${o.sz||20}"/><w:rtl/></w:rPr>${i?'<w:br/>':''}<w:t xml:space="preserve">${xe(ln)}</w:t></w:r>`).join('')}
 function xp(t,o){o=o||{};return `<w:p><w:pPr><w:bidi/><w:spacing w:before="20" w:after="20"/>${o.jc?`<w:jc w:val="${o.jc}"/>`:''}</w:pPr>${xr(t,o)}</w:p>`}
 function xc(content,o){o=o||{};const fill=o.h?fdDT.hd:o.l?fdDT.lb:fdDT.cl;return `<w:tc><w:tcPr>${o.w?`<w:tcW w:w="${o.w}" w:type="dxa"/>`:''}${o.span?`<w:gridSpan w:val="${o.span}"/>`:''}<w:shd w:val="clear" w:color="auto" w:fill="${fill}"/><w:vAlign w:val="center"/></w:tcPr>${(Array.isArray(content)?content:[content]).map(x=>xp(x,{b:o.h||o.l||o.b,c:o.h?'FFFFFF':'1A1A1A',jc:o.h?'center':undefined,sz:o.sz})).join('')}</w:tc>`}
 function xt(rows,grid){const B='<w:top w:val="single" w:sz="4" w:color="E0D3B4"/><w:left w:val="single" w:sz="4" w:color="E0D3B4"/><w:bottom w:val="single" w:sz="4" w:color="E0D3B4"/><w:right w:val="single" w:sz="4" w:color="E0D3B4"/><w:insideH w:val="single" w:sz="4" w:color="E0D3B4"/><w:insideV w:val="single" w:sz="4" w:color="E0D3B4"/>';
@@ -14528,9 +14807,10 @@ async function fdExportBook(){fdDT=FD_DT.g;const keys=Object.keys(fdPrefs.pl||{}
 /* ---- PowerPoint ---- */
 /* نموذج 2: عرض PowerPoint بحدّ أسود وظل صلب وألوان مسطّحة */
 async function fdExportPptxM2(PG,L,sv,gi){const p=new PG();p.layout='LAYOUT_WIDE';p.rtlMode=true;const F='Tahoma',INK='1A1A2E',CR='FFF6E5',YL='FFC93C',CO='FF7A5C',MI='2EC4A0',BL='4D7CFE',LV='B9A6FF';
-  const T=(sl,t,o)=>sl.addText(t,{fontFace:F,rtlMode:true,lang:'ar-KW',align:'right',color:INK,...o});
+  const D=x=>typeof x==='string'?m2Digits(x):Array.isArray(x)?x.map(o=>({...o,text:m2Digits(o.text)})):x;
+  const T=(sl,t,o)=>sl.addText(D(t),{fontFace:F,rtlMode:true,lang:'ar-KW',align:'right',color:INK,...o});
   const box=(sl,x,y,w,h,fill,r,sh)=>{if(sh!==0)sl.addShape(p.ShapeType.roundRect,{x:x-(sh||.12),y:y+(sh||.12),w,h,rectRadius:r||.25,fill:{color:INK},line:{color:INK,width:0}});sl.addShape(p.ShapeType.roundRect,{x,y,w,h,rectRadius:r||.25,fill:{color:fill},line:{color:INK,width:3}})};
-  const pill=(sl,t,x,y,w,fill,fs)=>{box(sl,x,y,w,.5,fill,.25,.06);sl.addText(t,{x,y,w,h:.5,fontFace:F,fontSize:fs||14,bold:true,color:INK,align:'center',valign:'middle',rtlMode:true,lang:'ar-KW'})};
+  const pill=(sl,t,x,y,w,fill,fs)=>{box(sl,x,y,w,.5,fill,.25,.06);sl.addText(D(t),{x,y,w,h:.5,fontFace:F,fontSize:fs||14,bold:true,color:INK,align:'center',valign:'middle',rtlMode:true,lang:'ar-KW'})};
   let logo=null;try{const r=await fetch('m2/logo.png');const b=await r.blob();logo=await new Promise(ok=>{const fr=new FileReader();fr.onload=()=>ok(fr.result);fr.readAsDataURL(b)})}catch(e){}
   let sl=p.addSlide();sl.background={color:CR};
   [[.5,.55,BL],[12.3,6.4,MI],[11.6,.6,LV]].forEach(([x,y,c])=>sl.addShape(p.ShapeType.ellipse,{x,y,w:.55,h:.55,fill:{color:c},line:{color:INK,width:2.5}}));
@@ -16653,11 +16933,15 @@ function nbPrint(){const [n,h]=nbPagesNow();let el=document.getElementById('nbPr
   document.body.classList.add('nb-printing');let gone=false;const done=()=>{if(gone)return;gone=true;document.body.classList.remove('nb-printing');el.innerHTML='';st.textContent='';window.removeEventListener('afterprint',done)};window.addEventListener('afterprint',done);
   const go=()=>{window.print();setTimeout(done,2500)};(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>setTimeout(go,80))}
 async function nbDataURL(path){const r=await fetch(path);if(!r.ok)throw new Error(path);const b=await r.blob();return await new Promise((res,rej)=>{const f=new FileReader();f.onload=()=>res(f.result);f.onerror=rej;f.readAsDataURL(b)})}
-async function nbExport(){nbToast('يُجهَّز الملف…');const [n,h]=nbPagesNow();let fonts='';
+async function nbExport(){nbToast('يُجهَّز الملف…');const [n,h]=nbPagesNow();let fonts='';const m2=window.almModel&&almModel()===2;let m2css='';
+  if(m2){try{const U='unicode-range:U+0660-066C,U+06F0-06F9';const [mk,mx,dr,db,dk]=await Promise.all(['fonts/Mikhak-DS1-ExtraBold.woff2','fonts/Mikhak-DS1-Black.woff2','fonts/m2d-alm-400.woff2','fonts/m2d-alm-700.woff2','fonts/m2d-mik-800.woff2'].map(nbDataURL));
+    m2css=`@font-face{font-family:Mikhak;src:url(${mk}) format("woff2");font-weight:400 800}@font-face{font-family:Mikhak;src:url(${mx}) format("woff2");font-weight:900}`;
+    m2css+=`@font-face{font-family:"Alm Sans Arabic";src:url(${dr}) format("woff2");font-weight:400;${U}}@font-face{font-family:"Alm Sans Arabic";src:url(${db}) format("woff2");font-weight:700;${U}}@font-face{font-family:Mikhak;src:url(${dk}) format("woff2");font-weight:400 900;${U}}`}catch(e){}
+    m2css+=(window.NB_PCSS_M2||'')+'html,body{background:#FFF6E5!important}.nbx-bar{background:#1A1A2E!important;border-bottom:3px solid #FFC93C}.nbx-bar button{background:#FFC93C!important;color:#1A1A2E!important;border:2px solid #FFF6E5!important}.nbx-pages .nbp{box-shadow:-6px 6px 0 #1A1A2E!important;border:2px solid #1A1A2E}@media print{.nbx-pages .nbp{box-shadow:none!important;border:0}}'}
   try{const [r,b,s]=await Promise.all(['fonts/AlmSansArabic-Regular.woff2','fonts/AlmSansArabic-Bold.woff2','fonts/amiri-sym.woff2'].map(nbDataURL));fonts=`@font-face{font-family:"Alm Sans Arabic";src:url(${r}) format("woff2");font-weight:400}@font-face{font-family:"Alm Sans Arabic";src:url(${b}) format("woff2");font-weight:700}@font-face{font-family:Sym;src:url(${s}) format("woff2");unicode-range:U+FDFA,U+FD3E-FD3F}`}catch(e){}
   const ids=[...new Set([...h.matchAll(/href="#([\w-]+)"/g)].map(m=>m[1]))];const sym=ids.map(id=>{const x=document.getElementById(id);return x&&x.tagName.toLowerCase()==='symbol'?x.outerHTML:''}).join('');
   const title='دفتر المعلم'+(NB.t.name?' – '+NB.t.name:'');
-  const doc=`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${nbE(title)}</title><style>${fonts}html,body{margin:0;background:#E9EEF8}body{font-family:"Alm Sans Arabic",Tahoma,sans-serif}.nbx-bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px;background:#0D1B3D;color:#fff;font-size:14px}.nbx-bar b{font-size:16px}.nbx-bar span{flex:1;color:#C9D6F2;min-width:200px}.nbx-bar button{font:inherit;font-weight:700;background:#FF7A1A;color:#0D1B3D;border:0;border-radius:999px;padding:8px 18px;cursor:pointer}.nbx-pages{display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px 0 40px}.nbx-pages .nbp{box-shadow:0 6px 18px rgba(13,27,61,.18)}@media (max-width:820px){.nbx-pages{zoom:calc(100vw / 820px)}}${NB_PCSS}@page{size:A4 portrait;margin:0}@media print{html,body{background:#fff}.nbx-bar{display:none}.nbx-pages{display:block;padding:0;zoom:1}.nbx-pages .nbp{box-shadow:none;break-after:page;page-break-after:always;height:296.6mm}.nbx-pages .nbp:last-child{break-after:auto;page-break-after:auto}}</style></head><body><div class="nbx-bar"><b>${nbE(title)}</b><span>${nbA(n)} صفحة A4. للطباعة أو الحفظ PDF: الورق A4، والهوامش «بلا»، مع «رسومات الخلفية». ويمكنك الكتابة في الخانات المنقطة قبل الطباعة.</span><button onclick="print()">اطبع</button></div><svg width="0" height="0" style="position:absolute" aria-hidden="true">${sym}</svg><main class="nbx-pages">${h}</main></body></html>`;
+  const doc=`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${nbE(title)}</title><style>${fonts}html,body{margin:0;background:#E9EEF8}body{font-family:"Alm Sans Arabic",Tahoma,sans-serif}.nbx-bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px;background:#0D1B3D;color:#fff;font-size:14px}.nbx-bar b{font-size:16px}.nbx-bar span{flex:1;color:#C9D6F2;min-width:200px}.nbx-bar button{font:inherit;font-weight:700;background:#FF7A1A;color:#0D1B3D;border:0;border-radius:999px;padding:8px 18px;cursor:pointer}.nbx-pages{display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px 0 40px}.nbx-pages .nbp{box-shadow:0 6px 18px rgba(13,27,61,.18)}@media (max-width:820px){.nbx-pages{zoom:calc(100vw / 820px)}}${NB_PCSS}${m2css}@page{size:A4 portrait;margin:0}@media print{html,body{background:#fff}.nbx-bar{display:none}.nbx-pages{display:block;padding:0;zoom:1}.nbx-pages .nbp{box-shadow:none;break-after:page;page-break-after:always;height:296.6mm}.nbx-pages .nbp:last-child{break-after:auto;page-break-after:auto}}</style></head><body><div class="nbx-bar"><b>${nbE(title)}</b><span>${nbA(n)} صفحة A4. للطباعة أو الحفظ PDF: الورق A4، والهوامش «بلا»، مع «رسومات الخلفية». ويمكنك الكتابة في الخانات المنقطة قبل الطباعة.</span><button onclick="print()">اطبع</button></div><svg width="0" height="0" style="position:absolute" aria-hidden="true">${sym}</svg><main class="nbx-pages">${h}</main></body></html>`;
   const name=`دفتر-المعلم${NB.t.name?'-'+NB.t.name.replace(/[\\/:*?"<>|]+/g,'').trim().replace(/\s+/g,'-'):''}.html`;
   nbSaveFile(new Blob([doc],{type:'text/html'}),name,'نُزّل الدفتر')}
 function nbSaveFile(blob,name,msg){if(typeof fdSaveBlob==='function'){fdSaveBlob(blob,name,msg);return}const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);nbToast(msg)}

@@ -1,7 +1,7 @@
 # يحدّث offline.json (قائمة ما يُحفظ للعمل بلا إنترنت وأحجامه) بعد إضافة ملفات النموذج 2.
 import json, os, glob
 d = json.load(open('offline.json', encoding='utf-8'))
-add = sorted(glob.glob('fonts/Mikhak-DS1-*.woff2')) + ['m2/logo.svg', 'm2/logo.png'] + sorted(glob.glob('m2/char/*.webp'))
+add = sorted(glob.glob('fonts/Mikhak-DS1-*.woff2')) + sorted(glob.glob('fonts/m2d-*.woff2')) + ['m2/logo.svg', 'm2/logo.png', 'm2/lv3-m2.webp'] + sorted(glob.glob('m2/char/*.webp'))
 core = d['groups']['core']['u']
 for f in add:
     if f not in core: core.append(f)
@@ -12,6 +12,6 @@ def sz(u):
 def fp(u): return 'index.html' if u == './' else (u + 'index.html' if u.endswith('/') else u)
 for g in d['groups'].values():
     g['n'] = len(g['u']); g['b'] = sum(sz(u) for u in g['u'])
-d['v'] = 111
+d['v'] = 112
 json.dump(d, open('offline.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 print({k: (g['n'], g['b']) for k, g in d['groups'].items()})
