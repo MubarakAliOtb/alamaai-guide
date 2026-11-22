@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="../icon-192.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><title>مختبر هندسة تجربة التعلّم — دليل المعلم الألمعي</title><script>try{var t=String(localStorage.getItem("dms:theme")||"").replace(/"/g,"");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script><style>@font-face{font-family:"Alm Sans Arabic";src:url("../fonts/AlmSansArabic-Regular.woff2") format("woff2");font-weight:400;font-display:swap}@font-face{font-family:"Alm Sans Arabic";src:url("../fonts/AlmSansArabic-Bold.woff2") format("woff2");font-weight:700;font-display:swap}@font-face{font-family:"Hafs";src:url("../fonts/hafs.woff2") format("woff2");font-display:swap}@font-face{font-family:"Sym";src:url("../fonts/amiri-sym.woff2") format("woff2");unicode-range:U+FDFA,U+FD3E-FD3F}/* «الموهوب العبقري» — مختبر الاكتشاف: أرضية جليدية، كحلي وأزرق يقودان، فيروزي للاستقصاء، وبرتقالي واحد يلفت النظر.
+   التخطيط: قارئ الدليل نفسه — شريط علوي، سكة أقسام لاصقة، عمود قراءة؛ والرموز في :root أدناه. */
+:root{
+  --navy-950:#0A1530; --navy-900:#0D1B3D; --navy-800:#16264D; --navy-700:#22345F; --navy-600:#334A7A;
+  --blue-50:#EEF4FF; --blue-100:#DCE7FF; --blue-200:#B9CDFB; --blue-300:#8DB0F7; --blue-500:#2563EB; --blue-600:#1D4ED8; --blue-800:#1E3A8A;
+  --teal-50:#E7F8F5; --teal-100:#C6EFE9; --teal-300:#5FD3C5; --teal-500:#14B8A6; --teal-700:#0B7C70;
+  --orange-50:#FFF3E8; --orange-100:#FFE1C7; --orange-300:#FFB26B; --orange-500:#FF7A1A; --orange-700:#B54E00;
+  --ink-500:#4A5878; --ink-300:#B9C9E8; --ink-100:#D5E0F2; --white:#FFFFFF;
+  --grad-spectrum:linear-gradient(225deg,#0D1B3D 0%,#2563EB 50%,#14B8A6 100%);
+  --grad-depth:linear-gradient(225deg,#2563EB 0%,#0D1B3D 100%);
+  --grad-ocean:linear-gradient(225deg,#2563EB 0%,#14B8A6 100%);
+  --grad-glow:linear-gradient(225deg,#FF7A1A 0%,#FFB26B 100%);
+  --grad-night:linear-gradient(200deg,#1E3A8A 0%,#0A1530 100%);
+  --grad-wash:linear-gradient(225deg,#EEF4FF 0%,#E7F8F5 55%,#FFF3E8 100%);
+  --grad-halo:radial-gradient(circle at 78% 22%,#14B8A6 0%,#2563EB 38%,#0D1B3D 82%);
+  /* semantic (light) */
+  --bg:var(--blue-50); --surface:var(--white); --sunk:var(--blue-100); --warm:var(--orange-50);
+  --ink:var(--navy-900); --ink2:var(--ink-500); --ink3:var(--ink-500); --line:var(--ink-100);
+  --brand:var(--blue-500); --on-brand:var(--white); --anchor:var(--navy-900); --on-anchor:var(--white);
+  --t-brand:var(--blue-600); --t-accent:var(--orange-700); --t-teal:var(--teal-700);
+  --accent:var(--brand); --accent-ink:var(--on-brand); --focus:var(--blue-600);
+  --sadu:var(--orange-700); --ochre:var(--orange-700); --indigo:var(--blue-600); --teal:var(--teal-700); --plum:var(--blue-800);
+  --ok:var(--teal-700); --okbg:var(--teal-50); --warnbg:var(--orange-50); --warnline:var(--orange-100); --infobg:var(--blue-100);
+  --hl:var(--orange-100);
+  --d1:#0D1B3D; --d2:#2563EB; --d3:#14B8A6; --d4:#FF7A1A; --d5:#1E3A8A; --d6:#0B7C70; --d7:#1D4ED8; --d8:#FF7A1A; --d9:#4A5878;
+  --f-display:"Alm Sans Arabic",Tahoma,sans-serif;
+  --f-body:"Alm Sans Arabic",Tahoma,sans-serif;
+  --r:20px; --r-s:14px;
+  --shadow:0 8px 22px rgba(13,27,61,.10); --shadow-lift:0 18px 40px rgba(13,27,61,.16); --shadow-glow:0 10px 28px rgba(255,122,26,.35);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:var(--navy-950); --surface:var(--navy-800); --sunk:var(--navy-700); --warm:#2A2238;
+  --ink:#F1F5FF; --ink2:#AEBBD6; --ink3:#AEBBD6; --line:var(--navy-600);
+  --brand:var(--blue-300); --on-brand:var(--navy-900); --anchor:var(--navy-600); --on-anchor:var(--white);
+  --t-brand:var(--blue-300); --t-accent:var(--orange-300); --t-teal:var(--teal-300);
+  --focus:var(--orange-300); --sadu:var(--orange-300); --ochre:var(--orange-300); --indigo:var(--blue-300); --teal:var(--teal-300); --plum:var(--blue-300);
+  --ok:var(--teal-300); --okbg:#103B44; --warnbg:#2A2238; --warnline:#4A3F5E; --infobg:var(--navy-700); --hl:var(--orange-300);
+  --d1:#8DB0F7; --d5:#8DB0F7; --d9:#AEBBD6;
+  --shadow:0 8px 22px rgba(0,0,0,.4); --shadow-lift:0 18px 40px rgba(0,0,0,.55); --shadow-glow:0 10px 28px rgba(255,178,107,.28); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:var(--navy-950); --surface:var(--navy-800); --sunk:var(--navy-700); --warm:#2A2238;
+  --ink:#F1F5FF; --ink2:#AEBBD6; --ink3:#AEBBD6; --line:var(--navy-600);
+  --brand:var(--blue-300); --on-brand:var(--navy-900); --anchor:var(--navy-600); --on-anchor:var(--white);
+  --t-brand:var(--blue-300); --t-accent:var(--orange-300); --t-teal:var(--teal-300);
+  --focus:var(--orange-300); --sadu:var(--orange-300); --ochre:var(--orange-300); --indigo:var(--blue-300); --teal:var(--teal-300); --plum:var(--blue-300);
+  --ok:var(--teal-300); --okbg:#103B44; --warnbg:#2A2238; --warnline:#4A3F5E; --infobg:var(--navy-700); --hl:var(--orange-300);
+  --d1:#8DB0F7; --d5:#8DB0F7; --d9:#AEBBD6;
+  --shadow:0 8px 22px rgba(0,0,0,.4); --shadow-lift:0 18px 40px rgba(0,0,0,.55); --shadow-glow:0 10px 28px rgba(255,178,107,.28); color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16.5px;line-height:1.85;direction:rtl;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--surface)}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+.ic{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sadu{height:12px;background:
+  linear-gradient(135deg,var(--sadu) 25%,transparent 25%) 0 0/12px 12px,
+  linear-gradient(225deg,var(--sadu) 25%,transparent 25%) 0 0/12px 12px,
+  linear-gradient(315deg,var(--ink) 25%,transparent 25%) 6px 6px/12px 12px,
+  linear-gradient(45deg,var(--ink) 25%,transparent 25%) 6px 6px/12px 12px;
+  opacity:.9;border-radius:2px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;min-height:62px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:19px 19px 6px 6px;background:var(--ink);color:var(--surface);font-family:var(--f-display);font-size:18px;flex:none}
+.brand b{font-family:var(--f-display);font-size:19px;font-weight:700;white-space:nowrap}
+.brand small{display:block;font-size:11.5px;color:var(--ink3);line-height:1.2;white-space:nowrap}
+.theme-btn{border:0;background:none;padding:8px;border-radius:50%;cursor:pointer;color:var(--ink2)}
+.progress-line{height:3px;background:transparent;position:absolute;inset:auto 0 -1px 0}
+.progress-line i{display:block;height:100%;width:0;background:var(--accent);transition:width .15s}
+@media (max-width:860px){main{padding-bottom:80px}}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.35;text-wrap:balance;font-weight:700;margin:0}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);padding:10px 16px;border-radius:999px;font-weight:600;cursor:pointer;text-decoration:none;font-size:15px}
+.btn:hover{border-color:var(--ink3)}
+.btn.accent{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.btn.accent:hover{filter:brightness(1.06)}
+.btn.ink{background:var(--ink);color:var(--surface);border-color:transparent}
+.btn.ghost{background:transparent}
+.btn.sm{padding:6px 12px;font-size:13.5px}
+.tag{display:inline-block;font-family:var(--f-body);font-size:11.5px;font-weight:600;padding:1px 9px;border-radius:999px;vertical-align:middle;line-height:1.7;letter-spacing:0}
+.tag.sug{background:color-mix(in srgb,var(--teal) 15%,transparent);color:var(--teal)}
+.tag.enr{background:color-mix(in srgb,var(--indigo) 14%,transparent);color:var(--indigo)}
+.tag.chk{background:color-mix(in srgb,var(--ochre) 18%,transparent);color:var(--ochre)}
+.hint{color:var(--ink3);font-size:14px}
+cite{font-style:normal;color:var(--ink3);font-size:.88em;white-space:nowrap}
+.src{color:var(--ink3);font-size:13.5px;margin:.4em 0 0}
+.num{font-variant-numeric:tabular-nums}
+main{min-height:70vh}
+.reader{display:grid;grid-template-columns:270px minmax(0,1fr);gap:40px;padding-block:24px 60px}
+@media (max-width:1000px){.reader{grid-template-columns:1fr;gap:0}}
+.rail{position:sticky;top:84px;align-self:start;max-height:calc(100vh - 100px);overflow:auto;padding-inline-end:4px}
+@media (max-width:1000px){.rail{position:static;max-height:none;margin-bottom:18px}}
+.rail-box{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.rail-box h4{font-size:15px;margin-bottom:2px}
+.rail-box .rp{font-size:12.5px;color:var(--ink3);margin:0 0 10px}
+.rail-list{list-style:none;padding:0;margin:0;display:grid;gap:2px}
+.rail-list a{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;padding:7px 8px;border-radius:10px;text-decoration:none;font-size:14px;line-height:1.5;color:var(--ink2)}
+.rail-list a:hover{background:var(--sunk)}
+.rail-list a.cur{background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--ink);font-weight:600}
+.rail-list .dot{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--ink3);margin-top:1px}
+.rail-list a.done .dot{background:var(--ok);border-color:var(--ok);color:#fff}
+@media (max-width:1000px){.rail-box{padding:12px}.rail-list{grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);overflow-x:auto;padding-bottom:4px}.rail-list a{font-size:13px}}
+.article{max-width:760px;min-width:0}
+.part-hero{position:relative;padding:8px 0 22px;margin-bottom:10px;border-bottom:1px solid var(--line)}
+.part-hero .sadu{width:120px;margin-bottom:18px}
+.part-hero .eyebrow{color:var(--door,var(--accent));font-weight:600;font-size:14px;margin:0 0 6px}
+.part-hero h1{font-size:clamp(32px,5vw,50px)}
+.part-num{display:block;font-size:16px;color:var(--ink3);font-weight:600;margin-bottom:2px}
+.lede{font-size:18.5px;color:var(--ink2);line-height:1.9;margin:14px 0 18px}
+.meta-line{font-size:13.5px;color:var(--ink3);margin:14px 0 0}
+.sec{padding-top:34px;margin-top:10px}
+.sec + .sec{border-top:1px solid var(--line)}
+.sec-eyebrow{font-family:var(--f-display);color:var(--accent);font-size:15px;margin:0;font-weight:600}
+.sec h2{font-size:clamp(25px,3.4vw,33px);margin:2px 0 14px}
+.sec h3{font-size:21px;margin:32px 0 10px}
+.sec h3 small{font-family:var(--f-body);font-size:13px;color:var(--ink3);font-weight:500;display:block;margin-top:2px}
+.sec h4{font-size:17px}
+.sec p{margin:0 0 14px}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:40px}
+.pager a{flex:1;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:14px 16px;text-decoration:none}
+.pager a small{display:block;color:var(--ink3);font-size:12.5px}
+.pager a b{font-family:var(--f-display);font-size:17px}
+.pager a.next{text-align:left}
+.callout{border-radius:14px;padding:13px 16px;margin:16px 0;font-size:15.5px;line-height:1.85;border:1px solid transparent}
+.callout.warn{background:var(--warnbg);border-color:var(--warnline)}
+.callout.info{background:var(--infobg);border-color:color-mix(in srgb,var(--indigo) 30%,transparent)}
+.callout b:first-child{color:var(--ochre)}
+.callout.info b:first-child{color:var(--indigo)}
+.official{margin:16px 0;padding:14px 18px;background:var(--surface);border:1px solid var(--line);border-inline-start:4px solid var(--indigo);border-radius:12px;font-size:16px;line-height:1.9}
+.off-tag{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;font-weight:600;color:var(--indigo);margin-bottom:4px}
+.pull{margin:28px 0;padding:0;font-family:var(--f-display);font-size:clamp(22px,3vw,28px);line-height:1.6;color:var(--ink);text-align:center}
+.pull::before{content:"";display:block;width:60px;height:6px;margin:0 auto 14px;background:linear-gradient(135deg,var(--sadu) 25%,transparent 25%) 0 0/6px 6px,linear-gradient(225deg,var(--sadu) 25%,transparent 25%) 0 0/6px 6px}
+.flow{margin:18px 0 20px}
+.flow figcaption{font-family:var(--f-display);font-size:16px;margin-bottom:10px}
+.flow ol{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:f}
+.flow li{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 12px 12px;counter-increment:f}
+.flow li::before{content:counter(f,arabic-indic);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--surface);font-size:13px;font-weight:700;margin-bottom:6px}
+.flow li:not(:last-child)::after{content:"";position:absolute;top:24px;left:-8px;width:8px;height:2px;background:var(--line)}
+.flow li b{display:block;font-size:15px;line-height:1.45}
+.flow li span{display:block;font-size:13px;color:var(--ink2);line-height:1.6;margin-top:3px}
+@media (max-width:700px){.flow li{display:grid;grid-template-columns:34px 1fr;gap:0 8px}.flow li::before{grid-row:span 2;margin:0}.flow li::after{display:none}}
+.tbl-wrap{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.tbl{width:100%;border-collapse:collapse;font-size:15px;line-height:1.7;min-width:520px}
+.tbl th,.tbl td{padding:10px 14px;text-align:right;vertical-align:top;border-bottom:1px solid var(--line)}
+.tbl thead th{background:var(--sunk);font-family:var(--f-display);font-weight:600;font-size:14.5px;color:var(--ink2)}
+.tbl tbody th{font-weight:600;color:var(--ink);width:24%}
+.tbl tr:last-child > *{border-bottom:0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+@media (max-width:640px){.grid2,.grid3{grid-template-columns:1fr}}
+.mini{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.mini-n{font-family:var(--f-display);color:var(--accent);font-size:18px;margin-inline-end:6px}
+.mini b{font-size:15.5px}
+.mini p{margin:4px 0 0!important;font-size:14.5px;color:var(--ink2);line-height:1.7}
+.strat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.strat dl{margin:10px 0 0;display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font-size:14.5px;line-height:1.7}
+.strat dt{color:var(--ink3);font-weight:600;font-size:13px}
+.strat dd{margin:0}
+.strat ol{margin:0;padding-inline-start:18px}
+@media (max-width:560px){.strat dl{grid-template-columns:1fr;gap:0}.strat dd{margin-bottom:6px}}
+.scene{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;max-width:860px;box-shadow:var(--shadow)}
+.scene h2{font-size:clamp(21px,3vw,27px);margin-bottom:10px}
+body{font-size:17px;line-height:1.9}
+h1,h2,h3,h4{font-weight:700}
+.sadu{height:10px;border-radius:999px;background:var(--grad-spectrum);opacity:1}
+.top{background:color-mix(in srgb,var(--surface) 94%,transparent)}
+.brand-mark{background:none;width:40px;height:40px;border-radius:12px;overflow:hidden}
+.brand-mark img{width:100%;height:100%;display:block}
+.progress-line i{background:var(--grad-ocean)}
+.btn{border-radius:999px;font-weight:700;box-shadow:var(--shadow);border-color:transparent;background:var(--surface);color:var(--t-brand)}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-lift)}
+.btn.accent{background:var(--brand);color:var(--on-brand)}
+.btn.ink{background:var(--anchor);color:var(--on-anchor)}
+.btn.ghost{background:transparent;box-shadow:none;outline:2px solid var(--t-brand);outline-offset:-2px}
+.btn[disabled]{opacity:.45;cursor:default;transform:none}
+.tag.sug{background:var(--teal-100);color:var(--navy-900)}
+.tag.enr{background:var(--blue-100);color:var(--blue-800)}
+.tag.chk{background:var(--orange-100);color:var(--navy-900)}
+.rail-box{border:0;border-radius:28px;box-shadow:var(--shadow)}
+.part-hero{border-bottom:0;padding:28px 28px 26px;margin-top:6px;border-radius:44px 8px 44px 44px;background:var(--grad-wash);color:var(--navy-900);position:relative;overflow:hidden}
+.part-hero::after{content:"";position:absolute;left:-60px;top:-60px;width:200px;height:200px;border-radius:50%;border:2px solid var(--blue-200)}
+.part-hero > *{position:relative;z-index:1}
+.part-hero .eyebrow{color:var(--orange-700)}
+.part-hero .lede{color:var(--navy-900)}
+.part-num{color:var(--blue-600)}
+.part-hero .meta-line{color:var(--ink-500)}
+.sec + .sec{border-top:0}
+.sec{padding-top:44px}
+.sec-eyebrow{display:inline-block;background:var(--anchor);color:var(--on-anchor);border-radius:999px;padding:2px 14px;font-size:14px}
+.sec h2{color:var(--ink)}
+.sec h3{color:var(--t-brand)}
+.pager a{border:0;border-radius:28px;box-shadow:var(--shadow)}
+.callout{border-radius:28px;border:0}
+.callout.warn{background:var(--warm)}
+.callout.warn b:first-child{color:var(--t-accent)}
+.callout.info{background:var(--sunk)}
+.callout.info b:first-child{color:var(--t-brand)}
+.official{border:0;border-radius:28px;background:var(--grad-wash);color:var(--navy-900);padding:18px 22px 18px 22px;padding-right:78px;position:relative}
+.official::before{content:"«";position:absolute;right:20px;top:18px;width:44px;height:44px;border-radius:50%;background:var(--navy-900);color:var(--orange-500);display:grid;place-items:center;font-size:26px;font-weight:700}
+.off-tag{color:var(--blue-600)}
+.official cite{color:var(--ink-500)}
+.pull{color:var(--t-brand)}
+.pull::before{width:80px;height:8px;border-radius:999px;background:var(--grad-spectrum)}
+.flow li{border:0;border-radius:20px;box-shadow:var(--shadow)}
+.flow li::before{width:30px;height:30px}
+.flow li:nth-child(4n+1)::before{background:var(--anchor);color:var(--on-anchor)}
+.flow li:nth-child(4n+2)::before{background:var(--blue-500);color:var(--white)}
+.flow li:nth-child(4n+3)::before{background:var(--teal-500);color:var(--navy-900)}
+.flow li:nth-child(4n+4)::before{background:var(--orange-500);color:var(--navy-900)}
+.flow li:not(:last-child)::after{background:var(--grad-ocean);height:4px;border-radius:4px}
+.strat,.tbl-wrap,.scene,.mini{border:0!important;box-shadow:var(--shadow);border-radius:20px}
+.strat,.scene{border-radius:28px}
+.tbl thead th{background:var(--brand);color:var(--on-brand);font-weight:700}
+.tbl tbody tr:nth-child(even) > *{background:color-mix(in srgb,var(--sunk) 55%,transparent)}
+.tbl tbody th{color:var(--t-brand)}
+.mini-n{color:var(--t-accent)}
+.rail-list a.cur{background:var(--sunk);color:var(--t-brand)}
+.rail-list a.done .dot{background:var(--teal-500);border-color:var(--teal-500);color:var(--navy-900)}
+.ticks{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px}
+.ticks li{position:relative;padding-inline-start:26px;font-size:15.5px;line-height:1.8}
+.ticks li::before{content:"";position:absolute;inset-inline-start:2px;top:.62em;width:12px;height:12px;border-radius:12px 3px 12px 12px;background:var(--teal-500)}
+.tbl caption{caption-side:top;text-align:right;font-family:var(--f-display);font-size:15px;padding:12px 14px 4px;color:var(--ink)}
+.brand>span:last-child{min-width:0;overflow:hidden}
+.brand b,.brand small{overflow:hidden;text-overflow:ellipsis}
+@media (max-width:520px){.brand small{display:none}}
+.cardrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0}
+.cardrow .mini p{white-space:normal}
+.abox{background:var(--surface);border-radius:20px;padding:14px 18px;box-shadow:var(--shadow);margin:16px 0}
+.abox>:first-child{margin-top:0}
+.abox p{margin:.4em 0!important;font-size:15.5px}
+.abox-k{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--anchor);color:var(--on-anchor);margin-bottom:6px}
+.abox.strat .abox-k{background:var(--blue-500);color:#fff}
+.abox.model .abox-k{background:var(--teal-500);color:var(--navy-900)}
+.abox.scene .abox-k{background:var(--orange-500);color:var(--navy-900)}
+.abox.model{background:var(--okbg)}
+.abox h4,.callout h4,.official h4{font-size:16.5px;margin:4px 0}
+.callout p,.official p{margin:.3em 0!important}
+.sec-intro{margin:10px 0 24px}
+a.mini{text-decoration:none;color:inherit;display:block;transition:transform .15s}
+a.mini:hover{transform:translateY(-2px)}
+a.mini p{color:var(--t-accent)!important}
+body{font-family:"Sym",var(--f-body)}
+/* الجزء ١٨ «هندسة تجربة التعلّم» — مكوّنات إضافية بلوحة «مختبر الاكتشاف».
+   كلها تبدأ بـ lx- وتعتمد رموز الدليل نفسها (‎--surface, --ink, --brand …)، فتعمل داخل موقع الدليل كما هي. */
+.lx-q{font-family:"Hafs","Sym",serif;font-size:1.28em;line-height:1.9;font-weight:400}
+.lx-en{direction:ltr;unicode-bidi:isolate;text-align:start}
+.lx-bub{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;font-family:var(--f-display);font-weight:700;font-size:21px;line-height:1;background:var(--blue-500);color:#fff}
+.lx-bub.c0{background:var(--anchor);color:var(--on-anchor)}
+.lx-bub.c1{background:var(--blue-500);color:#fff}
+.lx-bub.c2{background:var(--teal-500);color:var(--navy-900)}
+.lx-bub.c3{background:var(--orange-500);color:var(--navy-900)}
+.lx-bub.c4{background:var(--blue-300);color:var(--navy-900)}
+.lx-bub.c5{background:var(--blue-800);color:#fff}
+.lx-bub.sm{width:30px;height:30px;font-size:15px}
+
+/* قطرة الفكرة: ثلاثة أسئلة */
+.lx-ideas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:16px 0 22px}
+.lx-idea{background:var(--surface);color:var(--ink);border-radius:44px 8px 44px 44px;padding:22px 22px 24px;box-shadow:var(--shadow);display:grid;gap:12px;align-content:start}
+.lx-idea p{margin:0!important;font-family:var(--f-display);font-weight:700;font-size:18px;line-height:1.7}
+.lx-idea.depth{background:var(--grad-depth);color:#fff}
+.lx-idea.depth p{color:#fff;font-weight:400;font-size:16px}
+.lx-idea.depth b{color:#fff}
+
+/* حقائق بأرقام */
+.lx-facts{display:grid;gap:14px;margin:16px 0}
+.lx-fact{display:grid;grid-template-columns:84px minmax(0,1fr);gap:16px;align-items:start;background:var(--surface);border-radius:28px;padding:18px 20px;box-shadow:var(--shadow)}
+.lx-blob{display:grid;place-items:center;width:78px;height:78px;border-radius:62% 38% 55% 45% / 48% 58% 42% 52%;font-family:var(--f-display);font-weight:700;font-size:36px;line-height:1;background:var(--blue-500);color:#fff}
+.lx-blob.c2{background:var(--teal-500);color:var(--navy-900)}
+.lx-blob.c3{background:var(--orange-500);color:var(--navy-900)}
+.lx-fact h4{font-size:18px;margin:2px 0 10px;color:var(--t-brand)}
+.lx-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.lx-chips li{background:var(--sunk);color:var(--ink);border-radius:999px;padding:4px 14px;font-size:14.5px;line-height:1.7}
+.lx-chips.num{counter-reset:c}
+.lx-chips.num li{counter-increment:c;padding-inline-start:6px;display:flex;gap:8px;align-items:center}
+.lx-chips.num li::before{content:counter(c,arabic-indic);display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--surface);color:var(--t-brand);font-weight:700;font-size:13px;flex:none}
+.lx-path{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;position:relative}
+.lx-path::before{content:"";position:absolute;top:17px;inset-inline:8%;height:8px;border-radius:999px;background:var(--grad-spectrum)}
+.lx-path li{position:relative;display:grid;justify-items:center;gap:6px;font-weight:700;font-size:14.5px;text-align:center}
+.lx-path li span{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;font-size:18px;box-shadow:0 0 0 5px var(--surface)}
+.lx-path li:nth-child(1) span{background:var(--anchor);color:var(--on-anchor)}
+.lx-path li:nth-child(2) span{background:var(--blue-800);color:#fff}
+.lx-path li:nth-child(3) span{background:var(--blue-500);color:#fff}
+.lx-path li:nth-child(4) span{background:var(--blue-300);color:var(--navy-900)}
+.lx-path li:nth-child(5) span{background:var(--teal-500);color:var(--navy-900)}
+.lx-path li:nth-child(6) span{background:var(--orange-500);color:var(--navy-900)}
+.lx-canvas{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;counter-reset:c}
+.lx-canvas li{counter-increment:c;background:var(--sunk);border-radius:14px;padding:8px 12px 10px;font-size:14.5px;line-height:1.6;font-weight:700;display:grid;gap:2px;align-content:start}
+.lx-canvas li::before{content:counter(c,arabic-indic);font-size:12.5px;color:var(--t-brand)}
+.lx-canvas li small{font-weight:400;font-size:12.5px;color:var(--ink2)}
+
+/* أحكام الدليل */
+.lx-pill{display:inline-block;border-radius:999px;padding:1px 12px;font-weight:700;font-size:13.5px;line-height:1.8;white-space:nowrap;margin-inline-end:6px;background:var(--sunk);color:var(--ink)}
+.lx-pill::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-inline-end:6px;background:currentColor;opacity:.6}
+.lx-pill.s-strong{background:var(--teal-100);color:var(--navy-900)}
+.lx-pill.s-mid{background:var(--blue-100);color:var(--blue-800)}
+.lx-pill.s-reason{background:var(--anchor);color:var(--on-anchor)}
+.lx-pill.s-weak{background:var(--orange-100);color:var(--navy-900)}
+.lx-pill.s-myth{background:var(--orange-500);color:var(--navy-900)}
+.tbl.lx-ev tbody th{width:44%}
+
+/* بطاقة فحص الدعوى */
+.lx-check{background:var(--surface);border-radius:28px 8px 28px 28px;box-shadow:var(--shadow);padding:18px 22px;margin:14px 0}
+.lx-check ol{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:8px;counter-reset:c}
+.lx-check li{counter-increment:c}
+.lx-check label{display:grid;grid-template-columns:30px 22px 1fr;gap:10px;align-items:center;font-weight:700;font-size:16px;cursor:pointer}
+.lx-check label::before{content:counter(c,arabic-indic);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--anchor);color:var(--on-anchor);font-size:14px}
+.lx-check li:nth-child(2) label::before{background:var(--blue-500)}
+.lx-check li:nth-child(3) label::before{background:var(--teal-500);color:var(--navy-900)}
+.lx-check li:nth-child(4) label::before{background:var(--orange-500);color:var(--navy-900)}
+.lx-check input{width:20px;height:20px;accent-color:var(--teal-700);margin:0}
+.lx-check p{margin:0!important;font-size:15px;line-height:2.1}
+
+/* بطاقات بعناوين وحقول */
+.lx-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
+.lx-card{background:var(--surface);color:var(--ink);border-radius:20px;box-shadow:var(--shadow);padding:16px 18px;display:grid;gap:8px;align-content:start;min-width:0}
+.lx-card > header{display:flex;gap:12px;align-items:center}
+.lx-card h4{font-size:17px;margin:0;line-height:1.5}
+.lx-card p{margin:0!important;font-size:15px;line-height:1.8}
+.lx-card .src{font-size:13px;color:var(--ink3);margin:0}
+.lx-basis{display:inline-block;font-size:12.5px;font-weight:700;color:var(--t-brand);background:var(--sunk);border-radius:999px;padding:0 10px;line-height:1.8;margin-top:2px}
+.lx-k{font-weight:700;color:var(--t-brand)}
+.lx-dl{margin:0;display:grid;gap:6px}
+.lx-dl > div{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;align-items:baseline;font-size:14.5px;line-height:1.75}
+.lx-dl dt{font-weight:700;color:var(--t-brand);white-space:nowrap}
+.lx-dl dd{margin:0}
+.lx-meta{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.lx-meta > div{display:flex;gap:8px;align-items:baseline;background:var(--sunk);border-radius:999px;padding:2px 12px;font-size:13.5px;line-height:1.8}
+.lx-meta dt{font-weight:700;color:var(--ink2)}
+.lx-meta dd{margin:0;font-weight:700}
+.lx-prio{justify-self:start;border-radius:999px;padding:1px 12px;font-size:13px;font-weight:700;line-height:1.8;background:var(--teal-100);color:var(--navy-900)}
+.lx-prio.later{background:var(--blue-100);color:var(--blue-800)}
+.lx-prio.gate{background:var(--orange-100);color:var(--navy-900)}
+.lx-io{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:center;font-size:14.5px;line-height:1.7}
+.lx-io span{background:var(--sunk);border-radius:14px;padding:6px 12px}
+.lx-io i{font-style:normal;font-weight:700;font-size:20px;line-height:1;color:var(--t-teal)}
+
+/* بطاقة الدرس */
+.lx-lesson{background:var(--surface);border-radius:28px;box-shadow:var(--shadow);padding:6px 20px;margin:14px 0}
+.lx-row{display:grid;grid-template-columns:130px minmax(0,1fr);gap:4px 16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.8}
+.lx-row:last-child{border-bottom:0}
+.lx-row b{color:var(--t-brand)}
+.lx-row p{margin:0!important}
+.lx-row cite{grid-column:2;white-space:normal;font-size:12.5px}
+
+/* الشريط الزمني للحصة */
+.lx-time{margin:14px 0 6px;background:var(--surface);border-radius:28px;box-shadow:var(--shadow);padding:18px 20px}
+.lx-time figcaption{font-family:var(--f-display);font-weight:700;font-size:15.5px;margin-bottom:10px}
+.lx-bar{display:grid;grid-template-columns:56px minmax(0,1fr);gap:10px;align-items:center;margin:8px 0}
+.lx-bar-l{font-weight:700;font-size:14px;color:var(--ink2);white-space:nowrap}
+.lx-segs{display:flex;gap:3px;height:40px}
+.lx-segs i{flex:var(--m) 1 0;min-width:0;display:grid;place-items:center;border-radius:12px;font-style:normal;font-weight:700;font-size:15px;background:var(--anchor);color:var(--on-anchor)}
+.lx-segs i:first-child{border-start-start-radius:20px;border-end-start-radius:20px}
+.lx-segs i:last-child{border-start-end-radius:20px;border-end-end-radius:20px}
+.lx-segs i.c1,.lx-legend li.c1::before{background:var(--blue-500);color:#fff}
+.lx-segs i.c2,.lx-legend li.c2::before{background:var(--teal-500);color:var(--navy-900)}
+.lx-segs i.c3,.lx-legend li.c3::before{background:var(--orange-500);color:var(--navy-900)}
+.lx-segs i.c4,.lx-legend li.c4::before{background:var(--blue-300);color:var(--navy-900)}
+.lx-segs i.c5,.lx-legend li.c5::before{background:var(--blue-800);color:#fff}
+.lx-legend{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 16px;counter-reset:c}
+.lx-legend li{counter-increment:c;display:flex;gap:8px;align-items:center;font-size:13.5px;line-height:1.6}
+.lx-legend li::before{content:counter(c,arabic-indic);display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--anchor);color:var(--on-anchor);font-weight:700;font-size:12px;flex:none}
+.lx-legend li em{font-style:normal;color:var(--ink3)}
+.tbl td.lx-min{white-space:nowrap;text-align:center;font-weight:700;width:58px}
+.tbl th.lx-min{text-align:center}
+
+/* الدرجات والنقاط */
+.lx-grades{margin:14px 0;background:var(--surface);border-radius:28px;box-shadow:var(--shadow);padding:18px 20px}
+.lx-grades .lx-segs{height:46px}
+.lx-grades .lx-segs i{font-size:16px}
+.lx-g-lab{display:flex;gap:3px;margin-top:6px}
+.lx-g-lab span{flex:var(--m) 1 0;min-width:0;font-size:12.5px;line-height:1.4;text-align:center;color:var(--ink2);font-weight:700}
+.lx-g-brace{display:flex;gap:3px;margin-top:8px}
+.lx-g-brace span{flex:var(--m) 1 0;min-width:0;text-align:center;font-weight:700;font-size:13.5px;border-top:3px solid var(--line);padding-top:4px;border-radius:2px}
+.lx-g-brace span:first-child{border-color:var(--blue-500)}
+.lx-bands{list-style:none;margin:12px 0;padding:0;display:grid;gap:8px}
+.lx-bands li{display:grid;grid-template-columns:86px 62px minmax(0,1fr);gap:10px;align-items:center;font-weight:700;font-size:15px}
+.lx-bands .pts{background:var(--sunk);border-radius:999px;text-align:center;font-size:14px;line-height:1.9}
+.lx-bands .bar{height:30px;border-radius:999px;background:var(--sunk);position:relative;overflow:hidden}
+.lx-bands .bar i{position:absolute;inset-block:0;inset-inline-start:0;width:calc(var(--v)*1%);border-radius:999px;background:var(--blue-500)}
+.lx-bands .bar b{position:absolute;inset-inline-start:12px;top:0;line-height:30px;color:#fff;font-size:14.5px}
+.lx-bands li:nth-child(1) .bar i{background:var(--anchor)}
+.lx-bands li:nth-child(3) .bar i{background:var(--teal-500)}
+.lx-bands li:nth-child(3) .bar b,.lx-bands li:nth-child(4) .bar b{color:var(--navy-900)}
+.lx-bands li:nth-child(4) .bar i{background:var(--orange-500)}
+.lx-bands-h{display:grid;grid-template-columns:86px 62px minmax(0,1fr);gap:10px;font-size:12.5px;color:var(--ink3);font-weight:700;margin-top:10px}
+.lx-formula{direction:rtl;background:var(--sunk);border-radius:16px;padding:10px 16px;font-family:var(--f-display);font-weight:700;font-size:16.5px;text-align:center;margin:10px 0}
+
+/* صندوق النص الشرعي */
+.lx-ayat{position:relative;background:var(--grad-wash);color:var(--navy-900);border-radius:28px;padding:22px 26px 18px;margin:16px 0;overflow:hidden}
+.lx-ayat .lab{margin:0 0 4px!important;font-weight:700;font-size:13.5px;color:var(--blue-600)}
+.lx-ayat .txt{margin:0!important;font-family:"Hafs","Sym",serif;font-size:29px;line-height:2.15;text-align:justify;color:var(--navy-900)}
+.lx-ayat .ref{margin:6px 0 0!important;font-size:13.5px;color:var(--ink-500)}
+.lx-ayat::after{content:"";position:absolute;inset-inline-end:-40px;bottom:-46px;width:120px;height:120px;border-radius:50%;background:var(--orange-300);opacity:.55}
+.lx-ayat > *{position:relative;z-index:1}
+.lx-vocab{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:14px 0}
+.lx-vocab div{background:var(--surface);border-radius:20px;box-shadow:var(--shadow);padding:10px 14px}
+.lx-vocab b{display:block;font-weight:400;color:var(--t-brand)}
+.lx-vocab p{margin:2px 0 0!important;font-size:14.5px;line-height:1.7}
+
+/* السلّم */
+.lx-stair{list-style:none;margin:16px 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;align-items:end}
+.lx-stair li{background:var(--surface);border-radius:20px 8px 20px 20px;box-shadow:var(--shadow);padding:12px 12px 14px;display:grid;gap:6px;align-content:start;min-height:calc(96px + var(--k)*26px)}
+.lx-stair li b{font-size:17px;line-height:1.4}
+.lx-stair li p{margin:0!important;font-size:13.5px;line-height:1.65;color:var(--ink2)}
+
+/* الأسابيع */
+.lx-weeks{margin:16px 0;background:var(--surface);border-radius:28px;box-shadow:var(--shadow);padding:18px 20px}
+.lx-wk-strip{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:3px;margin-bottom:14px}
+.lx-wk-strip i{font-style:normal;display:grid;place-items:center;height:34px;border-radius:10px;font-weight:700;font-size:13.5px;background:var(--anchor);color:var(--on-anchor)}
+.lx-wk-strip i.c1{background:var(--blue-500)}
+.lx-wk-strip i.c2{background:var(--teal-500);color:var(--navy-900)}
+.lx-wk-strip i.c3{background:var(--orange-500);color:var(--navy-900)}
+.lx-wk-rows{display:grid;gap:10px}
+.lx-wk-row{display:grid;grid-template-columns:auto minmax(0,1.5fr) minmax(0,1fr);gap:12px;align-items:start;font-size:14.5px;line-height:1.75}
+.lx-wk-row .wkn{border-radius:999px;padding:0 12px;font-weight:700;white-space:nowrap;background:var(--anchor);color:var(--on-anchor);line-height:1.9}
+.lx-wk-row.c1 .wkn{background:var(--blue-500)}
+.lx-wk-row.c2 .wkn{background:var(--teal-500);color:var(--navy-900)}
+.lx-wk-row.c3 .wkn{background:var(--orange-500);color:var(--navy-900)}
+.lx-wk-row p{margin:0!important}
+.lx-wk-row .out{color:var(--ink2)}
+.lx-wk-row .out b{color:var(--t-brand)}
+
+/* خريطة الربط */
+.lx-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.lx-links a,.lx-links div.l{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:center;background:var(--surface);color:var(--ink);border-radius:20px;box-shadow:var(--shadow);padding:10px 14px;text-decoration:none}
+.lx-links b{display:block;font-size:15px;line-height:1.5}
+.lx-links span.t{display:block;font-size:13.5px;color:var(--ink2);line-height:1.65}
+.lx-bridge{list-style:none;margin:12px 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.lx-bridge li{display:grid;grid-template-columns:minmax(0,1fr) 34px auto;gap:10px;align-items:center;background:var(--surface);border-radius:20px;box-shadow:var(--shadow);padding:10px 14px;font-size:14.5px;line-height:1.6}
+.lx-bridge li b{display:block}
+.lx-bridge li i{height:10px;border-radius:999px;background:var(--grad-ocean)}
+.lx-bridge li em{font-style:normal;font-weight:700;background:var(--anchor);color:var(--on-anchor);border-radius:999px;padding:1px 14px;white-space:nowrap}
+.lx-bridge-h{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;font-size:12.5px;font-weight:700;color:var(--ink3);margin-top:12px}
+
+/* خريطة الجزء */
+.lx-over{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 6px}
+.lx-over .pg{background:var(--surface);color:var(--ink);border-radius:28px 8px 28px 28px;box-shadow:var(--shadow);padding:14px 16px 16px;display:grid;gap:8px;align-content:start}
+.lx-over .pg > header{display:flex;gap:10px;align-items:center;font-weight:700;font-size:14px;color:var(--ink2)}
+.lx-over a{display:flex;justify-content:space-between;gap:10px;align-items:baseline;text-decoration:none;color:var(--ink);font-weight:700;font-size:15px;line-height:1.6}
+.lx-over a small{font-weight:700;color:var(--t-brand);white-space:nowrap}
+.lx-over a em{font-style:normal;color:var(--ink3);font-size:12.5px;white-space:nowrap}
+
+/* المراجع */
+.lx-refs{list-style:none;margin:10px 0 18px;padding:0;display:grid;gap:8px;font-size:14.5px;line-height:1.8}
+.lx-refs li{padding-inline-start:26px;text-indent:-26px}
+.lx-refs.en{direction:ltr;text-align:left}
+.lx-refs.en li{overflow-wrap:anywhere}
+.lx-refs a{color:var(--t-brand)}
+.lx-note{font-size:14px;color:var(--ink2)}
+
+.abox > h4 .tag,.sec h3 .tag{margin-inline-start:6px}
+.sec .lede2{font-size:17.5px;line-height:1.95;color:var(--ink)}
+
+@media (max-width:760px){
+  .lx-ideas,.lx-cards,.lx-links,.lx-bridge,.lx-over{grid-template-columns:1fr}
+  .lx-bridge-h{display:none}
+  .lx-canvas{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lx-path{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:14px}
+  .lx-path::before{display:none}
+  .lx-stair{grid-template-columns:1fr}
+  .lx-stair li{min-height:0}
+  .lx-fact{grid-template-columns:1fr}
+  .lx-row{grid-template-columns:1fr}
+  .lx-row cite{grid-column:1}
+  .lx-wk-row{grid-template-columns:1fr}
+  .lx-io{grid-template-columns:1fr}
+  .lx-io i{justify-self:center;transform:rotate(-90deg)}
+  .lx-two{grid-template-columns:1fr!important}
+  .lx-bands li,.lx-bands-h{grid-template-columns:70px 52px minmax(0,1fr)}
+  .lx-ayat .txt{font-size:24px}
+}
+
+.lx-cards.one{grid-template-columns:1fr}
+.lx-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 26px;margin:14px 0 20px}
+.lx-two > div{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start}
+.lx-legend.col{flex-direction:column;gap:8px}
+.lx-figcap{font-family:var(--f-display);font-weight:700;font-size:15.5px;margin-bottom:10px}
+.tbl.lx-rubric thead th:nth-child(2){background:var(--anchor);color:var(--on-anchor)}
+.tbl.lx-rubric thead th:nth-child(3){background:var(--blue-500);color:#fff}
+.tbl.lx-rubric thead th:nth-child(4){background:var(--teal-500);color:var(--navy-900)}
+.tbl.lx-rubric thead th:nth-child(5){background:var(--orange-500);color:var(--navy-900)}
+.tbl.lx-rubric thead th:first-child{background:var(--sunk);color:var(--ink)}
+.lx-refs:not(.en) em{font-style:normal;font-weight:700}
+/* غلاف الصفحة المستقلة للجزء ١٨: يحاكي قارئ الدليل (شريط علوي، سكة أقسام، عمود قراءة). */
+.top .wrap{justify-content:space-between}
+.lx-open{white-space:nowrap}
+.article{min-width:0}
+.part-hero h1{font-size:clamp(32px,5vw,50px)}
+.lx-hero-note{margin:0 0 10px;font-size:15px;line-height:1.85;color:var(--navy-900)}
+.lx-hero-tags{margin:0;font-size:14px;line-height:2;color:var(--ink-500)}
+.lx-hero-tags .tag{margin-inline-end:2px}
+.rail-list a span:last-child small{display:block;font-size:11.5px;color:var(--ink3);font-weight:400}
+.lx-foot{margin-top:48px;padding:22px 0 30px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.lx-foot .sg{height:44px;width:auto}
+.lx-foot p{margin:0;font-size:13.5px;line-height:1.8;color:var(--ink2)}
+.lx-foot p b{color:var(--ink)}
+.lx-foot a{color:var(--t-brand)}
+.on-dark{display:none}
+:root[data-theme="dark"] .on-dark{display:block}
+:root[data-theme="dark"] .on-light{display:none}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .on-dark{display:block}
+  :root:not([data-theme="light"]) .on-light{display:none}
+}
+@media (max-width:560px){
+  .lx-foot{grid-template-columns:1fr;justify-items:start}
+  .tbl{min-width:460px}
+}
+/* مختبر هندسة تجربة التعلّم — على رموز تصميم موقع الدليل */
+html[data-view="lab"] #guideView{display:none}
+.lb-nav{display:flex;gap:6px;margin-inline-start:auto}
+.lb-nav a{padding:7px 14px;border-radius:999px;font-weight:700;font-size:14.5px;color:var(--ink2);text-decoration:none}
+.lb-nav a.on{background:var(--anchor);color:var(--on-anchor)}
+.lb-wrap{padding-block:26px 60px}
+.lb-head h1{font-size:clamp(28px,4.4vw,40px);margin:4px 0 10px;line-height:1.3;color:var(--ink)}
+.lb-head .lede{max-width:72ch}
+.lb-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0 22px;font-size:14.5px;color:var(--ink2)}
+.lb-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:22px;align-items:start}
+.lb-main{display:grid;gap:16px;min-width:0}
+.lb-card{background:var(--surface);border-radius:28px;box-shadow:var(--shadow);padding:20px 22px;min-width:0}
+.lb-card h3{margin:0 0 12px;font-size:19px;display:flex;align-items:center;gap:10px;color:var(--ink)}
+.lb-card h3 i{font-style:normal;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--anchor);color:var(--on-anchor);font-size:15px;flex:none}
+.lb-hint{margin:0 0 12px;font-size:14.5px;line-height:1.8;color:var(--ink2)}
+.lb-ref{color:var(--t-brand);font-weight:700;white-space:nowrap}
+.lb-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.lb-row .w2{grid-column:span 2}
+.lb-f{display:grid;gap:5px;font-size:13.5px;font-weight:700;color:var(--ink2);min-width:0;align-content:start}
+.lb-wrap input[type=text],.lb-wrap input[type=number],.lb-wrap input[type=date],.lb-wrap select,.lb-wrap textarea{font:inherit;font-weight:400;font-size:15.5px;color:var(--ink);background:var(--sunk);border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;width:100%;min-width:0;box-sizing:border-box}
+.lb-wrap textarea{resize:vertical;line-height:1.7}
+.lb-wrap input:focus-visible,.lb-wrap select:focus-visible,.lb-wrap textarea:focus-visible{outline:3px solid var(--blue-300);outline-offset:1px;border-color:var(--blue-500)}
+.lb-wrap input[type=checkbox],.lb-wrap input[type=radio]{width:18px;height:18px;accent-color:var(--blue-500);flex:none;margin:4px 0 0}
+.lb-bar{display:flex;gap:3px;height:34px;margin:4px 0 14px;border-radius:999px;overflow:hidden}
+.lb-bar span{display:grid;place-items:center;min-width:26px;font-weight:700;font-size:14px}
+.lb-segs{display:grid;gap:10px;margin-bottom:12px}
+.lb-seg{display:grid;grid-template-columns:minmax(0,1fr) 92px auto 30px;gap:8px;align-items:center}
+.lb-seg textarea{grid-column:1/-1}
+.lb-min{display:flex;align-items:center;gap:6px;font-weight:700;color:var(--ink2)}
+.lb-pk{display:flex;align-items:center;gap:5px;font-size:13.5px;font-weight:700;color:var(--ink2);white-space:nowrap}
+.lb-pk input{margin:0!important}
+.lb-x{width:30px;height:30px;border-radius:50%;border:0;background:var(--sunk);color:var(--ink2);font-size:18px;line-height:1;cursor:pointer}
+.lb-techs,.lb-needs,.lb-lims{display:grid;gap:8px}
+.lb-tech{border:1.5px solid var(--line);border-radius:18px;padding:10px 14px}
+.lb-tech.on{border-color:var(--blue-500);background:var(--sunk)}
+.lb-tech>label{display:flex;flex-wrap:wrap;align-items:center;gap:8px;cursor:pointer;font-size:15.5px;color:var(--ink)}
+.lb-tech>label input{margin:0!important}
+.lb-tech em{font-style:normal;font-size:12.5px;font-weight:700;color:var(--t-brand)}
+.lb-chip{font-size:12.5px;font-weight:700;background:var(--sunk);border-radius:999px;padding:2px 10px;color:var(--ink2)}
+.lb-tech.on .lb-chip{background:var(--surface)}
+.lb-td{margin-top:8px;font-size:14.5px;line-height:1.8;color:var(--ink)}
+.lb-td p{margin:0 0 6px}
+.lb-td .lb-f{max-width:320px}
+.lb-need{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:16px;padding:10px 14px;cursor:pointer;font-size:15px;line-height:1.75;color:var(--ink)}
+.lb-need small{display:block;color:var(--ink2);font-size:13px}
+.lb-rub{display:grid;gap:10px}
+.lb-rub fieldset{border:1.5px solid var(--line);border-radius:16px;padding:8px 14px 12px;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;min-width:0}
+.lb-rub legend{font-weight:700;padding:0 6px;color:var(--t-brand)}
+.lb-rub label{display:flex;gap:6px;align-items:flex-start;font-size:13.5px;line-height:1.6;cursor:pointer;color:var(--ink)}
+.lb-out{margin:10px 0 0;font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.8}
+.lb-side{position:sticky;top:84px;background:var(--surface);border-radius:28px;box-shadow:var(--shadow);padding:18px}
+.lb-side h4{margin:0 0 10px;font-size:16px;color:var(--ink)}
+.lb-side ul{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:7px;font-size:13.5px;line-height:1.6;color:var(--ink)}
+.lb-side li{padding-inline-start:22px;position:relative}
+.lb-side li::before{content:"";position:absolute;inset-inline-start:0;top:.4em;width:11px;height:11px;border-radius:50%;background:var(--ink3)}
+.lb-side li.ok::before{background:var(--teal-500)}
+.lb-side li.bad::before{background:var(--orange-500)}
+.lb-side li.bad{font-weight:700}
+.lb-btns{display:flex;flex-wrap:wrap;gap:6px}
+.lb-msg{margin:10px 0 0;font-size:13px;color:var(--t-brand);min-height:1.4em}
+/* اللوحة: ورقة بيضاء في الوضعين، كما تُطبع */
+.lb-sheet{background:#fff;color:#0D1B3D;border-radius:20px;box-shadow:var(--shadow);margin:28px auto 0;padding:26px 28px;max-width:800px;font-size:13.5px;line-height:1.7}
+.lb-sheet .sh-top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:2px solid #D5E0F2;padding-bottom:10px;margin-bottom:12px}
+.lb-sheet small{color:#4A5878;font-weight:700}
+.lb-sheet h2{margin:0;font-size:24px;line-height:1.3;color:#0D1B3D}
+.lb-sheet .sh-top p{margin:0;font-weight:700;color:#1D4ED8;max-width:60%}
+.lb-sheet table{width:100%;border-collapse:collapse;margin-bottom:12px}
+.lb-sheet thead th{background:#0D1B3D;color:#fff;padding:6px 10px;text-align:start;font-size:13px}
+.lb-sheet tbody th{width:24%;text-align:start;vertical-align:top;padding:8px 10px;color:#1D4ED8;border-bottom:1px solid #D5E0F2}
+.lb-sheet tbody th i{display:inline-block;font-style:normal;font-size:11.5px;background:#FF7A1A;color:#0D1B3D;border-radius:999px;padding:0 8px;margin-inline-start:6px}
+.lb-sheet td{padding:8px 10px;vertical-align:top;border-bottom:1px solid #D5E0F2}
+.lb-sheet td.mn,.lb-sheet thead th:last-child{text-align:center;width:44px;font-weight:700}
+.lb-sheet tfoot th{text-align:start;padding:6px 10px}
+.lb-sheet tr.pk td,.lb-sheet tr.pk th{background:#FFF3E8}
+.lb-sheet .tq{margin-top:6px;padding:6px 10px;background:#EEF4FF;border-radius:10px;font-size:12.5px}
+.lb-sheet .tq em{font-style:normal;color:#1D4ED8;font-weight:700}
+.lb-sheet .sh-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.lb-sheet .bx{border:1.5px solid #D5E0F2;border-radius:14px;padding:8px 12px;margin-bottom:10px;break-inside:avoid}
+.lb-sheet .sh-grid .bx{margin:0}
+.lb-sheet h5{margin:0 0 4px;font-size:13px;color:#1D4ED8}
+.lb-sheet p{margin:0}
+.lb-sheet ol,.lb-sheet ul{margin:0;padding-inline-start:18px}
+.lb-sheet .sm{font-size:12.5px;color:#4A5878}
+.lb-sheet .mt{color:#B9C9E8}
+.lb-sheet .sh-foot{margin-top:8px;font-size:12px;color:#4A5878;border-top:1px solid #D5E0F2;padding-top:6px}
+@media (max-width:900px){.lb-grid{grid-template-columns:1fr}.lb-side{position:static;order:-1}.lb-row{grid-template-columns:repeat(2,minmax(0,1fr))}.lb-rub fieldset{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.lb-row{grid-template-columns:1fr}.lb-row .w2{grid-column:auto}.lb-seg{grid-template-columns:minmax(0,1fr) 84px}.lb-rub fieldset{grid-template-columns:1fr}.lb-sheet{padding:16px}.lb-sheet .sh-grid{grid-template-columns:1fr}.lb-sheet .sh-top{display:block}.lb-sheet .sh-top p{max-width:none}.lb-nav a{padding:6px 10px;font-size:13.5px}.top .lx-open{display:none}.lb-card{padding:16px}}
+@media print{
+  html[data-view="lab"] .top,html[data-view="lab"] .lb-head,html[data-view="lab"] .lb-grid{display:none!important}
+  html[data-view="lab"] body{background:#fff!important}
+  html[data-view="lab"] .lb-wrap{padding:0;max-width:none;width:auto}
+  html[data-view="lab"] .lb-sheet{box-shadow:none;border-radius:0;margin:0;padding:0;max-width:none}
+  .lb-sheet *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{size:A4;margin:12mm}
+}
+</style></head><body><header class="top"><div class="wrap"><a class="brand" href="../index.html" aria-label="دليل المعلم الألمعي"><span class="brand-mark"><img src="../emblem.png" alt=""></span><span><b>دليل المعلم الألمعي</b><small>التربية الإسلامية والقرآن الكريم للموهوبين</small></span></a><nav class="lb-nav" aria-label="أقسام الصفحة"><a href="#lab" data-view="lab">المختبر</a><a href="#guide" data-view="guide">الدليل</a><a href="lxd-part18.pdf">PDF</a></nav><a class="btn sm lx-open" href="../index.html">دليل المعلم الألمعي</a></div><div class="progress-line" aria-hidden="true"><i id="readProg"></i></div></header><div id="labView" class="wrap lb-wrap"></div><main id="guideView" hidden><div class="wrap reader"><aside class="rail" aria-label="أقسام الجزء"><div class="rail-box"><h4>الجزء الثامن عشر</h4><p class="rp">هندسة تجربة التعلّم</p><ol class="rail-list"><li><a href="#lx-p1a"><span class="dot">١</span><span>(أ) ما تجربة التعلّم؟</span></a></li><li><a href="#lx-p1b"><span class="dot">١</span><span>(ب) ما الذي يثبت علميًّا؟</span></a></li><li><a href="#lx-p2"><span class="dot">٢</span><span>التجربة والموهوب</span></a></li><li><a href="#lx-p3"><span class="dot">٣</span><span>الحاجات والقرارات</span></a></li><li><a href="#lx-p4a"><span class="dot">٤</span><span>(أ) حدود التصميم الملزمة</span></a></li><li><a href="#lx-p4b"><span class="dot">٤</span><span>(ب) خمس عشرة تقنية</span></a></li><li><a href="#lx-p4c"><span class="dot">٤</span><span>(ج) المثال المحلول (١) — صلاة العيد، الثامن</span></a></li><li><a href="#lx-p4d"><span class="dot">٤</span><span>(د) المثال المحلول (٢) — القلم ١–٧، الثامن</span></a></li><li><a href="#lx-p5"><span class="dot">٥</span><span>الأدوات العشر والروبركات</span></a></li><li><a href="#lx-p6"><span class="dot">٦</span><span>المعلم المصمم</span></a></li><li><a href="#lx-links"><span class="dot">+</span><span>خريطة الربط بأجزاء الدليل</span></a></li><li><a href="#lx-refs"><span class="dot">+</span><span>المراجع</span></a></li></ol></div></aside><article class="article"><header class="part-hero"><div class="sadu" aria-hidden="true"></div><p class="eyebrow">دليل المعلم الألمعي</p><h1><span class="part-num">الجزء الثامن عشر</span> هندسة تجربة التعلّم</h1><p class="lede">هذا الجزء يعلّم معلم التربية الإسلامية والقرآن الكريم أن يصمّم الحصة تجربةً يعيشها المتعلم الموهوب داخل القالب الرسمي، لا بديلًا عنه.</p><p class="lx-hero-note">وهو النص المدمج المحقَّق: ملف «الدليل العملي لتصميم تجارب التعلم» بعد تصويبه، مطابَقًا على كتب الطالب للفصل الأول ودليلي المعلم ولوائح مدارس الموهوبين.</p><p class="lx-hero-tags">الوسوم: <span class="tag sug">مقترح</span> اجتهاد يُعرض على التوجيه الفني، <span class="tag enr">إثراء</span> إضافة من الأدبيات، <span class="tag chk">يُتحقق</span> يُطابق على مصدره قبل النشر. والإحالات: <cite>(مادة)</cite> لائحة نظام مدارس الموهوبين، <cite>(ش)</cite> اللائحة الشاملة، <cite>(د.ع)</cite> دليل العمل، <cite>(د.إ)</cite> و<cite>(د.ق)</cite> دليلا المعلم.</p><p class="meta-line">ست صفحات في عشرة أقسام · مثالان محلولان · خريطة ربط بأجزاء الدليل · ٥٢ مرجعًا أجنبيًّا</p></header><nav class="lx-over" aria-label="خريطة الجزء"><div class="pg"><header><span class="lx-bub sm c0">١</span>الصفحة ١</header><a href="#lx-p1a"><span>(أ) ما تجربة التعلّم؟</span></a><a href="#lx-p1b"><span>(ب) ما الذي يثبت علميًّا؟</span></a></div><div class="pg"><header><span class="lx-bub sm c1">٢</span>الصفحة ٢</header><a href="#lx-p2"><span>التجربة والموهوب</span></a></div><div class="pg"><header><span class="lx-bub sm c2">٣</span>الصفحة ٣</header><a href="#lx-p3"><span>الحاجات والقرارات</span></a></div><div class="pg"><header><span class="lx-bub sm c3">٤</span>الصفحة ٤</header><a href="#lx-p4a"><span>(أ) حدود التصميم الملزمة</span></a><a href="#lx-p4b"><span>(ب) خمس عشرة تقنية</span></a><a href="#lx-p4c"><span>(ج) المثال المحلول (١) — صلاة العيد، الثامن</span></a><a href="#lx-p4d"><span>(د) المثال المحلول (٢) — القلم ١–٧، الثامن</span></a></div><div class="pg"><header><span class="lx-bub sm c5">٥</span>الصفحة ٥</header><a href="#lx-p5"><span>الأدوات العشر والروبركات</span></a></div><div class="pg"><header><span class="lx-bub sm c4">٦</span>الصفحة ٦</header><a href="#lx-p6"><span>المعلم المصمم</span></a></div><div class="pg"><header><span class="lx-bub sm c0">+</span>خاتمة الجزء</header><a href="#lx-links"><span>خريطة الربط بأجزاء الدليل</span></a><a href="#lx-refs"><span>المراجع</span></a></div></nav><section class="sec" id="lx-p1a"><p class="sec-eyebrow">الصفحة ١ (أ)</p><h2>ما تجربة التعلّم؟</h2><p class="lede2">«التجربة» ما يعيشه المتعلم في الحصة عقلًا ووجدانًا وحسًّا، و«التصميم» ما يهندسه المعلم منها قبل أن تبدأ. وتصميم تجربة التعلّم (LXD) عدسة تكمّل التصميم التعليمي ولا تستبدله: التصميم التعليمي يضبط المعيار والمؤشرات والتقويم، والعدسة تسأل عمّا يغفله التحضير المعتاد.</p><h3>ثلاثة أسئلة تضيفها العدسة</h3><div class="lx-ideas"><div class="lx-idea"><span class="lx-bub c1">١</span><p>من هذا المتعلم بعينه، وماذا يتقن قبل أن أبدأ؟</p></div><div class="lx-idea"><span class="lx-bub c2">٢</span><p>ماذا سيفعل ويشعر في كل مقطع من الحصة؟</p></div><div class="lx-idea"><span class="lx-bub c3">٣</span><p>ما اللحظة التي سيتذكرها بعد أسبوع؟</p></div></div><h3>المسرد</h3><div class="tbl-wrap"><table class="tbl"><thead><tr><th>المصطلح</th><th>المقابل</th><th>الحدّ العملي</th></tr></thead><tbody><tr><th scope="row">تصميم تجربة التعلّم</th><td class="lx-en">LXD</td><td>ابتكار تجارب تعلّم تبلغ بالمتعلم ناتجه المنشود، وهي عند فلور (٢٠٢٣) «متمركزة حول الإنسان وموجّهة نحو الهدف»</td></tr><tr><th scope="row">تجربة المتعلّم</th><td class="lx-en">LX</td><td>ما يعيشه المتعلم معرفيًّا ووجدانيًّا وحسيًّا واجتماعيًّا</td></tr><tr><th scope="row">التصميم التعليمي</th><td class="lx-en">ID</td><td>التخطيط المنهجي من الأهداف إلى التقويم</td></tr><tr><th scope="row">العبء الجوهري والعبء الدخيل</th><td class="lx-en">Intrinsic / Extraneous load</td><td>الأول من تعقيد المادة، والثاني من سوء العرض</td></tr><tr><th scope="row">الصعوبة المرغوبة</th><td class="lx-en">Desirable difficulty</td><td>صعوبة تبطئ الأداء الآني وتقوّي الاحتفاظ والنقل</td></tr><tr><th scope="row">انعكاس الخبرة</th><td class="lx-en">Expertise reversal</td><td>ما ينفع المبتدئ يصير عبئًا على المتمكن</td></tr><tr><th scope="row">الإخفاق المنتج</th><td class="lx-en">Productive failure</td><td>محاولة الحل قبل الشرح</td></tr><tr><th scope="row">الاستدماج المُقحَم والمتماهي</th><td class="lx-en">Introjected / Identified</td><td>الأول دافعه الذنب واللوم، والثاني قناعة ذاتية</td></tr><tr><th scope="row">ناتج الارتقاء</th><td class="lx-en">من اصطلاح الدليل</td><td>ناتج إضافي للموهوبين في التحليل أو التقويم أو الإبداع، يُكتب في «تكملة التحضير»</td></tr></tbody></table></div><h3>ما عند فلور فعلًا</h3><div class="lx-facts"><div class="lx-fact"><span class="lx-blob">٩</span><div><h4>القواعد تسع لا خمس</h4><ul class="lx-chips num"><li>التعلم من التجربة</li><li>فرادة كل تجربة</li><li>استمرار التعلم وكلّيته</li><li>تأثره بالعاطفة</li><li>كونه عملية وناتجًا</li><li>تمركز التصميم حول الإنسان</li><li>إشراك حواس أكثر</li><li>فاعلية التفاعل</li><li>كون التجربة الجيدة إيجابية وشخصية وعميقة</li></ul></div></div><div class="lx-fact"><span class="lx-blob c2">٦</span><div><h4>المراحل ست</h4><ol class="lx-path"><li><span>١</span>السؤال</li><li><span>٢</span>البحث</li><li><span>٣</span>التصميم</li><li><span>٤</span>التطوير</li><li><span>٥</span>الاختبار</li><li><span>٦</span>الإطلاق</li></ol></div></div><div class="lx-fact"><span class="lx-blob c3">١١</span><div><h4>عناصر اللوحة أحد عشر</h4><ul class="lx-canvas"><li>ناتج التعلم</li><li>أهداف التعلم بأنواعها الأربعة<small>بصيرة، معرفة، مهارة، سلوك</small></li><li>الأشخاص</li><li>الخصائص</li><li>الموقع</li><li>البيئة</li><li>الموارد</li><li>القيود</li><li>الاستراتيجية</li><li>الأنشطة</li><li>العملية</li></ul></div></div></div><aside class="callout info"><b>ما ليس له:</b> المسار الرباعي (معايشة، فتأمل، فتجريد، فتطبيق) دورة كولب (١٩٨٤) وقد تبنّاها فلور، وقاعدة الذروة والنهاية لكانيمان وزملائه (١٩٩٣).</aside><p>فاللوحة في هذا الجزء «مكيَّفة عن لوحة فلور» <span class="tag sug">مقترح</span>: أُضيف إليها منحنى الحصة والتحقق، وأُبقي فيها «الموقع».</p><h3>النماذج وما نأخذه من كل منها للحصة</h3><div class="grid3"><div class="mini"><b>ديوي (١٩٣٨)</b><p>الخبرة التربوية تبني على ما قبلها وتتفاعل مع البيئة</p></div><div class="mini"><b>كولب (١٩٨٤)</b><p>معايشة فتأمل فتجريد فتطبيق: هيكل الذروة</p></div><div class="mini"><b>Pine وGilmore (١٩٩٩)</b><p>أربعة عوالم للتجربة (تعليمي، جمالي، ترفيهي، انغماسي) لتنويع المثير</p></div><div class="mini"><b>Parrish (٢٠٠٩)</b><p>القوس السردي: بداية وتوتر وحلّ</p></div><div class="mini"><b>Csikszentmihalyi (١٩٩٠)</b><p>التدفق: تحدٍّ يوازي المهارة مع هدف واضح وتغذية فورية</p></div><div class="mini"><b>Kahneman وزملاؤه (١٩٩٣)</b><p>الذروة والنهاية تحكمان تذكّر التجربة</p></div><div class="mini"><b>Keller (١٩٨٧)</b><p>الانتباه والصلة والثقة والرضا: قائمة فحص للدافعية</p></div><div class="mini"><b>Wiggins وMcTighe (٢٠٠٥)</b><p>التصميم العكسي: ناتج فدليل فأنشطة، وهو متسق مع «ناتج التعلم» الرسمي</p></div><div class="mini"><b>Fink (٢٠١٣)</b><p>التعلم ذو المغزى، ومنه «تعلّم كيف تتعلّم»</p></div><div class="mini"><b>Merrill (٢٠٠٢)</b><p>مشكلة حقيقية، فتنشيط، فعرض، فتطبيق، فدمج</p></div><div class="mini"><b>van Merriënboer وKirschner (٢٠١٨)</b><p>مهام كاملة ودعم وتمرين جزئي: يصلح للتجويد</p></div><div class="mini"><b>Heath وHeath (٢٠١٧)</b><p>اللحظة الفارقة: سموّ، بصيرة، اعتزاز، ارتباط</p></div></div><p>ودورة التفكير التصميمي (تعاطف، فنمذجة سريعة، فاختبار) مبسوطة في الجزء الرابع عشر، فلا تُكرر هنا.</p></section><section class="sec lx-cont" id="lx-p1b"><p class="sec-eyebrow">الصفحة ١ (ب)</p><h2>ما الذي يثبت علميًّا؟</h2><aside class="callout info">لم نقف على تجربة مضبوطة تثبت أن تصميم تجربة التعلّم بوصفه حزمة يرفع التحصيل؛ الثابت مكوّناته المأخوذة من علوم التعلّم. فيُقدَّم في الدليل إطارًا ينظّم التصميم، لا نظرية مجرَّبة.</aside><h3>حال الأدبيات</h3><ul class="ticks"><li>تعريف Schmidt وHuang (٢٠٢٢) مستخلص من تحليل نوعي لآراء الممارسين: مقاربة إنسانية التمركز، مؤسسة نظريًّا، حساسة للسياق الاجتماعي والثقافي، تستعين بمناهج تجربة المستخدم.</li><li>Jahnke وزملاؤها (٢٠٢٢) يرونه «يقف إلى جانب ID وUX مقاربةً مكمِّلة»، لا حقلًا منفصلًا.</li><li>Abramenka-Lachheb (٢٠٢٣) تعدّه تطورًا طبيعيًّا للتصميم التعليمي، لا شيئًا مختلفًا عنه.</li><li>مراجعة منهجية (Tawfik وزملاؤه، ٢٠٢٤) لأدوات تقويمه وجدت أن أكثر استباناته من صنع الباحثين أنفسهم، وأن الاتفاق على أدوات مقننة ضعيف؛ فالحقل ما زال يبحث عن أدوات قياسه.</li></ul><h3>تصنيف الدعاوى</h3><div class="tbl-wrap"><table class="tbl lx-ev"><thead><tr><th>الدعوى</th><th>الحكم</th></tr></thead><tbody><tr><th scope="row">الاسترجاع والتباعد والترميز المزدوج</th><td><span class="lx-pill s-strong">دليل قوي</span></td></tr><tr><th scope="row">خفض العبء الدخيل، وانعكاس الخبرة</th><td><span class="lx-pill s-strong">دليل قوي</span></td></tr><tr><th scope="row">الإخفاق المنتج قبل الشرح</th><td><span class="lx-pill s-strong">دليل قوي</span>مشروط بالعمر وجودة التصميم</td></tr><tr><th scope="row">تداخل العاطفة مع الانتباه والذاكرة والقرار</th><td><span class="lx-pill s-strong">دليل قوي</span>وصياغته العصبية الشائعة مبالغ فيها</td></tr><tr><th scope="row">الذروة والنهاية تحكمان تذكّر التجربة وتفضيلها</th><td><span class="lx-pill s-mid">دليل متوسط</span>وأثرهما في التحصيل غير مثبت</td></tr><tr><th scope="row">الاستدماج المتماهي أصحّ نفسيًّا</th><td><span class="lx-pill s-mid">دليل متوسط</span>ارتباطي</td></tr><tr><th scope="row">لوحة فلور والشخصيات وخرائط الرحلة، وعدسات كابلان</th><td><span class="lx-pill s-reason">اجتهاد تصميمي معقول</span>ودليله التجريبي محدود</td></tr><tr><th scope="row">فرط الإثارة سمة مميِّزة للموهوبين</th><td><span class="lx-pill s-weak">دليل ضعيف</span>ومتباين</td></tr><tr><th scope="row">مواءمة التدريس لـ«نمط المتعلم»</th><td><span class="lx-pill s-myth">شائع بلا دليل</span></td></tr><tr><th scope="row">«هرم التعلم» ونسبه المئوية</th><td><span class="lx-pill s-myth">شائع بلا دليل</span></td></tr><tr><th scope="row">«التعلم المستند إلى الدماغ» عنوانًا جامعًا</th><td>يخلط الثابت بالخرافة العصبية؛ يُحتفظ بالاسم ويُسند كل مبدأ فيه إلى دليله</td></tr></tbody></table></div><h3>ثلاث صياغات مصوَّبة</h3><div class="abox"><h4>العبء المعرفي</h4><p>«يُخفض العبء الدخيل، ويُضبط العبء الجوهري بحسب خبرة المتعلم، وتُدرج صعوبات مرغوبة مقصودة في التدريب والمراجعة». فـ«العبء وثيق الصلة» لم يعد مصدرًا ثالثًا مستقلًّا (Sweller وزملاؤه، ٢٠١٩)، و«الصعوبة المرغوبة» مفهوم آخر من أبحاث الذاكرة (Bjork وBjork، ٢٠١١).</p></div><div class="abox"><h4>العاطفة</h4><p>تتداخل العمليات الانفعالية مع الانتباه والذاكرة والقرار (Immordino-Yang وDamasio، ٢٠٠٧)؛ فالمطلوب انخراط ذو معنى وأمان، لا إثارة مجردة.</p></div><div class="abox"><h4>الذروة والنهاية</h4><p>خاتمة أيسر تحسّن تذكّر المهمة وتفضيلها (Finn، ٢٠١٠)، وظهر ذلك في صف سابع (Hoogerheide وPaas، ٢٠١٢)، ولم يثبت أنها ترفع التحصيل؛ فتُستعمل للدافعية لا بديلًا عن التدريب.</p></div><h3>أداة الصفحة: بطاقة فحص الدعوى <span class="tag sug">مقترح</span></h3><div class="lx-check"><ol><li><label><input type="checkbox" id="lxc0"><span>من صاحبها الأصلي؟</span></label></li><li><label><input type="checkbox" id="lxc1"><span>هل لها دراسة محكّمة أو تحليل تلوي؟</span></label></li><li><label><input type="checkbox" id="lxc2"><span>هل جُرّبت على أعمار ١٢–١٥؟</span></label></li><li><label><input type="checkbox" id="lxc3"><span>هل قاست التعلّم أم الرضا؟</span></label></li></ol><p>ثم توسم بأحد ثلاثة: <span class="lx-pill s-strong">دليل قوي</span>، أو <span class="lx-pill s-reason">اجتهاد معقول</span>، أو <span class="lx-pill s-myth">شائع بلا دليل</span>.</p></div></section><section class="sec" id="lx-p2"><p class="sec-eyebrow">الصفحة ٢</p><h2>التجربة والموهوب</h2><p class="lede2">حاجة الموهوب الأولى تحدٍّ مضبوط في بيئة لا تعاقب الخطأ، والتجربة المصمَّمة تجمع الاثنين: تشخيص يكشف ما أُتقن، وذروة ترفع السقف، وخاتمة يخرج بها المتعلم ناجحًا.</p><h3>نماذج الموهوبين وموقعها في التصميم</h3><div class="grid2"><div class="mini"><b>رينزولي: الإثراء وضغط المنهج</b><p>تشخيص ضاغط، ثم تحويل الوقت الموفَّر إلى بحث حقيقي</p></div><div class="mini"><b>كابلان: العمق والتعقيد</b><p>مادة الذروة: عدستان أو ثلاث</p></div><div class="mini"><b>ماكر</b><p>تعديل المحتوى والعملية والمنتج والبيئة</p></div><div class="mini"><b>توملينسون</b><p>التمايز بالاستعداد والاهتمام، لا بـ«النمط»</p></div><div class="mini"><b>VanTassel-Baska: المنهج التكاملي</b><p>محتوى متقدم، وعمليات عليا، وقضايا كبرى</p></div><div class="mini"><b>Betts: المتعلم المستقل</b><p>تدرّج الاستقلالية حتى يقترح الطالب سؤاله</p></div><div class="mini"><b>Gagné: نموذج DMGT</b><p>الموهبة لا تصير تميزًا إلا بعوامل محفّزة، والتجربة المصمَّمة منها</p></div></div><div class="abox"><h4>ناتج الارتقاء هو الذروة نفسها</h4><p>يُصاغ ناتجًا إضافيًّا في التحليل أو التقويم أو الإبداع، مع جملة تربطه بخاصية من خصائص الموهوبين. ويُكتب في «تكملة التحضير»، ولا يُخلط بمؤشرات القالب الرسمية (الجزء الثالث؛ الجزء السادس).</p></div><div class="abox"><h4>الشعبة المصغّرة واقع نظامي</h4><p>القاعة لا تزيد على ستة عشر متعلمًا، ويجوز الترخيص بعدد أقل <cite>(مادة ٢٧)</cite>. فلكل استراتيجية جماعية في هذا الجزء صيغتان: (م) للشعبة من أربعة إلى ستة، و(١٦) للشعبة الكاملة.</p></div><div class="abox"><h4>من «الشخصيات» إلى «ملمح الشعبة» <span class="tag sug">مقترح</span></h4><p>بطاقات الشخصيات الافتراضية تُغري بتنميط الطلاب. البديل ملمح يُبنى من بيانات الشعبة نفسها: تشخيص قبلي، وملاحظة أسبوعين، وبطاقة صوت المتعلم. يُراجع كل فصل، ولا يُنسب إلى طالب بعينه، ولا تُدخل بياناته في أداة خارجية. وسنده أن الفروق الفردية قائمة بين الموهوبين أنفسهم، وأن الموهوب ليس متفوقًا في كل المجالات <cite>(الميثاق: ثانيًا، ثالثًا)</cite>.</p></div><div class="abox"><h4>لا يُخصَّص المدخل المعرفي بالجنس</h4><p>اللائحة الشاملة تذكر خصائص وتوجيهات للبنين والبنات في النشاط والقواعد والحوار <cite>(ش ص١٠٦–١٠٧)</cite>، وليس فيها أن التحدي المنطقي للبنين والمعضلة الإنسانية للبنات. يختار المعلم المدخل من ملمح شعبته.</p></div></section><section class="sec" id="lx-p3"><p class="sec-eyebrow">الصفحة ٣</p><h2>الحاجات والقرارات</h2><p class="lede2">كل حاجة عند المتعلم يقابلها قرار تصميم ومؤشر يُرصد. والهدف الوجداني الأعلى أن ينتقل التدين من الامتثال بدافع اللوم إلى القناعة الذاتية؛ فقد ميّز Ryan وRigby وKing (١٩٩٣) النوعين، ووجدوا الثاني مقترنًا بصحة نفسية أفضل.</p><h3>الحاجات المعرفية</h3><div class="lx-cards one"><div class="lx-card"><h4>ضبط العبء</h4><p>يُخفض الدخيل، ويُضبط الجوهري بحسب الخبرة (الصفحة ١ ب).</p></div><div class="lx-card"><h4>تفادي انعكاس الخبرة</h4><p>الإرشاد المفصّل للمبتدئ يصير عبئًا على من أتقن الأساس (Kalyuga، ٢٠٠٧). فتُحذف له الأمثلة المحلولة الطويلة ويُنقل إلى مهام مفتوحة، وهذا ما ينفّذه ضغط المنهج.</p></div><div class="lx-card"><h4>المحاولة قبل الشرح</h4><p>في تحليل Sinha وKapur (٢٠٢١) التلوي لثلاث وخمسين دراسة كان الأثر لصالح «الحل ثم الشرح» متوسطًا (g = 0.36)، وأقوى مع الالتزام بمبادئ التصميم، وانقلب لصالح الشرح أولًا في الصفوف ٢–٥. وطلابنا في سن ١٢–١٥ خارج هذه المنطقة.</p></div><div class="lx-card"><h4>علاج الملل</h4><p>الملل علامة تحدٍّ ناقص أو سيطرة منخفضة (Pekrun، ٢٠٠٦)؛ يُعالج برفع القيمة المدركة ومنح الخيار، لا بالتسلية.</p></div><div class="lx-card"><h4>الحفظ والمراجعة</h4><p>التسميع الذاتي قبل النظر أقوى من إعادة القراءة، والمراجعة المتباعدة أقوى من المكثفة. وخريطة بنية المقطع مع اللفظ ترميز مزدوج ينفع جميع الطلاب، لا «نمط بصري» لبعضهم (Pashler وزملاؤه، ٢٠٠٨).</p></div></div><h3>الحاجات الوجدانية</h3><div class="lx-cards one"><div class="lx-card"><h4>الشدة والحساسية</h4><p>في تحليل Winkler وVoight (٢٠١٦) التلوي لاثنتي عشرة دراسة تفوّق الموهوبون في الإثارة العقلية (g = 0.55) والتخيلية (0.36)، وكان الفرق صغيرًا في الحسية والانفعالية وغير دالّ في الحركية. ويرى Vuyk وزملاؤها (٢٠١٦) أن «الانفتاح على الخبرة» يفسّرها أفضل. فالصياغة الأدق: «يُظهر كثير من الموهوبين شدة في الفضول العقلي والخيال، وقد يُظهر بعضهم حساسية انفعالية أو حسية؛ وهذه فروق فردية تُرصد لدى كل طالب، لا سمة ثابتة للفئة».</p></div><div class="lx-card"><h4>النمو غير المتزامن</h4><p>مفهوم وصفي يفسّر التفاوت بين نضج السؤال ونضج الانفعال، ولا يُستعمل للتشخيص.</p></div><div class="lx-card"><h4>الكمالية</h4><p>يُفرَّق بين السعي إلى الإتقان، وهو مقترن غالبًا بالإنجاز، والقلق من الخطأ والتقييم، وهو مقترن بالتجنب (Stoeber وOtto، ٢٠٠٦). وقلق التسميع الجهري مظهر مباشر للثاني.</p></div><div class="lx-card"><h4>الأمان والانتماء</h4><p>شرط للمخاطرة بالسؤال. والميثاق يجعل السؤال والخطأ جزءًا آمنًا من التعلم، ويمنع المقارنة العلنية والسخرية <cite>(الميثاق: ثالثًا)</cite>.</p></div><div class="lx-card"><h4>مدح الجهد</h4><p>أثر تدخلات عقلية النمو في التحصيل ضعيف (d = 0.08 عند Sisk وزملائها، ٢٠١٨؛ وانظر Macnamara وBurgoyne، ٢٠٢٣). والنافع منها ما نص عليه الميثاق: مدح الجهد والاستراتيجية والمثابرة، لا «الذكاء» <cite>(الميثاق: ثالثًا)</cite>.</p></div></div><h3>خريطة الحاجة، فالقرار، فالمؤشر</h3><div class="lx-cards"><article class="lx-card"><header><span class="lx-bub sm c0">١</span><h4>تحدٍّ مضبوط</h4></header><dl class="lx-dl"><div><dt>القرار</dt><dd>تشخيص في ثلاث دقائق، ثم مهمة مفتوحة للمتقنين</dd></div><div><dt>مثال في التربية الإسلامية</dt><dd>بطاقة من أربعة بنود قبل شرح صلاة العيد</dd></div><div><dt>مثال في القرآن الكريم</dt><dd>«جولة آية» تشخيصية</dd></div><div><dt>مؤشر يُرصد</dt><dd>عدد من انتقلوا إلى العمق</dd></div></dl></article><article class="lx-card"><header><span class="lx-bub sm c1">٢</span><h4>تفادي انعكاس الخبرة</h4></header><dl class="lx-dl"><div><dt>القرار</dt><dd>سحب الدعامات تدريجيًّا</dd></div><div><dt>مثال في التربية الإسلامية</dt><dd>جدول مقارنة ناقص يكمله الطالب</dd></div><div><dt>مثال في القرآن الكريم</dt><dd>إخفاء الحكم التجويدي ليستنبطه</dd></div><div><dt>مؤشر يُرصد</dt><dd>زمن الإنجاز ودقته</dd></div></dl></article><article class="lx-card"><header><span class="lx-bub sm c2">٣</span><h4>استقلالية</h4></header><dl class="lx-dl"><div><dt>القرار</dt><dd>خياران في السؤال أو المنتج</dd></div><div><dt>مثال في التربية الإسلامية</dt><dd>اختيار وجه المقارنة الذي يدافع عنه</dd></div><div><dt>مثال في القرآن الكريم</dt><dd>اختيار أسلوب الاستظهار من الأساليب الرسمية</dd></div><div><dt>مؤشر يُرصد</dt><dd>عدد الخيارات المنفذة</dd></div></dl></article><article class="lx-card"><header><span class="lx-bub sm c3">٤</span><h4>أمان من الخطأ</h4></header><dl class="lx-dl"><div><dt>القرار</dt><dd>تسميع ثنائي أو خاص قبل الجهري</dd></div><div><dt>مثال في التربية الإسلامية</dt><dd>«خطأ الأسبوع النافع» بلا أسماء</dd></div><div><dt>مثال في القرآن الكريم</dt><dd>تسميع للمعلم منفردًا لمن يقلق</dd></div><div><dt>مؤشر يُرصد</dt><dd>انخفاض حالات الامتناع</dd></div></dl></article><article class="lx-card"><header><span class="lx-bub sm c0">٥</span><h4>معنى</h4></header><dl class="lx-dl"><div><dt>القرار</dt><dd>سؤال حقيقي في الافتتاح</dd></div><div><dt>مثال في التربية الإسلامية</dt><dd>«إذا قام بها بعض أهل الحي سقط الإثم عن الباقين؛ فلماذا أحرص على شهودها؟»</dd></div><div><dt>مثال في القرآن الكريم</dt><dd>«كيف ردّت الآيات على الاتهام؟»</dd></div><div><dt>مؤشر يُرصد</dt><dd>جودة أسئلة الطلاب</dd></div></dl></article><article class="lx-card"><header><span class="lx-bub sm c1">٦</span><h4>استدماج القيمة</h4></header><dl class="lx-dl"><div><dt>القرار</dt><dd>قيمة في صلب الدرس وعهد يختاره الطالب</dd></div><div><dt>مثال في التربية الإسلامية</dt><dd>بطاقة عهد بصيغة المصدر</dd></div><div><dt>مثال في القرآن الكريم</dt><dd>ربط الآية (٧) بموقف يومي</dd></div><div><dt>مؤشر يُرصد</dt><dd>متابعة العهد بعد أسبوع</dd></div></dl></article></div><aside class="callout warn">المؤشرات تُرصد لتحسين التصميم، ولا تُحوَّل إلى درجات؛ فالقيمة توصف ولا تُرقَّم (الجزء التاسع).</aside></section><section class="sec" id="lx-p4a"><p class="sec-eyebrow">الصفحة ٤ (أ)</p><h2>حدود التصميم الملزمة</h2><p class="lede2">التجربة تُصمَّم داخل حدود، وكل حدّ هنا مطابَق على نصه في ملفات اللوائح. تفصيلها في الجزء الأول «البوصلة»؛ وهذه خلاصة ما يغيّر قرار التصميم.</p><div class="lx-cards"><article class="lx-card"><h4>النواتج</h4><p>التكييف في أسلوب العرض وإيقاع التغطية، دون إخلال بنواتج التعلم المقررة</p><p><span class="lx-k">أثره في التصميم:</span> يُضغط الزمن لا الناتج: ما أُتقن يوثَّق سريعًا ولا يُحذف</p><p class="src">السند: مادة ٢٥؛ الميثاق: ثانيًا</p></article><article class="lx-card"><h4>القالب</h4><p>حقول القالب الرسمي ثابتة</p><p><span class="lx-k">أثره في التصميم:</span> كل تقنية تُكتب في حقلها، وما زاد يُحال إلى «تكملة التحضير»</p><p class="src">السند: الجزء السادس</p></article><article class="lx-card"><h4>الزمن</h4><p>أزمنة النماذج الرسمية مبنية على ٤٥ دقيقة، وحصة المدرسة ٤٠</p><p><span class="lx-k">أثره في التصميم:</span> كل منحنى بنسختين، ونسخة الأربعين تحذف التكرار لا الذروة</p><p class="src">السند: قالبا التحضير؛ د.إ ص٤٢–٤٣</p></article><article class="lx-card"><h4>القيمة</h4><p>تُستخرج في التمهيد أو أحد المحاور، ولا تؤجَّل إلى آخر الدرس، ومظهرها بصيغة المصدر</p><p><span class="lx-k">أثره في التصميم:</span> القيمة في صلب الدرس، والنهاية لتثبيت العهد</p><p class="src">السند: د.ق ص٥٥</p></article><article class="lx-card"><h4>حصة القرآن</h4><p>الابتعاد عن المصورات الغيبية وعن التصوير والتمثيل الحركي للآيات</p><p><span class="lx-k">أثره في التصميم:</span> خريطة البنية ألفاظ وأسهم لا رسوم، والسمع أولًا</p><p class="src">السند: د.ق ص٣٦</p></article><article class="lx-card"><h4>الحفظ في الفصل الأول</h4><p>يُحفَّظ المتعلمون في الحصة جماعيًّا وجزئيًّا وفرديًّا بالمحو التدريجي</p><p><span class="lx-k">أثره في التصميم:</span> كتلة الحفظ لا تُقتطع لأجل الذروة</p><p class="src">السند: د.ق ص٣٦</p></article><article class="lx-card"><h4>الصور والأدوار</h4><p>لا تصوير للأنبياء ولا الصحابة ولا شيء من الغيب، ولا تمثيل لهم</p><p><span class="lx-k">أثره في التصميم:</span> «تجميد المشهد» تخطيط وكتابة لا تمثيل</p><p class="src">السند: الجزء العاشر</p></article><article class="lx-card"><h4>الأجهزة</h4><p>إحضار الأجهزة الذكية دون إذن مخالفة سلوكية، والتلاوة النموذجية تُفتح من جهاز العرض</p><p><span class="lx-k">أثره في التصميم:</span> لا نشاط يتوقف على هاتف الطالب</p><p class="src">السند: ش ص١٧٩؛ د.ق ص٤٠</p></article><article class="lx-card"><h4>المبنى</h4><p>لا كتابة ولا لصق ولا تثبيت على الجدران والأثاث، ولا نقل أثاث بين القاعات، ولا بخور ولا لهب</p><p><span class="lx-k">أثره في التصميم:</span> في المحطات يتحرك الطلاب لا الأثاث، والعرض على الشاشة أو اللوحات المخصصة</p><p class="src">السند: د.ع ٦.١.٣، ٦.١.٨، ٦.٥.٣، ٦.٧.٢</p></article><article class="lx-card"><h4>التواصل والتصوير</h4><p>التواصل مع المتعلم عبر القنوات المعتمدة، ولا تصوير للنشر بمبادرة شخصية</p><p><span class="lx-k">أثره في التصميم:</span> سؤال ما قبل الحصة عبر القناة المعتمدة، والتوثيق في الملف التراكمي</p><p class="src">السند: الميثاق: خامسًا، سابعًا</p></article><article class="lx-card"><h4>التقويم</h4><p>إعلان المعايير قبل التكليف، والدرجة ليست أداة عقاب، ولا مقارنة علنية</p><p><span class="lx-k">أثره في التصميم:</span> الروبرك يُعرض قبل المهمة، والعهد السلوكي بلا درجة</p><p class="src">السند: الميثاق: ثالثًا، رابعًا</p></article><article class="lx-card"><h4>المشروع</h4><p>يُنفَّذ داخل الفصل ويُخصَّص له جزء من الحصة مع تحديد مسؤولية كل متعلم، ويجوز اعتماده لأكثر من مجال بقرار اللجنة</p><p><span class="lx-k">أثره في التصميم:</span> الذروة قد تكون مرحلة من مشروع</p><p class="src">السند: ش ص١١٨؛ مادة ٣١</p></article></div><figure class="lx-grades"><figcaption class="lx-figcap">درجات المادتين في سطر</figcaption><div class="lx-segs"><i class="c1" style="--m:8"><b>٨</b></i><i class="c1" style="--m:8"><b>٨</b></i><i class="c1" style="--m:6"><b>٦</b></i><i class="c1" style="--m:8"><b>٨</b></i><i class="c2" style="--m:20"><b>٢٠</b></i><i class="c0" style="--m:50"><b>٥٠</b></i></div><div class="lx-g-lab"><span style="--m:8">المشاركة</span><span style="--m:8">الواجبات</span><span style="--m:6">السلوك</span><span style="--m:8">المشروع</span><span style="--m:20">اختبار قصير</span><span style="--m:50">امتحان نهاية الفصل</span></div><div class="lx-g-brace"><span style="--m:30">أعمال ٣٠</span><span style="--m:20">٢٠</span><span style="--m:50">٥٠</span></div></figure><p><strong>درجات المادتين في سطر:</strong> ١٠٠ = أعمال ٣٠ (المشاركة ٨، الواجبات ٨، السلوك ٦، المشروع ٨) + اختبار قصير ٢٠ + امتحان نهاية الفصل ٥٠ <cite>(ش ص١١٦)</cite>. وشرط النجاح في المادة ألا يقل معدل امتحانَي الفصلين عن ١٢٫٥ من ٥٠ <cite>(ش ص١٢١)</cite>. والتفصيل في الجزء التاسع.</p><div class="abox"><h4>حافة التسعين</h4><p>حدّ استمرار القيد نسبة عامة نهائية ٩٠٪ و٧٥ درجة في الإثراء، مجتمعَين <cite>(مادة ٣٩)</cite>. ومعادلة النقاط: (النقاط + ١) × ٢٠ × الوزن النسبي ÷ ١٠٠ <cite>(ش ص١١٤)</cite>.</p><div class="lx-formula">(النقاط + ١) × ٢٠ × الوزن النسبي ÷ ١٠٠</div><div class="lx-bands-h"><span>الدرجة في المادة</span><span>النقاط</span><span>ما تدخل به في النسبة العامة</span></div><ul class="lx-bands"><li><span>٩٥–١٠٠</span><span class="pts">٤٫٠</span><span class="bar"><i style="--v:100"></i><b>١٠٠</b></span></li><li><span>٩٠–٩٤</span><span class="pts">٣٫٧</span><span class="bar"><i style="--v:94"></i><b>٩٤</b></span></li><li><span>٨٥–٨٩</span><span class="pts">٣٫٤٥</span><span class="bar"><i style="--v:89"></i><b>٨٩</b></span></li><li><span>٨٠–٨٤</span><span class="pts">٣٫٢</span><span class="bar"><i style="--v:84"></i><b>٨٤</b></span></li></ul><p>فالفرق بين ٨٩ و٩٠ خمس درجات في إسهام المادة الواحدة، لا حكمًا على القيد بها وحدها. والمطلوب من المعلم تنبيه رئيس القسم مبكرًا وتغذية راجعة مكتوبة <cite>(الميثاق: رابعًا)</cite>؛ أما خطة الرعاية العلاجية فتقرّها اللجنة <cite>(مادة ٤٠)</cite>. وترتيب تطبيق المعادلة، على درجة كل فصل أم على معدل الفصلين، يُحسم من سجل الطالب <span class="tag chk">يُتحقق</span>.</p></div></section><section class="sec lx-cont" id="lx-p4b"><p class="sec-eyebrow">الصفحة ٤ (ب)</p><h2>خمس عشرة تقنية</h2><p class="lede2">خمس عشرة تقنية تغطي قوس الحصة من قبل بدايتها إلى ما بعد نهايتها. قاعدتان: كل تقنية تُكتب في حقلها من القالب الرسمي أو تُحال إلى «تكملة التحضير»، ونسخة الأربعين تُبنى بحذف التكرار لا بقصّ الذروة.</p><p>لا تُجمع كلها في حصة: ثلاث إلى خمس تكفي، واحدة للافتتاح وواحدة للذروة وواحدة للختام <span class="tag sug">مقترح</span>. والرمز (م) للشعبة من أربعة إلى ستة، و(١٦) للشعبة الكاملة.</p><div class="lx-cards"><article class="lx-card lx-tech"><header><span class="lx-bub c0">١</span><div><h4>سؤال قبل الحصة</h4><span class="lx-basis">الفضول والتهيئة</span></div></header><p>يُرسل قبل يومين عبر القناة المعتمدة: «لماذا تُقدَّم صلاة الأضحى ويؤخَّر الفطر؟»، «ما الذي يجعل إنسانًا عظيم الخُلُق؟»</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>خارج الحصة</dd></div><div><dt>(م) / (١٦)</dt><dd>فردي</dd></div></dl><p><span class="lx-k">الضابط:</span> اختياري بلا درجة</p><p><span class="lx-k">المؤشر:</span> عدد من دخلوا بفرضية</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c1">٢</span><div><h4>المثير الصامت</h4><span class="lx-basis">الانتباه</span></div></header><p>ثلاثون ثانية بلا تعليق: مقطع مظاهر العيد في الكويت من النموذج الرسمي. وفي القرآن يُؤجَّل إلى قسم المعنى، فتمهيد أول السورة تعريف بها</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>٢ / ٣</dd></div><div><dt>(م) / (١٦)</dt><dd>جماعي</dd></div></dl><p><span class="lx-k">الضابط:</span> لا صور لأنبياء ولا صحابة ولا غيب</p><p><span class="lx-k">المؤشر:</span> عدد الأسئلة المتولدة</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c2">٣</span><div><h4>التشخيص الضاغط</h4><span class="lx-basis">ضغط المنهج</span></div></header><p>أربعة إلى ستة بنود؛ من أتقن انتقل إلى العمق</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>٣ / ٤</dd></div><div><dt>(م) / (١٦)</dt><dd>شفهي فردي / بطاقات</dd></div></dl><p><span class="lx-k">الضابط:</span> لا يُسقط ناتج رسمي</p><p><span class="lx-k">المؤشر:</span> خريطة إتقان</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c3">٤</span><div><h4>التنبؤ قبل الكشف</h4><span class="lx-basis">الإخفاق المنتج</span></div></header><p>«رتّبوا خطوات صلاة العيد» ثم الكشف من الكتاب؛ «توقّعوا كيف ترد الآيات على الاتهام»</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>٤ / ٥</dd></div><div><dt>(م) / (١٦)</dt><dd>فردي ثم مقارنة / ثنائيات</dd></div></dl><p><span class="lx-k">الضابط:</span> تصحيح فوري</p><p><span class="lx-k">المؤشر:</span> التحسن بين المحاولة والشرح</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c0">٥</span><div><h4>شجرة القرار الفقهية</h4><span class="lx-basis">الترميز المزدوج</span></div></header><p>«فاتتني صلاة العيد أو بعضها: ماذا أفعل؟»، وفروعها تقف عند نص الكتاب</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>٦ / ٧</dd></div><div><dt>(م) / (١٦)</dt><dd>شجرة جماعية / أربع شجرات</dd></div></dl><p><span class="lx-k">الضابط:</span> ما سكت عنه الكتاب يُرفع ولا يُجاب عنه</p><p><span class="lx-k">المؤشر:</span> دقة الفروع</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c1">٦</span><div><h4>عدستا العمق: الذروة</h4><span class="lx-basis">كابلان</span></div></header><p>«الأنماط» و«القواعد» في مقارنة الجمعة والعيد؛ «الأنماط» و«الفكرة الكبرى» في القلم</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>١٠ / ١٢</dd></div><div><dt>(م) / (١٦)</dt><dd>عدسة لكل طالب ثم تبادل / أربع رباعيات</dd></div></dl><p><span class="lx-k">الضابط والمؤشر:</span> منتج مكتوب في مستوى التحليل</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c2">٧</span><div><h4>محكمة الأقران المصغّرة</h4><span class="lx-basis">الحِجاج</span></div></header><p>فريق يعرض وآخر يسائل، في نازلة واحدة لا أربع</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>٧ / ٨</dd></div><div><dt>(م) / (١٦)</dt><dd>طالب يعرض والبقية لجنة / أربع فرق</dd></div></dl><p><span class="lx-k">الضابط:</span> لا تجريح ولا مقارنة علنية</p><p><span class="lx-k">المؤشر:</span> أسئلة مسندة بدليل</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c3">٨</span><div><h4>التثبت ضد الشائعة</h4><span class="lx-basis">منهج المحدثين</span></div></header><p>يطبّق الطلاب أسئلة الإسناد والعدالة والضبط على خبر رقمي</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>٨ / ١٠</dd></div><div><dt>(م) / (١٦)</dt><dd>فردي / ثنائيات</dd></div></dl><p><span class="lx-k">الضابط:</span> لا حديث بلا تخريج ودرجة</p><p><span class="lx-k">المؤشر:</span> تمييز المصدر</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c0">٩</span><div><h4>تجميد المشهد في السيرة</h4><span class="lx-basis">الإخفاق المنتج</span></div></header><p>يتوقف السرد قبل القرار النبوي، فيخطط الطلاب كتابةً، ثم يُكشف التدبير ويُقارن</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>٨ / ١٠</dd></div><div><dt>(م) / (١٦)</dt><dd>خطة لكل طالب / أربع خطط</dd></div></dl><p><span class="lx-k">الضابط:</span> لا تمثيل للنبي ﷺ ولا للصحابة</p><p><span class="lx-k">المؤشر:</span> عدد العوامل المعتبرة</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c1">١٠</span><div><h4>الاستخراج العضوي للقيمة</h4><span class="lx-basis">الاستدماج</span></div></header><p>من موقف في الدرس: «ما الذي يتغير في يومي؟»</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>٣ / ٣</dd></div><div><dt>(م) / (١٦)</dt><dd>فردي ثم مشاركة طوعية</dd></div></dl><p><span class="lx-k">الضابط:</span> في التمهيد أو أحد المحاور وبصيغة المصدر</p><p><span class="lx-k">المؤشر:</span> مظهر قابل للملاحظة</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c2">١١</span><div><h4>التسميع الاسترجاعي المتدرج</h4><span class="lx-basis">الاسترجاع</span></div></header><p>قراءة، فإخفاء أواخر الجمل، فإخفاء كلي، فتسميع ثنائي؛ ونشاط الإكمال في الكتاب درجة جاهزة منه</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>١٥ / ١٨</dd></div><div><dt>(م) / (١٦)</dt><dd>ثنائيتان والمعلم مع الخامس / الحلقات الرباعية</dd></div></dl><p><span class="lx-k">الضابط والمؤشر:</span> عدد أخطاء التسميع الأول</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c3">١٢</span><div><h4>خريطة البنية</h4><span class="lx-basis">الترميز المزدوج</span></div></header><p>القلم ١–٧: قسم، فنفي، فإثبات، فوعد بظهور الحق، فردّ العلم إلى الله</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>٥ / ٥</dd></div><div><dt>(م) / (١٦)</dt><dd>فردي</dd></div></dl><p><span class="lx-k">الضابط:</span> ألفاظ وأسهم بلا رسوم</p><p><span class="lx-k">المؤشر:</span> صحة الربط بالتفسير المعتمد</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c0">١٣</span><div><h4>مختبر الصوت في التجويد</h4><span class="lx-basis">المهمة الكاملة</span></div></header><p>تلاوة القارئ المعتمد من الرمز بجهاز المعلم، ثم مقارنة الأداء في موضع الحكم</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>٥ / ٦</dd></div><div><dt>(م) / (١٦)</dt><dd>فردي / ثنائيات</dd></div></dl><p><span class="lx-k">الضابط:</span> لا هواتف طلاب</p><p><span class="lx-k">المؤشر:</span> تمييز صحيح في أربعة مواضع من خمسة</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c1">١٤</span><div><h4>النهاية المرتفعة</h4><span class="lx-basis">التذكّر الناجح</span></div></header><p>آخر دقيقتين مهمة نجاح مضمون: تلاوة جماعية متقنة أو بطاقة عهد</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>٢ / ٣</dd></div><div><dt>(م) / (١٦)</dt><dd>جماعي</dd></div></dl><p><span class="lx-k">الضابط والمؤشر:</span> تقدير ذاتي أربعة من خمسة فأعلى</p></article><article class="lx-card lx-tech"><header><span class="lx-bub c2">١٥</span><div><h4>المراجعة المتباعدة</h4><span class="lx-basis">التباعد</span></div></header><p>بعد يوم، فثلاثة أيام، فأسبوع، فشهر</p><dl class="lx-meta"><div><dt>٤٠ / ٤٥ د</dt><dd>خارج الحصة، وثلاث دقائق في حصة لاحقة</dd></div><div><dt>(م) / (١٦)</dt><dd>فردي</dd></div></dl><p><span class="lx-k">الضابط:</span> لا تخزين قبل التسميع</p><p><span class="lx-k">المؤشر:</span> الثبات بعد شهر</p></article></div><blockquote class="official"><span class="off-tag">أصل نبوي للتعليم بالرسم</span>عن عبد الله بن مسعود رضي الله عنه قال: «خطَّ النبيُّ ﷺ خطًّا مربعًا، وخطَّ خطًّا في الوسط خارجًا منه، وخطَّ خُطَطًا صغارًا إلى هذا الذي في الوسط...»، ثم بيّن ﷺ أن الخط الأوسط الإنسان، والمربع أجله المحيط به، والخارج أمله، والخطط الصغار الأعراض. رواه البخاري (٦٤١٧). وهو أصل لخريطة البنية وشجرة القرار.</blockquote></section><section class="sec lx-cont" id="lx-p4c"><p class="sec-eyebrow">الصفحة ٤ (ج)</p><h2>المثال المحلول (١) — صلاة العيد، الثامن</h2><p class="lede2">الدرس حصتان في خطة التوزيع، فتُقسم مؤشراته الأربعة: المشروعية والكيفية في الأولى، والآداب والمسائل في الثانية. وكل حكم فيه مأخوذ من نص كتاب الطالب.</p><h3>بطاقة الدرس</h3><div class="lx-lesson"><div class="lx-row"><b>العنوان</b><p>«صلاة العيد» في خطة التوزيع وفهرس الكتاب، و«صلاة العيدين» في صفحة الدرس ودليل المعلم؛ يُكتب كما في الخطة</p><cite>الخطة؛ الكتاب ص٦٥؛ د.إ ص٤٢</cite></div><div class="lx-row"><b>الموضع</b><p>الوحدة الثانية · الفقه · الدرس الثاني · ص٦٥–٧٠</p><cite>كتاب الطالب</cite></div><div class="lx-row"><b>الحصص</b><p>حصتان: الأسبوعان الخامس والسادس (١١–٢٢ أكتوبر ٢٠٢٦)</p><cite>خطة التوزيع</cite></div><div class="lx-row"><b>المعيار</b><p>«التعرف على أحكام الصلاة وتأديتها بصفتها وطريقتها الصحيحة.»</p><cite>د.إ ص٤٢؛ الكتاب ص٥١</cite></div><div class="lx-row"><b>المؤشرات</b><p>١- يبين مشروعية صلاة العيدين. ٢- يوضح كيفية أداء صلاة العيدين. ٣- يطبق آداب وسنن صلاة العيدين. ٤- يوضح بعض المسائل المتعلقة بصلاة العيدين.</p><cite>د.إ ص٤٢–٤٣</cite></div><div class="lx-row"><b>ناتج التعلم</b><p>«تعظيم شعائر الإسلام»</p><cite>د.إ ص٤٣</cite></div><div class="lx-row"><b>القيمة ومظاهرها</b><p>«شكر الله تعالى»: الحرص على أداء صلاة العيد شكرًا لله تعالى، والمحافظة على آداب وسنن صلاة العيدين</p><cite>د.إ ص٤٢–٤٣</cite></div><div class="lx-row"><b>الحكم المعتمد</b><p>فرض كفاية</p><cite>الكتاب ص٦٥</cite></div></div><h3>الحصة ١ من ٢: المؤشران ١ و٢</h3><div class="lx-keep"><figure class="lx-time" aria-label="الحصة ١ من ٢: المؤشران ١ و٢"><div class="lx-bar"><span class="lx-bar-l">٤٠ د</span><div class="lx-segs"><i class="c0" style="--m:5"><b>٥</b></i><i class="c1" style="--m:8"><b>٨</b></i><i class="c3" style="--m:20"><b>٢٠</b></i><i class="c2" style="--m:7"><b>٧</b></i></div></div><div class="lx-bar"><span class="lx-bar-l">٤٥ د</span><div class="lx-segs"><i class="c0" style="--m:5"><b>٥</b></i><i class="c1" style="--m:9"><b>٩</b></i><i class="c3" style="--m:23"><b>٢٣</b></i><i class="c2" style="--m:8"><b>٨</b></i></div></div><ol class="lx-legend"><li class="c0">الدعاء والتمهيد</li><li class="c1">المحور الأول: المشروعية</li><li class="c3">المحور الثاني: الكيفية (الذروة)</li><li class="c2">التقويم النهائي</li></ol></figure><div class="tbl-wrap lx-keep"><table class="tbl"><thead><tr><th>حقل القالب الرسمي</th><th>ما يجري</th><th class="lx-min">٤٠ د</th><th class="lx-min">٤٥ د</th></tr></thead><tbody><tr><th scope="row">الدعاء والتمهيد</th><td>دعاء النموذج الرسمي ومقطع «مظاهر العيد في الكويت» وحديث التمهيد وأسئلته الثلاثة، ثم بطاقة تشخيص من أربعة بنود: الحكم، الوقت، عدد الركعات، موضع الخطبة. وتُستخرج القيمة هنا كما في النموذج الرسمي</td><td class="lx-min">٥</td><td class="lx-min">٥</td></tr><tr><th scope="row">المحور الأول: المشروعية</th><td>قراءة جدول المشروعية، ثم نشاط الكتاب (١): علة تقديم صلاة الأضحى وتأخير صلاة الفطر، ثم سؤال المعنى: «إذا قام بها بعض أهل الحي سقط الإثم عن الباقين؛ فلماذا أحرص على شهودها؟»</td><td class="lx-min">٨</td><td class="lx-min">٩</td></tr><tr><th scope="row">المحور الثاني: الكيفية (الذروة)</th><td>نمذجة صامتة، فبطاقات ترتيب من الكتاب، فأداء بقائمة ملاحظة (نشاط الكتاب ٢)، فاستخلاص الحقيقة</td><td class="lx-min">٢٠</td><td class="lx-min">٢٣</td></tr><tr><th scope="row">التقويم النهائي</th><td>بطاقة خروج من ثلاثة أسئلة متدرجة من تقويم الكتاب، ثم ختام: أداء جماعي متقن للركعة الأولى بتكبيراتها</td><td class="lx-min">٧</td><td class="lx-min">٨</td></tr></tbody></table></div></div><h3>الحصة ٢ من ٢: المؤشران ٣ و٤</h3><div class="lx-keep"><figure class="lx-time" aria-label="الحصة ٢ من ٢: المؤشران ٣ و٤"><div class="lx-bar"><span class="lx-bar-l">٤٠ د</span><div class="lx-segs"><i class="c0" style="--m:5"><b>٥</b></i><i class="c1" style="--m:9"><b>٩</b></i><i class="c3" style="--m:16"><b>١٦</b></i><i class="c2" style="--m:10"><b>١٠</b></i></div></div><div class="lx-bar"><span class="lx-bar-l">٤٥ د</span><div class="lx-segs"><i class="c0" style="--m:5"><b>٥</b></i><i class="c1" style="--m:10"><b>١٠</b></i><i class="c3" style="--m:19"><b>١٩</b></i><i class="c2" style="--m:11"><b>١١</b></i></div></div><ol class="lx-legend"><li class="c0">الدعاء والتمهيد</li><li class="c1">المحور الثالث: الآداب والسنن</li><li class="c3">المحور الرابع: المسائل (الذروة)</li><li class="c2">التقويم النهائي</li></ol></figure><div class="tbl-wrap lx-keep"><table class="tbl"><thead><tr><th>حقل القالب الرسمي</th><th>ما يجري</th><th class="lx-min">٤٠ د</th><th class="lx-min">٤٥ د</th></tr></thead><tbody><tr><th scope="row">الدعاء والتمهيد</th><td>بطاقة دخول استرجاعية والكتاب مغلق: اكتب تسلسل الركعتين بتكبيراتهما</td><td class="lx-min">٥</td><td class="lx-min">٥</td></tr><tr><th scope="row">المحور الثالث: الآداب والسنن</th><td>خريطة ذهنية كما في النموذج الرسمي، مع سؤال تعليل: لماذا الأكل قبل الخروج في الفطر، وبعد الصلاة في الأضحى؟</td><td class="lx-min">٩</td><td class="lx-min">١٠</td></tr><tr><th scope="row">المحور الرابع: المسائل (الذروة)</th><td>جدول الحالات من الكتاب، والتكبير المطلق والمقيد، ثم مهمة الارتقاء: مقارنة الجمعة والعيد</td><td class="lx-min">١٦</td><td class="lx-min">١٩</td></tr><tr><th scope="row">التقويم النهائي</th><td>سؤالا الكتاب الأول والثاني، ثم ختام: عهد سلوكي بصيغة المصدر وتكبير جماعي بالصيغة الواردة في الكتاب</td><td class="lx-min">١٠</td><td class="lx-min">١١</td></tr></tbody></table></div></div><h3>ناتج الارتقاء <span class="tag sug">مقترح</span></h3><div class="lx-idea depth lx-two"><div><span class="lx-bub c3">١</span><p>الحصة الأولى (تقويم): «يكشف الخطأ في وصفٍ لأداء صلاة العيد ويصوّبه بنص الكتاب». يخدم دقة الملاحظة وسرعة التقاط النمط.</p></div><div><span class="lx-bub c3">٢</span><p>الحصة الثانية (تحليل): «يقارن بين صلاتي الجمعة والعيد في خمسة أوجه من الدرسين، ويستنبط حكمة أحد الفروق». يخدم الميل إلى التعليل والتجريد.</p></div></div><h3>مادة الذروة من الكتاب: مقارنة الجمعة والعيد</h3><div class="tbl-wrap lx-keep"><table class="tbl"><thead><tr><th>وجه المقارنة</th><th>الجمعة (ص٦٠)</th><th>العيد (ص٦٥–٦٧)</th></tr></thead><tbody><tr><th scope="row">الحكم</th><td>فرض عين</td><td>فرض كفاية</td></tr><tr><th scope="row">الوقت</th><td>وقت صلاة الظهر</td><td>بعد ارتفاع الشمس نحو ربع ساعة إلى قبيل الظهر</td></tr><tr><th scope="row">الخطبتان</th><td>تسبقان الصلاة</td><td>بعد الصلاة</td></tr><tr><th scope="row">من تُطلب منه</th><td>الرجل المسلم الحر العاقل البالغ المقيم القادر</td><td>تصح من الرجال والنساء والصبيان، مسافرين ومقيمين</td></tr><tr><th scope="row">التكبيرات الزوائد</th><td>لا ذكر لها</td><td>ست بعد تكبيرة الإحرام، وخمس بعد تكبيرة الانتقال</td></tr></tbody></table></div><h3>حالات المسائل</h3><div class="tbl-wrap lx-keep"><table class="tbl"><thead><tr><th>الحالة</th><th>الحكم كما في الكتاب</th></tr></thead><tbody><tr><th scope="row">فاتته صلاة العيد كلها</th><td>يسن قضاؤها على صفتها، منفردًا أو مع جماعة (ص٦٧)</td></tr><tr><th scope="row">فاته بعضها</th><td>يسن قضاؤه على صفتها (ص٦٧)</td></tr><tr><th scope="row">امرأة أو صبي أو مسافر</th><td>تصح منهم (ص٦٧)</td></tr><tr><th scope="row">كيفية قضاء التكبيرات لمن أدرك الإمام في أثنائها</th><td>ليست في الكتاب: تُرفع إلى التوجيه الفني ولا يُجاب عنها من خارجه</td></tr></tbody></table></div><aside class="callout warn">خطأ شائع يصلح للتشخيص: «سبع تكبيرات بعد تكبيرة الإحرام» عبارة في تقويم الكتاب (س٣، ص٦٩) تخالف نصه؛ ففيه ست.</aside><h3>أين يُكتب كل شيء</h3><div class="grid2"><div class="mini"><b>في القالب</b><p>التمهيد وأسئلته، وأنشطة المحاور بأزمنتها، وأدوات التقييم، وبطاقة الخروج، والقيمة ومظاهرها الرسمية.</p></div><div class="mini"><b>في «تكملة التحضير»</b><p>ناتجا الارتقاء، وجدول المقارنة وأسئلته، وتوزيع الأدوار، والإجابات النموذجية.</p></div></div><h3>الشعبة المصغّرة والشعبة الكاملة</h3><div class="grid2"><div class="mini"><b>ذروة الحصة الأولى</b><p>في شعبة الخمسة إمام وثلاثة مأمومين وملاحِظ بقائمة، مع تدوير الأدوار. وفي الستة عشر أربع مجموعات رباعية في كل منها ملاحِظ.</p></div><div class="mini"><b>ذروة الحصة الثانية</b><p>في شعبة الخمسة جدول مقارنة واحد على الشاشة، ولكل طالب وجه يدافع عنه. وفي الستة عشر أربع مجموعات، لكل مجموعة وجهان.</p></div></div><aside class="callout info"><b>إثراء للمعلم:</b> في حكم صلاة العيد خلاف معتبر: واجبة عند الحنفية، وسنة مؤكدة عند المالكية والشافعية، وفرض كفاية عند الحنابلة؛ وفي عدّ التكبيرات خلاف كذلك. والكتاب اعتمد فرض الكفاية وستًّا بعد تكبيرة الإحرام. يُدرَّس ما في الكتاب، ويُنبَّه إلى وجود الخلاف بأدب إن سُئل عنه، دون ترجيح من خارج المنهج.</aside></section><section class="sec lx-cont" id="lx-p4d"><p class="sec-eyebrow">الصفحة ٤ (د)</p><h2>المثال المحلول (٢) — القلم ١–٧، الثامن</h2><p class="lede2">الدرس حصة حفظ واحدة: سبع آيات في ٣٣ كلمة. والطالب تلا السورة في التربية الإسلامية للسابع، فالتشخيص يسبق التعليم.</p><h3>بطاقة الدرس</h3><div class="lx-lesson"><div class="lx-row"><b>الموضع</b><p>كتاب القرآن الكريم للثامن · الوحدة الأولى · مجال حفظ القرآن الكريم وتدبره · الدرس الثالث «الرسول ﷺ على خلق عظيم» · ص٢٤–٢٦</p><cite>كتاب الطالب</cite></div><div class="lx-row"><b>الحصص</b><p>حصة واحدة، الأسبوع الثالث (٢٧ سبتمبر – ١ أكتوبر ٢٠٢٦)</p><cite>خطة التوزيع</cite></div><div class="lx-row"><b>السورة</b><p>القلم · مكية · ٥٢ آية</p><cite>الكتاب ص٢٢</cite></div><div class="lx-row"><b>المعيار</b><p>«١- الاهتمام بحفظ وتلاوة السور المقررة من القرآن الكريم. ٢- إدراك معاني الآيات القرآنية المقررة وتبني التوجيهات الواردة فيها من خلال تدبرها.»</p><cite>د.ق ص٩٤</cite></div><div class="lx-row"><b>مؤشرات المجال في الوحدة</b><p>ثمانية، منها: «يتلو الآيات من (١–٧) من سورة القلم تلاوة مجودة حسب أحكام التجويد المقررة بالتعاون مع الآخرين»، «يصحح قراءة زميله وفق معايير القراءة الصحيحة»، «يبين أهمية الكتابة والقلم في طلب العلم»، «يحفظ الآيات المقررة حفظًا سليمًا»</p><cite>د.ق ص٩٤</cite></div><div class="lx-row"><b>ما يتعلمه الطالب بنص الكتاب</b><p>معاني مفردات جديدة، وإتقان تلاوة الآيات وحفظها، وتدبرها</p><cite>الكتاب ص٢٤</cite></div><div class="lx-row"><b>القيمة في النموذج الرسمي</b><p>«طاعة الله تعالى»؛ ونشاط الكتاب (١) يطلب استنباط قيمة من الآية (٧)</p><cite>د.ق ص٦٨؛ الكتاب ص٢٥</cite></div></div><div class="lx-ayat"><p class="lab">نص الآيات</p><p class="txt">﴿نٓۚ وَٱلۡقَلَمِ وَمَا يَسۡطُرُونَ ١ مَآ أَنتَ بِنِعۡمَةِ رَبِّكَ بِمَجۡنُونٖ ٢ وَإِنَّ لَكَ لَأَجۡرًا غَيۡرَ مَمۡنُونٖ ٣ وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٖ ٤ فَسَتُبۡصِرُ وَيُبۡصِرُونَ ٥ بِأَييِّكُمُ ٱلۡمَفۡتُونُ ٦ إِنَّ رَبَّكَ هُوَ أَعۡلَمُ بِمَن ضَلَّ عَن سَبِيلِهِۦ وَهُوَ أَعۡلَمُ بِٱلۡمُهۡتَدِينَ ٧﴾</p><p class="ref">[القلم: ١–٧] · مطابق لنص مجمع الملك فهد</p></div><h3>ما في الكتاب</h3><p class="lx-note">معناها في الكتاب (ص٢٤)</p><div class="lx-vocab"><div><b><span class="lx-q">﴿نٓۚ﴾</span></b><p>حرف من حروف الهجاء</p></div><div><b><span class="lx-q">﴿وَٱلۡقَلَمِ﴾</span></b><p>أقسم الله بالقلم الذي يُكتب به، والواو حرف من أحرف القسم</p></div><div><b><span class="lx-q">﴿وَمَا يَسۡطُرُونَ﴾</span></b><p>أقسم الله بما يكتبون</p></div><div><b><span class="lx-q">﴿غَيۡرَ مَمۡنُونٖ﴾</span></b><p>غير مقطوع</p></div><div><b><span class="lx-q">﴿فَسَتُبۡصِرُ﴾</span></b><p>ستعلم يا محمد ﷺ</p></div><div><b><span class="lx-q">﴿وَيُبۡصِرُونَ﴾</span></b><p>وسيعلم قومك</p></div><div><b><span class="lx-q">﴿ٱلۡمَفۡتُونُ﴾</span></b><p>المجنون</p></div></div><ul class="ticks"><li><strong>الدلالات بترتيب جدول الكتاب:</strong> الآية (١) تيسير العلم وتسهيل أدواته من نعم الله؛ الآيات (٢–٤) الأخلاق الحسنة ترفع قدر صاحبها؛ الآيتان (٥–٦) الحق سيظهر عاجلًا أم آجلًا. والآية (٧) متروكة للنشاط الأول.</li><li><strong>الأنشطة:</strong> استنباط قيمة من الآية (٧) ومظهرها (مهارة الاستنباط)، وإكمال كتابة الآيات (مهارة التذكر)، ونسخها لاصفيًّا (مهارة الكتابة، ص٢٦).</li></ul><h3>التجويد والرسم من نص المقطع</h3><div class="tbl-wrap lx-keep"><table class="tbl"><thead><tr><th>الموضع</th><th>الحكم</th><th>سنده</th></tr></thead><tbody><tr><th scope="row"><span class="lx-q">﴿نٓۚ وَٱلۡقَلَمِ﴾</span></th><td>إظهار النون عند الواو، استثناءً من الإدغام</td><td>تنبيهات درس الإدغام، الكتاب ص٢٠</td></tr><tr><th scope="row"><span class="lx-q">﴿بِمَجۡنُونٖ﴾</span> ثم <span class="lx-q">﴿وَإِنَّ﴾</span>، و<span class="lx-q">﴿مَمۡنُونٖ﴾</span> ثم <span class="lx-q">﴿وَإِنَّكَ﴾</span></th><td>إدغام بغنة، ولا يظهر إلا عند وصل الآيتين</td><td>درس الإدغام، الكتاب ص١٩</td></tr><tr><th scope="row"><span class="lx-q">﴿لَأَجۡرًا غَيۡرَ﴾</span> و<span class="lx-q">﴿خُلُقٍ عَظِيمٖ﴾</span></th><td>إظهار حلقي</td><td>مقرر تطبيقات الدرس التاسع</td></tr><tr><th scope="row"><span class="lx-q">﴿بِأَييِّكُمُ﴾</span></th><td>تُرسم بياءين، وإملاؤها «بأيكم»</td><td>نص المجمع بحقليه العثماني والإملائي <span class="tag enr">إثراء</span></td></tr><tr><th scope="row"><span class="lx-q">﴿لَعَلَىٰ﴾</span></th><td>مثال الرسم العثماني في النموذج الرسمي</td><td>د.ق ص٦٧</td></tr></tbody></table></div><p>فليس في آية من المقطع إدغام داخلها، وهذا هو الاكتشاف الذي يُطلب من الطلاب قبل عرض الحكم. ومواضع الإخفاء في الآيتين (٢) و(٧) لا تُسمّى الآن؛ فمقرر الفصل الإظهار الحلقي والإدغام.</p><h3>المنحنى على القالب الرسمي</h3><div class="lx-keep"><figure class="lx-time" aria-label="المنحنى على القالب الرسمي"><div class="lx-bar"><span class="lx-bar-l">٤٠ د</span><div class="lx-segs"><i class="c0" style="--m:3"><b>٣</b></i><i class="c1" style="--m:5"><b>٥</b></i><i class="c2" style="--m:5"><b>٥</b></i><i class="c3" style="--m:5"><b>٥</b></i><i class="c0" style="--m:22"><b>٢٢</b></i></div></div><div class="lx-bar"><span class="lx-bar-l">٤٥ د</span><div class="lx-segs"><i class="c0" style="--m:3"><b>٣</b></i><i class="c1" style="--m:5"><b>٥</b></i><i class="c2" style="--m:5"><b>٥</b></i><i class="c3" style="--m:5"><b>٥</b></i><i class="c0" style="--m:25"><b>٢٥</b></i><i class="c1" style="--m:2"><b>٢</b></i></div></div><ol class="lx-legend"><li class="c0">الدعاء والتمهيد</li><li class="c1">(١) الاستماع والقراءة النشطة</li><li class="c2">(٢) المفردات وأحكام التجويد</li><li class="c3">(٣) المعنى الإجمالي ومقاصد الآيات (الذروة)</li><li class="c0">(٤) التلاوة التفاعلية والحفظ</li><li class="c1">التقويم النهائي</li></ol></figure><div class="tbl-wrap lx-keep"><table class="tbl"><thead><tr><th>قسم القالب</th><th>ما يجري</th><th class="lx-min">٤٠ د</th><th class="lx-min">٤٥ د</th></tr></thead><tbody><tr><th scope="row">الدعاء والتمهيد</th><td>دعاء النموذج الرسمي، وجملة تمهيد الكتاب عن افتتاح السورة بحرف مقطَّع، وبطاقة السورة (مكية، ٥٢ آية)، وسؤال النموذج عن لقبه ﷺ قبل الوحي، ثم العنوان سؤالًا: ما علامات الخلق العظيم في المقطع؟</td><td class="lx-min">٣</td><td class="lx-min">٣</td></tr><tr><th scope="row">(١) الاستماع والقراءة النشطة</th><td>تلاوة القارئ المعتمد من الرمز بجهاز المعلم، ثم المعلم، ثم قراءة جماعية. و«جولة آية» تشخيصية تستثمر تلاوة السابع</td><td class="lx-min">٥</td><td class="lx-min">٥</td></tr><tr><th scope="row">(٢) المفردات وأحكام التجويد</th><td>المعاني، والرسم العثماني، وكلمات التدريب، والحكم. والسؤال: أين الإدغام في المقطع؟</td><td class="lx-min">٥</td><td class="lx-min">٥</td></tr><tr><th scope="row">(٣) المعنى الإجمالي ومقاصد الآيات (الذروة)</th><td>دلالات الكتاب الثلاث، ثم سؤال التحليل: كيف ردّت الآيات على الاتهام؟ وخريطة البنية: قسم (١)، فنفي ثم إثبات (٢–٤)، فوعد بظهور الحق (٥–٦)، فردّ العلم إلى الله (٧). ثم استنباط القيمة من الآية (٧)</td><td class="lx-min">٥</td><td class="lx-min">٥</td></tr><tr><th scope="row">(٤) التلاوة التفاعلية والحفظ</th><td>الطرق الرسمية، مع استرجاع متدرج يبدأ بنشاط الإكمال في الكتاب، وكتابة آية من الذاكرة. وفي نسخة الأربعين يقع الاستظهار والختام في آخر دقيقتين منه</td><td class="lx-min">٢٢</td><td class="lx-min">٢٥</td></tr><tr><th scope="row">التقويم النهائي</th><td>استظهار بأحد الأساليب الرسمية، وختام بتلاوة جماعية للآية (٤)</td><td class="lx-min">ضمن (٤)</td><td class="lx-min">٢</td></tr></tbody></table></div></div><p>نسخة الأربعين <span class="tag sug">مقترح</span> كما في الجزء الثامن: الحدود الدنيا للأقسام الأربعة الأولى، و٢٢ دقيقة للحفظ، حتى يعتمد التوجيه الفني توزيعًا. فمجموع الحدود الدنيا الرسمية ٤٣ دقيقة، ولا يتسع في حصة الأربعين.</p><div class="abox strat"><h4>ناتج الارتقاء <span class="tag sug">مقترح</span></h4><p>«يحلّل بناء ردّ الآيات على الاتهام (نفي، فإثبات، فإحالة إلى العاقبة وعلم الله)، ويستخرج منه قاعدة في الرد على الإساءة» (تحليل). يخدم الميل إلى التجريد واستخراج القاعدة، ويُضبط بالتفسير المعتمد قبل العرض.</p></div><div class="abox model"><h4>القيمة ومظاهرها</h4><p>القيمة الرسمية «طاعة الله تعالى». ومظهران بصيغة المصدر <span class="tag sug">مقترح</span>: التخلّق بأخلاق القرآن اقتداءً بالنبي ﷺ، وردّ الحكم على سرائر الناس إلى علم الله تعالى.</p></div><div class="abox"><h4>شاهد للمعلم <span class="tag enr">إثراء</span></h4><p>سأل سعد بن هشام عائشة رضي الله عنها عن خلق النبي ﷺ فقالت: «فإن خُلُق نبي الله ﷺ كان القرآن». رواه مسلم (٧٤٦) في حديث طويل.</p></div><aside class="callout warn"><b>تنبيه <span class="tag chk">يُتحقق</span>:</b> عبارة تمهيد الكتاب «ولو بآية» أوسع من مواضع التحدي التي وقفنا عليها في القرآن: بمثله [الإسراء: ٨٨]، وبعشر سور [هود: ١٣]، وبسورة [البقرة: ٢٣] و[يونس: ٣٨]، وبحديث مثله [الطور: ٣٤]. تُدرَّس عبارة الكتاب كما هي، وإن سأل طالب عن موضع التحدي بآية فالجواب بهذه المواضع، ويُرفع الاستفسار إلى التوجيه الفني.</aside><h3>الشعبة المصغّرة والشعبة الكاملة في القسم (٤)</h3><div class="grid2"><div class="mini"><b>شعبة الخمسة</b><p>ثنائيتان تتبادلان التسميع والمعلم مع الخامس، ثم تدوير.</p></div><div class="mini"><b>الستة عشر</b><p>الحلقات الرباعية والقارئ القدوة وجولة الآية، كما في الجزء الثامن.</p></div></div></section><section class="sec" id="lx-p5"><p class="sec-eyebrow">الصفحة ٥</p><h2>الأدوات العشر والروبركات</h2><p class="lede2">عشر أدوات تعمل في المتصفح بلا خادم، وتُحفظ بياناتها في متصفح المعلم وحده أو تُصدَّر ملفًا. واجهتها عربية من اليمين إلى اليسار، ومخرجاتها تُطبع على A4، ولا تطلب اسم طالب ولا صورته ولا درجته؛ فالملف التراكمي سري وخصوصية بيانات المتعلم حق له <cite>(مادة ٤٦؛ مادة ٥٠)</cite>.</p><div class="lx-cards"><article class="lx-card lx-tool"><header><span class="lx-bub c0">١</span><h4>مولّد لوحة التجربة</h4></header><div class="lx-io"><span>الدرس والناتج والقيود</span><i aria-hidden="true">←</i><span>لوحة من أحد عشر عنصرًا</span></div><p>ينبّه إن وُضعت القيمة آخر الحصة أو لم يكن المظهر مصدرًا</p><span class="lx-prio ">الأولوية: الآن</span></article><article class="lx-card lx-tool"><header><span class="lx-bub c1">٢</span><h4>باني منحنى الحصة</h4></header><div class="lx-io"><span>المادة و٤٠ أو ٤٥</span><i aria-hidden="true">←</i><span>شريط زمني على حقول القالب</span></div><p>ينبّه عند تجاوز الزمن أو النزول عن الحد الرسمي</p><span class="lx-prio ">الأولوية: الآن</span></article><article class="lx-card lx-tool"><header><span class="lx-bub c2">٣</span><h4>مولّد أسئلة العدسات</h4></header><div class="lx-io"><span>المجال والصف وعدستان</span><i aria-hidden="true">←</i><span>ستة أسئلة</span></div><p>بنك جذور أسئلة لكل عدسة في كل مجال</p><span class="lx-prio ">الأولوية: الآن</span></article><article class="lx-card lx-tool"><header><span class="lx-bub c3">٤</span><h4>ملمح الشعبة</h4></header><div class="lx-io"><span>ملاحظات بلا أسماء</span><i aria-hidden="true">←</i><span>ملمح مجمَّع</span></div><p>يجمع: إتقان قبلي، وتفضيل منتج، وقلق تسميع</p><span class="lx-prio later">الأولوية: لاحقًا</span></article><article class="lx-card lx-tool"><header><span class="lx-bub c0">٥</span><h4>فاحص العبء في الشريحة</h4></header><div class="lx-io"><span>عدد الكلمات والعناصر</span><i aria-hidden="true">←</i><span>أخضر أو أصفر أو أحمر</span></div><p>لا نص مقروء مع تلاوة مسموعة؛ والآية وشرحها متجاوران</p><span class="lx-prio later">الأولوية: لاحقًا</span></article><article class="lx-card lx-tool"><header><span class="lx-bub c1">٦</span><h4>بنك المثيرات الافتتاحية</h4></header><div class="lx-io"><span>المجال</span><i aria-hidden="true">←</i><span>ثلاثة مثيرات</span></div><p>مصنفة بعوالم التجربة الأربعة</p><span class="lx-prio ">الأولوية: الآن</span></article><article class="lx-card lx-tool"><header><span class="lx-bub c2">٧</span><h4>مصمم بطاقة الخروج والعهد</h4></header><div class="lx-io"><span>القيمة</span><i aria-hidden="true">←</i><span>ثلاثة أسئلة وعهد</span></div><p>يحوّل الفعل المضارع إلى مصدر</p><span class="lx-prio ">الأولوية: الآن</span></article><article class="lx-card lx-tool"><header><span class="lx-bub c3">٨</span><h4>مخطط المراجعة المتباعدة</h4></header><div class="lx-io"><span>المقطع وتاريخ الحفظ</span><i aria-hidden="true">←</i><span>جدول مراجعة</span></div><p>يحسب تواريخ اليوم ١ و٣ و٧ و٣٠</p><span class="lx-prio ">الأولوية: الآن</span></article><article class="lx-card lx-tool"><header><span class="lx-bub c0">٩</span><h4>حاسبة حافة التسعين</h4></header><div class="lx-io"><span>درجات افتراضية</span><i aria-hidden="true">←</i><span>إسهام كل مادة والنسبة العامة</span></div><p>معادلة اللائحة الشاملة <cite>(ش ص١١٤)</cite>؛ توضيحية بلا حفظ، والحساب الرسمي في سجل الطالب</p><span class="lx-prio gate">الأولوية: بعد اعتماد الإدارة</span></article><article class="lx-card lx-tool"><header><span class="lx-bub c1">١٠</span><h4>مقياس جودة التجربة</h4></header><div class="lx-io"><span>ملاحظة الزميل وصوت المتعلم</span><i aria-hidden="true">←</i><span>ملف أداء</span></div><p>روبرك من خمسة أبعاد في أربعة مستويات</p><span class="lx-prio ">الأولوية: الآن</span></article></div><h3>التقويم بمستويين</h3><div class="lx-cards one"><div class="lx-card"><h4>تعلّم الطلاب</h4><p>منتج الذروة يُقوَّم بروبرك تحليلي معلن قبل المهمة: صحة الدليل الشرعي، وعمق العدسة (وصف، فتفسير، فتعميم)، وجودة التعبير. والتسميع بسجل أخطاء لا بانطباع.</p></div><div class="lx-card"><h4>جودة التجربة</h4><p>الروبرك الآتي، يملؤه المعلم أو زميل زائر.</p></div></div><h3>روبرك جودة تجربة التعلّم <span class="tag sug">مقترح</span></h3><div class="tbl-wrap lx-keep"><table class="tbl lx-rubric"><thead><tr><th>البعد</th><th>١ ناشئ</th><th>٢ متطور</th><th>٣ متمكن</th><th>٤ متميز</th></tr></thead><tbody><tr><th scope="row">المواءمة</th><td>أنشطة بلا صلة بالناتج</td><td>صلة جزئية</td><td>كل نشاط يخدم مؤشرًا</td><td>الذروة تحقق ناتج الارتقاء بدليل مكتوب</td></tr><tr><th scope="row">التحدي</th><td>تكرار لما يُتقن</td><td>تحدٍّ لبعضهم</td><td>تشخيص يوجّه التحدي</td><td>مسارات متمايزة باختيار الطالب</td></tr><tr><th scope="row">الأمان والانتماء</th><td>خوف من الخطأ</td><td>تشجيع لفظي</td><td>قنوات آمنة للتسميع</td><td>الطلاب يطلبون التغذية الراجعة</td></tr><tr><th scope="row">القوس الزمني</th><td>بلا ذروة ولا خاتمة</td><td>ذروة مبتورة</td><td>ذروة وخاتمة في وقتهما</td><td>لحظة يتذكرها الطلاب بعد أسبوع</td></tr><tr><th scope="row">الاستدماج</th><td>قيمة ملقّنة آخر الحصة</td><td>قيمة بلا سلوك</td><td>قيمة عضوية بمظهر مصدري</td><td>عهد اختاره الطالب وتابعه</td></tr></tbody></table></div><h3>مقاييس منشورة للبحث الإجرائي، لا للتقويم الرسمي</h3><ul class="ticks"><li><strong>COS-R:</strong> بطاقة ملاحظة التمايز في صفوف الموهوبين (VanTassel-Baska وزملاؤها، ٢٠٠٧)؛ الأنسب لملاحظة الأقران.</li><li><strong>مقياس التدفق القصير</strong> (Rheinberg وزملاؤه، ٢٠٠٣)، و<strong>استبانة انفعالات التحصيل</strong> (Pekrun وزملاؤه، ٢٠١١)، و<strong>مقياس الاهتمام الموقفي</strong> (Linnenbrink-Garcia وزملاؤها، ٢٠١٠). نسخها العربية المقننة للمرحلة المتوسطة <span class="tag chk">يُتحقق</span>.</li><li><strong>صوت المتعلم:</strong> بطاقة بلا اسم من ثلاثة أسئلة: ما أقوى لحظة؟ أين تُهت؟ ماذا ستفعل؟</li></ul></section><section class="sec" id="lx-p6"><p class="sec-eyebrow">الصفحة ٦</p><h2>المعلم المصمم</h2><p class="lede2">المعلم مصمم يختبر فرضيات في صفه، لا منفّذ لنموذج جاهز (Laurillard، ٢٠١٢). والتطوير المهني الفعّال مركَّز على المحتوى، نشط، متسق، ممتد، جماعي (Desimone، ٢٠٠٩؛ Darling-Hammond وزملاؤها، ٢٠١٧).</p><h3>السند النظامي</h3><ul class="ticks"><li>تصميم التجارب يدخل في المهام الإضافية: إعداد المواد الإثرائية وتطويرها، وحضور التدريب والاجتماعات الفنية، موثقةً في خطة عمل فصلية يعتمدها رئيس القسم <cite>(مادة ٥٧)</cite>.</li><li>الميثاق يطلب خطة نمو مهني سنوية في ضوء نتائج بطاقة الملاحظة الصفية، والمشاركة في مجتمع التعلم المهني: الزيارات التبادلية، ودراسة الدروس، وتبادل الخبرات بين مدرستي البنين والبنات <cite>(الميثاق: تاسعًا)</cite>.</li><li>بطاقة الملاحظة الصفية تقيس دور المعلم في إثارة التفكير وتكييف المهام وتوظيف التقويم للتشخيص <cite>(مادة ٥٥)</cite>؛ وهذا ما يصنعه هذا الجزء في الحصة.</li></ul><h3>سلّم نضج «المعلم المصمم» <span class="tag sug">مقترح</span></h3><ol class="lx-stair"><li style="--k:0"><span class="lx-bub sm c0">١</span><b>منفِّذ</b><p>يطبق نموذجًا جاهزًا كما هو</p></li><li style="--k:1"><span class="lx-bub sm c1">٢</span><b>مكيِّف</b><p>يعدّل الزمن والتجميع لشعبته</p></li><li style="--k:2"><span class="lx-bub sm c4">٣</span><b>مصمم</b><p>يبني لوحة ومنحنى لدرس جديد ويختبرهما</p></li><li style="--k:3"><span class="lx-bub sm c2">٤</span><b>باحث</b><p>يجمع بيانات (صوت المتعلم وبطاقة الملاحظة) ويعدّل في دورة ثانية</p></li><li style="--k:4"><span class="lx-bub sm c3">٥</span><b>ملهِم</b><p>يقدّم ورشة ويُدرج نموذجه في الدليل بعد مراجعة الأقران</p></li></ol><h3>الخطة الفصلية في ثلاثة عشر أسبوعًا <span class="tag sug">مقترح</span></h3><div class="lx-weeks"><div class="lx-wk-strip"><i class="c0">١</i><i class="c0">٢</i><i class="c0">٣</i><i class="c1">٤</i><i class="c1">٥</i><i class="c1">٦</i><i class="c1">٧</i><i class="c1">٨</i><i class="c2">٩</i><i class="c2">١٠</i><i class="c2">١١</i><i class="c2">١٢</i><i class="c3">١٣</i></div><div class="lx-wk-rows"><div class="lx-wk-row c0"><span class="wkn">الأسابيع ١–٣</span><p>تنفيذ المثالين المحلولين كما هما</p><p class="out"><b>المنتج:</b> ملاحظتان مكتوبتان عمّا نجح وما تعثّر</p></div><div class="lx-wk-row c1"><span class="wkn">الأسابيع ٤–٨</span><p>دورة دراسة درس مع زميل: تخطيط مشترك، وملاحظة بالروبرك، وتعديل</p><p class="out"><b>المنتج:</b> خطة معدَّلة وبطاقة ملاحظة</p></div><div class="lx-wk-row c2"><span class="wkn">الأسابيع ٩–١٢</span><p>بحث إجرائي بسؤال واحد، مثل: هل يخفض التسميع الثنائي امتناع القلقين؟</p><p class="out"><b>المنتج:</b> بيانات قبل وبعد</p></div><div class="lx-wk-row c3"><span class="wkn">الأسبوع ١٣</span><p>ملف إنجاز المعلم المصمم</p><p class="out"><b>المنتج:</b> يُرفق بخطة العمل الفصلية</p></div></div></div><h3>ورشة ٣٠ دقيقة: «من التحضير إلى التجربة»</h3><figure class="lx-time"><div class="lx-bar"><span class="lx-bar-l">٣٠ د</span><div class="lx-segs"><i class="c0" style="--m:5"><b>٥</b></i><i class="c1" style="--m:10"><b>١٠</b></i><i class="c2" style="--m:10"><b>١٠</b></i><i class="c3" style="--m:5"><b>٥</b></i></div></div><ol class="lx-legend col"><li class="c0">مثير: حصتان بالمحتوى نفسه، إحداهما بذروة ونهاية مرتفعة؛ أيهما يتذكر الطالب؟ <em>(٥ د)</em></li><li class="c1">تشريح مثال القلم ١–٧ على القالب الرسمي <em>(١٠ د)</em></li><li class="c2">يبني كل معلم منحنى حصته القادمة في أربعين دقيقة <em>(١٠ د)</em></li><li class="c3">التزام بتجربة واحدة وموعد لمشاركة نتيجتها <em>(٥ د)</em></li></ol></figure><h3>ورشة ٩٠ دقيقة: «مختبر المعلم المصمم»</h3><figure class="lx-time"><div class="lx-bar"><span class="lx-bar-l">٩٠ د</span><div class="lx-segs"><i class="c0" style="--m:15"><b>١٥</b></i><i class="c1" style="--m:20"><b>٢٠</b></i><i class="c2" style="--m:25"><b>٢٥</b></i><i class="c3" style="--m:20"><b>٢٠</b></i><i class="c5" style="--m:10"><b>١٠</b></i></div></div><ol class="lx-legend col"><li class="c0">بطاقة فحص الدعوى وخرافات التعلم الشائعة <em>(١٥ د)</em></li><li class="c1">ملمح الشعبة بدل الشخصيات، على حالات بلا أسماء <em>(٢٠ د)</em></li><li class="c2">تصميم ذروة بعدستين في مجموعات بحسب المجال <em>(٢٥ د)</em></li><li class="c3">تدريس مصغّر عشر دقائق مع ملاحظة بالروبرك <em>(٢٠ د)</em></li><li class="c5">خطة دراسة درس <em>(١٠ د)</em></li></ol></figure><div class="abox"><h4>تقويم أثر التدريب</h4><p>بمستويات Guskey (٢٠٠٠) الخمسة: ردود الفعل، والتعلّم قبليًّا وبعديًّا، والدعم المؤسسي، واستعمال الجديد (لوحات منفَّذة وملاحظات)، ونواتج الطلاب (ثبات الحفظ بعد شهر).</p></div></section><section class="sec" id="lx-links"><h2>خريطة الربط بأجزاء الدليل</h2><p class="lede2">هذا الجزء يقطع أكثر أجزاء الدليل، فيُحال منه إليها ولا يُكرر ما فيها.</p><div class="lx-links"><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-2" target="_blank" rel="noopener"><span class="lx-bub c0">١</span><span><b>البوصلة: الإطار الملزم</b><span class="t">حدود التصميم (الصفحة ٤ أ) خلاصة منه</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-3" target="_blank" rel="noopener"><span class="lx-bub c1">٢</span><span><b>المتعلم الموهوب</b><span class="t">تصويب «فرط الإثارة» إلى فروق فردية تُرصد</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-4" target="_blank" rel="noopener"><span class="lx-bub c2">٣</span><span><b>المنهج القائم على المعايير</b><span class="t">ناتج الارتقاء هو الذروة، ورموز المؤشرات تُكتب كما طُبعت</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-5" target="_blank" rel="noopener"><span class="lx-bub c3">٤</span><span><b>علم التعلّم وبصريات التعلّم</b><span class="t">الخرافات العصبية وبطاقة فحص الدعوى</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-7" target="_blank" rel="noopener"><span class="lx-bub c0">٦</span><span><b>تخطيط الحصة وإدارتها</b><span class="t">«تكملة التحضير» موضع ما لا يتسع له القالب</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-8" target="_blank" rel="noopener"><span class="lx-bub c1">٧</span><span><b>تدريس مجالات التربية الإسلامية</b><span class="t">جسر التلاوة بين المادتين</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-9" target="_blank" rel="noopener"><span class="lx-bub c2">٨</span><span><b>تدريس القرآن الكريم</b><span class="t">قالب القرآن بنسختيه، والحلقات الرباعية والقارئ القدوة وجولة الآية</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-10" target="_blank" rel="noopener"><span class="lx-bub c3">٩</span><span><b>التقويم</b><span class="t">الروبركات، وتوزيع الدرجات، وتقويم القيمة بلا درجة</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-11" target="_blank" rel="noopener"><span class="lx-bub c0">١٠</span><span><b>الوسيلة والمحتوى الشرعي</b><span class="t">ضوابط الصورة والغيب، وبطاقة التحقق من النص الشرعي</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-13" target="_blank" rel="noopener"><span class="lx-bub c1">١٢</span><span><b>مختبر الابتكار</b><span class="t">المشروعات البينية</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-15" target="_blank" rel="noopener"><span class="lx-bub c2">١٤</span><span><b>التعلم المستند إلى الدماغ</b><span class="t">إسناد كل مبدأ إلى دليله</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-16" target="_blank" rel="noopener"><span class="lx-bub c3">١٥</span><span><b>البحث العلمي</b><span class="t">البحث الإجرائي في خطة المعلم المصمم</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-18" target="_blank" rel="noopener"><span class="lx-bub c0">١٧</span><span><b>القيم وتفعيلها</b><span class="t">العهد السلوكي ومتابعته</span></span></a><a href="https://mubarakaliotb.github.io/alamaai-guide/#part-19" target="_blank" rel="noopener"><span class="lx-bub c1">م</span><span><b>الملاحق</b><span class="t">بنك الاستراتيجيات، وبنك المعضلات، و«قَبَس»</span></span></a></div><div class="abox"><h4>جسر التلاوة: التشخيص يسبق التعليم</h4><p>دروس التلاوة في كتاب التربية الإسلامية مأخوذة من مقرر الحفظ للصف التالي، بنص مقدمة الكتب الأربعة (ص١٢). فما يحفظه الطالب في القرآن الكريم هذا العام تلاه في التربية الإسلامية في العام الماضي.</p><div class="lx-bridge-h"><span>يتلو في التربية الإسلامية ← ثم يحفظ في القرآن الكريم</span><span>يتلو في التربية الإسلامية ← ثم يحفظ في القرآن الكريم</span></div><ul class="lx-bridge"><li><span><b>السادس</b>نوح والمعارج</span><i aria-hidden="true"></i><em>السابع</em></li><li><span><b>السابع</b>القلم</span><i aria-hidden="true"></i><em>الثامن</em></li><li><span><b>الثامن</b>التحريم</span><i aria-hidden="true"></i><em>التاسع</em></li><li><span><b>التاسع</b>التغابن</span><i aria-hidden="true"></i><em>العاشر</em></li></ul><p>أثره في التصميم: قسم «الاستماع والقراءة النشطة» يبدأ بجولة تشخيصية قصيرة تكشف من بقي ضبطه، فتذهب دقائقه إلى الحفظ والتدبر. والفاصل عام كامل، فلا يُفترض الإتقان.</p></div></section><section class="sec" id="lx-refs"><h2>المراجع</h2><p class="lx-note">طوبق ٣٤ مرجعًا من هذه القائمة آليًّا على قاعدة OpenAlex بالمعرّف الرقمي (العنوان والمؤلفون والسنة والوعاء)، والمعرّف مثبت في آخر ٣٣ منها. والمراجع الثمانية عشر الباقية كتب وفصول لم يُعثر لها على معرّف رقمي؛ تُراجع بيانات نشرها على فهارس المكتبات. ولم تُطابق أرقام المجلدات والصفحات آليًّا <span class="tag chk">يُتحقق</span>.</p><h3>الوثائق الرسمية والمصادر الشرعية</h3><ul class="lx-refs"><li>وزارة التربية، مكتب الموهوبين. (٢٠٢٦). <em>لائحة نظام مدارس الموهوبين الصادرة تنفيذًا للقرار الوزاري رقم (١٥٣) لسنة ٢٠٢٦</em>. دولة الكويت.</li><li>وزارة التربية، مكتب الموهوبين. (٢٠٢٦). <em>ميثاق العمل المهني في مدارس الموهوبين</em>. دولة الكويت.</li><li>وزارة التربية، مكتب الموهوبين. (٢٠٢٦). <em>دليل العمل في مدارس الموهوبين</em> (الإصدار الأول). دولة الكويت.</li><li>وزارة التربية. (٢٠٢٦). <em>اللائحة التنظيمية الشاملة للتعليم</em>. دولة الكويت.</li><li>وزارة التربية، إدارة المناهج. (٢٠٢٥). <em>دليل المعلم لمادة التربية الإسلامية للمرحلة المتوسطة</em>. دولة الكويت.</li><li>وزارة التربية، إدارة المناهج. (٢٠٢٥). <em>دليل المعلم لمادة القرآن الكريم للمرحلة المتوسطة</em>. دولة الكويت.</li><li>وزارة التربية. (د.ت.). <em>التربية الإسلامية للصف الثامن: الفصل الدراسي الأول</em> [كتاب الطالب]. دولة الكويت.</li><li>وزارة التربية. (د.ت.). <em>القرآن الكريم للصف الثامن: الفصل الدراسي الأول</em> [كتاب الطالب]. دولة الكويت.</li><li>مجمع الملك فهد لطباعة المصحف الشريف. <em>مصحف المدينة النبوية برواية حفص عن عاصم</em> (النص الرقمي، الإصدار ١٨).</li><li>البخاري، محمد بن إسماعيل. <em>صحيح البخاري</em>، كتاب الرقاق، الحديث (٦٤١٧).</li><li>مسلم بن الحجاج. <em>صحيح مسلم</em>، الحديث (٧٤٦).</li><li>ابن كثير، إسماعيل بن عمر. <em>تفسير القرآن العظيم</em>، تفسير الآية ٢٥٥ من سورة البقرة.</li></ul><h3>المراجع الأجنبية</h3><ul class="lx-refs en"><li>Abramenka-Lachheb, V. (2023). Theory-driven and practice oriented perspectives on instructional design and learning experience design. <em>The Journal of Applied Instructional Design, 12</em>(3). <a href="https://doi.org/10.59668/515.12998" target="_blank" rel="noopener">https://doi.org/10.59668/515.12998</a></li><li>Betts, G. T., &amp; Kercher, J. K. (1999). <em>Autonomous learner model: Optimizing ability</em>. ALPS Publishing.</li><li>Bjork, E. L., &amp; Bjork, R. A. (2011). Making things hard on yourself, but in a good way: Creating desirable difficulties to enhance learning. In M. A. Gernsbacher, R. W. Pew, L. M. Hough, &amp; J. R. Pomerantz (Eds.), <em>Psychology and the real world: Essays illustrating fundamental contributions to society</em> (pp. 56–64). Worth Publishers.</li><li>Csikszentmihalyi, M. (1990). <em>Flow: The psychology of optimal experience</em>. Harper &amp; Row.</li><li>Cuypers, M. (2015). <em>The composition of the Qur'an: Rhetorical analysis</em>. Bloomsbury Academic.</li><li>Darling-Hammond, L., Hyler, M. E., &amp; Gardner, M. (2017). <em>Effective teacher professional development</em>. Learning Policy Institute. <a href="https://doi.org/10.54300/122.311" target="_blank" rel="noopener">https://doi.org/10.54300/122.311</a></li><li>Desimone, L. M. (2009). Improving impact studies of teachers' professional development: Toward better conceptualizations and measures. <em>Educational Researcher, 38</em>(3), 181–199. <a href="https://doi.org/10.3102/0013189X08331140" target="_blank" rel="noopener">https://doi.org/10.3102/0013189X08331140</a></li><li>Dewey, J. (1938). <em>Experience and education</em>. Macmillan.</li><li>Douglas, M. (2007). <em>Thinking in circles: An essay on ring composition</em>. Yale University Press. <a href="https://doi.org/10.12987/9780300134957" target="_blank" rel="noopener">https://doi.org/10.12987/9780300134957</a></li><li>Farrin, R. (2014). <em>Structure and Qur'anic interpretation: A study of symmetry and coherence in Islam's holy text</em>. White Cloud Press.</li><li>Farrin, R. K. (2010). Surat al-Baqara: A structural analysis. <em>The Muslim World, 100</em>(1), 17–32. <a href="https://doi.org/10.1111/j.1478-1913.2009.01299.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1478-1913.2009.01299.x</a></li><li>Fink, L. D. (2013). <em>Creating significant learning experiences: An integrated approach to designing college courses</em> (Rev. ed.). Jossey-Bass.</li><li>Finn, B. (2010). Ending on a high note: Adding a better end to effortful study. <em>Journal of Experimental Psychology: Learning, Memory, and Cognition, 36</em>(6), 1548–1553. <a href="https://doi.org/10.1037/a0020605" target="_blank" rel="noopener">https://doi.org/10.1037/a0020605</a></li><li>Floor, N. (2023). <em>This is learning experience design: What it is, how it works, and why it matters</em>. New Riders.</li><li>Gagné, F. (2004). Transforming gifts into talents: The DMGT as a developmental theory. <em>High Ability Studies, 15</em>(2), 119–147. <a href="https://doi.org/10.1080/1359813042000314682" target="_blank" rel="noopener">https://doi.org/10.1080/1359813042000314682</a></li><li>Guskey, T. R. (2000). <em>Evaluating professional development</em>. Corwin Press.</li><li>Heath, C., &amp; Heath, D. (2017). <em>The power of moments: Why certain experiences have extraordinary impact</em>. Simon &amp; Schuster.</li><li>Hoogerheide, V., &amp; Paas, F. (2012). Remembered utility of unpleasant and pleasant learning experiences: Is all well that ends well? <em>Applied Cognitive Psychology, 26</em>(6), 887–894. <a href="https://doi.org/10.1002/acp.2890" target="_blank" rel="noopener">https://doi.org/10.1002/acp.2890</a></li><li>Immordino-Yang, M. H., &amp; Damasio, A. (2007). We feel, therefore we learn: The relevance of affective and social neuroscience to education. <em>Mind, Brain, and Education, 1</em>(1), 3–10. <a href="https://doi.org/10.1111/j.1751-228X.2007.00004.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1751-228X.2007.00004.x</a></li><li>Jahnke, I., Schmidt, M., Earnshaw, Y., &amp; Tawfik, A. A. (2022). Theoretical considerations of learning experience design. In H. Leary, S. P. Greenhalgh, K. B. Staudt Willet, &amp; M.-H. Cho (Eds.), <em>Theories to influence the future of learning design and technology</em>. EdTech Books.</li><li>Kahneman, D., Fredrickson, B. L., Schreiber, C. A., &amp; Redelmeier, D. A. (1993). When more pain is preferred to less: Adding a better end. <em>Psychological Science, 4</em>(6), 401–405. <a href="https://doi.org/10.1111/j.1467-9280.1993.tb00589.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1467-9280.1993.tb00589.x</a></li><li>Kalyuga, S. (2007). Expertise reversal effect and its implications for learner-tailored instruction. <em>Educational Psychology Review, 19</em>(4), 509–539. <a href="https://doi.org/10.1007/s10648-007-9054-3" target="_blank" rel="noopener">https://doi.org/10.1007/s10648-007-9054-3</a></li><li>Kaplan, S. N. (2009). Layering differentiated curricula for the gifted and talented. In F. A. Karnes &amp; S. M. Bean (Eds.), <em>Methods and materials for teaching the gifted</em> (3rd ed., pp. 107–135). Prufrock Press.</li><li>Keller, J. M. (1987). Development and use of the ARCS model of instructional design. <em>Journal of Instructional Development, 10</em>(3), 2–10. <a href="https://doi.org/10.1007/BF02905780" target="_blank" rel="noopener">https://doi.org/10.1007/BF02905780</a></li><li>Kolb, D. A. (1984). <em>Experiential learning: Experience as the source of learning and development</em>. Prentice-Hall.</li><li>Laurillard, D. (2012). <em>Teaching as a design science: Building pedagogical patterns for learning and technology</em>. Routledge. <a href="https://doi.org/10.4324/9780203125083" target="_blank" rel="noopener">https://doi.org/10.4324/9780203125083</a></li><li>Linnenbrink-Garcia, L., Durik, A. M., Conley, A. M., Barron, K. E., Tauer, J. M., Karabenick, S. A., &amp; Harackiewicz, J. M. (2010). Measuring situational interest in academic domains. <em>Educational and Psychological Measurement, 70</em>(4), 647–671. <a href="https://doi.org/10.1177/0013164409355699" target="_blank" rel="noopener">https://doi.org/10.1177/0013164409355699</a></li><li>Macnamara, B. N., &amp; Burgoyne, A. P. (2023). Do growth mindset interventions impact students' academic achievement? A systematic review and meta-analysis with recommendations for best practices. <em>Psychological Bulletin, 149</em>(3–4), 133–173. <a href="https://doi.org/10.1037/bul0000352" target="_blank" rel="noopener">https://doi.org/10.1037/bul0000352</a></li><li>Maker, C. J., &amp; Schiever, S. W. (2010). <em>Curriculum development and teaching strategies for gifted learners</em> (3rd ed.). Pro-Ed.</li><li>Merrill, M. D. (2002). First principles of instruction. <em>Educational Technology Research and Development, 50</em>(3), 43–59. <a href="https://doi.org/10.1007/BF02505024" target="_blank" rel="noopener">https://doi.org/10.1007/BF02505024</a></li><li>Parrish, P. E. (2009). Aesthetic principles for instructional design. <em>Educational Technology Research and Development, 57</em>(4), 511–528. <a href="https://doi.org/10.1007/s11423-007-9060-7" target="_blank" rel="noopener">https://doi.org/10.1007/s11423-007-9060-7</a></li><li>Pashler, H., McDaniel, M., Rohrer, D., &amp; Bjork, R. (2008). Learning styles: Concepts and evidence. <em>Psychological Science in the Public Interest, 9</em>(3), 105–119. <a href="https://doi.org/10.1111/j.1539-6053.2009.01038.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1539-6053.2009.01038.x</a></li><li>Pekrun, R. (2006). The control-value theory of achievement emotions: Assumptions, corollaries, and implications for educational research and practice. <em>Educational Psychology Review, 18</em>(4), 315–341. <a href="https://doi.org/10.1007/s10648-006-9029-9" target="_blank" rel="noopener">https://doi.org/10.1007/s10648-006-9029-9</a></li><li>Pekrun, R., Goetz, T., Frenzel, A. C., Barchfeld, P., &amp; Perry, R. P. (2011). Measuring emotions in students' learning and performance: The Achievement Emotions Questionnaire (AEQ). <em>Contemporary Educational Psychology, 36</em>(1), 36–48. <a href="https://doi.org/10.1016/j.cedpsych.2010.10.002" target="_blank" rel="noopener">https://doi.org/10.1016/j.cedpsych.2010.10.002</a></li><li>Pine, B. J., II, &amp; Gilmore, J. H. (1999). <em>The experience economy: Work is theatre &amp; every business a stage</em>. Harvard Business School Press.</li><li>Renzulli, J. S., &amp; Reis, S. M. (2014). <em>The schoolwide enrichment model: A how-to guide for talent development</em> (3rd ed.). Prufrock Press.</li><li>Rheinberg, F., Vollmeyer, R., &amp; Engeser, S. (2003). Die Erfassung des Flow-Erlebens. In J. Stiensmeier-Pelster &amp; F. Rheinberg (Eds.), <em>Diagnostik von Motivation und Selbstkonzept</em> (pp. 261–279). Hogrefe.</li><li>Ryan, R. M., Rigby, S., &amp; King, K. (1993). Two types of religious internalization and their relations to religious orientations and mental health. <em>Journal of Personality and Social Psychology, 65</em>(3), 586–596. <a href="https://doi.org/10.1037/0022-3514.65.3.586" target="_blank" rel="noopener">https://doi.org/10.1037/0022-3514.65.3.586</a></li><li>Schmidt, M., &amp; Huang, R. (2022). Defining learning experience design: Voices from the field of learning design &amp; technology. <em>TechTrends, 66</em>(2), 141–158. <a href="https://doi.org/10.1007/s11528-021-00656-y" target="_blank" rel="noopener">https://doi.org/10.1007/s11528-021-00656-y</a></li><li>Sinai, N. (2017). Review essay: "Going round in circles" [Review of the books <em>The composition of the Qur'an: Rhetorical analysis</em>, by M. Cuypers, and <em>Structure and Qur'anic interpretation: A study of symmetry and coherence in Islam's holy text</em>, by R. Farrin]. <em>Journal of Qur'anic Studies, 19</em>(2), 106–122. <a href="https://doi.org/10.3366/jqs.2017.0285" target="_blank" rel="noopener">https://doi.org/10.3366/jqs.2017.0285</a></li><li>Sinha, T., &amp; Kapur, M. (2021). When problem solving followed by instruction works: Evidence for productive failure. <em>Review of Educational Research, 91</em>(5), 761–798. <a href="https://doi.org/10.3102/00346543211019105" target="_blank" rel="noopener">https://doi.org/10.3102/00346543211019105</a></li><li>Sisk, V. F., Burgoyne, A. P., Sun, J., Butler, J. L., &amp; Macnamara, B. N. (2018). To what extent and under which circumstances are growth mind-sets important to academic achievement? Two meta-analyses. <em>Psychological Science, 29</em>(4), 549–571. <a href="https://doi.org/10.1177/0956797617739704" target="_blank" rel="noopener">https://doi.org/10.1177/0956797617739704</a></li><li>Stoeber, J., &amp; Otto, K. (2006). Positive conceptions of perfectionism: Approaches, evidence, challenges. <em>Personality and Social Psychology Review, 10</em>(4), 295–319. <a href="https://doi.org/10.1207/s15327957pspr1004_2" target="_blank" rel="noopener">https://doi.org/10.1207/s15327957pspr1004_2</a></li><li>Sweller, J., van Merriënboer, J. J. G., &amp; Paas, F. (2019). Cognitive architecture and instructional design: 20 years later. <em>Educational Psychology Review, 31</em>(2), 261–292. <a href="https://doi.org/10.1007/s10648-019-09465-5" target="_blank" rel="noopener">https://doi.org/10.1007/s10648-019-09465-5</a></li><li>Tawfik, A. A., Payne, L., Ketter, H., &amp; James, J. (2024). What instruments do researchers use to evaluate LXD? A systematic review study. <em>Technology, Knowledge and Learning</em>. <a href="https://doi.org/10.1007/s10758-024-09763-0" target="_blank" rel="noopener">https://doi.org/10.1007/s10758-024-09763-0</a></li><li>Tomlinson, C. A. (2014). <em>The differentiated classroom: Responding to the needs of all learners</em> (2nd ed.). ASCD.</li><li>van Merriënboer, J. J. G., &amp; Kirschner, P. A. (2018). <em>Ten steps to complex learning: A systematic approach to four-component instructional design</em> (3rd ed.). Routledge. <a href="https://doi.org/10.4324/9781315113210" target="_blank" rel="noopener">https://doi.org/10.4324/9781315113210</a></li><li>VanTassel-Baska, J. (1986). Effective curriculum and instructional models for talented students. <em>Gifted Child Quarterly, 30</em>(4), 164–169. <a href="https://doi.org/10.1177/001698628603000404" target="_blank" rel="noopener">https://doi.org/10.1177/001698628603000404</a></li><li>VanTassel-Baska, J., Quek, C., &amp; Feng, A. X. (2007). The development and use of a structured teacher observation scale to assess differentiated best practice. <em>Roeper Review, 29</em>(2), 84–92. <a href="https://doi.org/10.1080/02783190709554391" target="_blank" rel="noopener">https://doi.org/10.1080/02783190709554391</a></li><li>Vuyk, M. A., Krieshok, T. S., &amp; Kerr, B. A. (2016). Openness to experience rather than overexcitabilities: Call it like it is. <em>Gifted Child Quarterly, 60</em>(3), 192–211. <a href="https://doi.org/10.1177/0016986216645407" target="_blank" rel="noopener">https://doi.org/10.1177/0016986216645407</a></li><li>Wiggins, G., &amp; McTighe, J. (2005). <em>Understanding by design</em> (Expanded 2nd ed.). ASCD.</li><li>Winkler, D., &amp; Voight, A. (2016). Giftedness and overexcitability: Investigating the relationship using meta-analysis. <em>Gifted Child Quarterly, 60</em>(4), 243–257. <a href="https://doi.org/10.1177/0016986216657588" target="_blank" rel="noopener">https://doi.org/10.1177/0016986216657588</a></li></ul></section><footer class="lx-foot"><p><b>دليل المعلم الألمعي · الجزء الثامن عشر: هندسة تجربة التعلّم</b><br>جمع وتطوير: أ. مبارك علي العتيبي · مدرسة الموهوبين المتوسطة بنين ١ · دولة الكويت · نوفمبر ٢٠٢٦<br>النسخة العامة من الدليل: <a href="https://mubarakaliotb.github.io/alamaai-guide/" target="_blank" rel="noopener">mubarakaliotb.github.io/alamaai-guide</a></p><span><img class="sg on-light" src="img/mubarak-signature.png" alt="توقيع مبارك العتيبي"><img class="sg on-dark" src="img/mubarak-signature-white.png" alt="توقيع مبارك العتيبي"></span></footer></article></div></main><script>(function(){
+var links=[].slice.call(document.querySelectorAll('.rail-list a')),map={};
+links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+function cur(id){links.forEach(function(a){a.classList.toggle('cur',a===map[id])})}
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)cur(e.target.id)})},{rootMargin:'-15% 0px -75% 0px'});
+  [].slice.call(document.querySelectorAll('.article .sec')).forEach(function(s){io.observe(s)});
+}
+var bar=document.getElementById('readProg');
+function prog(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;bar.style.width=(m>0?h.scrollTop/m*100:0)+'%'}
+addEventListener('scroll',prog,{passive:true});prog();
+})();</script><script type="application/json" id="lxData">{"needs":[{"t":"تحدٍّ مضبوط","dec":"تشخيص في ثلاث دقائق، ثم مهمة مفتوحة للمتقنين","isl":"بطاقة من أربعة بنود قبل شرح صلاة العيد","qrn":"«جولة آية» تشخيصية","ind":"عدد من انتقلوا إلى العمق"},{"t":"تفادي انعكاس الخبرة","dec":"سحب الدعامات تدريجيًّا","isl":"جدول مقارنة ناقص يكمله الطالب","qrn":"إخفاء الحكم التجويدي ليستنبطه","ind":"زمن الإنجاز ودقته"},{"t":"استقلالية","dec":"خياران في السؤال أو المنتج","isl":"اختيار وجه المقارنة الذي يدافع عنه","qrn":"اختيار أسلوب الاستظهار من الأساليب الرسمية","ind":"عدد الخيارات المنفذة"},{"t":"أمان من الخطأ","dec":"تسميع ثنائي أو خاص قبل الجهري","isl":"«خطأ الأسبوع النافع» بلا أسماء","qrn":"تسميع للمعلم منفردًا لمن يقلق","ind":"انخفاض حالات الامتناع"},{"t":"معنى","dec":"سؤال حقيقي في الافتتاح","isl":"«إذا قام بها بعض أهل الحي سقط الإثم عن الباقين؛ فلماذا أحرص على شهودها؟»","qrn":"«كيف ردّت الآيات على الاتهام؟»","ind":"جودة أسئلة الطلاب"},{"t":"استدماج القيمة","dec":"قيمة في صلب الدرس وعهد يختاره الطالب","isl":"بطاقة عهد بصيغة المصدر","qrn":"ربط الآية (٧) بموقف يومي","ind":"متابعة العهد بعد أسبوع"}],"limits":[{"t":"النواتج","what":"التكييف في أسلوب العرض وإيقاع التغطية، دون إخلال بنواتج التعلم المقررة","eff":"يُضغط الزمن لا الناتج: ما أُتقن يوثَّق سريعًا ولا يُحذف","src":"مادة ٢٥؛ الميثاق: ثانيًا"},{"t":"القالب","what":"حقول القالب الرسمي ثابتة","eff":"كل تقنية تُكتب في حقلها، وما زاد يُحال إلى «تكملة التحضير»","src":"الجزء السادس"},{"t":"الزمن","what":"أزمنة النماذج الرسمية مبنية على ٤٥ دقيقة، وحصة المدرسة ٤٠","eff":"كل منحنى بنسختين، ونسخة الأربعين تحذف التكرار لا الذروة","src":"قالبا التحضير؛ د.إ ص٤٢–٤٣"},{"t":"القيمة","what":"تُستخرج في التمهيد أو أحد المحاور، ولا تؤجَّل إلى آخر الدرس، ومظهرها بصيغة المصدر","eff":"القيمة في صلب الدرس، والنهاية لتثبيت العهد","src":"د.ق ص٥٥"},{"t":"حصة القرآن","what":"الابتعاد عن المصورات الغيبية وعن التصوير والتمثيل الحركي للآيات","eff":"خريطة البنية ألفاظ وأسهم لا رسوم، والسمع أولًا","src":"د.ق ص٣٦"},{"t":"الحفظ في الفصل الأول","what":"يُحفَّظ المتعلمون في الحصة جماعيًّا وجزئيًّا وفرديًّا بالمحو التدريجي","eff":"كتلة الحفظ لا تُقتطع لأجل الذروة","src":"د.ق ص٣٦"},{"t":"الصور والأدوار","what":"لا تصوير للأنبياء ولا الصحابة ولا شيء من الغيب، ولا تمثيل لهم","eff":"«تجميد المشهد» تخطيط وكتابة لا تمثيل","src":"الجزء العاشر"},{"t":"الأجهزة","what":"إحضار الأجهزة الذكية دون إذن مخالفة سلوكية، والتلاوة النموذجية تُفتح من جهاز العرض","eff":"لا نشاط يتوقف على هاتف الطالب","src":"ش ص١٧٩؛ د.ق ص٤٠"},{"t":"المبنى","what":"لا كتابة ولا لصق ولا تثبيت على الجدران والأثاث، ولا نقل أثاث بين القاعات، ولا بخور ولا لهب","eff":"في المحطات يتحرك الطلاب لا الأثاث، والعرض على الشاشة أو اللوحات المخصصة","src":"د.ع ٦.١.٣، ٦.١.٨، ٦.٥.٣، ٦.٧.٢"},{"t":"التواصل والتصوير","what":"التواصل مع المتعلم عبر القنوات المعتمدة، ولا تصوير للنشر بمبادرة شخصية","eff":"سؤال ما قبل الحصة عبر القناة المعتمدة، والتوثيق في الملف التراكمي","src":"الميثاق: خامسًا، سابعًا"},{"t":"التقويم","what":"إعلان المعايير قبل التكليف، والدرجة ليست أداة عقاب، ولا مقارنة علنية","eff":"الروبرك يُعرض قبل المهمة، والعهد السلوكي بلا درجة","src":"الميثاق: ثالثًا، رابعًا"},{"t":"المشروع","what":"يُنفَّذ داخل الفصل ويُخصَّص له جزء من الحصة مع تحديد مسؤولية كل متعلم، ويجوز اعتماده لأكثر من مجال بقرار اللجنة","eff":"الذروة قد تكون مرحلة من مشروع","src":"ش ص١١٨؛ مادة ٣١"}],"techs":[{"n":1,"name":"سؤال قبل الحصة","basis":"الفضول والتهيئة","how":"يُرسل قبل يومين عبر القناة المعتمدة: «لماذا تُقدَّم صلاة الأضحى ويؤخَّر الفطر؟»، «ما الذي يجعل إنسانًا عظيم الخُلُق؟»","tt":"خارج الحصة","t":null,"modes":["فردي","فردي"],"ctl":"اختياري بلا درجة","ind":"عدد من دخلوا بفرضية","both":""},{"n":2,"name":"المثير الصامت","basis":"الانتباه","how":"ثلاثون ثانية بلا تعليق: مقطع مظاهر العيد في الكويت من النموذج الرسمي. وفي القرآن يُؤجَّل إلى قسم المعنى، فتمهيد أول السورة تعريف بها","tt":"٢ / ٣","t":[2,3],"modes":["جماعي","جماعي"],"ctl":"لا صور لأنبياء ولا صحابة ولا غيب","ind":"عدد الأسئلة المتولدة","both":""},{"n":3,"name":"التشخيص الضاغط","basis":"ضغط المنهج","how":"أربعة إلى ستة بنود؛ من أتقن انتقل إلى العمق","tt":"٣ / ٤","t":[3,4],"modes":["شفهي فردي","بطاقات"],"ctl":"لا يُسقط ناتج رسمي","ind":"خريطة إتقان","both":""},{"n":4,"name":"التنبؤ قبل الكشف","basis":"الإخفاق المنتج","how":"«رتّبوا خطوات صلاة العيد» ثم الكشف من الكتاب؛ «توقّعوا كيف ترد الآيات على الاتهام»","tt":"٤ / ٥","t":[4,5],"modes":["فردي ثم مقارنة","ثنائيات"],"ctl":"تصحيح فوري","ind":"التحسن بين المحاولة والشرح","both":""},{"n":5,"name":"شجرة القرار الفقهية","basis":"الترميز المزدوج","how":"«فاتتني صلاة العيد أو بعضها: ماذا أفعل؟»، وفروعها تقف عند نص الكتاب","tt":"٦ / ٧","t":[6,7],"modes":["شجرة جماعية","أربع شجرات"],"ctl":"ما سكت عنه الكتاب يُرفع ولا يُجاب عنه","ind":"دقة الفروع","both":""},{"n":6,"name":"عدستا العمق: الذروة","basis":"كابلان","how":"«الأنماط» و«القواعد» في مقارنة الجمعة والعيد؛ «الأنماط» و«الفكرة الكبرى» في القلم","tt":"١٠ / ١٢","t":[10,12],"modes":["عدسة لكل طالب ثم تبادل","أربع رباعيات"],"ctl":"","ind":"","both":"منتج مكتوب في مستوى التحليل"},{"n":7,"name":"محكمة الأقران المصغّرة","basis":"الحِجاج","how":"فريق يعرض وآخر يسائل، في نازلة واحدة لا أربع","tt":"٧ / ٨","t":[7,8],"modes":["طالب يعرض والبقية لجنة","أربع فرق"],"ctl":"لا تجريح ولا مقارنة علنية","ind":"أسئلة مسندة بدليل","both":""},{"n":8,"name":"التثبت ضد الشائعة","basis":"منهج المحدثين","how":"يطبّق الطلاب أسئلة الإسناد والعدالة والضبط على خبر رقمي","tt":"٨ / ١٠","t":[8,10],"modes":["فردي","ثنائيات"],"ctl":"لا حديث بلا تخريج ودرجة","ind":"تمييز المصدر","both":""},{"n":9,"name":"تجميد المشهد في السيرة","basis":"الإخفاق المنتج","how":"يتوقف السرد قبل القرار النبوي، فيخطط الطلاب كتابةً، ثم يُكشف التدبير ويُقارن","tt":"٨ / ١٠","t":[8,10],"modes":["خطة لكل طالب","أربع خطط"],"ctl":"لا تمثيل للنبي ﷺ ولا للصحابة","ind":"عدد العوامل المعتبرة","both":""},{"n":10,"name":"الاستخراج العضوي للقيمة","basis":"الاستدماج","how":"من موقف في الدرس: «ما الذي يتغير في يومي؟»","tt":"٣ / ٣","t":[3,3],"modes":["فردي ثم مشاركة طوعية","فردي ثم مشاركة طوعية"],"ctl":"في التمهيد أو أحد المحاور وبصيغة المصدر","ind":"مظهر قابل للملاحظة","both":""},{"n":11,"name":"التسميع الاسترجاعي المتدرج","basis":"الاسترجاع","how":"قراءة، فإخفاء أواخر الجمل، فإخفاء كلي، فتسميع ثنائي؛ ونشاط الإكمال في الكتاب درجة جاهزة منه","tt":"١٥ / ١٨","t":[15,18],"modes":["ثنائيتان والمعلم مع الخامس","الحلقات الرباعية"],"ctl":"","ind":"","both":"عدد أخطاء التسميع الأول"},{"n":12,"name":"خريطة البنية","basis":"الترميز المزدوج","how":"القلم ١–٧: قسم، فنفي، فإثبات، فوعد بظهور الحق، فردّ العلم إلى الله","tt":"٥ / ٥","t":[5,5],"modes":["فردي","فردي"],"ctl":"ألفاظ وأسهم بلا رسوم","ind":"صحة الربط بالتفسير المعتمد","both":""},{"n":13,"name":"مختبر الصوت في التجويد","basis":"المهمة الكاملة","how":"تلاوة القارئ المعتمد من الرمز بجهاز المعلم، ثم مقارنة الأداء في موضع الحكم","tt":"٥ / ٦","t":[5,6],"modes":["فردي","ثنائيات"],"ctl":"لا هواتف طلاب","ind":"تمييز صحيح في أربعة مواضع من خمسة","both":""},{"n":14,"name":"النهاية المرتفعة","basis":"التذكّر الناجح","how":"آخر دقيقتين مهمة نجاح مضمون: تلاوة جماعية متقنة أو بطاقة عهد","tt":"٢ / ٣","t":[2,3],"modes":["جماعي","جماعي"],"ctl":"","ind":"","both":"تقدير ذاتي أربعة من خمسة فأعلى"},{"n":15,"name":"المراجعة المتباعدة","basis":"التباعد","how":"بعد يوم، فثلاثة أيام، فأسبوع، فشهر","tt":"خارج الحصة، وثلاث دقائق في حصة لاحقة","t":null,"modes":["فردي","فردي"],"ctl":"لا تخزين قبل التسميع","ind":"الثبات بعد شهر","both":""}],"rubric":[{"dim":"المواءمة","lv":["أنشطة بلا صلة بالناتج","صلة جزئية","كل نشاط يخدم مؤشرًا","الذروة تحقق ناتج الارتقاء بدليل مكتوب"]},{"dim":"التحدي","lv":["تكرار لما يُتقن","تحدٍّ لبعضهم","تشخيص يوجّه التحدي","مسارات متمايزة باختيار الطالب"]},{"dim":"الأمان والانتماء","lv":["خوف من الخطأ","تشجيع لفظي","قنوات آمنة للتسميع","الطلاب يطلبون التغذية الراجعة"]},{"dim":"القوس الزمني","lv":["بلا ذروة ولا خاتمة","ذروة مبتورة","ذروة وخاتمة في وقتهما","لحظة يتذكرها الطلاب بعد أسبوع"]},{"dim":"الاستدماج","lv":["قيمة ملقّنة آخر الحصة","قيمة بلا سلوك","قيمة عضوية بمظهر مصدري","عهد اختاره الطالب وتابعه"]}],"presets":[{"id":"eid1","name":"صلاة العيد · الحصة ١ من ٢","subj":"isl","grade":"الثامن","title":"صلاة العيد","period":"١ من ٢","segs":[{"n":"الدعاء والتمهيد","peak":false,"what":"دعاء النموذج الرسمي ومقطع «مظاهر العيد في الكويت» وحديث التمهيد وأسئلته الثلاثة، ثم بطاقة تشخيص من أربعة بنود: الحكم، الوقت، عدد الركعات، موضع الخطبة. وتُستخرج القيمة هنا كما في النموذج الرسمي","m40":5,"m45":5,"nt":""},{"n":"المحور الأول: المشروعية","peak":false,"what":"قراءة جدول المشروعية، ثم نشاط الكتاب (١): علة تقديم صلاة الأضحى وتأخير صلاة الفطر، ثم سؤال المعنى: «إذا قام بها بعض أهل الحي سقط الإثم عن الباقين؛ فلماذا أحرص على شهودها؟»","m40":8,"m45":9,"nt":""},{"n":"المحور الثاني: الكيفية","peak":true,"what":"نمذجة صامتة، فبطاقات ترتيب من الكتاب، فأداء بقائمة ملاحظة (نشاط الكتاب ٢)، فاستخلاص الحقيقة","m40":20,"m45":23,"nt":""},{"n":"التقويم النهائي","peak":false,"what":"بطاقة خروج من ثلاثة أسئلة متدرجة من تقويم الكتاب، ثم ختام: أداء جماعي متقن للركعة الأولى بتكبيراتها","m40":7,"m45":8,"nt":""}],"card":[["العنوان","«صلاة العيد» في خطة التوزيع وفهرس الكتاب، و«صلاة العيدين» في صفحة الدرس ودليل المعلم؛ يُكتب كما في الخطة","الخطة؛ الكتاب ص٦٥؛ د.إ ص٤٢"],["الموضع","الوحدة الثانية · الفقه · الدرس الثاني · ص٦٥–٧٠","كتاب الطالب"],["الحصص","حصتان: الأسبوعان الخامس والسادس (١١–٢٢ أكتوبر ٢٠٢٦)","خطة التوزيع"],["المعيار","«التعرف على أحكام الصلاة وتأديتها بصفتها وطريقتها الصحيحة.»","د.إ ص٤٢؛ الكتاب ص٥١"],["المؤشرات","١- يبين مشروعية صلاة العيدين. ٢- يوضح كيفية أداء صلاة العيدين. ٣- يطبق آداب وسنن صلاة العيدين. ٤- يوضح بعض المسائل المتعلقة بصلاة العيدين.","د.إ ص٤٢–٤٣"],["ناتج التعلم","«تعظيم شعائر الإسلام»","د.إ ص٤٣"],["القيمة ومظاهرها","«شكر الله تعالى»: الحرص على أداء صلاة العيد شكرًا لله تعالى، والمحافظة على آداب وسنن صلاة العيدين","د.إ ص٤٢–٤٣"],["الحكم المعتمد","فرض كفاية","الكتاب ص٦٥"]]},{"id":"eid2","name":"صلاة العيد · الحصة ٢ من ٢","subj":"isl","grade":"الثامن","title":"صلاة العيد","period":"٢ من ٢","segs":[{"n":"الدعاء والتمهيد","peak":false,"what":"بطاقة دخول استرجاعية والكتاب مغلق: اكتب تسلسل الركعتين بتكبيراتهما","m40":5,"m45":5,"nt":""},{"n":"المحور الثالث: الآداب والسنن","peak":false,"what":"خريطة ذهنية كما في النموذج الرسمي، مع سؤال تعليل: لماذا الأكل قبل الخروج في الفطر، وبعد الصلاة في الأضحى؟","m40":9,"m45":10,"nt":""},{"n":"المحور الرابع: المسائل","peak":true,"what":"جدول الحالات من الكتاب، والتكبير المطلق والمقيد، ثم مهمة الارتقاء: مقارنة الجمعة والعيد","m40":16,"m45":19,"nt":""},{"n":"التقويم النهائي","peak":false,"what":"سؤالا الكتاب الأول والثاني، ثم ختام: عهد سلوكي بصيغة المصدر وتكبير جماعي بالصيغة الواردة في الكتاب","m40":10,"m45":11,"nt":""}],"card":[["العنوان","«صلاة العيد» في خطة التوزيع وفهرس الكتاب، و«صلاة العيدين» في صفحة الدرس ودليل المعلم؛ يُكتب كما في الخطة","الخطة؛ الكتاب ص٦٥؛ د.إ ص٤٢"],["الموضع","الوحدة الثانية · الفقه · الدرس الثاني · ص٦٥–٧٠","كتاب الطالب"],["الحصص","حصتان: الأسبوعان الخامس والسادس (١١–٢٢ أكتوبر ٢٠٢٦)","خطة التوزيع"],["المعيار","«التعرف على أحكام الصلاة وتأديتها بصفتها وطريقتها الصحيحة.»","د.إ ص٤٢؛ الكتاب ص٥١"],["المؤشرات","١- يبين مشروعية صلاة العيدين. ٢- يوضح كيفية أداء صلاة العيدين. ٣- يطبق آداب وسنن صلاة العيدين. ٤- يوضح بعض المسائل المتعلقة بصلاة العيدين.","د.إ ص٤٢–٤٣"],["ناتج التعلم","«تعظيم شعائر الإسلام»","د.إ ص٤٣"],["القيمة ومظاهرها","«شكر الله تعالى»: الحرص على أداء صلاة العيد شكرًا لله تعالى، والمحافظة على آداب وسنن صلاة العيدين","د.إ ص٤٢–٤٣"],["الحكم المعتمد","فرض كفاية","الكتاب ص٦٥"]]},{"id":"qalam","name":"القلم ١–٧ · حصة حفظ","subj":"qrn","grade":"الثامن","title":"الرسول ﷺ على خلق عظيم — القلم ١–٧","period":"١ من ١","segs":[{"n":"الدعاء والتمهيد","peak":false,"what":"دعاء النموذج الرسمي، وجملة تمهيد الكتاب عن افتتاح السورة بحرف مقطَّع، وبطاقة السورة (مكية، ٥٢ آية)، وسؤال النموذج عن لقبه ﷺ قبل الوحي، ثم العنوان سؤالًا: ما علامات الخلق العظيم في المقطع؟","m40":3,"m45":3,"nt":""},{"n":"(١) الاستماع والقراءة النشطة","peak":false,"what":"تلاوة القارئ المعتمد من الرمز بجهاز المعلم، ثم المعلم، ثم قراءة جماعية. و«جولة آية» تشخيصية تستثمر تلاوة السابع","m40":5,"m45":5,"nt":""},{"n":"(٢) المفردات وأحكام التجويد","peak":false,"what":"المعاني، والرسم العثماني، وكلمات التدريب، والحكم. والسؤال: أين الإدغام في المقطع؟","m40":5,"m45":5,"nt":""},{"n":"(٣) المعنى الإجمالي ومقاصد الآيات","peak":true,"what":"دلالات الكتاب الثلاث، ثم سؤال التحليل: كيف ردّت الآيات على الاتهام؟ وخريطة البنية: قسم (١)، فنفي ثم إثبات (٢–٤)، فوعد بظهور الحق (٥–٦)، فردّ العلم إلى الله (٧). ثم استنباط القيمة من الآية (٧)","m40":5,"m45":5,"nt":""},{"n":"(٤) التلاوة التفاعلية والحفظ","peak":false,"what":"الطرق الرسمية، مع استرجاع متدرج يبدأ بنشاط الإكمال في الكتاب، وكتابة آية من الذاكرة. وفي نسخة الأربعين يقع الاستظهار والختام في آخر دقيقتين منه","m40":22,"m45":25,"nt":""},{"n":"التقويم النهائي","peak":false,"what":"استظهار بأحد الأساليب الرسمية، وختام بتلاوة جماعية للآية (٤)","m40":0,"m45":2,"nt":"ضمن (٤)"}],"card":[["الموضع","كتاب القرآن الكريم للثامن · الوحدة الأولى · مجال حفظ القرآن الكريم وتدبره · الدرس الثالث «الرسول ﷺ على خلق عظيم» · ص٢٤–٢٦","كتاب الطالب"],["الحصص","حصة واحدة، الأسبوع الثالث (٢٧ سبتمبر – ١ أكتوبر ٢٠٢٦)","خطة التوزيع"],["السورة","القلم · مكية · ٥٢ آية","الكتاب ص٢٢"],["المعيار","«١- الاهتمام بحفظ وتلاوة السور المقررة من القرآن الكريم. ٢- إدراك معاني الآيات القرآنية المقررة وتبني التوجيهات الواردة فيها من خلال تدبرها.»","د.ق ص٩٤"],["مؤشرات المجال في الوحدة","ثمانية، منها: «يتلو الآيات من (١–٧) من سورة القلم تلاوة مجودة حسب أحكام التجويد المقررة بالتعاون مع الآخرين»، «يصحح قراءة زميله وفق معايير القراءة الصحيحة»، «يبين أهمية الكتابة والقلم في طلب العلم»، «يحفظ الآيات المقررة حفظًا سليمًا»","د.ق ص٩٤"],["ما يتعلمه الطالب بنص الكتاب","معاني مفردات جديدة، وإتقان تلاوة الآيات وحفظها، وتدبرها","الكتاب ص٢٤"],["القيمة في النموذج الرسمي","«طاعة الله تعالى»؛ ونشاط الكتاب (١) يطلب استنباط قيمة من الآية (٧)","د.ق ص٦٨؛ الكتاب ص٢٥"]]}],"qmin":{"40":[3,5,5,5,22],"45":[3,5,5,5,25]},"where":{"form":"في القالب: التمهيد وأسئلته، وأنشطة المحاور بأزمنتها، وأدوات التقييم، وبطاقة الخروج، والقيمة ومظاهرها الرسمية.","extra":"في «تكملة التحضير»: ناتجا الارتقاء، وجدول المقارنة وأسئلته، وتوزيع الأدوار، والإجابات النموذجية."}}</script><script>/* مختبر هندسة تجربة التعلّم — يعمل في المتصفح بلا خادم. بياناته (التقنيات، الحاجات، الحدود، الروبرك، الأمثلة)
+   مستخرجة من نص الجزء الثامن عشر، وما يكتبه المعلم يبقى في متصفحه (lxd.lab.v1). */
+(function(){
+'use strict';
+const D=JSON.parse(document.getElementById('lxData').textContent);
+const KEY='lxd.lab.v1',AR='٠١٢٣٤٥٦٧٨٩';
+const $=(s,r)=>(r||document).querySelector(s),$$=(s,r)=>Array.prototype.slice.call((r||document).querySelectorAll(s));
+const ar=n=>String(n).replace(/\d/g,d=>AR[d]);
+const lat=s=>String(s).replace(/[٠-٩]/g,d=>AR.indexOf(d));
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+const SUBJ={isl:'التربية الإسلامية',qrn:'القرآن الكريم'},SIZE={m:'مصغّرة (٤–٦)',f:'كاملة (١٦)'};
+const GR=['السادس','السابع','الثامن','التاسع'],LV=['التحليل','التقويم','الإبداع'],ORD=['الأول','الثاني','الثالث','الرابع','الخامس'];
+const REF={2:['lx-p4c','المثالان المحلولان'],3:['lx-p4b','خمس عشرة تقنية'],4:['lx-p3','الحاجات والقرارات'],5:['lx-p2','ناتج الارتقاء'],7:['lx-p5','الروبرك'],8:['lx-p4a','حدود التصميم الملزمة']};
+const root=$('#labView');
+const FORM=D.limits.filter(l=>l.t==='القالب')[0]||D.limits[1];
+let S;
+
+function fromPreset(p,keep){
+  return {v:1,subj:p.subj,grade:p.grade,title:keep?p.title:'',period:keep?p.period:'',mins:40,size:'m',
+    segs:p.segs.map(s=>({n:keep?s.n:s.n.split(':')[0],what:keep?s.what:'',m40:s.m40,m45:s.m45,nt:s.nt||''})),
+    peak:p.segs.findIndex(s=>s.peak),techs:[],needs:[],rise:'',riseLv:0,value:'',mazhar:'',vseg:0,exit:['','',''],pledge:'',date:'',rub:[0,0,0,0,0],lim:[],src:keep?p.id:''};
+}
+const blank=subj=>fromPreset(D.presets.find(p=>p.subj===subj),false);
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(valid(s))return s}catch(e){}return null}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function valid(s){return !!(s&&s.v===1&&SUBJ[s.subj]&&Array.isArray(s.segs)&&s.segs.length&&Array.isArray(s.techs)&&Array.isArray(s.exit)&&Array.isArray(s.rub))}
+const mk=()=>'m'+S.mins;
+const total=()=>S.segs.reduce((a,s)=>a+(+s[mk()]||0),0);
+const tech=n=>D.techs[n-1];
+const techMin=n=>{const t=tech(n).t;return t?t[S.mins===40?0:1]:0};
+
+/* ---------- الفحوص: كل فحص قاعدة من نص الجزء ---------- */
+function checks(){
+  const c=[],k=mk(),tot=total(),last=S.segs.length-1;
+  c.push(tot===S.mins?{ok:true,t:'مجموع الحقول '+ar(tot)+' دقيقة من '+ar(S.mins)}
+    :{ok:false,t:'مجموع الحقول '+ar(tot)+' دقيقة والحصة '+ar(S.mins)+': '+(tot>S.mins?'احذف ':'أضف ')+ar(Math.abs(tot-S.mins))});
+  if(S.subj==='qrn'){
+    const mn=D.qmin[S.mins],low=S.segs.slice(0,5).filter((s,i)=>(+s[k]||0)<mn[i]).map(s=>s.n);
+    c.push(low.length?{ok:false,t:'نزل عن حدّه في القالب: '+low.join('، ')}:{ok:true,t:'أقسام حصة القرآن عند حدودها أو فوقها'});
+  }
+  c.push(S.peak>=0&&S.peak<=last?{ok:true,t:'الذروة في: '+S.segs[S.peak].n}:{ok:false,t:'حدّد حقل الذروة'});
+  const nt=S.techs.length;
+  c.push(nt>5?{ok:false,t:ar(nt)+' تقنيات في حصة واحدة، وثلاث إلى خمس تكفي'}:nt<3?{ok:null,t:'اختر ثلاث تقنيات إلى خمس (المختار '+ar(nt)+')'}:{ok:true,t:ar(nt)+' تقنيات مختارة'});
+  const over=S.segs.filter((s,i)=>S.techs.filter(t=>t.seg===i).reduce((a,t)=>a+techMin(t.n),0)>(+s[k]||0)).map(s=>s.n);
+  if(over.length)c.push({ok:false,t:'تقنيات تتجاوز زمن حقلها: '+over.join('، ')});
+  c.push(S.rise.trim()?{ok:true,t:'ناتج الارتقاء مكتوب ('+LV[S.riseLv]+')'}:{ok:null,t:'اكتب ناتج الارتقاء'});
+  if(S.value.trim()){
+    c.push(S.vseg!==last?{ok:true,t:'القيمة تُستخرج في: '+S.segs[Math.min(S.vseg,last)].n}:{ok:false,t:'القيمة مؤجلة إلى آخر الحصة؛ استخرجها في التمهيد أو أحد المحاور'});
+    const m=S.mazhar.trim();
+    c.push(!m?{ok:null,t:'اكتب المظهر السلوكي بصيغة المصدر'}:/^ي/.test(m)?{ok:false,t:'المظهر يبدو فعلًا مضارعًا؛ اكتبه بصيغة المصدر'}:{ok:true,t:'المظهر السلوكي مكتوب'});
+  }else c.push({ok:null,t:'اكتب القيمة ومظهرها السلوكي'});
+  const ex=S.exit.filter(x=>x.trim()).length;
+  c.push({ok:ex===3&&S.pledge.trim()?true:null,t:'بطاقة الخروج: '+ar(ex)+' من ٣ أسئلة'+(S.pledge.trim()?'، والعهد مكتوب':'، وبلا عهد')});
+  return c;
+}
+function reviewDates(){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(S.date))return [];
+  const p=S.date.split('-').map(Number),f=new Intl.DateTimeFormat('ar-u-nu-arab-ca-gregory',{weekday:'long',day:'numeric',month:'long'});
+  return [1,3,7,30].map(d=>({d:d,t:f.format(new Date(p[0],p[1]-1,p[2]+d))}));
+}
+function rubTotal(){return S.rub.reduce((a,b)=>a+b,0)}
+function rubTarget(){
+  if(S.rub.indexOf(0)>=0)return '';
+  let i=0;S.rub.forEach((v,j)=>{if(v<S.rub[i])i=j});
+  return S.rub[i]>=4?'':'أولوية التحسين: '+D.rubric[i].dim+' — المستوى التالي: «'+D.rubric[i].lv[S.rub[i]]+'»';
+}
+
+/* ---------- الواجهة ---------- */
+const opt=(v,t,sel)=>'<option value="'+esc(v)+'"'+(sel?' selected':'')+'>'+esc(t)+'</option>';
+const fld=(l,inner,cls)=>'<label class="lb-f'+(cls?' '+cls:'')+'"><span>'+l+'</span>'+inner+'</label>';
+const ref=k=>REF[k]?'<a class="lb-ref" href="#'+REF[k][0]+'">في الدليل: '+REF[k][1]+'</a>':'';
+const segOpts=(sel,none)=>(none?opt(-1,none,sel<0):'')+S.segs.map((s,i)=>opt(i,s.n,i===sel)).join('');
+const STEP={
+1:()=>'<h3><i>١</i>بيانات الحصة</h3><div class="lb-row">'
+  +fld('المادة','<select data-k="subj">'+Object.keys(SUBJ).map(k=>opt(k,SUBJ[k],S.subj===k)).join('')+'</select>')
+  +fld('الصف','<select data-k="grade">'+GR.map(g=>opt(g,g,S.grade===g)).join('')+'</select>')
+  +fld('زمن الحصة','<select data-k="mins">'+opt(40,'٤٠ دقيقة',S.mins===40)+opt(45,'٤٥ دقيقة',S.mins===45)+'</select>')
+  +fld('الشعبة','<select data-k="size">'+Object.keys(SIZE).map(k=>opt(k,SIZE[k],S.size===k)).join('')+'</select>')+'</div><div class="lb-row">'
+  +fld('عنوان الدرس','<input type="text" data-k="title" value="'+esc(S.title)+'" placeholder="كما في خطة التوزيع">','w2')
+  +fld('الحصة','<input type="text" data-k="period" value="'+esc(S.period)+'" placeholder="١ من ٢">')+'</div>',
+2:()=>'<h3><i>٢</i>منحنى الحصة على القالب الرسمي</h3><p class="lb-hint">وزّع الدقائق على حقول القالب، وحدّد الذروة. نسخة الأربعين تحذف التكرار لا الذروة. '+ref(2)+'</p>'
+  +'<div class="lb-bar" id="lbBar"></div><div class="lb-segs">'+S.segs.map((s,i)=>'<div class="lb-seg"><input type="text" data-seg="'+i+'" data-f="n" value="'+esc(s.n)+'" aria-label="اسم الحقل">'
+    +'<label class="lb-min"><input type="number" inputmode="numeric" min="0" max="60" data-seg="'+i+'" data-f="m" value="'+(+s[mk()]||0)+'" aria-label="دقائق '+esc(s.n)+'"><span>د</span></label>'
+    +'<label class="lb-pk"><input type="radio" name="peak" value="'+i+'"'+(S.peak===i?' checked':'')+'><span>الذروة</span></label>'
+    +(S.subj==='isl'&&i>0&&i<S.segs.length-1&&S.segs.length>3?'<button type="button" class="lb-x" data-act="delseg" data-i="'+i+'" aria-label="احذف '+esc(s.n)+'">×</button>':'<span class="lb-x0"></span>')
+    +'<textarea data-seg="'+i+'" data-f="what" rows="2" placeholder="ما يجري في هذا الحقل">'+esc(s.what)+'</textarea></div>').join('')+'</div>'
+  +(S.subj==='isl'&&S.segs.length<6?'<button type="button" class="btn ghost sm" data-act="addseg">أضف محورًا</button>':''),
+3:()=>'<h3><i>٣</i>التقنيات</h3><p class="lb-hint">ثلاث إلى خمس تكفي: واحدة للافتتاح وواحدة للذروة وواحدة للختام. '+ref(3)+' <b id="techOut"></b></p><div class="lb-techs">'
+  +D.techs.map(t=>{const on=S.techs.find(x=>x.n===t.n),mn=t.t?ar(techMin(t.n))+' د':'خارج الحصة';
+    return '<div class="lb-tech'+(on?' on':'')+'"><label><input type="checkbox" data-tech="'+t.n+'"'+(on?' checked':'')+'><b>'+esc(t.name)+'</b><em>'+esc(t.basis)+'</em><span class="lb-chip">'+mn+'</span><span class="lb-chip">'+esc(t.modes[S.size==='m'?0:1])+'</span></label>'
+      +(on?'<div class="lb-td"><p>'+esc(t.how)+'</p>'+(t.both?'<p><b>الضابط والمؤشر:</b> '+esc(t.both)+'</p>':'<p><b>الضابط:</b> '+esc(t.ctl)+' · <b>المؤشر:</b> '+esc(t.ind)+'</p>')
+        +(t.t?fld('حقلها في القالب','<select data-tseg="'+t.n+'">'+segOpts(on.seg,'لم يُحدَّد')+'</select>'):'<p class="lb-hint">'+esc(t.tt)+'</p>')+'</div>':'')+'</div>'}).join('')+'</div>',
+4:()=>'<h3><i>٤</i>حاجات الشعبة وقرارات التصميم</h3><p class="lb-hint">اختر ما يغلب على شعبتك؛ يدخل قراره ومؤشره في اللوحة. '+ref(4)+'</p><div class="lb-needs">'
+  +D.needs.map((n,i)=>'<label class="lb-need"><input type="checkbox" data-need="'+i+'"'+(S.needs.indexOf(i)>=0?' checked':'')+'><span><b>'+esc(n.t)+'</b> '+esc(n.dec)+'<small>مثال: '+esc(n[S.subj])+' · يُرصد: '+esc(n.ind)+'</small></span></label>').join('')+'</div>',
+5:()=>'<h3><i>٥</i>الارتقاء والقيمة والختام</h3><p class="lb-hint">ناتج الارتقاء يُكتب في «تكملة التحضير» ولا يُخلط بمؤشرات القالب الرسمية. '+ref(5)+'</p><div class="lb-row">'
+  +fld('ناتج الارتقاء','<textarea data-k="rise" rows="2" placeholder="ناتج إضافي للموهوبين">'+esc(S.rise)+'</textarea>','w2')
+  +fld('مستواه','<select data-k="riseLv">'+LV.map((l,i)=>opt(i,l,S.riseLv===i)).join('')+'</select>')+'</div><div class="lb-row">'
+  +fld('القيمة','<input type="text" data-k="value" value="'+esc(S.value)+'" placeholder="كما في النموذج الرسمي">')
+  +fld('مظهرها السلوكي بصيغة المصدر','<input type="text" data-k="mazhar" value="'+esc(S.mazhar)+'" placeholder="الحرص على…">','w2')
+  +fld('تُستخرج في','<select data-k="vseg">'+segOpts(S.vseg)+'</select>')+'</div><div class="lb-row">'
+  +[0,1,2].map(i=>fld('سؤال الخروج '+ar(i+1),'<input type="text" data-exit="'+i+'" value="'+esc(S.exit[i])+'">')).join('')
+  +fld('العهد السلوكي','<input type="text" data-k="pledge" value="'+esc(S.pledge)+'" placeholder="عهد يختاره الطالب ويتابعه">','w2')+'</div>',
+6:()=>'<h3><i>٦</i>المراجعة المتباعدة</h3><div class="lb-row">'+fld('تاريخ الحصة','<input type="date" data-k="date" value="'+esc(S.date)+'">')+'<p class="lb-out w2" id="dateOut"></p></div>',
+7:()=>'<h3><i>٧</i>فحص جودة التجربة</h3><p class="lb-hint">قدّر كل بعد من ١ إلى ٤. '+ref(7)+'</p><div class="lb-rub">'
+  +D.rubric.map((d,i)=>'<fieldset><legend>'+esc(d.dim)+'</legend>'+d.lv.map((l,j)=>'<label><input type="radio" name="rub'+i+'" value="'+(j+1)+'"'+(S.rub[i]===j+1?' checked':'')+'><span><b>'+ar(j+1)+'</b> '+esc(l)+'</span></label>').join('')+'</fieldset>').join('')+'</div><p class="lb-out" id="rubOut"></p>',
+8:()=>'<h3><i>٨</i>الحدود الملزمة قبل الطباعة</h3><p class="lb-hint">راجع كل حدّ وأثره في التصميم. '+ref(8)+' <b id="limOut"></b></p><div class="lb-lims">'
+  +D.limits.map((l,i)=>'<label class="lb-need"><input type="checkbox" data-lim="'+i+'"'+(S.lim.indexOf(i)>=0?' checked':'')+'><span><b>'+esc(l.t)+'</b> '+esc(l.eff)+'<small>'+esc(l.src)+'</small></span></label>').join('')+'</div>'
+};
+function draw(k){const el=$('[data-step="'+k+'"]',root);if(el)el.innerHTML=STEP[k]()}
+function drawAll(){
+  root.innerHTML='<header class="lb-head"><p class="eyebrow">دليل المعلم الألمعي · الجزء الثامن عشر</p><h1>مختبر هندسة تجربة التعلّم</h1>'
+    +'<p class="lede">من بيانات الحصة إلى لوحة تجربة جاهزة للطباعة في دقائق: منحنى على القالب الرسمي، وتقنيات بضوابطها ومؤشراتها، وقيمة وختام ومراجعة متباعدة. ما تكتبه يبقى في متصفحك وحده.</p>'
+    +'<div class="lb-acts"><span>ابدأ من مثال محلول:</span>'+D.presets.map(p=>'<button type="button" class="btn ghost sm" data-act="preset" data-id="'+p.id+'">'+esc(p.name)+'</button>').join('')
+    +'<button type="button" class="btn ghost sm" data-act="new">حصة جديدة</button></div></header>'
+    +'<div class="lb-grid"><div class="lb-main">'+[1,2,3,4,5,6,7,8].map(k=>'<section class="lb-card" data-step="'+k+'">'+STEP[k]()+'</section>').join('')+'</div>'
+    +'<aside class="lb-side" aria-label="حالة اللوحة"><h4>حالة اللوحة</h4><ul id="lbChecks"></ul><div class="lb-btns"><button type="button" class="btn sm" data-act="show">اعرض اللوحة</button>'
+    +'<button type="button" class="btn ghost sm" data-act="print">اطبع</button><button type="button" class="btn ghost sm" data-act="copy">انسخ نصًّا</button>'
+    +'<button type="button" class="btn ghost sm" data-act="export">صدّر</button><button type="button" class="btn ghost sm" data-act="import">استورد</button>'
+    +'<input type="file" id="lbFile" accept="application/json,.json" hidden></div><p class="lb-msg" id="lbMsg" role="status"></p></aside></div>'
+    +'<section class="lb-sheet" id="lbSheet" aria-label="لوحة تجربة الحصة"></section>';
+  refresh();
+}
+const COL=['var(--navy-900)','var(--blue-500)','var(--teal-500)','var(--blue-800)','var(--navy-600)','var(--teal-700)'];
+function bar(){
+  const k=mk();
+  return S.segs.map((s,i)=>(+s[k]||0)?'<span style="flex:'+s[k]+' 1 0;background:'+(i===S.peak?'var(--orange-500)':COL[i%COL.length])+';color:'+(i===S.peak||COL[i%COL.length]==='var(--teal-500)'?'var(--navy-900)':'#fff')+'" title="'+esc(s.n)+'">'+ar(s[k])+'</span>':'').join('');
+}
+function refresh(){
+  save();
+  const b=$('#lbBar',root);if(b)b.innerHTML=bar();
+  $('#lbChecks',root).innerHTML=checks().map(c=>'<li class="'+(c.ok===true?'ok':c.ok===false?'bad':'soft')+'">'+esc(c.t)+'</li>').join('');
+  const used=S.techs.reduce((a,t)=>a+techMin(t.n),0);
+  const to=$('#techOut',root);if(to)to.textContent=S.techs.length?'المختار '+ar(S.techs.length)+'، ودقائقها داخل الحصة '+ar(used):'';
+  const dts=reviewDates(),dOut=$('#dateOut',root);
+  if(dOut)dOut.textContent=dts.length?dts.map(x=>'بعد '+ar(x.d)+(x.d===1?' يوم':x.d<11?' أيام':' يومًا')+': '+x.t).join(' · '):'اختر تاريخ الحصة تخرج مواعيد المراجعة: بعد يوم، فثلاثة أيام، فأسبوع، فشهر.';
+  const r=$('#rubOut',root);if(r)r.textContent=S.rub.indexOf(0)>=0?'قدّر الأبعاد الخمسة ليظهر المجموع.':'المجموع '+ar(rubTotal())+' من ٢٠. '+rubTarget();
+  const l=$('#limOut',root);if(l)l.textContent='روجع '+ar(S.lim.length)+' من '+ar(D.limits.length);
+  $('#lbSheet',root).innerHTML=sheet();
+}
+
+/* ---------- اللوحة المطبوعة ---------- */
+function techLine(x){const t=tech(x.n);return '<div class="tq"><b>'+esc(t.name)+'</b> <em>'+esc(t.basis)+'</em>'+(t.t?' · '+ar(techMin(t.n))+' د':'')+' · '+esc(t.modes[S.size==='m'?0:1])
+  +'<br>'+(t.both?esc(t.both):'الضابط: '+esc(t.ctl)+' · المؤشر: '+esc(t.ind))+'</div>'}
+function sheet(){
+  const k=mk(),dts=reviewDates(),out=S.techs.filter(x=>x.seg<0||x.seg>=S.segs.length||!tech(x.n).t),ex=S.exit.filter(x=>x.trim()),last=S.segs.length-1;
+  const box=(h,b)=>'<div class="bx"><h5>'+h+'</h5>'+b+'</div>',dash='<span class="mt">—</span>';
+  return '<div class="sh-top"><div><small>دليل المعلم الألمعي · هندسة تجربة التعلّم</small><h2>لوحة تجربة الحصة</h2></div>'
+    +'<p>'+[SUBJ[S.subj],'الصف '+S.grade,S.title||'عنوان الدرس',S.period?'الحصة '+S.period:'',ar(S.mins)+' دقيقة','شعبة '+SIZE[S.size]].filter(Boolean).map(esc).join(' · ')+'</p></div>'
+    +'<div class="lb-bar">'+bar()+'</div>'
+    +'<table><thead><tr><th>حقل القالب</th><th>ما يجري، والتقنية بضابطها ومؤشرها</th><th>د</th></tr></thead><tbody>'
+    +S.segs.map((s,i)=>'<tr'+(i===S.peak?' class="pk"':'')+'><th>'+esc(s.n)+(i===S.peak?'<i>الذروة</i>':'')+'</th><td>'+(esc(s.what)||dash)
+      +S.techs.filter(x=>x.seg===i&&tech(x.n).t).map(techLine).join('')+'</td><td class="mn">'+((+s[k]||0)?ar(s[k]):esc(s.nt||'٠'))+'</td></tr>').join('')
+    +'</tbody><tfoot><tr><th colspan="2">المجموع</th><td class="mn">'+ar(total())+'</td></tr></tfoot></table>'
+    +(out.length?box('تقنيات خارج الحصة أو بلا حقل',out.map(techLine).join('')):'')
+    +'<div class="sh-grid">'+box('ناتج الارتقاء · '+LV[S.riseLv],'<p>'+(esc(S.rise)||dash)+'</p>')
+    +box('القيمة ومظهرها','<p>'+(esc(S.value)||dash)+(S.mazhar.trim()?' — '+esc(S.mazhar):'')+'</p>'+(S.value.trim()?'<p class="sm">تُستخرج في: '+esc(S.segs[Math.min(S.vseg,last)].n)+'</p>':''))
+    +box('بطاقة الخروج والعهد',(ex.length?'<ol>'+ex.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>':'<p>'+dash+'</p>')+(S.pledge.trim()?'<p class="sm">العهد: '+esc(S.pledge)+'</p>':''))
+    +box('المراجعة المتباعدة',dts.length?'<ul>'+dts.map(x=>'<li>'+esc(x.t)+'</li>').join('')+'</ul>':'<p>بعد يوم، فثلاثة أيام، فأسبوع، فشهر</p>')+'</div>'
+    +(S.needs.length?box('قرارات التصميم ومؤشراتها','<ul>'+S.needs.map(i=>D.needs[i]).map(n=>'<li><b>'+esc(n.t)+':</b> '+esc(n.dec)+' — يُرصد: '+esc(n.ind)+'</li>').join('')+'</ul>'):'')
+    +(S.rub.indexOf(0)<0?box('جودة التجربة · '+ar(rubTotal())+' من ٢٠','<p>'+D.rubric.map((d,i)=>esc(d.dim)+' '+ar(S.rub[i])).join(' · ')+'</p>'+(rubTarget()?'<p class="sm">'+esc(rubTarget())+'</p>':'')):'')
+    +'<p class="sh-foot">'+esc(FORM.t)+': '+esc(FORM.eff)+'.</p>';
+}
+function sheetText(){
+  const k=mk(),L=[],dts=reviewDates(),tl=x=>{const t=tech(x.n);return '   • '+t.name+' ('+t.basis+')'+(t.t?' — '+ar(techMin(t.n))+' د':'')+' — '+(t.both||('الضابط: '+t.ctl+'؛ المؤشر: '+t.ind))};
+  L.push('لوحة تجربة الحصة',[SUBJ[S.subj],'الصف '+S.grade,S.title,S.period?'الحصة '+S.period:'',ar(S.mins)+' دقيقة','شعبة '+SIZE[S.size]].filter(Boolean).join(' · '),'');
+  S.segs.forEach((s,i)=>{L.push(s.n+(i===S.peak?' (الذروة)':'')+' — '+((+s[k]||0)?ar(s[k])+' د':(s.nt||'٠')));if(s.what.trim())L.push('   '+s.what.trim());S.techs.filter(x=>x.seg===i&&tech(x.n).t).forEach(x=>L.push(tl(x)))});
+  const out=S.techs.filter(x=>x.seg<0||x.seg>=S.segs.length||!tech(x.n).t);if(out.length){L.push('','خارج الحصة أو بلا حقل:');out.forEach(x=>L.push(tl(x)))}
+  L.push('','ناتج الارتقاء ('+LV[S.riseLv]+'): '+S.rise.trim(),'القيمة: '+S.value.trim()+(S.mazhar.trim()?' — المظهر: '+S.mazhar.trim():''));
+  S.exit.filter(x=>x.trim()).forEach((x,i)=>L.push('سؤال الخروج '+ar(i+1)+': '+x.trim()));
+  if(S.pledge.trim())L.push('العهد: '+S.pledge.trim());
+  if(dts.length)L.push('المراجعة المتباعدة: '+dts.map(x=>x.t).join('، '));
+  S.needs.forEach(i=>{const n=D.needs[i];L.push('قرار ('+n.t+'): '+n.dec+' — يُرصد: '+n.ind)});
+  if(S.rub.indexOf(0)<0)L.push('جودة التجربة: '+ar(rubTotal())+' من ٢٠');
+  return L.join('\n');
+}
+
+/* ---------- الأحداث ---------- */
+function msg(t){const m=$('#lbMsg',root);if(m){m.textContent=t;clearTimeout(msg.t);msg.t=setTimeout(()=>{m.textContent=''},6000)}}
+function reindex(fn){S.peak=fn(S.peak,-1);S.vseg=Math.max(0,fn(S.vseg,0));S.techs.forEach(t=>{t.seg=fn(t.seg,-1)})}
+function onInput(e){
+  const t=e.target,d=t.dataset,chg=e.type==='change';
+  if(t.id==='lbFile'){if(chg&&t.files[0])readFile(t.files[0]);return}
+  if(d.k){
+    if(d.k==='subj'){if(t.value!==S.subj){const keep={grade:S.grade,title:S.title,period:S.period,mins:S.mins,size:S.size};S=Object.assign(blank(t.value),keep)}drawAll();return}
+    if(d.k==='mins'){S.mins=+t.value;drawAll();return}
+    if(d.k==='size'){S.size=t.value;draw(3);refresh();return}
+    S[d.k]=(d.k==='riseLv'||d.k==='vseg')?+t.value:t.value;
+  }else if(d.seg!=null){
+    const s=S.segs[+d.seg];
+    if(d.f==='m')s[mk()]=Math.max(0,Math.min(60,parseInt(lat(t.value),10)||0));else s[d.f]=t.value;
+    if(d.f==='n'&&chg){draw(3);draw(5)}
+  }else if(t.name==='peak'){S.peak=+t.value}
+  else if(d.tech){const n=+d.tech,i=S.techs.findIndex(x=>x.n===n);if(t.checked&&i<0)S.techs.push({n:n,seg:-1});if(!t.checked&&i>=0)S.techs.splice(i,1);draw(3)}
+  else if(d.tseg){const x=S.techs.find(x=>x.n===+d.tseg);if(x)x.seg=+t.value}
+  else if(d.need!=null||d.lim!=null){const a=d.need!=null?S.needs:S.lim,v=+(d.need!=null?d.need:d.lim),i=a.indexOf(v);if(t.checked&&i<0)a.push(v);if(!t.checked&&i>=0)a.splice(i,1);a.sort((x,y)=>x-y)}
+  else if(d.exit!=null){S.exit[+d.exit]=t.value}
+  else if(/^rub\d$/.test(t.name||'')){S.rub[+t.name.slice(3)]=+t.value}
+  else return;
+  refresh();
+}
+function onClick(e){
+  const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+  if(a==='preset'){S=fromPreset(D.presets.find(p=>p.id===b.dataset.id),true);drawAll();msg('حُمّل المثال؛ عدّله على درسك.')}
+  else if(a==='new'){S=blank(S.subj);drawAll()}
+  else if(a==='addseg'){const at=S.segs.length-1,n=S.segs.filter(s=>/^المحور/.test(s.n)).length;S.segs.splice(at,0,{n:'المحور '+(ORD[n]||ar(n+1)),what:'',m40:0,m45:0,nt:''});reindex((v,x)=>v>=at?v+1:v);drawAll()}
+  else if(a==='delseg'){const i=+b.dataset.i;S.segs.splice(i,1);reindex((v,x)=>v===i?x:v>i?v-1:v);drawAll()}
+  else if(a==='show'){$('#lbSheet',root).scrollIntoView({behavior:'smooth',block:'start'})}
+  else if(a==='print'){try{window.print()}catch(err){msg('الطباعة غير متاحة في هذه النافذة؛ افتح المختبر من موقع الدليل.')}}
+  else if(a==='copy'){const tx=sheetText(),ok=()=>msg('نُسخ نص اللوحة.'),no=()=>msg('تعذّر النسخ من هذه النافذة.');
+    try{navigator.clipboard.writeText(tx).then(ok,no)}catch(err){no()}}
+  else if(a==='export'){try{const u=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:'application/json'})),l=document.createElement('a');l.href=u;l.download='لوحة-تجربة-الحصة.json';document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);msg('صُدّر ملف اللوحة.')}catch(err){msg('تعذّر التصدير من هذه النافذة.')}}
+  else if(a==='import'){$('#lbFile',root).click()}
+}
+function readFile(f){const r=new FileReader();r.onload=()=>{try{const s=JSON.parse(r.result);if(!valid(s))throw 0;S=Object.assign(blank(s.subj),s);drawAll();msg('استُوردت اللوحة.')}catch(err){msg('الملف ليس لوحة صالحة من هذا المختبر.')}};r.readAsText(f)}
+
+/* ---------- المسار: #lab للمختبر، و#guide أو معرّف قسم للدليل ---------- */
+function route(){
+  const h=location.hash.slice(1),g=h==='guide'||/^lx-/.test(h),v=g?'guide':'lab';
+  document.documentElement.setAttribute('data-view',v);
+  root.hidden=g;$('#guideView').hidden=!g;
+  $$('.lb-nav a[data-view]').forEach(a=>{const on=a.dataset.view===v;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  if(g&&/^lx-/.test(h)){const el=document.getElementById(h);if(el)el.scrollIntoView({behavior:'instant',block:'start'})}else window.scrollTo({top:0,behavior:'instant'});
+}
+S=load()||blank('isl');
+if(S.lim==null)S.lim=[];if(S.needs==null)S.needs=[];
+root.addEventListener('input',onInput);root.addEventListener('change',onInput);root.addEventListener('click',onClick);
+drawAll();window.addEventListener('hashchange',route);route();
+})();
+</script></body></html>
