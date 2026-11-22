@@ -20,6 +20,6 @@ def sz(u):
 def fp(u): return 'index.html' if u == './' else (u + 'index.html' if u.endswith('/') else u)
 for g in d['groups'].values():
     g['n'] = len(g['u']); g['b'] = sum(sz(u) for u in g['u'])
-d['v'] = 115
+d['v'] = 116
 json.dump(d, open('offline.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 print({k: (g['n'], g['b']) for k, g in d['groups'].items()})
