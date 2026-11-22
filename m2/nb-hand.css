@@ -1,0 +1,81 @@
+.nbp{color:#1A1A2E}
+.nbp h1,.nbp h2,.nbp h3,.nbp h4{font-family:Mikhak,"Alm Sans Arabic",Tahoma,sans-serif!important}
+.nbp-h{background:repeating-linear-gradient(-45deg,#FFC93C 0 2mm,#1A1A2E 2mm 2.8mm) bottom/100% 1.2mm no-repeat!important;color:#4A4A5E}
+.nbp-hl b{color:#1A1A2E!important;font-family:Mikhak,"Alm Sans Arabic",sans-serif;font-weight:800}
+.nbp-hl span{border-inline-start-color:#E6DCC8!important}
+.nb-band{background:#1A1A2E!important;border-radius:5mm!important;box-shadow:-1.4mm 1.4mm 0 #FFC93C}
+.nb-band h2{font-weight:900!important}
+.nb-band p{color:#E6DCC8!important}
+.nb-bi{background:#FFC93C!important;border:.5mm solid #FFF6E5;color:#1A1A2E!important}
+.nb-bs{background:#FFC93C!important;color:#1A1A2E!important;border:.35mm solid #FFF6E5}
+.nb-h{font-family:Mikhak,"Alm Sans Arabic",sans-serif;font-weight:800!important;color:#1A1A2E!important}
+.nb-h::before{background:#FFC93C!important;box-shadow:0 0 0 .5mm #1A1A2E!important}
+.nb-ref b,.nb-note b{color:#2D4FCB!important}
+.nb-t{border:.5mm solid #1A1A2E!important;border-radius:2.6mm!important}
+.nb-t th{background:#1A1A2E!important;color:#FFF6E5!important;font-family:Mikhak,"Alm Sans Arabic",sans-serif}
+.nb-t th small{color:#E6DCC8!important}
+.nb-t.blue th{background:#4D7CFE!important;color:#1A1A2E!important}
+.nb-t td{border-top-color:#E6DCC8!important}
+.nb-t td+td,.nb-t th+th,.nb-t td[rowspan]+td{border-inline-start-color:#E6DCC8!important}
+.nb-t .rh{background:#FFF6E5!important}
+.nb-t .nb-sec{background:#FFF0C4!important;color:#1A1A2E!important;font-family:Mikhak,"Alm Sans Arabic",sans-serif}
+.nb-card2{border:.5mm solid #1A1A2E!important;border-radius:3mm!important;box-shadow:-.9mm .9mm 0 #1A1A2E}
+.nb-card2 h2,.nb-card2 h3,.nb-card2 h4{color:#1A1A2E!important}
+.nb-note{background:#E3EBFF!important;border:.35mm solid #1A1A2E;color:#1A1A2E!important}
+.nb-hint{background:#FFF0C4!important;color:#1A1A2E!important;border:.35mm dashed #1A1A2E}
+.nb-quote{border-inline-start:1.6mm solid #FF7A5C!important;background:#FFE3DB!important}
+.nb-eye{background:#FFF6E5!important;border:.35mm solid #1A1A2E}
+.nb-ol li>b{background:#FFC93C!important;color:#1A1A2E!important;border:.3mm solid #1A1A2E}
+.nb-ul li::before{background:#1A1A2E!important}
+.nbx{color:#13806A!important}
+span.nbf,.nb-box{border-bottom-color:#B8B2A6!important}
+.nbp-f b{background:#FFC93C!important;color:#1A1A2E!important;border:.35mm solid #1A1A2E}
+.nbc-sky{background:#1A1A2E!important}
+.nbc-sky i{border-color:rgba(255,201,60,.45)!important}
+.nbc-yr{background:#FFC93C!important;color:#1A1A2E!important}
+.cal-top{position:relative;height:58mm;border:.6mm solid #1A1A2E;border-radius:6mm;box-shadow:-1.4mm 1.4mm 0 #1A1A2E;overflow:hidden;display:flex;align-items:center;gap:2mm;padding:4mm 6mm;flex:none;margin-inline-start:1.4mm}
+.cal-txt{flex:1;display:flex;flex-direction:column;gap:1.6mm;position:relative;z-index:1;min-width:0}
+.cal-mn{margin:0;font-family:Mikhak,"Alm Sans Arabic",sans-serif!important;font-weight:900;font-size:46pt!important;line-height:1.05!important;color:#fff!important;-webkit-text-stroke:.6mm #1A1A2E;paint-order:stroke fill;text-shadow:-.5mm .5mm 0 #1A1A2E,-1mm 1mm 0 #1A1A2E,-1.5mm 1.5mm 0 #1A1A2E}
+.cal-yr{align-self:flex-start;background:#fff;border:.45mm solid #1A1A2E;border-radius:999px;padding:.4mm 3.4mm;font-family:Mikhak,"Alm Sans Arabic",sans-serif;font-weight:900;font-size:12pt;line-height:1.4;box-shadow:-.6mm .6mm 0 #1A1A2E}
+.cal-sub{margin:0;font-family:Mikhak,"Alm Sans Arabic",sans-serif;font-weight:800;font-size:9pt;color:#1A1A2E}
+.cal-art{width:96mm;height:54mm;flex:none;position:relative;z-index:1}
+.cal-wd{display:grid;grid-template-columns:repeat(7,1fr);font-family:Mikhak,"Alm Sans Arabic",sans-serif;font-weight:900;font-size:9pt;text-align:center;margin-top:3.4mm;flex:none}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);border:.5mm solid #1A1A2E;border-radius:3mm;overflow:hidden;flex:none;margin-top:1.2mm;background:#fff}
+.cal-d{position:relative;border-inline-start:.3mm solid #1A1A2E;border-top:.3mm solid #1A1A2E;padding:1.1mm 1.4mm;display:flex;flex-direction:column;gap:.6mm;min-height:0;overflow:hidden}
+.cal-d:nth-child(7n+1){border-inline-start:0}
+.cal-d:nth-child(-n+7){border-top:0}
+.cal-d.we{background:#FFF6E5}
+.cal-d.out{background:repeating-linear-gradient(-45deg,#fff 0 2mm,#FBEFD6 2mm 2.6mm)}
+.cal-d b{font-family:Mikhak,"Alm Sans Arabic",sans-serif;font-weight:900;font-size:12.5pt;line-height:1}
+.cal-d span{font-size:6.8pt;font-weight:700;line-height:1.25;color:#1A1A2E}
+.cal-wk{position:absolute;inset-inline-end:1mm;top:1.1mm;font-style:normal;font-size:5.6pt;font-weight:800;border:.3mm solid #1A1A2E;border-radius:999px;padding:0 1.2mm;background:#fff;line-height:1.5}
+.cal-leg{display:flex;flex-wrap:wrap;gap:1.4mm 3mm;font-size:7pt;font-weight:700;margin-top:2mm;flex:none}
+.cal-leg i{display:inline-block;width:3.2mm;height:3.2mm;border:.3mm solid #1A1A2E;border-radius:1mm;vertical-align:-.6mm;margin-inline-end:1mm}
+.cal-leg-we i{background:#FFF6E5}
+.cal-ft{display:grid;grid-template-columns:1fr 1.45fr 1fr;gap:3mm;flex:none;margin-top:3mm}
+.cal-box{border:.45mm solid #1A1A2E;border-radius:3mm;padding:2mm 2.6mm;font-size:7.6pt;line-height:1.5;background:#fff}
+.cal-box h4{font-family:Mikhak,"Alm Sans Arabic",sans-serif!important;font-size:9pt!important;font-weight:900!important;margin:0 0 1mm!important;color:#1A1A2E!important}
+.cal-v{background:#FFF0C4}
+.cal-val{font-family:Mikhak,"Alm Sans Arabic",sans-serif;font-weight:900;font-size:11pt;line-height:1.35;margin-bottom:.8mm!important}
+.pc-top{position:relative;height:46mm;border:.6mm solid #1A1A2E;border-radius:6mm;box-shadow:-1.4mm 1.4mm 0 #1A1A2E;overflow:hidden;display:flex;align-items:center;gap:2mm;padding:3mm 6mm;flex:none;margin-inline-start:1.4mm}
+.pc-top .cal-art{width:76mm;height:42mm}
+.pc-txt{flex:1;display:flex;flex-direction:column;gap:1.4mm;position:relative;z-index:1;min-width:0}
+.pc-mn{margin:0;font-family:Mikhak,"Alm Sans Arabic",sans-serif!important;font-weight:900;font-size:24pt!important;line-height:1.15!important;color:#fff!important;-webkit-text-stroke:.45mm #1A1A2E;paint-order:stroke fill;text-shadow:-.4mm .4mm 0 #1A1A2E,-.8mm .8mm 0 #1A1A2E,-1.2mm 1.2mm 0 #1A1A2E}
+.pc-leg{margin-top:2.6mm}
+.pc-b{display:flex;flex-direction:column;gap:1.2mm;margin-top:1.6mm;flex:none}
+.pc-mo{display:flex;align-items:center;gap:2mm;margin-top:1mm}
+.pc-mo span{font-family:Mikhak,"Alm Sans Arabic",sans-serif;font-weight:900;font-size:9.5pt;border:.45mm solid #1A1A2E;border-radius:999px;padding:.2mm 4mm;box-shadow:-.6mm .6mm 0 #1A1A2E;line-height:1.5}
+.pc-mo i{flex:1;height:0;border-top:.35mm dashed #1A1A2E}
+.pc-row{display:grid;grid-template-columns:23mm 1fr 17mm;gap:1.4mm;align-items:stretch}
+.pc-wk{border:.4mm solid #1A1A2E;border-radius:2.4mm;background:#fff;padding:1mm 1.6mm;display:flex;flex-direction:column;justify-content:center}
+.pc-wk b{font-family:Mikhak,"Alm Sans Arabic",sans-serif;font-weight:900;font-size:8.6pt;line-height:1.3}
+.pc-wk small{font-size:6.6pt;color:#4A4A5E;font-weight:700}
+.pc-ls{display:flex;gap:1.4mm;min-width:0}
+.pc-l{flex:1;min-width:0;border:.4mm solid #1A1A2E;border-radius:2.4mm;padding:1mm 1.8mm;display:flex;flex-direction:column;gap:.2mm;position:relative}
+.pc-l small{font-size:6.2pt;font-weight:800;color:#1A1A2E;opacity:.85}
+.pc-l b{font-size:7.9pt;font-weight:700;line-height:1.3;color:#1A1A2E}
+.pc-l em{font-style:normal;font-size:6.3pt;color:#1A1A2E;line-height:1.35}
+.pc-hz{position:absolute;inset-inline-end:1.2mm;top:1mm;font-style:normal;font-size:5.8pt;font-weight:800;background:#fff;border:.3mm solid #1A1A2E;border-radius:999px;padding:0 1.4mm}
+.pc-x{border:.4mm dashed #1A1A2E;border-radius:2.4mm;padding:.8mm 1.2mm;display:flex;flex-direction:column;font-size:6.4pt;background:#fff}
+.pc-x small{font-weight:800;color:#4A4A5E}
+.pc-x .nbf{min-width:0!important;border-bottom:0!important;font-size:6.8pt}

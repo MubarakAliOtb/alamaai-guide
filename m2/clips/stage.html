@@ -1,0 +1,19 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Mikhak;src:url(../../fonts/Mikhak-DS1-Black.woff2) format("woff2");font-weight:900}
+@font-face{font-family:Mikhak;src:url(../../fonts/Mikhak-DS1-ExtraBold.woff2) format("woff2");font-weight:800}
+@font-face{font-family:Mikhak;src:url(../../fonts/Mikhak-DS1-Bold.woff2) format("woff2");font-weight:700}
+html,body{margin:0;background:#FFF6E5;overflow:hidden}
+svg{display:block;width:1200px;height:900px}
+text{font-family:Mikhak,sans-serif;direction:rtl;dominant-baseline:central}
+</style></head><body>
+<svg id="S" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg"></svg>
+<script src="engine.js"></script>
+<script src="scenes.js"></script>
+<script>
+Promise.all(['900','800','700'].map(w=>document.fonts.load(w+' 40px Mikhak','أبجد 0123'))).then(()=>{
+  const k=new URLSearchParams(location.search).get('s');
+  bg(); R=G(S,{id:'R'}); SCENES[k](); render(0); window.READY=true;
+}).catch(e=>{window.ERR=String(e)});
+</script>
+</body></html>
