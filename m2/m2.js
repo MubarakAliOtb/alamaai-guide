@@ -22,8 +22,20 @@
     for (var i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', String(bs[i].getAttribute('data-m2set') === m));
     if (m === '2') M2Tag.start(); else M2Tag.stop();
     digits(m === '2');
+    vids(m === '2');
     try { window.dispatchEvent(new CustomEvent('almmodel', { detail: { model: m, user: !!user } })); } catch (e) {}
   }
+  /* المقاطع المكتوبة في الصفحة (الحلول البصرية): نسخة النموذج 2 في vid/m2 */
+  function vids(on) {
+    var vs = document.querySelectorAll('video[src*="vid/"]');
+    for (var i = 0; i < vs.length; i++) {
+      var v = vs[i], s = v.getAttribute('src'), n = on ? s.replace(/(^|\/)vid\/(?!m2\/)/, '$1vid/m2/') : s.replace(/(^|\/)vid\/m2\//, '$1vid/');
+      if (n === s) continue;
+      var play = !v.paused; v.setAttribute('src', n);
+      if (play) { v.load(); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function () { vids(R.getAttribute('data-model') === '2'); });
   var M2MAP = {'#0D1B3D':'#1A1A2E','#0A1530':'#1A1A2E','#16264D':'#1A1A2E','#1E3A8A':'#1A1A2E','#334A7A':'#4A4A5E','#4A5878':'#4A4A5E','#4D5B7C':'#4A4A5E',
     '#2563EB':'#4D7CFE','#1D4ED8':'#2D4FCB','#14B8A6':'#2EC4A0','#0B7C70':'#13806A','#5EEAD4':'#6FDCC0','#5FD3C5':'#6FDCC0',
     '#FF7A1A':'#FF7A5C','#FFB37A':'#FFC93C','#FFB26B':'#FFC93C','#B54E00':'#B23A1E','#EEF4FF':'#FFF6E5','#DCE7FF':'#E3EBFF','#D5E0F5':'#E6DCC8','#D5E0F2':'#E6DCC8','#B9C9E8':'#D8D2C4','#8DB0F7':'#93AEFF'};
