@@ -2303,7 +2303,7 @@ html[data-model="2"]{
   --ink:#1E1B4B; --ink2:#5B5880; --ink3:#6E6B8F; --line:#E7E5F2;
   --brand:#6D28D9; --on-brand:#FFFFFF; --anchor:#1E1B4B; --on-anchor:#FFFFFF;
   --t-brand:#6D28D9; --t-accent:#047857; --t-teal:#047857;
-  --accent:#6D28D9; --accent-ink:#FFFFFF; --focus:#6D28D9;
+  --accent:#6D28D9; --accent-ink:#FFFFFF; --on-accent:#FFFFFF; --focus:#6D28D9;
   --sadu:#6D28D9; --ochre:#047857; --indigo:#6D28D9; --teal:#047857; --plum:#6D28D9;
   --ok:#047857; --okbg:#ECFDF5; --warnbg:#F5F3FF; --warnline:#C4B5FD; --infobg:#F7F6FB; --hl:#EDE9FE;
   --d1:#6D28D9; --d2:#6D28D9; --d3:#6D28D9; --d4:#6D28D9; --d5:#6D28D9; --d6:#6D28D9; --d7:#6D28D9; --d8:#6D28D9; --d9:#6D28D9;
@@ -2449,6 +2449,15 @@ html[data-model="2"] .lx .lx-text{color:var(--s-ink)}
 html[data-model="2"] .lx .lx-ttl b{font-weight:700}
 html[data-model="2"] .lx .lx-badge,html[data-model="2"] .lx .lx-kind>span{border:0;box-shadow:none}
 html[data-model="2"] .lx .lx-kind{font-weight:700;color:var(--s-pri)}
+/* غلاف الحصة في العرض: الصورة مظلّلة بالنيلي، والنص فوقها فاتح (كان يرث لون النص الداكن فلا يُقرأ) */
+html[data-model="2"] .lx .lx-body.lx-b-cover{background:#1E1B4B}
+html[data-model="2"] .lx .lx-b-cover :is(.lx-prompt,.lx-title,.lx-kind){color:#FFFFFF}
+html[data-model="2"] .lx .lx-b-cover .lx-text{color:#E4E2F7}
+html[data-model="2"] .lx .lx-b-cover .lx-kind small{color:#D4D1E6;border-color:rgba(255,255,255,.35)}
+html[data-model="2"] .lx .lx-b-cover .lx-shade{background:linear-gradient(to left,rgba(20,18,58,.95) 0%,rgba(20,18,58,.86) 38%,rgba(20,18,58,.42) 68%,rgba(20,18,58,.12) 100%)}
+@media (max-width:820px),(max-aspect-ratio:1/1){html[data-model="2"] .lx .lx-b-cover .lx-shade{background:rgba(20,18,58,.86)}}
+/* أرقام الشاشات في نافذة «شاشات العرض» كانت باهتة على الأبيض */
+html[data-model="2"] .lx .lx-th > i{color:var(--s-ink3)}
 html[data-model="2"] .lx .lx-chip{border:0;font-weight:700;background:var(--s-pri-50);color:var(--s-pri-d)}
 html[data-model="2"] .lx .lx-chip.lx-skill{background:var(--s-acc-50);color:var(--s-acc-ink)}
 html[data-model="2"] .lx .lx-tb,html[data-model="2"] .lx .lx-timer{border:1px solid rgba(255,255,255,.25)!important;background:transparent}

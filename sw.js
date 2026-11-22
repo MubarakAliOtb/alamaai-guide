@@ -9,7 +9,7 @@
    - لا تُعترض: الحقائب التدريبية وملفات الدروس PDF (كبيرة، وتُنزَّل إلى الجهاز عند طلبها)، ولا أي موقع آخر، ولا أي طلب غير GET.
    اسم المخزن ثابت (alm-v1) فلا يضيع المحفوظ عند تحديث هذا الملف؛ يتغير الاسم فقط إن تغيّرت بنية المحفوظ. لا يُحفظ فيه شيء من بيانات المعلم ولا طلابه. */
 'use strict';
-const SW_VER = '115';
+const SW_VER = '116';
 const CACHE = 'alm-v1';
 const ROOT = new URL('./', self.location).pathname;
 const CDN = ['https://cdnjs.cloudflare.com', 'https://cdn.jsdelivr.net'];
