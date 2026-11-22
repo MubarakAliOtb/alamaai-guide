@@ -1,9 +1,10 @@
 # ينتج نسخة «نموذج 2» من كل ملف تحضير مصوّر: ls/fN/m2/<id>.pdf، بتبديل ألوان النموذج 1 بألوان النموذج 2 (البنية نفسها).
 import pikepdf, glob, os
 def h(c): return tuple(int(c[i:i+2], 16) / 255 for i in (1, 3, 5))
-FILL = {'#D5E0F2': '#FFF0C4', '#0D1B3D': '#1A1A2E', '#4A5878': '#4A4A5E', '#1D4ED8': '#2D4FCB', '#0B7C70': '#13806A', '#2563EB': '#2D4FCB',
-        '#DCE7FF': '#FFC93C', '#EEF4FF': '#FFF6E5', '#B54E00': '#B23A1E', '#14B8A6': '#2EC4A0', '#FF7A1A': '#FF7A5C', '#B9CDFB': '#E6DCC8'}
-STROKE = dict(FILL, **{'#D5E0F2': '#1A1A2E', '#DCE7FF': '#1A1A2E', '#B9CDFB': '#1A1A2E', '#2563EB': '#4D7CFE'})
+# النموذج 2 البسيط: النيلي للنص، والبنفسجي للعناوين والروابط، والنعناعي (بدرجته الداكنة للنص) للتمييز، وصبغات فاتحة للخلفيات والخطوط
+FILL = {'#0D1B3D': '#1E1B4B', '#4A5878': '#5B5880', '#1D4ED8': '#6D28D9', '#2563EB': '#6D28D9', '#0B7C70': '#047857', '#B54E00': '#5B21B6',
+        '#EEF4FF': '#F7F6FB', '#DCE7FF': '#EDE9FE', '#D5E0F2': '#E7E5F2', '#B9CDFB': '#DDD6FE', '#14B8A6': '#34D399', '#FF7A1A': '#34D399'}
+STROKE = dict(FILL)
 def key(ops): return '#%02X%02X%02X' % tuple(round(float(x) * 255) for x in ops)
 n = 0
 for f in sorted(glob.glob('ls/f[6-9]/*.pdf')):

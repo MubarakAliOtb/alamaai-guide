@@ -313,7 +313,7 @@ SCENES.proj = () => {
 SCENES.distance = () => {
   deco([[1112, 92, 's', C.white], [88, 92, 'd', C.pink]]);
   chip(600, 92, 'كلما بعُد القارئ كبُر الحرف', { fill: C.yel, size: 44, h: 92, at: .3 });
-  const cv = document.createElement('canvas').getContext('2d'); cv.font = '900 200px Mikhak'; const m = cv.measureText('أ'), inkH = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
+  const cv = document.createElement('canvas').getContext('2d'); cv.font = '700 200px "Alm Sans Arabic"'; const m = cv.measureText('أ'), inkH = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
   const COL = [[930, 3, 2.8, '2.8', C.mint, 2.2], [600, 6, 6.0, '6.0', C.sky, 3.3], [270, 9, 9.1, '9.1', C.pink, 4.4]], bot = 528;
   path('M1130 690H80', { sw: 6, at: 1.0, dur: .7 });
   COL.forEach(([x, dm, cm, lab, f, ta], i) => {
