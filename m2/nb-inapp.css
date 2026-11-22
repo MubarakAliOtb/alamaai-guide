@@ -149,6 +149,7 @@ html[data-model="2"] .nb-band p, html[data-model="2"] .nb-mt p{color:#5B5880!imp
 html[data-model="2"] .nb-cvh span.nbf{color:#1E1B4B!important;border-bottom-color:#C4B5FD!important}
 html[data-model="2"] .nb-bi{background:#6D28D9!important;color:#fff!important;border:0!important}
 html[data-model="2"] .nb-bs{background:#fff!important;color:#6D28D9!important;border:0!important}
+html[data-model="2"] .nb-in-dark{color:#6D28D9!important;border-bottom-color:#C4B5FD!important}
 html[data-model="2"] .nb-h{color:#1E1B4B!important}
 html[data-model="2"] .nb-h::before{background:#6D28D9!important;box-shadow:none!important;width:1.8mm!important;height:1.8mm!important}
 html[data-model="2"] .nb-ref b, html[data-model="2"] .nb-note b{color:#6D28D9!important}
@@ -177,10 +178,13 @@ html[data-model="2"] .nb-wkh{background:#F5F3FF!important;color:#1E1B4B!importan
 html[data-model="2"] .nb-wkh span{color:#5B5880!important}
 html[data-model="2"] .nb-stats div{background:#F5F3FF!important;color:#1E1B4B!important}
 html[data-model="2"] .nb-stats b{color:#6D28D9!important}
+html[data-model="2"] .nb-stats span{color:#5B5880!important}
+html[data-model="2"] .nb-cvh .nb-photo{color:#6E6B8F!important}
 html[data-model="2"] .nb-load{background:#F5F3FF!important;color:#1E1B4B!important}
 html[data-model="2"] .nb-load h4, html[data-model="2"] .nb-load h3, html[data-model="2"] .nb-load h2{color:#6D28D9!important}
 html[data-model="2"] .nb-load h4 em, html[data-model="2"] .nb-load h3 em, html[data-model="2"] .nb-load h2 em{color:#047857!important}
 html[data-model="2"] .nb-load b{color:#1E1B4B!important}
+html[data-model="2"] .nb-load p{color:#5B5880!important}
 html[data-model="2"] .nb-gdb{color:#1E1B4B!important}
 html[data-model="2"] .nb-gdb.a{background:#F5F3FF!important}
 html[data-model="2"] .nb-gdb.b{background:#ECFDF5!important}

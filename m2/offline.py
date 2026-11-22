@@ -1,18 +1,17 @@
 # يحدّث offline.json (قائمة ما يُحفظ للعمل بلا إنترنت وأحجامه) بعد إضافة ملفات النموذج 2.
 import json, os, glob
 d = json.load(open('offline.json', encoding='utf-8'))
-# النموذج 2 البسيط: خط واحد (Alm Sans) بأرقامه الإنجليزية، وشعاره، وأيقونات البلاطات، وصور رؤوس الأقسام
-add = sorted(glob.glob('fonts/m2d-alm-*.woff2')) + ['m2/logo.svg', 'm2/logo.png', 'm2/lv3-s.webp'] + sorted(glob.glob('m2/img/*.webp'))
+# التصميم البسيط: خط واحد (Alm Sans) بأرقامه الإنجليزية، وشعاره، وأيقونات البلاطات، وصور الأقسام،
+# وأغلفة المقاطع (vid/m2/*.webp للنهار و*-d.webp لليل) لأنها تظهر في المنشورات قبل تشغيل المقطع
+add = sorted(glob.glob('fonts/m2d-alm-*.woff2')) + ['m2/logo.svg', 'm2/logo.png', 'm2/lv3-s.webp'] + sorted(glob.glob('m2/img/*.webp')) + sorted(glob.glob('vid/m2/*.webp'))
 core = d['groups']['core']['u']
 # ما لم يعد يُستعمل منذ النمط البسيط: خط ميخك وأرقامه، وأيقونات النمط السابق، ومجلد الشخصيات
 OLD = lambda u: u.startswith(('fonts/Mikhak-', 'fonts/m2d-mik-', 'm2/char/')) or u == 'm2/lv3-m2.webp'
-core[:] = [u for u in core if not OLD(u)]
+core[:] = [u for u in core if not OLD(u) and u != 'img/lv3e.webp']
 for f in add:
     if f not in core: core.append(f)
-# مقاطع النموذج 2 مع مقاطع النموذج 1 في مجموعة «المقاطع القصيرة»
-vid = d['groups']['vid']['u']
-for f in sorted(glob.glob('vid/m2/*.mp4')):
-    if f not in vid: vid.append(f)
+# «المقاطع القصيرة»: مقاطع التصميم الحالي وحدها (vid/m2)؛ مقاطع النموذج السابق في vid/ لا تُستعمل
+d['groups']['vid']['u'] = sorted(glob.glob('vid/m2/*.mp4'))
 CDN = {'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js': 198689, 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js': 97630, 'https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js': 477529}
 def sz(u):
     if u in CDN: return CDN[u]
@@ -20,6 +19,6 @@ def sz(u):
 def fp(u): return 'index.html' if u == './' else (u + 'index.html' if u.endswith('/') else u)
 for g in d['groups'].values():
     g['n'] = len(g['u']); g['b'] = sum(sz(u) for u in g['u'])
-d['v'] = 113
+d['v'] = 114
 json.dump(d, open('offline.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 print({k: (g['n'], g['b']) for k, g in d['groups'].items()})

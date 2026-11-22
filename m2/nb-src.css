@@ -31,7 +31,7 @@
 .nb-t td{padding:1.1mm 1.8mm;border-top:.3mm solid #D5E0F2;vertical-align:top}
 .nb-t td+td,.nb-t th+th,.nb-t td[rowspan]+td{border-inline-start:.3mm solid #D5E0F2}.nb-t thead tr+tr th{border-top:.3mm solid #334A7A}
 .nb-t .rh{background:#EEF4FF;font-weight:700}.nb-t td p+p{margin-top:.8mm}
-.nb-t .nb-sec{background:#DCE7FF;font-weight:700;color:#1E3A8A;text-align:center;padding:.8mm}
+.nb-t .nb-sec{background:#DCE7FF;font-weight:700;color:#1E3A8A;text-align:right;padding:.8mm}
 .nb-rows td{height:6.6mm}.nb-tall td{height:11mm}.nb-ro td{height:8.6mm}
 .nb-mini{font-size:7.8pt}.nb-mini td,.nb-mini th{padding:.8mm 1.6mm}
 .nb-ul li{position:relative;padding-inline-start:3.4mm;margin-top:.5mm}.nb-ul li::before{content:"";position:absolute;inset-inline-start:0;top:1.9mm;width:1.5mm;height:1.5mm;border-radius:50%;background:#2563EB}
@@ -89,7 +89,7 @@ span.nbf{display:inline-block;min-width:24mm;max-width:100%;border-bottom:.3mm d
 .nb-wk ul{padding:1mm 2mm;display:flex;flex-direction:column;gap:.5mm;flex:1}.nb-wk li em{color:#1D4ED8;font-weight:700;margin-inline-end:1mm}.nb-wk li em.q{color:#0B7C70}.nb-wk li small{color:#4A5878}
 .nb-wk .nb-box{font-size:6.9pt;min-height:4.4mm;border:0;background:#FFF3E8;color:#B54E00;font-weight:700;padding:.5mm 2mm;line-height:1.35}.nb-wk .nb-box:empty{background:transparent}
 .nb-wkx{font-size:6.8pt;color:#4A5878;padding:.6mm 2mm 1mm;border-top:.3mm solid #EEF4FF}.nb-wkx span.nbf{min-width:20mm;font-size:6.8pt}
-.nb-wke{background:linear-gradient(225deg,#EEF4FF 0%,#E7F8F5 55%,#FFF3E8 100%)}.nb-wke p{flex:1;display:grid;place-items:center;text-align:center;font-weight:700;font-size:8.4pt;padding:2mm;min-height:18mm}.nb-wke p small{font-weight:400;color:#4A5878}
+.nb-wke{background:linear-gradient(225deg,#EEF4FF 0%,#E7F8F5 55%,#FFF3E8 100%)}.nb-wke p{flex:1;display:grid;place-items:center;text-align:right;font-weight:700;font-size:8.4pt;padding:2mm;min-height:18mm}.nb-wke p small{font-weight:400;color:#4A5878}
 .nb-plan td{padding:.8mm 1.6mm;font-size:7.7pt}.nb-plan th{font-size:7.6pt}.nb-wkc b{display:block;font-size:7.8pt}.nb-wkc small{font-size:6.6pt;color:#4A5878;font-weight:400}
 .nb-hds{display:flex;flex-direction:column;gap:1.8mm;flex:none}.nb-hd{display:grid;grid-template-columns:9mm 1fr 34mm;border:.3mm solid #C9D6EE;border-radius:2.6mm;overflow:hidden}.nb-hdn{background:#0D1B3D;color:#fff;display:grid;place-items:center;font-size:12pt}
 .nb-hdt{padding:1.6mm 2.6mm;display:flex;flex-direction:column;gap:.6mm}.nb-hdi{font-size:7.6pt;color:#4A5878}.nb-hdx{font-size:10.6pt;line-height:1.85;font-weight:700;color:#0D1B3D}.nb-hdr{font-size:7pt;color:#4A5878}
