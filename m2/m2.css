@@ -1,20 +1,7 @@
-/* ===== نموذج 2: واجهة بسيطة =====
+/* ===== التصميم البسيط: التصميم الوحيد للدليل =====
    ثلاثة ألوان بوظيفة ثابتة لكل منها: نيلي #1E1B4B للنصوص، وبنفسجي #6D28D9 للإجراء الرئيسي والروابط،
    ونعناعي #34D399 لعنصر تمييز واحد. خط واحد (Alm Sans Arabic)، وأسطح بيضاء بحدود رفيعة، بلا ظلال ولا زخارف ولا حركة زائدة.
-   كل القواعد تحت html[data-model="2"]، فلا يتأثر النموذج 1 بشيء. */
-
-/* ---------- مبدّل النموذجين (في النموذجين) ---------- */
-.m2-menu-sw{display:none}
-@media (max-width:860px){
-  .top .m2-switch:not(.m2-in-menu){display:none}
-  .m2-menu-sw{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 12px;margin-bottom:6px;border-bottom:1px solid var(--line);font-weight:700;font-size:14px}
-  .m2-menu-sw .m2-switch button{min-width:44px;min-height:40px;font-size:15px}
-}
-.m2-switch{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--bg);flex:none}
-.m2-switch button{font:inherit;font-size:13px;font-weight:700;border:0;background:transparent;color:var(--ink2);padding:6px 11px;border-radius:999px;cursor:pointer;min-height:32px;white-space:nowrap}
-.m2-switch button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
-.m2-switch .m2-w{margin-inline-end:3px}
-@media (max-width:860px){.m2-switch .m2-w{display:none}.m2-switch button{padding:6px 10px;min-width:34px}}
+   القواعد كلها تحت html[data-model="2"] (ثابتة في وسم الصفحة) فوق الأنماط الأساسية للصفحة. */
 
 html[data-model="2"]{
   color-scheme:light;
@@ -60,9 +47,6 @@ html[data-model="2"] .nav a:hover{background:var(--s-pri-50);color:var(--s-ink)}
 html[data-model="2"] .nav a[aria-current="page"]{background:var(--s-pri-50);color:var(--s-pri);box-shadow:none}
 html[data-model="2"] :is(.search-btn,.fb-btn,.n5-more-b){border:1px solid var(--s-line2)!important;background:#FFFFFF!important;color:var(--s-ink)!important;box-shadow:none!important}
 html[data-model="2"] .theme-btn,html[data-model="2"] #themeBtn{display:none!important}
-html[data-model="2"] .m2-switch{border:1px solid var(--s-line2);background:#FFFFFF}
-html[data-model="2"] .m2-switch button{color:var(--s-ink2)}
-html[data-model="2"] .m2-switch button[aria-pressed="true"]{background:var(--s-pri);color:#FFFFFF}
 html[data-model="2"] .n5-menu{border:1px solid var(--s-line)!important;border-radius:16px!important;box-shadow:var(--s-lift)!important;background:#FFFFFF!important}
 html[data-model="2"] .n5-menu a{font-weight:700;color:var(--s-ink)}
 html[data-model="2"] .n5-menu a:hover{background:var(--s-pri-50)}
@@ -371,3 +355,8 @@ html[data-model="2"] .b-top .b-tab[aria-current="page"]{background:#FFFFFF!impor
 html[data-model="2"] .b-top .b-tab[aria-current="page"] *{color:var(--s-pri)!important}
 html[data-model="2"] .b-top :is(.b-tab,button[aria-pressed]){color:var(--s-ink2)!important}
 html[data-model="2"] .b-top button[aria-pressed="true"]{background:#FFFFFF!important;color:var(--s-ink)!important;box-shadow:0 0 0 1px var(--s-line2)!important}
+
+/* ===== المطبوعات: النصوص من اليمين إلى اليسار، ورأس «خريطة الدرس» فاتح ===== */
+html[data-model="2"] .lm-top{background:var(--s-pri-50)!important;color:var(--s-ink)!important;justify-items:start!important;text-align:right!important;border:1px solid var(--s-pri-100)}
+html[data-model="2"] .lm-top :is(h2,h3,p,span,b,strong){color:var(--s-ink)!important}
+html[data-model="2"] .lm-top small{color:var(--s-pri)!important}

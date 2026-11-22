@@ -1,8 +1,9 @@
-/* نموذجا التصميم: «نموذج 1» (الافتراضي) و«نموذج 2». الاختيار محفوظ في المتصفح (alm:model).
-   يُحمَّل في رأس الصفحة قبل رسمها، فلا يومض النموذج الآخر. في النموذج 2 لا يوجد وضع داكن. */
+/* طبقة التصميم البسيط، وهي التصميم الوحيد للدليل منذ إلغاء النموذج السابق.
+   data-model="2" ثابت في وسم <html> وتطبّقه هذه الطبقة أيضًا عند التحميل؛ ولا وضع داكن.
+   (اسم «النموذج 2» باقٍ في الشيفرة لأن قواعد الطبقة كلها معلّقة به.) */
 (function () {
   var R = document.documentElement, K = 'alm:model';
-  function saved() { try { return localStorage.getItem(K) === '2' ? '2' : '1'; } catch (e) { return '1'; } }
+  function saved() { try { localStorage.removeItem(K); } catch (e) {} return '2'; }
   function userTheme() { try { var t = JSON.parse(localStorage.getItem('dms:theme') || 'null'); return t === 'dark' || t === 'light' ? t : ''; } catch (e) { return ''; } }
   var forcing = false;
   function forceLight() { if (R.getAttribute('data-model') === '2' && R.getAttribute('data-theme') !== 'light') { forcing = true; R.setAttribute('data-theme', 'light'); forcing = false; } }
@@ -18,8 +19,6 @@
     if (m === '2') forceLight();
     else { var t = userTheme(); if (t) R.setAttribute('data-theme', t); else R.removeAttribute('data-theme'); }
     setMeta(m);
-    var bs = document.querySelectorAll('[data-m2set]');
-    for (var i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', String(bs[i].getAttribute('data-m2set') === m));
     if (m === '2') M2Tag.start(); else { M2Tag.stop(); mostOff(); }
     digits(m === '2');
     vids(m === '2');
@@ -81,11 +80,7 @@
   window.m2Digits = function (s) { return String(s == null ? '' : s).replace(/[\u0660-\u0669]/g, function (c) { return c.charCodeAt(0) - 0x660; }).replace(/[\u06F0-\u06F9]/g, function (c) { return c.charCodeAt(0) - 0x6F0; }).replace(/\u066A/g, '%').replace(/\u066B/g, '.').replace(/\u066C/g, ','); };
   window.m2Num = function (s) { return R.getAttribute('data-model') === '2' ? window.m2Digits(s) : s; };
   window.almModel = function () { return R.getAttribute('data-model') === '2' ? 2 : 1; };
-  window.almSetModel = function (m) {
-    m = String(m) === '2' ? '2' : '1';
-    try { localStorage.setItem(K, m); } catch (e) {}
-    apply(m, true);
-  };
+  window.almSetModel = function () { apply('2', true); };
   new MutationObserver(function () { if (!forcing) forceLight(); }).observe(R, { attributes: true, attributeFilter: ['data-theme'] });
 
   /* وسم البطاقات: كل صندوق منحنٍ بحدّ وخلفية فاتحة يأخذ في النموذج 2 حدًّا أسود وظلًّا صلبًا،
@@ -93,7 +88,7 @@
   var M2Tag = (function () {
     var on = false, mo = null, queue = [], sched = false;
     var SEL = 'input,textarea,select,div,section,article,li,details,label,a,figure,aside,form,dl,fieldset,nav,ul,ol,blockquote,output,summary';
-    var SKIP = '.sheet,.ps,.nbp,[class*="nbx"],.m2-switch,header.top,.no-m2,svg,dialog.no-m2,.tb-bar,.tb-seg';
+    var SKIP = '.sheet,.ps,.nbp,[class*="nbx"],header.top,.no-m2,svg,dialog.no-m2,.tb-bar,.tb-seg';
     function rgb(s) { var m = /rgba?\(([^)]+)\)/.exec(s || ''); if (!m) return null; var p = m[1].split(',').map(parseFloat); return { r: p[0], g: p[1], b: p[2], a: p.length > 3 ? p[3] : 1 }; }
     function L(c) { function f(v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); } return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b); }
     function check(el) {
@@ -140,12 +135,6 @@
   })();
 
   apply(saved(), false);
-  document.addEventListener('click', function (e) {
-    var b = e.target && e.target.closest ? e.target.closest('[data-m2set]') : null;
-    if (!b) return;
-    e.preventDefault();
-    var m = b.getAttribute('data-m2set');
-    if (m !== (R.getAttribute('data-model') || '1')) { almSetModel(m); if (typeof window.toast === 'function') window.toast(m === '2' ? 'فُعِّل النموذج 2' : 'فُعِّل النموذج 1'); }
-  });
-  document.addEventListener('DOMContentLoaded', function () { apply(R.getAttribute('data-model') || '1', false); });
+
+  document.addEventListener('DOMContentLoaded', function () { apply('2', false); });
 })();

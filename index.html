@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" data-model="2">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -7,7 +7,7 @@
 <meta name="description" content="أداة تطبيقية لمعلم التربية الإسلامية والقرآن الكريم للموهوبين: بطاقات قصيرة، ومواقف وحلولها، وحصص الأسبوع من خطة التوزيع، وعروض الدروس والاختبارات والألعاب الصفية.">
 <meta name="author" content="مبارك علي العتيبي">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#16264D" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: dark)">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob:; frame-src 'self' blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
 <link rel="canonical" href="https://mubarakaliotb.github.io/alamaai-guide/">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -431,7 +431,7 @@ textarea:focus,input[type=text]:focus{outline:2px solid var(--focus);outline-off
 .bins span{border:1px solid #C9C5D6;border-radius:6px;padding:6px 8px 28px;font-size:12px;color:#575270;text-align:center}
 .opts{color:#575270}
 .sheet-list{margin:6px 0 0;padding-inline-start:18px;font-size:13.5px}
-.sheet-f{border-top:1px solid #DEDAE7;margin-top:10px;padding-top:6px;font-size:11px;color:#837E99;text-align:center}
+.sheet-f{border-top:1px solid #DEDAE7;margin-top:10px;padding-top:6px;font-size:11px;color:#837E99;text-align:right}
 @media (max-width:520px){.bins{grid-template-columns:1fr}.sheet{padding:16px}}
 .grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
@@ -2276,23 +2276,10 @@ html[data-model="2"] [stop-color="#6B80AD" i]{stop-color:#6E6B8F}
 html[data-model="2"] [fill="#C9D3E6" i]{fill:#E7E5F2}
 html[data-model="2"] [stroke="#C9D3E6" i]{stroke:#E7E5F2}
 html[data-model="2"] [stop-color="#C9D3E6" i]{stop-color:#E7E5F2}
-/* ===== نموذج 2: واجهة بسيطة =====
+/* ===== التصميم البسيط: التصميم الوحيد للدليل =====
    ثلاثة ألوان بوظيفة ثابتة لكل منها: نيلي #1E1B4B للنصوص، وبنفسجي #6D28D9 للإجراء الرئيسي والروابط،
    ونعناعي #34D399 لعنصر تمييز واحد. خط واحد (Alm Sans Arabic)، وأسطح بيضاء بحدود رفيعة، بلا ظلال ولا زخارف ولا حركة زائدة.
-   كل القواعد تحت html[data-model="2"]، فلا يتأثر النموذج 1 بشيء. */
-
-/* ---------- مبدّل النموذجين (في النموذجين) ---------- */
-.m2-menu-sw{display:none}
-@media (max-width:860px){
-  .top .m2-switch:not(.m2-in-menu){display:none}
-  .m2-menu-sw{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 12px;margin-bottom:6px;border-bottom:1px solid var(--line);font-weight:700;font-size:14px}
-  .m2-menu-sw .m2-switch button{min-width:44px;min-height:40px;font-size:15px}
-}
-.m2-switch{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--bg);flex:none}
-.m2-switch button{font:inherit;font-size:13px;font-weight:700;border:0;background:transparent;color:var(--ink2);padding:6px 11px;border-radius:999px;cursor:pointer;min-height:32px;white-space:nowrap}
-.m2-switch button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
-.m2-switch .m2-w{margin-inline-end:3px}
-@media (max-width:860px){.m2-switch .m2-w{display:none}.m2-switch button{padding:6px 10px;min-width:34px}}
+   القواعد كلها تحت html[data-model="2"] (ثابتة في وسم الصفحة) فوق الأنماط الأساسية للصفحة. */
 
 html[data-model="2"]{
   color-scheme:light;
@@ -2338,9 +2325,6 @@ html[data-model="2"] .nav a:hover{background:var(--s-pri-50);color:var(--s-ink)}
 html[data-model="2"] .nav a[aria-current="page"]{background:var(--s-pri-50);color:var(--s-pri);box-shadow:none}
 html[data-model="2"] :is(.search-btn,.fb-btn,.n5-more-b){border:1px solid var(--s-line2)!important;background:#FFFFFF!important;color:var(--s-ink)!important;box-shadow:none!important}
 html[data-model="2"] .theme-btn,html[data-model="2"] #themeBtn{display:none!important}
-html[data-model="2"] .m2-switch{border:1px solid var(--s-line2);background:#FFFFFF}
-html[data-model="2"] .m2-switch button{color:var(--s-ink2)}
-html[data-model="2"] .m2-switch button[aria-pressed="true"]{background:var(--s-pri);color:#FFFFFF}
 html[data-model="2"] .n5-menu{border:1px solid var(--s-line)!important;border-radius:16px!important;box-shadow:var(--s-lift)!important;background:#FFFFFF!important}
 html[data-model="2"] .n5-menu a{font-weight:700;color:var(--s-ink)}
 html[data-model="2"] .n5-menu a:hover{background:var(--s-pri-50)}
@@ -2649,6 +2633,11 @@ html[data-model="2"] .b-top .b-tab[aria-current="page"]{background:#FFFFFF!impor
 html[data-model="2"] .b-top .b-tab[aria-current="page"] *{color:var(--s-pri)!important}
 html[data-model="2"] .b-top :is(.b-tab,button[aria-pressed]){color:var(--s-ink2)!important}
 html[data-model="2"] .b-top button[aria-pressed="true"]{background:#FFFFFF!important;color:var(--s-ink)!important;box-shadow:0 0 0 1px var(--s-line2)!important}
+
+/* ===== المطبوعات: النصوص من اليمين إلى اليسار، ورأس «خريطة الدرس» فاتح ===== */
+html[data-model="2"] .lm-top{background:var(--s-pri-50)!important;color:var(--s-ink)!important;justify-items:start!important;text-align:right!important;border:1px solid var(--s-pri-100)}
+html[data-model="2"] .lm-top :is(h2,h3,p,span,b,strong){color:var(--s-ink)!important}
+html[data-model="2"] .lm-top small{color:var(--s-pri)!important}
 /* مولَّد آليًّا من أنماط index.html بالأداة m2/auto.py: لا يُعدَّل باليد. */
 html[data-model="2"] .nbp{color:#1E1B4B}
 html[data-model="2"] .nbp-h{color:#5B5880;background:linear-gradient(#34D399,#34D399) bottom/100% .7mm no-repeat}
@@ -2897,11 +2886,12 @@ html[data-model="2"] .pc-x{border:.3mm dashed #D4D1E6;border-radius:2.4mm;paddin
 html[data-model="2"] .pc-x small{font-weight:700;color:#5B5880}
 html[data-model="2"] .pc-x .nbf{min-width:0!important;border-bottom:0!important;font-size:6.8pt}</style>
 <script id="m2Js">
-/* نموذجا التصميم: «نموذج 1» (الافتراضي) و«نموذج 2». الاختيار محفوظ في المتصفح (alm:model).
-   يُحمَّل في رأس الصفحة قبل رسمها، فلا يومض النموذج الآخر. في النموذج 2 لا يوجد وضع داكن. */
+/* طبقة التصميم البسيط، وهي التصميم الوحيد للدليل منذ إلغاء النموذج السابق.
+   data-model="2" ثابت في وسم <html data-model="2"> وتطبّقه هذه الطبقة أيضًا عند التحميل؛ ولا وضع داكن.
+   (اسم «النموذج 2» باقٍ في الشيفرة لأن قواعد الطبقة كلها معلّقة به.) */
 (function () {
   var R = document.documentElement, K = 'alm:model';
-  function saved() { try { return localStorage.getItem(K) === '2' ? '2' : '1'; } catch (e) { return '1'; } }
+  function saved() { try { localStorage.removeItem(K); } catch (e) {} return '2'; }
   function userTheme() { try { var t = JSON.parse(localStorage.getItem('dms:theme') || 'null'); return t === 'dark' || t === 'light' ? t : ''; } catch (e) { return ''; } }
   var forcing = false;
   function forceLight() { if (R.getAttribute('data-model') === '2' && R.getAttribute('data-theme') !== 'light') { forcing = true; R.setAttribute('data-theme', 'light'); forcing = false; } }
@@ -2917,8 +2907,6 @@ html[data-model="2"] .pc-x .nbf{min-width:0!important;border-bottom:0!important;
     if (m === '2') forceLight();
     else { var t = userTheme(); if (t) R.setAttribute('data-theme', t); else R.removeAttribute('data-theme'); }
     setMeta(m);
-    var bs = document.querySelectorAll('[data-m2set]');
-    for (var i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', String(bs[i].getAttribute('data-m2set') === m));
     if (m === '2') M2Tag.start(); else { M2Tag.stop(); mostOff(); }
     digits(m === '2');
     vids(m === '2');
@@ -2980,11 +2968,7 @@ html[data-model="2"] .pc-x .nbf{min-width:0!important;border-bottom:0!important;
   window.m2Digits = function (s) { return String(s == null ? '' : s).replace(/[\u0660-\u0669]/g, function (c) { return c.charCodeAt(0) - 0x660; }).replace(/[\u06F0-\u06F9]/g, function (c) { return c.charCodeAt(0) - 0x6F0; }).replace(/\u066A/g, '%').replace(/\u066B/g, '.').replace(/\u066C/g, ','); };
   window.m2Num = function (s) { return R.getAttribute('data-model') === '2' ? window.m2Digits(s) : s; };
   window.almModel = function () { return R.getAttribute('data-model') === '2' ? 2 : 1; };
-  window.almSetModel = function (m) {
-    m = String(m) === '2' ? '2' : '1';
-    try { localStorage.setItem(K, m); } catch (e) {}
-    apply(m, true);
-  };
+  window.almSetModel = function () { apply('2', true); };
   new MutationObserver(function () { if (!forcing) forceLight(); }).observe(R, { attributes: true, attributeFilter: ['data-theme'] });
 
   /* وسم البطاقات: كل صندوق منحنٍ بحدّ وخلفية فاتحة يأخذ في النموذج 2 حدًّا أسود وظلًّا صلبًا،
@@ -2992,7 +2976,7 @@ html[data-model="2"] .pc-x .nbf{min-width:0!important;border-bottom:0!important;
   var M2Tag = (function () {
     var on = false, mo = null, queue = [], sched = false;
     var SEL = 'input,textarea,select,div,section,article,li,details,label,a,figure,aside,form,dl,fieldset,nav,ul,ol,blockquote,output,summary';
-    var SKIP = '.sheet,.ps,.nbp,[class*="nbx"],.m2-switch,header.top,.no-m2,svg,dialog.no-m2,.tb-bar,.tb-seg';
+    var SKIP = '.sheet,.ps,.nbp,[class*="nbx"],header.top,.no-m2,svg,dialog.no-m2,.tb-bar,.tb-seg';
     function rgb(s) { var m = /rgba?\(([^)]+)\)/.exec(s || ''); if (!m) return null; var p = m[1].split(',').map(parseFloat); return { r: p[0], g: p[1], b: p[2], a: p.length > 3 ? p[3] : 1 }; }
     function L(c) { function f(v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); } return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b); }
     function check(el) {
@@ -3039,14 +3023,8 @@ html[data-model="2"] .pc-x .nbf{min-width:0!important;border-bottom:0!important;
   })();
 
   apply(saved(), false);
-  document.addEventListener('click', function (e) {
-    var b = e.target && e.target.closest ? e.target.closest('[data-m2set]') : null;
-    if (!b) return;
-    e.preventDefault();
-    var m = b.getAttribute('data-m2set');
-    if (m !== (R.getAttribute('data-model') || '1')) { almSetModel(m); if (typeof window.toast === 'function') window.toast(m === '2' ? 'فُعِّل النموذج 2' : 'فُعِّل النموذج 1'); }
-  });
-  document.addEventListener('DOMContentLoaded', function () { apply(R.getAttribute('data-model') || '1', false); });
+
+  document.addEventListener('DOMContentLoaded', function () { apply('2', false); });
 })();
 
 window.NB_PCSS_M2 = "/* مولَّد آليًّا من أنماط index.html بالأداة m2/auto.py: لا يُعدَّل باليد. */\n.nbp{color:#1E1B4B}\n.nbp-h{color:#5B5880;background:linear-gradient(#34D399,#34D399) bottom/100% .7mm no-repeat}\n.nbp-hl b{color:#5B21B6}\n.nbp-hl span{border-inline-start:.3mm solid #D4D1E6}\n.nbp-f{color:#5B5880}\n.nbp-f b{background:#1E1B4B}\n.nb-band{background:linear-gradient(#1E1B4B,#1E1B4B)}\n.nb-bi{background:#34D399;color:#1E1B4B}\n.nb-band p{color:#D4D1E6}\n.nb-h{color:#1E1B4B}\n.nb-h::before{background:#34D399;box-shadow:0 0 0 .8mm #D1FAE5}\n.nb-h small{color:#5B5880}\n.nb-ref{color:#5B5880}\n.nb-ref b{color:#5B21B6}\n.nb-note{color:#1E1B4B;background:#F7F6FB}\n.nb-note b{color:#5B21B6}\n.nb-hint{color:#047857;background:#ECFDF5}\n.nb-t th{background:#1E1B4B}\n.nb-t th small{color:#D4D1E6}\n.nb-t.blue th{background:#5B21B6}\n.nb-t td{border-top:.3mm solid #E7E5F2}\n.nb-t td+td, .nb-t th+th, .nb-t td[rowspan]+td{border-inline-start:.3mm solid #E7E5F2}\n.nb-t thead tr+tr th{border-top:.3mm solid #5B5880}\n.nb-t .rh{background:#F7F6FB}\n.nb-t .nb-sec{background:#EDE9FE;color:#1E1B4B}\n.nb-ul li::before{background:#6D28D9}\n.nb-ol li>b{background:#EDE9FE;color:#1E1B4B}\n.nb-card2 h4:not(:where(.a9-h5)), .nb-card2 h3:where(.a9-h4), .nb-card2 h2:where(.a9-h4){color:#5B21B6}\n.nb-card2 h4:not(:where(.a9-h5)) small, .nb-card2 h3:where(.a9-h4) small, .nb-card2 h2:where(.a9-h4) small{color:#5B5880}\n.nb-card2 h4:not(:where(.a9-h5)) em, .nb-card2 h3:where(.a9-h4) em, .nb-card2 h2:where(.a9-h4) em{color:#047857}\n.nb-eye{background:linear-gradient(#F7F6FB,#F7F6FB)}\n.nb-eye b{color:#1E1B4B}\n.nb-quote{border-inline-start:1.4mm solid #34D399;background:#ECFDF5}\n.nb-quote span{color:#5B5880}\n.nb-qt{color:#1E1B4B}\nspan.nbf{border-bottom:.3mm dotted #A78BFA}\n.nb-box{border-bottom:.3mm dotted #A78BFA}\n.nbx{color:#047857}\n.nb-dl{border-bottom:.3mm dotted #5B5880}\n.nbc-sky{background:linear-gradient(#1E1B4B,#1E1B4B)}\n.nbc-sky .o3{background:#34D399}\n.nbc-sky .o4{background:#34D399}\n.nbc-title p{color:#6EE7B7}\n.nbc-bar{background:linear-gradient(#34D399,#34D399)}\n.nbc-g{color:#5B21B6}\n.nbc-card span{color:#5B5880}\n.nbc-card b{color:#1E1B4B}\n.nbc-dots{border-bottom:.4mm dotted #A78BFA}\n.nbc-spec{background:linear-gradient(#1E1B4B,#1E1B4B)}\n.nbp-div{background:linear-gradient(#F7F6FB,#F7F6FB)}\n.nbd-k{color:#5B5880}\n.nbd-n{color:#6D28D9}\n.nbd h2:not(:where(.a9-h3, .a9-h4)){color:#1E1B4B}\n.nbd p{color:#5B5880}\n.nbd li{border-bottom:.3mm dashed #D4D1E6}\n.nbd li b{color:#5B21B6}\n.nbd li small{color:#5B5880}\n.nbd-f{color:#5B5880}\n.nb-tocn{background:#1E1B4B}\n.nb-toct h3:not(:where(.a9-h4, .a9-h5)), .nb-toct h2:where(.a9-h3){color:#1E1B4B}\n.nb-toct p{color:#5B5880}\n.nb-toct li i{border-bottom:.3mm dotted #D4D1E6}\n.nb-toct li b{color:#5B21B6}\n.nb-toct li small{color:#5B5880}\n.nb-vk b{background:#6D28D9}\n.nb-val i{color:#6D28D9}\n.nb-val b{color:#5B21B6}\n.nb-gn small{color:#047857}\n.nb-gn b{color:#1E1B4B}\n.nb-gm{background:#ECFDF5}\n.nb-gm small{color:#047857}\n.nb-gm em{color:#5B5880}\n.nb-gm .nb-box{border-bottom-color:#6EE7B7}\n.nb-std2 li b{background:#1E1B4B}\n.nb-qc h4:not(:where(.a9-h5)), .nb-qc h3:where(.a9-h4), .nb-qc h2:where(.a9-h4){background:#5B21B6}\n.nb-stats div{background:#1E1B4B}\n.nb-stats b{color:#6EE7B7}\n.nb-stats span{color:#D4D1E6}\n.nb-intro{background:linear-gradient(#F7F6FB,#F7F6FB)}\n.nb-do th:first-child{background:#047857}\n.nb-do th:last-child{background:#047857}\n.nb-do td:last-child .nb-ul li::before{background:#34D399}\n.nb-do td:first-child .nb-ul li::before{background:#34D399}\n.nb-load{background:#1E1B4B}\n.nb-load h4:not(:where(.a9-h5)), .nb-load h3:where(.a9-h4), .nb-load h2:where(.a9-h4){color:#6EE7B7}\n.nb-load h4:not(:where(.a9-h5)) em, .nb-load h3:where(.a9-h4) em, .nb-load h2:where(.a9-h4) em{color:#6EE7B7}\n.nb-load p{color:#D4D1E6}\n.nb-art h4:not(:where(.a9-h5)), .nb-art h3:where(.a9-h4), .nb-art h2:where(.a9-h4){color:#5B21B6}\n.nb-art h4:not(:where(.a9-h5)) em, .nb-art h3:where(.a9-h4) em, .nb-art h2:where(.a9-h4) em{color:#047857}\n.nb-gdb.a{background:#1E1B4B}\n.nb-gdb.b{background:#5B21B6}\n.nb-gdb.c{background:#047857}\n.nb-gdb i b{color:#6EE7B7}\n.nb-ymb h4:not(:where(.a9-h5)), .nb-ymb h3:where(.a9-h4), .nb-ymb h2:where(.a9-h4){background:#1E1B4B}\n.nb-ymb th{background:#F7F6FB;color:#1E1B4B}\n.nb-ymb tr+tr th, .nb-ymb tr+tr td{border-top:.3mm solid #E7E5F2}\n.nb-wkh{background:#1E1B4B}\n.nb-wkh span{color:#D4D1E6}\n.nb-wk li em{color:#5B21B6}\n.nb-wk li em.q{color:#047857}\n.nb-wk li small{color:#5B5880}\n.nb-wk .nb-box{background:#ECFDF5;color:#047857}\n.nb-wkx{color:#5B5880;border-top:.3mm solid #F7F6FB}\n.nb-wke{background:linear-gradient(#F7F6FB,#F7F6FB)}\n.nb-wke p small{color:#5B5880}\n.nb-wkc small{color:#5B5880}\n.nb-hdn{background:#1E1B4B}\n.nb-hdi{color:#5B5880}\n.nb-hdx{color:#1E1B4B}\n.nb-hdr{color:#5B5880}\n.nb-hdl{background:#F7F6FB}\n.nb-hdl small{color:#5B5880}\n.nb-hdl b{color:#1E1B4B}\n.nb-hdl span{color:#047857}\n.nb-in-dark{border-bottom-color:#A78BFA!important}\n.nb-tt th small{color:#D4D1E6}\n.nb-brk td{background:#ECFDF5!important;color:#047857}\n.nb-fn{background:#F7F6FB}\n.nb-fn i{background:#34D399;color:#1E1B4B!important}\n.nb-face p{color:#5B5880}\n.nb-photo{background:#F7F6FB center/cover no-repeat;border:.3mm dashed #A78BFA;color:#5B21B6}\n.nb-leg{color:#5B5880}\n.nb-leg b{color:#047857}\n.nb-hz th[colspan]{background:#5B21B6}\n.nb-flow b{color:#5B21B6}\n.nb-flow span{color:#1E1B4B}\n.nb-flow>i{color:#047857}\n.nb-fh{background:linear-gradient(#F7F6FB,#F7F6FB)}\n.nb-fhm small{color:#5B21B6}\n.nb-fhn i{background:#34D399;color:#1E1B4B}\n.nb-fhm p{color:#5B5880}\n.nb-mt{background:linear-gradient(#1E1B4B,#1E1B4B)}\n.nb-mtf i{border-bottom:.4mm dotted #A78BFA}\n.nb-cvh{background:linear-gradient(#1E1B4B,#1E1B4B)}\n.nb-cvh .nb-photo{border-color:#A78BFA;color:#D4D1E6}\n.nb-cvh p{color:#D4D1E6}\n.nb-cvh span.nbf{border-bottom-color:#A78BFA}\n.nb-cvf small{color:#5B21B6}\n.nbp{color:#1E1B4B}\n.nbp h1,.nbp h2,.nbp h3,.nbp h4{font-family:\"Alm Sans Arabic\",Tahoma,sans-serif!important;font-weight:700}\n.nbp-h{background:linear-gradient(#DDD6FE,#DDD6FE) bottom/100% .35mm no-repeat!important;color:#5B5880}\n.nbp-hl b{color:#6D28D9!important}\n.nbp-hl span{border-inline-start-color:#E7E5F2!important}\n.nbp-f b{background:#EDE9FE!important;color:#6D28D9!important}\n.nb-band,.nb-mt,.nb-cvh{background:#F5F3FF!important;color:#1E1B4B!important;border-radius:4mm!important;box-shadow:none!important}\n.nb-band h2,.nb-mt h2,.nb-cvh h2{color:#1E1B4B!important}\n.nb-band p,.nb-mt p{color:#5B5880!important}\n.nb-cvh span.nbf{color:#1E1B4B!important;border-bottom-color:#C4B5FD!important}\n.nb-bi{background:#6D28D9!important;color:#fff!important;border:0!important}\n.nb-bs{background:#fff!important;color:#6D28D9!important;border:0!important}\n.nb-h{color:#1E1B4B!important}\n.nb-h::before{background:#6D28D9!important;box-shadow:none!important;width:1.8mm!important;height:1.8mm!important}\n.nb-ref b,.nb-note b{color:#6D28D9!important}\n.nb-t{border:.3mm solid #E7E5F2!important;border-radius:2.4mm!important}\n.nb-t th{background:#F5F3FF!important;color:#1E1B4B!important}\n.nb-t th small{color:#5B5880!important}\n.nb-t.blue th,.nb-hz th[colspan]{background:#EDE9FE!important;color:#1E1B4B!important}\n.nb-t thead tr+tr th{border-top-color:#DDD6FE!important}\n.nb-t td{border-top-color:#E7E5F2!important}\n.nb-t td+td,.nb-t th+th,.nb-t td[rowspan]+td{border-inline-start-color:#E7E5F2!important}\n.nb-t .rh{background:#F7F6FB!important}\n.nb-t .nb-sec{background:#EDE9FE!important;color:#1E1B4B!important}\n.nb-card2{border:.3mm solid #E7E5F2!important;border-radius:3mm!important;box-shadow:none!important}\n.nb-card2 h2,.nb-card2 h3,.nb-card2 h4{color:#1E1B4B!important}\n.nb-note{background:#F5F3FF!important;border:0!important;color:#1E1B4B!important}\n.nb-hint{background:#ECFDF5!important;color:#047857!important;border:0!important}\n.nb-quote{border-inline-start:.8mm solid #6D28D9!important;background:#F7F6FB!important}\n.nb-eye{background:#F7F6FB!important;border:0!important}\n.nb-ol li>b{background:#EDE9FE!important;color:#6D28D9!important;border:0!important}\n.nb-ul li::before{background:#6D28D9!important}\n.nbx{color:#047857!important}\nspan.nbf,.nb-box{border-bottom-color:#D4D1E6!important}\n.nb-tocn,.nb-std2 li b,.nb-hdn,.nb-vk b{background:#EDE9FE!important;color:#6D28D9!important}\n.nb-qc h4,.nb-qc h3,.nb-qc h2,.nb-ymb h4,.nb-ymb h3,.nb-ymb h2{background:#EDE9FE!important;color:#1E1B4B!important}\n.nb-wkh{background:#F5F3FF!important;color:#1E1B4B!important}\n.nb-wkh span{color:#5B5880!important}\n.nb-stats div{background:#F5F3FF!important;color:#1E1B4B!important}\n.nb-stats b{color:#6D28D9!important}\n.nb-load{background:#F5F3FF!important;color:#1E1B4B!important}\n.nb-load h4,.nb-load h3,.nb-load h2{color:#6D28D9!important}\n.nb-load h4 em,.nb-load h3 em,.nb-load h2 em{color:#047857!important}\n.nb-load b{color:#1E1B4B!important}\n.nb-gdb{color:#1E1B4B!important}\n.nb-gdb.a{background:#F5F3FF!important}\n.nb-gdb.b{background:#ECFDF5!important}\n.nb-gdb.c{background:#EDE9FE!important}\n.nb-gdb i{background:#fff!important}\n.nbp-div>i{display:none!important}\n.nb-gdb i b{color:#6D28D9!important}\n.nbc-sky{background:#F5F3FF!important;color:#1E1B4B!important}\n.nbc-sky i{display:none!important}\n.nbc-yr{background:#fff!important;color:#6D28D9!important}\n.nbc-title p{color:#6D28D9!important}\n.nbc-title h1{color:#1E1B4B!important}\n.nbc-bar{background:#34D399!important}\n.nbc-subs span{border-color:#DDD6FE!important;background:#fff;color:#1E1B4B}\n.nbc-top img{border:.3mm solid #E7E5F2}\n.nbc-card{border-color:#E7E5F2!important}\n.nbc-dots{border-bottom-color:#C4B5FD!important}\n.nbc-spec{background:#6D28D9!important;height:1.6mm!important}\n.cal-top{position:relative;height:52mm;border:0;border-radius:5mm;overflow:hidden;display:flex;align-items:center;gap:2mm;padding:4mm 6mm;flex:none}\n.cal-txt{flex:1;display:flex;flex-direction:column;gap:1.6mm;position:relative;z-index:1;min-width:0}\n.cal-mn{margin:0;font-weight:700;font-size:40pt!important;line-height:1.05!important;color:#1E1B4B!important}\n.cal-yr{align-self:flex-start;background:#fff;border:0;border-radius:999px;padding:.4mm 3.4mm;font-weight:700;font-size:11pt;line-height:1.4;color:#6D28D9}\n.cal-sub{margin:0;font-weight:700;font-size:9pt;color:#5B5880}\n.cal-art{width:90mm;height:50mm;flex:none;position:relative;z-index:1}\n.cal-wd{display:grid;grid-template-columns:repeat(7,1fr);font-weight:700;font-size:8.6pt;text-align:center;margin-top:3.4mm;flex:none;color:#5B5880}\n.cal-g{display:grid;grid-template-columns:repeat(7,1fr);border:.3mm solid #E7E5F2;border-radius:3mm;overflow:hidden;flex:none;margin-top:1.2mm;background:#fff}\n.cal-d{position:relative;border-inline-start:.3mm solid #E7E5F2;border-top:.3mm solid #E7E5F2;padding:1.1mm 1.4mm;display:flex;flex-direction:column;gap:.6mm;min-height:0;overflow:hidden}\n.cal-d:nth-child(7n+1){border-inline-start:0}\n.cal-d:nth-child(-n+7){border-top:0}\n.cal-d.we{background:#F7F6FB}\n.cal-d.out{background:#fff}\n.cal-d b{font-weight:700;font-size:12pt;line-height:1;color:#1E1B4B}\n.cal-d span{font-size:6.8pt;font-weight:700;line-height:1.25;color:#1E1B4B}\n.cal-wk{position:absolute;inset-inline-end:1mm;top:1.1mm;font-style:normal;font-size:5.6pt;font-weight:700;border:0;border-radius:999px;padding:0 1.2mm;background:#EDE9FE;color:#6D28D9;line-height:1.6}\n.cal-leg{display:flex;flex-wrap:wrap;gap:1.4mm 3mm;font-size:7pt;font-weight:700;margin-top:2mm;flex:none;color:#5B5880}\n.cal-leg i{display:inline-block;width:3.2mm;height:3.2mm;border:0;border-radius:1mm;vertical-align:-.6mm;margin-inline-end:1mm}\n.cal-leg-we i{background:#F7F6FB;box-shadow:inset 0 0 0 .3mm #E7E5F2}\n.cal-ft{display:grid;grid-template-columns:1fr 1.45fr 1fr;gap:3mm;flex:none;margin-top:3mm}\n.cal-box{border:.3mm solid #E7E5F2;border-radius:3mm;padding:2mm 2.6mm;font-size:7.6pt;line-height:1.5;background:#fff}\n.cal-box h4{font-size:9pt!important;font-weight:700!important;margin:0 0 1mm!important;color:#1E1B4B!important}\n.cal-v{background:#F5F3FF;border-color:#F5F3FF}\n.cal-val{font-weight:700;font-size:10.5pt;line-height:1.35;margin-bottom:.8mm!important;color:#6D28D9}\n.pc-top{position:relative;height:42mm;border:0;border-radius:5mm;overflow:hidden;display:flex;align-items:center;gap:2mm;padding:3mm 6mm;flex:none}\n.pc-top .cal-art{width:72mm;height:40mm}\n.pc-txt{flex:1;display:flex;flex-direction:column;gap:1.4mm;position:relative;z-index:1;min-width:0}\n.pc-mn{margin:0;font-weight:700;font-size:22pt!important;line-height:1.2!important;color:#1E1B4B!important}\n.pc-leg{margin-top:2.6mm}\n.pc-b{display:flex;flex-direction:column;gap:1.2mm;margin-top:1.6mm;flex:none}\n.pc-mo{display:flex;align-items:center;gap:2mm;margin-top:1mm}\n.pc-mo span{font-weight:700;font-size:9pt;border:0;border-radius:999px;padding:.2mm 4mm;line-height:1.6;color:#6D28D9}\n.pc-mo i{flex:1;height:0;border-top:.3mm solid #E7E5F2}\n.pc-row{display:grid;grid-template-columns:23mm 1fr 17mm;gap:1.4mm;align-items:stretch}\n.pc-wk{border:.3mm solid #E7E5F2;border-radius:2.4mm;background:#fff;padding:1mm 1.6mm;display:flex;flex-direction:column;justify-content:center}\n.pc-wk b{font-weight:700;font-size:8.4pt;line-height:1.3;color:#1E1B4B}\n.pc-wk small{font-size:6.6pt;color:#5B5880;font-weight:700}\n.pc-ls{display:flex;gap:1.4mm;min-width:0}\n.pc-l{flex:1;min-width:0;border:0;border-radius:2.4mm;padding:1mm 1.8mm;display:flex;flex-direction:column;gap:.2mm;position:relative}\n.pc-l small{font-size:6.2pt;font-weight:700;color:#5B5880}\n.pc-l b{font-size:7.9pt;font-weight:700;line-height:1.3;color:#1E1B4B}\n.pc-l em{font-style:normal;font-size:6.3pt;color:#5B5880;line-height:1.35}\n.pc-hz{position:absolute;inset-inline-end:1.2mm;top:1mm;font-style:normal;font-size:5.8pt;font-weight:700;background:#D1FAE5;color:#047857;border:0;border-radius:999px;padding:0 1.4mm}\n.pc-x{border:.3mm dashed #D4D1E6;border-radius:2.4mm;padding:.8mm 1.2mm;display:flex;flex-direction:column;font-size:6.4pt;background:#fff}\n.pc-x small{font-weight:700;color:#5B5880}\n.pc-x .nbf{min-width:0!important;border-bottom:0!important;font-size:6.8pt}\n";
@@ -3224,9 +3202,8 @@ window.NB_PCSS_M2 = "/* مولَّد آليًّا من أنماط index.html ب�
       <a href="#do" data-nav5="do"><svg class="ic" aria-hidden="true"><use href="#i-help"/></svg>حلول المواقف</a>
     </nav>
     <div class="n5-more"><button type="button" class="n5-more-b" id="n5More" aria-expanded="false" aria-controls="n5Menu"><svg class="ic" aria-hidden="true"><use href="#i-more"/></svg><span class="n5-more-t">المزيد</span></button>
-      <div class="n5-menu" id="n5Menu" hidden><div class="m2-menu-sw" role="group" aria-label="نموذج التصميم"><span>نموذج التصميم</span><span class="m2-switch m2-in-menu"><button type="button" data-m2set="1" aria-pressed="true">1</button><button type="button" data-m2set="2" aria-pressed="false">2</button></span></div><a href="#me" data-nav5="me"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>ملفي وإعدادي</a><a href="#tk/backup" data-nav5="tk/backup"><svg class="ic" aria-hidden="true"><use href="#i-save"/></svg>النسخة الاحتياطية</a><a href="#map" data-nav5="map"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg>خريطة الدليل</a><a href="#lab" data-nav5="lab"><svg class="ic" aria-hidden="true"><use href="#i-lab"/></svg>التدرّب على المواقف</a><a href="#challenge" data-nav5="challenge"><svg class="ic" aria-hidden="true"><use href="#i-flag"/></svg>تحدي ٢١ يومًا</a><a href="#about" data-nav5="about"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>عن الدليل</a><a href="https://forms.cloud.microsoft/r/Q8pY6i4ADv" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg>إرسال ملاحظة<span class="sr-only"> (تُفتح في نافذة جديدة)</span></a></div></div>
+      <div class="n5-menu" id="n5Menu" hidden><a href="#me" data-nav5="me"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>ملفي وإعدادي</a><a href="#tk/backup" data-nav5="tk/backup"><svg class="ic" aria-hidden="true"><use href="#i-save"/></svg>النسخة الاحتياطية</a><a href="#map" data-nav5="map"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg>خريطة الدليل</a><a href="#lab" data-nav5="lab"><svg class="ic" aria-hidden="true"><use href="#i-lab"/></svg>التدرّب على المواقف</a><a href="#challenge" data-nav5="challenge"><svg class="ic" aria-hidden="true"><use href="#i-flag"/></svg>تحدي ٢١ يومًا</a><a href="#about" data-nav5="about"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>عن الدليل</a><a href="https://forms.cloud.microsoft/r/Q8pY6i4ADv" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg>إرسال ملاحظة<span class="sr-only"> (تُفتح في نافذة جديدة)</span></a></div></div>
     <a class="fb-btn" href="https://forms.cloud.microsoft/r/Q8pY6i4ADv" target="_blank" rel="noopener" aria-label="إرسال ملاحظة على الدليل"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg><span>إرسال ملاحظة</span></a><button class="search-btn" data-open-search aria-label="ابحث في الدليل" aria-keyshortcuts="Control+K Meta+K"><svg class="ic"><use href="#i-search"/></svg><span>ابحث في الدليل والبطاقات</span><kbd>Ctrl K</kbd></button>
-    <div class="m2-switch" role="group" aria-label="نموذج التصميم"><button type="button" data-m2set="1" aria-pressed="true"><span class="m2-w">نموذج&nbsp;</span>1</button><button type="button" data-m2set="2" aria-pressed="false"><span class="m2-w">نموذج&nbsp;</span>2</button></div>
     <button class="theme-btn" id="themeBtn" aria-label="بدّل بين الوضعين الفاتح والداكن"><svg class="ic"><use href="#i-moon"/></svg></button>
   </div>
   <div class="progress-line" aria-hidden="true"><i id="readProg"></i></div>
@@ -3773,7 +3750,7 @@ window.NB_PCSS_M2 = "/* مولَّد آليًّا من أنماط index.html ب�
     .tk-pdfbox.bfp>.ps.tkp-tight p.bfp-k{padding:8px 13px;margin-bottom:7px}
     .tk-pdfbox.bfp>.ps.tkp-tight .bfp-ten li{padding:6px 12px}
     .tk-pdfbox.bfp>.ps.tkp-tight .bfp-how{margin-bottom:14px}
-    .tk-pdfbox.bfp>.ps::after{content:attr(data-foot);position:absolute;inset:auto 54px 24px 54px;padding-top:7px;border-top:1px solid #D5E0F2;font-size:10.5px;color:#4A5878;text-align:center}
+    .tk-pdfbox.bfp>.ps::after{content:attr(data-foot);position:absolute;inset:auto 54px 24px 54px;padding-top:7px;border-top:1px solid #D5E0F2;font-size:10.5px;color:#4A5878;text-align:right}
     .tk-pdfbox.bfp>.ps::before{content:attr(data-pn);position:absolute;bottom:22px;left:54px;font-size:11px;font-weight:700;color:#0D1B3D;z-index:1}
     .tk-pdfbox.bfp>.ps.bfp-cover{padding:0;background:#0D1B3D;color:#fff}
     .tk-pdfbox.bfp>.ps.bfp-cover::after,.tk-pdfbox.bfp>.ps.bfp-cover::before{content:none}
@@ -4355,7 +4332,7 @@ window.NB_PCSS_M2 = "/* مولَّد آليًّا من أنماط index.html ب�
     .ps-prev{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff;margin:6px 0 4px;overflow:hidden}
     .ps-h{border-bottom:2px solid #0D1B3D;padding-bottom:8px;margin-bottom:12px}.ps-h b{display:block;font-size:20px;color:#0D1B3D}.ps-h span{display:block;font-size:14px;margin-top:4px}
     .ps-f{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#4A5878;margin-top:8px}
-    .ps-ft{margin-top:14px;padding-top:6px;border-top:1px solid #B9CDFB;font-size:10px;color:#4A5878;text-align:left}
+    .ps-ft{margin-top:14px;padding-top:6px;border-top:1px solid #B9CDFB;font-size:10px;color:#4A5878;text-align:right}
     .ps-src{font-size:10.5px;color:#4A5878;margin:8px 0 0}
     .og-b{border:1.5px solid #0D1B3D;border-radius:10px;padding:8px 10px;min-height:64px;background:#fff;margin-bottom:8px}.og-b b{font-size:13px;color:#0D1B3D}
     .og-b.tall{min-height:150px}.og-hd{background:#EEF4FF;min-height:56px}.og-ft{min-height:70px}
@@ -6695,7 +6672,7 @@ body.dw-dragging,body.dw-dragging *{cursor:grabbing!important;user-select:none!i
 .tk-pdfbox>.ps.fx-ps.tkp-tight .fx-it{margin:1px 0 4px}
 .tk-pdfbox>.ps.fx-ps.tkp-tight .fx-mt td,.tk-pdfbox>.ps.fx-ps.tkp-tight .fx-mt th{line-height:1.45}
 .tk-pdfbox .no-print{display:none!important}
-.tk-pdfbox>.ps>.tkp-endm{position:absolute;left:0;right:0;bottom:14px;margin:0;text-align:center}
+.tk-pdfbox>.ps>.tkp-endm{position:absolute;left:54px;right:54px;bottom:14px;margin:0;text-align:right}
 .tk-pdfov{position:fixed;inset:0;z-index:400;display:grid;place-items:center;background:rgba(13,27,61,.55);padding:20px}
 .tk-pdfov[hidden]{display:none}
 .tk-pdfov-b{background:var(--surface,#fff);color:var(--ink,#0D1B3D);border-radius:18px;padding:22px 26px;min-width:min(320px,86vw);display:grid;gap:8px;text-align:center;box-shadow:0 18px 50px rgba(0,0,0,.25)}
@@ -14865,10 +14842,10 @@ const FD_SURA={'القلم':['مكية',52],'المدثر':['مكية',56],'ال
 function fdLoadZip(){return window.JSZip?Promise.resolve(window.JSZip):new Promise((ok,no)=>{const sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';sc.integrity='sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG';sc.crossOrigin='anonymous';sc.onload=()=>ok(window.JSZip);sc.onerror=no;document.head.appendChild(sc)})}
 const fdMin=n=>ar(n)+(n>=3&&n<=10?' دقائق':' دقيقة');
 const xe=t=>String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const FD_DT={g:{hd:'0D1B3D',lb:'EEF4FF',cl:'FFFFFF',bd:'B9CDFB',f:'Alm Sans Arabic'}};let fdDT=FD_DT.g;/* هوية «الموهوب العبقري» لكل ملفات Word */
+const FD_DT={g:{hd:'6D28D9',lb:'F5F3FF',cl:'FFFFFF',bd:'DDD6FE',f:'Alm Sans Arabic'}};let fdDT=FD_DT.g;/* التصميم البسيط لكل ملفات Word: رأس الجدول بنفسجي بنص أبيض، والتسميات بصبغة فاتحة، والنص نيلي، والفقرات كلها من اليمين */
 function xr(t,o){o=o||{};const lines=(window.m2Num?m2Num(String(t||'')):String(t||'')).split('\n');return lines.map((ln,i)=>`<w:r><w:rPr><w:rFonts w:ascii="${fdDT.f}" w:hAnsi="${fdDT.f}" w:cs="${fdDT.f}"/>${o.b?'<w:b/><w:bCs/>':''}${o.c?`<w:color w:val="${o.c}"/>`:''}<w:sz w:val="${o.sz||20}"/><w:szCs w:val="${o.sz||20}"/><w:rtl/></w:rPr>${i?'<w:br/>':''}<w:t xml:space="preserve">${xe(ln)}</w:t></w:r>`).join('')}
 function xp(t,o){o=o||{};return `<w:p><w:pPr><w:bidi/><w:spacing w:before="20" w:after="20"/>${o.jc?`<w:jc w:val="${o.jc}"/>`:''}</w:pPr>${xr(t,o)}</w:p>`}
-function xc(content,o){o=o||{};const fill=o.h?fdDT.hd:o.l?fdDT.lb:fdDT.cl;return `<w:tc><w:tcPr>${o.w?`<w:tcW w:w="${o.w}" w:type="dxa"/>`:''}${o.span?`<w:gridSpan w:val="${o.span}"/>`:''}<w:shd w:val="clear" w:color="auto" w:fill="${fill}"/><w:vAlign w:val="center"/></w:tcPr>${(Array.isArray(content)?content:[content]).map(x=>xp(x,{b:o.h||o.l||o.b,c:o.h?'FFFFFF':'1A1A1A',jc:o.h?'center':undefined,sz:o.sz})).join('')}</w:tc>`}
+function xc(content,o){o=o||{};const fill=o.h?fdDT.hd:o.l?fdDT.lb:fdDT.cl;return `<w:tc><w:tcPr>${o.w?`<w:tcW w:w="${o.w}" w:type="dxa"/>`:''}${o.span?`<w:gridSpan w:val="${o.span}"/>`:''}<w:shd w:val="clear" w:color="auto" w:fill="${fill}"/><w:vAlign w:val="center"/></w:tcPr>${(Array.isArray(content)?content:[content]).map(x=>xp(x,{b:o.h||o.l||o.b,c:o.h?'FFFFFF':'1E1B4B',jc:undefined,sz:o.sz})).join('')}</w:tc>`}
 function xt(rows,grid){const B='<w:top w:val="single" w:sz="4" w:color="E0D3B4"/><w:left w:val="single" w:sz="4" w:color="E0D3B4"/><w:bottom w:val="single" w:sz="4" w:color="E0D3B4"/><w:right w:val="single" w:sz="4" w:color="E0D3B4"/><w:insideH w:val="single" w:sz="4" w:color="E0D3B4"/><w:insideV w:val="single" w:sz="4" w:color="E0D3B4"/>';
   return `<w:tbl><w:tblPr><w:bidiVisual/><w:tblW w:w="5000" w:type="pct"/><w:tblBorders>${B.replace(/E0D3B4/g,fdDT.bd)}</w:tblBorders><w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="80" w:type="dxa"/><w:right w:w="80" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>${grid.map(w=>`<w:gridCol w:w="${w}"/>`).join('')}</w:tblGrid>${rows.map((r,i)=>`<w:tr>${i?'<w:trPr><w:trHeight w:val="620"/></w:trPr>':''}${r}</w:tr>`).join('')}</w:tbl><w:p/>`}
 /* ---- قالبا التحضير الرسميان كما أرسلهما المعلم: البنية نفسها صفًّا صفًّا وخلية خلية، بهوية «الموهوب العبقري» ----
@@ -14888,7 +14865,7 @@ function tpTable(grid,rows,CW){const tot=grid.reduce((a,b)=>a+b,0);const g=grid.
     r.c.forEach(c=>{const s=c.s||1;const w=g.slice(k,k+s).reduce((a,b)=>a+b,0);k+=s;
       const hd=c.f==='hd',lb=c.f==='lb'||c.f==='ti';const fill=hd?fdDT.hd:c.f==='lb'?fdDT.lb:c.f==='ti'?FD_TPC.ti:fdDT.cl;
       const ps=(c.v==='c'||!c.p||!c.p.length)?['']:c.p;
-      x+=`<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/>${s>1?`<w:gridSpan w:val="${s}"/>`:''}${c.v?`<w:vMerge${c.v==='r'?' w:val="restart"':''}/>`:''}<w:shd w:val="clear" w:color="auto" w:fill="${fill}"/><w:vAlign w:val="${c.top?'top':'center'}"/></w:tcPr>${ps.map(p=>tpPar(p,{b:hd||lb||c.b,c:hd?'FFFFFF':lb?FD_TPC.ink:undefined,jc:(hd||c.f==='lb'||c.ctr)?'center':undefined,sz:hd?22:(c.sz||21),kn:r.kn})).join('')}</w:tc>`});
+      x+=`<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/>${s>1?`<w:gridSpan w:val="${s}"/>`:''}${c.v?`<w:vMerge${c.v==='r'?' w:val="restart"':''}/>`:''}<w:shd w:val="clear" w:color="auto" w:fill="${fill}"/><w:vAlign w:val="${c.top?'top':'center'}"/></w:tcPr>${ps.map(p=>tpPar(p,{b:hd||lb||c.b,c:hd?'FFFFFF':lb?FD_TPC.ink:undefined,jc:undefined,sz:hd?22:(c.sz||21),kn:r.kn})).join('')}</w:tc>`});
     x+='</w:tr>'});
   return x+'</w:tbl>'}
 /* حقول «مخطط حصتي» كما يراها المعلم، بالقيم الافتراضية نفسها التي تعرضها الصفحة */
@@ -14974,17 +14951,17 @@ async function fdDocx(sections){const JSZip=await fdLoadZip();let body='';sectio
   z.file('word/fontTable.xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:fonts xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:font w:name="'+fdDT.f+'"><w:altName w:val="Tahoma"/><w:charset w:val="B2"/><w:family w:val="swiss"/><w:pitch w:val="variable"/></w:font><w:font w:name="Tahoma"><w:panose1 w:val="020B0604030504040204"/><w:charset w:val="00"/><w:family w:val="swiss"/><w:pitch w:val="variable"/></w:font></w:fonts>');
   z.file('word/document.xml',doc);return z.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'})}
 /* fdSaveBlob: انتقلت إلى قسم «حفظ الملفات» (v89) */
-const xh=(t,sz)=>xp(t,{b:1,sz:sz||28,c:'0D1B3D'});
+const xh=(t,sz)=>xp(t,{b:1,sz:sz||28,c:'1E1B4B'});
 async function fdExportDocx(){fdDT=FD_DT.g;const key=fdPlanKey||($('[data-plsel]')||{}).value;const d=fdPlanDoc(key);if(!d)return;try{fdSaveBlob(await fdDocx([d]),d.name,'حُفظ ملف التحضير')}catch(e){toast('تعذّر تجهيز الملف. تحقّق من اتصال الإنترنت ثم أعد المحاولة.')}}
 async function fdExportBook(){fdDT=FD_DT.g;const keys=Object.keys(fdPrefs.pl||{}).filter(k=>fdLessonOf(k)&&Object.values(fdPrefs.pl[k]||{}).some(v=>String(v).trim()));
   if(!keys.length){toast('لم تُعِدّ مخططًا بعد');return}
   keys.sort((a,b)=>{const x=a.split('.').map(Number),y=b.split('.').map(Number);return x[0]-y[0]||x[1]-y[1]||x[2]-y[2]});
   const docs=keys.map(fdPlanDoc).filter(Boolean);const cw=fdCW(false);
   const idx=xt([[xc('الأسبوع',{h:1,w:Math.round(cw*.2)}),xc('المادة',{h:1,w:Math.round(cw*.15)}),xc('الحصة',{h:1,w:Math.round(cw*.5)}),xc('الصف',{h:1,w:Math.round(cw*.15)})].join(''),...docs.map(d=>[xc(FD_WK[d.wi],{w:Math.round(cw*.2)}),xc(d.L[0],{w:Math.round(cw*.15)}),xc(d.L[2],{w:Math.round(cw*.5)}),xc(FD_GRN[d.gi],{w:Math.round(cw*.15)})].join(''))],[.2,.15,.5,.15].map(x=>Math.round(cw*x)));
-  const cover={land:false,body:'<w:p/><w:p/><w:p/>'+xp('دفتر التحضير',{b:1,sz:56,c:'0D1B3D',jc:'center'})+xp('التربية الإسلامية والقرآن الكريم',{sz:30,jc:'center'})+xp('الفصل الدراسي الأول ٢٠٢٦/٢٠٢٧',{sz:24,jc:'center'})+'<w:p/>'+xp('اسم المعلم: ................................................',{sz:24,jc:'center'})+xp('عدد الحصص: '+ar(docs.length),{sz:22,jc:'center'})+'<w:p/>'+xh('الفهرس',26)+idx};
+  const cover={land:false,body:'<w:p/><w:p/><w:p/>'+xp('دفتر التحضير',{b:1,sz:56,c:'1E1B4B'})+xp('التربية الإسلامية والقرآن الكريم',{sz:30})+xp('الفصل الدراسي الأول ٢٠٢٦/٢٠٢٧',{sz:24})+'<w:p/>'+xp('اسم المعلم: ................................................',{sz:24})+xp('عدد الحصص: '+ar(docs.length),{sz:22})+'<w:p/>'+xh('الفهرس',26)+idx};
   try{fdSaveBlob(await fdDocx([cover,...docs]),'دفتر-التحضير.docx','حُفظ دفتر التحضير')}catch(e){toast('تعذّر تجهيز الملف. تحقّق من اتصال الإنترنت ثم أعد المحاولة.')}}
 /* ---- PowerPoint ---- */
-/* نموذج 2: عرض PowerPoint بحدّ أسود وظل صلب وألوان مسطّحة */
+/* عرض PowerPoint بالتصميم البسيط: خلفية بيضاء وثلاثة ألوان وخط واحد */
 async function fdExportPptxM2(PG,L,sv,gi){const p=new PG();p.layout='LAYOUT_WIDE';p.rtlMode=true;
   /* نموذج 2 البسيط: خلفية بيضاء، ونيلي للنص، وبنفسجي للعنوان الفرعي والخط، ونعناعي لشارة الوقت وحدها؛ بلا ظلال ولا حدود */
   const F='Tahoma',INK='1E1B4B',INK2='5B5880',PRI='6D28D9',PRI50='F5F3FF',ACC100='D1FAE5',ACCI='047857',SUNK='F7F6FB';
@@ -15045,7 +15022,7 @@ function fdSpecCalc(){const g=fdGr();const sv=fdPrefs.spec||{};const W=FD_PLANS[
   const cells=[];rows.forEach(([k,w])=>pc.forEach(p=>cells.push(tot*(w/wsum)*(p/100))));let fl=cells.map(Math.floor);let rem=tot-fl.reduce((a,b)=>a+b,0);cells.map((v,i)=>[v-Math.floor(v),i]).sort((a,b)=>b[0]-a[0]).slice(0,Math.max(0,rem)).forEach(([,i])=>fl[i]++);return {g,rows,fl,tot}}
 async function fdExportExam(){fdDT=FD_DT.g;const {g,rows,fl,tot}=fdSpecCalc();if(!rows.length){toast('اختر دروس الاختبار أولًا');return}const cw=fdCW(false);const LV=['تذكّر وفهم','تطبيق','تحليل وتقويم'];const ORD=['أولًا','ثانيًا','ثالثًا'];const deg=n=>n===1?'درجة واحدة':n===2?'درجتان':ar(n)+(n<=10?' درجات':' درجة');
   const head=xt([[xc('الاسم: ',{w:Math.round(cw*.4)}),xc('الصف: ',{w:Math.round(cw*.2)}),xc('التاريخ: ',{w:Math.round(cw*.2)}),xc('الدرجة:  ..... / '+ar(tot),{w:Math.round(cw*.2),b:1})].join('')],[.4,.2,.2,.2].map(x=>Math.round(cw*x)));
-  let body=xp('اختبار قصير · التربية الإسلامية · الصف '+FD_GRN[g],{b:1,sz:32,c:'0D1B3D',jc:'center'})+head+xp('أجب عن الأسئلة الآتية، واكتب الدليل حيث يُطلب.',{sz:22});
+  let body=xp('اختبار قصير · التربية الإسلامية · الصف '+FD_GRN[g],{b:1,sz:32,c:'1E1B4B'})+head+xp('أجب عن الأسئلة الآتية، واكتب الدليل حيث يُطلب.',{sz:22});
   LV.forEach((lv,c)=>{const sum=rows.reduce((a,_,r)=>a+fl[r*3+c],0);if(!sum)return;body+=xh(ORD[c]+': '+lv+' ('+deg(sum)+')',26);
     rows.forEach(([k],r)=>{const m=fl[r*3+c];if(!m)return;body+=xp('سؤال من درس «'+k+'» ('+deg(m)+'):',{b:1,sz:22});body+=xp('..........................................................................................................................',{sz:22,c:'9AA6BF'}).repeat(c===2?4:3)})});
   const spec=xt([[xc('الدرس',{h:1}),...LV.map(x=>xc(x,{h:1})),xc('المجموع',{h:1})].join(''),...rows.map(([k],r)=>{const v=fl.slice(r*3,r*3+3);return [xc(k,{l:1}),...v.map(x=>xc(ar(x))),xc(ar(v.reduce((a,b)=>a+b,0)),{b:1})].join('')})],[.36,.16,.16,.16,.16].map(x=>Math.round(cw*x)));
@@ -15063,7 +15040,7 @@ function fdRubHTML(){const sv=fdPrefs.rub||{};const sel=sv.sel||['fahm','diqqa',
 function fdRubRows(){const sv=fdPrefs.rub||{};const sel=sv.sel||['fahm','diqqa','tanzim','ard','iltizam'];return FD_RUB.filter(r=>sel.includes(r[0]))}
 async function fdRubDocx(){fdDT=FD_DT.g;const sv=fdPrefs.rub||{};const rows=fdRubRows();const cw=fdCW(true);const g=[.2,.2,.2,.2,.2].map(x=>Math.round(cw*x));
   const t=xt([[xc('المعيار',{h:1,w:g[0]}),...FD_RUBL.map((x,i)=>xc(x,{h:1,w:g[i+1]}))].join(''),...rows.map(([k,n,d])=>[xc(n,{l:1,w:g[0]}),...d.map((x,i)=>xc(x,{w:g[i+1]}))].join('')),[xc('المجموع',{l:1,w:g[0]}),xc('..... من '+ar(rows.length*4),{w:g[1]+g[2]+g[3]+g[4],span:4})].join('')],g);
-  const body=xp('سلّم التقدير'+(sv.task?' · '+sv.task:''),{b:1,sz:32,c:'0D1B3D',jc:'center'})+xp('الاسم: ................................   الصف: ..........',{sz:22})+t;
+  const body=xp('سلّم التقدير'+(sv.task?' · '+sv.task:''),{b:1,sz:32,c:'1E1B4B'})+xp('الاسم: ................................   الصف: ..........',{sz:22})+t;
   try{fdSaveBlob(await fdDocx([{land:true,body}]),'سلم-تقدير.docx','حُفظ سلّم التقدير')}catch(e){toast('تعذّر تجهيز الملف. تحقّق من اتصال الإنترنت ثم أعد المحاولة.')}}
 /* ---- hifz record (Excel) ---- */
 /* v101: SheetJS 0.20.3 من lib/ في الموقع نفسه، وإلا فالملف نفسه من jsDelivr (حزمة @e965/xlsx المطابقة للرسمي)، بالتوقيع نفسه */
@@ -15117,7 +15094,7 @@ function fdWsSheet(){const w=fdWs();let n=0;return `<section class="ps">${fdShee
   if(b.k==='tf'){n++;return `<div class="ws-q"><p><b>${ar(n)}.</b> ضع علامة (✓) أمام العبارة الصحيحة، وعلامة (✗) أمام الخطأ:</p>${L.map(x=>`<p class="ws-tf"><span>(&nbsp;&nbsp;&nbsp;)</span>${esc(x)}</p>`).join('')}</div>`}
   if(b.k==='tbl'){const H=(L[0]||'').split('|').map(x=>x.trim()).filter(Boolean);const r=Math.max(1,Math.min(12,+b.n||3));return `<table class="ws-t"><thead><tr>${H.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${`<tr>${H.map(()=>'<td></td>').join('')}</tr>`.repeat(r)}</tbody></table>`}
   if(b.k==='draw')return `<div class="ws-draw"><b>${esc(v)}</b></div>`;return ''}).join('')}${fdSheetFoot}</section>`}
-function fdWsDocxBody(){fdDT=FD_DT.g;const w=fdWs();const cw=fdCW(false);let n=0;const LN='..........................................................................................................................';let body=xp(w.t||'ورقة عمل',{b:1,sz:32,c:'0D1B3D',jc:'center'})+xp('الاسم: ................................   الصف: ..........   التاريخ: ..........',{sz:22});
+function fdWsDocxBody(){fdDT=FD_DT.g;const w=fdWs();const cw=fdCW(false);let n=0;const LN='..........................................................................................................................';let body=xp(w.t||'ورقة عمل',{b:1,sz:32,c:'1E1B4B'})+xp('الاسم: ................................   الصف: ..........   التاريخ: ..........',{sz:22});
   w.b.forEach(b=>{const v=String(b.v||'');const L=v.split('\n').map(x=>x.trim()).filter(Boolean);
     if(b.k==='ins')body+=xp(v,{b:1,sz:22});else if(b.k==='txt')body+=xt([xc(v,{l:1,w:cw})],[cw]);
     else if(b.k==='q'){n++;body+=xp(ar(n)+'. '+v,{b:1,sz:22})+xp(LN,{sz:22,c:'9AA6BF'}).repeat(Math.max(1,Math.min(12,+b.n||3)))}
@@ -15139,7 +15116,7 @@ const FD_ADM=[
  ['rep','تقرير دوري عن متعلّم',false,[['المتعلّم والصف والفترة',1],['نقاط القوة، مع شاهد لكل نقطة',4],['ما يحتاج إلى تطوير، مع شاهد',3],['منتجاته في الملف التراكمي',3],['هدفان للفترة القادمة',2],['ملاحظات المعلم',2]],null,'كل حكم في التقرير معه شاهد: منتج، أو ملاحظة مؤرخة، أو درجة.'],
  ['prj','سجل الإشراف على المشروع',true,[['عنوان المشروع وسؤاله',1],['أعضاء الفريق',1]],{c:['التاريخ','المرحلة','ما أُنجز','العقبات','الخطوة التالية','توقيع المشرف'],w:[.1,.14,.24,.2,.2,.12],n:6,h:900},'جلسة إشراف قصيرة كل أسبوع أو أسبوعين.']];
 function fdAdmSheet(F){const [id,t,land,rows,tb,tip]=F;return `<section class="ps${land?' land':''}">${`<header class="ps-h"><div><b>${esc(t)}</b></div></header>`}<table class="adm-t">${rows.map(([l,h])=>`<tr><th>${esc(l)}</th><td style="height:${h*1.9}em"></td></tr>`).join('')}</table>${tb?`<table class="adm-t adm-g"><thead><tr>${tb.c.map((x,i)=>`<th style="width:${tb.w[i]*100}%">${esc(x)}</th>`).join('')}</tr></thead><tbody>${`<tr>${tb.c.map(()=>`<td style="height:${tb.h/180}em"></td>`).join('')}</tr>`.repeat(tb.n)}</tbody></table>`:''}${fdSheetFoot}</section>`}
-function fdAdmDocx(F){fdDT=FD_DT.g;const [id,t,land,rows,tb]=F;const cw=fdCW(land);let body=xp(t,{b:1,sz:32,c:'0D1B3D',jc:'center'});const g=[Math.round(cw*.28),cw-Math.round(cw*.28)];
+function fdAdmDocx(F){fdDT=FD_DT.g;const [id,t,land,rows,tb]=F;const cw=fdCW(land);let body=xp(t,{b:1,sz:32,c:'1E1B4B'});const g=[Math.round(cw*.28),cw-Math.round(cw*.28)];
   body+=xt(rows.map(([l,h])=>`<w:tc><w:tcPr><w:tcW w:w="${g[0]}" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="${fdDT.lb}"/><w:vAlign w:val="center"/></w:tcPr>${xp(l,{b:1})}</w:tc><w:tc><w:tcPr><w:tcW w:w="${g[1]}" w:type="dxa"/><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/></w:tcPr>${'<w:p/>'.repeat(h)}</w:tc>`),g);
   if(tb){const gw=tb.w.map(x=>Math.round(cw*x));body+=xt([tb.c.map((x,i)=>xc(x,{h:1,w:gw[i]})).join(''),...Array.from({length:tb.n},()=>tb.c.map((_,i)=>`<w:tc><w:tcPr><w:tcW w:w="${gw[i]}" w:type="dxa"/></w:tcPr>${'<w:p/>'.repeat(Math.max(1,Math.round(tb.h/400)))}</w:tc>`).join(''))],gw)}
   return {land,body}}
@@ -16953,7 +16930,7 @@ const NB_PCSS=`
 .nb-t td{padding:1.1mm 1.8mm;border-top:.3mm solid #D5E0F2;vertical-align:top}
 .nb-t td+td,.nb-t th+th,.nb-t td[rowspan]+td{border-inline-start:.3mm solid #D5E0F2}.nb-t thead tr+tr th{border-top:.3mm solid #334A7A}
 .nb-t .rh{background:#EEF4FF;font-weight:700}.nb-t td p+p{margin-top:.8mm}
-.nb-t .nb-sec{background:#DCE7FF;font-weight:700;color:#1E3A8A;text-align:center;padding:.8mm}
+.nb-t .nb-sec{background:#DCE7FF;font-weight:700;color:#1E3A8A;text-align:right;padding:.8mm}
 .nb-rows td{height:6.6mm}.nb-tall td{height:11mm}.nb-ro td{height:8.6mm}
 .nb-mini{font-size:7.8pt}.nb-mini td,.nb-mini th{padding:.8mm 1.6mm}
 .nb-ul li{position:relative;padding-inline-start:3.4mm;margin-top:.5mm}.nb-ul li::before{content:"";position:absolute;inset-inline-start:0;top:1.9mm;width:1.5mm;height:1.5mm;border-radius:50%;background:#2563EB}
@@ -17011,7 +16988,7 @@ span.nbf{display:inline-block;min-width:24mm;max-width:100%;border-bottom:.3mm d
 .nb-wk ul{padding:1mm 2mm;display:flex;flex-direction:column;gap:.5mm;flex:1}.nb-wk li em{color:#1D4ED8;font-weight:700;margin-inline-end:1mm}.nb-wk li em.q{color:#0B7C70}.nb-wk li small{color:#4A5878}
 .nb-wk .nb-box{font-size:6.9pt;min-height:4.4mm;border:0;background:#FFF3E8;color:#B54E00;font-weight:700;padding:.5mm 2mm;line-height:1.35}.nb-wk .nb-box:empty{background:transparent}
 .nb-wkx{font-size:6.8pt;color:#4A5878;padding:.6mm 2mm 1mm;border-top:.3mm solid #EEF4FF}.nb-wkx span.nbf{min-width:20mm;font-size:6.8pt}
-.nb-wke{background:linear-gradient(225deg,#EEF4FF 0%,#E7F8F5 55%,#FFF3E8 100%)}.nb-wke p{flex:1;display:grid;place-items:center;text-align:center;font-weight:700;font-size:8.4pt;padding:2mm;min-height:18mm}.nb-wke p small{font-weight:400;color:#4A5878}
+.nb-wke{background:linear-gradient(225deg,#EEF4FF 0%,#E7F8F5 55%,#FFF3E8 100%)}.nb-wke p{flex:1;display:grid;place-items:center;text-align:right;font-weight:700;font-size:8.4pt;padding:2mm;min-height:18mm}.nb-wke p small{font-weight:400;color:#4A5878}
 .nb-plan td{padding:.8mm 1.6mm;font-size:7.7pt}.nb-plan th{font-size:7.6pt}.nb-wkc b{display:block;font-size:7.8pt}.nb-wkc small{font-size:6.6pt;color:#4A5878;font-weight:400}
 .nb-hds{display:flex;flex-direction:column;gap:1.8mm;flex:none}.nb-hd{display:grid;grid-template-columns:9mm 1fr 34mm;border:.3mm solid #C9D6EE;border-radius:2.6mm;overflow:hidden}.nb-hdn{background:#0D1B3D;color:#fff;display:grid;place-items:center;font-size:12pt}
 .nb-hdt{padding:1.6mm 2.6mm;display:flex;flex-direction:column;gap:.6mm}.nb-hdi{font-size:7.6pt;color:#4A5878}.nb-hdx{font-size:10.6pt;line-height:1.85;font-weight:700;color:#0D1B3D}.nb-hdr{font-size:7pt;color:#4A5878}
@@ -18164,26 +18141,26 @@ function qzDocItem(o,t,n,cw,nom,vert){const q=o.q;const num=ar(n)+') ';let b='';
 function qzDocAns(o,t){const q=o.q,T=qzT;if(t==='mcq')return `(${QZ_L[o.a]}) ${T(o.opts[o.a])}`;if(t==='tf')return q.a?'(✓)':'(×)'+(/^\s*الصواب/.test(q.why||'')?' '+T(q.why):'');if(t==='fill')return T(q.opts[q.a]);if(t==='term'||t==='fillw')return T(q.ans||'');if(t==='list')return ((q.pts||[]).length>3?'أي ثلاث مما يأتي، ولكل نقطة درجة: ':'لكل نقطة درجة: ')+(q.pts||[]).map(T).join('؛ ');if(t==='match')return 'أرقام المجموعة (ب) بترتيبها: '+o.right.map((x,j)=>ar(o.key.indexOf(j)+1)).join('، ');if(t==='order')return o.shown.map((x,j)=>ar(o.key[j]+1)).join(' · ');return T(q.ans||'')}
 async function qzDocx(){const Q=TK.qz;if(qzIsSup(Q))return qzSupDocx();fdDT=FD_DT.g;const cw=fdCW(false);const docs=[];const vers=Q.ver>1?[0,1]:[0];
   vers.forEach(ver=>{const S=qzSecs(ver);let n=0;nbLoad();bgLoad();const sch=(NB.t&&NB.t.school)||BG.school||'';
-    let b=xp(sch||'المدرسة: ................................',{b:1,sz:24})+xp(`${qzTtl()} · ${Q.subj==='quran'?'القرآن الكريم':'التربية الإسلامية'} · الصف ${FD_GRN[Q.g]} · الفصل الدراسي الأول ٢٠٢٦ / ٢٠٢٧`+(Q.ver>1?` · النموذج (${ver?'ب':'أ'})`:''),{b:1,sz:28,c:'0D1B3D',jc:'center'});
+    let b=xp(sch||'المدرسة: ................................',{b:1,sz:24})+xp(`${qzTtl()} · ${Q.subj==='quran'?'القرآن الكريم':'التربية الإسلامية'} · الصف ${FD_GRN[Q.g]} · الفصل الدراسي الأول ٢٠٢٦ / ٢٠٢٧`+(Q.ver>1?` · النموذج (${ver?'ب':'أ'})`:''),{b:1,sz:28,c:'1E1B4B'});
     b+=xt([[xc('الاسم: ',{w:Math.round(cw*.4)}),xc('الصف: ',{w:Math.round(cw*.2)}),xc('الزمن: '+ar(Q.dur)+' دقيقة',{w:Math.round(cw*.2)}),xc('الدرجة: ..... / '+ar(qzSum()),{w:Math.round(cw*.2),b:1})].join('')],[.4,.2,.2,.2].map(x=>Math.round(cw*x)));
     S.forEach((s,i)=>{b+=xh(`السؤال ${QZ_ORD[i]||ar(i+1)}: ${qzSecH(s.t,s.L)} (${qzDeg(s.m)})`,24);s.L.forEach(o=>{b+=qzDocItem(o,s.t,++n,cw)})});
-    b+=xp('انتهت الأسئلة',{b:1,sz:22,jc:'center'});docs.push({land:false,body:b})});
+    b+=xp('انتهت الأسئلة',{b:1,sz:22});docs.push({land:false,body:b})});
   vers.forEach(ver=>{const S=qzSecs(ver);let n=0;let b=xh('مفتاح الإجابة'+(Q.ver>1?` · النموذج (${ver?'ب':'أ'})`:''),28);
     S.forEach((s,i)=>{b+=xh(`السؤال ${QZ_ORD[i]||ar(i+1)} (${qzDeg(s.m)})`,22);s.L.forEach(o=>{b+=xp(ar(++n)+') '+qzDocAns(o,s.t),{sz:20})})});docs.push({land:false,body:b})});
   try{fdSaveBlob(await fdDocx(docs),'اختبار-قصير_الصف-'+FD_GRN[Q.g]+'.docx','حُفظ ملف الاختبار')}catch(e){toast('تعذّر تجهيز الملف. تحقّق من اتصال الإنترنت ثم أعد المحاولة.')}}
 /* نموذج التوجيه في Word: لكل نموذج ورقتان (قسمان)، ثم مفتاح كل نموذج */
 async function qzSupDocx(){const Q=TK.qz;fdDT=FD_DT.g;const cw=fdCW(false);const docs=[];const vers=Q.ver>1?[0,1]:[0];nbLoad();bgLoad();const sch=(NB.t&&NB.t.school)||BG.school||'';const W=f=>Math.round(cw*f);
   vers.forEach(ver=>{const P=qzSup(ver);const mdl=Q.ver>1?`، النموذج (${ver?'ب':'أ'})`:'';
-    let b=xp(sch||'المدرسة: ................................',{b:1,sz:24})+xp(`الاختبار القصير، التربية الإسلامية، الصف ${FD_GRN[Q.g]}، الفصل الدراسي الأول ٢٠٢٦ / ٢٠٢٧${mdl}`,{b:1,sz:28,c:'0D1B3D',jc:'center'});
+    let b=xp(sch||'المدرسة: ................................',{b:1,sz:24})+xp(`الاختبار القصير، التربية الإسلامية، الصف ${FD_GRN[Q.g]}، الفصل الدراسي الأول ٢٠٢٦ / ٢٠٢٧${mdl}`,{b:1,sz:28,c:'1E1B4B'});
     b+=xt([[xc('الاسم: ',{w:W(.46)}),xc('الصف: ',{w:W(.18)}),xc('التاريخ: ',{w:W(.18)}),xc('الزمن: حصة دراسية',{w:W(.18)})].join('')],[.46,.18,.18,.18].map(W));
     b+=xt([[xc('السؤال',{h:1}),xc('الأول: حفظ الحديث الشريف',{h:1}),xc('الثاني: فهم الحديث الشريف',{h:1}),xc('المجموع',{h:1})].join(''),[xc('الدرجة',{l:1}),xc('........ / ٩'),xc('........ / ١١'),xc('........ / ٢٠',{b:1})].join('')],[.16,.3,.3,.24].map(W));
     b+=xh('السؤال الأول: في مجال حفظ الحديث الشريف (٩ درجات)',24)+xp('أكمل الأحاديث النبوية الشريفة الآتية (لكل حديث ثلاث درجات):',{sz:24});
     P.hs.forEach((o,n)=>{const h=o.h;const ln=qzHfLines(h);b+=xp(`(${QZ_PL[n]||ar(n+1)}) ${qzT(h.text.slice(0,h.b))} ......`,{sz:26});b+=qzWLine('',480).repeat(ln)+xp('',{sz:12})});
     docs.push({land:false,body:b});
-    let c=xp(`تابع الاختبار القصير، التربية الإسلامية، الصف ${FD_GRN[Q.g]}${mdl}`,{b:1,sz:24,c:'0D1B3D'})+xp('الاسم: ..........................................          الصف: ............',{sz:22});
+    let c=xp(`تابع الاختبار القصير، التربية الإسلامية، الصف ${FD_GRN[Q.g]}${mdl}`,{b:1,sz:24,c:'1E1B4B'})+xp('الاسم: ..........................................          الصف: ............',{sz:22});
     c+=xh('السؤال الثاني: في مجال فهم الحديث الشريف (١١ درجة)',24);
     [['a','أ',P.ta,'٤ درجات'],['b','ب',P.tb,'٤ درجات'],['c','ج','open','٣ درجات']].forEach(([p,l,t,deg])=>{c+=xp(`(${l}) ${p==='c'?qzT(P.ch):qzSecH(t,P[p])} (${deg})`,{b:1,sz:26});P[p].forEach((o,i)=>{c+=qzDocItem(o,p==='c'?o.x.t:t,i+1,cw,1,1).replace(/w:val="22"/g,'w:val="24"')})});
-    c+=xp('انتهت الأسئلة',{b:1,sz:22,jc:'center'});docs.push({land:false,body:c})});
+    c+=xp('انتهت الأسئلة',{b:1,sz:22});docs.push({land:false,body:c})});
   vers.forEach(ver=>{const P=qzSup(ver);let b=xh('مفتاح الإجابة'+(Q.ver>1?`، النموذج (${ver?'ب':'أ'})`:''),28);
     b+=xh('السؤال الأول: حفظ الحديث الشريف (٩ درجات)',22);P.hs.forEach((o,n)=>{b+=xp(`(${QZ_PL[n]||ar(n+1)}) ${qzT(o.h.text)}`,{sz:22});b+=xp(qzT(o.h.src)+(/…/.test(o.h.text)?'، والنص هنا كما نُقل في صفحة الدرس وينتهي بعلامة حذف (…): تُراجع تتمته في كتاب الطالب.':''),{sz:18,c:'4A5878'})});
     b+=xh('السؤال الثاني: فهم الحديث الشريف (١١ درجة)',22);[['a','أ',P.ta],['b','ب',P.tb],['c','ج','open']].forEach(([p,l,t])=>{b+=xp(`(${l})`,{b:1,sz:20});P[p].forEach((o,i)=>{b+=xp(ar(i+1)+') '+qzDocAns(o,p==='c'?o.x.t:t),{sz:20})})});docs.push({land:false,body:b})});
@@ -19911,13 +19888,13 @@ async function fxDocx(){const F=TK.fx;fdDT=FD_DT.g;const cw=fdCW(false);const do
   const item=(o,t,n)=>{const q=o.q;if(t==='match')return xt([[xc('م',{h:1}),xc('المجموعة (أ)',{h:1}),xc('الرقم',{h:1}),xc('المجموعة (ب)',{h:1})].join(''),...o.right.map((r,j)=>[xc(o.left[j]!=null?ar(j+1):''),xc(o.left[j]!=null?T(o.left[j]):''),xc('(      )'),xc(T(r))].join(''))],[.07,.42,.11,.4].map(x=>Math.round(cw*x)));
     if(t==='mcq')return xp(ar(n)+'- '+T(q.q),{sz:32})+o.opts.map((x,j)=>xp('      '+QZ_L[j]+'- '+T(x),{sz:32})).join('');return qzDocItem(o,t,n,cw,1).replace(/w:val="22"/g,'w:val="32"')};
   vers.forEach(ver=>{const P=fxPrep(ver);const mdl=F.ver>1?`، النموذج (${ver?'ب':'أ'})`:'';const N=1+P.qs.length;
-    let b=xp('دولة الكويت — وزارة التربية — '+(sch||'المدرسة: ................'),{b:1,sz:26})+xp('العام الدراسي: ١٤٤٨ / ١٤٤٩ هـ، الموافق: ٢٠٢٦ / ٢٠٢٧ م          الزمن: '+(F.dur||'................'),{sz:24})+xp(`امتحان نهاية الفصل الدراسي الأول في مادة التربية الإسلامية للصف ${gr}${mdl}`,{b:1,sz:32,jc:'center'})+xp('اسم المتعلم: ................................................   الصف: ............',{sz:26})+xp(`تأكد أن عدد الصفحات (${FX_CNT[N]||ar(N)}) مختلفات، ثم أجب عن جميع الأسئلة الآتية:`,{b:1,sz:26});
+    let b=xp('دولة الكويت — وزارة التربية — '+(sch||'المدرسة: ................'),{b:1,sz:26})+xp('العام الدراسي: ١٤٤٨ / ١٤٤٩ هـ، الموافق: ٢٠٢٦ / ٢٠٢٧ م          الزمن: '+(F.dur||'................'),{sz:24})+xp(`امتحان نهاية الفصل الدراسي الأول في مادة التربية الإسلامية للصف ${gr}${mdl}`,{b:1,sz:32})+xp('اسم المتعلم: ................................................   الصف: ............',{sz:26})+xp(`تأكد أن عدد الصفحات (${FX_CNT[N]||ar(N)}) مختلفات، ثم أجب عن جميع الأسئلة الآتية:`,{b:1,sz:26});
     b+=xp('السؤال الأول: في مجال حفظ الحديث الشريف',{b:1,sz:36})+xp(`اكتب الأحاديث النبوية الشريفة الآتية إلى آخر كلٍّ منها: (${qzDeg(P.hs.reduce((a,o)=>a+o.mk,0))})`,{b:1,sz:32});
     P.hs.forEach((o,n)=>{const h=o.h;b+=xp(`${QZ_L[n]}- ${T(h.text.slice(0,h.b))} .................. (${qzDeg(o.mk)})`,{sz:32});b+=xp(QZ_DOTW,{sz:32,c:'808080'}).repeat(Math.max(2,Math.min(5,Math.ceil(qzNm(h.text.slice(h.b)).s.length/48))))});docs.push({land:false,body:b});
     P.qs.forEach((q,i)=>{let c=xp(`تابع: امتحان نهاية الفصل الدراسي الأول، للصف ${gr}، لمادة التربية الإسلامية${mdl}`,{sz:20})+xp(`السؤال ${QZ_ORD[i+1]||ar(i+2)}: في مجال ${q.name} (${qzDeg(q.m)})`,{b:1,sz:36});
-      q.parts.forEach(p=>{c+=xp(`${p.l}- ${qzSecH(p.t,p.L)} (${qzDeg(p.m)}${p.m>1?'، لكل جزئية درجة':''})`,{b:1,sz:32});p.L.forEach((o,j)=>{c+=item(o,p.t,j+1)})});if(i===P.qs.length-1)c+=xp('انتهت الأسئلة',{b:1,sz:28,jc:'center'});docs.push({land:false,body:c})})});
+      q.parts.forEach(p=>{c+=xp(`${p.l}- ${qzSecH(p.t,p.L)} (${qzDeg(p.m)}${p.m>1?'، لكل جزئية درجة':''})`,{b:1,sz:32});p.L.forEach((o,j)=>{c+=item(o,p.t,j+1)})});if(i===P.qs.length-1)c+=xp('انتهت الأسئلة',{b:1,sz:28});docs.push({land:false,body:c})})});
   vers.forEach(ver=>{const P=fxPrep(ver);let b=xh('نموذج الإجابة'+(F.ver>1?`، النموذج (${ver?'ب':'أ'})`:''),28)+xh('السؤال الأول: حفظ الحديث الشريف',22);P.hs.forEach((o,n)=>{b+=xp(`${QZ_L[n]}- ${T(o.h.text)} (${qzDeg(o.mk)})`,{sz:22})+xp(T(o.h.src),{sz:18,c:'4A5878'})});
-    P.qs.forEach((q,i)=>{b+=xh(`السؤال ${QZ_ORD[i+1]||ar(i+2)}: ${q.name} (${qzDeg(q.m)})`,22);q.parts.forEach(p=>{b+=xp(`(${p.l})`,{b:1,sz:20});p.L.forEach((o,j)=>{const a=p.t==='match'?o.right.map((r,k)=>T(r)+': '+(o.rk[k]>=0?ar(o.rk[k]+1):'مكمل زائد')).join('، '):qzDocAns(o,p.t);b+=xp(ar(j+1)+') '+a+'  ('+(o.x.src==='o'?'سؤال المعلم':'درس: '+o.x.k)+')',{sz:20})})})});b+=xp('انتهت الإجابة',{b:1,sz:22,jc:'center'});docs.push({land:false,body:b})});
+    P.qs.forEach((q,i)=>{b+=xh(`السؤال ${QZ_ORD[i+1]||ar(i+2)}: ${q.name} (${qzDeg(q.m)})`,22);q.parts.forEach(p=>{b+=xp(`(${p.l})`,{b:1,sz:20});p.L.forEach((o,j)=>{const a=p.t==='match'?o.right.map((r,k)=>T(r)+': '+(o.rk[k]>=0?ar(o.rk[k]+1):'مكمل زائد')).join('، '):qzDocAns(o,p.t);b+=xp(ar(j+1)+') '+a+'  ('+(o.x.src==='o'?'سؤال المعلم':'درس: '+o.x.k)+')',{sz:20})})})});b+=xp('انتهت الإجابة',{b:1,sz:22});docs.push({land:false,body:b})});
   try{fdSaveBlob(await fdDocx(docs),'اختبار-نهائي_الصف-'+gr+'.docx','حُفظ ملف الاختبار')}catch(e){toast('تعذّر تجهيز الملف. تحقّق من اتصال الإنترنت ثم أعد المحاولة.')}}
 /* ---------- الصفحة ---------- */
 function fxSetup(F){const g=F.g,w=tkWeek();const H=qzHad(g);const L=fxLes(g);const P=fxPlan(F);const cupN=k=>((FD_CUP[g]||{})[k]||[]).length;const nh=F.hsel.length;const T=FX_TPL[fxBand(g)];
