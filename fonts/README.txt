@@ -17,3 +17,7 @@ amiri-sym.woff2
     Copyright 2010-2022 The Amiri Project Authors (https://github.com/aliftype/amiri),
     under the SIL Open Font License 1.1 (the license text in AlmSansArabic-OFL.txt,
     read with this copyright line).
+
+Mikhak-DS1-Regular.woff2, Mikhak-DS1-Bold.woff2, Mikhak-DS1-ExtraBold.woff2, Mikhak-DS1-Black.woff2
+    The heading font of "Model 2" (نموذج 2). Mikhak, DS1 cut, by Amin Abedi,
+    under the SIL Open Font License 1.1. License: Mikhak-OFL.txt.
