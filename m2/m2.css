@@ -10,6 +10,7 @@ html[data-model="2"]{
   --s-acc:#34D399; --s-acc-50:#ECFDF5; --s-acc-100:#D1FAE5; --s-acc-ink:#047857;
   --s-line:#E7E5F2; --s-line2:#D4D1E6; --s-sunk:#F7F6FB; --s-paper:#FFFFFF;
   --s-lift:0 12px 32px rgba(30,27,75,.12);
+  --s-pri-bg:#6D28D9; --s-pri-bg-h:#5B21B6; --s-ink-bg:#1E1B4B;
   /* الألوان الأولية: يأخذها كل ما بُني عليها */
   --navy-950:#14123A; --navy-900:#1E1B4B; --navy-800:#2A2660; --navy-700:#3B3775; --navy-600:#5B5880;
   --blue-50:#F7F6FB; --blue-100:#EDE9FE; --blue-200:#DDD6FE; --blue-300:#C4B5FD; --blue-500:#6D28D9; --blue-600:#5B21B6; --blue-800:#4C1D95;
@@ -46,7 +47,7 @@ html[data-model="2"] .nav a{font-weight:700;color:var(--s-ink2);border-radius:10
 html[data-model="2"] .nav a:hover{background:var(--s-pri-50);color:var(--s-ink)}
 html[data-model="2"] .nav a[aria-current="page"]{background:var(--s-pri-50);color:var(--s-pri);box-shadow:none}
 html[data-model="2"] :is(.search-btn,.fb-btn,.n5-more-b){border:1px solid var(--s-line2)!important;background:#FFFFFF!important;color:var(--s-ink)!important;box-shadow:none!important}
-html[data-model="2"] .theme-btn,html[data-model="2"] #themeBtn{display:none!important}
+html[data-model="2"] :is(.theme-btn,#themeBtn){border:1px solid var(--s-line2)!important;background:var(--s-paper)!important;color:var(--s-ink)!important;box-shadow:none!important}
 html[data-model="2"] .n5-menu{border:1px solid var(--s-line)!important;border-radius:16px!important;box-shadow:var(--s-lift)!important;background:#FFFFFF!important}
 html[data-model="2"] .n5-menu a{font-weight:700;color:var(--s-ink)}
 html[data-model="2"] .n5-menu a:hover{background:var(--s-pri-50)}
@@ -62,7 +63,7 @@ html[data-model="2"] [data-m2c="card"]{border:1px solid var(--s-line)!important;
 html[data-model="2"] [data-m2gap]{gap:16px!important}
 html[data-model="2"] [data-m2c="flat"]{border:1px solid var(--s-line)!important;box-shadow:none!important}
 html[data-model="2"] [data-m2c="dark"]{background:var(--s-ink)!important;border:0!important;box-shadow:none!important;color:#FFFFFF;border-radius:16px!important}
-html[data-model="2"] [data-m2c="dark"] :is(h1,h2,h3,h4){color:#FFFFFF}
+html[data-model="2"] [data-m2c="dark"] :is(h1,h2,h3,h4):not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){color:#FFFFFF}
 html[data-model="2"] a[data-m2c="card"],html[data-model="2"] button[data-m2c="card"]{transition:border-color .15s}
 html[data-model="2"] a[data-m2c="card"]:hover,html[data-model="2"] button[data-m2c="card"]:hover{border-color:var(--s-pri-200)!important;transform:none}
 html[data-model="2"] [data-m2c="pill"]{border-width:1px!important;font-weight:700}
@@ -284,6 +285,8 @@ html[data-model="2"] .bf-cta i *{color:var(--s-pri)!important}
 html[data-model="2"] :is(.n5-gr,.fd-gr) button{background:#FFFFFF!important;color:var(--s-ink)!important;border:1px solid var(--s-line2)!important;box-shadow:none!important}
 html[data-model="2"] :is(.n5-gr,.fd-gr) button:is(.on,[aria-pressed="true"]){background:var(--s-pri-100)!important;color:var(--s-pri-d)!important;border-color:var(--s-pri-200)!important}
 html[data-model="2"] .chip[aria-pressed="true"]{background:var(--s-pri-100)!important;color:var(--s-pri-d)!important;border-color:var(--s-pri-200)!important}
+/* أزرار التبديل (بنين/بنات، أقسام الأدوات، خيارات المعالج…): الاختيار نفسه في النهار والليل */
+html[data-model="2"] :is(.tk-seg,.nb-tog,.kit-tabs,.kit-chips,.wz-o,.bag .b-sc3) button[aria-pressed="true"],html[data-model="2"] :is(.me-g,.bag .b-chip)[aria-pressed="true"]{background:var(--s-pri-100)!important;color:var(--s-pri-d)!important;border:1px solid var(--s-pri-200)!important;box-shadow:none!important}
 
 /* تبويبات الفئات: خط تحت المختار، كما في واجهات الخدمات الحكومية */
 html[data-model="2"] :is(.fd-cols,.tk-jump,.n5-mitabs){display:flex!important;flex-wrap:nowrap!important;gap:2px!important;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--s-line)!important;background:transparent!important;padding:0!important;border-radius:0!important;box-shadow:none!important}
@@ -291,6 +294,10 @@ html[data-model="2"] :is(.fd-cols,.tk-jump,.n5-mitabs)::-webkit-scrollbar{displa
 html[data-model="2"] :is(.fd-cols button,.tk-jump button,.n5-mitabs a){flex:none;background:transparent!important;border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;box-shadow:none!important;color:var(--s-ink2)!important;font-weight:700!important;padding:10px 12px!important;min-height:44px;white-space:nowrap;margin-bottom:-1px;text-decoration:none}
 html[data-model="2"] :is(.fd-cols button.on,.fd-cols button[aria-selected="true"],.n5-mitabs a[aria-current="page"]){color:var(--s-pri)!important;border-bottom-color:var(--s-pri)!important;background:transparent!important}
 html[data-model="2"] :is(.fd-cols button,.tk-jump button) :is(small,i){font-style:normal;background:var(--s-sunk);color:var(--s-ink2);border-radius:999px;padding:0 7px;margin-inline-start:6px;font-size:12px}
+/* تبويبات المحتوى (لك، الكل، مقاطع، المحفوظات، المسارات): خط تحت المختار كبقية التبويبات، بلا حبة داكنة */
+html[data-model="2"] .fd-tabs{gap:2px!important;padding:0!important;backdrop-filter:none!important;border-bottom:1px solid var(--s-line)!important}
+html[data-model="2"] .fd-tabs button{border-radius:0!important;background:transparent!important;color:var(--s-ink2)!important;font-weight:700!important;border-bottom:2px solid transparent!important;min-height:46px;margin-bottom:-1px}
+html[data-model="2"] .fd-tabs button[aria-selected="true"]{background:transparent!important;color:var(--s-pri)!important;border-bottom-color:var(--s-pri)!important}
 
 /* شارة الحالة: النعناعي وحده، لشيء واحد في الشاشة */
 html[data-model="2"] :is(.m2-badge,.n5-tag,.p-new,.fd-new){background:var(--s-acc-100)!important;color:var(--s-acc-ink)!important;border:0!important;border-radius:999px;font-weight:700}
@@ -306,15 +313,55 @@ html[data-model="2"] .m2-most a:hover{border-color:var(--s-pri-200);background:v
 /* بطاقات الاختصار في الرئيسية تكرار لـ«الأكثر استخدامًا» وشريط التنقل */
 html[data-model="2"] .fd-tiles.t6{display:none!important}
 
-/* صورة واحدة في رأس كل قسم رئيسي */
+/* ===== الصور: أكبرها في الرئيسية، ثم رؤوس الأقسام الرئيسية، ثم صور أصغر في بقية الصفحات وبأماكن مختلفة =====
+   الأحجام في الهاتف/الشاشة الواسعة: الرئيسية 240/420، رأس القسم 150/220، شريط الصفحة الفرعية 120/160،
+   غلاف داخل البطاقة، وصورة جانبية، وصورة صغيرة في زاوية بطاقة. كلها من صور كانفا في m2/img/ */
 html[data-model="2"] #fdHello{display:block}
-html[data-model="2"] #fdHello::before,html[data-model="2"] .do-head:has(~ .tk-find)::before,html[data-model="2"] .n5-lsh::before,html[data-model="2"] .home-hero::before{content:"";display:block;position:static;width:auto;height:150px;border:0;border-radius:16px;background-color:var(--s-sunk);background-position:center;background-size:cover;background-repeat:no-repeat;margin:0 0 16px;pointer-events:none}
-html[data-model="2"] #fdHello::before{background-image:url("m2/img/desk.webp");background-position:center 40%}
+html[data-model="2"] :where(#fdHello,.n5-lsh,.do-head:has(~ .tk-find),.do-head:has(.do-q),.home-hero,section.lab,section.ch,section.block:has(> #mapBody),article.about,.bf-hero-in,header.b-top,.me-card,header.lb-head)::before,html[data-model="2"] :where(header.nb-hero)::after{content:"";display:block;position:static;inset:auto;width:auto;aspect-ratio:auto;opacity:1;transform:none;border:0;border-radius:16px;background-color:var(--s-sunk);background-position:center;background-size:cover;background-repeat:no-repeat;margin:0 0 16px;pointer-events:none}
+/* ١) الرئيسية: الصورة الأكبر */
+html[data-model="2"] #fdHello::before{height:240px;border-radius:20px;margin:0 0 18px;background-image:url("m2/img/home.webp");background-position:center 62%}
+/* ٢) رؤوس الأقسام الرئيسية: دروسي وأدواتي والدليل وحلول المواقف */
+html[data-model="2"] :is(.n5-lsh,.do-head:has(~ .tk-find),.do-head:has(.do-q),.home-hero)::before{height:150px}
 html[data-model="2"] .n5-lsh::before{flex:0 0 100%;background-image:url("m2/img/classroom.webp")}
 html[data-model="2"] .do-head:has(~ .tk-find)::before{background-image:url("m2/img/lab.webp")}
+html[data-model="2"] .do-head:has(.do-q)::before{background-image:url("m2/img/do.webp");background-position:center 45%}
 html[data-model="2"] .home-hero::before{background-image:url("m2/img/library.webp")}
 html[data-model="2"] .home-hero::after{display:none!important}
-@media (min-width:861px){html[data-model="2"] #fdHello::before,html[data-model="2"] .do-head:has(~ .tk-find)::before,html[data-model="2"] .n5-lsh::before,html[data-model="2"] .home-hero::before{height:220px}}
+/* ٣) الصفحات الفرعية: شريط أقصر أعلى الصفحة */
+html[data-model="2"] :is(section.lab,section.ch,section.block:has(> #mapBody))::before{height:120px;margin:0 0 18px}
+html[data-model="2"] section.lab::before{background-image:url("m2/img/practice.webp")}
+html[data-model="2"] section.ch::before{background-image:url("m2/img/challenge.webp");background-position:center 65%}
+html[data-model="2"] section.block:has(> #mapBody)::before{background-image:url("m2/img/map.webp");background-position:center 60%}
+/* ٤) غلاف داخل البطاقة: عن الدليل، وخلاصة الدليل، وحقيبة الصف */
+html[data-model="2"] article.about::before{height:150px;margin:-18px -18px 18px;border-radius:20px 20px 0 0;background-image:url("m2/img/about.webp");background-position:center 62%}
+html[data-model="2"] .bf-hero-in::before{grid-column:1/-1;height:150px;margin:calc(-1*clamp(22px,4vw,40px)) calc(-1*clamp(22px,4vw,40px)) 0;border-radius:0;background-image:url("m2/img/brief.webp")}
+html[data-model="2"] header.b-top::before{height:104px;margin:0 -18px;border-radius:27px 7px 0 0;background-image:url("m2/img/bag.webp");background-position:center 55%}
+/* ٥) صورة صغيرة في زاوية بطاقة «ملفي» */
+html[data-model="2"] .me-card{position:relative}
+html[data-model="2"] .me-card::before{position:absolute;top:20px;inset-inline-end:20px;width:112px;height:64px;margin:0;border-radius:12px;background-image:url("m2/img/desk.webp")}
+/* ٦) دفتر المعلم: شريط فوق العنوان في الهاتف، وصورة جانبية في الشاشة الواسعة */
+html[data-model="2"] header.nb-hero{flex-wrap:wrap}
+html[data-model="2"] header.nb-hero::after{order:-1;flex:0 0 100%;height:120px;margin:0;background-image:url("m2/img/nb.webp");background-position:center 55%}
+/* ٧) الحلول البصرية: صورة حقيقية مكان الرسم في واجهة الصفحة */
+html[data-model="2"] .hero-art{aspect-ratio:16/10;border-radius:16px;background:var(--s-sunk) url("m2/img/vsc.webp") center/cover no-repeat}
+html[data-model="2"] .hero-art > svg{display:none}
+/* ٨) مختبر هندسة تجربة التعلّم: شريط في الهاتف، وصورة جانبية في الشاشة الواسعة */
+html[data-model="2"] header.lb-head::before{height:120px;background-image:url("m2/img/lxd.webp")}
+@media (min-width:861px){
+  html[data-model="2"] #fdHello::before{height:420px}
+  html[data-model="2"] :is(.n5-lsh,.do-head:has(~ .tk-find),.do-head:has(.do-q),.home-hero)::before{height:220px}
+  html[data-model="2"] :is(section.lab,section.ch,section.block:has(> #mapBody))::before{height:160px}
+  html[data-model="2"] article.about::before{height:200px}
+  html[data-model="2"] .bf-hero-in::before{height:180px}
+  html[data-model="2"] header.b-top::before{height:150px}
+  html[data-model="2"] .me-card::before{width:168px}
+  html[data-model="2"] header.nb-hero{flex-wrap:nowrap}
+  html[data-model="2"] header.nb-hero::after{order:0;flex:0 0 320px;height:150px;margin-inline-start:auto}
+  html[data-model="2"] header.lb-head{display:flow-root}
+  html[data-model="2"] header.lb-head::before{float:left;width:380px;height:220px;margin:0 32px 12px 0}
+}
+/* الوضع الليلي: الصور أخفت قليلًا حتى لا تبهر العين */
+html[data-model="2"][data-theme="dark"] :is(#fdHello,.n5-lsh,.do-head,.home-hero,section.lab,section.ch,section.block,article.about,.bf-hero-in,header.b-top,.me-card,header.lb-head)::before,html[data-model="2"][data-theme="dark"] header.nb-hero::after,html[data-model="2"][data-theme="dark"] .hero-art{filter:brightness(.8) saturate(.92)}
 
 /* ===== الحلول البصرية (vsc/) ومختبر هندسة تجربة التعلّم (lxd/) بالنمط نفسه ===== */
 /* الحلول البصرية: جسمها وحده يحمل data-role */
@@ -350,7 +397,7 @@ html[data-model="2"] body[data-role] .path::before{background:var(--s-pri-100)!i
 html[data-model="2"] body[data-role] .st-tab{border-width:1px!important}
 html[data-model="2"] body[data-role] .st-tab[aria-pressed="true"]{border-color:var(--s-pri)!important;box-shadow:inset 0 0 0 1px var(--s-pri)!important}
 html[data-model="2"] .lb-card h3 i{background:var(--s-pri-100)!important;color:var(--s-pri)!important}
-html[data-model="2"] :is(.cp-hero,.bf-hero-in)::before,html[data-model="2"] :is(.cp-hero,.bf-hero-in)::after{display:none!important}
+html[data-model="2"] .cp-hero::before,html[data-model="2"] :is(.cp-hero,.bf-hero-in)::after{display:none!important}
 html[data-model="2"] .b-top .b-tab[aria-current="page"]{background:#FFFFFF!important;color:var(--s-pri)!important;border:1px solid var(--s-pri-200)!important;box-shadow:none!important}
 html[data-model="2"] .b-top .b-tab[aria-current="page"] *{color:var(--s-pri)!important}
 html[data-model="2"] .b-top :is(.b-tab,button[aria-pressed]){color:var(--s-ink2)!important}
@@ -360,3 +407,114 @@ html[data-model="2"] .b-top button[aria-pressed="true"]{background:#FFFFFF!impor
 html[data-model="2"] .lm-top{background:var(--s-pri-50)!important;color:var(--s-ink)!important;justify-items:start!important;text-align:right!important;border:1px solid var(--s-pri-100)}
 html[data-model="2"] .lm-top :is(h2,h3,p,span,b,strong){color:var(--s-ink)!important}
 html[data-model="2"] .lm-top small{color:var(--s-pri)!important}
+
+/* ===== أغلفة المقاطع: لقطة من المقطع بالتصميم الحالي بدل الرسم القديم (vid/m2/<المقطع>.webp) ===== */
+html[data-model="2"] .cl-box{background:#FFFFFF center/cover no-repeat!important}
+html[data-model="2"] .cl-dg{display:none!important}
+html[data-model="2"] :is(.cl-tag,.cl-btn){background:rgba(255,255,255,.94)!important;color:var(--s-ink)!important;border:1px solid var(--s-line)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html[data-model="2"] .cl-btn{color:var(--s-pri)!important}
+html[data-model="2"] .p-clip[data-clip="brain"] .cl-box,html[data-model="2"] .clip[data-clip="brain"] video{background-image:url("vid/m2/brain.webp")!important}
+html[data-model="2"] .p-clip[data-clip="load"] .cl-box,html[data-model="2"] .clip[data-clip="load"] video{background-image:url("vid/m2/load.webp")!important}
+html[data-model="2"] .p-clip[data-clip="dual"] .cl-box,html[data-model="2"] .clip[data-clip="dual"] video{background-image:url("vid/m2/dual.webp")!important}
+html[data-model="2"] .p-clip[data-clip="gestalt"] .cl-box,html[data-model="2"] .clip[data-clip="gestalt"] video{background-image:url("vid/m2/gestalt.webp")!important}
+html[data-model="2"] .p-clip[data-clip="bell"] .cl-box,html[data-model="2"] .clip[data-clip="bell"] video{background-image:url("vid/m2/bell.webp")!important}
+html[data-model="2"] .p-clip[data-clip="ask"] .cl-box,html[data-model="2"] .clip[data-clip="ask"] video{background-image:url("vid/m2/ask.webp")!important}
+html[data-model="2"] .p-clip[data-clip="mayer"] .cl-box,html[data-model="2"] .clip[data-clip="mayer"] video{background-image:url("vid/m2/mayer.webp")!important}
+html[data-model="2"] .p-clip[data-clip="dt"] .cl-box,html[data-model="2"] .clip[data-clip="dt"] video{background-image:url("vid/m2/dt.webp")!important}
+html[data-model="2"] .p-clip[data-clip="ubd"] .cl-box,html[data-model="2"] .clip[data-clip="ubd"] video{background-image:url("vid/m2/ubd.webp")!important}
+html[data-model="2"] .p-clip[data-clip="gagne"] .cl-box,html[data-model="2"] .clip[data-clip="gagne"] video{background-image:url("vid/m2/gagne.webp")!important}
+html[data-model="2"] .p-clip[data-clip="bloom"] .cl-box,html[data-model="2"] .clip[data-clip="bloom"] video{background-image:url("vid/m2/bloom.webp")!important}
+html[data-model="2"] .p-clip[data-clip="udl"] .cl-box,html[data-model="2"] .clip[data-clip="udl"] video{background-image:url("vid/m2/udl.webp")!important}
+html[data-model="2"] .p-clip[data-clip="kirk"] .cl-box,html[data-model="2"] .clip[data-clip="kirk"] video{background-image:url("vid/m2/kirk.webp")!important}
+html[data-model="2"] .p-clip[data-clip="chain"] .cl-box,html[data-model="2"] .clip[data-clip="chain"] video{background-image:url("vid/m2/chain.webp")!important}
+html[data-model="2"] .p-clip[data-clip="daftar"] .cl-box,html[data-model="2"] .clip[data-clip="daftar"] video{background-image:url("vid/m2/daftar.webp")!important}
+html[data-model="2"] .p-clip[data-clip="dialog"] .cl-box,html[data-model="2"] .clip[data-clip="dialog"] video{background-image:url("vid/m2/dialog.webp")!important}
+html[data-model="2"] .p-clip[data-clip="proj"] .cl-box,html[data-model="2"] .clip[data-clip="proj"] video{background-image:url("vid/m2/proj.webp")!important}
+html[data-model="2"] .p-clip[data-clip="distance"] .cl-box,html[data-model="2"] .clip[data-clip="distance"] video{background-image:url("vid/m2/distance.webp")!important}
+html[data-model="2"] .p-clip[data-clip="ucurve"] .cl-box,html[data-model="2"] .clip[data-clip="ucurve"] video{background-image:url("vid/m2/ucurve.webp")!important}
+html[data-model="2"] .clip video{background-color:#FFFFFF!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important}
+
+/* ===== الوضع الليلي ===== */
+/* نيلي داكن للخلفية، وأسطح أفتح قليلًا، ونص فاتح؛ والبنفسجي أفتح للنص والروابط وأغمق قليلًا لتعبئة الأزرار؛ والنعناعي كما هو.
+   القواعد ذات الألوان المكتوبة يقابلها ملف مولَّد (m2/dark.py) تحت html[data-model="2"][data-theme="dark"]. */
+html[data-model="2"][data-theme="dark"]{
+  color-scheme:dark;
+  --s-ink:#ECEAFB; --s-ink2:#B4B0D6; --s-ink3:#9894C0;
+  --s-pri:#A78BFA; --s-pri-h:#C4B5FD; --s-pri-d:#DDD6FE; --s-pri-50:#1E1A3F; --s-pri-100:#2A2357; --s-pri-200:#3B3176;
+  --s-pri-bg:#7C3AED; --s-pri-bg-h:#8B5CF6; --s-ink-bg:#26244A;
+  --s-acc:#34D399; --s-acc-50:#0F2A23; --s-acc-100:#143B30; --s-acc-ink:#6EE7B7;
+  --s-line:#2A2848; --s-line2:#3A3762; --s-sunk:#121128; --s-paper:#17162E;
+  --s-lift:0 12px 32px rgba(0,0,0,.5);
+  --navy-950:#0E0D1F; --navy-900:#15142B; --navy-800:#17162E; --navy-700:#1E1C3A; --navy-600:#2E2B52;
+  --blue-50:#121128; --blue-100:#2A2357; --blue-200:#3B3176; --blue-300:#A78BFA; --blue-500:#8B5CF6; --blue-600:#A78BFA; --blue-800:#C4B5FD;
+  --teal-50:#0F2A23; --teal-100:#143B30; --teal-300:#6EE7B7; --teal-500:#34D399; --teal-700:#6EE7B7;
+  --orange-50:#0F2A23; --orange-100:#143B30; --orange-300:#6EE7B7; --orange-500:#34D399; --orange-700:#6EE7B7;
+  --ink-500:#B4B0D6; --ink-300:#5E5A8A; --ink-100:#2A2848; --white:#FFFFFF;
+  --grad-spectrum:#26244A; --grad-depth:#26244A; --grad-ocean:#7C3AED; --grad-glow:#34D399; --grad-night:#26244A; --grad-wash:#121128; --grad-halo:#26244A;
+  --bg:#0E0D1F; --surface:#17162E; --sunk:#121128; --warm:#1E1A3F;
+  --ink:#ECEAFB; --ink2:#B4B0D6; --ink3:#9894C0; --line:#2A2848;
+  --brand:#7C3AED; --on-brand:#FFFFFF; --anchor:#26244A; --on-anchor:#FFFFFF;
+  --t-brand:#A78BFA; --t-accent:#6EE7B7; --t-teal:#6EE7B7;
+  --accent:#7C3AED; --accent-ink:#FFFFFF; --focus:#A78BFA;
+  --sadu:#A78BFA; --ochre:#6EE7B7; --indigo:#A78BFA; --teal:#6EE7B7; --plum:#A78BFA;
+  --ok:#6EE7B7; --okbg:#0F2A23; --warnbg:#1E1A3F; --warnline:#4C3F94; --infobg:#121128; --hl:#2A2357;
+  --d1:#A78BFA; --d2:#A78BFA; --d3:#A78BFA; --d4:#A78BFA; --d5:#A78BFA; --d6:#A78BFA; --d7:#A78BFA; --d8:#A78BFA; --d9:#A78BFA;
+  --surface-raised:#17162E; --surface-soft:#1E1C3A; --surface-warm:#1E1A3F; --surface-teal:#0F2A23;
+  --text:#ECEAFB; --text-muted:#B4B0D6; --text-brand:#A78BFA; --text-accent:#6EE7B7; --text-teal:#6EE7B7;
+  --highlight:#2A2357; --on-highlight:#ECEAFB; --energy:#7C3AED; --on-energy:#FFFFFF; --on-accent:#FFFFFF;
+  --shadow:none; --shadow-lift:var(--s-lift); --shadow-glow:none;
+}
+html[data-model="2"][data-theme="dark"] body{background:var(--bg)}
+/* الحلول البصرية: --surface فيها خلفية الصفحة لا البطاقة */
+html[data-model="2"][data-theme="dark"] body[data-role]{--surface:#0E0D1F}
+/* حقيبة الصف تعيد تعريف --white سطحًا داكنًا في الليل؛ والنص على التعبئة يبقى أبيض */
+html[data-model="2"][data-theme="dark"] .bag{--on-anchor:#FFFFFF;--on-brand:#FFFFFF}
+/* نص كحلي كان على صبغة فاتحة تُعرَّف في قاعدة أخرى: الصبغة داكنة في الليل */
+html[data-model="2"][data-theme="dark"] :is(.bag .ls-tbl tbody th,.bag .b-pill:is(.b-blue,.b-teal,.b-orange),.ex-kind em){color:var(--s-ink)!important}
+/* شريط دقائق الحصة في مختبر هندسة تجربة التعلّم: ألوانه مكتوبة في الصفحة، فتأخذ في الليل تعبئة داكنة يُقرأ عليها الرقم الأبيض */
+html[data-model="2"][data-theme="dark"] .lb-bar span[style*="background:var(--navy-900)"]{background:#3B3176!important}
+html[data-model="2"][data-theme="dark"] .lb-bar span[style*="background:var(--blue-800)"]{background:#4C3F94!important}
+html[data-model="2"][data-theme="dark"] .lb-bar span[style*="background:var(--teal-700)"]{background:#047857!important}
+html[data-model="2"][data-theme="dark"] .lb-bar span[style*="background:var(--blue-500)"]{background:#7C3AED!important}
+html[data-model="2"][data-theme="dark"] .lx-bands li:nth-child(1) .bar i{background:#4C3F94}
+/* زر الوضع: شمس في الليل */
+html[data-model="2"][data-theme="dark"] :is(.theme-btn,#themeBtn) svg{display:none}
+html[data-model="2"][data-theme="dark"] :is(.theme-btn,#themeBtn)::before{content:"";width:20px;height:20px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4.2'/%3E%3Cpath d='M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4.2'/%3E%3Cpath d='M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6'/%3E%3C/svg%3E") center/contain no-repeat}
+/* الورق والطباعة والشاشة الذكية، ولوحة تجربة الحصة الجاهزة للطباعة، تبقى فاتحة في الليل */
+html[data-model="2"][data-theme="dark"] :is(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet){
+  color-scheme:light;
+  --s-ink:#1E1B4B; --s-ink2:#5B5880; --s-ink3:#6E6B8F; --s-pri:#6D28D9; --s-pri-h:#5B21B6; --s-pri-d:#4C1D95; --s-pri-50:#F5F3FF; --s-pri-100:#EDE9FE; --s-pri-200:#DDD6FE;
+  --s-pri-bg:#6D28D9; --s-pri-bg-h:#5B21B6; --s-ink-bg:#1E1B4B; --s-acc-50:#ECFDF5; --s-acc-100:#D1FAE5; --s-acc-ink:#047857;
+  --s-line:#E7E5F2; --s-line2:#D4D1E6; --s-sunk:#F7F6FB; --s-paper:#FFFFFF;
+  --navy-950:#14123A; --navy-900:#1E1B4B; --navy-800:#2A2660; --navy-700:#3B3775; --navy-600:#5B5880;
+  --blue-50:#F7F6FB; --blue-100:#EDE9FE; --blue-200:#DDD6FE; --blue-300:#C4B5FD; --blue-500:#6D28D9; --blue-600:#5B21B6; --blue-800:#4C1D95;
+  --teal-50:#ECFDF5; --teal-100:#D1FAE5; --teal-300:#6EE7B7; --teal-700:#047857; --orange-50:#ECFDF5; --orange-100:#D1FAE5; --orange-300:#6EE7B7; --orange-700:#047857;
+  --ink-500:#5B5880; --ink-300:#A6A3C2; --ink-100:#E7E5F2;
+  --bg:#FFFFFF; --surface:#FFFFFF; --sunk:#F7F6FB; --warm:#F5F3FF; --ink:#1E1B4B; --ink2:#5B5880; --ink3:#6E6B8F; --line:#E7E5F2;
+  --brand:#6D28D9; --anchor:#1E1B4B; --t-brand:#6D28D9; --t-accent:#047857; --t-teal:#047857; --accent:#6D28D9; --hl:#EDE9FE; --ok:#047857; --okbg:#ECFDF5;
+}
+html[data-model="2"][data-theme="dark"] :is(.ps,.sheet,.nbp){color:#1E1B4B}
+/* أيقونات البلاطات والمقاطع وأغلفتها: صورها بيضاء الخلفية، فتُعكس ألوانها في الليل مع حفظ الدرجات */
+html[data-model="2"][data-theme="dark"] .lv3{filter:invert(1) hue-rotate(180deg)!important}
+html[data-model="2"][data-theme="dark"] :is(.cl-v,.clip video){filter:invert(.92) hue-rotate(180deg)}
+html[data-model="2"][data-theme="dark"] .cl-box{background-color:#141414!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="brain"] .cl-box{background-image:url("vid/m2/brain-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="load"] .cl-box{background-image:url("vid/m2/load-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="dual"] .cl-box{background-image:url("vid/m2/dual-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="gestalt"] .cl-box{background-image:url("vid/m2/gestalt-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="bell"] .cl-box{background-image:url("vid/m2/bell-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="ask"] .cl-box{background-image:url("vid/m2/ask-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="mayer"] .cl-box{background-image:url("vid/m2/mayer-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="dt"] .cl-box{background-image:url("vid/m2/dt-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="ubd"] .cl-box{background-image:url("vid/m2/ubd-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="gagne"] .cl-box{background-image:url("vid/m2/gagne-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="bloom"] .cl-box{background-image:url("vid/m2/bloom-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="udl"] .cl-box{background-image:url("vid/m2/udl-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="kirk"] .cl-box{background-image:url("vid/m2/kirk-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="chain"] .cl-box{background-image:url("vid/m2/chain-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="daftar"] .cl-box{background-image:url("vid/m2/daftar-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="dialog"] .cl-box{background-image:url("vid/m2/dialog-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="proj"] .cl-box{background-image:url("vid/m2/proj-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="distance"] .cl-box{background-image:url("vid/m2/distance-d.webp")!important}
+html[data-model="2"][data-theme="dark"] .p-clip[data-clip="ucurve"] .cl-box{background-image:url("vid/m2/ucurve-d.webp")!important}
+html[data-model="2"][data-theme="dark"] :is(.cl-tag,.cl-btn){background:rgba(23,22,46,.92)!important;border-color:var(--s-line2)!important}

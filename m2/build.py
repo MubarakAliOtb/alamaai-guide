@@ -13,7 +13,12 @@ for page, up in PAGES:
     out = f'm2/auto-{page.replace("/", "-").replace(".html", "")}.css'
     subprocess.run([sys.executable, str(M / 'auto.py'), page, out], check=True)
     css = (R / out).read_text(encoding='utf-8') + core_css + (nb_in if page == 'index.html' else '')
-    if up: css = css.replace('url("fonts/', f'url("{up}fonts/').replace('url("m2/', f'url("{up}m2/')
+    # الوضع الليلي: قواعد مولَّدة لكل لون مكتوب في الصفحة وفي الطبقة الفاتحة (m2/dark.py)
+    light = M / ('_light-' + page.replace('/', '-').replace('.html', '') + '.css'); light.write_text(css, encoding='utf-8')
+    dk = f'm2/dark-{page.replace("/", "-").replace(".html", "")}.css'
+    subprocess.run([sys.executable, str(M / 'dark.py'), page, str(light.relative_to(R)), dk], check=True); light.unlink()
+    css += (R / dk).read_text(encoding='utf-8')
+    if up: css = css.replace('url("fonts/', f'url("{up}fonts/').replace('url("m2/', f'url("{up}m2/').replace('url("vid/', f'url("{up}vid/')
     js_p = js.replace("var M2_BASE = '';", f"var M2_BASE = '{up}';")
     if page == 'index.html': js_p += '\nwindow.NB_PCSS_M2 = ' + _json.dumps(nb_ex, ensure_ascii=False).replace('</', '<\\/') + ';\n'
     s = p.read_text(encoding='utf-8')

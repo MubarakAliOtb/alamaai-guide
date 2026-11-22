@@ -1,8 +1,9 @@
 # يحدّث offline.json (قائمة ما يُحفظ للعمل بلا إنترنت وأحجامه) بعد إضافة ملفات النموذج 2.
 import json, os, glob
 d = json.load(open('offline.json', encoding='utf-8'))
-# النموذج 2 البسيط: خط واحد (Alm Sans) بأرقامه الإنجليزية، وشعاره، وأيقونات البلاطات، وصور رؤوس الأقسام
-add = sorted(glob.glob('fonts/m2d-alm-*.woff2')) + ['m2/logo.svg', 'm2/logo.png', 'm2/lv3-s.webp'] + sorted(glob.glob('m2/img/*.webp'))
+# التصميم البسيط: خط واحد (Alm Sans) بأرقامه الإنجليزية، وشعاره، وأيقونات البلاطات، وصور الأقسام،
+# وأغلفة المقاطع (vid/m2/*.webp للنهار و*-d.webp لليل) لأنها تظهر في المنشورات قبل تشغيل المقطع
+add = sorted(glob.glob('fonts/m2d-alm-*.woff2')) + ['m2/logo.svg', 'm2/logo.png', 'm2/lv3-s.webp'] + sorted(glob.glob('m2/img/*.webp')) + sorted(glob.glob('vid/m2/*.webp'))
 core = d['groups']['core']['u']
 # ما لم يعد يُستعمل منذ النمط البسيط: خط ميخك وأرقامه، وأيقونات النمط السابق، ومجلد الشخصيات
 OLD = lambda u: u.startswith(('fonts/Mikhak-', 'fonts/m2d-mik-', 'm2/char/')) or u == 'm2/lv3-m2.webp'

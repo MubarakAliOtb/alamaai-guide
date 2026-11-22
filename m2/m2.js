@@ -1,24 +1,26 @@
 /* طبقة التصميم البسيط، وهي التصميم الوحيد للدليل منذ إلغاء النموذج السابق.
-   data-model="2" ثابت في وسم <html> وتطبّقه هذه الطبقة أيضًا عند التحميل؛ ولا وضع داكن.
+   data-model="2" ثابت في وسم <html> وتطبّقه هذه الطبقة أيضًا عند التحميل.
+   الوضع الليلي: data-theme صريح دائمًا (dark أو light) من اختيار المعلم (dms:theme) وإلا من إعداد الجهاز، فلا يومض الوضع الآخر.
    (اسم «النموذج 2» باقٍ في الشيفرة لأن قواعد الطبقة كلها معلّقة به.) */
 (function () {
   var R = document.documentElement, K = 'alm:model';
   function saved() { try { localStorage.removeItem(K); } catch (e) {} return '2'; }
   function userTheme() { try { var t = JSON.parse(localStorage.getItem('dms:theme') || 'null'); return t === 'dark' || t === 'light' ? t : ''; } catch (e) { return ''; } }
   var forcing = false;
-  function forceLight() { if (R.getAttribute('data-model') === '2' && R.getAttribute('data-theme') !== 'light') { forcing = true; R.setAttribute('data-theme', 'light'); forcing = false; } }
-  function setMeta(m) {
-    var ms = document.querySelectorAll('meta[name="theme-color"]');
-    for (var i = 0; i < ms.length; i++) {
-      if (!ms[i].hasAttribute('data-m1')) ms[i].setAttribute('data-m1', ms[i].getAttribute('content') || '');
-      ms[i].setAttribute('content', m === '2' ? '#FFFFFF' : ms[i].getAttribute('data-m1'));
-    }
+  function sysDark() { try { return !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches); } catch (e) { return false; } }
+  /* سمة صريحة: اختيار المعلم أولًا، ثم إعداد الجهاز */
+  function theme() {
+    var t = userTheme() || (sysDark() ? 'dark' : 'light');
+    if (R.getAttribute('data-theme') !== t) { forcing = true; R.setAttribute('data-theme', t); forcing = false; }
+    setMeta();
+  }
+  function setMeta() {
+    var c = R.getAttribute('data-theme') === 'dark' ? '#17162E' : '#FFFFFF', ms = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < ms.length; i++) ms[i].setAttribute('content', c);
   }
   function apply(m, user) {
     R.setAttribute('data-model', m);
-    if (m === '2') forceLight();
-    else { var t = userTheme(); if (t) R.setAttribute('data-theme', t); else R.removeAttribute('data-theme'); }
-    setMeta(m);
+    theme();
     if (m === '2') M2Tag.start(); else { M2Tag.stop(); mostOff(); }
     digits(m === '2');
     vids(m === '2');
@@ -81,7 +83,9 @@
   window.m2Num = function (s) { return R.getAttribute('data-model') === '2' ? window.m2Digits(s) : s; };
   window.almModel = function () { return R.getAttribute('data-model') === '2' ? 2 : 1; };
   window.almSetModel = function () { apply('2', true); };
-  new MutationObserver(function () { if (!forcing) forceLight(); }).observe(R, { attributes: true, attributeFilter: ['data-theme'] });
+  /* زر الوضع في الشريط يكتب data-theme ويحفظه؛ وإن أُزيلت السمة عادت من الإعداد، ويتبع الجهاز إن لم يختر المعلم */
+  new MutationObserver(function () { if (forcing) return; if (!R.getAttribute('data-theme')) theme(); else setMeta(); }).observe(R, { attributes: true, attributeFilter: ['data-theme'] });
+  try { var mq = matchMedia('(prefers-color-scheme: dark)'), onSys = function () { if (!userTheme()) theme(); }; if (mq.addEventListener) mq.addEventListener('change', onSys); else if (mq.addListener) mq.addListener(onSys); } catch (e) {}
 
   /* وسم البطاقات: كل صندوق منحنٍ بحدّ وخلفية فاتحة يأخذ في النموذج 2 حدًّا أسود وظلًّا صلبًا،
      والصناديق داخل صناديق، أو داخل عمود القراءة، تأخذ الحدّ وحده بلا ظل. الورق المطبوع خارج ذلك. */
