@@ -1785,7 +1785,7 @@ function pagePrint(P){
   $("#prPrint").onclick=()=>{ if(IN_FRAME){ toast("افتح index.html في المتصفح للطباعة"); return; }
     let root=$("#print-root"); if(!root){ root=document.createElement("div"); root.id="print-root"; document.body.appendChild(root); }
     root.innerHTML=$("#prOut").innerHTML; $$(".sheet",root).forEach(s=>s.style.zoom="");
-    document.documentElement.classList.add("print-mode"); setTimeout(()=>{ window.print(); setTimeout(()=>{ document.documentElement.classList.remove("print-mode"); root.innerHTML=""; },400); },60); };
+    document.documentElement.classList.add("print-mode"); setTimeout(()=>{ const t0=document.title; document.title=cur.name; window.print(); setTimeout(()=>{ document.documentElement.classList.remove("print-mode"); root.innerHTML=""; document.title=t0; },400); },60); };
   addEventListener("resize",fit); ROUTE_CLEANUP.push(()=>removeEventListener("resize",fit));
   open();
 }

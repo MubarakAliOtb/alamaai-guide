@@ -1792,7 +1792,7 @@ function techLine(x){const t=tech(x.n);return '<div class="tq"><b>'+esc(t.name)+
 function sheet(){
   const k=mk(),dts=reviewDates(),out=S.techs.filter(x=>x.seg<0||x.seg>=S.segs.length||!tech(x.n).t),ex=S.exit.filter(x=>x.trim()),last=S.segs.length-1;
   const box=(h,b)=>'<div class="bx"><h5>'+h+'</h5>'+b+'</div>',dash='<span class="mt">—</span>';
-  return '<div class="sh-top"><div><small>دليل المعلم الألمعي · هندسة تجربة التعلّم</small><h2>لوحة تجربة الحصة</h2></div>'
+  return '<div class="sh-top"><div><small>هندسة تجربة التعلّم</small><h2>لوحة تجربة الحصة</h2></div>'
     +'<p>'+[SUBJ[S.subj],'الصف '+S.grade,S.title||'عنوان الدرس',S.period?'الحصة '+S.period:'',ar(S.mins)+' دقيقة','شعبة '+SIZE[S.size]].filter(Boolean).map(esc).join(' · ')+'</p></div>'
     +'<div class="lb-bar">'+bar()+'</div>'
     +'<table><thead><tr><th>حقل القالب</th><th>ما يجري، والتقنية بضابطها ومؤشرها</th><th>د</th></tr></thead><tbody>'
@@ -1853,7 +1853,7 @@ function onClick(e){
   else if(a==='addseg'){const at=S.segs.length-1,n=S.segs.filter(s=>/^المحور/.test(s.n)).length;S.segs.splice(at,0,{n:'المحور '+(ORD[n]||ar(n+1)),what:'',m40:0,m45:0,nt:''});reindex((v,x)=>v>=at?v+1:v);drawAll()}
   else if(a==='delseg'){const i=+b.dataset.i;S.segs.splice(i,1);reindex((v,x)=>v===i?x:v>i?v-1:v);drawAll()}
   else if(a==='show'){$('#lbSheet',root).scrollIntoView({behavior:'smooth',block:'start'})}
-  else if(a==='print'){try{window.print()}catch(err){msg('الطباعة غير متاحة في هذه النافذة؛ افتح المختبر من موقع الدليل.')}}
+  else if(a==='print'){const t0=document.title;try{document.title='لوحة تجربة الحصة'+(S.title?' — '+S.title:'');window.print()}catch(err){msg('الطباعة غير متاحة في هذه النافذة؛ افتح المختبر من موقع الدليل.')}finally{setTimeout(()=>{document.title=t0},1500)}}
   else if(a==='copy'){const tx=sheetText(),ok=()=>msg('نُسخ نص اللوحة.'),no=()=>msg('تعذّر النسخ من هذه النافذة.');
     try{navigator.clipboard.writeText(tx).then(ok,no)}catch(err){no()}}
   else if(a==='export'){try{const u=URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:'application/json'})),l=document.createElement('a');l.href=u;l.download='لوحة-تجربة-الحصة.json';document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);msg('صُدّر ملف اللوحة.')}catch(err){msg('تعذّر التصدير من هذه النافذة.')}}
