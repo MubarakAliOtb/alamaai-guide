@@ -2559,14 +2559,14 @@ function ticketPNG(t){
     var foot=t.foot?wrap(t.foot,'400 26px '+F,W-2*pad-(logo?250:0)):[];
     var H=270+blocks.reduce(function(s,b){return s+50+b.lines.length*52+22},0)+150;
     c.width=W;c.height=H;ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
-    var g=ctx.createLinearGradient(W,0,0,210);g.addColorStop(0,'#2563EB');g.addColorStop(1,'#0D1B3D');ctx.fillStyle=g;ctx.fillRect(0,0,W,210);
+    var g=ctx.createLinearGradient(W,0,0,210);g.addColorStop(0,'#6D28D9');g.addColorStop(1,'#1E1B4B');ctx.fillStyle=g;ctx.fillRect(0,0,W,210);
     try{ctx.direction='rtl'}catch(e){}
     ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='700 54px '+F;ctx.fillText(t.title,W-pad,100);
     ctx.font='400 28px '+F;ctx.fillText('مركز الاستشارات والحلول البصرية',W-pad,158);
-    if(t.code){try{ctx.direction='ltr'}catch(e){}ctx.textAlign='left';ctx.font='700 30px '+F;var cw=ctx.measureText(t.code).width+44;ctx.fillStyle='#14B8A6';ctx.beginPath();if(ctx.roundRect)ctx.roundRect(pad,62,cw,56,28);else ctx.rect(pad,62,cw,56);ctx.fill();ctx.fillStyle='#0D1B3D';ctx.fillText(t.code,pad+22,101);try{ctx.direction='rtl'}catch(e){}ctx.textAlign='right'}
-    var y=280;blocks.forEach(function(b){ctx.fillStyle='#1D4ED8';ctx.font='700 30px '+F;ctx.fillText(b.l,W-pad,y);y+=50;ctx.fillStyle='#0D1B3D';ctx.font='400 34px '+F;b.lines.forEach(function(ln){ctx.fillText(ln,W-pad,y);y+=52});y+=22});
-    ctx.fillStyle='#DCE6FA';ctx.fillRect(pad,H-140,W-2*pad,2);
-    ctx.fillStyle='#4A5878';ctx.font='400 26px '+F;foot.forEach(function(ln,i){ctx.fillText(ln,W-pad,H-76+i*36-(foot.length-1)*18)});
+    if(t.code){try{ctx.direction='ltr'}catch(e){}ctx.textAlign='left';ctx.font='700 30px '+F;var cw=ctx.measureText(t.code).width+44;ctx.fillStyle='#34D399';ctx.beginPath();if(ctx.roundRect)ctx.roundRect(pad,62,cw,56,28);else ctx.rect(pad,62,cw,56);ctx.fill();ctx.fillStyle='#1E1B4B';ctx.fillText(t.code,pad+22,101);try{ctx.direction='rtl'}catch(e){}ctx.textAlign='right'}
+    var y=280;blocks.forEach(function(b){ctx.fillStyle='#5B21B6';ctx.font='700 30px '+F;ctx.fillText(b.l,W-pad,y);y+=50;ctx.fillStyle='#1E1B4B';ctx.font='400 34px '+F;b.lines.forEach(function(ln){ctx.fillText(ln,W-pad,y);y+=52});y+=22});
+    ctx.fillStyle='#E7E5F2';ctx.fillRect(pad,H-140,W-2*pad,2);
+    ctx.fillStyle='#5B5880';ctx.font='400 26px '+F;foot.forEach(function(ln,i){ctx.fillText(ln,W-pad,H-76+i*36-(foot.length-1)*18)});
     if(logo){var lh=66,lw=lh*1130.3/333.94;ctx.drawImage(logo,pad,H-112,lw,lh)}
     return new Promise(function(res,rej){try{c.toBlob(function(b){if(b)res(b);else rej(new Error('empty'))},'image/png')}catch(e){rej(e)}});
   }
@@ -2906,7 +2906,7 @@ TOOLS.distance=function(el){
 /* ---------- five seconds ---------- */
 TOOLS.five=function(el){
   var url=null,log=store.get('five',[]);
-  el.innerHTML=fld('الرسالة التي تقصدها','<input class="in" data-msg placeholder="ما الفكرة التي يجب أن يخرج بها القارئ؟">')+fld('صورة الوسيلة (اختياري)','<input class="in" type="file" accept="image/*" data-file aria-label="اختر صورة الوسيلة">','إن لم ترفع صورة فاعرض الورقة بيدك حين يبدأ العدّ.')+'<div class="row"><button class="btn btn-energy" type="button" data-go>'+ic('eye')+' ابدأ العرض: ٥ ثوانٍ</button></div><div data-stage hidden style="position:fixed;inset:0;z-index:80;background:#0A1530;display:grid;place-items:center;padding:16px"><img data-img alt="" style="max-width:100%;max-height:82vh;border-radius:16px;background:#fff"><p data-cnt class="num" style="position:absolute;top:14px;inset-inline-start:18px;color:#fff;font-weight:700;font-size:34px"></p><p data-hold style="color:#fff;font-size:22px;font-weight:700;text-align:center" hidden>اعرض الورقة الآن</p></div><div class="out" data-ask hidden>'+fld('ما الفكرة الرئيسة؟','<input class="in" data-a1>')+fld('أين وقعت عينك أولًا؟','<input class="in" data-a2>')+'<div class="row"><button class="btn" type="button" data-cmp>قارن بالمقصود</button></div></div><div class="out teal" data-res hidden></div><div class="field"><span class="flabel">آخر النتائج</span><div data-log></div></div>';
+  el.innerHTML=fld('الرسالة التي تقصدها','<input class="in" data-msg placeholder="ما الفكرة التي يجب أن يخرج بها القارئ؟">')+fld('صورة الوسيلة (اختياري)','<input class="in" type="file" accept="image/*" data-file aria-label="اختر صورة الوسيلة">','إن لم ترفع صورة فاعرض الورقة بيدك حين يبدأ العدّ.')+'<div class="row"><button class="btn btn-energy" type="button" data-go>'+ic('eye')+' ابدأ العرض: ٥ ثوانٍ</button></div><div data-stage hidden style="position:fixed;inset:0;z-index:80;background:#1E1B4B;display:grid;place-items:center;padding:16px"><img data-img alt="" style="max-width:100%;max-height:82vh;border-radius:16px;background:#fff"><p data-cnt class="num" style="position:absolute;top:14px;inset-inline-start:18px;color:#fff;font-weight:700;font-size:34px"></p><p data-hold style="color:#fff;font-size:22px;font-weight:700;text-align:center" hidden>اعرض الورقة الآن</p></div><div class="out" data-ask hidden>'+fld('ما الفكرة الرئيسة؟','<input class="in" data-a1>')+fld('أين وقعت عينك أولًا؟','<input class="in" data-a2>')+'<div class="row"><button class="btn" type="button" data-cmp>قارن بالمقصود</button></div></div><div class="out teal" data-res hidden></div><div class="field"><span class="flabel">آخر النتائج</span><div data-log></div></div>';
   function drawLog(){$('[data-log]',el).innerHTML=log.length?'<p class="note num">طابق المقصود في '+arn(log.filter(function(x){return x}).length)+' من '+arn(log.length)+' محاولة.</p>':'<p class="note">لا محاولات بعد.</p>'}
   el.addEventListener('change',function(e){if(!e.target.matches('[data-file]'))return;var f=e.target.files[0];url=null;if(!f)return;try{var fr=new FileReader();fr.onload=function(){url=String(fr.result)};fr.onerror=function(){url=null;toast('تعذّر فتح الصورة. اعرض الورقة بيدك.')};fr.readAsDataURL(f)}catch(err){url=null}});
   $('[data-img]',el).addEventListener('error',function(){this.hidden=true;$('[data-hold]',el).hidden=false});
@@ -3067,9 +3067,9 @@ var MC=document.createElement('canvas').getContext('2d');
 var FONTS=Promise.resolve();
 try{if(document.fonts&&document.fonts.load)FONTS=Promise.all([document.fonts.load('400 30px "Alm Sans Arabic"','ابجد'),document.fonts.load('700 30px "Alm Sans Arabic"','ابجد')]).catch(function(){})}catch(e){}
 var PALS={
- lab:{n:'سماء',bg:'#FFFFFF',pan:'#EEF4FF',ink:'#0D1B3D',mut:'#4A5878',ln:'#B9CDFB',c:['#2563EB','#14B8A6','#FF7A1A','#0D1B3D'],on:['#FFFFFF','#0D1B3D','#0D1B3D','#FFFFFF'],t:['#DCE7FF','#C6EFE9','#FFE1C7','#D5E0F2']},
- sea:{n:'واحة',bg:'#FFFFFF',pan:'#E7F8F5',ink:'#0D1B3D',mut:'#4A5878',ln:'#5FD3C5',c:['#0B7C70','#2563EB','#FF7A1A','#0D1B3D'],on:['#FFFFFF','#FFFFFF','#0D1B3D','#FFFFFF'],t:['#C6EFE9','#DCE7FF','#FFE1C7','#D5E0F2']},
- dusk:{n:'غروب',bg:'#FFFFFF',pan:'#FFF3E8',ink:'#0D1B3D',mut:'#4A5878',ln:'#FFB26B',c:['#0D1B3D','#FF7A1A','#14B8A6','#2563EB'],on:['#FFFFFF','#0D1B3D','#0D1B3D','#FFFFFF'],t:['#D5E0F2','#FFE1C7','#C6EFE9','#DCE7FF']}
+ lab:{n:'بنفسج',bg:'#FFFFFF',pan:'#F7F6FB',ink:'#1E1B4B',mut:'#5B5880',ln:'#DDD6FE',c:['#6D28D9','#34D399','#A78BFA','#1E1B4B'],on:['#FFFFFF','#1E1B4B','#1E1B4B','#FFFFFF'],t:['#EDE9FE','#D1FAE5','#F5F3FF','#E7E5F2']},
+ sea:{n:'نعناع',bg:'#FFFFFF',pan:'#ECFDF5',ink:'#1E1B4B',mut:'#5B5880',ln:'#6EE7B7',c:['#047857','#6D28D9','#34D399','#1E1B4B'],on:['#FFFFFF','#FFFFFF','#1E1B4B','#FFFFFF'],t:['#D1FAE5','#EDE9FE','#ECFDF5','#E7E5F2']},
+ dusk:{n:'نيلي',bg:'#FFFFFF',pan:'#F5F3FF',ink:'#1E1B4B',mut:'#5B5880',ln:'#C4B5FD',c:['#1E1B4B','#6D28D9','#34D399','#A78BFA'],on:['#FFFFFF','#FFFFFF','#1E1B4B','#1E1B4B'],t:['#E7E5F2','#EDE9FE','#D1FAE5','#F5F3FF']}
 };
 function vfont(sz,w){return (w||400)+' '+sz+'px '+VFONT}
 /* عرض النص بالخط والحجم والوزن؛ يُحفظ القياس بعد تحميل الخط (قبله قد يقيس بخط بديل) */
@@ -4027,11 +4027,11 @@ function seatPos(f){var p=[],g,s,ry=[124,176,228,280],gc=[[430,158],[170,158],[4
   else if(f==='D'){for(g=0;g<4;g++){var d=gc[g];[[25,-17],[-25,-17],[-25,17],[25,17]].forEach(function(o,k){p.push([d[0]+o[0],d[1]+o[1],g,k])})}}
   else{[[516,112,0,0],[516,154,0,1],[516,196,0,2],[516,238,0,3],[516,280,1,0],[448,326,1,1],[390,326,1,2],[332,326,1,3],[268,326,2,0],[210,326,2,1],[152,326,2,2],[84,280,2,3],[84,112,3,0],[84,154,3,1],[84,196,3,2],[84,238,3,3]].forEach(function(v){p.push(v)})}
   return p}
-function seatSVG(f){var G=['#2563EB','#14B8A6','#FF7A1A','#0D1B3D'],O=['#FFFFFF','#0D1B3D','#0D1B3D','#FFFFFF'],h='<svg class="seatsvg" viewBox="0 0 600 430" role="img" aria-label="مسقط الفصل: التشكيل '+SEATF[f][0]+'. '+SEATF[f][1]+'" style="direction:rtl"><rect x="20" y="36" width="560" height="358" rx="14" fill="#EEF4FF" stroke="#B9CDFB" stroke-width="2"/>'
-   +'<rect x="216" y="40" width="168" height="13" rx="6" fill="#0D1B3D"/><text x="300" y="27" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">الشاشة: مقدمة الصف</text>'
+function seatSVG(f){var G=['#6D28D9','#34D399','#A78BFA','#1E1B4B'],O=['#FFFFFF','#1E1B4B','#1E1B4B','#FFFFFF'],h='<svg class="seatsvg" viewBox="0 0 600 430" role="img" aria-label="مسقط الفصل: التشكيل '+SEATF[f][0]+'. '+SEATF[f][1]+'" style="direction:rtl"><rect x="20" y="36" width="560" height="358" rx="14" fill="#F7F6FB" stroke="#DDD6FE" stroke-width="2"/>'
+   +'<rect x="216" y="40" width="168" height="13" rx="6" fill="#1E1B4B"/><text x="300" y="27" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">الشاشة: مقدمة الصف</text>'
    +'<rect x="512" y="33" width="52" height="9" rx="4" fill="var(--orange-500)"/><text x="538" y="27" text-anchor="middle" font-size="14" font-weight="700" fill="var(--text)">الباب</text>'
-   +'<rect x="34" y="58" width="74" height="22" rx="6" fill="#B9C9E8"/><text x="71" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#0D1B3D">المعلم</text>'
-   +'<rect x="40" y="356" width="520" height="24" rx="8" fill="#DCE7FF"/><text x="300" y="373" text-anchor="middle" font-size="13" font-weight="700" fill="#0D1B3D">مكان الحقائب</text>';
+   +'<rect x="34" y="58" width="74" height="22" rx="6" fill="#D4D1E6"/><text x="71" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#1E1B4B">المعلم</text>'
+   +'<rect x="40" y="356" width="520" height="24" rx="8" fill="#EDE9FE"/><text x="300" y="373" text-anchor="middle" font-size="13" font-weight="700" fill="#1E1B4B">مكان الحقائب</text>';
   for(var i=0;i<6;i++)h+='<rect x="'+(62+i*82)+'" y="390" width="62" height="8" rx="4" fill="var(--teal-500)"/>';
   h+='<text x="300" y="420" text-anchor="middle" font-size="14" font-weight="700" fill="var(--text)">النوافذ على امتداد الجدار المقابل</text>';
   seatPos(f).forEach(function(s){h+='<rect x="'+(s[0]-22)+'" y="'+(s[1]-15)+'" width="44" height="30" rx="9" fill="'+G[s[2]]+'"/><text x="'+s[0]+'" y="'+(s[1]+6)+'" text-anchor="middle" font-size="16" font-weight="700" fill="'+O[s[2]]+'">'+arn(s[3]+1)+'</text>'});
@@ -4140,7 +4140,7 @@ TOOLS.backrow=function(el){
     var pct=mm/R.w*100,lines=Math.floor(R.h/(mm*2.5)),ref=$('[data-ref]',el),fxn=BR_FX.filter(function(q){return q[0]===st.fx})[0][1];
     if(st.far){var ap=mm*k*p;ref.hidden=false;ref.style.fontSize=Math.max(6,ap/ALIF).toFixed(1)+'px'}
     else{ref.hidden=true;/* شريط بارتفاع أدنى حرف، بمقياس الصورة المكبّرة */var bh2=Math.min(bh*.9,mm/R.w*bw),bx=Math.round(bw-14*dpr),by=Math.round(bh-10*dpr),t=Math.max(2,Math.round(3*dpr));
-      x.fillStyle='#fff';x.fillRect(bx-4*dpr-t,by-bh2-t,8*dpr+2*t,bh2+2*t);x.fillStyle='#FF7A1A';x.fillRect(bx-t/2,by-bh2,t,bh2);x.fillRect(bx-4*dpr,by-bh2,8*dpr,t);x.fillRect(bx-4*dpr,by-t,8*dpr,t)}
+      x.fillStyle='#fff';x.fillRect(bx-4*dpr-t,by-bh2-t,8*dpr+2*t,bh2+2*t);x.fillStyle='#34D399';x.fillRect(bx-t/2,by-bh2,t,bh2);x.fillRect(bx-4*dpr,by-bh2,8*dpr,t);x.fillRect(bx-4*dpr,by-t,8*dpr,t)}
     view.classList.toggle('far',st.far);view.classList.toggle('wide',st.far&&W>avail+1);
     cv.setAttribute('aria-label',(st.far?'الوسيلة كما تبدو من '+arn(st.d)+' متر':'الوسيلة مكبّرة')+(st.fx==='none'?'':'، '+fxn));
     $('[data-cap]',el).textContent=st.far?('هكذا تبدو '+kindName()+' من '+arn(st.d)+' متر، لمن ينظر إلى شاشته من '+(BR_DEV[st.dev].eye>=100?arn(BR_DEV[st.dev].eye/100)+' متر':arn(BR_DEV[st.dev].eye)+' سم')+'. والسطر تحتها أدنى حرف يقبله المعيار من هذه المسافة: ما كان في وسيلتك أصغر منه لا يُقرأ من هناك.'+(W>avail+1?' الصورة أعرض من هذا الإطار: اسحبها لترى بقيتها.':'')+(cap?' صُغّرت قليلًا لتتسع لها الصفحة.':''))
@@ -4195,7 +4195,7 @@ SX['tool-backrow']=function(){return 'محاكاة المسافة آخر الص�
    اللوحة الجدارية، بطاقة الاستذكار. كل مخرج مشهد Scene بعرض ١٢٠٠ وحدة وارتفاع يتبع المقاس، والقالب نفسه يرسم في مداه الرأسي.
    الخط يكبر بمقياس ts حيث يتسع الرسم: يُجرَّب سلّم المقاييس ويُؤخذ ما يجعل أصغر نص أكبر ما يمكن بلا قطع.
    القياسات المعروضة حساب لا تقدير: النقطة من مقاس الورق، ومسافة القراءة من قاعدة adaMM نفسها (معيار اللوحات)، وارتفاع الألف يُقاس من الخط. */
-var ST_SRC=null,ST_ALIF=.686,ST_INK='#0D1B3D',ST_GRY='#5B6B8C',ST_MID='#3C4A6B';
+var ST_SRC=null,ST_ALIF=.686,ST_INK='#1E1B4B',ST_GRY='#5B6B8C',ST_MID='#3C4A6B';
 var ST_PAP={a6:[105,148],a5:[148,210],a4:[210,297],a3:[297,420],a2:[420,594],a1:[594,841]};
 var ST_FMT={board:['شاشة الصف','١٦:٩ · عرض وكشف متدرج'],sheet:['ورقة العمل','A4 · حبر قليل وأسئلة تفكير'],poster:['اللوحة الجدارية','A3 فأكبر · للجدار والممر'],card:['بطاقة الاستذكار','A6 أو A5 · للجيب والمراجعة']};
 var ST_TS=[2.2,2,1.8,1.65,1.5,1.4,1.3,1.2,1.1,1,.9,.8];
@@ -4511,7 +4511,7 @@ SX['tool-studio']=function(){return 'المقاسات: '+Object.keys(ST_FMT).map
 var WP_ADD=null;/* لوحة قادمة من استوديو المقاسات: {n,w,h} بالسنتيمتر */
 var WP_KIND={front:['الجدار الأمامي','الشاشة والباب: بؤرة هادئة'],side:['جدار جانبي','لوحات الصف وركن الوحدة'],win:['جدار النوافذ','ضوء بلا ورق'],hall:['ممر أو مرفق','لوحات عبور ومحطات مسار']};
 /* الفئة: [الاسم، الرمز، لون الإطار، لون التعبئة، تقطيع الإطار] — اللون لا يحمل المعنى وحده: مع كل لوحة حرف فئتها */
-var WP_CAT={scr:['حول الشاشة','ش','#0D1B3D','#D5E0F2',''],cls:['لوحات الصف المشتركة','ص','#1D4ED8','#DCE7FF',''],unit:['لوحة الوحدة الجارية','و','#0B7C70','#C6EFE9',''],anc:['المراسي المعرفية','م','#0B7C70','#E7F8F5','7 5'],work:['معرض إنتاج الطلبة','ط','#B54E00','#FFE1C7',''],val:['القيم والهوية','ق','#0D1B3D','#EEF4FF','7 5'],hall:['لوحة ممر أو محطة مسار','ع','#B54E00','#FFF3E8','7 5']};
+var WP_CAT={scr:['حول الشاشة','ش','#1E1B4B','#E7E5F2',''],cls:['لوحات الصف المشتركة','ص','#5B21B6','#EDE9FE',''],unit:['لوحة الوحدة الجارية','و','#047857','#D1FAE5',''],anc:['المراسي المعرفية','م','#047857','#ECFDF5','7 5'],work:['معرض إنتاج الطلبة','ط','#7C3AED','#F3E8FF',''],val:['القيم والهوية','ق','#1E1B4B','#F7F6FB','7 5'],hall:['لوحة ممر أو محطة مسار','ع','#7C3AED','#FAF5FF','7 5']};
 var WP_FIX={mag:['مغناطيس','يُبدَّل في ثوانٍ'],pocket:['جيب شفاف','تُبدَّل ورقته'],cork:['لوح فلين','دبابيس تُنزع'],tack:['لاصق يُزال','بلا أثر على الجدار'],rail:['سكة أو حبل','ملاقط ومشابك'],perm:['تثبيت دائم','يحتاج اعتماد الإدارة']};
 var WP_FT={screen:['الشاشة الذكية',166,93],door:['الباب',90,210],win:['نافذة',150,120],board:['سبورة',240,120]};
 var WP_LIB=[['هدف الحصة','scr',100,20,'mag'],['مفردات الحصة','scr',42,59.4,'mag'],['حكايتنا وأخبارنا','cls',120,90,'cork'],['إنجازاتنا ونتعلّم معًا','cls',120,90,'cork'],['ميثاقنا','cls',90,60,'cork'],
@@ -4618,8 +4618,8 @@ function wpSvg(P,sel,px,bad){var W=P.w,H=P.h,m=Math.max(22,W*.045),vw=W+2*m,k=vw
     var sr=ph>=60&&pw>=64,tp=ph<38?2:16,bt=ph-(sr?17:3),mw=ph<38?pw-46:pw-10,fs=0;
     if(mw>=28&&bt-tp>=13)[12,10.5].some(function(sz){var q;ls=vwrap(wpName(t),sz,700,mw);if(!ls.length||ls.length*(sz+3)>bt-tp+1)return false;for(q=0;q<ls.length;q++)if(vmw(ls[q],sz,700)>mw+1)return false;fs=sz;return true});
     if(fs){y0=((tp+bt)/2-(ls.length-1)*(fs+3)/2+fs*.36)*k;
-      for(j=0;j<ls.length;j++)g+='<text class="wp-t" x="'+vR(t.w/2)+'" y="'+vR(y0+j*(fs+3)*k)+'" font-size="'+f(fs)+'" font-weight="700" fill="#0D1B3D" text-anchor="middle">'+esc(ls[j])+'</text>'}
-    if(sr)g+='<text class="wp-t" x="'+vR(t.w/2)+'" y="'+vR(t.h-7*k)+'" font-size="'+f(10.5)+'" fill="#4A5878" text-anchor="middle">'+wpF(t.w)+' × '+wpF(t.h)+'</text>';
+      for(j=0;j<ls.length;j++)g+='<text class="wp-t" x="'+vR(t.w/2)+'" y="'+vR(y0+j*(fs+3)*k)+'" font-size="'+f(fs)+'" font-weight="700" fill="#1E1B4B" text-anchor="middle">'+esc(ls[j])+'</text>'}
+    if(sr)g+='<text class="wp-t" x="'+vR(t.w/2)+'" y="'+vR(t.h-7*k)+'" font-size="'+f(10.5)+'" fill="#5B5880" text-anchor="middle">'+wpF(t.w)+' × '+wpF(t.h)+'</text>';
     if(pw>=20&&ph>=18)g+='<text class="wp-t" x="'+vR(t.w-5*k)+'" y="'+vR(14*k)+'" font-size="'+f(12)+'" font-weight="700" fill="'+c[2]+'" text-anchor="start">'+c[1]+'</text>';
     h+=g+'</g>'});
   return h+dimT+'</svg>'}
@@ -4643,12 +4643,12 @@ function wpPlanScenes(P,by){var med=wpMed(P.eye),cv=wpCover(P),it=P.it,n=it.leng
   function first(){var s=new Scene('lab',false,VW,849),p=s.p,y0=vhead(s,{title:'خطة تعليق: '+P.name,sub:WP_KIND[P.kind][0]+' · '+wpF(P.w/100)+' × '+wpF(P.h/100)+' م · '+(n?stCount(n,'لوحة واحدة','لوحتان','لوحات','لوحة'):'بلا لوحات')},44),top=y0+6,
       avH=Math.max(180,(n&&one?360:520)-(y0-150)),k=Math.min(1040/P.w,avH/P.h),ox=600-P.w*k/2,oy=top,W=P.w*k,H=P.h*k;
     s.rect(ox,oy,W,H,'#FFFFFF',0,p.ink,2.5);
-    if(med!=null){s.rect(ox,oy+H-(med+15)*k,W,30*k,'#E7F8F5',0);s.line(ox,oy+H-med*k,ox+W,oy+H-med*k,'#0B7C70',2,'8 6')}
+    if(med!=null){s.rect(ox,oy+H-(med+15)*k,W,30*k,'#ECFDF5',0);s.line(ox,oy+H-med*k,ox+W,oy+H-med*k,'#047857',2,'8 6')}
     P.fx.forEach(function(r){var L=ox+(P.w-r.x-r.w)*k,T=oy+(P.h-r.y-r.h)*k;s.rect(L,T,r.w*k,r.h*k,'#E3E8F2',0,p.mut,1.5);if(r.w*k>70&&r.h*k>24)s.box(WP_FT[r.k][0],L+r.w*k/2,T+r.h*k/2,r.w*k-6,r.h*k-4,[18,16,14],{f:p.mut})});
     it.forEach(function(r,i){var c=WP_CAT[r.c],L=ox+(P.w-r.x-r.w)*k,T=oy+(P.h-r.y-r.h)*k,w=r.w*k,h=r.h*k,z=Math.max(11,Math.min(22,Math.min(w,h)*.62));s.rect(L,T,w,h,c[3],3,c[2],2);if(c[4])s.o[s.o.length-1].dash=c[4];s.box(vn(s,i+1),L+w/2,T+h/2,w,h,[Math.round(z)],{w:700})});
     s.line(ox-14,oy+H,ox+W+14,oy+H,p.ink,5);
     s.txt('العرض '+wpF(P.w/100)+' م · الارتفاع '+wpF(P.h/100)+' م',ox,oy+H+28,19,{f:p.mut,a:'e'});
-    if(med!=null)s.txt('الخط المتقطع: مستوى العين '+wpF(med)+' سم',ox+W,oy+H+28,19,{f:'#0B7C70',a:'s'});
+    if(med!=null)s.txt('الخط المتقطع: مستوى العين '+wpF(med)+' سم',ox+W,oy+H+28,19,{f:'#047857',a:'s'});
     if(n&&one){table(s,oy+H+44,0,n);done=n}
     foot(s);return s}
   pages.push(first());
