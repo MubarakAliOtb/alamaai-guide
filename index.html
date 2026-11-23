@@ -7313,6 +7313,16 @@ button.ar-c:hover{transform:translateY(-2px);background:var(--brand);color:var(-
 .tk-ga:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
 .tk-ga b{font-size:19px;font-family:var(--f-display);line-height:1.3;position:relative;padding-inline-end:34px}
 .tk-ga small{font-size:13px;line-height:1.7;color:rgba(255,255,255,.9);position:relative;max-width:27ch}
+.tk-ga small.tk-by{font-size:12px;font-weight:700;line-height:1.5;max-width:none;margin-top:1px}
+.tk-ga .tk-by bdi,.tk-gset bdi{white-space:nowrap}
+.tk-mom-g .tk-ggrid .tk-by{display:none}
+.tk-gset{grid-column:1/-1;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;margin-top:10px;padding-top:18px;border-top:1px solid var(--line)}
+.tk-gset p{margin:0;display:flex;flex-direction:column;gap:2px}
+.tk-gset b{font-size:17px;line-height:1.4;color:var(--ink)}
+.tk-gset small{font-size:13px;font-weight:700;color:var(--ink2)}
+.tk-gset a{font-size:14px;font-weight:700;color:var(--t-brand);text-decoration:none;padding-block:4px}
+.tk-gset a::after{content:" ←"}
+.tk-gset a:hover{text-decoration:underline}
 .tk-gart{position:absolute;inset-inline-end:-16px;bottom:-20px;width:128px;height:128px;opacity:.2;pointer-events:none}
 .tk-gart .ic{width:100%;height:100%;stroke-width:1.15}
 .tk-gplay{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-style:normal;font-weight:700;font-size:13.5px;background:#fff;color:#0D1B3D;border-radius:999px;padding:5px 14px;position:relative}
@@ -15774,7 +15784,7 @@ function fdHelloHTML(){hyQ();const h=new Date(Date.now()+3*3600e3).getUTCHours()
   <div class="fd-tiles t6"><a class="fd-tile" href="#do"><i class="lv3" style="--k:0" aria-hidden="true"></i><b>حلول المواقف</b><small>حلّ سريع لموقف في صفك</small></a>
   <a class="fd-tile" href="#lessons"><i class="lv3" style="--k:1" aria-hidden="true"></i><b>دروسي</b><small>دروس هذا الأسبوع وعروضها</small></a>
   <a class="fd-tile" href="#tools"><i class="lv3" style="--k:2" aria-hidden="true"></i><b>أدواتي</b><small>مخطط الحصة، والتغذية الراجعة، والمزيد</small></a>
-  <a class="fd-tile fd-tile-g" href="#tools" data-tkjump="g"><i class="lv3" style="--k:3" aria-hidden="true"></i><b>ألعاب الصف</b><small>تسع ألعاب تفاعلية على الشاشة</small></a>
+  <a class="fd-tile fd-tile-g" href="#tools" data-tkjump="g"><i class="lv3" style="--k:3" aria-hidden="true"></i><b>ألعاب الصف</b><small>تسع ألعاب تفاعلية، ومجموعة «متعة صفية»</small></a>
   <a class="fd-tile" href="#nb"><i class="lv3" style="--k:10" aria-hidden="true"></i><b>دفتر تحضيري</b><small>دفتر المعلم للعام: الخطط والمهام والقوائم</small></a>
   <a class="fd-tile" href="#vs"><i class="lv3" style="--k:11" aria-hidden="true"></i><b>الحلول البصرية</b><small>وسائل تُفهم في ثوانٍ: مختبر ونماذج وحقائب تدريبية</small></a></div>
   ${fdTodayHTML()}
@@ -18621,25 +18631,32 @@ const TK_T=[
  ['grid','شبكة الاستدعاء','ai-grid','ست بطاقات من أسئلة الدرس لختام الحصة في خمس دقائق: بالخيارات، ثم من الذاكرة، ثم مع التعليل','#tk/grid','g',2],
  ['duel','مبارزة السبورة','ai-dual','السؤال نفسه في نصفي الشاشة: طالبان يتسابقان إلى الجواب الصحيح، ومن أخطأ أُقفل نصفه','#tk/duel','g',2],
  ['spot','اكتشف الخطأ','ai-lens','سؤال وجواب معروض: صحيح هو أم فيه خطأ؟ يحكم الصف، ومن كشف الخطأ صوّبه','#tk/spot','g',2],
+/* «متعة صفية»: مجموعة مستقلة في fun/ بنظام تصميم الدليل، إعداد وتطوير: أ. عمر خالد العتيبي. [7] المؤلف، [8] نص زر البطاقة */
+ ['fgroup','ألعاب جماعية','ai-people','أكثر من مئة لعبة للصف كله: كلامية وحركية وتمثيل ورسم وفِرق، ومعها مؤقت ونقاط للفِرق وقرعة تختار اللعبة','fun/index.html#games','g',2,'أ. عمر خالد العتيبي','تصفّح الألعاب'],
+ ['fbrain','ألعاب ذهنية','ai-brain','أربع عشرة لعبة قصيرة تُلعب على الشاشة: ذاكرة وانتباه وسرعة ومنطق، ومعها مئة نشاط ذهني للفصل','fun/index.html#brain','g',2,'أ. عمر خالد العتيبي','العب الآن'],
+ ['friddle','ألغاز ذهنية','ai-qmark','مئة لغز بالعربية بمستوياتها: كلمات ومنطق وأرقام وتفكير جانبي، ولكل لغز تلميح وإجابة ووضع عرض كبير','fun/index.html#riddles','g',2,'أ. عمر خالد العتيبي','افتح الألغاز'],
  ['log','سجل الوقائع','ai-note','الموقف في ثوانٍ بتاريخه ودرسه، إيجابيًا كان أو يحتاج متابعة: دليل موثّق للسلوك والتواصل','#tk/log','a',1],
  ['report','التقرير الدوري','ai-doc','تقرير لكل طالب بعناصر الدليل الخمسة، يُبنى من درجاته وحفظه ونقاطه ووقائعه (م٥٧/٥)','#tk/report','a',1],
  ['fbk',0,0,0,'#fbk','a'],['hifz',0,0,0,'#hifz','a'],['parent',0,0,0,'#parent','a'],['wcard',0,0,0,'#wcard','a'],
  ['backup','نسخة احتياطية شاملة','ai-box','كل ما كتبته في الحقيبة والدفتر والأدوات في ملف واحد تحفظه عندك، وتستعيده على أي جهاز','#tk/backup','a',1]];
 const TK_M=[['b','قبل الحصة','خطّط وأعدّ ما تحتاجه'],['d','في الحصة','على شاشة الصف ومع طلابك'],['g','الألعاب التفاعلية','تعلّم باللعب على شاشة الصف، بلا أجهزة للطلاب'],['a','بعد الحصة','وثّق وقوّم وتواصل']];
-function tkTool(x){const F=(FD_TOOLS.find(t=>t[0]===x[0])||[]);return {id:x[0],name:x[1]||F[1]||x[0],ic:x[2]||FD_TIC[x[0]]||F[2]||'ai-toolbox',desc:x[3]||F[3]||'',href:x[4],m:x[5],isNew:x[6]===2}}
+function tkTool(x){const F=(FD_TOOLS.find(t=>t[0]===x[0])||[]);return {id:x[0],name:x[1]||F[1]||x[0],ic:x[2]||FD_TIC[x[0]]||F[2]||'ai-toolbox',desc:x[3]||F[3]||'',href:x[4],m:x[5],isNew:x[6]===2,by:x[7]||'',go:x[8]||''}}
 const tkPins=()=>{const p=store.get('tkPins',[]);return Array.isArray(p)?p.filter(id=>TK_T.some(x=>x[0]===id)):[]};
 function tkCard(t,pins){const on=pins.includes(t.id);return `<div class="tk-tc"><a class="tg-c" href="${t.href}"${t.id==='book'?' data-book':''}>${tkIc(t.ic)}<b>${t.name}</b><small>${t.desc}</small>${t.isNew?'<i class="tk-new">جديد</i>':''}</a><button type="button" class="tk-pin" data-tkpin="${t.id}" aria-pressed="${on}" aria-label="${on?'ألغِ تثبيت':'ثبّت'} ${esc(t.name)}" title="${on?'ألغِ التثبيت':'ثبّت في الأعلى'}">${tkSvg(TK_P.star)}</button></div>`}
-const TK_GART={cup:'M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 21h7M10 17h4',hive:'M12 2.5l4 2.3v4.6l-4 2.3-4-2.3V4.8zM8 11.7l4 2.3v4.6l-4 2.3-4-2.3V14zM16 11.7l4 2.3v4.6l-4 2.3-4-2.3V14z',summit:'M3 20l6-10 3 4.5 2.5-3.5L21 20zM9 10V4l4 1.5L9 7',pairs:'M4 6h7v12H4zM13 6h7v12h-7zM7.5 10.5v3M16.5 10.5v3',arena:'M3 5h18v14H3zM3 10h18M9 5v14M15 5v14',diwan:'M3 4h5v6H3zM9.5 4h5v6h-5zM16 4h5v6h-5zM3 14h5v6H3zM9.5 14h5v6h-5zM16 14h5v6h-5zM3 12h18'};
-function tkGameCard(t,pins){const on=pins.includes(t.id);return `<div class="tk-tc tk-gc g-${t.id}"><a class="tk-ga" href="${t.href}"><span class="tk-gart" aria-hidden="true">${tkSvg(TK_GART[t.id]||TK_P.gamepad)}</span><b>${t.name}</b><small>${t.desc}</small><i class="tk-gplay">${tkI('play')}تشغيل اللعبة</i>${t.isNew?'<em class="tk-new">جديد</em>':''}</a><button type="button" class="tk-pin" data-tkpin="${t.id}" aria-pressed="${on}" aria-label="${on?'ألغِ تثبيت':'ثبّت'} ${esc(t.name)}" title="${on?'ألغِ التثبيت':'ثبّت في الأعلى'}">${tkSvg(TK_P.star)}</button></div>`}
+const TK_GART={cup:'M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 21h7M10 17h4',hive:'M12 2.5l4 2.3v4.6l-4 2.3-4-2.3V4.8zM8 11.7l4 2.3v4.6l-4 2.3-4-2.3V14zM16 11.7l4 2.3v4.6l-4 2.3-4-2.3V14z',summit:'M3 20l6-10 3 4.5 2.5-3.5L21 20zM9 10V4l4 1.5L9 7',pairs:'M4 6h7v12H4zM13 6h7v12h-7zM7.5 10.5v3M16.5 10.5v3',arena:'M3 5h18v14H3zM3 10h18M9 5v14M15 5v14',diwan:'M3 4h5v6H3zM9.5 4h5v6h-5zM16 4h5v6h-5zM3 14h5v6H3zM9.5 14h5v6h-5zM16 14h5v6h-5zM3 12h18',fgroup:'M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M16 11a2.5 2.5 0 1 0 0-5M17.5 14.5A5 5 0 0 1 21 20',fbrain:'M13 2L4 14h7l-1 8 9-12h-7z',friddle:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.7.4-1.1.9-1.1 1.8M12 17h.01'};
+/* رأس المجموعة داخل شبكة الألعاب: اسمها ومُعدّها ورابط صفحتها (يختفي أثناء البحث، فتبقى نسبة كل بطاقة عليها) */
+const TK_FUN={name:'متعة صفية',href:'fun/index.html',go:'افتح المجموعة: أفكار ونماذج للطباعة'};
+const tkSetHead=t=>`<div class="tk-gset" data-tkhide><p><b>${TK_FUN.name}</b><small>إعداد وتطوير: <bdi>${esc(t.by)}</bdi></small></p><a href="${TK_FUN.href}">${TK_FUN.go}</a></div>`;
+function tkGameCard(t,pins){const on=pins.includes(t.id);return `<div class="tk-tc tk-gc g-${t.id}"><a class="tk-ga" href="${t.href}"><span class="tk-gart" aria-hidden="true">${tkSvg(TK_GART[t.id]||TK_P.gamepad)}</span><b>${t.name}</b><small>${t.desc}</small>${t.by?`<small class="tk-by">${TK_FUN.name} · إعداد وتطوير: <bdi>${esc(t.by)}</bdi></small>`:''}<i class="tk-gplay">${tkI('play')}${t.go||'تشغيل اللعبة'}</i>${t.isNew?'<em class="tk-new">جديد</em>':''}</a><button type="button" class="tk-pin" data-tkpin="${t.id}" aria-pressed="${on}" aria-label="${on?'ألغِ تثبيت':'ثبّت'} ${esc(t.name)}" title="${on?'ألغِ التثبيت':'ثبّت في الأعلى'}">${tkSvg(TK_P.star)}</button></div>`}
 function tkToolsHTML(){const pins=tkPins();const all=TK_T.map(tkTool);const cnt=m=>all.filter(t=>t.m===m).length;
   const hero=(cls,href,ic,b,s,go,attr='')=>`<a class="tg-hero tk-hero-s ${cls}" href="${href}"${attr}><span class="tg-hero-ic">${tkIc(ic)}</span><span><b>${b}</b><small>${s}</small></span><i class="tg-hero-go">${go}</i></a>`;
   const top=(typeof tkBkNagHTML==='function'?tkBkNagHTML():'')+(typeof tkSetupCta==='function'?tkSetupCta():'')+(typeof tkCtxBarHTML==='function'?tkCtxBarHTML():'');
   return `<div class="do-head"><h2>أدواتي</h2><p>أدوات تختصر عملًا يتكرر كل يوم، مرتبة بلحظات يومك: قبل الحصة، وفيها، وبعدها، ومعها ألعاب تفاعلية لشاشة الصف. ثبّت ما تستعمله كثيرًا بالنجمة فيظهر في الأعلى. وما تكتبه فيها يبقى على جهازك.</p></div>${top}
   <div class="tk-find"><label class="tk-find-in">${tkI('search')}<input type="search" data-tkfind placeholder="ابحث عن أداة أو لعبة…" aria-label="ابحث في الأدوات والألعاب" autocomplete="off" enterkeyhint="search"></label><nav class="tk-jump" aria-label="أقسام الأدوات">${TK_M.map(([m,h])=>`<button type="button" data-tkjump="${m}">${h}<i>${bgN(cnt(m))}</i></button>`).join('')}</nav></div>
-  <div class="tk-heroes" data-tkhide>${hero('','#bag/map','ai-toolbox','حقيبة الصف','طلابك ودرجاتهم ونقاطهم وأوسمتهم وشهاداتهم، ورحلة الصف وفِرقه، لكل صفوفك. بياناتك على جهازك وحده.','فتح الحقيبة')}${hero('tg-hero2','#tools','ai-trophy','الألعاب التفاعلية','تسع ألعاب على شاشة الصف: مسابقة الكأس، وديوانية الأسئلة، وخلية المعرفة، وسلّم القمة، وبطاقات الذاكرة، وميدان التحدي، وشبكة الاستدعاء، ومبارزة السبورة، واكتشف الخطأ.','إلى الألعاب',' data-tkjump="g"')}${hero('tg-hero3','#nb','ai-books','دفتر المعلم','دفترك للعام باسمك وصفوفك: الأنظمة والخطط والمهام والقوائم، للطباعة والتصدير.','فتح الدفتر')}${hero('tg-hero4','#vs','ai-layout','الحلول البصرية','من معلومة معقّدة إلى وسيلة تُفهم في ثوانٍ: مختبر تنفيذي ونماذج وأدوات وأدلة، وحقائب تدريبية.','فتح المنصة')}${hero('tg-hero5','lxd/index.html','ai-peak','هندسة تجربة التعلّم','من بيانات الحصة إلى لوحة تجربة مطبوعة: منحنى على القالب الرسمي، وتقنيات بضوابطها ومؤشراتها، وقيمة وختام، ومعها دليل من ست صفحات.','فتح المختبر')}</div>
+  <div class="tk-heroes" data-tkhide>${hero('','#bag/map','ai-toolbox','حقيبة الصف','طلابك ودرجاتهم ونقاطهم وأوسمتهم وشهاداتهم، ورحلة الصف وفِرقه، لكل صفوفك. بياناتك على جهازك وحده.','فتح الحقيبة')}${hero('tg-hero2','#tools','ai-trophy','الألعاب التفاعلية','تسع ألعاب على شاشة الصف، من مسابقة الكأس إلى اكتشف الخطأ، ومعها «متعة صفية»: ألعاب جماعية وذهنية وألغاز وأفكار، إعداد وتطوير أ. عمر خالد العتيبي.','إلى الألعاب',' data-tkjump="g"')}${hero('tg-hero3','#nb','ai-books','دفتر المعلم','دفترك للعام باسمك وصفوفك: الأنظمة والخطط والمهام والقوائم، للطباعة والتصدير.','فتح الدفتر')}${hero('tg-hero4','#vs','ai-layout','الحلول البصرية','من معلومة معقّدة إلى وسيلة تُفهم في ثوانٍ: مختبر تنفيذي ونماذج وأدوات وأدلة، وحقائب تدريبية.','فتح المنصة')}${hero('tg-hero5','lxd/index.html','ai-peak','هندسة تجربة التعلّم','من بيانات الحصة إلى لوحة تجربة مطبوعة: منحنى على القالب الرسمي، وتقنيات بضوابطها ومؤشراتها، وقيمة وختام، ومعها دليل من ست صفحات.','فتح المختبر')}</div>
   <div id="tkFindNone" class="tk-empty" hidden><b>لا أداة بهذا الاسم</b><span>جرّب كلمة أخرى، مثل: اختبار، حفظ، لعبة، مجموعات، مقاعد.</span></div>
   ${pins.length?`<section class="tg tk-pinned" data-tksec><h2 class="a9-h3 tg-h">أدواتك المثبتة</h2><div class="tg-grid">${pins.map(id=>{const t=all.find(t=>t.id===id);return t.m==='g'?tkGameCard(t,pins):tkCard(t,pins)}).join('')}</div></section>`:`<p class="tk-pinhint" data-tkhide>${tkSvg(TK_P.star)}<span>اضغط النجمة على أي أداة لتثبيتها هنا.</span></p>`}
-  ${TK_M.map(([m,h,s])=>`<section class="tg tk-mom tk-mom-${m}" id="tkSec-${m}" data-tksec><h2 class="a9-h3 tg-h">${h}<small>${s}</small></h2><div class="${m==='g'?'tk-ggrid':'tg-grid'}">${all.filter(t=>t.m===m).map(t=>m==='g'?tkGameCard(t,pins):tkCard(t,pins)).join('')}</div></section>`).join('')}`}
+  ${TK_M.map(([m,h,s])=>`<section class="tg tk-mom tk-mom-${m}" id="tkSec-${m}" data-tksec><h2 class="a9-h3 tg-h">${h}<small>${s}</small></h2><div class="${m==='g'?'tk-ggrid':'tg-grid'}">${all.filter(t=>t.m===m).map((t,i,a)=>m==='g'?(t.by&&!(a[i-1]||{}).by?tkSetHead(t):'')+tkGameCard(t,pins):tkCard(t,pins)).join('')}</div></section>`).join('')}`}
 /* البحث العام (نافذة البحث): الأدوات والألعاب والدروس قبل بطاقات الدليل وصفحاته */
 function tkSearchHits(q){const n=tkNorm(q).trim();if(n.length<2)return '';const ws=n.split(/\s+/).filter(w=>w.length>1);if(!ws.length)return '';const hit=s=>{const x=tkNorm(s);return ws.every(w=>x.includes(w))};
   const T=almToolRank(TK_T.map(tkTool).filter(t=>t.id!=='book'&&t.id!=='run'),almKeys(q));   /* v104: أي كلمة دالة بترتيب، وأسماء بديلة (A2-07) */
@@ -18648,7 +18665,7 @@ function tkSearchHits(q){const n=tkNorm(q).trim();if(n.length<2)return '';const 
   const LS=[];[6,7,8,9].forEach(g=>{const C=lsCatOf(g)||{};Object.keys(C).forEach(id=>{if(!LS_BUILT.has(id))return;const c=C[id];if(hit(c[0]+' '+(c[7]||'')+' '+(c[3]||'')))LS.push([id,g,c])})});
   const row=(href,k,b,p,attr='')=>`<a href="${href}" data-close-search${attr}><span class="r-k"><span>${k}</span></span><b>${b}</b>${p?`<p>${p}</p>`:''}</a>`;let h='';
   if(SM.length)h+='<p class="sres-sec">خلاصة الدليل</p>'+SM.map(x=>row(x[0],x[1],x[2],x[3])).join('');
-  if(T.length||H.length)h+=`<p class="sres-sec">أدوات وألعاب · ${ar(T.length+H.length)}</p>`+[...H.map(x=>row(x[0],'أدواتي',x[1],x[2].replace(' دفتر تحضيري التحضير',''))),...T.slice(0,6).map(t=>row(t.href,t.m==='g'?'لعبة تفاعلية':'أداة',esc(t.name),esc(t.desc)))].join('');
+  if(T.length||H.length)h+=`<p class="sres-sec">أدوات وألعاب · ${ar(T.length+H.length)}</p>`+[...H.map(x=>row(x[0],'أدواتي',x[1],x[2].replace(' دفتر تحضيري التحضير',''))),...T.slice(0,6).map(t=>row(t.href,t.m==='g'?'لعبة تفاعلية':'أداة',esc(t.name),esc(t.desc+(t.by?' · متعة صفية، إعداد وتطوير: '+t.by:''))))].join('');
   if(LS.length)h+=`<p class="sres-sec">دروس · ${ar(LS.length)}</p>`+LS.slice(0,6).map(([id,g,c])=>row('#bag/lesson/'+id,`الصف ${FD_GRN[g]} · ${esc(c[3]||'')} · الأسبوع ${FD_WK[c[4]-1]||''}`,esc(tkLesson(id).title),'')).join('')+(LS.length>6?`<p class="sres-meta">و${ar(LS.length-6)} دروس أخرى؛ زد كلمة لتضييق البحث.</p>`:'');
   if(VS.length)h+=`<p class="sres-sec">الحلول البصرية · ${ar(VS.length)}</p>`+VS.slice(0,5).map(v=>{const k=String(v[2]||'').split(' · ');return row(vsHash(v[0]),'الحلول البصرية'+(k[0]?' · '+esc(k[0]):''),esc(v[1]),k[1]?esc(k.slice(1).join(' · ')):'')}).join('')+(VS.length>5?`<p class="sres-meta">و${ar(VS.length-5)} صفحات أخرى في الحلول البصرية؛ زد كلمة لتضييق البحث.</p>`:'');
   return h?h+'<p class="sres-sec">في الدليل</p>':''}
@@ -20161,8 +20178,8 @@ TK_PAGES.lmap={render(M){const B=nwS('lm');const g=B.g;if(!['full','blank'].incl
 
 /* ---------- ٣) النسخة الاحتياطية الشاملة ----------
    كل ما كتبه المعلم على هذا الجهاز في ملف واحد يحفظه عنده: الحقيبة، والدفتر، والأدوات وسجلاتها، وتقدّم المسابقة، وتفضيلاته. لا يُرفع شيء إلى أي مكان. */
-const BK_PARTS=[['fdBag.v1','حقيبة الصف','الصفوف والطلاب والدرجات والحفظ والنقاط'],['nb.v1','دفتر المعلم','صفحات الدفتر وجداوله'],['tk.v1','الأدوات','صفوفك وجدولك ومهامك، وتخصيص عروضك وملاحظاتك، وخريطة الجلوس والجرّة'],['tk.log.v1','سجل الوقائع','وقائع الطلاب الموثقة'],['tk.rep.v1','التقارير الدورية','ما كتبته في تقارير الطلاب'],['fdCup.v1','مسابقة الكأس','لاعبو المسابقة وتقدّمهم'],['dms:','التفضيلات والتحضير','مخططات الحصص والمحفوظات والمثبّت والمظهر'],['vsc.','الحلول البصرية','مشاريع المختبر، وما كتبته في أدواتها واستماراتها'],['lxd.','هندسة تجربة التعلّم','لوحات تجربة الحصة التي بنيتها في المختبر']];
-const bkPre=k=>k==='dms:'||k==='vsc.'||k==='lxd.';
+const BK_PARTS=[['fdBag.v1','حقيبة الصف','الصفوف والطلاب والدرجات والحفظ والنقاط'],['nb.v1','دفتر المعلم','صفحات الدفتر وجداوله'],['tk.v1','الأدوات','صفوفك وجدولك ومهامك، وتخصيص عروضك وملاحظاتك، وخريطة الجلوس والجرّة'],['tk.log.v1','سجل الوقائع','وقائع الطلاب الموثقة'],['tk.rep.v1','التقارير الدورية','ما كتبته في تقارير الطلاب'],['fdCup.v1','مسابقة الكأس','لاعبو المسابقة وتقدّمهم'],['dms:','التفضيلات والتحضير','مخططات الحصص والمحفوظات والمثبّت والمظهر'],['vsc.','الحلول البصرية','مشاريع المختبر، وما كتبته في أدواتها واستماراتها'],['lxd.','هندسة تجربة التعلّم','لوحات تجربة الحصة التي بنيتها في المختبر'],['mtaa_','متعة صفية','المفضلة، والألغاز المحلولة، والفِرق ونقاطها، وأفضل نتائجك في الألعاب الذهنية']];
+const bkPre=k=>k==='dms:'||k==='vsc.'||k==='lxd.'||k==='mtaa_';
 let bkIn=null;
 const bkIs=k=>BK_PARTS.some(p=>bkPre(p[0])?k.startsWith(p[0]):k===p[0]);
 function bkCollect(){const out={};try{if(TK)localStorage.setItem(TK_KEY,JSON.stringify(TK))}catch(e){}try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&bkIs(k)){const v=localStorage.getItem(k);if(v!=null)out[k]=v}}}catch(e){}return out}
@@ -20346,7 +20363,7 @@ function meTTHTML(){let n=0;const cell=(d,p)=>{const P=tdParse(TK.tt[d+'.'+p]);i
 const ME_TOUR=[['ai-home2','الرئيسية','«حصتي الآن» في أعلى الصفحة تعرف حصتك من جدولك، وتفتح عرضها بضغطة واحدة.','#home','إلى الرئيسية'],
  ['ai-screen','صفحة الدرس','فيها التحضير بالقالب الرسمي والشاشات وملفات PDF. ومن «خصّص عرضي» تخفي شاشة، أو تضيف شاشتك وصورتك وملاحظتك.','#bag/sessions','كل الحصص'],
  ['ai-layout','على شاشة الصف','المسافة تكشف ثم تنتقل، والسهمان للتنقل. ومفتاح M لدرج المعلم، ومفتاح P للقلم، ومفتاح O لكل الشاشات، ومفتاح F لملء الشاشة.','',''],
- ['ai-toolbox','أدواتي والألعاب','أدوات لما قبل الحصة وفيها وبعدها، وتسع ألعاب لشاشة الصف، وكلها تفتح على درسك مباشرة.','#tools','أدواتي'],
+ ['ai-toolbox','أدواتي والألعاب','أدوات لما قبل الحصة وفيها وبعدها، وتسع ألعاب لشاشة الصف تفتح على درسك مباشرة، ومعها مجموعة «متعة صفية» من الألعاب الجماعية والذهنية والألغاز.','#tools','أدواتي'],
  ['ai-box','بياناتك عندك','أسماء طلابك ودرجاتهم على جهازك وحده. خذ «نسخة احتياطية شاملة» كل أسبوع وقبل تغيير الجهاز.','#tk/backup','النسخة الشاملة']];
 TK_PAGES.setup={render(M){const E=meInit();const tt=Object.values(TK.tt).filter(Boolean).length;const nc=BG.classes.length;const nst=BG.classes.reduce((a,c)=>a+meStuN(c),0);
   const step=(ok,t)=>`<span class="me-st${ok?' ok':''}">${tkI(ok?'check':'minus')}${t}</span>`;const ttH=meTTHTML();
@@ -22822,7 +22839,7 @@ const ALM_TOOL_ALIAS={plan:'تحضير درس، تحضير الحصة، خطة �
   seat:'جلوس، مقاعد، مشاركة',hifzd:'حفظ، تسميع، مراجعة الحفظ',decks:'عرض، عروض، شرائح، باوربوينت',backup:'نسخة احتياطية، استعادة',check:'جهازي، السبورة الذكية'};
 const almAlias=id=>{const C=almAlias.C||(almAlias.C={});if(!(id in C))C[id]=almNorm(ALM_TOOL_ALIAS[id]||'').replace(ALM_PUNCT,' ').replace(/\s+/g,' ').trim();return C[id]};
 /* ترتيب الأدوات: أي كلمة دالة، والأعلى من طابق كلمات أكثر، ثم ما طابق في الاسم */
-function almToolRank(list,ws){if(!ws.length)return [];return list.map(t=>{const al=almAlias(t.id),nm=almNorm(t.name),body=nm+' '+almNorm(t.desc+(t.m==='g'?' لعبة ألعاب':' أداة'))+' '+al;
+function almToolRank(list,ws){if(!ws.length)return [];return list.map(t=>{const al=almAlias(t.id),nm=almNorm(t.name),body=nm+' '+almNorm(t.desc+(t.m==='g'?' لعبة ألعاب':' أداة')+(t.by?' متعة صفية '+t.by:''))+' '+al;
     let sc=0,hit=0;ws.forEach(w=>{if(body.includes(w)){hit++;sc+=10;if(nm.includes(w))sc+=4}});
     if(hit&&hit===ws.length)sc+=20;if(ws.length>1&&al&&al.includes(ws.join(' ')))sc+=30;return [sc,hit,t]})
     .filter(x=>x[1]&&(ws.length<3||x[1]>=2)).sort((a,b)=>b[0]-a[0]).map(x=>x[2])}
