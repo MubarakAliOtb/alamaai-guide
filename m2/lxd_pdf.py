@@ -30,7 +30,7 @@ def cover_html(logo_svg):
 @page{{size:A4;margin:0}}*{{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 body{{width:210mm;height:297mm;background:#1E1B4B;color:#fff;font-family:AlmD,Alm,sans-serif;position:relative;overflow:hidden}}
 .dots{{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1.6px,transparent 2.2px);background-size:9mm 9mm}}
-.c1{{position:absolute;width:150mm;height:150mm;border-radius:50%;background:#6D28D9;opacity:.55;left:-55mm;top:-50mm;filter:blur(2mm)}}
+.c1{{position:absolute;width:150mm;height:150mm;border-radius:50%;background:#2A2660;left:-55mm;top:-50mm}}
 .c2{{position:absolute;width:70mm;height:70mm;border-radius:50%;background:#34D399;opacity:.9;left:22mm;top:58mm}}
 .c3{{position:absolute;width:40mm;height:40mm;border-radius:12mm;background:#A78BFA;left:70mm;top:28mm;transform:rotate(12deg)}}
 .in{{position:absolute;right:20mm;left:20mm;bottom:28mm}}
