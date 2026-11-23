@@ -733,6 +733,14 @@ textarea:focus,input[type=text]:focus{outline:2px solid var(--focus);outline-off
 .scale button{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 12px;cursor:pointer;font-size:14px;min-width:90px}
 .scale button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
 .rv-out{font-size:14px;margin-top:10px;min-height:1.4em}
+.fb .rv-q label{display:block;margin-bottom:6px}.fb .rv-q label b{font-size:15px}
+.fb-opt{font-size:13px;font-weight:400;color:var(--ink3)}
+.fb-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.fb-two{grid-template-columns:1fr}}
+.fb-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.fb-to{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 0;font-size:14px;color:var(--ink2)}
+.fb-to bdi{font-family:ui-monospace,monospace;font-size:13.5px;color:var(--ink)}
+.fb-note{font-size:14px;color:var(--ink2);margin:0}
 .rv-link{font-family:ui-monospace,monospace;direction:ltr;unicode-bidi:embed;background:var(--sunk);padding:2px 8px;border-radius:6px;font-size:13.5px;user-select:all}
 .rv-list{display:grid;gap:10px}
 .rv-item{border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:14.5px}
@@ -4490,8 +4498,8 @@ window.NB_PCSS_M2 = "/* مولَّد آليًّا من أنماط index.html ب�
       <a href="#do" data-nav5="do"><svg class="ic" aria-hidden="true"><use href="#i-help"/></svg>حلول المواقف</a>
     </nav>
     <div class="n5-more"><button type="button" class="n5-more-b" id="n5More" aria-expanded="false" aria-controls="n5Menu"><svg class="ic" aria-hidden="true"><use href="#i-more"/></svg><span class="n5-more-t">المزيد</span></button>
-      <div class="n5-menu" id="n5Menu" hidden><a href="#me" data-nav5="me"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>ملفي وإعدادي</a><a href="#tk/backup" data-nav5="tk/backup"><svg class="ic" aria-hidden="true"><use href="#i-save"/></svg>النسخة الاحتياطية</a><a href="#map" data-nav5="map"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg>خريطة الدليل</a><a href="#lab" data-nav5="lab"><svg class="ic" aria-hidden="true"><use href="#i-lab"/></svg>التدرّب على المواقف</a><a href="#challenge" data-nav5="challenge"><svg class="ic" aria-hidden="true"><use href="#i-flag"/></svg>تحدي ٢١ يومًا</a><a href="#about" data-nav5="about"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>عن الدليل</a><a href="https://forms.cloud.microsoft/r/Q8pY6i4ADv" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg>إرسال ملاحظة<span class="sr-only"> (تُفتح في نافذة جديدة)</span></a></div></div>
-    <a class="fb-btn" href="https://forms.cloud.microsoft/r/Q8pY6i4ADv" target="_blank" rel="noopener" aria-label="إرسال ملاحظة على الدليل"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg><span>إرسال ملاحظة</span></a><button class="search-btn" data-open-search aria-label="ابحث في الدليل" aria-keyshortcuts="Control+K Meta+K"><svg class="ic"><use href="#i-search"/></svg><span>ابحث في الدليل والبطاقات</span><kbd>Ctrl K</kbd></button>
+      <div class="n5-menu" id="n5Menu" hidden><a href="#me" data-nav5="me"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>ملفي وإعدادي</a><a href="#tk/backup" data-nav5="tk/backup"><svg class="ic" aria-hidden="true"><use href="#i-save"/></svg>النسخة الاحتياطية</a><a href="#map" data-nav5="map"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg>خريطة الدليل</a><a href="#lab" data-nav5="lab"><svg class="ic" aria-hidden="true"><use href="#i-lab"/></svg>التدرّب على المواقف</a><a href="#challenge" data-nav5="challenge"><svg class="ic" aria-hidden="true"><use href="#i-flag"/></svg>تحدي ٢١ يومًا</a><a href="#about" data-nav5="about"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>عن الدليل</a><a href="#feedback" data-nav5="feedback"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg>إرسال ملاحظة</a></div></div>
+    <a class="fb-btn" href="#feedback" aria-label="إرسال ملاحظة على الدليل"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg><span>إرسال ملاحظة</span></a><button class="search-btn" data-open-search aria-label="ابحث في الدليل" aria-keyshortcuts="Control+K Meta+K"><svg class="ic"><use href="#i-search"/></svg><span>ابحث في الدليل والبطاقات</span><kbd>Ctrl K</kbd></button>
     <button class="theme-btn" id="themeBtn" aria-label="بدّل بين الوضعين الفاتح والداكن"><svg class="ic"><use href="#i-moon"/></svg></button>
   </div>
   <div class="progress-line" aria-hidden="true"><i id="readProg"></i></div>
@@ -13923,11 +13931,22 @@ body.dw-dragging,body.dw-dragging *{cursor:grabbing!important;user-select:none!i
       <p style="color:var(--ink2)">لا نطلب منك قراءة الدليل كله. اقرأ قسمًا واحدًا يخص عملك، ثم أجب عن ثلاثة أسئلة قصيرة. تأخذ دقيقتين.</p>
       <div class="rv-card" id="rvForm"></div>
       <div class="rv-card">
-        <h2>نموذج الملاحظات الرسمي</h2>
-        <p style="color:var(--ink2);margin:0 0 8px">للملاحظات الأطول والتعديلات، يفتح بحساب وزارة التربية على Microsoft 365:</p>
-        <p><span class="rv-link" id="formLink">forms.cloud.microsoft/r/Q8pY6i4ADv</span> <button class="btn sm" data-copy-form><svg class="ic"><use href="#i-copy"/></svg>انسخ الرابط</button> <a class="btn sm accent" href="https://forms.cloud.microsoft/r/Q8pY6i4ADv" target="_blank" rel="noopener">افتح النموذج</a></p>
+        <h2>ملاحظة أطول؟</h2>
+        <p style="color:var(--ink2);margin:0 0 8px">للملاحظات الأطول والتعديلات: اكتبها في «أرسل ملاحظتك»، فتصل برسالة جاهزة إلى البريد الرسمي لمعدّ الدليل.</p>
+        <p><a class="btn sm accent" href="#feedback">أرسل ملاحظتك</a></p>
       </div>
       <div class="rv-card" id="rvOwner" hidden><h2>ملاحظات الزملاء</h2><p class="hint" id="rvOwnerMeta"></p><div class="rv-list" id="rvList"></div></div>
+    </section>
+  </div>
+
+  <!-- FEEDBACK: رسالة جاهزة إلى البريد الرسمي لمعدّ الدليل -->
+  <div class="view" data-view="feedback" hidden>
+    <section class="wrap rv fb">
+      <p class="eyebrow" style="color:var(--teal);font-weight:600;margin:0">ملاحظات الدليل</p>
+      <h1 style="font-size:clamp(28px,4vw,40px)">أرسل ملاحظتك</h1>
+      <p style="color:var(--ink2)">تصل ملاحظتك إلى معدّ الدليل أ. مبارك علي العتيبي على بريده الرسمي. اكتبها هنا، ثم اضغط «افتح بريدي برسالة جاهزة»، فتُفتح في بريدك رسالة موضوعها ونصها جاهزان، فتضغط «إرسال».</p>
+      <div class="rv-card" id="fbForm"></div>
+      <p class="fb-note">لا يرسل الدليل شيئًا بنفسه: بريدك هو الذي يرسل، فتبقى نسخة من رسالتك في «المرسل» عندك. وما تكتبه هنا يبقى مسودة على هذا الجهاز حتى تمسحه.</p>
     </section>
   </div>
 </main>
@@ -15778,7 +15797,7 @@ function fdHelloHTML(){hyQ();const h=new Date(Date.now()+3*3600e3).getUTCHours()
   <a class="fd-tile" href="#nb"><i class="lv3" style="--k:10" aria-hidden="true"></i><b>دفتر تحضيري</b><small>دفتر المعلم للعام: الخطط والمهام والقوائم</small></a>
   <a class="fd-tile" href="#vs"><i class="lv3" style="--k:11" aria-hidden="true"></i><b>الحلول البصرية</b><small>وسائل تُفهم في ثوانٍ: مختبر ونماذج وحقائب تدريبية</small></a></div>
   ${fdTodayHTML()}
-  <a class="fd-fb" href="${FD_FORM}" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg><span><b>إرسال ملاحظة</b><small>رأيك في الأداة يصلنا مباشرة عبر استمارة قصيرة</small></span><svg class="ic fd-fb-ar" aria-hidden="true"><use href="#i-arrow"/></svg></a>`}
+  <a class="fd-fb" href="${FD_FORM}"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg><span><b>إرسال ملاحظة</b><small>رأيك يصل إلى بريد معدّ الدليل برسالة جاهزة من بريدك</small></span><svg class="ic fd-fb-ar" aria-hidden="true"><use href="#i-arrow"/></svg></a>`}
 function fdResumeHTML(){const l=fdPrefs.last&&FD_P[fdPrefs.last];if(!l||fdPrefs.seen.length<2)return '';
   const nx=FD_POSTS.filter(p=>!fdIs('seen',p.id)&&p.ord>l.ord).sort((a,b)=>a.ord-b.ord)[0];if(!nx)return '';
   return `<a class="fd-resume" href="#feed/${nx.id}"><span><small>أكمل من حيث توقفت</small><b>${esc(nx.k==='quote'?FD_A[nx.a].n:nx.t)}</b></span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>`}
@@ -15933,7 +15952,7 @@ function fdRender(){const L=$('#fdList');if(!L)return;{const FV=$('[data-view="f
     if(fdCol)list=list.filter(p=>fdPrefs.cl[p.id]===fdCol);
     fdPaint(bar+(list.length?'':`<div class="fd-empty"><h3>المجموعة فارغة</h3><p>من «الكل» اختر لأي بطاقة «ضعها في: ${esc(fdCol)}».</p></div>`),list);return}
   fdPaint(top,fdOrder(FD_POSTS))}
-const FD_FORM='https://forms.cloud.microsoft/r/Q8pY6i4ADv';/* رابط استمارة الملاحظات */
+const FD_FORM='#feedback';/* صفحة الملاحظات: رسالة جاهزة إلى البريد الرسمي لمعدّ الدليل */
 let fdDoC='',fdDoQ='';
 function fdDoHTML(){const qn=fdNorm(fdDoQ.trim());const list=FD_DO.filter(d=>(!fdDoC||d.c===fdDoC)&&(!qn||n5DoMatch(fdNorm(d.t+' '+d.st.join(' ')+' '+d.say+' '+(d.kw||'')),qn)));
   return `<div class="do-head"><h2>حلول المواقف</h2><p>اختر الموقف الذي تمر به: ثلاث خطوات، وجملة تقولها، وما تتجنبه، والبطاقات التي يقوم عليها الحل.</p>
@@ -15961,7 +15980,7 @@ function fdAboutHTML(){const url='https://claude.ai/artifact/GTN8TtNPpFEXtWdSrj6
   <ul><li>التنزيل (<bdi>Word</bdi> و<bdi>PDF</bdi> و<bdi>Excel</bdi> والصور والعروض) والطباعة يعملان هنا مباشرة لكل من يفتح الرابط، بلا حساب.</li><li>لتثبيت الدليل تطبيقًا على الهاتف أو الحاسوب أو الشاشة الذكية: من قائمة المتصفح اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». ${ofCan()?'وبعد أول فتح يعمل بلا إنترنت: الصفحة وأدواتها وألعابها تُحفظ على جهازك، ودروس صفوفك تجهّزها من بطاقة «العمل بلا إنترنت» أدناه.':'ويبقى محتاجًا إلى الاتصال بالإنترنت.'}</li><li>ما يعتمد على حساب <bdi>Claude</bdi> يعمل في نسخة <bdi>Claude</bdi> وحدها: الجواب المكتوب في «اسأل الدليل» والمسودات الآلية، و«أفادني» والتعليقات وتجارب الزملاء، ومزامنة إعداداتك في الحساب. و«جرّبتها» هنا علامة خاصة بك على هذا الجهاز. <a href="${FD_CLAUDE}" target="_blank" rel="noopener">افتح نسخة Claude</a>.</li><li>ما تكتبه في الأدوات (صفوفك وجدولك وطلابك) يُحفظ في متصفحك، ولكل نسخة حفظها. لنقله من نسخة إلى أخرى: <a href="#tk/backup">النسخة الاحتياطية الشاملة</a>، احفظها في نسخة ثم استعدها في الأخرى.</li></ul>${ofCard()}`}
   <h2 class="a9-h3">بياناتك</h2><ul><li>ما تكتبه في الأدوات والحقيبة والدفتر يبقى في متصفح هذا الجهاز وحده، ولا يُرسل إلى أي مكان. خذ <a href="#tk/backup">نسخة احتياطية شاملة</a> كل أسبوع.</li><li>تستعمل جهازًا مشتركًا؟ امسح بياناتك منه قبل أن تتركه: «امسح بياناتي من هذا الجهاز» في صفحة <a href="#tk/backup">النسخة الاحتياطية الشاملة</a>.</li></ul>
   <h2 class="a9-h3">كيف تستشهد بها</h2><p class="about-cite" dir="rtl">العتيبي، مبارك علي. (٢٠٢٦). <i>دليل المعلم الألمعي: أداة تطبيقية لمعلمي التربية الإسلامية والقرآن الكريم للموهوبين</i> [أداة رقمية]. <bdi>${esc(url)}</bdi></p>
-  <div class="about-acts"><a class="btn sm" href="#refs">المراجع (APA)</a>${FD_FORM?`<a class="btn accent sm" href="${FD_FORM}" target="_blank" rel="noopener">إرسال ملاحظة</a>`:''}</div>
+  <div class="about-acts"><a class="btn sm" href="#refs">المراجع (APA)</a>${FD_FORM?`<a class="btn accent sm" href="${FD_FORM}">إرسال ملاحظة</a>`:''}</div>
   </article>`}
 function fdRefsHTML(){return `<article class="about refs"><h2>المراجع</h2><p class="about-lead">المراجع النظرية التي تستند إليها بطاقات الأداة وأقسام الدليل، بنظام APA (الطبعة السابعة)، مرتبة هجائيًا.</p><ol class="refs-l" dir="ltr" lang="en">${FD_REFS.map(r=>`<li>${r}</li>`).join('')}</ol><p class="hint">الإحالات داخل البطاقات بصيغة (المؤلف، السنة) تقابل هذه القائمة.</p><a class="btn sm" href="#about">عن الدليل</a></article>`}
 const FD_SV=[['acc','الدقة العلمية والشرعية'],['use','الفائدة التطبيقية للمعلم'],['clr','الوضوح وسهولة الاستخدام'],['gift','مناسبة المحتوى لتعليم الموهوبين'],['vis','التصميم البصري']];
@@ -16444,7 +16463,7 @@ function fdMeHTML(){hyQ();const mine=fdSocial[UID]||{};const nC=Object.values(mi
     ${fdMirrorHTML()}${hyMeHTML()}
     <h2 class="a9-h3 me-sec">صفّي</h2><p class="hint">تظهر لك «حصص الأسبوع» من خطة توزيع صفّك.</p><div class="fd-gr big" role="group" aria-label="اختر صفّك">${[6,7,8,9].map(n=>`<button data-gr="${n}" aria-pressed="${n===fdGr()}"${n===fdGr()?' class="on"':''}>الصف ${FD_GRN[n]}</button>`).join('')}</div><p class="hint">تدرّس أكثر من صف أو شعبة؟ <a href="#tk/setup">أدخل صفوفك وشُعبك وجدولك في «إعدادي»</a>، فتعرفك الأدوات كلها وتظهر حصتك الآن في الرئيسية.</p>
     ${fdBadgesHTML()}
-    <h2 class="a9-h3 me-sec">ملاحظاتك</h2><a class="fd-fb" href="${FD_FORM}" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg><span><b>إرسال ملاحظة</b><small>ما الذي نفعك؟ وما الذي تقترح تطويره؟</small></span><svg class="ic fd-fb-ar" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <h2 class="a9-h3 me-sec">ملاحظاتك</h2><a class="fd-fb" href="${FD_FORM}"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg><span><b>إرسال ملاحظة</b><small>ما الذي نفعك؟ وما الذي تقترح تطويره؟</small></span><svg class="ic fd-fb-ar" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     <h2 class="a9-h3 me-sec">أدوات الدليل</h2><div class="me-tools"><a href="#guide"><svg class="ic"><use href="#i-book"/></svg>الدليل كاملًا</a><a href="#brief"><svg class="ic"><use href="#ai-layers"/></svg>خلاصة الدليل</a><a href="#map"><svg class="ic"><use href="#i-map"/></svg>خريطة الدليل</a><a href="#lab"><svg class="ic"><use href="#i-lab"/></svg>التدرّب على المواقف</a><a href="#tools"><svg class="ic"><use href="#ai-toolbox"/></svg>أدواتي</a><a href="#plan"><svg class="ic"><use href="#ai-clipboard"/></svg>مخطط حصتي</a><a href="#about"><svg class="ic"><use href="#i-info"/></svg>عن الدليل</a><a href="#refs"><svg class="ic"><use href="#i-book"/></svg>المراجع (APA)</a><a href="#challenge"><svg class="ic"><use href="#i-flag"/></svg>تحدي ٢١ يومًا</a></div>
     <details class="me-more"><summary><span><b>ما تتابعه</b><small>الوسوم والحسابات التي تصنع صفحة «لك»</small></span></summary><h2 class="a9-h3 me-sec">الوسوم</h2><p class="hint">تابع وسمًا لتصلك بطاقاته من أجزاء الدليل كلها في «لك».</p><div class="fd-tagbar wrap">${fdTagChips()}</div>
     <h2 class="a9-h3 me-sec">الحسابات</h2>${fdGrouped(false)}</details>
@@ -22943,7 +22962,7 @@ function n5Key(h){h=h||'home';
   if(h==='lessons'||h.indexOf('lessons/')===0||/^bag\/lesson\//.test(h)||h==='tk/decks')return 'lessons';
   if(h==='do')return 'do';
   if(h==='me'||h==='tk/setup')return 'more:me';
-  if(h==='lab'||h==='challenge'||h==='about')return 'more:'+h;
+  if(h==='lab'||h==='challenge'||h==='about'||h==='feedback')return 'more:'+h;
   if(h==='refs')return 'more:about';
   if(h==='guide'||h==='map'||h==='review'||/^part-\d+$/.test(h)||/^p\d+-s\d+$/.test(h)||/^pg-\d+$/.test(h)||h.indexOf('brief')===0||(typeof sumIs==='function'&&sumIs(h)))return 'guide';
   if(N5_TOOLS.indexOf(h)>=0||h.indexOf('tk/')===0||h.indexOf('bag/')===0||h.indexOf('plan/')===0||h.indexOf('vs')===0)return 'tools';
@@ -23371,6 +23390,7 @@ function route(){
   if(h==='lab'){show('lab');renderLab();window.scrollTo(0,0);return}
   if(h==='challenge'){show('challenge');renderChallenge();window.scrollTo(0,0);return}
   if(h==='review'){show('review');renderReview();window.scrollTo(0,0);return}
+  if(h==='feedback'){show('feedback');renderFeedback();window.scrollTo(0,0);return}
   if((m=h.match(/^(?:part-(\d+)|p(\d+)-s(\d+))$/))){const i=+(m[1]||m[2]);if(LIVE.has(i)&&!HAND.has(i)&&!document.querySelector(`[data-view="part-${i}"]`)){ensureAuto(i).then(route).catch(()=>{showPreview(i,null)});return}}
   if((m=h.match(/^part-(\d+)$/))&&LIVE.has(+m[1])){const i=+m[1];show('part-'+i);initPart(i);if(!store.get('last',null))store.set('last',{part:i,sec:SECS[i][0].id});window.scrollTo(0,0);return}
   if((m=h.match(/^p(\d+)-s(\d+)$/))&&LIVE.has(+m[1])){const i=+m[1];show('part-'+i);initPart(i);requestAnimationFrame(()=>{const el=document.getElementById(h);if(el)el.scrollIntoView()});return}
@@ -24030,14 +24050,48 @@ function renderReview(){
   ['rvSec','rvMiss','rvBest'].forEach(id=>$('#'+id).addEventListener('input',keep));
   const text=()=>{const s=ALLSECS.find(x=>x.id===rvDraft.sec);const L=['','يحتاج توضيحًا','واضح في أكثره','واضح تمامًا'],U=['','لا يناسب صفي','ربما لاحقًا','نعم، هذا الأسبوع'];
     return `رأيي في دليل المعلم الألمعي\nالقسم: ${s?s.t:rvDraft.sec==='other'?'جزء آخر':'—'}\nالوضوح: ${L[rvDraft.c]||'—'}\nالاستعمال: ${U[rvDraft.u]||'—'}\nما لا ينطبق أو ينقص: ${rvDraft.miss||'—'}\nأكثر ما نفعني: ${rvDraft.best||'—'}`};
-  $('#rvCopy').onclick=async()=>{const ok=await copyText(text());$('#rvOut').textContent=ok?'نُسخ رأيك. الصقه في النموذج الرسمي أدناه أو أرسله لمعدّ الدليل.':'تعذّر النسخ هنا.'};
+  $('#rvCopy').onclick=async()=>{const ok=await copyText(text());$('#rvOut').textContent=ok?'نُسخ رأيك. الصقه في «أرسل ملاحظتك» أو أرسله لمعدّ الدليل.':'تعذّر النسخ هنا.'};
   $('#rvSend').onclick=async()=>{keep();const out=$('#rvOut');if(!rvDraft.sec||!rvDraft.c||!rvDraft.u){out.textContent='اختر القسم وأجب عن السؤالين الأولين.';return}
     out.textContent='يُرسل…';await ensureDb();
     if(DB&&UID&&canWrite!==false){try{const ref=DB.doc('reviews/'+UID);const snap=await ref.get();const cur=snap.exists?{...snap.data()}:{};cur.forms={...(cur.forms||{}),[rvDraft.sec]:{c:rvDraft.c,u:rvDraft.u,miss:rvDraft.miss.slice(0,2000),best:rvDraft.best.slice(0,500),at:new Date().toISOString()}};cur.updated=new Date().toISOString();await ref.set(cur);out.innerHTML='<b style="color:var(--ok)">وصل رأيك. شكرًا لك.</b> يمكنك تقييم قسم آخر بالطريقة نفسها.';return}catch(e){canWrite=false}}
-    const ok=await copyText(text());out.innerHTML=`لا يتيح هذا الرابط الحفظ المباشر لحسابك، ${ok?'فنسخنا رأيك نصًّا':'فانسخ رأيك بزر «انسخه نصًّا»'}. الصقه في <a href="https://forms.cloud.microsoft/r/Q8pY6i4ADv" target="_blank" rel="noopener">النموذج الرسمي</a>.`};
+    const ok=await copyText(text());out.innerHTML=`لا يتيح هذا الرابط الحفظ المباشر لحسابك، ${ok?'فنسخنا رأيك نصًّا':'فانسخ رأيك بزر «انسخه نصًّا»'}. الصقه في <a href="#feedback">«أرسل ملاحظتك»</a>.`};
   ensureDb();
 }
-$('[data-copy-form]').addEventListener('click',async()=>{const ok=await copyText('https://forms.cloud.microsoft/r/Q8pY6i4ADv');toast(ok?'نُسخ الرابط':'حدّد الرابط وانسخه')});
+/* ================= الملاحظات بالبريد (#feedback) =================
+   للدليل لا خادم: الصفحة تجهّز رسالة إلى البريد الرسمي لمعدّ الدليل، فيفتحها بريد المعلم (mailto) أو Outlook على الويب، ويرسلها المعلم من بريده.
+   المسودة على الجهاز وحده (dms:fb). الرسالة الطويلة تُنسخ أيضًا احتياطًا، لأن بعض برامج البريد تقصّ رابط mailto الطويل. */
+const ALM_MAIL=['t294030200237','moe.edu.kw'].join('@');
+const FB_TYPES=['اقتراح تطوير','خطأ في المحتوى','مشكلة تقنية','تجربة من صفي','شكر'];
+let fbDraft=Object.assign({type:'',where:'',text:'',name:'',school:''},store.get('fb',{})),fbFrom='';
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href="#feedback"]');if(a&&location.hash!=='#feedback')fbFrom=(document.title||'').split(' — ')[0].trim()},true);
+function fbMsg(){const d=fbDraft;const subj=['ملاحظة على دليل المعلم الألمعي',d.type,d.where.trim()].filter(Boolean).join(' · ').slice(0,160);
+  const meta=[d.type?'نوع الملاحظة: '+d.type:'',d.where.trim()?'الموضع: '+d.where.trim():''].filter(Boolean);
+  const L=['الأستاذ الفاضل مبارك علي العتيبي','معدّ «دليل المعلم الألمعي»','','السلام عليكم ورحمة الله وبركاته،','',...(meta.length?[...meta,'']:[]),d.text.trim(),'','مع الشكر والتقدير،',d.name.trim()||'[الاسم]',...(d.school.trim()?[d.school.trim()]:[])];
+  return {subj,body:L.join('\n')}}
+const fbMailto=m=>'mailto:'+ALM_MAIL+'?subject='+encodeURIComponent(m.subj)+'&body='+encodeURIComponent(m.body.replace(/\n/g,'\r\n'));
+const fbOwa=m=>'https://outlook.office.com/mail/deeplink/compose?to='+encodeURIComponent(ALM_MAIL)+'&subject='+encodeURIComponent(m.subj)+'&body='+encodeURIComponent(m.body);
+function renderFeedback(){const d=fbDraft;if(!d.where&&fbFrom&&fbFrom!=='أرسل ملاحظتك'&&fbFrom!==ALM_TITLE)d.where=fbFrom;
+  $('#fbForm').innerHTML=`<h2>ملاحظتك</h2>
+  <div class="rv-q"><b id="fbTypeL">نوعها</b><div class="scale" id="fbType" role="group" aria-labelledby="fbTypeL">${FB_TYPES.map(t=>`<button type="button" data-v="${t}" aria-pressed="${d.type===t}">${t}</button>`).join('')}</div></div>
+  <div class="rv-q"><label for="fbWhere"><b>أين؟</b> <span class="fb-opt">الصفحة أو الأداة، اختياري</span></label><input type="text" id="fbWhere" maxlength="120" placeholder="مثال: أدواتي، مخطط الحصة"></div>
+  <div class="rv-q"><label for="fbText"><b>الملاحظة</b></label><textarea id="fbText" rows="6" maxlength="4000" placeholder="اكتب ما لاحظته، ومثالًا إن أمكن…"></textarea></div>
+  <div class="rv-q fb-two"><div><label for="fbName"><b>اسمك</b> <span class="fb-opt">اختياري</span></label><input type="text" id="fbName" maxlength="80" autocomplete="name"></div><div><label for="fbSchool"><b>مدرستك</b> <span class="fb-opt">اختياري</span></label><input type="text" id="fbSchool" maxlength="100" autocomplete="organization"></div></div>
+  <div class="fb-acts"><button class="btn accent" type="button" id="fbMailB">${ic('i-msg')}افتح بريدي برسالة جاهزة</button><button class="btn" type="button" id="fbOwaB">Outlook على الويب</button><button class="btn" type="button" id="fbCopyB">${ic('i-copy')}انسخ الرسالة</button></div>
+  <p class="fb-to">إلى: <bdi dir="ltr">${ALM_MAIL}</bdi><button class="btn sm" type="button" id="fbToB">انسخ العنوان</button><button class="btn sm" type="button" id="fbNewB">مسودة جديدة</button></p>
+  <p class="rv-out" id="fbOut" aria-live="polite"></p>`;
+  const F={fbWhere:'where',fbText:'text',fbName:'name',fbSchool:'school'};
+  Object.keys(F).forEach(id=>{const e=$('#'+id);e.value=d[F[id]]||'';e.addEventListener('input',()=>{d[F[id]]=e.value;store.set('fb',d)})});
+  $('#fbType').onclick=e=>{const b=e.target.closest('button');if(!b)return;d.type=d.type===b.dataset.v?'':b.dataset.v;$$('#fbType button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.v===d.type));store.set('fb',d)};
+  const out=$('#fbOut'),ready=()=>{if(d.text.trim().length<3){out.textContent='اكتب ملاحظتك أولًا.';$('#fbText').focus();return null}return fbMsg()};
+  $('#fbMailB').onclick=()=>{const m=ready();if(!m)return;const u=fbMailto(m);const cp=u.length>2000?copyText(m.subj+'\n\n'+m.body):null;
+    const a=document.createElement('a');a.href=u;document.body.appendChild(a);a.click();a.remove();
+    const say=ok=>{out.textContent='فُتحت في بريدك رسالة جاهزة إلى معدّ الدليل؛ اضغط «إرسال» هناك.'+(ok?' ونسخنا نصها أيضًا احتياطًا: إن ظهرت ناقصة في بريدك فالصقه مكانها.':'')+' لم يُفتح بريدك؟ جرّب «Outlook على الويب» أو انسخ الرسالة.'};
+    say(false);if(cp)cp.then(ok=>{if(ok)say(true)},()=>{})};
+  $('#fbOwaB').onclick=()=>{const m=ready();if(!m)return;window.open(fbOwa(m),'_blank','noopener');out.textContent='فُتح Outlook على الويب برسالة جاهزة؛ إن طلب الدخول فادخل ببريدك الرسمي، ثم اضغط «إرسال».'};
+  $('#fbCopyB').onclick=async()=>{const m=ready();if(!m)return;const ok=await copyText('إلى: '+ALM_MAIL+'\nالموضوع: '+m.subj+'\n\n'+m.body);out.textContent=ok?'نُسخت الرسالة بعنوانها وموضوعها: الصقها في بريدك وأرسلها.':'تعذّر النسخ هنا.'};
+  $('#fbToB').onclick=async()=>{const ok=await copyText(ALM_MAIL);toast(ok?'نُسخ العنوان':'تعذّر النسخ')};
+  $('#fbNewB').onclick=()=>{d.type='';d.where='';d.text='';store.set('fb',d);fbFrom='';renderFeedback();$('#fbText').focus()};
+}
 let ownerOn=false;
 function ownerView(){if(ownerOn)return;ownerOn=true;$('#rvOwner').hidden=false;const meta=$('#rvOwnerMeta');meta.textContent='يُحمَّل…';
   const tm=setTimeout(()=>meta.textContent='تعذّر الوصول إلى الملاحظات الآن؛ قد تكون قديمة.',10000);
