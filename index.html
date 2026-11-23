@@ -8,7 +8,7 @@
 <meta name="author" content="مبارك علي العتيبي">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: dark)">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob:; frame-src 'self' blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: wss://relay.damus.io wss://nos.lol wss://relay.primal.net wss://offchain.pub wss://nostr.mom https://ntfy.sh; frame-src 'self' blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
 <link rel="canonical" href="https://mubarakaliotb.github.io/alamaai-guide/">
 <link rel="icon" type="image/svg+xml" href="m2/logo.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="m2/fav-32.png">
@@ -24127,6 +24127,78 @@ function ownerView(){if(ownerOn)return;ownerOn=true;$('#rvOwner').hidden=false;c
 $('#themeBtn').onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark';store.set('theme',r.dataset.theme)};
 const th=store.get('theme',null);if(th)document.documentElement.dataset.theme=th;
 
+/* ===== v117: «التحكم من الجوال» (remote/) =====
+   جسر صغير لملفات remote/ (زر الشريط والربط والتشفير والإرسال كلها هناك، ولا تُحمَّل إلا حين يضغط المعلم الزر):
+   - almShow.state(آخر درس): حالة العرض كما يحتاجها الجوال: الشاشة الحالية وتفاعلها، والمؤقت، و«من يجيب؟»، ودرج «للمعلم»، وقائمة الشاشات.
+   - almShow.run(أمر): ينفّذ أمر الجوال بالضغط على زر العرض نفسه (data-ls)، فيعمل كما لو ضغطه المعلم بيده.
+   - almShow.reopen(درس): يفتح العرض من حيث توقف. almShow.say(نص): رسالة قصيرة على الشاشة.
+   - الحدث alm:show على document بعد كل رسم للعرض (open)، وإغلاقه (close)، وتغيّر المؤقت أو «من يجيب؟» (change).
+   لا يُرسل من هنا شيء. */
+try{
+  const rcEv=t=>{try{document.dispatchEvent(new CustomEvent('alm:show',{detail:{t}}))}catch(e){}};
+  {const O=lsScrOpen;lsScrOpen=function(){const r=O.apply(this,arguments);rcEv('open');return r}}
+  {const C=lsScrClose;lsScrClose=function(){const r=C.apply(this,arguments);rcEv('close');return r}}
+  {const T=lsTimerToggle;lsTimerToggle=function(){const r=T.apply(this,arguments);rcEv('change');return r}}
+  {const T=lsTimerSet;lsTimerSet=function(){const r=T.apply(this,arguments);rcEv('change');return r}}
+  {const K=lxPick;lxPick=function(){const r=K.apply(this,arguments);rcEv('change');return r}}
+  const rcCut=(s,n)=>{s=String(s==null?'':s).trim();return s.length>n?s.slice(0,n-1)+'…':s};
+  const rcHash=s=>{let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(36)};
+  const rcInt=(v,a,b)=>{v=Math.round(+v);return Number.isFinite(v)?Math.max(a,Math.min(b,v)):a};
+  const rcLx=()=>document.querySelector('#lsOv .lx[data-id]');
+  const rcKind=sc=>sc.kind==='verse'&&!/[﴿ٱۡ]/.test(sc.text||'')?'النص الشرعي':(LS_KIND[sc.kind]||(sc.kind==='mine'?'شاشتي':'شاشة'));
+  function rcState(last){
+    const lx=rcLx(),on=!!lx&&document.body.classList.contains('ls-on');const id=lx?lx.dataset.id:(last||'');
+    const st={t:'st',on};if(!id)return {st};
+    const s=lsView(id);if(!s||!s.screens||!s.screens.length)return {st};
+    const M=lsMeta(id)||{},L=lsL(id),N=s.screens.length,n=rcInt(L.screen||1,1,N);
+    Object.assign(st,{id,ttl:rcCut(M.title,160),sub:rcCut(M.sub,220),N,n});
+    const deck=s.screens.map(x=>[rcKind(x),rcCut(x.title,140)]);st.dv=rcHash(JSON.stringify(deck));
+    if(!on)return {st,deck};
+    const sc=s.screens[n-1],it=sc.interaction||{type:'none'},si=lsStageOf(s,n);
+    st.sc={k:rcKind(sc),t:rcCut(sc.title,220),x:rcCut(sc.text,2400),sk:rcCut(sc.skill,80),st:si>=0?rcCut(lsShort(s.stages[si].name),80):''};
+    const w={ty:String(it.type||'none')};
+    if(it.reveal){w.rv=lsParts(it.reveal).map(p=>rcCut(p,700));w.r=Math.min(w.rv.length,+L.revealed[n]||0)}
+    if(it.type==='vote'){w.o=(it.options||[]).map(o=>rcCut(o,220));const v=L.votes[n]||{};w.v=w.o.map((_,i)=>+(v[i]||0))}
+    if(it.type==='key'){w.k=rcCut(it.key,80);w.h=(L.keys||[]).includes(it.key)}
+    if(it.type==='steps'){w.s=(it.steps||[]).map(x=>rcCut(x,260));const d=(L.steps||{})[n]||{};w.d=w.s.map((_,i)=>!!d[i])}
+    if(it.type==='timer'||(it.type==='reveal'&&it.seconds)){const sec=+it.seconds||60;const live=!!(lxR&&lxR.id===id&&lxR.n===n);w.rg={s:sec,run:!!(live&&lxR.running),rem:Math.max(0,Math.round(live?lxRRem():sec))}}
+    if(it.type==='play'){w.p=String(it.play||'');w.pt=rcCut((LX_PLAY[it.play]||[])[0],80)}
+    st.it=w;
+    if(lsT&&lsT.id===id&&s.stages[lsT.si]){const g=s.stages[lsT.si];st.tm={run:!!lsT.running,rem:lsRem(),nm:rcCut(lsShort(g.name),80),mn:+g.min||0,over:!!(lsT.running&&Date.now()>lsT.end)}}
+    const pk=document.getElementById('lxPick');if(pk&&!pk.hidden)st.pk=rcCut([...pk.querySelectorAll('small,b')].map(x=>x.textContent.trim()).filter(Boolean).join(' '),120);
+    st.keys=(s.keys||[]).map(k=>[rcCut(k.name,60),(L.keys||[]).includes(k.name)?1:0]);
+    st.act=lxtIsOpen()?1:0;
+    /* درج «للمعلم» كما في العرض */
+    const g=si>=0?s.stages[si]:null,T=s.takmila||{},d=dkOf(id);
+    const notes={h:g?[rcCut(g.name,140),[g.min?g.min+' د':'',g.mode||'',g.dimension?'بُعد الموهبة: '+g.dimension:''].filter(Boolean).join(' · ')]:null,
+      my:rcCut(d&&d.notes?d.notes[dkKey(sc)]:'',600),
+      r:g?[['الاستراتيجية',g.strategy],['دور المعلم',g.teacher],['دور الطالب',g.student],['استخلاص الحقيقة',g.fact],['أداة التقييم',g.tool]].filter(x=>x[1]).map(x=>[x[0],rcCut(x[1],1400)]):[],
+      df:[rcCut(T.support,1400),rcCut(T.enrich,1400)]};
+    st.nv=rcHash(JSON.stringify(notes));
+    return {st,deck,notes}}
+  function rcBtn(a,ds){const lx=rcLx();if(!lx)return;const b=document.createElement('button');b.type='button';b.hidden=true;b.dataset.ls=a;b.dataset.id=lx.dataset.id;
+    if(ds)for(const k in ds)b.dataset[k]=String(ds[k]);lx.appendChild(b);try{b.click()}catch(e){}b.remove()}
+  function rcRun(c){
+    const lx=rcLx();if(!lx||!c)return;const id=lx.dataset.id,s=lsView(id);if(!s)return;
+    const L=lsL(id),N=s.screens.length,n=L.screen,it=(s.screens[n-1]||{}).interaction||{};
+    switch(c.c){
+      case 'go':{const t=rcInt(c.n,1,N);if(t!==n)rcBtn('go',{n:t});break}
+      case 'rev':{const tot=lsParts(it.reveal).length,want=rcInt(c.r,0,tot),cur=+L.revealed[n]||0;if(want<=cur)break;
+        if(want===tot&&want-cur>1)rcBtn('revall');else for(let k=cur;k<want;k++)rcBtn('reveal');break}
+      case 'vote':case 'unvote':{const no=(it.options||[]).length;if(it.type==='vote'&&no)rcBtn(c.c,{i:rcInt(c.i,0,no-1)});break}
+      case 'step':{const ns=(it.steps||[]).length;if(it.type!=='steps'||!ns)break;const i=rcInt(c.i,0,ns-1),done=!!(((L.steps||{})[n]||{})[i]);if(!!c.d!==done)rcBtn('step',{i});break}
+      case 'key':if(it.type==='key')rcBtn('key');break;
+      case 'tmr':if(!!c.run!==!!(lsT&&lsT.running))rcBtn('ttoggle');break;
+      case 'treset':rcBtn('treset');break;
+      case 'ring':if(it.type==='timer'||it.seconds)rcBtn('tsec',{s:+it.seconds||60});break;
+      case 'pick':rcBtn('pick');break;
+      case 'pickx':{const pk=document.getElementById('lxPick');if(pk&&!pk.hidden)rcBtn('pickx');break}
+      case 'play':if(it.type==='play'&&it.play)rcBtn('playgo',{t:it.play});break;
+      case 'back':if(lxtIsOpen())lxtClose();break}}
+  function rcReopen(id){if(rcLx()||!id||!LS_BUILT.has(id))return;const go=()=>{if(!rcLx())lsScrOpen(id,lsL(id).screen)};if(lsView(id))go();else lsLoad(id).then(x=>{if(x)go()})}
+  window.almShow={state:rcState,run:rcRun,reopen:rcReopen,say:m=>{if(rcLx())lxSay(m);else toast(m)}};
+}catch(e){}
+
 window.__almOK=1;   /* v104: عمل السكربت الرئيسي حتى آخره؛ فلا تظهر رسالة «متصفح قديم» (feed/early104.js) */
 route();
 setTimeout(()=>{ensureDb()},1500);
@@ -24201,4 +24273,5 @@ setTimeout(()=>{ensureDb()},1500);
 @media (max-width:860px){.bottom-nav a[aria-current="page"] .ic{background:var(--sunk)}}
 }
 </style>
+<script src="remote/boot.js" defer></script>
 </body></html>
