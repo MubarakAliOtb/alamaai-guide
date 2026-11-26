@@ -2938,6 +2938,28 @@ html[data-model="2"] body>header.top.al-hd-clear .search-btn,html[data-model="2"
 html[data-model="2"] body>header.top.al-hd-clear .search-btn:hover,html[data-model="2"] body>header.top.al-hd-clear .fb-btn:hover,html[data-model="2"] body>header.top.al-hd-clear .n5-more-b:hover,html[data-model="2"] body>header.top.al-hd-clear #themeBtn:hover,html[data-model="2"] body>header.top.al-hd-tint .search-btn:hover,html[data-model="2"] body>header.top.al-hd-tint .fb-btn:hover,html[data-model="2"] body>header.top.al-hd-tint .n5-more-b:hover,html[data-model="2"] body>header.top.al-hd-tint #themeBtn:hover{background:rgba(255,255,255,.18)!important}
 html[data-model="2"] body>header.top.al-hd-clear a:focus-visible,html[data-model="2"] body>header.top.al-hd-clear button:focus-visible,html[data-model="2"] body>header.top.al-hd-tint a:focus-visible,html[data-model="2"] body>header.top.al-hd-tint button:focus-visible{outline:2px solid rgb(255,255,255);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){html[data-model="2"].al-hd body>header.top,html[data-model="2"].al-hd body>header.top .brand b,html[data-model="2"].al-hd body>header.top .brand small,html[data-model="2"].al-hd body>header.top .nav a,html[data-model="2"].al-hd body>header.top .search-btn,html[data-model="2"].al-hd body>header.top .fb-btn,html[data-model="2"].al-hd body>header.top .n5-more-b,html[data-model="2"].al-hd body>header.top #themeBtn{transition:none}}
+/* v125: رؤوس الأقسام الأربعة (دروسي وأدواتي وحلول المواقف والدليل) صورٌ بعرض الصفحة مثل «اليوم»، بلا زوايا، وعليها ستار نيلي مسطّح.
+   الصورة هي ::before نفسه بعد أن يصير طبقة خلف الرأس، تمدّها متغيرات alSec إلى أعلى الصفحة تحت الشريط وإلى حافتي الشاشة؛ والرأس في مكانه بمحاذاة المحتوى.
+   صورتا «دروسي» و«أدواتي» هما صورتا بطاقتيهما في «اليوم»، و«حلول المواقف» صورة فاصل «في الحصة»، فيتصل المكان بالصفحة؛ و«الدليل» صورة الكتب المفتوحة كما في النموذج المعتمد. */
+html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head,html[data-model="2"][data-al-pg="do"] #fdList>.do-head,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero{position:relative;isolation:isolate}
+html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh::before,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head::before,html[data-model="2"][data-al-pg="do"] #fdList>.do-head::before,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero::before{content:"";display:block;position:absolute;z-index:-1;top:calc(-1 * var(--al-sht,0px));left:calc(-1 * var(--al-shl,0px));right:calc(-1 * var(--al-shr,0px));bottom:auto;width:auto;height:calc(var(--al-sht,0px) + var(--al-shh,100%));margin:0;border:0;border-radius:0;flex:none;opacity:1;transform:none;background-color:#1E1B4B;background-size:cover;background-repeat:no-repeat;background-position:center}
+html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh::before{background-image:linear-gradient(rgba(30,27,75,.7),rgba(30,27,75,.7)),url("m2/img/al-lessons-900.webp");background-position:center 62%}
+html[data-model="2"][data-al-pg="tools"] #fdList>.do-head::before{background-image:linear-gradient(rgba(30,27,75,.7),rgba(30,27,75,.7)),url("m2/img/al-tools-900.webp");background-position:center 58%}
+html[data-model="2"][data-al-pg="do"] #fdList>.do-head::before{background-image:linear-gradient(rgba(30,27,75,.7),rgba(30,27,75,.7)),url("m2/img/al-classroom-900.webp");background-position:center 55%}
+html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero::before{background-image:linear-gradient(rgba(30,27,75,.7),rgba(30,27,75,.7)),url("m2/img/al-guide-900.webp");background-position:center 55%}
+@media (min-width:900px){html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh::before{background-image:linear-gradient(rgba(30,27,75,.7),rgba(30,27,75,.7)),url("m2/img/al-lessons-1800.webp")}html[data-model="2"][data-al-pg="tools"] #fdList>.do-head::before{background-image:linear-gradient(rgba(30,27,75,.7),rgba(30,27,75,.7)),url("m2/img/al-tools-1800.webp")}html[data-model="2"][data-al-pg="do"] #fdList>.do-head::before{background-image:linear-gradient(rgba(30,27,75,.7),rgba(30,27,75,.7)),url("m2/img/al-classroom-1800.webp")}html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero::before{background-image:linear-gradient(rgba(30,27,75,.7),rgba(30,27,75,.7)),url("m2/img/al-guide-1600.webp")}}
+html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head,html[data-model="2"][data-al-pg="do"] #fdList>.do-head{padding-top:28px;padding-bottom:28px;margin-bottom:24px}
+@media (min-width:1024px){html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head,html[data-model="2"][data-al-pg="do"] #fdList>.do-head{padding-top:48px;padding-bottom:40px}}
+html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh h1,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head>h2,html[data-model="2"][data-al-pg="do"] #fdList>.do-head>h2{color:rgb(255,255,255)}
+html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh p,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head>p,html[data-model="2"][data-al-pg="do"] #fdList>.do-head>p{color:rgb(255,255,255);opacity:.94}
+html[data-model="2"][data-al-pg="do"] #fdList>.do-head .do-q{margin-bottom:44px}
+html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero{overflow:visible}
+@media (min-width:901px){html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .hero-grid>.side-stack{margin-top:var(--al-shg,0px)}}
+html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .eyebrow{color:rgba(255,255,255,.88)}
+html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-title{color:rgb(255,255,255)}
+html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-title span{color:rgb(196,181,253)}
+html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-sub{color:rgb(255,255,255);opacity:.94;margin-bottom:60px}
+@media print{html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh::before,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head::before,html[data-model="2"][data-al-pg="do"] #fdList>.do-head::before,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero::before{display:none!important}html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh h1,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head>h2,html[data-model="2"][data-al-pg="do"] #fdList>.do-head>h2,html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh p,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head>p,html[data-model="2"][data-al-pg="do"] #fdList>.do-head>p,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .eyebrow,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-title,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-sub{color:#1A1A1A!important}}
 @keyframes alSettle{from{transform:scale(1.06)}to{transform:none}}
 @keyframes alSw{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (min-width:760px){
@@ -4387,6 +4409,17 @@ html[data-model="2"][data-theme="dark"] .al .al-tile:not(:where(.ps,.sheet,.nbp,
 html[data-model="2"][data-theme="dark"] .al .al-fm:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background-color:#26244A}
 html[data-model="2"][data-theme="dark"] .al .al-scap:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:#17162E;color:#B4B0D6}
 html[data-model="2"][data-theme="dark"] body>header.top.al-hd-tint:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:rgba(0,0,0,0.60)}
+html[data-model="2"][data-theme="dark"][data-al-pg="lessons"] #n5Ls>.n5-lsh:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before, html[data-model="2"][data-theme="dark"][data-al-pg="tools"] #fdList>.do-head:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before, html[data-model="2"][data-theme="dark"][data-al-pg="do"] #fdList>.do-head:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before, html[data-model="2"][data-theme="dark"][data-al-pg="guide"] [data-view="home"] .home-hero:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-color:#26244A}
+html[data-model="2"][data-theme="dark"][data-al-pg="lessons"] #n5Ls>.n5-lsh:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-lessons-900.webp")}
+html[data-model="2"][data-theme="dark"][data-al-pg="tools"] #fdList>.do-head:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-tools-900.webp")}
+html[data-model="2"][data-theme="dark"][data-al-pg="do"] #fdList>.do-head:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-classroom-900.webp")}
+html[data-model="2"][data-theme="dark"][data-al-pg="guide"] [data-view="home"] .home-hero:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-guide-900.webp")}
+@media (min-width:900px){
+html[data-model="2"][data-theme="dark"][data-al-pg="lessons"] #n5Ls>.n5-lsh:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-lessons-1800.webp")}
+html[data-model="2"][data-theme="dark"][data-al-pg="tools"] #fdList>.do-head:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-tools-1800.webp")}
+html[data-model="2"][data-theme="dark"][data-al-pg="do"] #fdList>.do-head:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-classroom-1800.webp")}
+html[data-model="2"][data-theme="dark"][data-al-pg="guide"] [data-view="home"] .home-hero:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-guide-1600.webp")}
+}
 html[data-model="2"][data-theme="dark"] span.nbf:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){border-bottom:.3mm dotted #6D5BC9}
 html[data-model="2"][data-theme="dark"] .nbd-k:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){color:#B4B0D6}
 html[data-model="2"][data-theme="dark"] .nbd-n:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){color:#A78BFA}
@@ -24003,18 +24036,37 @@ function alWire(){const R=document.querySelector('[data-view="feed"] .al');if(!R
 /* v124: الشريط العلوي فوق صورة «اليوم»: شفاف في أعلى الصفحة (.al-hd-clear)، ونيلي شفيف ما دامت الصورة تحته (.al-hd-tint)، ثم يعود كما هو بعدها.
    الصورة تمتد تحته دائمًا (--al-top ارتفاعه)، فلا يتحرك المحتوى حين يتغير لونه. وفي أي صفحة أخرى يبقى كما هو. */
 let alTh=0;
+/* v125: رؤوس «دروسي» و«أدواتي» و«حلول المواقف» و«الدليل» صورٌ بعرض الصفحة مثل «اليوم»: صورة الرأس (::before) تمتد إلى أعلى الصفحة تحت الشريط وإلى حافتي الشاشة،
+   وفوقها العنوان والوصف، وفي «حلول المواقف» البحث، وفي «الدليل» سطر الطبعة. html[data-al-pg] يحدد الصفحة، وأبعاد الصورة متغيرات على html تحسبها alSec:
+   --al-sht المسافة من أعلى الصفحة إلى الرأس، و--al-shl و--al-shr إلى حافتي الشاشة، و--al-shh ارتفاع الصورة داخل الرأس (إلى آخر ما يُعرض عليها). */
+const AL_PG={lessons:['#n5Ls>.n5-lsh',''],tools:['#fdList>.do-head',''],do:['#fdList>.do-head','.do-q'],guide:['[data-view="home"] .home-hero','.home-sub']};
+let alShB=0,alRO=null,alRoEl=null;
+function alSec(){const D=document.documentElement;const h=(location.hash||'').replace(/^#/,'');const P=AL_PG.hasOwnProperty(h)?AL_PG[h]:null;
+  const el=P&&document.querySelector(P[0]);
+  if(!el||el.offsetParent===null||(h==='tools'&&!el.parentNode.querySelector('.tk-find'))||(h==='do'&&!el.querySelector('.do-q'))){if(D.hasAttribute('data-al-pg'))D.removeAttribute('data-al-pg');alShB=0;return}
+  if(D.getAttribute('data-al-pg')!==h)D.setAttribute('data-al-pg',h);
+  const r=el.getBoundingClientRect(),cw=D.clientWidth,T=Math.round(r.top+window.pageYOffset);
+  const end=P[1]&&el.querySelector(P[1]);const E=Math.round(end?end.getBoundingClientRect().bottom-r.top+(h==='guide'?32:28):el.offsetHeight);
+  D.style.setProperty('--al-sht',T+'px');D.style.setProperty('--al-shl',Math.round(r.left)+'px');D.style.setProperty('--al-shr',Math.round(cw-r.right)+'px');D.style.setProperty('--al-shh',E+'px');
+  alShB=T+E;
+  /* «الدليل» في الشاشة الواسعة عمودان: العمود الجانبي يبدأ بعد الصورة مع مربع «ماذا تحتاج الآن؟» لا تحتها */
+  if(h==='guide'){const g=el.querySelector('.hero-grid');D.style.setProperty('--al-shg',(g?Math.max(0,Math.round(r.top+E+28-g.getBoundingClientRect().top)):0)+'px')}
+  if('ResizeObserver' in window&&alRoEl!==el){if(alRO)alRO.disconnect();else alRO=new ResizeObserver(()=>{alSec();alHdr()});alRO.observe(el);alRoEl=el}}
 function alHdr(){const T=document.querySelector('body>header.top');if(!T)return;const D=document.documentElement;
   const V=document.querySelector('[data-view="feed"]');const H=V&&!V.hidden&&V.classList.contains('al-today')?V.querySelector('.al-hero'):null;
-  if(!H){if(D.classList.contains('al-hd')){D.classList.remove('al-hd');T.classList.remove('al-hd-clear','al-hd-tint')}return}
+  const B=H?H.offsetHeight:(D.hasAttribute('data-al-pg')?alShB:0);
+  if(!B){if(D.classList.contains('al-hd')){D.classList.remove('al-hd');T.classList.remove('al-hd-clear','al-hd-tint')}return}
   const th=T.offsetHeight;if(th&&th!==alTh){alTh=th;D.style.setProperty('--al-top',th+'px')}
-  const y=window.pageYOffset,past=y>=H.offsetHeight-th;D.classList.add('al-hd');T.classList.toggle('al-hd-clear',!past&&y<=4);T.classList.toggle('al-hd-tint',!past&&y>4)}
+  const y=window.pageYOffset,past=y>=B-th;D.classList.add('al-hd');T.classList.toggle('al-hd-clear',!past&&y<=4);T.classList.toggle('al-hd-tint',!past&&y>4)}
 function alPar(){if(alTick)return;alTick=true;requestAnimationFrame(()=>{alTick=false;alHdr();const V=document.querySelector('[data-view="feed"]');if(!V||V.hidden)return;const R=V.querySelector('.al');if(!R||alRM())return;
   const vh=window.innerHeight,y=window.pageYOffset;
   [].slice.call(R.querySelectorAll('[data-alpar]')).forEach(img=>{const k=img.getAttribute('data-alpar');let off;
     if(k==='hero')off=Math.min(y*.3,150);else{const b=img.parentNode.parentNode.getBoundingClientRect();if(b.bottom<-100||b.top>vh+100)return;off=Math.max(-70,Math.min(70,-(b.top+b.height/2-vh/2)*parseFloat(k)))}
     img.style.transform='translate3d(0,'+off.toFixed(1)+'px,0)'})})}
 window.addEventListener('scroll',alPar,{passive:true});window.addEventListener('resize',alPar);
-window.addEventListener('hashchange',()=>{if(!alHomeHash())alAway=true;setTimeout(alHdr,0)});
+window.addEventListener('hashchange',()=>{if(!alHomeHash())alAway=true;setTimeout(()=>{alSec();alHdr()},0)});
+window.addEventListener('resize',()=>{alSec();alHdr()});window.addEventListener('load',()=>{alSec();alHdr()});
+try{document.fonts.ready.then(()=>{alSec();alHdr()})}catch(e){}
 function alSheet(title,body){fdSheetPost=null;alOpener=document.activeElement;fdOpenSheet(title,body,'');const x=document.querySelector('#fdSheet [data-sheet-close]');if(x)setTimeout(()=>{try{x.focus()}catch(e){}},30)}
 /* بعد إغلاق ورقة فتحتها هذه الصفحة يعود التركيز إلى الزر الذي فتحها */
 {const S=document.getElementById('fdSheet');if(S&&'MutationObserver' in window)new MutationObserver(()=>{if(!S.hidden||!alOpener)return;const o=alOpener;alOpener=null;if(o.isConnected&&o.offsetParent!==null)try{o.focus({preventScroll:true})}catch(e){}}).observe(S,{attributes:true,attributeFilter:['hidden']})}
@@ -24039,6 +24091,9 @@ window.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('
 /* «الرئيسية» من الشريط تعيد «اليوم» دائمًا، حتى لو بقي في الموجز وسم أو بحث من قبل */
 window.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href="#home"]');if(!a)return;const had=!!(fdTag||fdQ.trim()||fdPath||fdLesson);if(!had)return;
   fdTag=null;fdQ='';fdPath=null;fdLesson=null;const qi=$('#fdQ');if(qi)qi.value='';if(alHomeHash()){e.preventDefault();route();window.scrollTo(0,0)}},true);
+{const F1=fdRender;fdRender=function(){const r=F1.apply(this,arguments);try{alSec();alHdr()}catch(e){}return r}}
+{const N1=n5LessonsRender;n5LessonsRender=function(){const r=N1.apply(this,arguments);try{alSec();alHdr()}catch(e){}return r}}
+{const G1=renderHome;renderHome=function(){const r=G1.apply(this,arguments);try{setTimeout(()=>{alSec();alHdr()},0)}catch(e){}return r}}
 {const H0=fdHelloHTML;fdHelloHTML=function(){const on=alIsHome();const FV=$('[data-view="feed"]');if(FV)FV.classList.toggle('al-today',on);if(!on)return H0.apply(this,arguments);setTimeout(alWire,0);return alTodayHTML()}}
 
 /* ---------- ٢) «دروسي» ---------- */
