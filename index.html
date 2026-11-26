@@ -2960,6 +2960,27 @@ html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-tit
 html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-title span{color:rgb(196,181,253)}
 html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-sub{color:rgb(255,255,255);opacity:.94;margin-bottom:60px}
 @media print{html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh::before,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head::before,html[data-model="2"][data-al-pg="do"] #fdList>.do-head::before,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero::before{display:none!important}html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh h1,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head>h2,html[data-model="2"][data-al-pg="do"] #fdList>.do-head>h2,html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh p,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head>p,html[data-model="2"][data-al-pg="do"] #fdList>.do-head>p,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .eyebrow,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-title,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-sub{color:#1A1A1A!important}}
+/* v126: شريط الحصة السفلي (#alMini، الدالة alMiniSync): فوق شريط التنقل في الهاتف، وفي الزاوية السفلية في الشاشة الواسعة. سطح أبيض بحدّ بنفسجي فاتح بلا ظل،
+   وزر واحد بارز («عودة للعرض» أو «ابدأ العرض»). ويُرفع التنبيه المؤقت وتُزاد مسافة أسفل الصفحة ما دام ظاهرًا، فلا يغطي شيئًا. */
+html[data-model="2"] .al-mini{position:fixed;z-index:48;left:12px;right:12px;bottom:calc(var(--al-navh,0px) + 10px);display:flex;align-items:center;gap:10px;padding:8px;padding-inline-start:14px;border:1px solid var(--s-pri-200);border-radius:16px;background:var(--s-paper);color:var(--s-ink);box-sizing:border-box;transform:translateY(14px);opacity:0;transition:transform .3s cubic-bezier(.2,.7,.2,1),opacity .3s ease}
+html[data-model="2"] .al-mini.on{transform:none;opacity:1}
+html[data-model="2"] .al-mini[hidden]{display:none}
+html[data-model="2"] .al-mini>.ic{flex:none;width:22px;height:22px;color:var(--s-pri)}
+html[data-model="2"] .al-mini .al-mt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.4}
+html[data-model="2"] .al-mini .al-mt small{font-size:12.5px;color:var(--s-ink2)}
+html[data-model="2"] .al-mini .al-mt b{overflow:hidden;font-size:14.5px;white-space:nowrap;text-overflow:ellipsis}
+html[data-model="2"] .al-mini .al-mc{flex:none;font-size:14px;color:var(--s-ink2);font-variant-numeric:tabular-nums}
+html[data-model="2"] .al-mini .al-mb{flex:none;min-height:44px;padding:0 14px;border:1px solid var(--s-line2);border-radius:12px;background:transparent;color:var(--s-ink);font:inherit;font-size:14px;font-weight:700;white-space:nowrap;cursor:pointer}
+html[data-model="2"] .al-mini .al-mb:hover{background:var(--s-pri-50)}
+html[data-model="2"] .al-mini .al-mp{border-color:transparent;background:var(--s-pri-bg);color:#FFFFFF}
+html[data-model="2"] .al-mini .al-mp:hover{background:var(--s-pri-bg-h)}
+html[data-model="2"] body.ls-on .al-mini{display:none}
+html[data-model="2"] body.al-mini-on #toast{bottom:calc(var(--al-navh,0px) + 86px)}
+html[data-model="2"] body.al-mini-on #main{padding-bottom:calc(var(--al-navh,0px) + 86px)}
+@media (min-width:760px){html[data-model="2"] .al-mini{left:24px;right:auto;bottom:calc(var(--al-navh,0px) + 24px);width:440px}html[data-model="2"] body.al-mini-on #toast{bottom:90px}}
+@media (max-width:360px){html[data-model="2"] .al-mini .al-mc{display:none}}
+@media (prefers-reduced-motion:reduce){html[data-model="2"] .al-mini{transition:none}}
+@media print{html[data-model="2"] .al-mini{display:none!important}html[data-model="2"] body.al-mini-on #main{padding-bottom:0}}
 @keyframes alSettle{from{transform:scale(1.06)}to{transform:none}}
 @keyframes alSw{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (min-width:760px){
@@ -24058,14 +24079,48 @@ function alHdr(){const T=document.querySelector('body>header.top');if(!T)return;
   if(!B){if(D.classList.contains('al-hd')){D.classList.remove('al-hd');T.classList.remove('al-hd-clear','al-hd-tint')}return}
   const th=T.offsetHeight;if(th&&th!==alTh){alTh=th;D.style.setProperty('--al-top',th+'px')}
   const y=window.pageYOffset,past=y>=B-th;D.classList.add('al-hd');T.classList.toggle('al-hd-clear',!past&&y<=4);T.classList.toggle('al-hd-tint',!past&&y>4)}
-function alPar(){if(alTick)return;alTick=true;requestAnimationFrame(()=>{alTick=false;alHdr();const V=document.querySelector('[data-view="feed"]');if(!V||V.hidden)return;const R=V.querySelector('.al');if(!R||alRM())return;
+/* v126: شريط الحصة السفلي (#alMini)، بنمطين:
+   «الحصة الجارية» بعد فتح عرض حصة ثم إغلاقه: عنوانها والوقت منذ بدئها، و«عودة للعرض» من الشاشة التي توقف عندها (almShow.reopen)، و«إنهاء». يبقى في كل الصفحات حتى ينهيه المعلم،
+   ويُحفظ في sessionStorage (alm:live) للنافذة نفسها، فيبقى بعد إعادة تحميل الصفحة، ويُنسى بعد ثلاث ساعات.
+   و«ابدأ العرض» في «اليوم» حين تختفي بطاقة الحصة عند النزول، ولا حصة جارية. ويختفي والعرض مفتوح (body.ls-on). يعرف فتح العرض وإغلاقه من الحدث alm:show. */
+let alLive=null,alMiniT=null,alMiniKey='',alQOut=null,alEnded='';
+try{const v=JSON.parse(sessionStorage.getItem('alm:live')||'null');if(v&&v.id&&v.t0&&LS_BUILT.has(v.id))alLive=v}catch(e){}
+const alLiveSave=()=>{try{if(alLive)sessionStorage.setItem('alm:live',JSON.stringify(alLive));else sessionStorage.removeItem('alm:live')}catch(e){}};
+const alClock=t0=>{const s=Math.max(0,Math.floor((Date.now()-t0)/1000));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function alMiniEl(){let m=document.getElementById('alMini');if(!m){m=document.createElement('div');m.id='alMini';m.className='al-mini no-m2';m.setAttribute('role','region');m.hidden=true;document.body.appendChild(m)}return m}
+function alMiniSync(force){const D=document.documentElement,on=document.body.classList.contains('ls-on');
+  if(alLive&&Date.now()-alLive.t0>108e5){alLive=null;alLiveSave()}
+  let mode='',L=null;
+  if(alLive&&!on){mode='live';L=tkLesson(alLive.id)}
+  else if(!alLive&&!on){const V=document.querySelector('[data-view="feed"]');const C=V&&!V.hidden&&V.classList.contains('al-today')?document.getElementById('alCard'):null;
+    const T=document.querySelector('body>header.top');const out=!!C&&C.getBoundingClientRect().bottom<(T?T.offsetHeight:63);
+    if(!force&&out===alQOut&&!alMiniKey.startsWith('live'))return;alQOut=out;
+    if(out){const st=alState();if(st.L&&st.L.built&&st.L.id!==alEnded){mode='quick';L=st.L}}}
+  if(!L)mode='';
+  const N=document.querySelector('.bottom-nav'),nh=N?Math.round(N.getBoundingClientRect().height):0;if(D.style.getPropertyValue('--al-navh')!==nh+'px')D.style.setProperty('--al-navh',nh+'px');
+  const key=mode+'|'+(L?L.id:''),m=alMiniEl();if(key===alMiniKey)return;alMiniKey=key;clearInterval(alMiniT);alMiniT=null;
+  if(!mode){m.classList.remove('on');document.body.classList.remove('al-mini-on');setTimeout(()=>{if(!m.classList.contains('on'))m.hidden=true},alRM()?0:320);return}
+  m.setAttribute('aria-label',mode==='live'?'الحصة الجارية':'حصتك');
+  m.innerHTML=mode==='live'
+    ?`${tkI('screen')}<span class="al-mt"><small>الحصة الجارية</small><b>${esc(alTitle(L.title))}</b></span><time class="al-mc" aria-label="الوقت منذ بدء الحصة">${alClock(alLive.t0)}</time><button type="button" class="al-mb al-mp" data-almini="back">عودة للعرض</button><button type="button" class="al-mb" data-almini="end">إنهاء</button>`
+    :`${tkI('play')}<span class="al-mt"><small>${esc(alSess(L.title)||'حصة هذا الأسبوع')}</small><b>${esc(alTitle(L.title))}</b></span><button type="button" class="al-mb al-mp" data-ls="play" data-id="${L.id}">ابدأ العرض</button>`;
+  m.hidden=false;void m.offsetWidth;m.classList.add('on');document.body.classList.add('al-mini-on');
+  if(mode==='live')alMiniT=setInterval(()=>{const c=m.querySelector('.al-mc');if(c&&alLive)c.textContent=alClock(alLive.t0)},1000)}
+document.addEventListener('alm:show',e=>{const t=e.detail&&e.detail.t;
+  if(t==='open'){let id='';try{const S=window.almShow&&window.almShow.state();id=(S&&S.st&&S.st.id)||''}catch(x){}
+    if(id&&LS_BUILT.has(id)){if(!alLive||alLive.id!==id){alLive={id,t0:Date.now()};alLiveSave()}alEnded=''}}
+  if(t==='open'||t==='close')setTimeout(()=>alMiniSync(true),0)});
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-almini]');if(!b)return;
+  if(b.dataset.almini==='back'&&alLive){try{window.almShow.reopen(alLive.id)}catch(x){toast('تعذّر فتح العرض الآن')}}
+  if(b.dataset.almini==='end'){alEnded=alLive?alLive.id:'';alLive=null;alLiveSave();alMiniSync(true);toast('انتهت الحصة')}});
+function alPar(){if(alTick)return;alTick=true;requestAnimationFrame(()=>{alTick=false;alHdr();alMiniSync(false);const V=document.querySelector('[data-view="feed"]');if(!V||V.hidden)return;const R=V.querySelector('.al');if(!R||alRM())return;
   const vh=window.innerHeight,y=window.pageYOffset;
   [].slice.call(R.querySelectorAll('[data-alpar]')).forEach(img=>{const k=img.getAttribute('data-alpar');let off;
     if(k==='hero')off=Math.min(y*.3,150);else{const b=img.parentNode.parentNode.getBoundingClientRect();if(b.bottom<-100||b.top>vh+100)return;off=Math.max(-70,Math.min(70,-(b.top+b.height/2-vh/2)*parseFloat(k)))}
     img.style.transform='translate3d(0,'+off.toFixed(1)+'px,0)'})})}
 window.addEventListener('scroll',alPar,{passive:true});window.addEventListener('resize',alPar);
-window.addEventListener('hashchange',()=>{if(!alHomeHash())alAway=true;setTimeout(()=>{alSec();alHdr()},0)});
-window.addEventListener('resize',()=>{alSec();alHdr()});window.addEventListener('load',()=>{alSec();alHdr()});
+window.addEventListener('hashchange',()=>{if(!alHomeHash())alAway=true;alEnded='';setTimeout(()=>{alSec();alHdr();alMiniSync(true)},0)});
+window.addEventListener('resize',()=>{alSec();alHdr()});window.addEventListener('load',()=>{alSec();alHdr();alMiniSync(true)});
 try{document.fonts.ready.then(()=>{alSec();alHdr()})}catch(e){}
 function alSheet(title,body){fdSheetPost=null;alOpener=document.activeElement;fdOpenSheet(title,body,'');const x=document.querySelector('#fdSheet [data-sheet-close]');if(x)setTimeout(()=>{try{x.focus()}catch(e){}},30)}
 /* بعد إغلاق ورقة فتحتها هذه الصفحة يعود التركيز إلى الزر الذي فتحها */
