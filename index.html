@@ -2981,6 +2981,9 @@ html[data-model="2"] body.al-mini-on #main{padding-bottom:calc(var(--al-navh,0px
 @media (max-width:360px){html[data-model="2"] .al-mini .al-mc{display:none}}
 @media (prefers-reduced-motion:reduce){html[data-model="2"] .al-mini{transition:none}}
 @media print{html[data-model="2"] .al-mini{display:none!important}html[data-model="2"] body.al-mini-on #main{padding-bottom:0}}
+/* v127: التنقل أربعة أقسام، و«حلول المواقف» أول «المزيد»؛ فزر «المزيد» يظهر مختارًا في صفحاته (.on من n5Mark) كما يظهر القسم المختار في التنقل */
+html[data-model="2"] .top .n5-more-b.on{background:var(--s-pri-50)!important;border-color:var(--s-pri-200)!important;color:var(--s-pri)!important}
+html[data-model="2"] body>header.top.al-hd-clear .n5-more-b.on,html[data-model="2"] body>header.top.al-hd-tint .n5-more-b.on{background:rgba(255,255,255,.24)!important;border-color:rgb(255,255,255)!important;color:rgb(255,255,255)!important}
 @keyframes alSettle{from{transform:scale(1.06)}to{transform:none}}
 @keyframes alSw{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (min-width:760px){
@@ -4992,10 +4995,9 @@ html.alm-gate .ai-note{animation:aiUp 300ms cubic-bezier(.16,1,.3,1) 800ms both}
       <a href="#lessons" data-nav5="lessons"><svg class="ic" aria-hidden="true"><use href="#ai-books"/></svg>دروسي</a>
       <a href="#tools" data-nav5="tools"><svg class="ic" aria-hidden="true"><use href="#ai-toolbox"/></svg>أدواتي</a>
       <a href="#guide" data-nav5="guide"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg>الدليل</a>
-      <a href="#do" data-nav5="do"><svg class="ic" aria-hidden="true"><use href="#i-help"/></svg>حلول المواقف</a>
     </nav>
     <div class="n5-more"><button type="button" class="n5-more-b" id="n5More" aria-expanded="false" aria-controls="n5Menu"><svg class="ic" aria-hidden="true"><use href="#i-more"/></svg><span class="n5-more-t">المزيد</span></button>
-      <div class="n5-menu" id="n5Menu" hidden><a href="#me" data-nav5="me"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>ملفي وإعدادي</a><a href="#tk/backup" data-nav5="tk/backup"><svg class="ic" aria-hidden="true"><use href="#i-save"/></svg>النسخة الاحتياطية</a><a href="#map" data-nav5="map"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg>خريطة الدليل</a><a href="#lab" data-nav5="lab"><svg class="ic" aria-hidden="true"><use href="#i-lab"/></svg>التدرّب على المواقف</a><a href="#challenge" data-nav5="challenge"><svg class="ic" aria-hidden="true"><use href="#i-flag"/></svg>تحدي ٢١ يومًا</a><a href="#about" data-nav5="about"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>عن الدليل</a><a href="#feedback" data-nav5="feedback"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg>إرسال ملاحظة</a></div></div>
+      <div class="n5-menu" id="n5Menu" hidden><a href="#do" data-nav5="do"><svg class="ic" aria-hidden="true"><use href="#i-help"/></svg>حلول المواقف</a><a href="#me" data-nav5="me"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>ملفي وإعدادي</a><a href="#tk/backup" data-nav5="tk/backup"><svg class="ic" aria-hidden="true"><use href="#i-save"/></svg>النسخة الاحتياطية</a><a href="#map" data-nav5="map"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg>خريطة الدليل</a><a href="#lab" data-nav5="lab"><svg class="ic" aria-hidden="true"><use href="#i-lab"/></svg>التدرّب على المواقف</a><a href="#challenge" data-nav5="challenge"><svg class="ic" aria-hidden="true"><use href="#i-flag"/></svg>تحدي ٢١ يومًا</a><a href="#about" data-nav5="about"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>عن الدليل</a><a href="#feedback" data-nav5="feedback"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg>إرسال ملاحظة</a></div></div>
     <a class="fb-btn" href="#feedback" aria-label="إرسال ملاحظة على الدليل"><svg class="ic" aria-hidden="true"><use href="#i-msg"/></svg><span>إرسال ملاحظة</span></a><button class="search-btn" data-open-search aria-label="ابحث في الدليل" aria-keyshortcuts="Control+K Meta+K"><svg class="ic"><use href="#i-search"/></svg><span>ابحث في الدليل والبطاقات</span><kbd>Ctrl K</kbd></button>
     <button class="theme-btn" id="themeBtn" aria-label="بدّل بين الوضعين الفاتح والداكن"><svg class="ic"><use href="#i-moon"/></svg></button>
   </div>
@@ -14465,7 +14467,6 @@ body.dw-dragging,body.dw-dragging *{cursor:grabbing!important;user-select:none!i
   <a href="#lessons" data-nav5="lessons"><svg class="ic" aria-hidden="true"><use href="#ai-books"/></svg>دروسي</a>
   <a href="#tools" data-nav5="tools"><svg class="ic" aria-hidden="true"><use href="#ai-toolbox"/></svg>أدواتي</a>
   <a href="#guide" data-nav5="guide"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg>الدليل</a>
-  <a href="#do" data-nav5="do"><svg class="ic" aria-hidden="true"><use href="#i-help"/></svg>حلول المواقف</a>
 </nav>
 
 <div class="overlay" id="search" hidden role="dialog" aria-modal="true" aria-label="البحث في الدليل">
@@ -23896,8 +23897,8 @@ setTimeout(()=>{almNavN=0;almAfterNav(true)},60);
 /* ---------- ٤) «اقفز إلى المحتوى» يبقى كما هو؛ ونقطة الجاهزية للسكربت المبكر تُوضع في آخر السكربت (patch45) ---------- */
 
 /* ================= v105: التنقل الموحد و«دروسي» والشاشة الأولى (الدفعة الثانية، البند ٢٫١) =================
-   ١) تنقل واحد في المقاسين: خمس وجهات أولى (الرئيسية، دروسي، أدواتي، الدليل، ماذا أفعل؟) في رأس الحاسوب وفي شريط الهاتف السفلي،
-      وزر «المزيد» في الرأس (ملفي وإعدادي، الخريطة، المختبر، التحدي، عن الدليل، إرسال ملاحظة)؛ ولكل مسار عنصر تنقل واحد مُبرز (A2-01).
+   ١) تنقل واحد في المقاسين: أربع وجهات أولى منذ v127 (الرئيسية، دروسي، أدواتي، الدليل) في رأس الحاسوب وفي شريط الهاتف السفلي،
+      وزر «المزيد» في الرأس (حلول المواقف، ملفي وإعدادي، النسخة الاحتياطية، الخريطة، المختبر، التحدي، عن الدليل، إرسال ملاحظة)؛ ولكل مسار عنصر تنقل واحد مُبرز (A2-01).
    ٢) «دروسي» (#lessons): دروس خطة التوزيع لصف واحد، هذا الأسبوع أولًا، ثم القادمة والسابقة مطوية، ولكل حصة عرضها وصفحتها؛
       و«عروض الدروس» (#tk/decks) تفتحها، وبلاطة «حصص الأسبوع» في الرئيسية صارت «دروسي» (A2-02، A1-03).
    ٣) صفحة الدرس: عنوانها h1 عنوان الدرس، ومسار «دروسي › الأسبوع › الدرس»، وشريط حقيبة مختصر بدل رأس الحقيبة (A2-02).
@@ -23912,7 +23913,7 @@ const N5_TOOLS=['tools','nb','bag','plan','ask','fbk','spec','kid','parent','wca
 function n5Key(h){h=h||'home';
   if(h==='home'||h==='feed'||h.indexOf('feed/')===0)return 'home';
   if(h==='lessons'||h.indexOf('lessons/')===0||/^bag\/lesson\//.test(h)||h==='tk/decks')return 'lessons';
-  if(h==='do')return 'do';
+  if(h==='do')return 'more:do';   /* v127: «حلول المواقف» في «المزيد» (التنقل أربعة أقسام كما في النموذج المعتمد)، وتُفتح أيضًا من «مسعف المواقف» في «اليوم» */
   if(h==='me'||h==='tk/setup')return 'more:me';
   if(h==='lab'||h==='challenge'||h==='about'||h==='feedback')return 'more:'+h;
   if(h==='refs')return 'more:about';
