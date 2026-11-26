@@ -1328,7 +1328,7 @@ html[data-model="2"] .al .al-bm{position:absolute;top:-80px;bottom:-80px;left:0;
 html[data-model="2"] .al .al-bm img{display:block;width:100%;max-width:none;height:100%;object-fit:cover;will-change:transform}
 html[data-model="2"] .al .al-veil{position:absolute;top:0;right:0;bottom:0;left:0;z-index:-1;background:rgba(30,27,75,.7)}
 html[data-model="2"] .al .al-dark .al-veil{background:rgba(14,13,31,.5)}
-html[data-model="2"] .al .al-hero{padding-top:28px}
+html[data-model="2"] .al .al-hero{margin-top:calc(-1 * var(--al-top,63px));padding-top:calc(var(--al-top,63px) + 28px)}
 html[data-model="2"] .al .al-hgrid{padding-bottom:28px}
 html[data-model="2"] .al .al-hi{margin:0;font-size:14.5px;color:rgb(255,255,255);opacity:.92}
 html[data-model="2"] .al .al-hero h1{margin:2px 0 14px;font-size:clamp(28px,6.4vw,46px);line-height:1.2;font-weight:700;color:rgb(255,255,255);text-wrap:balance}
@@ -1418,6 +1418,20 @@ html[data-model="2"] #fdSheet .al-list small{display:block;font-size:13.5px;font
 html[data-model="2"] #fdSheet .al-list .ic{flex:none;color:var(--s-pri)}
 /* التركيز بلوحة المفاتيح فوق الصور: حلقة بيضاء (البنفسجية لا تُرى على الستار النيلي) */
 html[data-model="2"] .al .al-chip:focus-visible,html[data-model="2"] .al .al-wbtn:focus-visible,html[data-model="2"] .al .al-scap:focus-visible{outline:2px solid rgb(255,255,255);outline-offset:3px}
+/* v124: الشريط العلوي فوق صورة «اليوم» (alHdr في الصفحة): شفاف في أعلاها (.al-hd-clear)، ونيلي شفيف ما دامت الصورة تحته (.al-hd-tint)، ثم يعود كما هو.
+   html.al-hd ما دامت «اليوم» معروضة؛ وفي أي صفحة أخرى لا يتغير شيء. وألوانه بـrgb() لأنها فوق الصورة فتبقى كما هي في الليل. */
+html[data-model="2"].al-hd body>header.top,html[data-model="2"].al-hd body>header.top .brand b,html[data-model="2"].al-hd body>header.top .brand small,html[data-model="2"].al-hd body>header.top .nav a,html[data-model="2"].al-hd body>header.top .search-btn,html[data-model="2"].al-hd body>header.top .fb-btn,html[data-model="2"].al-hd body>header.top .n5-more-b,html[data-model="2"].al-hd body>header.top #themeBtn{transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+html[data-model="2"] body>header.top.al-hd-clear{background:transparent;border-bottom-color:transparent}
+html[data-model="2"] body>header.top.al-hd-tint{background:rgba(30,27,75,.88);border-bottom-color:transparent;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+html[data-model="2"] body>header.top.al-hd-clear .brand b,html[data-model="2"] body>header.top.al-hd-tint .brand b{color:rgb(255,255,255)}
+html[data-model="2"] body>header.top.al-hd-clear .brand small,html[data-model="2"] body>header.top.al-hd-tint .brand small{color:rgba(255,255,255,.82)}
+html[data-model="2"] body>header.top.al-hd-clear .nav a,html[data-model="2"] body>header.top.al-hd-tint .nav a{color:rgba(255,255,255,.92)}
+html[data-model="2"] body>header.top.al-hd-clear .nav a:hover,html[data-model="2"] body>header.top.al-hd-tint .nav a:hover{background:rgba(255,255,255,.12);color:rgb(255,255,255)}
+html[data-model="2"] body>header.top.al-hd-clear .nav a[aria-current="page"],html[data-model="2"] body>header.top.al-hd-tint .nav a[aria-current="page"]{background:rgba(255,255,255,.18);color:rgb(255,255,255)}
+html[data-model="2"] body>header.top.al-hd-clear .search-btn,html[data-model="2"] body>header.top.al-hd-clear .fb-btn,html[data-model="2"] body>header.top.al-hd-clear .n5-more-b,html[data-model="2"] body>header.top.al-hd-clear #themeBtn,html[data-model="2"] body>header.top.al-hd-tint .search-btn,html[data-model="2"] body>header.top.al-hd-tint .fb-btn,html[data-model="2"] body>header.top.al-hd-tint .n5-more-b,html[data-model="2"] body>header.top.al-hd-tint #themeBtn{border-color:rgba(255,255,255,.5)!important;background:rgba(255,255,255,.08)!important;color:rgb(255,255,255)!important}
+html[data-model="2"] body>header.top.al-hd-clear .search-btn:hover,html[data-model="2"] body>header.top.al-hd-clear .fb-btn:hover,html[data-model="2"] body>header.top.al-hd-clear .n5-more-b:hover,html[data-model="2"] body>header.top.al-hd-clear #themeBtn:hover,html[data-model="2"] body>header.top.al-hd-tint .search-btn:hover,html[data-model="2"] body>header.top.al-hd-tint .fb-btn:hover,html[data-model="2"] body>header.top.al-hd-tint .n5-more-b:hover,html[data-model="2"] body>header.top.al-hd-tint #themeBtn:hover{background:rgba(255,255,255,.18)!important}
+html[data-model="2"] body>header.top.al-hd-clear a:focus-visible,html[data-model="2"] body>header.top.al-hd-clear button:focus-visible,html[data-model="2"] body>header.top.al-hd-tint a:focus-visible,html[data-model="2"] body>header.top.al-hd-tint button:focus-visible{outline:2px solid rgb(255,255,255);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html[data-model="2"].al-hd body>header.top,html[data-model="2"].al-hd body>header.top .brand b,html[data-model="2"].al-hd body>header.top .brand small,html[data-model="2"].al-hd body>header.top .nav a,html[data-model="2"].al-hd body>header.top .search-btn,html[data-model="2"].al-hd body>header.top .fb-btn,html[data-model="2"].al-hd body>header.top .n5-more-b,html[data-model="2"].al-hd body>header.top #themeBtn{transition:none}}
 @keyframes alSettle{from{transform:scale(1.06)}to{transform:none}}
 @keyframes alSw{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (min-width:760px){
@@ -1432,7 +1446,7 @@ html[data-model="2"] .al .al-chip:focus-visible,html[data-model="2"] .al .al-wbt
   html[data-model="2"] .al .al-tile{min-height:380px}
 }
 @media (min-width:1024px){
-  html[data-model="2"] .al .al-hero{padding-top:56px}
+  html[data-model="2"] .al .al-hero{padding-top:calc(var(--al-top,63px) + 56px)}
   html[data-model="2"] .al .al-hgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:56px;align-items:end;padding-bottom:52px}
   html[data-model="2"] .al .al-card{margin-top:0}
   html[data-model="2"] .al .al-duo{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px}
@@ -1448,6 +1462,7 @@ html[data-model="2"] .al .al-chip:focus-visible,html[data-model="2"] .al .al-wbt
 }
 @media print{
   html[data-model="2"] .al .al-rv{opacity:1!important;transform:none!important}
+  html[data-model="2"] .al .al-hero{margin-top:0;padding-top:16px}
   html[data-model="2"] .al :is(.al-hm,.al-bm,.al-veil,.al-fm,.al-chips,.al-wk,.al-scap,.al-wbtn,.al-tile img){display:none!important}
   html[data-model="2"] .al .al-tile::after{display:none}
   html[data-model="2"] .al :is(.al-bleed,.al-tile){background:none!important;color:#1A1A1A!important;border:1px solid #CCCCCC}
@@ -1638,6 +1653,7 @@ html[data-model="2"][data-theme="dark"] .al .al-tile:not(:where(.ps,.sheet,.nbp,
 html[data-model="2"][data-theme="dark"] .al .al-tile:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::after{background:rgba(0,0,0,0.60)}
 html[data-model="2"][data-theme="dark"] .al .al-fm:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background-color:#26244A}
 html[data-model="2"][data-theme="dark"] .al .al-scap:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:#17162E;color:#B4B0D6}
+html[data-model="2"][data-theme="dark"] body>header.top.al-hd-tint:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:rgba(0,0,0,0.60)}
 </style>
 <script id="m2Js">
 /* طبقة التصميم البسيط، وهي التصميم الوحيد للدليل منذ إلغاء النموذج السابق.

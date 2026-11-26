@@ -344,3 +344,4 @@ html[data-model="2"][data-theme="dark"] .al .al-tile:not(:where(.ps,.sheet,.nbp,
 html[data-model="2"][data-theme="dark"] .al .al-tile:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::after{background:rgba(0,0,0,0.60)}
 html[data-model="2"][data-theme="dark"] .al .al-fm:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background-color:#26244A}
 html[data-model="2"][data-theme="dark"] .al .al-scap:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:#17162E;color:#B4B0D6}
+html[data-model="2"][data-theme="dark"] body>header.top.al-hd-tint:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:rgba(0,0,0,0.60)}
