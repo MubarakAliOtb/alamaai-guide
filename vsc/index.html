@@ -1877,6 +1877,9 @@ html[data-model="2"] body.al-mini-on #main{padding-bottom:calc(var(--al-navh,0px
 @media (max-width:360px){html[data-model="2"] .al-mini .al-mc{display:none}}
 @media (prefers-reduced-motion:reduce){html[data-model="2"] .al-mini{transition:none}}
 @media print{html[data-model="2"] .al-mini{display:none!important}html[data-model="2"] body.al-mini-on #main{padding-bottom:0}}
+/* v127: التنقل أربعة أقسام، و«حلول المواقف» أول «المزيد»؛ فزر «المزيد» يظهر مختارًا في صفحاته (.on من n5Mark) كما يظهر القسم المختار في التنقل */
+html[data-model="2"] .top .n5-more-b.on{background:var(--s-pri-50)!important;border-color:var(--s-pri-200)!important;color:var(--s-pri)!important}
+html[data-model="2"] body>header.top.al-hd-clear .n5-more-b.on,html[data-model="2"] body>header.top.al-hd-tint .n5-more-b.on{background:rgba(255,255,255,.24)!important;border-color:rgb(255,255,255)!important;color:rgb(255,255,255)!important}
 @keyframes alSettle{from{transform:scale(1.06)}to{transform:none}}
 @keyframes alSw{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (min-width:760px){
