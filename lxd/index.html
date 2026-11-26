@@ -1454,6 +1454,27 @@ html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-tit
 html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-title span{color:rgb(196,181,253)}
 html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-sub{color:rgb(255,255,255);opacity:.94;margin-bottom:60px}
 @media print{html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh::before,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head::before,html[data-model="2"][data-al-pg="do"] #fdList>.do-head::before,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero::before{display:none!important}html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh h1,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head>h2,html[data-model="2"][data-al-pg="do"] #fdList>.do-head>h2,html[data-model="2"][data-al-pg="lessons"] #n5Ls>.n5-lsh p,html[data-model="2"][data-al-pg="tools"] #fdList>.do-head>p,html[data-model="2"][data-al-pg="do"] #fdList>.do-head>p,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .eyebrow,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-title,html[data-model="2"][data-al-pg="guide"] [data-view="home"] .home-hero .home-sub{color:#1A1A1A!important}}
+/* v126: شريط الحصة السفلي (#alMini، الدالة alMiniSync): فوق شريط التنقل في الهاتف، وفي الزاوية السفلية في الشاشة الواسعة. سطح أبيض بحدّ بنفسجي فاتح بلا ظل،
+   وزر واحد بارز («عودة للعرض» أو «ابدأ العرض»). ويُرفع التنبيه المؤقت وتُزاد مسافة أسفل الصفحة ما دام ظاهرًا، فلا يغطي شيئًا. */
+html[data-model="2"] .al-mini{position:fixed;z-index:48;left:12px;right:12px;bottom:calc(var(--al-navh,0px) + 10px);display:flex;align-items:center;gap:10px;padding:8px;padding-inline-start:14px;border:1px solid var(--s-pri-200);border-radius:16px;background:var(--s-paper);color:var(--s-ink);box-sizing:border-box;transform:translateY(14px);opacity:0;transition:transform .3s cubic-bezier(.2,.7,.2,1),opacity .3s ease}
+html[data-model="2"] .al-mini.on{transform:none;opacity:1}
+html[data-model="2"] .al-mini[hidden]{display:none}
+html[data-model="2"] .al-mini>.ic{flex:none;width:22px;height:22px;color:var(--s-pri)}
+html[data-model="2"] .al-mini .al-mt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.4}
+html[data-model="2"] .al-mini .al-mt small{font-size:12.5px;color:var(--s-ink2)}
+html[data-model="2"] .al-mini .al-mt b{overflow:hidden;font-size:14.5px;white-space:nowrap;text-overflow:ellipsis}
+html[data-model="2"] .al-mini .al-mc{flex:none;font-size:14px;color:var(--s-ink2);font-variant-numeric:tabular-nums}
+html[data-model="2"] .al-mini .al-mb{flex:none;min-height:44px;padding:0 14px;border:1px solid var(--s-line2);border-radius:12px;background:transparent;color:var(--s-ink);font:inherit;font-size:14px;font-weight:700;white-space:nowrap;cursor:pointer}
+html[data-model="2"] .al-mini .al-mb:hover{background:var(--s-pri-50)}
+html[data-model="2"] .al-mini .al-mp{border-color:transparent;background:var(--s-pri-bg);color:#FFFFFF}
+html[data-model="2"] .al-mini .al-mp:hover{background:var(--s-pri-bg-h)}
+html[data-model="2"] body.ls-on .al-mini{display:none}
+html[data-model="2"] body.al-mini-on #toast{bottom:calc(var(--al-navh,0px) + 86px)}
+html[data-model="2"] body.al-mini-on #main{padding-bottom:calc(var(--al-navh,0px) + 86px)}
+@media (min-width:760px){html[data-model="2"] .al-mini{left:24px;right:auto;bottom:calc(var(--al-navh,0px) + 24px);width:440px}html[data-model="2"] body.al-mini-on #toast{bottom:90px}}
+@media (max-width:360px){html[data-model="2"] .al-mini .al-mc{display:none}}
+@media (prefers-reduced-motion:reduce){html[data-model="2"] .al-mini{transition:none}}
+@media print{html[data-model="2"] .al-mini{display:none!important}html[data-model="2"] body.al-mini-on #main{padding-bottom:0}}
 @keyframes alSettle{from{transform:scale(1.06)}to{transform:none}}
 @keyframes alSw{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (min-width:760px){
