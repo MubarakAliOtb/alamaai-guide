@@ -4475,8 +4475,135 @@ span.x9-chip{cursor:default}.x9-chip.on{background:#6D28D9;color:#FFFFFF;border-
 .xw-wr{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:8px;align-items:center}.xw-wr.off{opacity:.5}
 @media (max-width:620px){.xw-wr{grid-template-columns:1fr}}
 </style>
+<style id="introCss">
+/* v122: حركة الدخول وصفحة «معلم / معلمة» قبل الرئيسية (#almIntro أول ما في <body>، وسكربتها بعدها مباشرة).
+   - عند كل دخول: يُفتح كتاب الشعار وتنزل علامته، ثم يظهر اسم الدليل، وتنصرف الطبقة حين تكتمل الصفحة (ai-go)،
+     لا قبل ثانية من ظهورها، فلا يرى المعلم الصفحة نصف مرسومة قبل أن تعمل. وإن تأخرت الصفحة انصرفت وحدها بعد ثلاث ثوانٍ
+     (CSS وحده، فلا تحبس الصفحة أبدًا)، ولمسةٌ عليها تصرفها في الحال.
+   - من لم يُحفظ على جهازه dms:gender بعد (introJs0 يضع html.alm-gate قبل الرسم): تبقى الطبقة صفحةَ اختيار حتى يختار.
+   - ألوانها كلها من متغيرات التصميم فتتبع الوضع الليلي، وألوان الشعار في وسومه كما في m2/logo.svg.
+     والحركة transform وopacity وحدهما بمدد 150/200/300 مللي ثانية. ومع «تقليل الحركة» لا شاشة افتتاحية، وصفحة الاختيار ثابتة. ولا تُطبع. */
+.alm-intro{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147481000;display:flex;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  background:var(--s-paper);color:var(--s-ink);font-family:var(--f-display);
+  padding:max(24px,env(safe-area-inset-top)) 20px max(24px,env(safe-area-inset-bottom));
+  animation:aiOut 200ms cubic-bezier(.7,0,.84,0) 3000ms forwards}
+.alm-intro.ai-go{animation:aiOut2 200ms cubic-bezier(.7,0,.84,0) forwards}
+.alm-intro.ai-skip{animation:aiOut2 150ms cubic-bezier(.7,0,.84,0) forwards}
+html.alm-gate .alm-intro{animation:none}
+html.alm-gate .alm-intro.ai-out{animation:aiOut 200ms cubic-bezier(.7,0,.84,0) forwards}
+.ai-in{margin:auto;width:100%;max-width:440px;text-align:center}
+.ai-brand{display:flex;flex-direction:column;align-items:center;gap:14px}
+.ai-logo{display:block;width:76px;height:76px;overflow:visible}
+.ai-logo>*{transform-box:fill-box}
+.ai-sq{transform-origin:center;animation:aiPop 300ms cubic-bezier(.16,1,.3,1) both}
+.ai-pl{transform-origin:right center;animation:aiOpen 300ms cubic-bezier(.16,1,.3,1) 100ms both}
+.ai-pr{transform-origin:left center;animation:aiOpen 300ms cubic-bezier(.16,1,.3,1) 100ms both}
+.ai-bm{animation:aiDrop 300ms cubic-bezier(.16,1,.3,1) 250ms both}
+.ai-name{display:block;font-size:22px;font-weight:700;line-height:1.4;color:var(--s-ink);animation:aiUp 300ms cubic-bezier(.16,1,.3,1) 350ms both}
+.ai-line{display:block;width:44px;height:3px;border-radius:2px;background:var(--s-acc);animation:aiGrow 300ms cubic-bezier(.16,1,.3,1) 450ms both}
+.ai-gate{display:none;margin-top:36px}
+html.alm-gate .ai-gate{display:block}
+.ai-gate:focus{outline:none}
+.ai-gate h2{margin:0;font-size:20px;font-weight:700;line-height:1.5;color:var(--s-ink)}
+.ai-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.ai-opt{font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:112px;padding:16px 12px;margin:0;
+  border:1px solid var(--s-line2);border-radius:16px;background:var(--s-paper);color:var(--s-ink);transition:border-color 150ms ease,background-color 150ms ease;-webkit-tap-highlight-color:transparent}
+.ai-opt b{font-size:22px;font-weight:700;line-height:1.3}
+.ai-opt small{font-size:14px;line-height:1.5;color:var(--s-ink3)}
+.ai-opt:hover,.ai-opt[aria-pressed="true"]{border-color:var(--s-pri);background:var(--s-pri-50)}
+.ai-opt:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.ai-note{margin:16px 0 0;font-size:13px;line-height:1.8;color:var(--s-ink3)}
+html.alm-gate .ai-gate h2{animation:aiUp 300ms cubic-bezier(.16,1,.3,1) 600ms both}
+html.alm-gate .ai-opts{animation:aiUp 300ms cubic-bezier(.16,1,.3,1) 700ms both}
+html.alm-gate .ai-note{animation:aiUp 300ms cubic-bezier(.16,1,.3,1) 800ms both}
+@keyframes aiPop{from{opacity:0;transform:scale(.92)}}
+@keyframes aiOpen{from{opacity:0;transform:scaleX(0)}}
+@keyframes aiDrop{from{opacity:0;transform:translateY(-40%)}}
+@keyframes aiUp{from{opacity:0;transform:translateY(8px)}}
+@keyframes aiGrow{from{transform:scaleX(0)}}
+@keyframes aiOut{to{opacity:0;visibility:hidden}}
+@keyframes aiOut2{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){
+  html:not(.alm-gate) .alm-intro{display:none}
+  .alm-intro,.alm-intro *{animation:none!important;transition:none!important}
+}
+@media print{.alm-intro{display:none!important}}
+</style>
+<script id="introJs0">
+/* v122: هل يرى الزائر صفحة الاختيار؟ نعم ما دام dms:gender غير محفوظ على جهازه. يُقرَّر قبل رسم الصفحة فلا تومض الرئيسية قبلها.
+   وإن منع المتصفح التخزين فلا صفحة اختيار (لن يُحفظ الاختيار)، والمخاطبة بصيغة المعلم كما كانت. */
+(function(){try{if(localStorage.getItem('dms:gender')===null)document.documentElement.classList.add('alm-gate')}catch(e){}})();
+</script>
 </head>
 <body dir="rtl">
+<div class="alm-intro" id="almIntro" data-gz="0">
+  <div class="ai-in">
+    <div class="ai-brand" aria-hidden="true">
+      <svg class="ai-logo" viewBox="0 0 512 512" focusable="false"><rect class="ai-sq" width="512" height="512" rx="112" fill="#6D28D9"/><path class="ai-pl" d="M247 172C213 150 159 142 111 150V320C159 312 213 320 247 342Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/><path class="ai-pr" d="M265 172C299 150 353 142 401 150V320C353 312 299 320 265 342Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/><path class="ai-bm" d="M232 128H280V404L256 382L232 404Z" fill="#34D399" stroke="#34D399" stroke-width="6" stroke-linejoin="round"/></svg>
+      <b class="ai-name">دليل المعلم الألمعي</b>
+      <i class="ai-line"></i>
+    </div>
+    <section class="ai-gate" role="dialog" aria-modal="true" aria-labelledby="almGateQ" aria-describedby="almGateN">
+      <h2 id="almGateQ">كيف نخاطبك؟</h2>
+      <div class="ai-opts">
+        <button type="button" class="ai-opt" data-gate="m" aria-pressed="false"><b>معلم</b><small>«حضّر درسك»</small></button>
+        <button type="button" class="ai-opt" data-gate="f" aria-pressed="false"><b>معلمة</b><small>«حضّري درسك»</small></button>
+      </div>
+      <p class="ai-note" id="almGateN">يُحفظ الاختيار على هذا الجهاز، ويمكن تغييره في أي وقت من «إعدادي».</p>
+    </section>
+  </div>
+</div>
+<script>
+/* v122: سلوك طبقة الدخول (introCss في <head>). بصيغة ES5، ويعمل قبل السكربت الرئيسي فلا ينتظره:
+   - الشاشة الافتتاحية: تنصرف عند DOMContentLoaded (بعد السكربت الرئيسي) ولا قبل ثانية من ظهورها، وإلا انصرفت بـCSS بعد ثلاث ثوانٍ،
+     ثم تُزال من الصفحة. ولمسةٌ عليها تصرفها في الحال. ومع «تقليل الحركة» تُزال فورًا.
+   - صفحة الاختيار: حوار (aria-modal) يأخذ التركيز ولا يُغلق إلا بالاختيار، وما خلفه inert بعد اكتمال الصفحة.
+     يُحفظ الاختيار بـalmGz.set إن كان السكربت الرئيسي قد عمل (فيتحوّل النص في الحال وتظهر رسالة التأكيد)،
+     وإلا كُتب في dms:gender مباشرة ووُضع window.__almGzEarly ليكمل السكربت الرئيسي ما بقي (نوع المدرسة في دفتر المعلم).
+     ثم تنصرف الطبقة، وينتقل التركيز إلى عنوان الصفحة المعروضة. */
+(function(){
+  var R=document.documentElement,I=document.getElementById('almIntro');if(!I)return;
+  var gate=R.classList.contains('alm-gate'),done=false,inerted=[];
+  function rmq(){try{return !!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)}catch(e){return false}}
+  function fo(el){if(!el)return;try{el.focus({preventScroll:true})}catch(e){try{el.focus()}catch(x){}}}
+  function unInert(){for(var i=0;i<inerted.length;i++){try{inerted[i].inert=false}catch(e){}}inerted=[]}
+  function remove(){if(done)return;done=true;unInert();document.removeEventListener('focusin',trap,true);
+    if(I.parentNode)I.parentNode.removeChild(I);R.classList.remove('alm-gate')}
+  function trap(e){if(!done&&!I.contains(e.target))fo(G)}
+  if(!gate){
+    I.setAttribute('aria-hidden','true');
+    if(rmq()){remove();return}
+    var t0=Date.now();
+    var ready=function(){setTimeout(function(){if(!done)I.classList.add('ai-go')},Math.max(0,1000-(Date.now()-t0)))};
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready);else ready();
+    I.addEventListener('animationend',function(e){if(e.target===I)remove()});
+    I.addEventListener('click',function(){I.classList.add('ai-skip')});
+    setTimeout(remove,3800);
+    return;
+  }
+  var G=I.querySelector('.ai-gate');
+  /* التركيز على الحوار نفسه لا على أحد الزرين، فلا يبدو أحدهما مختارًا سلفًا؛ وTab ينتقل بين الزرين */
+  G.setAttribute('tabindex','-1');fo(G);
+  document.addEventListener('focusin',trap,true);
+  function inertRest(){if(done)return;var c=document.body.children;
+    for(var i=0;i<c.length;i++){var el=c[i];if(el===I||/^(SCRIPT|STYLE|TEMPLATE|svg)$/i.test(el.tagName)||el.inert)continue;try{el.inert=true;inerted.push(el)}catch(e){}}}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',inertRest);else inertRest();
+  var chose=false;
+  I.addEventListener('click',function(e){
+    var b=e.target&&e.target.closest?e.target.closest('[data-gate]'):null;if(!b||done||chose)return;chose=true;
+    var v=b.getAttribute('data-gate')==='f'?'f':'m',bs=I.querySelectorAll('[data-gate]'),i,ok=false,went=false;
+    for(i=0;i<bs.length;i++)bs[i].setAttribute('aria-pressed',bs[i]===b?'true':'false');
+    /* تُعاد الصفحة قبل الحفظ، فيصل إعلان رسالة التأكيد إلى قارئ الشاشة */
+    unInert();document.removeEventListener('focusin',trap,true);
+    try{if(window.almGz&&window.__almOK){window.almGz.set(v);ok=true}}catch(x){}
+    if(!ok){try{localStorage.setItem('dms:gender',JSON.stringify(v))}catch(x){}window.__almGzEarly=v}
+    function go(){if(went)return;went=true;var h=document.querySelector('#main .view:not([hidden]) h1');remove();
+      if(h){if(!h.hasAttribute('tabindex'))h.setAttribute('tabindex','-1');fo(h)}}
+    if(rmq()){go();return}
+    setTimeout(function(){I.classList.add('ai-out');I.addEventListener('animationend',function(ev){if(ev.target===I)go()});setTimeout(go,600)},120);
+  });
+})();
+</script>
 
 <script>
 /* v104 (A6-15): سكربت صغير قبل الصفحة، بصيغة ES5 ليعمل في أقدم المتصفحات.
@@ -23612,8 +23739,6 @@ function n5HomeTop(){const N=typeof tkNowHTML==='function'?tkNowHTML():'';return
 function n5WelHTML(){const G=[6,7,8,9].filter(g=>FD_PLANS[g]);
   return `<section class="n5-wel" id="n5Wel" aria-labelledby="n5WelH"><h2 id="n5WelH">أهلًا بك في دليل المعلم الألمعي</h2>
     <p>دليل تطبيقي لمعلم التربية الإسلامية والقرآن الكريم للطلبة الموهوبين، من الصف السادس إلى التاسع: دروس أسبوعك جاهزة بعروضها، وأدوات للحصة، وحلول للمواقف الصفية.</p>
-    <div class="n5-wel-q"><b id="n5WelG">كيف يخاطبك الدليل؟</b><span>تتغير صيغة المخاطبة في الدليل بحسب الاختيار، ويمكن تغييرها في أي وقت من «إعدادي».</span>
-      <div class="n5-gr" role="group" aria-labelledby="n5WelG">${gzPick('')}</div></div>
     <div class="n5-wel-q"><b id="n5WelQ">صفك الدراسي</b><span>يُختار الصف مرة واحدة فتظهر دروسه هنا وفي «دروسي».</span>
       <div class="n5-gr" role="group" aria-labelledby="n5WelQ">${G.map(g=>`<button type="button" data-n5set="${g}">الصف ${FD_GRN[g]}</button>`).join('')}</div></div>
     <div class="n5-wel-a"><a href="#tk/setup" data-n5wel>إعداد الصفوف والشُّعب والجدول</a><a href="#do" data-n5wel>حلول المواقف</a><button type="button" data-n5welok>تم</button></div></section>`}
@@ -24718,7 +24843,7 @@ $('#themeBtn').onclick=()=>{const r=document.documentElement;const dark=r.datase
 const th=store.get('theme',null);if(th)document.documentElement.dataset.theme=th;
 
 /* ================= v121: المخاطبة (معلم / معلمة) =================
-   يختار المعلم صيغة المخاطبة في بطاقة الترحيب أو في «إعدادي»، فتُحفظ في dms:gender ('m' أو 'f') على جهازه وحده،
+   يختار المعلم صيغة المخاطبة في صفحة الاختيار قبل الرئيسية (v122، طبقة #almIntro) أو في «إعدادي»، فتُحفظ في dms:gender ('m' أو 'f') على جهازه وحده،
    وتدخل في النسخة الاحتياطية الشاملة مع التفضيلات (كل مفتاح يبدأ بـ dms:).
    نصوص الدليل مكتوبة بصيغة المذكر، وفي صيغة المعلمة تحوّل هذه الطبقة النص الظاهر عند رسمه (والعناوين المساعدة: placeholder وaria-label وtitle):
    ١) أفعال الأمر المفردة: اختر ← اختاري، ابدأ ← ابدئي، رتّب ← رتّبي… وصيغ نهي محددة: لا تجعل ← لا تجعلي.
@@ -24908,6 +25033,8 @@ function gzSet(v){v=v==='f'?'f':'m';const was=gzIsF();store.set('gender',v);
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-gzset]');if(!b)return;e.preventDefault();gzSet(b.dataset.gzset)});
 const gzPick=(cls)=>{const v=store.get('gender','');return ['m','f'].map(g=>`<button type="button"${cls?` class="${cls}"`:''} data-gzset="${g}" data-gz="0" aria-pressed="${v===g}">${cls?tkI('check'):''}<span>${g==='m'?'معلم':'معلمة'}</span></button>`).join('')};
 window.almGz={set:gzSet,text:gzText,isF:gzIsF};
+/* v122: اختيارٌ تمّ في صفحة الاختيار قبل أن يعمل هذا السكربت (شبكة بطيئة) كُتب في dms:gender مباشرة، فيُكمَّل هنا ما يفعله gzSet (نوع المدرسة في الدفتر) */
+if(window.__almGzEarly){try{gzSet(window.__almGzEarly)}catch(e){}window.__almGzEarly=0}
 if(gzIsF())gzStart();
 
 
