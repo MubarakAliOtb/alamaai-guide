@@ -16912,6 +16912,9 @@ const BG_CERT={
  wisam:{title:'وسام استحقاق',lead:'يُمنح هذا الوسام للطالب',def:''},
  hifz:{title:'شهادة إتقان الحفظ',lead:'تهنئة بإتقان حفظ المقاطع المقررة وتلاوتها، تُمنح هذه الشهادة للطالب',def:'لإتقانه حفظ المقاطع المقررة وتلاوتها مجوّدة'},
  level:{title:'شهادة ارتقاء',lead:'تهنئة بالارتقاء في سلّم النمو، تُمنح هذه الشهادة للطالب',def:''}};
+/* v121: صيغة المعلمة والطالبة لما يُرسم على الشهادة (اللوحة لا تمر بمحوّل الصفحة) */
+const BG_CERT_F={taqdir:{lead:'يسرّ معلمة المادة أن تقدّم هذه الشهادة للطالبة',def:'لجهدها المتواصل ومشاركتها الفاعلة وأسئلتها العميقة'},tamayuz:{lead:'تقديرًا لمثابرتها وإتقانها، تُمنح هذه الشهادة للطالبة',def:'لإتقانها وحرصها على أن يجيء عملها على أحسن وجه'},wisam:{lead:'يُمنح هذا الوسام للطالبة'},hifz:{lead:'تهنئة بإتقان حفظ المقاطع المقررة وتلاوتها، تُمنح هذه الشهادة للطالبة',def:'لإتقانها حفظ المقاطع المقررة وتلاوتها مجوّدة'},level:{lead:'تهنئة بالارتقاء في سلّم النمو، تُمنح هذه الشهادة للطالبة'}};
+const bgCT=k=>gzF(BG_CERT[k],Object.assign({},BG_CERT[k],BG_CERT_F[k]));
 const BG_NUM=new Intl.NumberFormat('ar-EG',{maximumFractionDigits:1});
 const bgN=v=>BG_NUM.format(Math.round((Number(v)||0)*10)/10);
 const bgUid=()=>Math.random().toString(36).slice(2,8)+Date.now().toString(36).slice(-4);
@@ -17028,7 +17031,7 @@ function bgDlgStu(id){const s=bgById(id);if(!s)return;const lv=bgLevel(s.points|
    ${bqStuExtra(s)}<div class="b-form-grid"><div class="b-field"><label for="bgSn">الاسم</label><input class="b-in" id="bgSn" value="${esc(s.name)}" maxlength="80"></div></div></div>
    <div class="b-dlg-foot"><button class="b-btn b-primary" data-bg="srename" data-id="${s.id}">حفظ الاسم</button><button class="b-btn" data-bg="certfor" data-id="${s.id}">${bgSvg('cert')} شهادة</button><button class="b-btn" data-bq="parent" data-id="${s.id}">${bgSvg('note')} ورقة لقاء ولي الأمر</button><button class="b-btn b-danger" data-bg="sdel" data-id="${s.id}">${bgSvg('trash')} حذف الطالب</button></div>`)}
 /* ---------- ٥. الشهادات ---------- */
-function bgCertDef(s){if(bgCert.type==='wisam')return (BG_BMAP[bgCert.badge]||{}).desc||'';if(bgCert.type==='level')return `لبلوغه مستوى «${bgLevel(s.points||0).L.name}» بجهده ومثابرته`;if(bgCert.type==='hifz'){const d=bgD();const h=d.hifz[s.id]||{};const segs=bgSegs().filter(g=>h[g.id]==='m').map(g=>g.t);return segs.length?'أتقن: '+segs.join('، '):BG_CERT.hifz.def}return BG_CERT[bgCert.type].def}
+function bgCertDef(s){if(bgCert.type==='wisam')return gzC((BG_BMAP[bgCert.badge]||{}).desc||'');if(bgCert.type==='level'){const n=bgLevel(s.points||0).L.name;return gzF(`لبلوغه مستوى «${n}» بجهده ومثابرته`,`لبلوغها مستوى «${gzC(n)}» بجهدها ومثابرتها`)}if(bgCert.type==='hifz'){const d=bgD();const h=d.hifz[s.id]||{};const segs=bgSegs().filter(g=>h[g.id]==='m').map(g=>g.t);return segs.length?gzF('أتقن: ','أتقنت: ')+segs.join('، '):bgCT('hifz').def}return bgCT(bgCert.type).def}
 function bgVCerts(){const S=bgStu();if(!S.length)return bgHead('الشهادات','')+bgAddForm();if(!bgCert.sid||!bgById(bgCert.sid))bgCert.sid=S[0].id;const s=bgById(bgCert.sid);if(bgCert.type==='wisam'&&!bgCert.badge)bgCert.badge=(s.badges||[]).slice(-1)[0]||BG_BADGES[0].key;
   return bgHead('الشهادات','صمّم الشهادة، ثم نزّلها صورة للطالب، أو اطبع شهادات الصف كله.')+`<div class="b-cert-layout"><div class="b-card" style="display:grid;gap:12px">
    <div class="b-field"><label for="bgCs">الطالب</label><select class="b-in" id="bgCs" data-bgin="cert" data-f="sid">${S.map(x=>`<option value="${x.id}"${x.id===bgCert.sid?' selected':''}>${esc(x.name)}</option>`).join('')}</select></div>
@@ -17041,7 +17044,7 @@ function bgVCerts(){const S=bgStu();if(!S.length)return bgHead('الشهادات
 function bgRR(x,ctx,X,Y,W,H,r){ctx.beginPath();ctx.moveTo(X+r,Y);ctx.arcTo(X+W,Y,X+W,Y+H,r);ctx.arcTo(X+W,Y+H,X,Y+H,r);ctx.arcTo(X,Y+H,X,Y,r);ctx.arcTo(X,Y,X+W,Y,r);ctx.closePath()}
 function bgWrap(ctx,t,w){const ws=String(t).split(/\s+/);const L=[];let c='';for(const x of ws){const tt=c?c+' '+x:x;if(ctx.measureText(tt).width>w&&c){L.push(c);c=x}else c=tt}if(c)L.push(c);return L}
 async function bgPaint(cv,s,opt){const F='"Alm Sans Arabic",Tahoma,sans-serif';try{await Promise.all([document.fonts.load('700 40px "Alm Sans Arabic"','ابجد'),document.fonts.load('400 40px "Alm Sans Arabic"','ابجد'),document.fonts.load('40px Hafs','وَقُل'),document.fonts.load('40px Sym','﴿')])}catch(e){}
-  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height,T=BG_CERT[opt.type],c=bgCls();ctx.setTransform(1,0,0,1,0,0);ctx.direction='rtl';ctx.textBaseline='alphabetic';ctx.globalAlpha=1;
+  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height,T=bgCT(opt.type),c=bgCls();ctx.setTransform(1,0,0,1,0,0);ctx.direction='rtl';ctx.textBaseline='alphabetic';ctx.globalAlpha=1;
   ctx.fillStyle=m2c('#EEF4FF');ctx.fillRect(0,0,W,H);ctx.save();ctx.globalAlpha=.10;let g=ctx.createLinearGradient(0,800,600,1414);g.addColorStop(0,m2c('#2563EB'));g.addColorStop(1,m2c('#14B8A6'));ctx.fillStyle=g;ctx.beginPath();ctx.arc(160,1300,420,0,Math.PI*2);ctx.fill();ctx.globalAlpha=.08;ctx.fillStyle=m2c('#FF7A1A');ctx.beginPath();ctx.arc(1900,120,300,0,Math.PI*2);ctx.fill();ctx.restore();
   bgRR(0,ctx,60,60,W-120,H-120,56);ctx.fillStyle=m2c('#FFFFFF');ctx.fill();const fg=ctx.createLinearGradient(W,0,0,H);fg.addColorStop(0,m2c('#2563EB'));fg.addColorStop(1,m2c('#14B8A6'));ctx.lineWidth=10;ctx.strokeStyle=fg;ctx.stroke();
   ctx.textAlign='right';if(BG.school){ctx.fillStyle=m2c('#1D4ED8');ctx.font=`700 34px ${F}`;ctx.fillText(BG.school,W-150,160)}ctx.fillStyle=m2c('#4D5B7C');ctx.font=`400 27px ${F}`;ctx.fillText(`${opt.subjName} · الصف ${FD_GRN[c.grade]} · ٢٠٢٦ / ٢٠٢٧`,W-150,BG.school?205:175);
@@ -17049,13 +17052,13 @@ async function bgPaint(cv,s,opt){const F='"Alm Sans Arabic",Tahoma,sans-serif';t
   const og=ctx.createLinearGradient(cx+110,0,cx-110,0);og.addColorStop(0,m2c('#FF7A1A'));og.addColorStop(1,m2c('#FFB26B'));ctx.fillStyle=og;bgRR(0,ctx,cx-110,440,220,12,6);ctx.fill();
   ctx.fillStyle=m2c('#4D5B7C');ctx.font=`400 36px ${F}`;bgWrap(ctx,T.lead,1200).slice(0,2).forEach((l,i)=>ctx.fillText(l,cx,530+i*48));
   ctx.fillStyle=m2c('#1D4ED8');ctx.font=`700 84px ${F}`;ctx.fillText(s.name,cx,665);const reason=(opt.reason||'').trim()||opt.def;ctx.fillStyle=m2c('#0D1B3D');ctx.font=`500 40px ${F}`;bgWrap(ctx,reason,1180).slice(0,3).forEach((l,i)=>ctx.fillText(l,cx,755+i*60));
-  ctx.fillStyle=m2c('#4D5B7C');ctx.font=`400 31px ${F}`;ctx.fillText('سائلين الله له التوفيق والسداد، وأن يجعل علمه نافعًا لدينه ووطنه',cx,955);
+  ctx.fillStyle=m2c('#4D5B7C');ctx.font=`400 31px ${F}`;ctx.fillText(gzF('سائلين الله له التوفيق والسداد، وأن يجعل علمه نافعًا لدينه ووطنه','سائلين الله لها التوفيق والسداد، وأن يجعل علمها نافعًا لدينها ووطنها'),cx,955);
   ctx.fillStyle=m2c('#0B7C70');ctx.font='44px Hafs, Sym, serif';ctx.fillText('﴿ وَقُل رَّبِّ زِدۡنِي عِلۡمٗا ﴾',cx,1040);ctx.fillStyle=m2c('#4D5B7C');ctx.font=`400 22px ${F}`;ctx.fillText('[طه: ١١٤]',cx,1080);
   const px=380,py=650,pr=185;ctx.beginPath();ctx.arc(px,py,pr+16,0,Math.PI*2);ctx.fillStyle=fg;ctx.fill();ctx.beginPath();ctx.arc(px,py,pr,0,Math.PI*2);ctx.fillStyle=m2c('#fff');ctx.fill();
   ctx.save();ctx.beginPath();ctx.arc(px,py,pr-8,0,Math.PI*2);ctx.clip();const ag=ctx.createLinearGradient(px+pr,py-pr,px-pr,py+pr);ag.addColorStop(0,m2c('#2563EB'));ag.addColorStop(1,m2c('#14B8A6'));ctx.fillStyle=ag;ctx.fillRect(px-pr,py-pr,pr*2,pr*2);ctx.fillStyle=m2c('#fff');ctx.font=`700 110px ${F}`;ctx.textAlign='center';ctx.fillText(bgInit(s.name),px,py+38);ctx.restore();
   const bk=opt.type==='wisam'?opt.badge:(s.badges||[]).slice(-1)[0];if(bk&&BG_BMAP[bk]){const b=BG_BMAP[bk],R=74,bx=px+140,by=py+140;const gg=ctx.createLinearGradient(bx+R,by-R,bx-R,by+R);gg.addColorStop(0,b.c1);gg.addColorStop(1,b.c2);ctx.beginPath();ctx.arc(bx,by,R,0,Math.PI*2);ctx.fillStyle=gg;ctx.fill();ctx.lineWidth=6;ctx.strokeStyle=m2c('#fff');ctx.stroke();ctx.save();ctx.translate(bx-R*.42,by-R*.42);ctx.scale(R*.84/24,R*.84/24);ctx.strokeStyle=m2c('#fff');ctx.lineWidth=1.9;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke(new Path2D(b.g));ctx.restore()}
-  ctx.textAlign='center';if(opt.type==='wisam'&&BG_BMAP[opt.badge]){ctx.fillStyle=m2c('#B54E00');ctx.font=`700 42px ${F}`;ctx.fillText(BG_BMAP[opt.badge].name,px,py+pr+105)}else{ctx.fillStyle=m2c('#4D5B7C');ctx.font=`500 32px ${F}`;ctx.fillText(`مستوى ${bgLevel(s.points||0).L.name}`,px,py+pr+100)}
-  ctx.fillStyle=m2c('#D5E0F5');ctx.fillRect(130,1130,W-260,3);ctx.textAlign='right';ctx.fillStyle=m2c('#4D5B7C');ctx.font=`400 28px ${F}`;ctx.fillText('معلم المادة',W-150,1195);ctx.fillStyle=m2c('#0D1B3D');ctx.font=`700 40px ${F}`;ctx.fillText(BG.teacher||'........................',W-150,1250);
+  ctx.textAlign='center';if(opt.type==='wisam'&&BG_BMAP[opt.badge]){ctx.fillStyle=m2c('#B54E00');ctx.font=`700 42px ${F}`;ctx.fillText(gzC(BG_BMAP[opt.badge].name),px,py+pr+105)}else{ctx.fillStyle=m2c('#4D5B7C');ctx.font=`500 32px ${F}`;ctx.fillText(`مستوى ${gzC(bgLevel(s.points||0).L.name)}`,px,py+pr+100)}
+  ctx.fillStyle=m2c('#D5E0F5');ctx.fillRect(130,1130,W-260,3);ctx.textAlign='right';ctx.fillStyle=m2c('#4D5B7C');ctx.font=`400 28px ${F}`;ctx.fillText(gzF('معلم المادة','معلمة المادة'),W-150,1195);ctx.fillStyle=m2c('#0D1B3D');ctx.font=`700 40px ${F}`;ctx.fillText(BG.teacher||'........................',W-150,1250);
   ctx.textAlign='left';ctx.fillStyle=m2c('#4D5B7C');ctx.font=`400 28px ${F}`;ctx.fillText('تاريخ المنح',150,1195);ctx.fillStyle=m2c('#0D1B3D');ctx.font=`600 38px ${F}`;ctx.fillText(new Date().toLocaleDateString('ar-EG',{day:'numeric',month:'long',year:'numeric'}),150,1250)}
 let bgDrawSeq=0;
 async function bgDrawCert(){const cv=$('#bgCanvas');if(!cv)return;const my=++bgDrawSeq;const s=bgById(bgCert.sid);if(!s)return;const off=document.createElement('canvas');off.width=cv.width;off.height=cv.height;
@@ -17072,7 +17075,7 @@ function bgVExport(){const c=bgCls();const d=bgD();
     <div class="b-form-grid" style="margin-top:10px">${bgClsForm()}</div><button class="b-btn" data-bg="addcls" style="margin-top:8px">${bgSvg('plus')} أضف صفًّا</button></div></div>`}
 async function bgXlsx(){const c=bgCls();const S=bgStu();let X;try{X=await fdLoadXlsx()}catch(e){toast('تعذّر تحميل أداة Excel. تحقّق من اتصال الإنترنت ثم أعد المحاولة.');return}const wb=X.utils.book_new();wb.Workbook={Views:[{RTL:true}]};
   ['islamic','quran'].forEach(sj=>{const aoa=[[`${BG_SUBJ[sj].name} · ${c.name} · ${BG_TERMS[bgTerm]}`],['م','الطالب',...BG_COMP.map(x=>`${x.name} (${x.max})`),'المجموع (١٠٠)','التقدير']];S.forEach((s,i)=>{const r=bgCalc(s.id,sj);const gr=r.total!=null?bgGrade(r.total):null;aoa.push([i+1,s.name,...BG_COMP.map(x=>r.v[x.k]!=null?r.v[x.k]:''),r.total!=null?r.total:'',gr?gr.code+' '+gr.label:''])});const ws=X.utils.aoa_to_sheet(aoa);ws['!cols']=[{wch:4},{wch:28},...BG_COMP.map(()=>({wch:12})),{wch:12},{wch:16}];X.utils.book_append_sheet(wb,ws,'درجات '+BG_SUBJ[sj].short)});
-  const pa=[['م','الطالب','النقاط','المستوى','الأوسمة']];S.forEach((s,i)=>pa.push([i+1,s.name,s.points||0,bgLevel(s.points||0).L.name,(s.badges||[]).map(k=>(BG_BMAP[k]||{}).name).filter(Boolean).join('، ')]));const ws2=X.utils.aoa_to_sheet(pa);ws2['!cols']=[{wch:4},{wch:28},{wch:8},{wch:12},{wch:50}];X.utils.book_append_sheet(wb,ws2,'النقاط والأوسمة');
+  const pa=[['م','الطالب','النقاط','المستوى','الأوسمة']];S.forEach((s,i)=>pa.push([i+1,s.name,s.points||0,gzC(bgLevel(s.points||0).L.name),(s.badges||[]).map(k=>gzC((BG_BMAP[k]||{}).name)).filter(Boolean).join('، ')]));const ws2=X.utils.aoa_to_sheet(pa);ws2['!cols']=[{wch:4},{wch:28},{wch:8},{wch:12},{wch:50}];X.utils.book_append_sheet(wb,ws2,'النقاط والأوسمة');
   const segs=bgSegs();const d=bgD();const M={m:'أتقن',r:'يحتاج مراجعة',x:'لم يحفظ بعد'};const ha=[['م','الطالب',...segs.map(g=>g.t)]];S.forEach((s,i)=>{const h=d.hifz[s.id]||{};ha.push([i+1,s.name,...segs.map(g=>M[h[g.id]]||'')])});X.utils.book_append_sheet(wb,X.utils.aoa_to_sheet(ha),'الحفظ');
   X.utils.book_append_sheet(wb,X.utils.aoa_to_sheet([['م','الطالب'],...S.map((s,i)=>[i+1,s.name])]),'القائمة');
   const out=X.write(wb,{bookType:'xlsx',type:'array'});fdSaveBlob(new Blob([out],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),'حقيبة-المعلم_'+c.name.replace(/[\s/]+/g,'-')+'.xlsx','حُفظ ملف Excel')}
@@ -17253,6 +17256,7 @@ function cpEnd(){const R=cpRun,g=R.g,n=R.qs.length,c=R.ok,pct=Math.round(c/n*100
 function cpConfetti(n){let c=document.getElementById('cpConf');if(!c){c=document.createElement('canvas');c.id='cpConf';c.className='cp-conf';document.body.appendChild(c)}if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;const C=['#2563EB','#14B8A6','#FF7A1A','#0D1B3D','#DCE7FF','#FFB466'];const P=[];for(let i=0;i<n;i++)P.push({x:Math.random()*c.width,y:-20-Math.random()*c.height*.5,r:4+Math.random()*6,c:C[i%C.length],vy:2+Math.random()*3,vx:-1.5+Math.random()*3,a:Math.random()*6.3,va:-.2+Math.random()*.4});let t=0;(function f(){x.clearRect(0,0,c.width,c.height);P.forEach(q=>{q.y+=q.vy;q.x+=q.vx;q.a+=q.va;x.save();x.translate(q.x,q.y);x.rotate(q.a);x.fillStyle=q.c;x.fillRect(-q.r/2,-q.r/2,q.r,q.r*.6);x.restore()});t++;if(t<240)requestAnimationFrame(f);else x.clearRect(0,0,c.width,c.height)})()}
 /* ---------- شهادة الكأس: بلا شعار ولا اسم مدرسة ولا توقيع مصوَّر ---------- */
 const CP_PHRASE='راجعتَ قبل أن تُسأل، وأتقنتَ قبل أن تُمتحن، وبلغتَ الغاية بجدارة. نفع الله بك وبعلمك، وبارك في جهدك ووقتك، وجعلك من أهل القرآن والعلم العاملين به؛ فالقمم لا تُبلغ إلا بخطواتٍ صادقة ومثابرةٍ لا تعرف الملل.';
+const CP_PHRASE_F='راجعتِ قبل أن تُسألي، وأتقنتِ قبل أن تُمتحني، وبلغتِ الغاية بجدارة. نفع الله بكِ وبعلمكِ، وبارك في جهدكِ ووقتكِ، وجعلكِ من أهل القرآن والعلم العاملين به؛ فالقمم لا تُبلغ إلا بخطواتٍ صادقة ومثابرةٍ لا تعرف الملل.';
 function cpRR(x,X,Y,w,h,r){if(typeof r==='number')r=[r,r,r,r];x.beginPath();x.moveTo(X+r[0],Y);x.lineTo(X+w-r[1],Y);x.quadraticCurveTo(X+w,Y,X+w,Y+r[1]);x.lineTo(X+w,Y+h-r[2]);x.quadraticCurveTo(X+w,Y+h,X+w-r[2],Y+h);x.lineTo(X+r[3],Y+h);x.quadraticCurveTo(X,Y+h,X,Y+h-r[3]);x.lineTo(X,Y+r[0]);x.quadraticCurveTo(X,Y,X+r[0],Y);x.closePath()}
 async function cpPaint(g,name,tr){const F='"Alm Sans Arabic",Tahoma,sans-serif';try{await Promise.all([document.fonts.load('700 60px "Alm Sans Arabic"','ابجد'),document.fonts.load('400 20px "Alm Sans Arabic"','ابجد')])}catch(e){}
   const W=1190,H=842,c=document.createElement('canvas');c.width=W*2;c.height=H*2;const x=c.getContext('2d');x.scale(2,2);
@@ -17261,10 +17265,10 @@ async function cpPaint(g,name,tr){const F='"Alm Sans Arabic",Tahoma,sans-serif';
   const gr=x.createLinearGradient(0,0,W,H);gr.addColorStop(0,m2c('#14B8A6'));gr.addColorStop(.5,m2c('#2563EB'));gr.addColorStop(1,m2c('#FF7A1A'));x.lineWidth=4;x.strokeStyle=gr;cpRR(x,28,28,W-56,H-56,[36,10,36,36]);x.stroke();x.lineWidth=1.5;x.strokeStyle=m2c('#B9C9E8');cpRR(x,40,40,W-80,H-80,[28,8,28,28]);x.stroke();
   x.direction='rtl';try{const im=await new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(CP_CUP.replace('class="cp-cup" ','xmlns="http://www.w3.org/2000/svg" '))});x.drawImage(im,W/2-62,58,124,124)}catch(e){}
   T('شهادة الكأس',W/2,258,{size:62,weight:700});x.font='700 17px '+F;const pt='الصف '+FD_GRN[g]+' · مسابقة الكأس · الفصل الدراسي الأول ٢٠٢٦ / ٢٠٢٧';const pw=x.measureText(pt).width+44;x.fillStyle=m2c('#EEF4FF');cpRR(x,W/2-pw/2,276,pw,34,17);x.fill();T(pt,W/2,299,{size:17,weight:700,color:'#1D4ED8'});
-  T('تُمنح للطالب المتميز',W/2,372,{size:21,color:'#4A5878'});const ng=x.createLinearGradient(W/2-260,0,W/2+260,0);ng.addColorStop(0,m2c('#0B7C70'));ng.addColorStop(1,m2c('#1D4ED8'));T(name,W/2,448,{size:58,weight:700,color:ng});x.fillStyle=m2c('#FF7A1A');cpRR(x,W/2-120,464,240,5,3);x.fill();
-  T('تقديرًا لجدّه ومثابرته في مراجعة دروسه وإتقانها حتى بلغ الكأس',W/2,506,{size:18,color:'#4A5878'});
-  x.font='400 20px '+F;const L=[];let cur='';CP_PHRASE.split(' ').forEach(w=>{const t=cur?cur+' '+w:w;if(x.measureText(t).width>800&&cur){L.push(cur);cur=w}else cur=t});if(cur)L.push(cur);L.forEach((l,i)=>T(l,W/2,552+i*36,{size:20}));
-  const tch=(typeof BG!=='undefined'&&BG&&BG.teacher)||'';T('معلم التربية الإسلامية والقرآن الكريم',W-92,700,{size:15,color:'#4A5878',align:'right'});T(tch||'........................',W-92,740,{size:24,weight:700,align:'right'});
+  T(gzF('تُمنح للطالب المتميز','تُمنح للطالبة المتميزة'),W/2,372,{size:21,color:'#4A5878'});const ng=x.createLinearGradient(W/2-260,0,W/2+260,0);ng.addColorStop(0,m2c('#0B7C70'));ng.addColorStop(1,m2c('#1D4ED8'));T(name,W/2,448,{size:58,weight:700,color:ng});x.fillStyle=m2c('#FF7A1A');cpRR(x,W/2-120,464,240,5,3);x.fill();
+  T(gzF('تقديرًا لجدّه ومثابرته في مراجعة دروسه وإتقانها حتى بلغ الكأس','تقديرًا لجدّها ومثابرتها في مراجعة دروسها وإتقانها حتى بلغت الكأس'),W/2,506,{size:18,color:'#4A5878'});
+  x.font='400 20px '+F;const L=[];let cur='';gzF(CP_PHRASE,CP_PHRASE_F).split(' ').forEach(w=>{const t=cur?cur+' '+w:w;if(x.measureText(t).width>800&&cur){L.push(cur);cur=w}else cur=t});if(cur)L.push(cur);L.forEach((l,i)=>T(l,W/2,552+i*36,{size:20}));
+  const tch=(typeof BG!=='undefined'&&BG&&BG.teacher)||'';T(gzF('معلم التربية الإسلامية والقرآن الكريم','معلمة التربية الإسلامية والقرآن الكريم'),W-92,700,{size:15,color:'#4A5878',align:'right'});T(tch||'........................',W-92,740,{size:24,weight:700,align:'right'});
   x.globalAlpha=.9;x.fillStyle=m2c('#14B8A6');cpRR(x,92,700,8,78,4);x.fill();x.globalAlpha=1;T('مجموع النقاط: '+ar(tr.score)+' · النجوم: '+ar(tr.stars),114,722,{size:16,weight:700,align:'left'});T('رمز الإنجاز: '+cpCode(g,name,tr.date,tr.score),114,748,{size:13,color:'#4A5878',align:'left'});T('حُرّرت في: '+tr.date,114,774,{size:13,color:'#4A5878',align:'left'});
   return c}
 async function cpMakeCert(){const g=cpGrade(),p=cpP(g);if(!p||!p.tr)return;try{cpCv=await cpPaint(g,CP.cur[g],p.tr);cpJpg=cpCv.toDataURL('image/jpeg',.92);const im=document.getElementById('cpPrev');if(im)im.src=cpJpg}catch(e){toast('تعذّر إنشاء الشهادة على هذا الجهاز')}}
@@ -18500,7 +18504,7 @@ const NB_CYC={ck:['','✓'],hz:['','✓','○','✗'],tm:['','ط','م','ط م']}
 const nbToast=m=>{try{toast(m)}catch(e){}};
 const nbId=()=>'c'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const nbClsLbl=c=>c.blank?nbGS(c.g):`${nbGS(c.g)}${c.sec?' / '+c.sec:''}`;
-function nbDef(){return {v:1,t:{name:'',school:'',head:'',year:'٢٠٢٦ / ٢٠٢٧',g:'b',si:1,sq:1},cls:[],gr:[8],sel:{},opt:{cover:1,div:1,files:'blank'},f:{},logo:null}}
+function nbDef(){return {v:1,t:{name:'',school:'',head:'',year:'٢٠٢٦ / ٢٠٢٧',g:store.get('gender','m')==='f'?'g':'b',si:1,sq:1},cls:[],gr:[8],sel:{},opt:{cover:1,div:1,files:'blank'},f:{},logo:null}}
 function nbFix(d){const D=nbDef();d.t=Object.assign(D.t,d.t||{});d.cls=Array.isArray(d.cls)?d.cls.filter(c=>c&&NB_GN[c.g]).map(c=>({id:String(c.id||nbId()),bag:c.bag||null,g:+c.g,sec:String(c.sec||'').slice(0,16),st:Array.isArray(c.st)?c.st.map(String).slice(0,30):[]})):[];
   d.gr=Array.isArray(d.gr)&&d.gr.length?d.gr.filter(g=>NB_GN[g]).map(Number):[8];d.sel=d.sel&&typeof d.sel==='object'?d.sel:{};d.opt=Object.assign(D.opt,d.opt||{});d.f=d.f&&typeof d.f==='object'?d.f:{};d.logo=typeof d.logo==='string'&&d.logo.startsWith('data:image/')?d.logo:null;d.v=1;return d}
 function nbLoad(){if(NB)return;let d=null;try{const r=localStorage.getItem(NB_KEY);d=r?JSON.parse(r):null}catch(e){d=null}
@@ -19772,7 +19776,7 @@ function rpEvidence(ck,sid){const {P}=rpS();const cid=ck.slice(2);const d=tkBagD
   const [a,b]=rpRange(term,P.rppart);lgLoad();const lg=LG.items.filter(x=>x.ck===ck&&x.sid===sid&&x.date>=a&&x.date<b).sort((x,y)=>x.ts.localeCompare(y.ts));
   const cnt={pos:0,fu:0,gift:0,com:0};lg.forEach(x=>{if(cnt[x.t]!=null)cnt[x.t]++});
   const badges=(s.badges||[]).map(k=>BG_BMAP[k]).filter(Boolean).map(b=>b.name);const lv=bgLevel(s.points||0);
-  return {s,c,comp,sum,mx,full,pct,grade,hz,lg,cnt,badges,pts:s.points||0,lv:lv.L.name}}
+  return {s,c,comp,sum,mx,full,pct,grade,hz,lg,cnt,badges,pts:s.points||0,lv:gzC(lv.L.name)}}
 function rpEvHTML(E){const r=[];
   r.push(`<div class="rp-ev"><b>الدرجات${E.full?'':' (المرصود حتى الآن)'}</b>${E.comp.some(x=>x.v!=null)?`<div class="rp-comp">${E.comp.map(x=>`<span${x.v==null?' class="na"':''}>${x.n}: <b>${x.v==null?'—':bgN(x.v)}</b> / ${bgN(x.max)}</span>`).join('')}</div><small>المجموع ${bgN(Math.round(E.sum*10)/10)} من ${bgN(E.mx)}${E.pct!=null?` (٪${bgN(Math.round(E.pct))})`:''}${E.grade?` · التقدير: ${E.grade.label} (${E.grade.code})`:''}</small>`:'<small>لم تُرصد درجات لهذه المادة والفصل في الحقيبة بعد.</small>'}</div>`);
   if(E.hz)r.push(`<div class="rp-ev"><b>الحفظ</b><small>أتقن ${bgN(E.hz.m)} من ${bgN(E.hz.n)} مقاطع${E.hz.r.length?` · يحتاج مراجعة: ${E.hz.r.map(esc).join('، ')}`:''}${E.hz.x.length?` · لم يحفظ بعد: ${E.hz.x.map(esc).join('، ')}`:''}</small></div>`);
@@ -20358,7 +20362,7 @@ TK_PAGES.lmap={render(M){const B=nwS('lm');const g=B.g;if(!['full','blank'].incl
 
 /* ---------- ٣) النسخة الاحتياطية الشاملة ----------
    كل ما كتبه المعلم على هذا الجهاز في ملف واحد يحفظه عنده: الحقيبة، والدفتر، والأدوات وسجلاتها، وتقدّم المسابقة، وتفضيلاته. لا يُرفع شيء إلى أي مكان. */
-const BK_PARTS=[['fdBag.v1','حقيبة الصف','الصفوف والطلاب والدرجات والحفظ والنقاط'],['nb.v1','دفتر المعلم','صفحات الدفتر وجداوله'],['tk.v1','الأدوات','صفوفك وجدولك ومهامك، وتخصيص عروضك وملاحظاتك، وخريطة الجلوس والجرّة'],['tk.log.v1','سجل الوقائع','وقائع الطلاب الموثقة'],['tk.rep.v1','التقارير الدورية','ما كتبته في تقارير الطلاب'],['fdCup.v1','مسابقة الكأس','لاعبو المسابقة وتقدّمهم'],['dms:','التفضيلات والتحضير','مخططات الحصص والمحفوظات والمثبّت والمظهر'],['vsc.','الحلول البصرية','مشاريع المختبر، وما كتبته في أدواتها واستماراتها'],['lxd.','هندسة تجربة التعلّم','لوحات تجربة الحصة التي بنيتها في المختبر'],['mtaa_','متعة صفية','المفضلة، والألغاز المحلولة، والفِرق ونقاطها، وأفضل نتائجك في الألعاب الذهنية']];
+const BK_PARTS=[['fdBag.v1','حقيبة الصف','الصفوف والطلاب والدرجات والحفظ والنقاط'],['nb.v1','دفتر المعلم','صفحات الدفتر وجداوله'],['tk.v1','الأدوات','صفوفك وجدولك ومهامك، وتخصيص عروضك وملاحظاتك، وخريطة الجلوس والجرّة'],['tk.log.v1','سجل الوقائع','وقائع الطلاب الموثقة'],['tk.rep.v1','التقارير الدورية','ما كتبته في تقارير الطلاب'],['fdCup.v1','مسابقة الكأس','لاعبو المسابقة وتقدّمهم'],['dms:','التفضيلات والتحضير','مخططات الحصص والمحفوظات والمثبّت والمظهر والمخاطبة'],['vsc.','الحلول البصرية','مشاريع المختبر، وما كتبته في أدواتها واستماراتها'],['lxd.','هندسة تجربة التعلّم','لوحات تجربة الحصة التي بنيتها في المختبر'],['mtaa_','متعة صفية','المفضلة، والألغاز المحلولة، والفِرق ونقاطها، وأفضل نتائجك في الألعاب الذهنية']];
 const bkPre=k=>k==='dms:'||k==='vsc.'||k==='lxd.'||k==='mtaa_';
 let bkIn=null;
 const bkIs=k=>BK_PARTS.some(p=>bkPre(p[0])?k.startsWith(p[0]):k===p[0]);
@@ -20548,6 +20552,9 @@ const ME_TOUR=[['ai-home2','الرئيسية','«حصتي الآن» في أعل
 TK_PAGES.setup={render(M){const E=meInit();const tt=Object.values(TK.tt).filter(Boolean).length;const nc=BG.classes.length;const nst=BG.classes.reduce((a,c)=>a+meStuN(c),0);
   const step=(ok,t)=>`<span class="me-st${ok?' ok':''}">${tkI(ok?'check':'minus')}${t}</span>`;const ttH=meTTHTML();
   M.innerHTML=`<div class="me-steps" aria-label="ما اكتمل من الإعداد">${step(E.grades.length>0,'صفوفي')}${step(nc>0,'شُعبي')}${step(tt>0,'جدولي')}${step(nst>0,'طلابي')}</div>
+   <section class="tk-card gz-card"><div class="tk-card-h"><h3>${tkIc('ai-talk')}المخاطبة</h3></div>
+     <p class="tk-tip">تتغير بها صيغة المخاطبة في صفحات الدليل وأدواته، وألفاظ الطلاب أو الطالبات فيما تطبعه الأدوات. ويُحفظ الاختيار على هذا الجهاز ويدخل في النسخة الشاملة.</p>
+     <div class="me-gr" role="group" aria-label="المخاطبة">${gzPick('me-g')}</div></section>
    <section class="tk-card"><div class="tk-card-h"><h3>${tkIc('ai-people')}١. صفوفي وشُعبي</h3></div>
      <p class="tk-tip">اختر الصفوف التي تدرّسها ثم عدد شُعب كل صف. تُنشأ الشُّعب في حقيبة الصف، فتعرفها الأدوات والألعاب والجدول كلها، ولا تختار الصف بعدها في كل أداة.</p>
      <div class="me-gr" role="group" aria-label="صفوفي">${[6,7,8,9].filter(g=>FD_PLANS[g]).map(g=>`<button type="button" class="me-g" data-tk="megr" data-g="${g}" aria-pressed="${E.grades.includes(g)}">${tkI('check')}<span>الصف ${FD_GRN[g]}</span></button>`).join('')}</div>
@@ -23605,6 +23612,8 @@ function n5HomeTop(){const N=typeof tkNowHTML==='function'?tkNowHTML():'';return
 function n5WelHTML(){const G=[6,7,8,9].filter(g=>FD_PLANS[g]);
   return `<section class="n5-wel" id="n5Wel" aria-labelledby="n5WelH"><h2 id="n5WelH">أهلًا بك في دليل المعلم الألمعي</h2>
     <p>دليل تطبيقي لمعلم التربية الإسلامية والقرآن الكريم للطلبة الموهوبين، من الصف السادس إلى التاسع: دروس أسبوعك جاهزة بعروضها، وأدوات للحصة، وحلول للمواقف الصفية.</p>
+    <div class="n5-wel-q"><b id="n5WelG">كيف يخاطبك الدليل؟</b><span>تتغير صيغة المخاطبة في الدليل بحسب الاختيار، ويمكن تغييرها في أي وقت من «إعدادي».</span>
+      <div class="n5-gr" role="group" aria-labelledby="n5WelG">${gzPick('')}</div></div>
     <div class="n5-wel-q"><b id="n5WelQ">صفك الدراسي</b><span>يُختار الصف مرة واحدة فتظهر دروسه هنا وفي «دروسي».</span>
       <div class="n5-gr" role="group" aria-labelledby="n5WelQ">${G.map(g=>`<button type="button" data-n5set="${g}">الصف ${FD_GRN[g]}</button>`).join('')}</div></div>
     <div class="n5-wel-a"><a href="#tk/setup" data-n5wel>إعداد الصفوف والشُّعب والجدول</a><a href="#do" data-n5wel>حلول المواقف</a><button type="button" data-n5welok>تم</button></div></section>`}
@@ -24707,6 +24716,200 @@ function ownerView(){if(ownerOn)return;ownerOn=true;$('#rvOwner').hidden=false;c
 /* ================= theme ================= */
 $('#themeBtn').onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark';store.set('theme',r.dataset.theme)};
 const th=store.get('theme',null);if(th)document.documentElement.dataset.theme=th;
+
+/* ================= v121: المخاطبة (معلم / معلمة) =================
+   يختار المعلم صيغة المخاطبة في بطاقة الترحيب أو في «إعدادي»، فتُحفظ في dms:gender ('m' أو 'f') على جهازه وحده،
+   وتدخل في النسخة الاحتياطية الشاملة مع التفضيلات (كل مفتاح يبدأ بـ dms:).
+   نصوص الدليل مكتوبة بصيغة المذكر، وفي صيغة المعلمة تحوّل هذه الطبقة النص الظاهر عند رسمه (والعناوين المساعدة: placeholder وaria-label وtitle):
+   ١) أفعال الأمر المفردة: اختر ← اختاري، ابدأ ← ابدئي، رتّب ← رتّبي… وصيغ نهي محددة: لا تجعل ← لا تجعلي.
+   ٢) ألفاظ المخاطبة: طلابك ← طالباتك، زميلك ← زميلتك… وعبارات محددة: أهلًا بك ← أهلًا بكِ، كما تشاء ← كما تشائين.
+   ٣) ألفاظ الطالب في العناوين والأوراق: اسم الطالب ← اسم الطالبة، طالب واحد ← طالبة واحدة، وعنوان «الطلاب» وحده ← «الطالبات».
+   ولا تمسّ: نص القرآن (عناصر خطه، وما بين ﴿﴾)، والحديث والأثر (ما بين «» بعد ﷺ أو «قال» أو «حديث»…)،
+   وأي نص فيه ﷺ أو «رضي الله» أو «تعالى» أو «اللهم» أو «ربنا»، واسم الدليل، و«دليل المعلم» و«كتاب الطالب» بأسمائهما الرسمية،
+   وما يكتبه المعلم بنفسه (حقول الإدخال والنصوص القابلة للتحرير).
+   وصف المعلم والطلاب بضمير الغائب في نصوص الدليل وخطط الدروس («يعرض المعلم»، «يتناقش الطلاب») للمرحلة الثانية بعد مراجعة الجدول.
+   التبديل إلى المعلمة يُطبَّق في الحال، والعودة إلى المعلم تعيد تحميل الصفحة لتعود النصوص الأصلية. */
+const GZ_M='\u064B-\u0652\u0670\u0640';                       /* الحركات والشدة والتطويل */
+const GZ_AR=/[\u0621-\u064A]/;
+const GZ_TOK=new RegExp('[\u0621-\u064A'+GZ_M+']+','g');
+const GZ_SH='\u0651';
+function gzPlain(w){return w.replace(new RegExp('['+GZ_M+']','g'),'')}
+/* الأمر: '' تُضاف ياء المخاطبة إلى آخره، وغير ذلك صيغة المؤنث كاملة.
+   S: صيغة الأمر فيه لا تشتبه بماضٍ ولا اسم. R: تشتبه بالماضي أو الاسم، فلا تُحوَّل بعد «من، إذا، قد، الذي…» ولا قبل «الطالب، المعلم، النبي…».
+   ما فيه شدة لا يطابق إلا بشدته، وما لا شدة فيه لا يطابق كلمة مشددة. */
+const GZ_VS={'اكتب':'','ابدأ':'ابدئي','اضغط':'','اقرأ':'اقرئي','اطبع':'','افتح':'','اجعل':'','احذف':'','اعرض':'','اسأل':'','انسخ':'','ابحث':'','ارفع':'','امسح':'','اطلب':'','افعل':'','ارجع':'','احفظ':'','ارسم':'','اسحب':'','اذكر':'','اجمع':'','اترك':'','اربط':'','اشرح':'','انظر':'','ارصد':'','افصل':'','افرز':'','املأ':'املئي','اصنع':'','اختم':'','اطرح':'','احسب':'','احجز':'','احضر':'','احرص':'','اجلس':'','احذر':'','اضبط':'','اقلب':'','امنح':'','اقطع':'','ادمج':'','اقبل':'','اشكر':'','احصل':'','اصعد':'','امدح':'','اسمح':'','اكشف':'','افحص':'','انقل':'','اتل':'اتلي','احكم':'','ابق':'ابقي','اشطب':'','اقصد':'','الصق':'','الزم':'','اصبر':'','اهتم':'','اعمل':'','ادرس':'','افهم':'','اعلم':'','اعرف':'','اختر':'اختاري','أضف':'أضيفي','أجب':'أجيبي','أعط':'أعطي','أنشئ':'','أدر':'أديري','أبق':'أبقي','استشر':'استشيري','استجب':'استجيبي','استعن':'استعيني','استفد':'استفيدي','اكتف':'اكتفي','امض':'امضي','ضع':'ضعي','خذ':'خذي','قف':'قفي','دع':'دعي','قل':'قولي','كن':'كوني','قم':'قومي','صل':'صِلي','زد':'زيدي','احم':'احمي','أحل':'أحيلي','غص':'غوصي','قس':'قيسي','غذّ':'غذّي','انسب':'','احصر':'','انقد':'','صغ':'صوغي','انقر':'','المس':'','اقصر':'','اصطد':''};
+const GZ_VR={'أكمل':'','أدخل':'','أغلق':'','أوقف':'','أرفق':'','أوصل':'','أنجز':'','أحضر':'','أبرز':'','أعلن':'','أشرك':'','أتمم':'','اقترح':'','استعمل':'','اكتشف':'','اختبر':'','استبدل':'','اختصر':'','اقترب':'','ابتكر':'','انتبه':'','استنتج':'','استخرج':'','استمع':'','انتظر':'','اتصل':'','احتفظ':'','استرجع':'','استوضح':'','اعتذر':'','استقبل':'',
+ 'رتّب':'','صنّف':'','علّل':'','حدّد':'','عدّد':'','عرّف':'','سجّل':'','جرّب':'','فكّر':'','لخّص':'','وضّح':'','صحّح':'','غيّر':'','قسّم':'','وزّع':'','نظّم':'','صمّم':'','دوّن':'','ميّز':'','خصّص':'','عطّل':'','كرّر':'','مرّر':'','لوّن':'','شغّل':'','حمّل':'','نزّل':'','ثبّت':'','فعّل':'','بدّل':'','صوّر':'','سمّ':'','حضّر':'','هيّئ':'','جهّز':'','خطّط':'','حلّل':'','طبّق':'','وظّف':'','نوّع':'','شجّع':'','ركّز':'','قرّر':'','وقّع':'','وثّق':'','جزّئ':'','قوّم':'','عزّز':'','نسّق':'','نبّه':'','ذكّر':'','سمّع':'','رحّب':'','نفّذ':'','عدّل':'','تقبّل':'','اعترف':'','التزم':'','أبلغ':'','أدرج':'','صدّر':'','عمّق':'','وجّه':'','درّس':'','حرّر':'','رقّم':'','فرّق':'','قرّب':'','بسّط':'','جمّع':'','جدّد':'','تأمّل':'','تخيّل':'','تحقّق':'','توقّع':'','تعرّف':'','تجنّب':'','تصفّح':'','تنفّس':'','استعدّ':'','قارن':'','ناقش':'','شارك':'','راجع':'','لاحظ':'','حاول':'','طابق':'','ساعد':'','تابع':'','تعاون':'','قدّم':'','درّب':'','كيّف':'','حاور':'','حوّل':'','شخّص':'','علّم':'','اعتمد':'','حقّق':'','حقق':'','قطّع':'','علّق':'','مثّل':'','ابتعد':'','وسّع':'','حدد':'','مايز':'','أعد':'أعيدي'};
+const GZ_PREV_NO=new Set('من لمن فمن ممن إذا وإذا فإذا إن وإن حتى ما وما فما مما بعدما متى كلما لما كما الذي التي الذين قد لقد وقد فقد كان ولو لو حين عندما كيف أن أنه قال وقال يوم بل ولكن لكن'.split(' '));
+const GZ_NEXT_NO=new Set('الطالب الطلاب المعلم المعلمون النبي الرسول المتعلم الموهوب الفريق الصحابي الصحابة المسلم المسلمون الله الناس بلوم سويلر ماير بادلي ميريل جانييه دابروفسكي رينزولي جاردنر فيجوتسكي بياجيه كين ويجنز مكتاي كيركباتريك هاتي ديويك برونر سكينر تورانس الباحث الباحثون العلماء فريق طالب معلم أحد مجموعة زميل ولي الموجه المدير المكتب'.split(' '));
+const GZ_INTR=new Set('اقترب انتبه استمع اتصل اعتذر انتظر'.split(' '));
+/* النهي المحدد: لا + الفعل. '' تُضاف الياء */
+const GZ_NH={'تجعل':'','تفعل':'','تستعمل':'','تستخدم':'','تقل':'تقولي','تكتف':'تكتفي','تؤجل':'','تحذف':'','تضع':'','تترك':'','تنسخ':'','تشخص':'','تفرض':'','تبن':'تبني','تحسم':'','تنس':'تنسي','تفترض':'','تختر':'تختاري','تضف':'تضيفي','تقارن':'','تكلف':'','تدخل':'','ترصد':'','تقرأ':'تقرئي','تكتب':'','تغير':'','تشرح':'','تهمل':'','تستعجل':'','تقاطع':'','تسخر':'','تحكم':'','تكن':'تكوني','تزد':'تزيدي','تنتظر':'','تعتمد':'','تجبر':'','تقلق':'','تيأس':'','تخف':'تخافي','تدع':'تدعي','تظن':'','تكرر':'','تطل':'تطيلي','تطلب':'','تمسح':'','تتهم':'','تنفذ':'','تشارك':'','ترتجل':''};
+/* ألفاظ المخاطبة والطالب: كلمة بكلمة، وتقبل الواو والفاء واللام والباء في أولها */
+const GZ_NU=new Set(['طلابك','طالبك','طالبًا','طالبا','طلاب','طالبين','طلابا','زميلًا','زميلا','طلابي']);
+const GZ_NN={'طلابك':'طالباتك','طالبك':'طالبتك','زميلك':'زميلتك','زملاءك':'زميلاتك','زملائك':'زميلاتك','زملاؤك':'زميلاتك','زميلي':'زميلتي','زملائي':'زميلاتي','صديقك':'صديقتك','أصدقاءك':'صديقاتك','أصدقائك':'صديقاتك','معلمك':'معلمتك','طالبًا':'طالبة','طالبا':'طالبة','طلاب':'طالبات','طالبين':'طالبتين','طلابا':'طالبات','زميلًا':'زميلة','زميلا':'زميلة','طلابي':'طالباتي'};
+/* العبارات: تُطابق كما هي (والحركات اختيارية بين حروفها)، والأطول أولًا */
+const GZ_PH=[['دليل تطبيقي لمعلم التربية الإسلامية والقرآن الكريم للطلبة الموهوبين','دليل تطبيقي لمعلمة التربية الإسلامية والقرآن الكريم للطالبات الموهوبات'],['أهلًا بك','أهلًا بكِ'],['مرحبًا بك','مرحبًا بكِ'],['بعد هذا الجزء تستطيع أن','بعد هذا الجزء تستطيعين أن'],
+ ['كما تشاء','كما تشائين'],['حيث تشاء','حيث تشائين'],['ما تشاء','ما تشائين'],['ما تريد','ما تريدين'],['الذي تريد','الذي تريدين'],['كما تريد','كما تريدين'],['هل تريد','هل تريدين'],
+ ['رسالة إلى معلمي','رسالة إلى معلمتي'],['أن يعرفه معلمي','أن تعرفه معلمتي'],['ليت معلمي يعرف','ليت معلمتي تعرف'],['يرفعها معلمي','ترفعها معلمتي'],
+ ['اسم المعلم','اسم المعلمة'],['توقيع المعلم','توقيع المعلمة'],['ملاحظة المعلم','ملاحظة المعلمة'],['جهاز المعلم','جهاز المعلمة'],
+ ['زميلك المعلم','زميلتك المعلمة'],['زملاءك المعلمين','زميلاتك المعلمات'],['زملائك المعلمين','زميلاتك المعلمات'],
+ ['طلابك ودرجاتهم ونقاطهم وأوسمتهم وشهاداتهم','طالباتك ودرجاتهن ونقاطهن وأوسمتهن وشهاداتهن'],['أسماء طلابك ودرجاتهم','أسماء طالباتك ودرجاتهن'],['أسماء الطلاب ودرجاتهم','أسماء الطالبات ودرجاتهن'],
+ ['ليوقّعوا هنا','ليوقّعن هنا'],['لتظهر أسماؤهم','لتظهر أسماؤهن'],['لبطاقاتهم','لبطاقاتهن'],
+ ['«الطلاب»','«الطالبات»'],['اسم الطالب','اسم الطالبة'],['ورقة الطالب','ورقة الطالبة'],['بطاقة الطالب','بطاقة الطالبة'],['سجل الطالب','سجل الطالبة'],['تقرير الطالب','تقرير الطالبة'],['دفتر الطالب','دفتر الطالبة'],
+ ['أسماء الطلاب','أسماء الطالبات'],['درجات الطلاب','درجات الطالبات'],['عدد الطلاب','عدد الطالبات'],['طلاب الصف','طالبات الصف'],['طلاب صفك','طالبات صفك'],
+ ['بطاقة الطالب لنقاطه وأوسمته','بطاقة الطالبة لنقاطها وأوسمتها'],['اسم الطالب لنقاطه وأوسمته','اسم الطالبة لنقاطها وأوسمتها'],['يبنيه طلاب الصف','تبنيه طالبات الصف'],['طلاب يعتمد عليهم','طالبات يُعتمد عليهن'],
+ ['الطالب التالي','الطالبة التالية'],['طالب واحد','طالبة واحدة'],['طالبان يتسابقان','طالبتان تتسابقان'],['طالبان','طالبتان'],['دفتر المعلم','دفتر المعلمة'],['درج المعلم','درج المعلمة'],
+ ['أظهر الحل','أظهري الحل'],['أظهر الإجابة','أظهري الإجابة'],['أظهر الجواب','أظهري الجواب'],
+ ['أعد المحاولة','أعيدي المحاولة'],['أعد كتابة','أعيدي كتابة'],['أعد ترتيب','أعيدي ترتيب'],['أعد قراءة','أعيدي قراءة'],['أعد صياغة','أعيدي صياغة'],['أعد نشر','أعيدي نشر'],['أعد ضبط','أعيدي ضبط'],['أعد تحميل','أعيدي تحميل'],['أعد التشغيل','أعيدي التشغيل'],['أعد العرض','أعيدي العرض'],['أعد الاختبار','أعيدي الاختبار'],['أعد فتح','أعيدي فتح'],
+ ['أرسل ملاحظتك','أرسلي ملاحظتك'],['استعد من نسخة','استعيدي من نسخة'],['فاستعد نسختك','فاستعيدي نسختك'],['اتفق مع معلم','اتفقي مع معلم'],['اتفق مع طلابك','اتفقي مع طالباتك'],['أرسل ملاحظة','أرسلي ملاحظة'],['أرسل الرابط','أرسلي الرابط'],['أرسل رأيك','أرسلي رأيك']];
+/* نص العقدة كله */
+const GZ_EX={'الطالب':'الطالبة','الطلاب':'الطالبات','طالب':'طالبة','الطالب:':'الطالبة:','للمعلم':'للمعلمة','المعلم':'المعلمة','معلم':'معلمة'};
+/* ما يبقى كما هو داخل النص */
+const GZ_KEEP=[/دليل المعلم الألمعي/g,/المعلم الألمعي/g,/دليل المعلم/g,/كتاب الطالب/g,/كتاب المعلم/g,/فكّ?ر[\s،,\-–—/]*زاوِ?ج[\s،,\-–—/]*شارِ?ك/g,/﴿[^﴾]*﴾/g];
+const GZ_SACRED=/الله|لله|ﷺ|صلى الله عليه|عليه السلام|عليهم السلام|عليها السلام|رضي الله|رضى الله|رحمه الله|تعالى|سبحانه|عز وجل|جل جلاله|اللهم|ربنا|يا رب|حدثنا|أخبرنا/;
+const GZ_QCTX=/(ﷺ|قال|قوله|يقول|تقول|قالت|حديث|الحديث|رضي الله|عليه السلام|تعالى|أثر|الإمام|ابن |رواه|يروي)[^«»]{0,40}$/;
+const GZ_SKIP='[contenteditable]:not([contenteditable="false"]),input,textarea,script,style,code,pre,svg,[data-gz="0"],.b-q,.b-ayah,.b-sym,.cp-q,.hz-q,.hz-n,.lm-ay,.qz-ay,.tj-text,.tl-q,.gm-ay';
+const GZ_ATTRS=['placeholder','aria-label','title'];
+const GZ_UI='#tkMain,#fdPrint,.sheet,.n5-wel,.bag,.tk-mom,.tk-heroes,.tk-ctxbox,.tk-cta,.tk-find,.me-steps,.gz-card',GZ_UI_NO='.n5-ls-page,.lm-ps';
+const gzRe=w=>[...w].map(ch=>ch===' '?'\\s+':ch.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+(/[\u0621-\u064A]/.test(ch)?'['+GZ_M+']*':'')).join('');
+/* حقيبة الصف: أسماء الأوسمة وأوصافها والمستويات وسبب النقاط. تتغير في العرض وحده؛ فالسجلات المخزّنة تُطابق بنصها الأصلي */
+const GZ_PHB=[['وسام المثابر','وسام المثابرة'],['وسام الحافظ المتقن','وسام الحافظة المتقنة'],['وسام المتدبّر','وسام المتدبّرة'],['وسام الباحث','وسام الباحثة'],['وسام المبتكر','وسام المبتكرة'],['وسام القائد','وسام القائدة'],
+ ['اختار طريقًا ذكيًا للحل وشرحه لزملائه','اختارت طريقًا ذكيًا للحل وشرحته لزميلاتها'],['واصل المحاولة حتى أتقن ما صعب عليه','واصلت المحاولة حتى أتقنت ما صعب عليها'],['قاد فريقه ووزّع الأدوار بعدل وحكمة','قادت فريقها ووزّعت الأدوار بعدل وحكمة'],['مبادرة نافعة ترك أثرها','مبادرة نافعة تركت أثرها'],
+ ['تعاون مع زميله','تعاون مع زميلتها'],['مسؤولية مستواه','مسؤولية مستواها'],
+ ['«مستكشف»','«مستكشفة»'],['«مثابر»','«مثابرة»'],['«باحث»','«باحثة»'],['«مبتكر»','«مبتكرة»'],['«صانع أثر»','«صانعة أثر»'],['مستكشف:','مستكشفة:'],['مثابر:','مثابرة:'],['باحث:','باحثة:'],['مبتكر:','مبتكرة:'],['صانع أثر:','صانعة أثر:']];
+GZ_PH.push(...GZ_PHB);
+const GZ_EXU={'مستكشف':'مستكشفة','مثابر':'مثابرة','باحث':'باحثة','مبتكر':'مبتكرة','صانع أثر':'صانعة أثر'};
+const GZ_PHU=/طالب|طلاب|الطلبة|يوقعوا|أسماؤهم|لبطاقاتهم/,GZ_PHUI=new Set(['اسم المعلم','توقيع المعلم','ملاحظة المعلم','جهاز المعلم',...GZ_PHB.map(p=>gzPlain(p[0]).replace(/\s+/g,' '))]),GZ_PHDOK=new Set(['طلاب يعتمد عليهم']);
+const GZ_PHRE=new RegExp('(^|[^\u0621-\u064A'+GZ_M+'])('+GZ_PH.map(p=>gzPlain(p[0])).sort((a,b)=>b.length-a.length).map(gzRe).join('|')+')(?![\u0621-\u064A'+GZ_M+'])','g');
+const GZ_PHMAP=new Map(GZ_PH.map(([a,b])=>[gzPlain(a).replace(/\s+/g,' '),b]));
+/* مفتاح الكلمة: حروفها بلا حركات، ومواضع الشدة فيها */
+function gzKey(w){const L=[],sh=new Set();for(const ch of w){if(ch===GZ_SH)sh.add(L.length-1);else if(!new RegExp('['+GZ_M+']').test(ch))L.push(ch)}return {p:L.join(''),sh}}
+const GZ_VK=new Map();
+[[GZ_VS,'S'],[GZ_VR,'R']].forEach(([T,k])=>Object.entries(T).forEach(([w,f])=>{const K=gzKey(w);if(!GZ_VK.has(K.p))GZ_VK.set(K.p,[]);GZ_VK.get(K.p).push({sh:K.sh,f,k})}));
+/* حروف الكلمة مع حركاتها: [[حرف، علامات]…] */
+function gzSplit(raw){const A=[];for(const ch of raw){if(new RegExp('['+GZ_M+']').test(ch)){if(A.length)A[A.length-1][1]+=ch}else A.push([ch,''])}return A}
+function gzShOK(A,off,sh,n){for(let i=0;i<n;i++){const has=A[off+i][1].includes(GZ_SH);if(has!==sh.has(i))return false}return true}
+const gzJoin=A=>A.map(x=>x[0]+x[1]).join('');
+const gzBare=A=>{const B=A.map(x=>[x[0],x[1]]);if(B.length){const l=B[B.length-1];l[1]=l[1].includes(GZ_SH)?GZ_SH:''}return gzJoin(B)};
+const GZ_SUF=['هما','هم','هن','ها','ه'];
+const GZ_VKS={'ابن':['ابني','ِ',-1],'احك':['احكي','ِ',-1],'أثن':['أثني','ِ',-1],'أر':['أري','ِ',-1],'صف':['صِفي','ِ',0],'عد':['عودي','ُ',0]};
+/* تحويل فعل أمر إن كان؛ يعيد النص الجديد أو null.
+   ok(k,pre): هل يُقبل موضعه؟ فالمشتبه (R) لا يُحوَّل إلا في أول الجملة أو بعد «ثم/أو» أو بعد أمر حُوّل قبله في النص نفسه */
+function gzVerb(raw,prev,next,next2,ok,sh2){const A=gzSplit(raw);const P=A.map(x=>x[0]).join('');
+  const tries=[];for(const pre of [0,1])for(const suf of ['',...GZ_SUF]){if(pre&&!/^[وف]/.test(P))continue;if(suf&&!P.endsWith(suf))continue;const b=P.slice(pre,P.length-suf.length);if(b.length<2)continue;tries.push([pre,suf,b])}
+  for(const pre of [0,1])for(const suf of ['',...GZ_SUF]){if(pre&&!/^[وف]/.test(P))continue;if(suf&&!P.endsWith(suf))continue;const b=P.slice(pre,P.length-suf.length),v=GZ_VKS[b];if(!v)continue;
+    const at=A[v[2]?pre+b.length-1:pre][1];if(at.includes(v[1])&&!at.includes(GZ_SH)&&ok('R',pre))return gzJoin(A.slice(0,pre))+v[0]+gzJoin(A.slice(pre+b.length));return null}
+  for(const [pre,suf,b] of tries){const C=GZ_VK.get(b);if(!C)continue;
+    for(const c of C){if(!gzShOK(A,pre,c.sh,b.length))continue;
+      if(c.k==='R'||(pre&&b.length<3)){if(raw.includes('ُ'))return null;
+        if(pre&&b.length<3&&!sh2)return null;                                   /* «، وخذ الموافقة» نعم؛ «أو وضعه» و«غنّة، وقف…» لا */                     /* المبني للمجهول: رُتّب، اختُصر */
+        if(GZ_PREV_NO.has(prev)||GZ_NEXT_NO.has(next))return null;
+        if(GZ_INTR.has(b)&&/^ال/.test(next))return null;                       /* اقترب العيد */
+        if(next2==='أن'&&next&&!/^ال/.test(next)&&next!=='قبل'&&next!=='بعد')return null;   /* لاحظ سويلر أن… (لا: شخّص قبل أن) */
+        if(!ok('R',pre))return null}
+      const head=gzJoin(A.slice(0,pre)),base=A.slice(pre,pre+b.length),tail=gzJoin(A.slice(pre+b.length));
+      return head+(c.f?c.f:gzBare(base)+'ي')+tail}}
+  return null}
+function gzNoun(raw,ui){const P=gzPlain(raw);if(raw.includes(GZ_SH)&&!/طلّاب/.test(raw))return null;
+  for(const pre of ['','و','ف','ل','ب','ك','ول','وب','فل']){if(!P.startsWith(pre))continue;const b=P.slice(pre.length);if(GZ_NN[b]&&(ui||!GZ_NU.has(b)))return pre+GZ_NN[b]}
+  return null}
+/* المضارع بعد «لا» الناهية وبعد «أن»: تُضاف الياء، والهمزة تُكتب على نبرة، والمعتل يُختم بالياء */
+const gzSubj=(raw,trusted)=>{const A=gzSplit(raw);const P=A.map(x=>x[0]).join('');if(!/^ت/.test(P)||P.length<3||/ي$/.test(P)||/(ه|ها|هم|هما|هن|وا)$/.test(P)||(!trusted&&/(ك|كم)$/.test(P))||raw.includes('ُ'))return null;if(/[ىو]$/.test(P)){A[A.length-1]=['ي',''];return gzJoin(A)}if(/أ$/.test(P)){A[A.length-1]=['ئ',''];return gzJoin(A)+'ي'}return gzBare(A)+'ي'};
+const GZ_NH4={'تدخل':'تُدخلي','تسقط':'تُسقطي','تفصح':'تُفصحي','تخرج':'تُخرجي','تلزم':'تُلزمي','تثقل':'تُثقلي','تجر':'تُجري','تصلح':'تُصلحي','تطلع':'تُطلعي','تسكت':'تُسكتي','تمل':'تُملي','تضع':'تُضيعي','تعد':'تُعيدي','تفت':'تُفتي','تظهر':'تُظهري','تهمل':'تُهملي','تجبر':'تُجبري','تحرج':'تُحرجي','تكثر':'تُكثري','تطل':'تُطيلي','ترهق':'تُرهقي'};
+/* المضارع مع ضمير الغائبين المتصل (ترتبهم ← ترتبيهم)؛ والهاء وحدها لا تُفصل لأنها قد تكون من أصل الفعل (تنتبه) */
+const gzSubjX=(raw,jz)=>{if(jz&&/(ي.|ة|ات)$/.test(gzPlain(raw)))return null;const r=gzSubj(raw);if(r)return r;const A=gzSplit(raw),P=A.map(x=>x[0]).join('');
+  for(const suf of ['هما','هم','هن','ها'])if(P.endsWith(suf)&&P.length-suf.length>=4){const n=P.length-suf.length,b=gzSubj(gzJoin(A.slice(0,n)));return b?b+gzJoin(A.slice(n)):null}return null};
+function gzNahy(raw,next,chain){const A=gzSplit(raw);const P=A.map(x=>x[0]).join('');
+  if(A.length&&A[0][1].includes('ُ'))return raw.includes(GZ_SH)?null:(GZ_NH4[P]||null);      /* لا تُدخل: مزيد بالهمزة، والمبني للمجهول يبقى */
+  let f=GZ_NH[P],n=P.length;
+  if(f===undefined)for(const suf of GZ_SUF)if(P.endsWith(suf)&&GZ_NH[P.slice(0,-suf.length)]!==undefined){n=P.length-suf.length;f=GZ_NH[P.slice(0,n)];break}
+  if(f===undefined)return chain?gzSubjX(raw,true):null;if(P==='تقل'&&(next==='عن'||raw.includes(GZ_SH)))return null;
+  return (f?f:gzBare(A.slice(0,n))+'ي')+gzJoin(A.slice(n))}
+/* بعد «قبل أن»: أفعال المخاطَب وحدها، فـ«قبل أن تكون/تظهر» تبقى */
+const GZ_QBL=new Set('تشرح تحكم تسأل تبدأ تزيد تفتح تغادر تعرض ترسم تكتب تكيف ترى تختار تستجيب تصمم ترفع تفحص تفسر تغير تفكر تلاحظ تضيف تسمع تنظر تترك تغلق تطلب تكشف تعرف تلمس تقرر تخطط تجيب تنفذ تقرأ تطبع تحذف تنشر'.split(' '));
+function gzQbl(raw){if(raw.includes('ُ'))return null;const A=gzSplit(raw),P=A.map(x=>x[0]).join('');
+  for(const suf of ['',...GZ_SUF]){if(suf&&!P.endsWith(suf))continue;const b=P.slice(0,P.length-suf.length),bb=suf&&/ا$/.test(b)?b.slice(0,-1)+'ى':b;
+    if(!GZ_QBL.has(bb))continue;const B=A.slice(0,b.length);const f=/ى$/.test(bb)?gzJoin(B.slice(0,-1))+'ي':gzSubj(gzJoin(B),true);return f?f+gzJoin(A.slice(b.length)):null}
+  return null}
+const GZ_CLAUSE=/[.:؛!؟?«»"“”(\[\-–—•·…\n]/;
+const GZ_STU_HM=new Set('درجاتهم أسماؤهم أسمائهم أسماءهم نقاطهم غيابهم وقائعهم أعمالهم بطاقاتهم أوسمتهم شهاداتهم تقدمهم مستواهم أوراقهم أجوبتهم إجاباتهم ملاحظاتهم حفظهم تلاواتهم أسرهم أمورهم أنفسهم عليهم لهم منهم بهم إليهم عنهم معهم بينهم'.split(' '));
+function gzWords(t,ui,stu0,can){const toks=[];let m;GZ_TOK.lastIndex=0;while((m=GZ_TOK.exec(t)))toks.push([m.index,m[0]]);if(!toks.length)return t;
+  let out='',last=0,conv=-9,stu=!!stu0;
+  for(let i=0;i<toks.length;i++){const [at,raw]=toks[i];
+    const before=t.slice(i?toks[i-1][0]+toks[i-1][1].length:0,at),after=t.charAt(at+raw.length);
+    if(/[@_]$/.test(before)||after==='_')continue;                              /* الوسوم مثل ‎@ابدأ_من_هنا‎ */
+    const prev=i?gzPlain(toks[i-1][1]):'',next=i+1<toks.length?gzPlain(toks[i+1][1]):'',next2=i+2<toks.length?gzPlain(toks[i+2][1]):'';
+    const pr2=i>1?gzPlain(toks[i-2][1]):'';
+    const start=i===0||GZ_CLAUSE.test(before);
+    const ok=(k,pre)=>pre?(conv>=0||(/^ف/.test(gzPlain(raw))&&/[.:؛!؟?]/.test(before))):(start||prev==='ثم'||prev==='أو'||conv>=0);
+    let rep=null,kv=false;
+    if(prev==='لا'||prev==='ولا'||prev==='فلا'){
+      const gap=t.slice(toks[i-1][0]+toks[i-1][1].length,at);
+      if(!/[.!؟?،,:؛;…]/.test(gap)){const lb=t.slice(i>1?toks[i-2][0]+toks[i-2][1].length:0,toks[i-1][0]);
+        const lStart=i===1||GZ_CLAUSE.test(lb);const chain=conv>=0&&conv>=i-6;
+        if(lStart||chain){rep=gzNahy(raw,next,prev!=='لا'&&chain);kv=rep!==null}}}
+    if(rep===null&&prev==='أن'&&(pr2==='قبل'||pr2==='دون'||pr2==='بدون')&&(conv>=0||can||i===2||GZ_CLAUSE.test(t.slice(toks[i-3][0]+toks[i-3][1].length,toks[i-2][0]))))rep=gzQbl(raw);
+    if(rep===null&&prev==='أن'&&(conv===i-2||/^(يمكنك|لك|عليك|بإمكانك|وبإمكانك|ويمكنك|فيمكنك)$/.test(pr2))){rep=gzSubjX(raw);kv=rep!==null}
+    if(rep===null){rep=gzVerb(raw,prev,next,next2,ok,/[،,؟?.:؛]\s*$/.test(before)&&/^\s+[«"“\u0621-\u064A]/.test(t.slice(at+raw.length)));kv=rep!==null}
+    if(rep===null){rep=gzNoun(raw,ui);if(rep!==null&&/طالب|طلاب/.test(rep))stu=true}
+    if(rep===null&&stu){const P=gzPlain(raw);for(const pre of ['','و','ف','ل','ب'])if(P.startsWith(pre)&&GZ_STU_HM.has(P.slice(pre.length))){rep=pre+P.slice(pre.length).replace(/هم$/,'هن');break}}
+    /* الماضي المخاطَب المضبوط بالفتحة: بلغتَ ← بلغتِ، أنتَ ← أنتِ */
+    if(rep===null&&/تَ$/.test(raw)&&!raw.includes('ُ')){const P=gzPlain(raw);if(P.length>=3&&!/^(ال|وال|فال|بال|كال|لل)/.test(P))rep=raw.slice(0,-1)+'ِ'}
+    if(rep!==null&&rep!==raw){out+=t.slice(last,at)+rep;last=at+raw.length;if(kv)conv=i}}
+  return out+t.slice(last)}
+/* «» يُحوَّل ما فيه إن كان اسم زر أو أداة (أربع كلمات فأقل بلا علامة وقف)، ويبقى غيره كما هو: الحديث والأثر والأمثلة المنقولة */
+const GZ_QHAD=/يريبك|استقم|غريب|ظالم|مظلوم|النصيحة|بالنيات|يسّروا|يسروا|تعسّروا|ازهد|اغتنم|ارحموا|تهادوا|الأمانة|تعجز|الجنة|النار|إيمان/;
+function gzText(t,ctx){if(!t||!GZ_AR.test(t))return t;if(GZ_SACRED.test(t))return t;
+  const k=t.trim();if(GZ_EX[k])return t.replace(k,GZ_EX[k]);if(ctx&&ctx.ui&&GZ_EXU[k])return t.replace(k,GZ_EXU[k]);
+  if((t.match(/﴿/g)||[]).length!==(t.match(/﴾/g)||[]).length)return t;
+  const keep=[];const hold=s=>{keep.push(s);return ''+String.fromCharCode(0xE100+keep.length-1)+''};
+  let s=t;GZ_KEEP.forEach(r=>{s=s.replace(r,hold)});
+  if(/[\u0671\u06D6-\u06ED]/.test(s))return t;                                  /* رسم عثماني خارج ﴿﴾ */
+  {const nL=(s.match(/[\u0621-\u064A]/g)||[]).length,nD=(s.match(/[\u064B-\u0652]/g)||[]).length;if(nL>12&&nD/nL>0.3)return t}   /* نص مضبوط بالشكل كله: حديث أو شعر */
+  s=s.replace(/«([^«»]*)»/g,(q,inner,off,all)=>{const words=(inner.match(GZ_TOK)||[]).length;
+    return (GZ_QCTX.test(all.slice(Math.max(0,off-80),off))||words>4||/[.؟?!،,:؛…]/.test(inner)||GZ_QHAD.test(inner))?hold(q):q});
+  const ui=!!(ctx&&ctx.ui),can=!!(ctx&&ctx.can);let phStu=false;
+  s=s.replace(GZ_PHRE,(m,a,b)=>{const k=gzPlain(b).replace(/\s+/g,' ');if(b.includes('ُ')&&!GZ_PHDOK.has(k))return m;if(!ui&&(GZ_PHU.test(k)||GZ_PHUI.has(k)))return m;const o=GZ_PHMAP.get(k)||b;if(/طالب/.test(o))phStu=true;return a+hold(o)});   /* ناتج العبارة لا تمسه قواعد الكلمات بعدها */
+  s=gzWords(s,ui,ui&&(phStu||/طالب(ات|ة)/.test(s)),can);
+  if(can){const m=s.match(/^(\s*)([ء-يً-ْ]+)/);if(m){const r=gzSubj(m[2],true);if(r)s=m[1]+r+s.slice(m[0].length)}}
+  return s.replace(/([-])/g,(m,c)=>keep[c.charCodeAt(0)-0xE100])}
+/* ---- التطبيق على الصفحة ---- */
+const GZ={on:false,obs:null,last:new WeakMap(),busy:false};
+const gzIsF=()=>store.get('gender','m')==='f';
+/* للنصوص المرسومة على اللوحة (الشهادات): لا تمر بالصفحة فتُختار صيغتها هنا. دالة مرفوعة فتصلح في أي موضع */
+function gzF(m,f){return store.get('gender','m')==='f'?f:m}
+function gzC(s){return s&&store.get('gender','m')==='f'?gzText(String(s),{ui:true}):s}
+function gzNode(n){if(GZ.last.get(n)===n.data)return;const p=n.parentElement;if(!p||p.closest(GZ_SKIP))return;
+  const ctx={can:!!(p.closest('.can-list li')&&!n.previousSibling),ui:!!(p.closest(GZ_UI)&&!p.closest(GZ_UI_NO))};const out=gzText(n.data,ctx);if(out!==n.data){if(window.__gzLog)window.__gzLog.push([n.data,out,location.hash]);n.data=out}GZ.last.set(n,n.data)}
+function gzAttrs(el){if(el.closest(GZ_SKIP)&&!/^(INPUT|TEXTAREA)$/.test(el.tagName))return;const ctx={ui:!!(el.closest(GZ_UI)&&!el.closest(GZ_UI_NO))};GZ_ATTRS.forEach(a=>{const v=el.getAttribute(a);if(v&&GZ_AR.test(v)){const o=gzText(v,ctx);if(o!==v)el.setAttribute(a,o)}});
+  if(el.tagName==='INPUT'&&/^(button|submit)$/i.test(el.type)&&el.value){const o=gzText(el.value);if(o!==el.value)el.value=o}}
+function gzTree(root){if(!root)return;if(root.nodeType===3){gzNode(root);return}if(root.nodeType!==1)return;
+  if(root.closest&&root.closest(GZ_SKIP)){if(/^(INPUT|TEXTAREA)$/.test(root.tagName))gzAttrs(root);return}
+  if(root.matches&&root.matches('.view[hidden]'))return;
+  gzAttrs(root);
+  const W=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT,{acceptNode(n){if(n.nodeType===1){if(n.matches(GZ_SKIP)){if(/^(INPUT|TEXTAREA)$/.test(n.tagName))gzAttrs(n);return NodeFilter.FILTER_REJECT}if(n.matches('.view[hidden]'))return NodeFilter.FILTER_REJECT;gzAttrs(n);return NodeFilter.FILTER_SKIP}return GZ_AR.test(n.data)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_SKIP}});
+  let t;while((t=W.nextNode()))gzNode(t)}
+function gzTitle(){const o=gzText(document.title);if(o!==document.title)document.title=o}
+function gzStart(){if(GZ.on)return;GZ.on=true;document.documentElement.dataset.gz='f';
+  gzTree(document.body);gzTitle();
+  GZ.obs=new MutationObserver(R=>{for(const r of R){
+      if(r.type==='childList'){r.addedNodes.forEach(n=>gzTree(n))}
+      else if(r.type==='characterData'){if(r.target.parentElement)gzNode(r.target)}
+      else if(r.type==='attributes'){const el=r.target;if(r.attributeName==='hidden'){if(!el.hidden&&el.classList.contains('view'))gzTree(el)}else gzAttrs(el)}}});
+  GZ.obs.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:[...GZ_ATTRS,'hidden']});
+  const T=document.querySelector('title');if(T)new MutationObserver(gzTitle).observe(T,{childList:true,characterData:true,subtree:true})}
+function gzSet(v){v=v==='f'?'f':'m';const was=gzIsF();store.set('gender',v);
+  /* «نوع المدرسة» في دفتر المعلم يتبع الاختيار، ولا يُنشأ دفتر لم يُفتح بعد */
+  try{const g=v==='f'?'g':'b';if(NB){if(NB.t&&NB.t.g!==g){NB.t.g=g;nbSave()}}else{const r=localStorage.getItem(NB_KEY),d=r&&JSON.parse(r);if(d&&d.t&&d.t.g!==g){d.t.g=g;localStorage.setItem(NB_KEY,JSON.stringify(d))}}}catch(e){}
+  document.querySelectorAll('[data-gzset]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.gzset===v)));
+  if(v==='f'){if(!was){gzStart();toast('سيخاطبكِ الدليل بصيغة المعلمة')}}
+  else if(was){toast('سيخاطبك الدليل بصيغة المعلم');setTimeout(()=>location.reload(),700)}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-gzset]');if(!b)return;e.preventDefault();gzSet(b.dataset.gzset)});
+const gzPick=(cls)=>{const v=store.get('gender','');return ['m','f'].map(g=>`<button type="button"${cls?` class="${cls}"`:''} data-gzset="${g}" data-gz="0" aria-pressed="${v===g}">${cls?tkI('check'):''}<span>${g==='m'?'معلم':'معلمة'}</span></button>`).join('')};
+window.almGz={set:gzSet,text:gzText,isF:gzIsF};
+if(gzIsF())gzStart();
+
 
 /* ===== v117: «التحكم من الجوال» (remote/) =====
    جسر صغير لملفات remote/ (زر الشريط والربط والتشفير والإرسال كلها هناك، ولا تُحمَّل إلا حين يضغط المعلم الزر):
