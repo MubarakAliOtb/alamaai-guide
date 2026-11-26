@@ -1794,7 +1794,7 @@ html[data-model="2"] .al .al-lab{margin:0 0 10px;font-size:14px;font-weight:700;
 html[data-model="2"] .al .al-fm{position:relative;min-height:220px;background-color:#1E1B4B}
 html[data-model="2"] .al .al-fm img{position:absolute;top:0;right:0;bottom:0;left:0;display:block;width:100%;max-width:none;height:100%;object-fit:cover}
 html[data-model="2"] .al .al-scap{display:flex;align-items:center;gap:10px;width:min(100%,520px);min-height:54px;margin-top:20px;padding:0 18px;border:0;border-radius:999px;background:#FFFFFF;color:#5B5880;font:inherit;font-size:15.5px;text-align:start;cursor:pointer;box-sizing:border-box}
-html[data-model="2"] .al .al-foot{padding-top:18px;padding-bottom:28px}
+html[data-model="2"] .al .al-foot{padding-top:18px;padding-bottom:8px}
 html[data-model="2"] .al .al-fbk{display:flex;align-items:center;gap:12px;min-height:56px;color:var(--s-ink);text-decoration:none}
 html[data-model="2"] .al .al-fbk .ic{flex:none;width:22px;height:22px;color:var(--s-pri)}
 html[data-model="2"] .al .al-fbk b{display:block;font-size:15px}
@@ -1872,14 +1872,29 @@ html[data-model="2"] .al-mini .al-mp{border-color:transparent;background:var(--s
 html[data-model="2"] .al-mini .al-mp:hover{background:var(--s-pri-bg-h)}
 html[data-model="2"] body.ls-on .al-mini{display:none}
 html[data-model="2"] body.al-mini-on #toast{bottom:calc(var(--al-navh,0px) + 86px)}
-html[data-model="2"] body.al-mini-on #main{padding-bottom:calc(var(--al-navh,0px) + 86px)}
 @media (min-width:760px){html[data-model="2"] .al-mini{left:24px;right:auto;bottom:calc(var(--al-navh,0px) + 24px);width:440px}html[data-model="2"] body.al-mini-on #toast{bottom:90px}}
 @media (max-width:360px){html[data-model="2"] .al-mini .al-mc{display:none}}
 @media (prefers-reduced-motion:reduce){html[data-model="2"] .al-mini{transition:none}}
-@media print{html[data-model="2"] .al-mini{display:none!important}html[data-model="2"] body.al-mini-on #main{padding-bottom:0}}
+@media print{html[data-model="2"] .al-mini{display:none!important}}
 /* v127: التنقل أربعة أقسام، و«حلول المواقف» أول «المزيد»؛ فزر «المزيد» يظهر مختارًا في صفحاته (.on من n5Mark) كما يظهر القسم المختار في التنقل */
 html[data-model="2"] .top .n5-more-b.on{background:var(--s-pri-50)!important;border-color:var(--s-pri-200)!important;color:var(--s-pri)!important}
 html[data-model="2"] body>header.top.al-hd-clear .n5-more-b.on,html[data-model="2"] body>header.top.al-hd-tint .n5-more-b.on{background:rgba(255,255,255,.24)!important;border-color:rgb(255,255,255)!important;color:rgb(255,255,255)!important}
+/* v128: آخر الصفحة لا يختفي خلف شريط التنقل ولا شريط الحصة: المسافة تحت التذييل بارتفاعهما، لا بين المحتوى والتذييل.
+   --al-navh يقيسه alMiniSync (عند التحميل والتمرير والانتقال، و0 في الشاشة الواسعة)؛ والصفحات التي لا شريط فيها (الحلول البصرية) يبقى تذييلها 28 كما كان.
+   وفي «اليوم» (html.al-home) لا مسافة زائدة قبل التذييل. */
+html[data-model="2"] .foot{padding-bottom:calc(28px + var(--al-navh,0px))}
+html[data-model="2"] body.al-mini-on .foot{padding-bottom:calc(28px + var(--al-navh,0px) + 76px)}
+html[data-model="2"].al-home #main{padding-bottom:0}
+html[data-model="2"].al-home .foot{margin-top:24px}
+/* v128: «إرسال ملاحظة» أيقونة في رأس الهاتف أيضًا، بجانب البحث. ولتتسع أربعة أزرار (44 لكل منها): مسافة 8 متساوية بينها (وقاعدة الصفحة تضع 8 بـ!important قبل البحث فتُلغى هنا)،
+   ويصغر اسم الدليل قليلًا (15 تحت 420، و14 تحت 390 ليبقى ظاهرًا في 375)، ويُكتفى بشعاره تحت 372 */
+@media (max-width:860px){html[data-model="2"] header.top .fb-btn{display:grid}html[data-model="2"] header.top .fb-btn span{display:none}html[data-model="2"] header.top .wrap{gap:8px}html[data-model="2"] header.top .fb-btn+.search-btn{margin-inline-start:0!important}}
+@media (max-width:420px){html[data-model="2"] header.top .brand b{font-size:15px}html[data-model="2"] header.top .brand{gap:8px}html[data-model="2"] header.top .wrap{padding-left:12px;padding-right:12px}}
+@media (max-width:389px){html[data-model="2"] header.top .brand b{font-size:14px}html[data-model="2"] header.top .brand{gap:6px}}
+@media (max-width:371px){html[data-model="2"] header.top .brand>span{display:none}}
+/* v128: الخيار المحدد في .scale (نوع الملاحظة، وعنوان الإرسال، ومقياس التقييم) في الليل: فاتح على داكن. كان --anchor الليلي بلون البطاقة نفسه،
+   فيبدو غير المحدد كأنه المحدد. والقاعدة ليلية صريحة (dark.py يتركها كما هي)؛ وفي النهار تبقى قاعدة الصفحة: نيلي وأبيض */
+html[data-model="2"][data-theme="dark"] .scale button[aria-pressed="true"]{background:var(--s-ink);color:var(--s-paper)}
 @keyframes alSettle{from{transform:scale(1.06)}to{transform:none}}
 @keyframes alSw{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (min-width:760px){
