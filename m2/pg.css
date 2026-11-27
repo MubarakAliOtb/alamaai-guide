@@ -83,6 +83,8 @@ html[data-model="2"] .pg-sub[open]>summary{border-bottom:1px solid var(--s-line)
 html[data-model="2"] .pg-sub-b{padding:16px 16px 18px}
 html[data-model="2"] .pg-sub-b>:first-child{margin-top:0}
 html[data-model="2"] .pg-sub-b>:last-child{margin-bottom:0}
+/* في الهاتف: حشو أقل داخل المطوية ليتسع الجدول */
+@media (max-width:520px){html[data-model="2"] .pg-sub-b{padding:14px 12px 16px}html[data-model="2"] .pg-sub>summary{padding:10px 12px}}
 html[data-model="2"] .pg-hit{outline:2px solid var(--s-pri);outline-offset:4px;border-radius:8px;transition:outline-color .6s}
 
 /* ---- السابق والتالي تحت القسم ---- */
