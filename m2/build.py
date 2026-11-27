@@ -11,6 +11,8 @@ nb_in = (M / 'nb-inapp.css').read_text(encoding='utf-8'); nb_ex = (M / 'nb-expor
 kb_css = (M / 'kb.css').read_text(encoding='utf-8'); kb_js = (M / 'kb-data.js').read_text(encoding='utf-8') + '\n' + (M / 'kb.js').read_text(encoding='utf-8')
 # «القراءة المركّزة» (v131): فهرس الجزء وقسم واحد كل مرة. pg.js يُحقن بعد kb.js في الموضع نفسه، وpg.css بعد kb.css
 kb_css += (M / 'pg.css').read_text(encoding='utf-8'); kb_js += '\n' + (M / 'pg.js').read_text(encoding='utf-8')
+# «ألعاب الآركيد» (v133): أربع ألعاب سريعة من المنهج، تُحقن بين /*arc:start*/…/*arc:end*/ بعد ألعاب «اكتشف الخطأ» في index.html
+arc_css = (M / 'arc.css').read_text(encoding='utf-8'); arc_js = (M / 'arc.js').read_text(encoding='utf-8')
 # «الحلول البصرية» للمادتين وشاشة الحصة (v132): vx-data.js أمثلة المادتين، وvx.js المحرك التفاعلي، يُحقنان داخل السكربت الرئيسي في vsc/index.html، وvx.css مع أنماطها
 vx_css = (M / 'vx.css').read_text(encoding='utf-8'); vx_data = (M / 'vx-data.js').read_text(encoding='utf-8'); vx_js = '\n'.join((M / f).read_text(encoding='utf-8') for f in ('vx-tpl.js', 'vx-play.js', 'vx.js'))
 # «نظام الصور الموحّد» (v132): رأس مصوَّر بعرض الصفحة وفواصل، للحلول البصرية وهندسة تجربة التعلّم كما في رئيسية الدليل
@@ -22,7 +24,7 @@ for page, up in PAGES:
     if not p.exists(): continue
     out = f'm2/auto-{page.replace("/", "-").replace(".html", "")}.css'
     subprocess.run([sys.executable, str(M / 'auto.py'), page, out], check=True)
-    css = (R / out).read_text(encoding='utf-8') + core_css + (kb_css + nb_in if page == 'index.html' else band_css + vx_css if page == 'vsc/index.html' else band_css + lx_css if page == 'lxd/index.html' else '')
+    css = (R / out).read_text(encoding='utf-8') + core_css + (kb_css + arc_css + nb_in if page == 'index.html' else band_css + vx_css if page == 'vsc/index.html' else band_css + lx_css if page == 'lxd/index.html' else '')
     # الوضع الليلي: قواعد مولَّدة لكل لون مكتوب في الصفحة وفي الطبقة الفاتحة (m2/dark.py)
     light = M / ('_light-' + page.replace('/', '-').replace('.html', '') + '.css'); light.write_text(css, encoding='utf-8')
     dk = f'm2/dark-{page.replace("/", "-").replace(".html", "")}.css'
@@ -36,6 +38,8 @@ for page, up in PAGES:
     if page == 'index.html':
         assert '/*kb:start*/' in s and '/*kb:end*/' in s and '</script' not in kb_js
         s = re.sub(r'/\*kb:start\*/.*?/\*kb:end\*/', lambda m: '/*kb:start*/\n' + kb_js + '/*kb:end*/', s, count=1, flags=re.S)
+        assert '/*arc:start*/' in s and '</script' not in arc_js
+        s = re.sub(r'/\*arc:start\*/.*?/\*arc:end\*/', lambda m: '/*arc:start*/\n' + arc_js + '/*arc:end*/', s, count=1, flags=re.S)
     if page == 'vsc/index.html':
         assert '/*vxd:start*/' in s and '/*vx:start*/' in s and '</script' not in vx_data + vx_js
         s = re.sub(r'/\*vxd:start\*/.*?/\*vxd:end\*/', lambda m: '/*vxd:start*/\n' + vx_data + '/*vxd:end*/', s, count=1, flags=re.S)
