@@ -356,3 +356,14 @@ html[data-model="2"][data-theme="dark"][data-al-pg="tools"] #fdList>.do-head:not
 html[data-model="2"][data-theme="dark"][data-al-pg="do"] #fdList>.do-head:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-classroom-1800.webp")}
 html[data-model="2"][data-theme="dark"][data-al-pg="guide"] [data-view="home"] .home-hero:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-guide-1600.webp")}
 }
+html[data-model="2"][data-theme="dark"] .bnd:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background-color:#26244A}
+html[data-model="2"][data-theme="dark"] .bnd-veil:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:rgba(0,0,0,0.60)}
+html[data-model="2"][data-theme="dark"] .bnd-soft .bnd-veil:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:rgba(0,0,0,0.60)}
+html[data-model="2"][data-theme="dark"] body>header.top.bnd-hd-tint:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:rgba(0,0,0,0.60)}
+html[data-model="2"][data-theme="dark"] .bnd-tile:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background-color:#26244A}
+html[data-model="2"][data-theme="dark"] .bnd-tile:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::after{background:rgba(0,0,0,0.60)}
+html[data-model="2"][data-theme="dark"] .vx-hero .bnd-veil:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:rgba(0,0,0,0.60)}
+html[data-model="2"][data-theme="dark"] .duo .gcard:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:#26244A}
+html[data-model="2"][data-theme="dark"] .duo .gcard:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::after{background:rgba(0,0,0,0.60)}
+html[data-model="2"][data-theme="dark"] .kx-tm u:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:var(--s-pri-bg)}
+html[data-model="2"][data-theme="dark"] .kx-pop:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:rgba(0,0,0,0.60)}

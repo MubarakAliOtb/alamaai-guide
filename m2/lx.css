@@ -1,0 +1,218 @@
+
+/* ============ v132: مختبر هندسة تجربة التعلّم — الدورة الكاملة (m2/lx.css) ============
+   الشريط العلوي كالحلول البصرية (رجوع، ثم الشعار وبجانبه اسم الصفحة)، ورأس مصوَّر بعرض الصفحة عليه المراحل الأربع،
+   ثم الحصص، ثم جسم المرحلة: أصمّم (خطوات تُفتح وتُطوى) · أشغّل (شاشة .lx-run) · أقيس · أحسّن.
+   كلها برموز الهوية فتتبع الوضع الليلي؛ وما فوق الصور وداخل ورقة الطباعة بـrgb() فيبقى كما هو. */
+html[data-model="2"] body{--bnd-half:574px;overflow-x:hidden}
+html[data-model="2"] .lx-ic{flex:none;width:18px;height:18px}
+
+/* ---- الشريط العلوي ---- */
+html[data-model="2"] header.top .brand{flex-direction:row;align-items:center;gap:10px}
+html[data-model="2"] header.top .brand .brand-t{display:flex;flex-direction:column;min-width:0;line-height:1.3}
+html[data-model="2"] header.top .brand .brand-t small{display:block;font-size:11px;line-height:1.3}
+html[data-model="2"] header.top .gback{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;height:40px;padding-inline:12px 15px;border:1px solid transparent;border-radius:999px;background:var(--s-pri-50);color:var(--s-ink);font-size:13.5px;font-weight:700;line-height:1;text-decoration:none;white-space:nowrap;box-sizing:border-box}
+html[data-model="2"] header.top .gback:hover{background:var(--s-pri-100)}
+html[data-model="2"] header.top .gback .lx-ic{width:20px;height:20px}
+html[data-model="2"] body>header.top:is(.bnd-hd-clear,.bnd-hd-tint) .lb-nav a.on{background:rgba(255,255,255,.18)!important;color:rgb(255,255,255)!important}
+@media (max-width:760px){
+html[data-model="2"] header.top .gback{width:40px;padding:0}
+html[data-model="2"] header.top .gback span{display:none}
+}
+@media (max-width:560px){html[data-model="2"] header.top .lb-nav a[href$=".pdf"]{display:none}}
+
+/* خط تقدّم القراءة للدليل وحده */
+html[data-model="2"][data-view="lab"] header.top .progress-line{display:none}
+
+/* ---- الرأس المصوَّر والمراحل ---- */
+html[data-model="2"] .lx-top .bnd-veil{background:rgba(30,27,75,.62)}
+/* شريط المراحل: لاصق تحت الشريط العلوي وبعرض الصفحة، فيبقى التنقل بين المراحل حاضرًا مع التمرير */
+html[data-model="2"] .lx-tabs{position:sticky;top:62px;z-index:40;display:flex;gap:2px;box-sizing:border-box;width:100vw;margin-inline:calc(50% - 50vw);padding-inline:max(16px,calc(50vw - var(--bnd-half,504px)));border-bottom:1px solid var(--s-line);background:var(--s-paper)}
+html[data-model="2"] .lx-tabs a{flex:1 1 0;display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;min-height:52px;margin-bottom:-1px;padding:0 4px;border-bottom:2px solid transparent;color:var(--s-ink2);font-size:15px;font-weight:700;white-space:nowrap;text-decoration:none}
+html[data-model="2"] .lx-tabs a:hover{background:var(--s-sunk);color:var(--s-ink)}
+html[data-model="2"] .lx-tabs a b{display:inline-grid;place-items:center;flex:none;width:22px;height:22px;border:1px solid currentColor;border-radius:50%;font-size:12.5px;line-height:1}
+html[data-model="2"] .lx-tabs a[aria-current]{border-bottom-color:var(--s-pri);color:var(--s-pri)}
+html[data-model="2"] .lx-tabs a[aria-current] b{border-color:var(--s-pri-bg);background:var(--s-pri-bg);color:rgb(255,255,255)}
+@media (min-width:760px){html[data-model="2"] .lx-tabs a{flex:0 0 auto;padding:0 20px}}
+
+/* ---- الحصص ---- */
+html[data-model="2"] .lx-les{display:grid;gap:10px;margin:20px 0 0}
+html[data-model="2"] .lx-lrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+html[data-model="2"] .lx-lrow>b{margin-inline-end:2px;font-size:15px;color:var(--s-ink2)}
+html[data-model="2"] .lx-l{min-height:44px;max-width:100%;padding:0 14px;border:1px solid var(--s-line2);border-radius:999px;background:var(--s-paper);color:var(--s-ink);font:inherit;font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+html[data-model="2"] .lx-l:hover{border-color:var(--s-pri-200);background:var(--s-pri-50)}
+html[data-model="2"] .lx-l.on{border-color:var(--s-pri);background:var(--s-pri-50);color:var(--s-pri-d)}
+html[data-model="2"] .lx-pre{font-size:14px;color:var(--s-ink2)}
+html[data-model="2"] #lxBody{margin-top:18px}
+
+/* ---- ١ أصمّم: خطوات تُفتح وتُطوى، وحالة اللوحة ---- */
+html[data-model="2"] #lxBody .lb-card{border:1px solid var(--s-line);border-radius:16px;padding:16px;background:var(--s-paper);box-shadow:none}
+html[data-model="2"] #lxBody>.lb-card+.lb-card{margin-top:14px}
+html[data-model="2"] #lxBody .lx-step{padding:0;overflow:hidden}
+html[data-model="2"] #lxBody .lx-step.open{border-color:var(--s-pri-200)!important}
+html[data-model="2"] #lxBody .lx-step h3{display:block;margin:0}
+html[data-model="2"] .lx-sth{display:flex;align-items:center;gap:10px;width:100%;min-height:60px;padding:12px 16px;border:0;background:transparent;color:var(--s-ink);font:inherit;font-size:18px;font-weight:700;text-align:start;cursor:pointer}
+html[data-model="2"] .lx-sth:hover{background:var(--s-sunk)}
+html[data-model="2"] .lx-sth>span{flex:1;min-width:0}
+html[data-model="2"] .lx-sth>.lx-ic{color:var(--s-ink3);transition:transform .2s ease}
+html[data-model="2"] .lx-step.open .lx-sth>.lx-ic{transform:rotate(180deg)}
+html[data-model="2"] .lx-stb{padding:4px 16px 18px}
+html[data-model="2"] .lx-dot{flex:none;width:10px;height:10px;border:1.5px solid var(--s-line2);border-radius:50%;background:transparent;box-sizing:border-box}
+html[data-model="2"] .lx-dot.ok{border-color:var(--s-acc);background:var(--s-acc)}
+html[data-model="2"] .lx-dot.bad{border-color:var(--s-pri);background:var(--s-pri)}
+html[data-model="2"] .lb-side{border:1px solid var(--s-line);border-radius:16px;background:var(--s-paper);box-shadow:none}
+/* في الهاتف: الخطوات أولًا ثم حالة اللوحة (لكل خطوة نقطة حالتها في رأسها) */
+html[data-model="2"] .lb-side{order:1}
+html[data-model="2"] .lb-side li{padding-block:3px}
+html[data-model="2"] .lb-side li::before{top:.7em;box-sizing:border-box}
+html[data-model="2"] .lb-side li.ok::before{background:var(--s-acc)}
+html[data-model="2"] .lb-side li.bad::before{background:var(--s-pri)}
+html[data-model="2"] .lb-side li.soft::before{border:1.5px solid var(--s-line2);background:transparent}
+html[data-model="2"] .lb-side li button{display:block;width:100%;padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:start;cursor:pointer}
+html[data-model="2"] .lb-side li button:hover{color:var(--s-pri)}
+html[data-model="2"] .lx-next{margin:18px 0 0}
+html[data-model="2"] .lx-next .btn{min-height:48px;padding-inline:20px;font-size:16px}
+html[data-model="2"] .lx-band{margin-top:26px}
+html[data-model="2"] .lx-band.lx-first{margin-top:0;margin-bottom:22px}
+@media (prefers-reduced-motion:reduce){html[data-model="2"] .lx-sth>.lx-ic{transition:none}}
+
+/* ---- ٢ أشغّل: مسار الحصة قبل التشغيل ---- */
+html[data-model="2"] .lx-h{margin:0 0 10px;font-size:20px;color:var(--s-ink)}
+html[data-model="2"] .lx-plan{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:10px}
+html[data-model="2"] .lx-plan li{padding:12px 16px;border:1px solid var(--s-line);border-radius:16px}
+/* طبقة الهوية تسم الصناديق المنحنية آليًّا وتوحّد حدودها (وفي الليل تعبئتها)؛ فما يحمل معنى (الذروة، والقيمة، والتقنية) يُثبَّت صراحة */
+html[data-model="2"] #lxBody .lx-plan li.pk{border:1px solid var(--s-acc)!important;background:var(--s-acc-50)!important}
+html[data-model="2"] .lx-pt{display:flex;align-items:center;gap:8px}
+html[data-model="2"] .lx-pt b{font-size:17px;color:var(--s-ink)}
+html[data-model="2"] .lx-pt span{margin-inline-start:auto;font-weight:700;color:var(--s-ink2);white-space:nowrap}
+html[data-model="2"] :is(.lx-pt,.lx-tr,.lx-rk) i{flex:none;padding:1px 10px;border-radius:999px;background:var(--s-acc);color:rgb(30,27,75);font-style:normal;font-size:12.5px;font-weight:700;line-height:1.7;white-space:nowrap}
+html[data-model="2"] .lx-plan p{margin:6px 0 0;font-size:15px;line-height:1.8;color:var(--s-ink)}
+html[data-model="2"] .lx-plan .lx-tq{font-size:14px;color:var(--s-ink2)}
+html[data-model="2"] .lx-plan .lx-tq b{color:var(--s-pri-d)}
+
+/* ---- شاشة التشغيل ---- */
+html[data-model="2"] body.lx-run-on{overflow:hidden}
+html[data-model="2"] .lx-run{position:fixed;top:0;right:0;bottom:0;left:0;z-index:96;display:flex;flex-direction:column;overflow-y:auto;background:var(--s-paper);color:var(--s-ink)}
+html[data-model="2"] .lx-rbar{position:sticky;top:0;z-index:1;flex:none;display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 12px;border-bottom:1px solid var(--s-line);background:var(--s-paper);box-sizing:border-box}
+html[data-model="2"] .lx-rt{flex:1;min-width:0;display:flex;flex-direction:column;text-align:center;line-height:1.35}
+html[data-model="2"] .lx-rt b{overflow:hidden;font-size:15.5px;white-space:nowrap;text-overflow:ellipsis;color:var(--s-ink)}
+html[data-model="2"] .lx-rt span{font-size:13.5px;font-variant-numeric:tabular-nums;color:var(--s-ink2)}
+html[data-model="2"] .lx-rarc{flex:none;height:30px;margin:12px 16px 0}
+html[data-model="2"] .lx-rarc span{opacity:.3}
+html[data-model="2"] .lx-rarc span.cur{opacity:1}
+html[data-model="2"] .lx-rmain{flex:1;display:grid;gap:14px;align-content:start;width:100%;max-width:1180px;margin-inline:auto;padding:14px 16px 28px;box-sizing:border-box}
+@media (min-width:900px){html[data-model="2"] .lx-rmain{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px;align-items:start}}
+html[data-model="2"] .lx-now{padding:18px;border:1px solid var(--s-line);border-radius:16px}
+html[data-model="2"] .lx-rk{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;font-weight:700;color:var(--s-ink2)}
+html[data-model="2"] .lx-now h2{margin:2px 0 4px;font-size:clamp(24px,5vw,34px);line-height:1.3;color:var(--s-ink)}
+html[data-model="2"] .lx-clock{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+html[data-model="2"] .lx-clock b{direction:ltr;unicode-bidi:isolate;font-size:clamp(64px,17vw,128px);font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--s-ink)}
+html[data-model="2"] .lx-clock span{font-size:15px;font-weight:700;color:var(--s-ink2)}
+html[data-model="2"] .lx-clock:is(.low,.over) b{color:var(--s-pri)}
+html[data-model="2"] .lx-prog{height:8px;margin-top:8px;border-radius:999px;background:var(--s-sunk);overflow:hidden}
+html[data-model="2"] .lx-prog u{display:block;width:0;height:100%;border-radius:999px;background:var(--s-pri-bg);text-decoration:none;transition:width .5s linear}
+html[data-model="2"] .lx-rc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+html[data-model="2"] .lx-rc .btn{min-height:48px;justify-content:center}
+html[data-model="2"] .lx-rc .lx-go{flex:1 1 100%;min-height:56px;font-size:18px}
+html[data-model="2"] .lx-rc .btn[disabled]{opacity:.45;cursor:default}
+html[data-model="2"] .lx-nx{margin:12px 0 0;font-size:14.5px;color:var(--s-ink2)}
+html[data-model="2"] .lx-do{display:grid;gap:12px;align-content:start;min-width:0}
+html[data-model="2"] .lx-sub{margin:6px 0 0;font-size:14.5px;font-weight:700;color:var(--s-pri)}
+html[data-model="2"] .lx-what{padding:14px 16px;border:1px solid var(--s-line);border-radius:16px}
+html[data-model="2"] .lx-what h3{margin:0 0 6px;font-size:14.5px;color:var(--s-ink2)}
+html[data-model="2"] .lx-what p{margin:0;font-size:17px;line-height:1.9;color:var(--s-ink)}
+html[data-model="2"] .lx-what ol{margin:0;padding-inline-start:22px;font-size:17px;line-height:1.9;color:var(--s-ink)}
+html[data-model="2"] .lx-what .btn{margin-top:10px}
+html[data-model="2"] .lx-run .lx-what.lx-val{border:1px solid var(--s-acc)!important;background:var(--s-acc-50)!important}
+html[data-model="2"] .lx-tc{padding:14px 16px;border-radius:16px}
+html[data-model="2"] .lx-run .lx-do .lx-tc{border:1px solid var(--s-pri-200)!important;background:var(--s-pri-50)!important}
+html[data-model="2"] .lx-tc h3{margin:0 0 6px;font-size:18px;line-height:1.5;color:var(--s-ink)}
+html[data-model="2"] .lx-tc h3 em{margin-inline-start:6px;font-style:normal;font-size:13px;font-weight:700;color:var(--s-ink2)}
+html[data-model="2"] .lx-tc p{margin:0 0 6px;font-size:15.5px;line-height:1.85;color:var(--s-ink)}
+html[data-model="2"] .lx-tc .lx-ctl{color:var(--s-ink2)}
+html[data-model="2"] .lx-cnt{display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 10px;border:1px solid var(--s-line);border-radius:12px;background:var(--s-paper)}
+html[data-model="2"] .lx-cnt>span{flex:1;min-width:0;font-size:14px;line-height:1.6;color:var(--s-ink2)}
+html[data-model="2"] :is(.lx-cnt,.lx-tal)>b{min-width:34px;font-size:22px;font-variant-numeric:tabular-nums;text-align:center;color:var(--s-ink)}
+html[data-model="2"] :is(.lx-cnt,.lx-tal) button{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:1px solid var(--s-line2);border-radius:12px;background:var(--s-paper);color:var(--s-ink);cursor:pointer}
+html[data-model="2"] :is(.lx-cnt,.lx-tal) button:hover{border-color:var(--s-pri-200);background:var(--s-pri-50)}
+html[data-model="2"] .lx-tools{margin:10px 0 0;font-size:14.5px;line-height:2;color:var(--s-ink2)}
+html[data-model="2"] .lx-tools a{display:inline-flex;align-items:center;gap:4px;margin-inline-start:10px;font-weight:700;color:var(--s-pri);text-decoration:none}
+html[data-model="2"] .lx-tools a:hover{text-decoration:underline}
+html[data-model="2"] .lx-tools .lx-ic{width:15px;height:15px}
+html[data-model="2"] .lx-exit{flex:1;display:flex;flex-direction:column;justify-content:center;gap:14px;width:100%;max-width:1000px;margin-inline:auto;padding:24px 20px;box-sizing:border-box}
+html[data-model="2"] .lx-ek{margin:0;font-size:20px;font-weight:700;color:var(--s-pri)}
+html[data-model="2"] .lx-exit ol{margin:0;padding-inline-start:1.2em;font-size:clamp(24px,4.6vw,46px);font-weight:700;line-height:1.55;color:var(--s-ink)}
+html[data-model="2"] .lx-exit li+li{margin-top:.5em}
+html[data-model="2"] .lx-ep{margin:0;font-size:clamp(18px,2.6vw,26px);line-height:1.7;color:var(--s-ink2)}
+html[data-model="2"] .lx-exit .btn{align-self:flex-start;margin-top:10px}
+/* عرض الطلبة: اسم الحقل ومؤقّته وحدهما، وتُخفى ملاحظات المعلم */
+html[data-model="2"] .lx-run.stu .lx-do{display:none}
+html[data-model="2"] .lx-run.stu .lx-rmain{grid-template-columns:minmax(0,1fr);max-width:980px;align-content:center}
+html[data-model="2"] .lx-run.stu .lx-now{border:0;padding:8px 0}
+html[data-model="2"] .lx-run.stu .lx-now h2{font-size:clamp(30px,6vw,56px)}
+html[data-model="2"] .lx-run.stu .lx-clock b{font-size:clamp(96px,26vw,280px)}
+html[data-model="2"] .lx-run.stu .lx-prog{height:12px}
+@media (prefers-reduced-motion:reduce){html[data-model="2"] .lx-prog u{transition:none}}
+
+/* ---- ٣ أقيس ---- */
+html[data-model="2"] .lx-lead{max-width:72ch;margin:0 0 14px}
+html[data-model="2"] .lx-tbl{margin-bottom:12px;border:1px solid var(--s-line);border-radius:12px;overflow:hidden}
+html[data-model="2"] .lx-tr{display:grid;grid-template-columns:minmax(0,1.7fr) repeat(3,minmax(0,1fr));align-items:center;gap:8px;padding:8px 12px;border-top:1px solid var(--s-line);font-size:15px;line-height:1.7;color:var(--s-ink)}
+html[data-model="2"] .lx-tr:first-child{border-top:0}
+html[data-model="2"] .lx-tr>span{min-width:0}
+html[data-model="2"] .lx-th{background:var(--s-sunk);font-size:13.5px;font-weight:700;color:var(--s-ink2)}
+html[data-model="2"] .lx-tr.pk{background:var(--s-acc-50)}
+html[data-model="2"] .lx-tr input{width:100%;max-width:92px;padding-inline:6px;text-align:center}
+html[data-model="2"] .lx-tr [data-df].off{font-weight:700;color:var(--s-pri)}
+html[data-model="2"] .lx-v .lx-tr{grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr))}
+html[data-model="2"] .lx-tal{display:inline-flex;align-items:center;gap:6px}
+html[data-model="2"] .lx-tal em{display:none}
+@media (max-width:640px){
+html[data-model="2"] .lx-v .lx-th{display:none}
+html[data-model="2"] .lx-v .lx-tr{grid-template-columns:minmax(0,1fr);gap:6px;padding:12px}
+html[data-model="2"] .lx-v .lx-tr>span:first-child{font-weight:700}
+html[data-model="2"] .lx-tal{display:flex;width:100%}
+html[data-model="2"] .lx-tal em{display:block;flex:1;min-width:0;font-style:normal;font-size:13.5px;color:var(--s-ink2)}
+}
+html[data-model="2"] .lx-inds{display:grid;gap:12px}
+@media (min-width:760px){html[data-model="2"] .lx-inds{grid-template-columns:repeat(2,minmax(0,1fr))}}
+html[data-model="2"] #lxBody .lb-f small{display:block;font-size:12.5px;font-weight:400;line-height:1.6;color:var(--s-ink3)}
+html[data-model="2"] #lxBody .lb-card>.lb-btns{margin-bottom:12px}
+
+/* ---- ٤ أحسّن ---- */
+html[data-model="2"] .lx-ins{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:8px}
+html[data-model="2"] .lx-ins li{position:relative;padding:10px 14px;padding-inline-start:34px;border:1px solid var(--s-line);border-radius:12px;font-size:15.5px;line-height:1.8;color:var(--s-ink)}
+html[data-model="2"] .lx-ins li::before{content:"";position:absolute;inset-inline-start:14px;top:1.3em;width:10px;height:10px;border-radius:50%;background:var(--s-pri)}
+html[data-model="2"] .lx-ins li.ok::before{background:var(--s-acc)}
+html[data-model="2"] .lx-f .lx-tr{grid-template-columns:minmax(0,.5fr) minmax(0,1.3fr) minmax(0,1fr) minmax(0,1.3fr) minmax(0,2fr)}
+@media (max-width:640px){
+html[data-model="2"] .lx-f .lx-th{display:none}
+html[data-model="2"] .lx-f .lx-tr{grid-template-columns:minmax(0,1fr);gap:4px;padding:12px}
+html[data-model="2"] .lx-f .lx-tr>span{display:flex;gap:8px}
+html[data-model="2"] .lx-f .lx-tr>span::before{content:attr(data-l);flex:none;width:96px;font-size:13.5px;font-weight:700;color:var(--s-ink2)}
+}
+html[data-model="2"] .lx-lad{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+@media (min-width:900px){html[data-model="2"] .lx-lad{grid-template-columns:repeat(5,minmax(0,1fr))}}
+html[data-model="2"] .lx-lad li{display:grid;gap:2px;align-content:start;padding:10px 12px;border:1px solid var(--s-line);border-radius:12px}
+html[data-model="2"] .lx-lad b{font-size:15.5px;color:var(--s-ink)}
+html[data-model="2"] .lx-lad span{font-size:13.5px;line-height:1.7;color:var(--s-ink2)}
+html[data-model="2"] #lxBody .lx-lad li.on{border:1px solid var(--s-pri)!important;background:var(--s-pri-50)!important}
+html[data-model="2"] .lx-lad li.done{background:var(--s-sunk)}
+html[data-model="2"] .lx-lad em{justify-self:start;margin-top:4px;padding:1px 10px;border-radius:999px;background:var(--s-pri-bg);color:rgb(255,255,255);font-style:normal;font-size:12.5px;font-weight:700;line-height:1.7}
+
+/* ---- رسالة الحالة: شريط عائم أسفل الشاشة ---- */
+html[data-model="2"] #lbMsg{position:fixed;right:16px;left:16px;bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:97;width:fit-content;max-width:min(520px,calc(100vw - 32px));min-height:0;margin:0 auto;padding:10px 16px;border-radius:12px;background:var(--s-ink-bg);color:rgb(255,255,255);font-size:14.5px;font-weight:700;line-height:1.7;text-align:center;box-sizing:border-box;outline:1px solid rgba(255,255,255,.22);outline-offset:-1px}
+html[data-model="2"] #lbMsg:empty{display:none}
+
+/* ---- ورقة الطباعة: بطاقات صوت المتعلم وملف الأداء (بيضاء في الوضعين) ---- */
+html[data-model="2"] .lb-sheet .vcs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+html[data-model="2"] .lb-sheet .vcs .vc{padding:10px 14px 14px;border:1.5px dashed rgb(201,198,221)!important;border-radius:12px;break-inside:avoid}
+html[data-model="2"] .lb-sheet .vc small{display:block;margin-bottom:2px}
+html[data-model="2"] .lb-sheet .vc p{margin:8px 0 0;font-weight:700;color:rgb(30,27,75)}
+html[data-model="2"] .lb-sheet .vc i{display:block;height:24px;border-bottom:1px solid rgb(201,198,221)}
+html[data-model="2"] .lb-sheet .bx table{margin:6px 0 8px}
+html[data-model="2"] .lb-sheet .bx ul{margin-bottom:6px}
+@media print{
+html[data-model="2"][data-view="lab"] :is(.lx-top,.lx-tabs,#lxLes,#lxBody,#lbMsg){display:none!important}
+html[data-model="2"] .lx-run{display:none!important}
+html[data-model="2"] .lx-gtop .bnd-row{display:none!important}
+}

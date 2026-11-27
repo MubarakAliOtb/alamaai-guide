@@ -13,6 +13,10 @@ for f in add:
     if f not in core: core.append(f)
 # «المقاطع القصيرة»: مقاطع التصميم الحالي وحدها (vid/m2)؛ مقاطع النموذج السابق في vid/ لا تُستعمل
 d['groups']['vid']['u'] = sorted(glob.glob('vid/m2/*.mp4'))
+# v132: صور «الحلول البصرية» الجديدة ورمز QR لرابط شاشة الحصة، وصفحة «هندسة تجربة التعلّم» (مختبر الجزء الثامن عشر) مع فصول الدليل
+for k, fs in (('vsc', ['vsc/img/vx-hero.webp', 'vsc/img/class.webp', 'vsc/img/dome.webp', 'remote/qr.js']), ('guide', ['lxd/', 'lxd/img/door.webp'])):
+    for f in fs:
+        if f not in d['groups'][k]['u']: d['groups'][k]['u'].append(f)
 CDN = {'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js': 198689, 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js': 97630, 'https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js': 477529}
 def sz(u):
     if u in CDN: return CDN[u]

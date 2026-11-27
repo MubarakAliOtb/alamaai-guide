@@ -2,12 +2,14 @@
 # «فحص الاتساق» (v131): يمنع رجوع التعارض إلى نص الدليل.
 #   python3 m2/check.py          يفحص ويطبع الملخص، ويخرج بـ1 إن وُجدت صيغة محظورة أو رابط مكسور
 #   python3 m2/check.py --list   يطبع معه مواضع «قائمة المراقبة» بسياقها
-# يُشغَّل في آخر m2/build.py. ما يفحصه: index.html (خارج طبقة التصميم) و data/parts/*.html.
+# يُشغَّل في آخر m2/build.py. ما يفحصه: index.html (خارج طبقة التصميم) و data/parts/*.html،
+# ومنذ v132 صفحتا «الحلول البصرية» و«هندسة تجربة التعلّم» (vsc/index.html و lxd/index.html) في الصيغ وقائمة المراقبة،
+# وأن فهرس بحث المنصة VS_IDX في index.html مطابق لصفحاتها (يولّده m2/vsidx.py).
 # القواعد ثلاثة أنواع:
 #   RULES  صيغة تعارض ما اعتمده الدليل: البناء يفشل حتى تُصحَّح (أو تُضاف قرينتها في unless).
 #   WATCH  ادعاء شائع يُذكر في الدليل نفيًا أو بحدوده: يُعدّ ولا يُفشل، ليراجَع عند كل إضافة.
 #   LINKS  كل رابط داخلي إلى قسم أو جزء، وكل قسم تشير إليه بيانات البطاقات، يجب أن يكون موجودًا.
-import re, sys, glob, html, pathlib
+import re, sys, glob, html, pathlib, subprocess
 R = pathlib.Path(__file__).resolve().parent.parent
 LIST = '--list' in sys.argv
 
@@ -16,7 +18,7 @@ RULES = [
      'الاسم المعتمد «تجنّب الزيادة» (redundancy): لا يُكتب على الشاشة ما يُقال. و«التماسك» (coherence) مبدأ آخر: حذف ما لا يخدم.'),
     ('مدى الانتباه', r'أقصى شرح متصل|فلا يتجاوز الشرح المتصل ربع ساعة', None,
      'رقم الدقائق قاعدة عملية لا حدّ علمي (Bradbury, 2016)؛ والمسنود هو تقطيع الشرح.'),
-    ('الذاكرة العاملة', r'7\s*±\s*2|٧\s*±\s*٢|سبعة? (?:وحدات|عناصر)', r'Miller|ميلر|تاريخي',
+    ('الذاكرة العاملة', r'7\s*±\s*2|٧\s*±\s*٢|سبعة? (?:وحدات|عناصر)', r'Miller|ميلر|تاريخي|عناصر دخيلة',
      'السعة المعتمدة «نحو أربع وحدات» (Cowan, 2001)؛ و«سبع ± 2» رقم تاريخي يُذكر منسوبًا إلى ميلر.'),
     ('عدد النظريات', r'إحدى عشرة نظرية(?! ونموذجًا)', None,
      '«إحدى عشرة نظرية ونموذجًا»: بلوم وجانييه و UbD وكيركباتريك و UDL والتفكير التصميمي أطر ونماذج لا نظريات.'),
@@ -37,14 +39,16 @@ WATCH = [
 
 def load(path):
     s = (R / path).read_text(encoding='utf-8')
-    if path == 'index.html':
+    if path in ('index.html',) + SAT:
         a = s.find('<!--m2:end-->')
         s = s[a:] if a > -1 else s
     return re.sub(r'data:image/[a-zA-Z+]+;base64,[A-Za-z0-9+/=]+', '', s)
 
 
-FILES = ['index.html'] + sorted(str(p.relative_to(R)) for p in (R / 'data/parts').glob('*.html'))
+SAT = ('vsc/index.html', 'lxd/index.html')   # الصفحتان التابعتان: تُفحص صيغهما، وروابط الأقسام للدليل وحده
+FILES = ['index.html'] + sorted(str(p.relative_to(R)) for p in (R / 'data/parts').glob('*.html')) + list(SAT)
 SRC = {f: load(f) for f in FILES}
+GUIDE = {f: s for f, s in SRC.items() if f not in SAT}
 
 
 def near(s, a, b, w=70):
@@ -75,12 +79,12 @@ for name, pat, unless, msg in RULES:
             print('      [%s | %s] …%s…' % (f, sec, t))
 
 # الروابط الداخلية
-ALL = '\n'.join(SRC.values())
+ALL = '\n'.join(GUIDE.values())
 secs = set(re.findall(r'<section[^>]*\bid="(p\d+-s\d+)"', ALL))
 # الأجزاء: ما في index.html، وما يُحمَّل عند الطلب من data/parts/N.html
 parts = {int(x) for x in re.findall(r'id="part(\d+)"', ALL)} | {int(pathlib.Path(f).stem) for f in FILES if f.startswith('data/parts/')}
 broken = []
-for f, s in SRC.items():
+for f, s in GUIDE.items():
     # مجموعات البطاقات (#k-…) تُبنى عند التشغيل، ففحصها في اختبارات المتصفح لا هنا
     for m in re.finditer(r'href=\\?["\']#((?:p\d+-s\d+)|(?:part-\d+))\\?["\']', s):
         h = m.group(1)
@@ -97,6 +101,10 @@ if broken:
         print('      [%s | %s] #%s' % (f, sec, h))
 
 print('  أقسام %d، أجزاء %d' % (len(secs), len(parts)))
+# فهرس بحث «الحلول البصرية» في الدليل: يجب أن يطابق صفحات المنصة
+if subprocess.run([sys.executable, str(R / 'm2' / 'vsidx.py'), '--check'], capture_output=True).returncode:
+    bad += 1
+    print('  ✗ فهرس VS_IDX لا يطابق صفحات «الحلول البصرية»: شغّل python3 m2/vsidx.py ثم أعد البناء.')
 for name, pat, msg in WATCH:
     hits = [(f, sec_of(s, m.start()), near(s, m.start(), m.end())) for f, s in SRC.items() for m in re.finditer(pat, s)]
     print('  ◦ مراقبة «%s»: %d موضعًا. %s' % (name, len(hits), msg))
