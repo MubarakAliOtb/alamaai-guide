@@ -55,6 +55,9 @@ html[data-model="2"] .kb-w{display:grid;gap:12px}
 html[data-model="2"] .kb-bulb{width:48px;height:48px;border-radius:14px;background:var(--s-acc-50);color:var(--s-acc-ink);display:grid;place-items:center}
 html[data-model="2"] .kb-bulb .ic{width:24px;height:24px}
 html[data-model="2"] .kb-ref{margin:0;font-size:15.5px;line-height:1.9;color:var(--s-ink);border-inline-start:3px solid var(--s-pri);padding-inline-start:12px}
+html[data-model="2"] .kb-ref[dir="auto"]{text-align:start;overflow-wrap:anywhere}
+html[data-model="2"] .kb-refs{list-style:none;margin:0;padding:0;display:grid;gap:10px;align-self:stretch}
+html[data-model="2"] .kb-refs li{margin:0;font-size:13.5px;line-height:1.7;color:var(--s-ink);text-align:start;border-inline-start:3px solid var(--s-pri-200);padding-inline-start:10px;overflow-wrap:anywhere}
 
 /* الغلاف: نيلي، وعليه صورة الباب تحت حجاب نيلي موحّد */
 html[data-model="2"] .kbc-cover{background-color:var(--s-ink-bg);border-color:var(--s-ink-bg);color:rgb(255,255,255);justify-content:flex-end;padding:22px 24px 30px;gap:12px}
@@ -358,6 +361,10 @@ html[data-model="2"] .kbf.r p{color:rgb(236,234,251)}
 html[data-model="2"] .kbf.r .kbf-ic{background:rgba(255,255,255,.16);color:rgb(255,255,255)}
 html[data-model="2"] .kbf.r i{color:rgb(196,181,253)}
 html[data-model="2"] .kbh-prog{display:grid;gap:6px;margin:0 0 14px;font-size:13px;color:var(--s-ink3)}
+/* v131: التبويب بحسب الحاجة: سطر يشرح الترتيب، ووصف المجموعة المختارة فوق أجزائها */
+html[data-model="2"] .kbh-cap{margin:-6px 0 12px;font-size:13px;line-height:1.7;color:var(--s-ink3)}
+html[data-model="2"] .kbh-cap a{color:var(--s-pri);font-weight:700}
+html[data-model="2"] .kbh-gd{margin:14px 0 4px;font-size:15px;line-height:1.8;color:var(--s-ink2)}
 html[data-model="2"] .kbh-pb{height:6px;border-radius:6px;overflow:hidden;background:var(--s-line)}
 html[data-model="2"] .kbh-pb i{display:block;height:100%;border-radius:6px;background:var(--s-pri)}
 html[data-model="2"] .kbh-plan{padding:14px 16px;border:1px solid var(--s-line2);border-radius:16px;background:var(--s-paper)}
