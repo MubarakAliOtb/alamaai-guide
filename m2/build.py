@@ -7,12 +7,14 @@ subprocess.run([sys.executable, str(M / 'nb.py')], check=True)
 core_css = (M / 'm2.css').read_text(encoding='utf-8'); js = (M / 'm2.js').read_text(encoding='utf-8')
 import json as _json
 nb_in = (M / 'nb-inapp.css').read_text(encoding='utf-8'); nb_ex = (M / 'nb-export.css').read_text(encoding='utf-8')
+# «بطاقات الدليل» (v130): أنماطها kb.css، ومحتواها ومحركها kb-data.js و kb.js يُحقنان داخل السكربت الرئيسي في index.html وحدها
+kb_css = (M / 'kb.css').read_text(encoding='utf-8'); kb_js = (M / 'kb-data.js').read_text(encoding='utf-8') + '\n' + (M / 'kb.js').read_text(encoding='utf-8')
 for page, up in PAGES:
     p = R / page
     if not p.exists(): continue
     out = f'm2/auto-{page.replace("/", "-").replace(".html", "")}.css'
     subprocess.run([sys.executable, str(M / 'auto.py'), page, out], check=True)
-    css = (R / out).read_text(encoding='utf-8') + core_css + (nb_in if page == 'index.html' else '')
+    css = (R / out).read_text(encoding='utf-8') + core_css + (kb_css + nb_in if page == 'index.html' else '')
     # الوضع الليلي: قواعد مولَّدة لكل لون مكتوب في الصفحة وفي الطبقة الفاتحة (m2/dark.py)
     light = M / ('_light-' + page.replace('/', '-').replace('.html', '') + '.css'); light.write_text(css, encoding='utf-8')
     dk = f'm2/dark-{page.replace("/", "-").replace(".html", "")}.css'
@@ -22,6 +24,9 @@ for page, up in PAGES:
     js_p = js.replace("var M2_BASE = '';", f"var M2_BASE = '{up}';")
     if page == 'index.html': js_p += '\nwindow.NB_PCSS_M2 = ' + _json.dumps(nb_ex, ensure_ascii=False).replace('</', '<\\/') + ';\n'
     s = p.read_text(encoding='utf-8')
+    if page == 'index.html':
+        assert '/*kb:start*/' in s and '/*kb:end*/' in s and '</script' not in kb_js
+        s = re.sub(r'/\*kb:start\*/.*?/\*kb:end\*/', lambda m: '/*kb:start*/\n' + kb_js + '/*kb:end*/', s, count=1, flags=re.S)
     block = f'<!--m2:start--><style id="m2Css">\n{css}</style>\n<script id="m2Js">\n{js_p}</script><!--m2:end-->\n'
     if '<!--m2:start-->' in s: s = re.sub(r'<!--m2:start-->.*?<!--m2:end-->\n', lambda m: block, s, count=1, flags=re.S)
     else: i = s.index('</head>'); s = s[:i] + block + s[i:]
