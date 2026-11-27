@@ -1172,6 +1172,12 @@ html[data-model="2"][data-theme="dark"][data-al-pg="tools"] #fdList>.do-head:not
 html[data-model="2"][data-theme="dark"][data-al-pg="do"] #fdList>.do-head:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-classroom-1800.webp")}
 html[data-model="2"][data-theme="dark"][data-al-pg="guide"] [data-view="home"] .home-hero:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::before{background-image:linear-gradient(rgba(0,0,0,0.60),rgba(0,0,0,0.60)),url("m2/img/al-guide-1600.webp")}
 }
+html[data-model="2"][data-theme="dark"] .kb-bars i.on:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:var(--s-pri-bg)}
+html[data-model="2"][data-theme="dark"] .kb-guess input[type=range]:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){accent-color:#7C3AED}
+html[data-model="2"][data-theme="dark"] .kb-gbar i:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:var(--s-pri-bg)}
+html[data-model="2"][data-theme="dark"] .kb-barsl i:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *)::after{background:var(--s-pri-bg)}
+html[data-model="2"][data-theme="dark"] .kb-meter i:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:var(--s-pri-bg)}
+html[data-model="2"][data-theme="dark"] .kbh-pb i:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){background:var(--s-pri-bg)}
 html[data-model="2"][data-theme="dark"] span.nbf:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){border-bottom:.3mm dotted #6D5BC9}
 html[data-model="2"][data-theme="dark"] .nbd-k:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){color:#B4B0D6}
 html[data-model="2"][data-theme="dark"] .nbd-n:not(:where(.ps,.sheet,.nbp,#fdPrint,.tk-pdfbox,.lx,.lb-sheet) *){color:#A78BFA}

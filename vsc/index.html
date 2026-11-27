@@ -2334,7 +2334,7 @@ html[data-model="2"][data-theme="dark"][data-al-pg="guide"] [data-view="home"] .
   var USE_K = 'alm:use', USE_DEF = ['lessons', 'tools', 'do', 'nb', 'vs'];
   var USE_N = { lessons: 'دروسي', tools: 'أدواتي', guide: 'الدليل', do: 'حلول المواقف', nb: 'دفتر المعلم', vs: 'الحلول البصرية', bag: 'حقيبة الصف', me: 'ملفي وإعدادي',
     map: 'خريطة الدليل', lab: 'التدرّب على المواقف', brief: 'خلاصة الدليل', 'tk/quiz': 'الاختبار القصير', 'tk/diwan': 'ديوانية الأسئلة', 'tk/decks': 'عروض الدروس', 'tk/setup': 'إعدادي', 'tk/backup': 'النسخة الاحتياطية' };
-  function useKey(h) { h = String(h || '').replace(/^#/, ''); if (!h || h === 'home' || h === 'feed') return ''; var p = h.split('/'), k = p[0] === 'tk' ? p.slice(0, 2).join('/') : p[0]; if (/^part-/.test(k)) k = 'guide'; return USE_N[k] ? k : ''; }
+  function useKey(h) { h = String(h || '').replace(/^#/, ''); if (!h || h === 'home' || h === 'feed') return ''; var p = h.split('/'), k = p[0] === 'tk' ? p.slice(0, 2).join('/') : p[0]; if (/^(part-|k-)/.test(k)) k = 'guide'; return USE_N[k] ? k : ''; }
   function useGet() { try { return JSON.parse(localStorage.getItem(USE_K) || '{}') || {}; } catch (e) { return {}; } }
   window.addEventListener('hashchange', function () { var k = useKey(location.hash); if (!k) return; var u = useGet(); u[k] = (u[k] || 0) + 1; try { localStorage.setItem(USE_K, JSON.stringify(u)); } catch (e) {} });
   function useTop() { var u = useGet(), ks = Object.keys(u).filter(function (k) { return USE_N[k]; }).sort(function (a, b) { return u[b] - u[a]; }); USE_DEF.forEach(function (k) { if (ks.indexOf(k) < 0) ks.push(k); }); return ks.slice(0, 5); }
