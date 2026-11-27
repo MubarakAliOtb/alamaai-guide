@@ -9,6 +9,8 @@ import json as _json
 nb_in = (M / 'nb-inapp.css').read_text(encoding='utf-8'); nb_ex = (M / 'nb-export.css').read_text(encoding='utf-8')
 # «بطاقات الدليل» (v130): أنماطها kb.css، ومحتواها ومحركها kb-data.js و kb.js يُحقنان داخل السكربت الرئيسي في index.html وحدها
 kb_css = (M / 'kb.css').read_text(encoding='utf-8'); kb_js = (M / 'kb-data.js').read_text(encoding='utf-8') + '\n' + (M / 'kb.js').read_text(encoding='utf-8')
+# «القراءة المركّزة» (v131): فهرس الجزء وقسم واحد كل مرة. pg.js يُحقن بعد kb.js في الموضع نفسه، وpg.css بعد kb.css
+kb_css += (M / 'pg.css').read_text(encoding='utf-8'); kb_js += '\n' + (M / 'pg.js').read_text(encoding='utf-8')
 for page, up in PAGES:
     p = R / page
     if not p.exists(): continue
@@ -35,3 +37,5 @@ for page, up in PAGES:
     s = re.sub(r'<div class="m2-switch" role="group".*?</div>\n    ', '', s, count=1, flags=re.S)
     s = re.sub(r'<div class="m2-menu-sw".*?</span></div>', '', s, count=1, flags=re.S)
     p.write_text(s, encoding='utf-8'); print('built', page, len(s.encode()))
+# فحص الاتساق (v131): صيغة محظورة أو رابط داخلي مكسور يُفشل البناء
+subprocess.run([sys.executable, str(M / 'check.py')], check=True)
