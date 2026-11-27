@@ -5,11 +5,23 @@
    وصفحة «الدليل» (#guide) تعرض الموضوعات: بحث فوري، ثم مختارات، ثم تبويب الأبواب وبلاطات كل جزء. الحالة في dms:kb (done وplan وdoor).
    الأصناف كلها تبدأ بـkb- أو kbc- أو kbh- أو kbt/kbf/kbp/kbg، وتتجنب kb-top وkb-h وkb-t وkb-d وkb-sum وkb-mini وkb-grid (لوحة المهام في أدواتي). */
 const KB_RM={};KB_R.forEach(r=>{KB_RM[r.id]=r});
-const KB_DOORN=['الإطار','العلم','الصنعة','الأثر','المعلّم','الآفاق','أوراقٌ تُفكِّر','القيم','الملاحق'];
+/* v131: «كل الموضوعات» مبوّبة بحسب حاجة المعلم، والمادتان بابان ظاهران. أرقام الأجزاء وأبواب الكتاب الثمانية كما هي في «الخريطة كاملة».
+   parts: أرقام الأجزاء في PARTS بترتيب العرض؛ r: مجموعات «من البحوث» (KB_R). كل جزء فيه موضوعات يرد في مجموعة واحدة. */
+const KB_NEED=[
+ {n:'التربية الإسلامية',d:'تدريس مجالاتها الستة، ومئة نموذج صفي، وبنك أسئلة ومهام تفكير.',parts:[8,17,22]},
+ {n:'القرآن الكريم',d:'التلاوة والتجويد والحفظ والتدبر، وبطاقات الحوار والتدبر للطلبة.',parts:[9,27]},
+ {n:'التخطيط والتدريس',d:'من المعيار إلى الحصة: التخطيط، والتكييف والإثراء، والاستراتيجيات، وخطط الصفوف.',parts:[7,6,4,19,26,28]},
+ {n:'طلابي الموهوبون',d:'من هم، وما قيمهم، وكيف يُتصرَّف في مواقفهم ومعضلاتهم.',parts:[3,18,21,23]},
+ {n:'علم التعلّم',d:'لماذا تنجح الأداة ومتى تُكسر قاعدتها: إحدى عشرة نظرية ونموذجًا، ومنهجية تطبيقها.',parts:[5,15]},
+ {n:'التقويم والوسائل',d:'تقويم يشخّص لينمّي، ووسيلة تخدم النص، وبصريات تعلّم، وأدوات جاهزة.',parts:[10,11,14,20]},
+ {n:'من البحوث',d:'دراسات محكّمة، كل رقم فيها بمصدره، وكل دراسة بحدودها.',r:1},
+ {n:'نموّي المهني',d:'رعاية تمتد إلى الأسرة والزملاء، ومختبر ابتكار، وبحث علمي في القاعة.',parts:[12,13,16]},
+ {n:'الأنظمة والمراجع',d:'الإطار الملزم واللوائح، ومسرد المصطلحات، وخريطة العام، وطريقة استعمال الدليل.',parts:[2,24,25,1,29]}
+];
 /* صورة الغلاف بحسب الباب (صور الأقسام نفسها، بلا أشخاص)، وللجزء صورته إن خُصّ */
 const KB_PH=['map','al-glow-700','al-lessons-900','al-tools-900','al-reading-600','al-rocket-900','nb','al-today-900','brief'];
 const KB_PHP={1:'al-guide-900',8:'home',9:'home',13:'lab'};
-const kbSt=()=>{const s=store.get('kb',{})||{};return {done:s.done||{},plan:s.plan||{},door:s.door||0}};
+const kbSt=()=>{const s=store.get('kb',{})||{};return {done:s.done||{},plan:s.plan||{},need:s.need||0}};
 const kbSave=s=>store.set('kb',s);
 const kbRM=()=>{try{return matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){return false}};
 /* للبحث: بلا تشكيل ولا تطويل (0x64B–0x652 و0x670 و0x640)، والهمزات والتاء المربوطة والألف المقصورة موحّدة */
@@ -100,7 +112,8 @@ function kbCard(D,c,i,n,st){let h='',extra='',style='',foot='';const K=t=>`<p cl
   case 'idea':h=K(c.k||'الفكرة')+kbFig(c.fig)+(c.dg?`<figure class="kb-dg">${FD_DG[c.dg]()}</figure>`:'')+`<h2 class="kb-hd">${c.h}</h2>`+(c.p?`<p class="kb-p">${c.p}</p>`:'');break;
   case 'like':h=K(c.k)+`<span class="kb-bulb">${kbIc('ai-bulb')}</span><h2 class="kb-hd sm">${c.h}</h2><p class="kb-p">${c.p}</p>`;break;
   case 'note':h=K(c.k)+`<h2 class="kb-hd sm">${c.h}</h2><p class="kb-p">${c.p}</p>`;break;
-  case 'src':h=K(c.k)+`<p class="kb-ref">${c.ref}</p>`+(c.p?`<p class="kb-p sm">${c.p}</p>`:'');break;
+  /* المرجع الواحد فقرة، والمراجع الكثيرة قائمة؛ والمرجع الأجنبي يُكتب من اليسار بسطور مستوية البداية (dir=auto) */
+  case 'src':h=K(c.k)+(Array.isArray(c.ref)?`<ul class="kb-refs">${c.ref.map(r=>`<li dir="auto">${r}</li>`).join('')}</ul>`:`<p class="kb-ref" dir="auto">${c.ref}</p>`)+(c.p?`<p class="kb-p sm">${c.p}</p>`:'');break;
   case 'steps':h=K(c.k)+`<ol class="kb-steps">${c.items.map((s,j)=>`<li style="--d:${j}"><b>${s[0]}</b>${s[1]?`<span>${s[1]}</span>`:''}</li>`).join('')}</ol>`;break;
   case 'app':h=`<p class="kb-k">${kbIc(c.sub==='qr'?'ai-mushaf':'i-book')}${c.sub==='qr'?'في القرآن الكريم':'في التربية الإسلامية'}${c.mine?'<em>مقترح</em>':''}</p><p class="kb-l">${c.l}</p><div class="kb-no"><small>بدل</small><p>${c.no}</p></div><button class="kb-rev" data-kb="rev" aria-expanded="false">اكشف البديل${kbIc('i-arrow')}</button><div class="kb-yes" hidden><small>جرّب</small><p>${c.yes}</p></div>`;break;
   case 'do':{const key=D.id+':do',on=!!st.plan[key];
@@ -258,16 +271,20 @@ window.addEventListener('hashchange',()=>{const h=(location.hash||'').slice(1);i
 function kbTile(a,st,lab){const done=st.done[a.id];
   return `<a class="kbt${done?' done':''}" href="#k-${a.id}"><span class="kbt-ic">${fdIc(a)}</span><b>${esc(a.n)}</b>${lab?`<small class="l">${esc(lab)}</small>`:''}${kbHasAct(a)?'<small>تفاعلية</small>':''}${done?`<i class="kbt-ok" role="img" aria-label="أتممتها">${kbIc('i-check')}</i>`:''}</a>`}
 function kbRTile(r,st){const done=st.done[r.id];return `<a class="kbt${done?' done':''}" href="#k-${r.id}"><span class="kbt-ic">${kbIc('ai-'+r.ic)}</span><b>${esc(r.n)}</b><small>${esc(r.tag)}</small>${done?`<i class="kbt-ok" role="img" aria-label="أتممتها">${kbIc('i-check')}</i>`:''}</a>`}
-function kbDoor(di){const st=kbSt(),BY=kbTopics(),d=TOC.doors[di];if(!d)return;
+function kbDoor(di){const st=kbSt(),BY=kbTopics(),G=KB_NEED[di];if(!G)return;
   $$('#kbTabs [data-kbdoor]').forEach(b=>b.setAttribute('aria-selected',+b.dataset.kbdoor===di));
-  /* باب أجزاؤه كثيرة ولكل جزء موضوع (الملاحق): شبكة واحدة، وعلى كل بلاطة اسم ملحقها */
-  if(d.parts.length>=6){const T=[];d.parts.forEach(pi=>(BY[pi]||[]).forEach(a=>T.push([a,PARTS[pi].label])));
-    $('#kbList').innerHTML=`<section class="kbp"><header><span class="kbp-n">${esc(d.label)}</span><h3>${esc(d.name)}</h3><div class="kbp-m"><span>${kbTop(T.length)}</span><a href="#map">الخريطة كاملة${kbIc('i-arrow')}</a></div></header><div class="kbp-g">${T.map(x=>kbTile(x[0],st,x[1])).join('')}</div></section>`;return}
-  $('#kbList').innerHTML=d.parts.map(pi=>{const P=PARTS[pi],T=BY[pi]||[],S=(typeof SUM!=='undefined'&&SUM[pi])||null;if(!P)return '';
+  const lead=`<p class="kbh-gd">${esc(G.d)}</p>`;
+  if(G.r){$('#kbList').innerHTML=lead+`<section class="kbp"><header><span class="kbp-n">من البحوث</span><h3>دراسات تُضاف إلى الدليل</h3><div class="kbp-m"><span>${KB_R.length===1?'دراسة واحدة':KB_R.length===2?'دراستان':KB_R.length<=10?KB_R.length+' دراسات':KB_R.length+' دراسة'}</span></div></header><div class="kbp-g">${KB_R.map(r=>kbRTile(r,st)).join('')}</div></section>`;return}
+  /* الأجزاء السبعة عشر كتلًا بسؤالها وبلاطات موضوعاتها؛ والملاحق والمدخل شبكة واحدة في آخر المجموعة، وعلى كل بلاطة اسم ملحقها */
+  let html='';const APP=[];
+  G.parts.forEach(pi=>{const P=PARTS[pi],T=BY[pi]||[],S=(typeof SUM!=='undefined'&&SUM[pi])||null;if(!P)return;
+    if(pi<2||pi>18){T.forEach(a=>APP.push([a,P.label]));return}
     let tiles='',last='';
     T.forEach(a=>{if(pi===5&&FD_AX[a.ax]){const ax=FD_AX[a.ax][0];if(ax!==last){tiles+=`<h4 class="kbp-ax">${esc(ax)}</h4>`;last=ax}}tiles+=kbTile(a,st)});
     const dn=T.filter(a=>st.done[a.id]).length;
-    return `<section class="kbp"><header><span class="kbp-n">${esc(P.label)}</span><h3>${esc(P.title.split(':')[0])}</h3>${S&&S.q?`<p>${S.q}</p>`:''}<div class="kbp-m">${T.length?`<span>${dn?'أتممت '+dn+' من '+T.length:kbTop(T.length)}</span>`:''}<a href="#part-${pi}">الجزء كاملًا${kbIc('i-arrow')}</a></div></header>${T.length?`<div class="kbp-g">${tiles}</div>`:''}</section>`}).join('')}
+    html+=`<section class="kbp"><header><span class="kbp-n">${esc(P.label)}</span><h3>${esc(P.title.split(':')[0])}</h3>${S&&S.q?`<p>${S.q}</p>`:''}<div class="kbp-m">${T.length?`<span>${dn?'أتممت '+dn+' من '+T.length:kbTop(T.length)}</span>`:''}<a href="#part-${pi}">الجزء كاملًا${kbIc('i-arrow')}</a></div></header>${T.length?`<div class="kbp-g">${tiles}</div>`:''}</section>`});
+  if(APP.length)html+=`<section class="kbp"><header><span class="kbp-n">الملاحق</span><h3>أدوات ومراجع جاهزة</h3><div class="kbp-m"><span>${kbTop(APP.length)}</span><a href="#map">الخريطة كاملة${kbIc('i-arrow')}</a></div></header><div class="kbp-g">${APP.map(x=>kbTile(x[0],st,x[1])).join('')}</div></section>`;
+  $('#kbList').innerHTML=lead+html}
 function kbFind(q){kbQv=q;const nq=kbNorm(q).trim(),R=$('#kbRes');if(!R)return;
   if(!nq){R.hidden=true;R.innerHTML='';return}
   const st=kbSt(),hay=a=>{const x=KB_X[a.id]||{};return kbNorm(a.n+' '+String(a.h||'').replace(/_/g,' ')+' '+a.st.join(' ')+' '+(a.who||'')+' '+(x.like?x.like[0]:''))};
@@ -281,14 +298,14 @@ function kbHub(){const F=$('#kbFeat');if(!F)return;const st=kbSt(),all=kbAll();
   $('#kbProg').innerHTML=`<span>${dn?'أتممت '+dn+' من '+kbTop(tot):kbTop(tot)+' في بطاقات، وكل موضوع يفتح صفحته في الدليل'}</span><div class="kbh-pb"><i style="width:${tot?Math.round(dn/tot*100):0}%"></i></div>`;
   const pk=Object.keys(st.plan),PL=$('#kbPlan');PL.hidden=!pk.length;
   PL.innerHTML=pk.length?`<h3>خطتي<small>${kbStp(pk.length)} من البطاقات. اضغط العلامة عند التنفيذ.</small></h3><ul>${pk.map(k=>{const p=st.plan[k];return `<li><button type="button" data-kbdel="${esc(k)}" aria-label="نُفّذت: تُزال من الخطة">${kbIc('i-check')}</button><div><p>${esc(p.t)}</p><a href="#k-${esc(p.id)}">${esc(p.n)}</a></div></li>`}).join('')}</ul>`:'';
-  const cur=Math.min(st.door||0,TOC.doors.length-1);
-  $('#kbTabs').innerHTML=TOC.doors.map((d,i)=>`<button type="button" role="tab" aria-selected="${i===cur}" data-kbdoor="${i}">${KB_DOORN[i]||esc(d.name)}</button>`).join('');
+  const cur=Math.min(st.need||0,KB_NEED.length-1);
+  $('#kbTabs').innerHTML=KB_NEED.map((g,i)=>`<button type="button" role="tab" aria-selected="${i===cur}" data-kbdoor="${i}">${esc(g.n)}</button>`).join('');
   kbDoor(cur);const Q=$('#kbQ');if(Q&&Q.value!==kbQv)Q.value=kbQv;if(kbQv)kbFind(kbQv);
   if(!kbHub.bound){kbHub.bound=true;const H=$('[data-view="home"]');
     H.addEventListener('click',e=>{const t=e.target.closest('[data-kbdoor],[data-kbrand],[data-kbdel],[data-kbfull],#kbNeedT');if(!t)return;
       if(t.id==='kbNeedT'){const w=$('#needWrap'),open=w.hidden;w.hidden=!open;t.setAttribute('aria-expanded',open);return}
       if(t.hasAttribute('data-kbfull')){openSearch(kbQv.trim());return}
-      if(t.hasAttribute('data-kbdoor')){const s=kbSt();s.door=+t.dataset.kbdoor;kbSave(s);kbDoor(s.door);const TB=$('#kbTabs');
+      if(t.hasAttribute('data-kbdoor')){const s=kbSt();s.need=+t.dataset.kbdoor;kbSave(s);kbDoor(s.need);const TB=$('#kbTabs');
         try{TB.scrollBy({left:t.getBoundingClientRect().left+t.offsetWidth/2-(TB.getBoundingClientRect().left+TB.clientWidth/2),behavior:kbRM()?'auto':'smooth'})}catch(x){}
         const y=TB.getBoundingClientRect().top;if(y<60||y>innerHeight*.6)try{window.scrollTo({top:window.pageYOffset+$('#kbList').getBoundingClientRect().top-TB.offsetHeight-(parseFloat(getComputedStyle(TB).top)||63)-4,behavior:kbRM()?'auto':'smooth'})}catch(x){}
         return}

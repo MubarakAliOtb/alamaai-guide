@@ -1,0 +1,105 @@
+/* ============ v131: القراءة المركّزة في صفحات الأجزاء (m2/pg.css) ============
+   فهرس الجزء، وشريط القسم، والعناوين الفرعية المطوية، والسابق/التالي. كلها برموز الهوية فتتبع الوضع الليلي. */
+
+/* ---- أيّ الأجزاء يظهر في كل عرض (السمة data-pgm على حاوية العرض) ---- */
+html[data-model="2"] .view[data-pgm="one"] .part-hero,html[data-model="2"] .view[data-pgm="one"] .kb-strip,html[data-model="2"] .view[data-pgm="one"] .bf-in,html[data-model="2"] .view[data-pgm="one"] .sec-intro,html[data-model="2"] .view[data-pgm="one"] .pg-index,html[data-model="2"] .view[data-pgm="one"] .article>.pager{display:none!important}
+html[data-model="2"] .view[data-pgm="all"] .pg-top .pg-back,html[data-model="2"] .view[data-pgm="all"] .pg-nav{display:none}
+html[data-model="2"] .view[data-pgm="one"] .sec{border-top:0!important;padding-top:6px;margin-top:0}
+html[data-model="2"] .view[data-pgm="index"] .article>.pager{margin-top:28px}
+@media (max-width:1000px){
+html[data-model="2"] .view[data-pgm="one"] .rail,html[data-model="2"] .view[data-pgm="index"] .rail{display:none}
+html[data-model="2"] .view[data-pgm="one"] .reader{padding-top:10px}
+}
+
+/* ---- فهرس الجزء ---- */
+html[data-model="2"] .pg-index{margin:22px 0 8px}
+html[data-model="2"] .pg-ih{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 12px}
+html[data-model="2"] .pg-it{margin:0;font-size:21px;font-weight:700;line-height:1.5;color:var(--s-ink)}
+html[data-model="2"] .pg-im{font-size:13.5px;color:var(--s-ink3);white-space:nowrap}
+html[data-model="2"] .pg-list{list-style:none;margin:0;padding:0;border:1px solid var(--s-line);border-radius:16px;background:var(--s-paper);overflow:hidden}
+html[data-model="2"] .pg-list li{margin:0;padding:0}
+html[data-model="2"] .pg-list li+li{border-top:1px solid var(--s-line)}
+html[data-model="2"] .pg-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;min-height:68px;text-decoration:none;color:var(--s-ink)}
+html[data-model="2"] .pg-row:hover{background:var(--s-pri-50)}
+html[data-model="2"] .pg-row:focus-visible{outline:2px solid var(--s-pri);outline-offset:-2px}
+html[data-model="2"] .pg-n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--s-line2);color:var(--s-pri);font-weight:700;font-size:14.5px;flex:none}
+html[data-model="2"] .pg-n i{font-style:normal}
+html[data-model="2"] .pg-n svg{display:none;width:17px;height:17px}
+html[data-model="2"] .pg-row.done .pg-n{background:var(--s-pri-50);border-color:var(--s-pri-200)}
+html[data-model="2"] .pg-row.done .pg-n i{display:none}
+html[data-model="2"] .pg-row.done .pg-n svg{display:block}
+html[data-model="2"] .pg-rt{min-width:0}
+html[data-model="2"] .pg-rt b{display:block;font-size:16px;font-weight:700;line-height:1.55}
+html[data-model="2"] .pg-rt small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px;font-size:13.5px;line-height:1.65;color:var(--s-ink2)}
+html[data-model="2"] .pg-rm{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:12.5px;color:var(--s-ink3);white-space:nowrap}
+html[data-model="2"] .pg-rm em{font-style:normal;font-weight:700;font-size:11.5px;color:var(--s-pri);background:var(--s-pri-50);border-radius:999px;padding:1px 9px}
+html[data-model="2"] .pg-if{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}
+html[data-model="2"] .pg-tot{font-size:13px;color:var(--s-ink3)}
+
+/* ---- «بعد هذا الجزء تستطيع أن» مطوية ---- */
+html[data-model="2"] .pg-can>summary{list-style:none;display:flex;align-items:center;gap:10px;cursor:pointer;min-height:44px;font-weight:700;color:var(--s-pri)}
+html[data-model="2"] .pg-can>summary::-webkit-details-marker{display:none}
+html[data-model="2"] .pg-can>summary em{font-style:normal;font-size:12.5px;font-weight:700;background:var(--s-pri-50);border-radius:999px;padding:1px 10px}
+html[data-model="2"] .pg-can>summary::after{content:"";width:8px;height:8px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg);margin-inline-start:auto;margin-inline-end:6px;transition:transform .18s}
+html[data-model="2"] .pg-can[open]>summary::after{transform:rotate(225deg)}
+html[data-model="2"] .pg-can>.can-list{margin-top:8px}
+
+/* ---- مقدمة الجزء مطوية فوق الفهرس ---- */
+html[data-model="2"] .pg-intro{border:1px solid var(--s-line);border-radius:16px;background:var(--s-paper);margin:14px 0 0}
+html[data-model="2"] .pg-intro>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:10px 16px;cursor:pointer;font-weight:700;font-size:16px;color:var(--s-ink)}
+html[data-model="2"] .pg-intro>summary::-webkit-details-marker{display:none}
+html[data-model="2"] .pg-intro>summary::after{content:"";flex:none;width:9px;height:9px;border:solid var(--s-pri);border-width:0 2px 2px 0;transform:rotate(45deg);margin:0 6px 4px;transition:transform .18s}
+html[data-model="2"] .pg-intro[open]>summary::after{transform:rotate(225deg);margin-bottom:-4px}
+html[data-model="2"] .pg-intro[open]>summary{border-bottom:1px solid var(--s-line)}
+html[data-model="2"] .pg-intro>:not(summary){margin-inline:16px}
+html[data-model="2"] .pg-intro>:last-child{margin-bottom:16px}
+html[data-model="2"] .pg-intro>summary+*{margin-top:14px}
+html[data-model="2"] .sec-intro:has(>.pg-intro){border:0;padding:0;margin:0;background:none}
+
+/* ---- شريط أعلى القسم ---- */
+html[data-model="2"] .pg-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin:0 0 16px}
+html[data-model="2"] .pg-back{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 14px;border:1px solid var(--s-line2);border-radius:12px;background:var(--s-paper);color:var(--s-pri);font-size:14px;font-weight:700;text-decoration:none}
+html[data-model="2"] .pg-back::before{content:"";width:7px;height:7px;border:solid currentColor;border-width:2px 2px 0 0;transform:rotate(45deg)}
+html[data-model="2"] .pg-back:hover{background:var(--s-pri-50)}
+html[data-model="2"] .pg-pos{font-size:13.5px;color:var(--s-ink3)}
+html[data-model="2"] .pg-all{margin-inline-start:auto;min-height:42px;padding:0 14px;border:1px solid var(--s-line2);border-radius:12px;background:var(--s-paper);color:var(--s-ink);font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+html[data-model="2"] .pg-all:hover{background:var(--s-pri-50)}
+html[data-model="2"] .pg-all[aria-pressed="true"]{border-color:var(--s-pri-200);color:var(--s-pri)}
+
+/* ---- الفكرة في سطر ---- */
+html[data-model="2"] .pg-gist{margin:14px 0 20px;padding:12px 16px;border:1px solid var(--s-pri-100);border-radius:16px;background:var(--s-pri-50);font-size:15.5px;line-height:1.85;color:var(--s-ink)}
+html[data-model="2"] .pg-gist b{display:block;font-size:12.5px;color:var(--s-pri);margin-bottom:2px}
+
+/* ---- العناوين الفرعية المطوية ---- */
+html[data-model="2"] .pg-sub{margin:10px 0;border:1px solid var(--s-line);border-radius:16px;background:var(--s-paper)}
+html[data-model="2"] .pg-sub>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:10px 16px;cursor:pointer;border-radius:16px}
+html[data-model="2"] .pg-sub>summary::-webkit-details-marker{display:none}
+html[data-model="2"] .pg-sub>summary:hover{background:var(--s-pri-50)}
+html[data-model="2"] .pg-sub>summary:focus-visible{outline:2px solid var(--s-pri);outline-offset:-2px}
+html[data-model="2"] .pg-sub>summary>h3{margin:0!important;padding:0!important;border:0!important;font-size:17px!important;line-height:1.55!important;color:var(--s-ink)}
+html[data-model="2"] .pg-sub>summary::after{content:"";flex:none;width:9px;height:9px;border:solid var(--s-pri);border-width:0 2px 2px 0;transform:rotate(45deg);margin:0 6px 4px;transition:transform .18s}
+html[data-model="2"] .pg-sub[open]>summary::after{transform:rotate(225deg);margin-bottom:-4px}
+html[data-model="2"] .pg-sub[open]>summary{border-bottom:1px solid var(--s-line);border-radius:16px 16px 0 0}
+html[data-model="2"] .pg-sub-b{padding:16px 16px 18px}
+html[data-model="2"] .pg-sub-b>:first-child{margin-top:0}
+html[data-model="2"] .pg-sub-b>:last-child{margin-bottom:0}
+/* في الهاتف: حشو أقل داخل المطوية ليتسع الجدول */
+@media (max-width:520px){html[data-model="2"] .pg-sub-b{padding:14px 12px 16px}html[data-model="2"] .pg-sub>summary{padding:10px 12px}}
+html[data-model="2"] .pg-hit{outline:2px solid var(--s-pri);outline-offset:4px;border-radius:8px;transition:outline-color .6s}
+
+/* ---- السابق والتالي تحت القسم ---- */
+html[data-model="2"] .pg-nav{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:10px;margin-top:18px}
+html[data-model="2"] .pg-nav a{display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:64px;padding:10px 16px;border:1px solid var(--s-line2);border-radius:12px;background:var(--s-paper);text-decoration:none;min-width:0}
+html[data-model="2"] .pg-nav a small{font-size:12.5px;color:var(--s-ink3)}
+html[data-model="2"] .pg-nav a b{font-size:15px;line-height:1.5;color:var(--s-ink);overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+html[data-model="2"] .pg-nav a:hover{background:var(--s-pri-50)}
+html[data-model="2"] .pg-nav a.next{background:var(--s-pri-bg);border-color:var(--s-pri-bg)}
+html[data-model="2"] .pg-nav a.next small{color:rgb(255 255 255 / .82)}
+html[data-model="2"] .pg-nav a.next b{color:rgb(255,255,255)}
+html[data-model="2"] .pg-nav a.next:hover{background:var(--s-pri-bg-h,var(--s-pri-bg))}
+@media (max-width:520px){html[data-model="2"] .pg-nav{grid-template-columns:1fr}html[data-model="2"] .pg-nav a.next{order:-1}}
+
+@media (prefers-reduced-motion:reduce){html[data-model="2"] .pg-sub>summary::after,html[data-model="2"] .pg-can>summary::after,html[data-model="2"] .pg-hit{transition:none}}
+/* الطباعة: النص كله، بلا أزرار ولا فهرس تنقل */
+@media print{html[data-model="2"] .pg-top,html[data-model="2"] .pg-nav,html[data-model="2"] .pg-if{display:none!important}
+html[data-model="2"] .pg-sub{border:0}html[data-model="2"] .pg-sub>summary{padding:0;min-height:0}html[data-model="2"] .pg-sub>summary::after{display:none}html[data-model="2"] .pg-sub-b{padding:6px 0 0}}
