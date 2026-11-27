@@ -1,0 +1,152 @@
+
+/* ============ v132: «الحلول البصرية» للمادتين وشاشة الحصة (m2/vx.css) ============
+   الرئيسية بأبوابها، وقائمة النماذج بمرشحاتها، وشاشة الحصة (.kx) بمسرحها ولوحتها. كلها برموز الهوية فتتبع الوضع الليلي.
+   ما يُرسم فوق الوسيلة نفسها (الخانات المنقّطة وعلامة «؟») ألوانه بـrgb() لأن الوسيلة بيضاء في النهار والليل. */
+
+/* ---- الشريط العلوي: الشعار بجانب العنوان كما في الدليل ---- */
+html[data-model="2"] header.top .brand{flex-direction:row;align-items:center;gap:10px}
+html[data-model="2"] header.top .brand .brand-t{display:flex;flex-direction:column;min-width:0;line-height:1.3}
+
+/* ---- الرئيسية ---- */
+html[data-model="2"] .vx-sec{display:grid;gap:16px}
+html[data-model="2"] .vx-hero .bnd-veil{background:rgba(30,27,75,.74)}
+html[data-model="2"] .vx-doors{display:grid;gap:12px}
+html[data-model="2"] .vx-door{display:flex;align-items:center;gap:14px;min-height:96px;padding:16px;border:1px solid var(--s-line);border-radius:16px;background:var(--s-paper);color:var(--s-ink);text-decoration:none;box-sizing:border-box}
+html[data-model="2"] .vx-door:hover{border-color:var(--s-pri-200);background:var(--s-pri-50)}
+html[data-model="2"] .vx-door>span{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+html[data-model="2"] .vx-door b{font-size:19px;line-height:1.45;color:var(--s-ink)}
+html[data-model="2"] .vx-door>span>span{font-size:14.5px;line-height:1.7;color:var(--s-ink2)}
+html[data-model="2"] .vx-door .vx-dic{flex:none;width:52px;height:52px;fill:currentColor;color:var(--s-pri)}
+html[data-model="2"] .vx-door>.ic{flex:none;width:20px;height:20px;color:var(--s-ink3)}
+html[data-model="2"] .vx-door-main{border-color:var(--s-pri-200);background:var(--s-pri-50)}
+@media (min-width:860px){
+html[data-model="2"] .vx-doors{grid-template-columns:repeat(3,minmax(0,1fr))}
+html[data-model="2"] .vx-door{flex-direction:column;align-items:flex-start;min-height:210px;padding:22px}
+html[data-model="2"] .vx-door>.ic{display:none}
+html[data-model="2"] .vx-door .vx-dic{width:60px;height:60px;margin-bottom:6px}
+}
+html[data-model="2"] .vx-recent{display:grid;gap:8px;padding:12px 14px;border:1px solid var(--s-line);border-radius:16px;background:var(--s-paper)}
+html[data-model="2"] .vx-recent b{font-size:15px;color:var(--s-ink2)}
+/* الأدلة بطاقات مصوَّرة كعوالم الدليل */
+html[data-model="2"] .duo .gcard{position:relative;isolation:isolate;overflow:hidden;justify-content:flex-start;min-height:300px;border:0;border-radius:16px;background:#1E1B4B;color:rgb(255,255,255);box-shadow:none;transform:none}
+html[data-model="2"] .duo .gcard:hover{transform:none;box-shadow:none}
+html[data-model="2"] .duo .gcard img{position:absolute;top:0;right:0;bottom:0;left:0;z-index:-2;width:100%;max-width:none;height:100%;aspect-ratio:auto;object-fit:cover;border-radius:0;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+html[data-model="2"] .duo .gcard:hover img{transform:scale(1.04)}
+html[data-model="2"] .duo .gcard::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;z-index:-1;background:rgba(30,27,75,.52)}
+html[data-model="2"] .duo .gcard .gb{flex:1;padding:22px;gap:4px;background:transparent}
+html[data-model="2"] .duo .gcard b{font-size:28px;line-height:1.3;color:rgb(255,255,255)}
+html[data-model="2"] .duo .gcard .gb>span:not(.chip):not(.btn){max-width:32ch;font-size:15.5px;line-height:1.75;color:rgb(255,255,255);opacity:.94}
+html[data-model="2"] .duo .gcard .chip{margin-bottom:6px;border:1px solid rgba(255,255,255,.6)!important;background:transparent!important;color:rgb(255,255,255)!important}
+@media (prefers-reduced-motion:reduce){html[data-model="2"] .duo .gcard img{transition:none}html[data-model="2"] .duo .gcard:hover img{transform:none}}
+
+/* ---- قائمة النماذج ---- */
+html[data-model="2"] .vx-filters{display:grid;gap:12px}
+html[data-model="2"] .vx-filters .field{min-width:0}
+html[data-model="2"] .vx-filters .seg{max-width:100%;overflow-x:auto;scrollbar-width:none}
+html[data-model="2"] .vx-filters .seg::-webkit-scrollbar{display:none}
+html[data-model="2"] .vx-filters .seg button{flex:none;white-space:nowrap}
+@media (min-width:760px){html[data-model="2"] .vx-filters{grid-template-columns:repeat(2,minmax(0,1fr))}html[data-model="2"] .vx-filters .vx-wide{grid-column:1/-1}}
+html[data-model="2"] .view h2.vx-h{margin:8px 0 0;font-size:20px}
+/* شاشة الحصة في الهاتف: صفوف مضغوطة (مصغّرة بجانب العنوان) بدل بطاقات كاملة، والصف كله يُضغط */
+html[data-model="2"] .vx-klist .gx .vzb{cursor:pointer}
+@media (max-width:640px){
+html[data-model="2"] .vx-klist{gap:8px}
+html[data-model="2"] .vx-klist .gx{position:relative;flex-direction:row;align-items:center;gap:12px;padding:8px;border-radius:16px}
+html[data-model="2"] .vx-klist .gx .vzb{flex:none;width:118px;border:1px solid var(--s-line);border-radius:10px;overflow:hidden}
+html[data-model="2"] .vx-klist .gx .vzb::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0}
+html[data-model="2"] .vx-klist .gx figcaption{flex:1;min-width:0;padding:0;border-top:0}
+}
+html[data-model="2"] .vx-mine{margin-bottom:6px}
+html[data-model="2"] .gx .vx-cr{gap:8px;padding:0 12px 12px}
+html[data-model="2"] .vx-src{display:flex;align-items:flex-start;gap:8px;margin:0;font-size:14.5px;line-height:1.8;color:var(--s-ink2)}
+html[data-model="2"] .vx-src .ic{flex:none;width:18px;height:18px;margin-top:5px;color:var(--s-pri)}
+html[data-model="2"] .vx-let{display:block;font-size:22px;font-weight:700;letter-spacing:.04em}
+
+/* ---- شاشة الحصة ---- */
+html[data-model="2"] body.kx-on{overflow:hidden}
+html[data-model="2"] .kx{position:fixed;top:0;right:0;bottom:0;left:0;z-index:96;display:flex;flex-direction:column;background:var(--s-paper);color:var(--s-ink)}
+html[data-model="2"] .kx-bar{flex:none;display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 12px;border-bottom:1px solid var(--s-line);box-sizing:border-box}
+html[data-model="2"] .kx-ttl{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.35}
+html[data-model="2"] .kx-ttl b{overflow:hidden;font-size:clamp(15px,1.5vw,22px);white-space:nowrap;text-overflow:ellipsis}
+html[data-model="2"] .kx-ttl span{font-size:13.5px;font-weight:700;color:var(--s-pri)}
+html[data-model="2"] .kx-tools{flex:none;display:flex;gap:6px}
+html[data-model="2"] .kx-bar .btn{flex:none}
+html[data-model="2"] .kx-body{flex:1;min-height:0;display:flex;flex-direction:column}
+html[data-model="2"] .kx-stage{flex:none;display:flex;align-items:center;justify-content:center;padding:8px;background:var(--s-sunk);box-sizing:border-box}
+html[data-model="2"] .kx-stage .kx-svg{display:block;width:min(100%,calc(46vh * 4 / 3));height:auto;border:1px solid var(--s-line);border-radius:12px;background:rgb(255,255,255)}
+html[data-model="2"] .kx-side{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:12px;padding:16px;box-sizing:border-box;-webkit-overflow-scrolling:touch}
+html[data-model="2"] .kx-side>*{flex:none}
+html[data-model="2"] .kx-live{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (min-width:900px) and (min-aspect-ratio:5/4){
+html[data-model="2"] .kx-body{flex-direction:row}
+html[data-model="2"] .kx-stage{flex:1;min-width:0;padding:14px}
+html[data-model="2"] .kx-stage .kx-svg,html[data-model="2"] .kx-stage .kx-cover{width:min(100%,calc((100vh - 86px) * 4 / 3))}
+html[data-model="2"] .kx-side{flex:none;width:clamp(320px,30vw,580px);padding:22px;gap:16px;border-inline-start:1px solid var(--s-line)}
+}
+@media (max-width:700px){html[data-model="2"] .kx-tools .btn span{display:none}html[data-model="2"] .kx-tools .btn{padding-inline:10px}}
+/* ما يُرسم فوق الوسيلة */
+html[data-model="2"] .kx-svg [data-g]{transition:opacity .25s ease}
+html[data-model="2"] .kx-svg .hid{opacity:0;pointer-events:none}
+html[data-model="2"] .kx-ghost{fill:rgba(109,40,217,.06);stroke:rgb(167,139,250);stroke-width:3;stroke-dasharray:10 8;cursor:pointer}
+html[data-model="2"] .kx-ghost:hover{fill:rgba(109,40,217,.14)}
+html[data-model="2"] .kx-ghost.off{display:none}
+html[data-model="2"] .kx-cur{fill:rgb(255,255,255);stroke:rgb(109,40,217);stroke-width:4;stroke-dasharray:10 8}
+html[data-model="2"] .kx-svg .kx-qm{fill:rgb(109,40,217);font-weight:700}
+html[data-model="2"] .kx-cover{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:min(100%,calc(46vh * 4 / 3));aspect-ratio:4/3;border:2px dashed var(--s-line2);border-radius:16px;background:var(--s-paper);color:var(--s-ink2);text-align:center;box-sizing:border-box}
+html[data-model="2"] .kx-cover .ic{width:48px;height:48px;color:var(--s-pri)}
+html[data-model="2"] .kx-cover b{font-size:22px;color:var(--s-ink)}
+/* اللوحة */
+html[data-model="2"] .kx-step{margin:0;font-size:14px;font-weight:700;line-height:1.5;color:var(--s-ink3)}
+html[data-model="2"] .kx-q{margin:0;font-size:clamp(19px,1.9vw,30px);font-weight:700;line-height:1.5;color:var(--s-ink)}
+html[data-model="2"] .kx-cue{margin:0;padding:8px 12px;border-radius:12px;background:var(--s-pri-50);color:var(--s-pri);font-size:clamp(15px,1.4vw,21px);font-weight:700;line-height:1.6}
+html[data-model="2"] .kx-side .note{margin:0}
+html[data-model="2"] .kx-ch{display:grid;gap:8px}
+html[data-model="2"] .kx-opt{min-height:52px;padding:10px 14px;border:1px solid var(--s-line2);border-radius:12px;background:var(--s-paper);color:var(--s-ink);font:inherit;font-size:clamp(16px,1.5vw,24px);font-weight:700;line-height:1.5;text-align:start;cursor:pointer}
+html[data-model="2"] .kx-opt:hover{border-color:var(--s-pri-200);background:var(--s-pri-50)}
+html[data-model="2"] .kx-opt:focus-visible{outline:2px solid var(--s-pri);outline-offset:2px}
+html[data-model="2"] .kx-opt.kx-hint{border-color:var(--s-acc);background:var(--s-acc-50)}
+html[data-model="2"] .kx-opt.kx-no{animation:kxNo .35s ease}
+@keyframes kxNo{20%{transform:translateX(6px)}50%{transform:translateX(-6px)}80%{transform:translateX(3px)}}
+html[data-model="2"] .kx-cats{grid-template-columns:repeat(2,minmax(0,1fr))}
+html[data-model="2"] .kx-cats .kx-opt{text-align:center}
+html[data-model="2"] .kx-card{padding:16px;border:1px solid var(--s-pri-200);border-radius:16px;background:var(--s-pri-50);text-align:center}
+html[data-model="2"] .kx-card small{display:block;margin-bottom:2px;font-size:14px;color:var(--s-ink2)}
+html[data-model="2"] .kx-card b{font-size:clamp(20px,2vw,32px);line-height:1.5;color:var(--s-ink)}
+html[data-model="2"] .kx-ans{padding:14px;border:1px solid var(--s-pri-200);border-radius:12px;background:var(--s-pri-50);color:var(--s-ink);font-size:clamp(18px,1.7vw,28px);font-weight:700;line-height:1.6}
+html[data-model="2"] .kx-acts{display:flex;flex-wrap:wrap;gap:8px}
+html[data-model="2"] .kx-acts .kx-big{min-height:52px;font-size:clamp(16px,1.4vw,22px)}
+html[data-model="2"] .kx-tog{align-self:flex-start}
+html[data-model="2"] .kx-done{display:flex;align-items:flex-start;gap:8px;margin:0;padding:12px 14px;border-radius:12px;background:var(--s-acc-50);color:var(--s-acc-ink);font-size:clamp(17px,1.5vw,24px);font-weight:700;line-height:1.6}
+html[data-model="2"] .kx-done .ic{flex:none;width:22px;height:22px;margin-top:6px}
+html[data-model="2"] .kx-nxt{margin:0;font-size:15.5px;line-height:1.8;color:var(--s-ink2)}
+html[data-model="2"] .kx-qs{margin:0;padding-inline-start:20px;font-size:15.5px;line-height:1.9;color:var(--s-ink)}
+html[data-model="2"] .kx-tm{display:grid;gap:8px}
+html[data-model="2"] .kx-tm b{font-size:clamp(44px,5vw,88px);line-height:1;font-variant-numeric:tabular-nums;color:var(--s-ink)}
+html[data-model="2"] .kx-tm i{display:block;height:8px;overflow:hidden;border-radius:999px;background:var(--s-sunk)}
+html[data-model="2"] .kx-tm u{display:block;height:100%;border-radius:999px;background:var(--s-pri);text-decoration:none;transition:width 1s linear}
+html[data-model="2"] .kx-tm.low b{color:var(--s-pri)}
+/* اختيار النشاط */
+html[data-model="2"] .kx-list{display:grid;gap:8px}
+html[data-model="2"] .kx-act{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:10px 12px;border:1px solid var(--s-line);border-radius:16px;background:var(--s-paper);color:var(--s-ink);font:inherit;text-align:start;cursor:pointer;box-sizing:border-box}
+html[data-model="2"] .kx-act:hover{border-color:var(--s-pri-200);background:var(--s-pri-50)}
+html[data-model="2"] .kx-act:focus-visible{outline:2px solid var(--s-pri);outline-offset:2px}
+html[data-model="2"] .kx-ai{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--s-pri-50);color:var(--s-pri)}
+html[data-model="2"] .kx-ai .ic{width:22px;height:22px}
+html[data-model="2"] .kx-at{flex:1;min-width:0;display:flex;flex-direction:column}
+html[data-model="2"] .kx-at b{font-size:16.5px;line-height:1.5}
+html[data-model="2"] .kx-at span{font-size:14px;line-height:1.65;color:var(--s-ink2)}
+html[data-model="2"] .kx-act>i{flex:none;padding:2px 10px;border:1px solid var(--s-line);border-radius:999px;font-style:normal;font-size:12.5px;font-weight:700;color:var(--s-ink3);white-space:nowrap}
+@media (max-width:480px){html[data-model="2"] .kx-act>i{display:none}}
+html[data-model="2"] .kx-prev{max-width:520px;margin-inline:auto}
+html[data-model="2"] .kx-chips,html[data-model="2"] .kx-lead{margin:0}
+/* الرابط والرمز */
+html[data-model="2"] .kx-pop{position:fixed;top:0;right:0;bottom:0;left:0;z-index:120;display:grid;place-items:center;padding:16px;background:rgba(30,27,75,.45);box-sizing:border-box}
+html[data-model="2"] .kx-popbox{display:grid;gap:12px;width:min(100%,420px);max-height:100%;overflow:auto;padding:16px;border:1px solid var(--s-line);border-radius:16px;background:var(--s-paper);color:var(--s-ink);box-sizing:border-box}
+html[data-model="2"] .kx-poph{display:flex;align-items:center;justify-content:space-between;gap:8px}
+html[data-model="2"] .kx-poph b{font-size:18px}
+html[data-model="2"] .kx-popbox .note{margin:0}
+html[data-model="2"] .kx-qr{display:grid;place-items:center}
+html[data-model="2"] .kx-qr svg{display:block;width:min(100%,300px);height:auto;border-radius:8px}
+html[data-model="2"] .kx-url{font-size:13px;text-align:left}
+@media (prefers-reduced-motion:reduce){html[data-model="2"] .kx-opt.kx-no{animation:none}html[data-model="2"] .kx-svg [data-g],html[data-model="2"] .kx-tm u{transition:none}}
+@media print{html[data-model="2"] .kx,html[data-model="2"] .kx-pop{display:none!important}}
