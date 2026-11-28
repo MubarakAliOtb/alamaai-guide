@@ -27,6 +27,7 @@ html[data-model="2"] .sj-logo img{height:44px;max-width:140px;object-fit:contain
 html[data-model="2"] .sj-edit{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);grid-template-areas:"nav" "data" "sheet" "more"}
 html[data-model="2"] .sj-nav{grid-area:nav;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
 html[data-model="2"] .sj-nav .sj-sp{flex:1}
+html[data-model="2"] .sj-acts{display:flex;flex-wrap:wrap;gap:8px}
 html[data-model="2"] .sj-pos{font-size:13px;font-weight:700;color:var(--ink2)}
 html[data-model="2"] .sj-data{grid-area:data;min-width:0}
 html[data-model="2"] .sj-data>.tk-bar{flex-wrap:nowrap}
@@ -53,9 +54,8 @@ html[data-model="2"] .sj-mini .ps.sjp{border:0;border-radius:0;pointer-events:no
 html[data-model="2"] #sjMeas .ps.sjp{border:0;padding:0}
 html[data-model="2"] .sjp-c{container-type:inline-size}
 html[data-model="2"] .sjp-in{--u:calc(100cqw/186);box-sizing:border-box;display:flex;flex-direction:column;gap:calc(var(--u)*4)}
-@supports not (width:1cqw){html[data-model="2"] .sjp-in{--u:min(4px,.47vw)}html[data-model="2"] .sj-mini .sjp-in{--u:.8px}}
+@supports not (width:1cqw){html[data-model="2"] .sjp-in{--u:min(4px,.47vw)}html[data-model="2"] .sj-mini .sjp-in{--u:.8px}html[data-model="2"] #sjMeas .sjp-in,html[data-model="2"] .tk-pdfbox .sjp-in{--u:1mm}}
 html[data-model="2"] .sjp-fix .sjp-in{height:calc(var(--u)*268);overflow:hidden}
-html[data-model="2"] .sjp-flow .sjp-in{height:auto;overflow:visible}
 html[data-model="2"] .sjp-hd{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:calc(var(--u)*5);align-items:end;padding-bottom:calc(var(--u)*3.6);border-bottom:calc(var(--u)*.45) solid #1E1B4B}
 html[data-model="2"] .sjp-hd::after{content:"";position:absolute;right:0;bottom:calc(var(--u)*-.9);width:calc(var(--u)*26);height:calc(var(--u)*1.35);border-radius:99px;background:#34D399}
 html[data-model="2"] .sjp-hd>div{min-width:0}
@@ -69,7 +69,8 @@ html[data-model="2"] .sjp-chip b{color:#6D28D9;font-weight:700}
 html[data-model="2"] .sjp-when{display:flex;flex-direction:column;align-items:flex-end;gap:calc(var(--u)*.5);font-size:calc(var(--u)*3.7);font-weight:700;line-height:1.5;white-space:nowrap;color:#1E1B4B}
 html[data-model="2"] .sjp-when small{font-size:calc(var(--u)*3);font-weight:400;color:#5B5880}
 html[data-model="2"] .sjp-when .sjp-logo{align-self:flex-end}
-html[data-model="2"] .sjp-logo{display:block;align-self:flex-start;height:calc(var(--u)*13);width:auto;max-width:calc(var(--u)*42);object-fit:contain;margin-bottom:calc(var(--u)*1.6)}
+html[data-model="2"] .sjp-logo{display:block;align-self:flex-start;width:auto;height:auto;max-height:calc(var(--u)*13);max-width:calc(var(--u)*42);margin-bottom:calc(var(--u)*1.6)}
+html[data-model="2"] .sjp-logo-ph{height:calc(var(--u)*13);width:calc(var(--u)*13)}
 html[data-model="2"] .sjp-body{flex:1;min-height:0;display:flex;flex-direction:column;gap:calc(var(--u)*4)}
 html[data-model="2"] .sjp-photos{flex:none;display:grid;gap:calc(var(--u)*2.4);min-height:0;height:calc(var(--u)*var(--h,112))}
 html[data-model="2"] .sjp-fix.sjp-only .sjp-photos{flex:1;height:auto}
@@ -139,10 +140,12 @@ html[data-model="2"] .sjp-capin{flex:1 1 210px;min-width:0;box-sizing:border-box
 html[data-model="2"] .sjp-hint{margin:0;font-size:max(12.5px,calc(var(--u)*3));line-height:1.7;color:#5B5880}
 /* الغلاف والفهرس */
 html[data-model="2"] .sjp-cover .sjp-in{position:relative;justify-content:space-between;gap:calc(var(--u)*6)}
-html[data-model="2"] .sjp-mark{position:absolute;top:0;left:calc(var(--u)*6);width:calc(var(--u)*15);height:calc(var(--u)*40);background:#34D399;-webkit-clip-path:polygon(0 0,100% 0,100% 100%,50% 80%,0 100%);clip-path:polygon(0 0,100% 0,100% 100%,50% 80%,0 100%)}
+html[data-model="2"] .sjp-mark{position:absolute;top:0;left:calc(var(--u)*6);width:calc(var(--u)*15);height:calc(var(--u)*40);background:#34D399}
+/* شقّ الشريط مثلث بلون الورقة فوق مستطيل واحد: لا clip-path (لا يعرفه رسّام PDF) ولا التقاء قطعتين يظهر بينهما فاصل */
+html[data-model="2"] .sjp-mark::after{content:"";position:absolute;left:0;right:0;bottom:calc(var(--u)*-.3);height:0;border-left:calc(var(--u)*7.5) solid transparent;border-right:calc(var(--u)*7.5) solid transparent;border-bottom:calc(var(--u)*8) solid #FFFFFF}
 html[data-model="2"] .sjp-cv-top{display:flex;flex-direction:column;gap:calc(var(--u)*1.2);padding-inline-end:calc(var(--u)*30);font-size:calc(var(--u)*4);line-height:1.6;color:#5B5880}
 html[data-model="2"] .sjp-cv-top b{font-size:calc(var(--u)*4.8);font-weight:700;color:#1E1B4B}
-html[data-model="2"] .sjp-cv-top .sjp-logo{height:calc(var(--u)*24);max-width:calc(var(--u)*70);margin-bottom:calc(var(--u)*4)}
+html[data-model="2"] .sjp-cv-top .sjp-logo{max-height:calc(var(--u)*24);max-width:calc(var(--u)*70);margin-bottom:calc(var(--u)*4)}
 html[data-model="2"] .sjp-cv-mid{display:flex;flex-direction:column;gap:calc(var(--u)*3)}
 html[data-model="2"] .sjp-cv-mid .sjp-cat{align-self:flex-start;font-size:calc(var(--u)*3.8);margin:0}
 html[data-model="2"] .sjp-cv-mid h1{margin:0;padding:0;font-family:inherit;font-size:calc(var(--u)*19);font-weight:700;line-height:1.25;letter-spacing:0;color:#1E1B4B}
@@ -153,15 +156,19 @@ html[data-model="2"] .sjp-cv-nums{display:grid;grid-template-columns:repeat(3,mi
 html[data-model="2"] .sjp-cv-nums div{border:calc(var(--u)*.3) solid #E7E5F2;border-radius:calc(var(--u)*4);padding:calc(var(--u)*4) calc(var(--u)*5);display:flex;flex-direction:column;gap:calc(var(--u)*.6)}
 html[data-model="2"] .sjp-cv-nums b{font-size:calc(var(--u)*10);font-weight:700;line-height:1.2;color:#6D28D9}
 html[data-model="2"] .sjp-cv-nums span{font-size:calc(var(--u)*3.6);color:#5B5880}
-html[data-model="2"] .sjp-idx{width:100%;border-collapse:collapse;font-size:calc(var(--u)*3.6);line-height:1.6;color:#1E1B4B}
+html[data-model="2"] .sjp-idx{width:100%;table-layout:fixed;border-collapse:collapse;font-size:calc(var(--u)*3.6);line-height:1.6;color:#1E1B4B}
 html[data-model="2"] .sjp-idx th{font-size:calc(var(--u)*3.1);font-weight:700;color:#5B5880;text-align:start;padding:calc(var(--u)*1.6) calc(var(--u)*2);border-bottom:calc(var(--u)*.45) solid #1E1B4B;background:transparent}
 html[data-model="2"] .sjp-idx td{padding:calc(var(--u)*2) calc(var(--u)*2);border:0;border-bottom:calc(var(--u)*.3) solid #E7E5F2;vertical-align:top;background:transparent}
 html[data-model="2"] .sjp-idx tr{break-inside:avoid}
-html[data-model="2"] .sjp-idx tr.sec td{padding-top:calc(var(--u)*4.4);font-weight:700;color:#6D28D9;border-bottom-color:#DDD6FE}
+html[data-model="2"] .sjp-idx tr.sec td{padding-top:calc(var(--u)*3.4);font-weight:700;color:#6D28D9;border-bottom-color:#DDD6FE}
 html[data-model="2"] .sjp-idx td:first-child,html[data-model="2"] .sjp-idx th:first-child{width:calc(var(--u)*11)}
 html[data-model="2"] .sjp-idx td:last-child,html[data-model="2"] .sjp-idx th:last-child{width:calc(var(--u)*14);text-align:end;font-weight:700}
+html[data-model="2"] .sjp-idx th:nth-child(3){width:calc(var(--u)*36)}
 html[data-model="2"] .sjp-idx td:nth-child(3){color:#5B5880;white-space:nowrap}
+html[data-model="2"] .sjp-idx td:nth-child(2){overflow-wrap:anywhere}
 html[data-model="2"] .sjp-idx tr.sec td{width:auto;text-align:start}
 html[data-model="2"] .sjp-idx small{font-size:.86em;color:#5B5880}
+/* ملف PDF المباشر: الورقة في حاوية tkPdf بعرض 794 بكسل، ومحتواها بعرض ورقة القياس نفسه (186 مم) ليطابق التفافُ النص ما قيس */
+html[data-model="2"] .tk-pdfbox>.ps.sjp{border:0;border-radius:0;padding:45px calc((794px - 186mm)/2);overflow:hidden}
 @media print{html[data-model="2"] #fdPrint .ps.sjp{border:0;border-radius:0;padding:0;overflow:visible}
   @supports not (width:1cqw){html[data-model="2"] #fdPrint .sjp-in{--u:1mm}}}
