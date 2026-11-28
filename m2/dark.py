@@ -28,7 +28,7 @@ TOK = dict(re.findall(r'(--[a-z0-9-]+):\s*([^;]+);', _m2[_i:_m2.find('}', _i)]))
 TOK.pop('--white', None)
 ROOT_DARK = 'html[data-model="2"][data-theme="dark"]'
 HEX = re.compile(r'#(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})\b')
-PAPER = re.compile(r'\.ps(?![\w-])|\.ps-|\.sheet(?![\w-])|\.sheet-|#fdPrint|\.nbp(?![\w])|\.nbp-|\.nb-|\.nbc-|\.nbx(?![\w-])|\.cal-|\.pc-|\.tk-pdfbox|\.lx(?![\w-])|\.ls-cut|\.lm-|\.bqpdf|\.prn-|\.lb-sheet|@page')
+PAPER = re.compile(r'\.ps(?![\w-])|\.ps-|\.sheet(?![\w-])|\.sheet-|#fdPrint|\.nbp(?![\w])|\.nbp-|\.nb-|\.nbc-|\.nbx(?![\w-])|\.cal-|\.pc-|\.tk-pdfbox|\.lx(?![\w-])|\.ls-cut|\.lm-|\.bqpdf|\.prn-|\.lb-sheet|\.sjp(?![\w])|\.sjp-|@page')
 BGP = {'background', 'background-color', 'background-image', 'fill'}
 FILLVAR = {'--navy-900': 'var(--s-ink-bg)', '--blue-800': '#4C3F94', '--blue-600': '#7C3AED', '--teal-700': '#047857', '--orange-700': '#047857'}
 TINT = re.compile(r'var\(--(?:teal-50|teal-100|orange-50|orange-100|blue-50|blue-100|grad-wash|hl)\)')
