@@ -24883,8 +24883,12 @@ const sjOn=(k,p)=>tkCur===SJ[k].id&&(p?sjPid()===p.id:!sjPid());
 /* عناوين الصور للعرض: blob: حيث تسمح به سياسة الصفحة (خفيف ولا يُعاد فكّه عند كل رسم)، وإلا data: كسائر مرفقات الجهاز */
 const sjUrls=new Map(),sjUrlP=new Map();let sjPrnUrls=[];
 const sjBlobOk=new Promise(res=>{try{const u=URL.createObjectURL(new Blob([Uint8Array.from(atob('R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='),c=>c.charCodeAt(0))],{type:'image/gif'})),i=new Image(),end=v=>{try{URL.revokeObjectURL(u)}catch(e){}res(v)};i.onload=()=>end(true);i.onerror=()=>end(false);i.src=u;setTimeout(()=>end(false),2500)}catch(e){res(false)}});
+/* الحفظ في مخزن المرفقات: Blob كما هو، وحيث يرفضه المتصفح (جلسة خاصة في Safari) يُحفظ محتواه ArrayBuffer مع نوعه */
+const sjBuf=b=>b.arrayBuffer?b.arrayBuffer():new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(r.error);r.readAsArrayBuffer(b)});
+async function sjPut(key,blob){if(await mdPut(key,blob))return true;try{const b=await sjBuf(blob);return !!(await mdTx('readwrite',st=>{st.put({t:blob.type||'',b},key)}))}catch(e){return false}}
+const sjGet=key=>mdTx('readonly',st=>st.get(key)).then(r=>r instanceof Blob?r:(r&&r.b instanceof ArrayBuffer?new Blob([r.b],{type:r.t||''}):null));
 const sjFree=u=>{if(u&&u.startsWith('blob:'))try{URL.revokeObjectURL(u)}catch(e){}};
-function sjUrl(key){if(sjUrlP.has(key))return sjUrlP.get(key);const pr=(async()=>{const ok=await sjBlobOk,b=await mdGet(key);let u='';if(b)u=ok?URL.createObjectURL(b):await mdData(b);if(sjUrlP.get(key)===pr)sjUrls.set(key,u);else sjFree(u);return u})();sjUrlP.set(key,pr);return pr}
+function sjUrl(key){if(sjUrlP.has(key))return sjUrlP.get(key);const pr=(async()=>{const ok=await sjBlobOk,b=await sjGet(key);let u='';if(b)u=ok?URL.createObjectURL(b):await mdData(b);if(sjUrlP.get(key)===pr)sjUrls.set(key,u);else sjFree(u);return u})();sjUrlP.set(key,pr);return pr}
 const sjDropUrls=pre=>{[...sjUrlP.keys()].forEach(x=>{if(x.startsWith(pre)){sjFree(sjUrls.get(x));sjUrls.delete(x);sjUrlP.delete(x)}})};
 const sjPrnFree=()=>{sjPrnUrls.forEach(sjFree);sjPrnUrls=[]};
 function sjNewPage(k,R,o){const p=Object.assign({id:tkUid(),t:'',d:tkToday(),c:SJ[k].cats[0][0],sz:'m',only:0,man:0,tpl:0,txt:'',sub:'',ph:[],at:[],st:[],ck:'',cn:'',lvl:'',res:'',pf:'',ts:Date.now()},o||{});R.pages.push(p);R.mod=p.ts;tkSave();return p}
@@ -24959,8 +24963,9 @@ function sjOrder(k,R,pages){const L=pages.slice(),byD=(a,b)=>String(a.d||'').loc
 /* ---------- اتّساع التقرير: يُقاس على ورقة ثابتة خارج الشاشة بعرض ١٨٦ مم ---------- */
 function sjFit(k,R,p,ph){const txt=String(p.txt||'').trim();ph=ph||p.ph;if(!txt)return [{txt:'',fs:0,cont:false,last:true}];
   let m=document.getElementById('sjMeas');if(!m){m=document.createElement('div');m.id='sjMeas';m.setAttribute('aria-hidden','true');document.body.appendChild(m)}
-  const mount=(cont,fs)=>{m.innerHTML=sjSheet(k,R,p,{mode:'fix',meas:1,ph,part:{txt:'س',fs,cont,att:cont,last:true}});return m.querySelector('.sjp-txt')};
-  const fits=(b,t)=>{if(!b)return false;b.textContent=t;return b.scrollHeight<=b.clientHeight+1};
+  /* يُترك سطر احتياط: فرق التفاف كلمة بين الشاشة والطابعة لا يقصّ سطرًا */
+  const mount=(cont,fs)=>{m.innerHTML=sjSheet(k,R,p,{mode:'fix',meas:1,ph,part:{txt:'س',fs,cont,att:cont,last:true}});const b=m.querySelector('.sjp-txt');if(b){b._s=(parseFloat(getComputedStyle(b).lineHeight)||27)*.85;b.textContent='';b._i=b.appendChild(document.createElement('div'))}return b};
+  const fits=(b,t)=>{if(!b)return false;b._i.textContent=t;return b._i.offsetHeight<=b.clientHeight-b._s};
   const out=[];let rest=txt,cont=false,guard=0,box=null;
   if(p.only&&ph.length){out.push({txt:'',fs:0,cont:false});cont=true}
   while(rest&&guard++<14){let fs=-1;for(const f of [0,1]){box=mount(cont,f);if(fits(box,rest)){fs=f;break}}
@@ -24987,7 +24992,7 @@ const sjGrow=t=>{t.style.height='auto';t.style.height=(t.scrollHeight+2)+'px'};
 function sjFill(root){root.querySelectorAll('img[data-sjk]').forEach(im=>{const key=im.dataset.sjk;im.removeAttribute('data-sjk');
   const miss=()=>{if(!im.isConnected)return;const f=im.closest('.sjp-ph');if(f)f.classList.add('miss');else im.remove()};
   sjUrl(key).then(u=>u||!key.startsWith('sj:t:')?[u,key]:sjUrl('sj:p:'+key.slice(5)).then(v=>[v,'sj:p:'+key.slice(5)])).then(([u,kk])=>{if(!im.isConnected)return;if(!u){miss();return}
-    if(u.startsWith('blob:'))im.onerror=()=>{im.onerror=null;mdGet(kk).then(b=>b?mdData(b):'').then(d=>{if(d){sjUrls.set(kk,d);im.src=d}else miss()})};
+    if(u.startsWith('blob:'))im.onerror=()=>{im.onerror=null;sjGet(kk).then(b=>b?mdData(b):'').then(d=>{if(d){sjUrls.set(kk,d);im.src=d}else miss()})};
     im.src=u})})}
 function sjPick(accept,multi,cb){const i=document.createElement('input');i.type='file';if(accept)i.accept=accept;i.multiple=!!multi;i.onchange=()=>{const f=[...(i.files||[])];if(f.length)cb(f)};i.click()}
 async function sjImg(file,o){o=o||{};const u=await mdData(file);if(!u)return null;
@@ -24999,13 +25004,12 @@ async function sjAddPhotos(k,p,files){if(sjWork){toast('انتظر حتى ينت
   const imgs=files.filter(f=>/^image\//.test(f.type||'')||/\.(jpe?g|png|webp|gif|heic|heif|bmp)$/i.test(f.name||''));if(!imgs.length){toast('اختر ملفات صور');return}
   sjWork='ph';if(sjOn(k,p))sjRe();let ok=0,bad=0,full=false;
   for(const f of imgs.slice(0,room)){if(f.size>40e6){bad++;continue}const r=await sjImg(f,{thumb:1});if(!r){bad++;continue}const id=tkUid();
-    if(!(await mdPut('sj:p:'+id,r.blob))){full=true;break}await mdPut('sj:t:'+id,r.thumb||r.blob);p.ph.push({id,w:r.w,h:r.h,z:r.blob.size});ok++}
+    if(!(await sjPut('sj:p:'+id,r.blob))){full=true;break}await sjPut('sj:t:'+id,r.thumb||r.blob);p.ph.push({id,w:r.w,h:r.h,z:r.blob.size});ok++}
   sjWork='';if(ok){p.tpl=0;sjArrange(p);sjSel=-1;sjTouch(sjS(k),p);try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{})}catch(e){}}
   if(tkCur===SJ[k].id)sjRe();
   toast(full?'تعذّر حفظ الصورة على هذا الجهاز: التخزين ممتلئ أو غير متاح':bad?(ok?`أُضيف ${ok}، وتعذّرت قراءة ${bad}: جرّب صيغة JPG أو PNG`:'تعذّرت قراءة الصورة: جرّب صيغة JPG أو PNG'):imgs.length>room?`أُضيفت ${ok} فقط: الحد 6 صور في الصفحة`:ok===1?'أُضيفت الصورة':ok===2?'أُضيفت صورتان':`أُضيفت ${ok} صور`)}
 /* ---------- ZIP بلا ضغط: يُكتب ويُقرأ هنا بلا مكتبة، فيعمل بلا إنترنت ---------- */
 const SJ_CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let i=0;i<8;i++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
-const sjBuf=b=>b.arrayBuffer?b.arrayBuffer():new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(r.error);r.readAsArrayBuffer(b)});
 const sjCrc=u=>{let c=0xFFFFFFFF;for(let i=0;i<u.length;i++)c=SJ_CRC[(c^u[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0};
 async function sjZip(files){const enc=new TextEncoder(),parts=[],cen=[],d=new Date();let off=0,cs=0;
   const dt=((d.getFullYear()-1980)<<9)|((d.getMonth()+1)<<5)|d.getDate(),tm=(d.getHours()<<11)|(d.getMinutes()<<5)|(d.getSeconds()>>1);
@@ -25028,9 +25032,9 @@ async function sjUnzip(file){const n=file.size,tail=new DataView(await sjBuf(fil
 const SJ_INFO=['name','job','school','org','year'];
 async function sjExport(k){if(sjWork)return;const S=SJ[k],R=sjS(k);if(!R.pages.length){toast('السجل فارغ');return}sjWork='exp';if(sjOn(k))sjRe();
   try{const files=[];let miss=0;
-    for(const p of R.pages){for(const x of p.ph){const b=await mdGet('sj:p:'+x.id);if(!b){miss++;continue}files.push({name:'photos/'+x.id+'.jpg',blob:b});const t=await mdGet('sj:t:'+x.id);if(t)files.push({name:'thumbs/'+x.id+'.jpg',blob:t})}
-      for(const a of p.at){const b=await mdGet('sj:f:'+a.id);if(b)files.push({name:'files/'+a.id,blob:b});else miss++}}
-    if(R.logo){const b=await mdGet('sj:logo:'+k);if(b)files.push({name:'logo',blob:b})}
+    for(const p of R.pages){for(const x of p.ph){const b=await sjGet('sj:p:'+x.id);if(!b){miss++;continue}files.push({name:'photos/'+x.id+'.jpg',blob:b});const t=await sjGet('sj:t:'+x.id);if(t)files.push({name:'thumbs/'+x.id+'.jpg',blob:t})}
+      for(const a of p.at){const b=await sjGet('sj:f:'+a.id);if(b)files.push({name:'files/'+a.id,blob:b});else miss++}}
+    if(R.logo){const b=await sjGet('sj:logo:'+k);if(b)files.push({name:'logo',blob:b})}
     const info={};SJ_INFO.concat(['po','pc','pi','hij','logo']).forEach(f=>{if(R[f]!=null)info[f]=R[f]});
     const data={app:'alm-sj',v:1,kind:k,at:new Date().toISOString(),info,pages:R.pages};
     files.unshift({name:'record.json',blob:new Blob([JSON.stringify(data)],{type:'application/json'})},{name:'README.txt',blob:new Blob(['\ufeff'+S.name+' — نسخة كاملة بصورها ومرفقاتها ('+tkToday()+').\r\nلاستعادتها: افتح «دليل المعلم الألمعي» ← أدواتي ← '+S.name+' ← «استعد نسخة»، واختر هذا الملف كما هو.\r\nالصور في مجلد photos، والمرفقات في مجلد files بأسمائها المسجّلة في record.json.\r\n'],{type:'text/plain'})});
@@ -25050,20 +25054,20 @@ async function sjImport(k,file){if(sjWork||!file)return;const S=SJ[k];let z,D=nu
   sjWork='imp';if(sjOn(k))sjRe();let add=0,upd=0;
   try{const R=sjS(k);
     for(const p0 of D.pages){const p=sjClean(p0);if(!p)continue;
-      for(const x of p.ph){const b=await z.get(pre+'photos/'+x.id+'.jpg');if(!b)continue;await mdPut('sj:p:'+x.id,new Blob([b],{type:'image/jpeg'}));const t=await z.get(pre+'thumbs/'+x.id+'.jpg');await mdPut('sj:t:'+x.id,new Blob([t||b],{type:'image/jpeg'}))}
-      for(const a of p.at){const b=await z.get(pre+'files/'+a.id);if(b)await mdPut('sj:f:'+a.id,new Blob([b],{type:a.y||''}))}
+      for(const x of p.ph){const b=await z.get(pre+'photos/'+x.id+'.jpg');if(!b)continue;await sjPut('sj:p:'+x.id,new Blob([b],{type:'image/jpeg'}));const t=await z.get(pre+'thumbs/'+x.id+'.jpg');await sjPut('sj:t:'+x.id,new Blob([t||b],{type:'image/jpeg'}))}
+      for(const a of p.at){const b=await z.get(pre+'files/'+a.id);if(b)await sjPut('sj:f:'+a.id,new Blob([b],{type:a.y||''}))}
       const i=R.pages.findIndex(q=>q.id===p.id);
       if(i>=0){const old=R.pages[i];old.ph.forEach(x=>{if(!p.ph.some(y=>y.id===x.id)){mdDel('sj:p:'+x.id);mdDel('sj:t:'+x.id)}});old.at.forEach(a=>{if(!p.at.some(y=>y.id===a.id))mdDel('sj:f:'+a.id)});R.pages[i]=p;upd++}else{R.pages.push(p);add++}}
     const I=D.info&&typeof D.info==='object'?D.info:{};SJ_INFO.forEach(f=>{if(!R[f]&&typeof I[f]==='string')R[f]=I[f].slice(0,100)});
-    if(!R.logo&&I.logo){const b=await z.get(pre+'logo');if(b&&await mdPut('sj:logo:'+k,new Blob([b],{type:'image/png'})))R.logo=1}
+    if(!R.logo&&I.logo){const b=await z.get(pre+'logo');if(b&&await sjPut('sj:logo:'+k,new Blob([b],{type:'image/png'})))R.logo=1}
     R.mod=Date.now();R.exp=R.mod;tkSave()}
   catch(e){console.error(e);toast('تعذّرت استعادة النسخة كاملة: تحقق من مساحة الجهاز');sjWork='';if(sjOn(k))sjRe();return}
   sjWork='';sjDropUrls('sj:');if(tkCur===S.id)sjRe();toast(add||upd?`استُعيدت النسخة: ${add?sjCnt(add,'صفحة جديدة','صفحتان جديدتان','صفحات جديدة','صفحة جديدة'):''}${add&&upd?'، و':''}${upd?'حُدّثت '+sjCnt(upd,'صفحة','صفحتان','صفحات','صفحة'):''}`:'لا صفحات في هذه النسخة')}
 /* ---------- الطباعة ---------- */
 async function sjPrint(k,pages,o){o=o||{};if(sjWork)return;if(!pages.length){toast('لا صفحات للطباعة');return}const S=SJ[k];sjWork='print';if(tkCur===S.id)sjRe();
   try{const R0=sjS(k),L=o.single?pages.slice():sjOrder(k,R0,pages),blobs={};
-    for(const p of L)for(const x of p.ph){const b=await mdGet('sj:p:'+x.id);if(b)blobs['sj:p:'+x.id]=b}
-    let R=R0;if(R0.logo){const b=await mdGet('sj:logo:'+k);if(b)blobs['sj:logo:'+k]=b;else R=Object.assign({},R0,{logo:0})}
+    for(const p of L)for(const x of p.ph){const b=await sjGet('sj:p:'+x.id);if(b)blobs['sj:p:'+x.id]=b}
+    let R=R0;if(R0.logo){const b=await sjGet('sj:logo:'+k);if(b)blobs['sj:logo:'+k]=b;else R=Object.assign({},R0,{logo:0})}
     let no=0,html='';const rows=[];
     for(const p of L){const ph=p.ph.filter(x=>blobs['sj:p:'+x.id]),parts=sjFit(k,R,p,ph);rows.push({p,no:no+1});parts.forEach(pt=>{no++;html+=sjSheet(k,R,p,{mode:'fix',print:1,ph,part:pt,no})})}
     const front=o.single?'':((R.pc!==0?sjCover(k,R,L):'')+(R.pi!==0&&L.length>1?sjIndex(k,R,rows):''));
@@ -25130,7 +25134,7 @@ function sjEditor(k,R,p,M){const S=SJ[k],fresh=sjCur!==p.id;if(fresh){sjDropUrls
     <section class="tk-card sj-data"><div class="tk-card-h"><h3>${tkI('edit')}بيانات الصفحة</h3></div><div class="tk-bar"><label class="tk-lb tk-grow">القسم${tkSel('sjc',cats.concat([['+','قسم جديد…']]),sjNewCat?'+':p.c)}</label><label class="tk-lb">التاريخ<input class="tk-in" type="date" data-tki="sjf" data-f="d" value="${esc(p.d||'')}" max="2100-12-31"></label></div>
      ${sjNewCat?`<div class="tk-bar"><label class="tk-lb tk-grow">اسم القسم الجديد<input class="tk-in" id="sjCatNew" maxlength="40" autocomplete="off"></label><button class="tk-btn" data-tk="sjcatok">اعتمده</button></div>`:''}${stu}</section>
     <div class="sj-stage">${sheet}${sjPv?'<p class="tk-tip">هكذا تُطبع الصفحة. عُد إلى التحرير لتغيّر فيها.</p>':'<p class="sj-fit" id="sjFit" role="status"></p>'}</div>
-    <div class="sj-more">${more}<section class="tk-card"><div class="tk-card-h"><h3>${sjI('clip')}التقرير المرفق والملفات</h3></div>${p.at.length?`<ul class="sj-att">${p.at.map(a=>`<li><span>${esc(a.n)}<small>${sjSize(a.z||0)}</small></span><button class="tk-ib" data-tk="sjattdl" data-id="${a.id}" aria-label="نزّل ${esc(a.n)}" title="نزّله">${tkI('dl')}</button><button class="tk-ib" data-tk="sjattx" data-id="${a.id}" aria-label="احذف ${esc(a.n)}" title="احذفه">${tkI('trash')}</button></li>`).join('')}</ul>`:''}
+    <div class="sj-more">${more}<section class="tk-card"><div class="tk-card-h"><h3>${sjI('clip')}التقرير المرفق والملفات</h3></div>${p.at.length?`<ul class="sj-att">${p.at.map(a=>`<li><span><bdi>${esc(a.n)}</bdi><small>${sjSize(a.z||0)}</small></span><button class="tk-ib" data-tk="sjattdl" data-id="${a.id}" aria-label="نزّل ${esc(a.n)}" title="نزّله">${tkI('dl')}</button><button class="tk-ib" data-tk="sjattx" data-id="${a.id}" aria-label="احذف ${esc(a.n)}" title="احذفه">${tkI('trash')}</button></li>`).join('')}</ul>`:''}
       <div class="tk-row-btns"><button class="tk-btn" data-tk="sjatt"${p.at.length>=5||sjWork?' disabled':''}>${tkI('plus')}${sjWork==='at'?'يُحفظ الملف…':'أرفق ملفًا'}</button></div>
       <p class="tk-tip">ملف التقرير كما هو: PDF أو Word أو صورة، حتى 20 ميغابايت. يُذكر اسمه أسفل الصفحة، ويُحفظ الملف نفسه مع نسخة السجل. وإن كان تقريرك ورقة مصوّرة فأضفها صورةً واختر «صور فقط».</p></section>
      <section class="tk-card"><div class="tk-row-btns"><button class="tk-btn" data-tk="sjdup">${sjI('copy')}صفحة مشابهة</button>${k==='t'?`<button class="tk-btn${linked?' on':''}" data-tk="sjproof">${tkI('check')}${linked?'في ملف أدلة الأداء':'أضفها إلى ملف أدلة الأداء'}</button>`:''}<button class="tk-btn warn" data-tk="sjrm">${tkI('trash')}احذف الصفحة</button></div>
@@ -25155,7 +25159,7 @@ const sjTool=k=>({render(M,args){const R=sjS(k),a=(args&&args[0])||'',pid=a.star
   if(a==='sjexp'){sjExport(k);return}
   if(a==='sjimp'){sjPick('.zip,application/zip,application/x-zip-compressed',false,fs=>sjImport(k,fs[0]));return}
   if(a==='sjpo'){R.po=t.dataset.v==='d'?'d':'c';tkSave();sjRe();return}
-  if(a==='sjlogo'){sjPick('image/*',false,async fs=>{const r=await sjImg(fs[0],{max:700,png:1});if(!r||!(await mdPut('sj:logo:'+k,r.blob))){toast('تعذّرت قراءة الشعار: جرّب صورة PNG أو JPG');return}sjDropUrls('sj:logo:'+k);R.logo=1;sjTouch(R);if(sjOn(k))sjRe();toast('أُضيف الشعار إلى الغلاف ورأس الصفحات')});return}
+  if(a==='sjlogo'){sjPick('image/*',false,async fs=>{const r=await sjImg(fs[0],{max:700,png:1});if(!r||!(await sjPut('sj:logo:'+k,r.blob))){toast('تعذّرت قراءة الشعار: جرّب صورة PNG أو JPG');return}sjDropUrls('sj:logo:'+k);R.logo=1;sjTouch(R);if(sjOn(k))sjRe();toast('أُضيف الشعار إلى الغلاف ورأس الصفحات')});return}
   if(a==='sjlogox'){mdDel('sj:logo:'+k);sjDropUrls('sj:logo:'+k);R.logo=0;sjTouch(R);sjRe();return}
   const p=R.pages.find(x=>x.id===sjPid());if(!p)return;const x=p.ph[sjSel];
   if(a==='sjpv'){sjPv=!sjPv;sjSel=-1;sjRe();return}
@@ -25174,8 +25178,8 @@ const sjTool=k=>({render(M,args){const R=sjS(k),a=(args&&args[0])||'',pid=a.star
   if(a==='sjst'){const n=t.dataset.n,i=p.st.indexOf(n);if(i>=0)p.st.splice(i,1);else{if(p.st.length>=12){toast('حتى 12 اسمًا في الصفحة الواحدة');return}p.st.push(n)}sjStuOpen=true;sjTouch(R,p);sjRe();return}
   if(a==='sjstadd'){const el=$('#sjStNew'),n=((el&&el.value)||'').trim().replace(/\s+/g,' ').slice(0,60);if(!n){toast('اكتب الاسم');return}if(p.st.length>=12&&!p.st.includes(n)){toast('حتى 12 اسمًا في الصفحة الواحدة');return}if(!p.st.includes(n))p.st.push(n);sjStuOpen=true;sjTouch(R,p);sjRe();return}
   if(a==='sjatt'){if(p.at.length>=5){toast('حتى 5 مرفقات للصفحة');return}sjPick('.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.rtf,image/*',false,async fs=>{const f=fs[0];if(f.size>20e6){toast('الملف أكبر من 20 ميغابايت: اضغطه أو قسّمه');return}
-     sjWork='at';if(sjOn(k,p))sjRe();const id=tkUid(),ok=await mdPut('sj:f:'+id,f);sjWork='';if(ok){p.at.push({id,n:String(f.name||'ملف').slice(0,120),z:f.size,y:String(f.type||'').slice(0,80)});sjTouch(sjS(k),p)}if(sjOn(k,p))sjRe();toast(ok?'أُرفق الملف، وهو محفوظ على جهازك':'تعذّر حفظ الملف على هذا الجهاز')});return}
-  if(a==='sjattdl'){const at=p.at.find(z=>z.id===t.dataset.id);if(at)mdGet('sj:f:'+at.id).then(b=>{if(b)nbSaveFile(b,at.n,'نُزّل المرفق');else toast('المرفق ليس على هذا الجهاز: استعد نسخة السجل التي تحويه')});return}
+     sjWork='at';if(sjOn(k,p))sjRe();const id=tkUid(),ok=await sjPut('sj:f:'+id,f);sjWork='';if(ok){p.at.push({id,n:String(f.name||'ملف').slice(0,120),z:f.size,y:String(f.type||'').slice(0,80)});sjTouch(sjS(k),p)}if(sjOn(k,p))sjRe();toast(ok?'أُرفق الملف، وهو محفوظ على جهازك':'تعذّر حفظ الملف على هذا الجهاز')});return}
+  if(a==='sjattdl'){const at=p.at.find(z=>z.id===t.dataset.id);if(at)sjGet('sj:f:'+at.id).then(b=>{if(b)nbSaveFile(b,at.n,'نُزّل المرفق');else toast('المرفق ليس على هذا الجهاز: استعد نسخة السجل التي تحويه')});return}
   if(a==='sjattx'){if(!tkSure(t,'اضغط ثانيةً للحذف'))return;p.at=p.at.filter(z=>z.id!==t.dataset.id);mdDel('sj:f:'+t.dataset.id);sjTouch(R,p);sjRe();return}
   if(a==='sjdup'){const q=sjNewPage(k,R,{c:p.c,sub:p.sub||'',ck:p.ck||'',cn:p.cn||'',st:p.st.slice(),lvl:p.lvl||'',sz:p.sz||'m',only:p.only?1:0});location.hash='#tk/'+S.id+'/p-'+q.id;toast('صفحة جديدة بالقسم نفسه وبياناته');return}
   if(a==='sjrm'){if(!tkSure(t,'اضغط ثانيةً لحذف الصفحة وصورها'))return;sjDelPage(R,p);location.hash='#tk/'+S.id;toast('حُذفت الصفحة');return}
