@@ -24954,7 +24954,7 @@ function sjSheet2(k,p){const S=SJ[k];return `<article class="ps sjp sjp-edit sjp
 function sjCover(k,R,L){const F=sjFlt[k],who=k==='s'?F.st:'',cns=k==='s'&&(F.st||F.ck)?[...new Set(L.map(p=>p.cn).filter(Boolean))]:[],cls=cns.length===1?cns[0]:'';
   const title=k==='t'?'سجل الإنجاز':who?'سجل إنجاز المتعلم':'سجل إنجاز المتعلمين';
   const l1=k==='t'?(R.name||''):(who||cls),l2=k==='t'?(R.job||''):[who?cls:'',R.name?'المعلم: '+R.name:'',R.job||''].filter(Boolean).join(' · ');
-  const nums=[[L.length,'الصفحات'],[new Set(L.map(p=>p.c)).size,'الأقسام'],[L.reduce((a,p)=>a+p.ph.length,0),'الصور']];
+  const nums=[[L.length,'الإنجازات'],[new Set(L.map(p=>p.c)).size,'الأقسام'],[L.reduce((a,p)=>a+p.ph.length,0),'الصور']];
   return `<section class="ps sjp sjp-fix sjp-cover"><div class="sjp-c"><div class="sjp-in"><i class="sjp-mark"></i><div class="sjp-cv-top">${R.logo?`<img class="sjp-logo" data-sjk="sj:logo:${k}" alt="">`:''}${R.org?`<span>${esc(R.org)}</span>`:''}${R.school?`<b>${esc(R.school)}</b>`:''}</div>
    <div class="sjp-cv-mid"><span class="sjp-cat">العام الدراسي ${esc(R.year||F.y||sjYear(tkToday()))}${F.c&&sjCat(k,F.c)?' · '+esc(sjCat(k,F.c)):''}</span><h1>${title}</h1><hr>${l1?`<p class="sjp-cv-name">${esc(l1)}</p>`:''}${l2?`<p class="sjp-cv-job">${esc(l2)}</p>`:''}</div>
    <div class="sjp-cv-nums">${nums.map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')}</div></div></div></section>`}
