@@ -5,6 +5,7 @@
      sj:p:<صورة> و sj:t:<مصغّرتها> و sj:f:<مرفق> و sj:logo:<السجل>، وتُنقل بنسخة ZIP من داخل السجل (sjExport و sjImport).
    الصفحة: {id,t,d,c,sz,only,tpl,txt,sub,ph:[{id,w,h,z,fit,pos,cap}],at:[{id,n,z,y}],ck,cn,st:[أسماء],lvl,res,pf,ts}
    الطباعة: غلاف وفهرس وصفحات بمقاس A4 عبر #fdPrint؛ والتقرير الطويل يصغر خطه درجة ثم يكتمل في صفحة تالية (sjFit).
+   v135: ملف PDF مباشر (sjPdf): المستند نفسه (sjDoc) تُرسم أوراقه صورًا وتُجمع في ملف عبر tkPdf، للسجل المعروض كله أو لصفحة واحدة.
    لا يُرفع شيء من الجهاز. window.ALM_SJ مقبض للفحص الآلي. */
 const SJ={t:{id:'folio',name:'سجل إنجاز المعلم',cats:[['train','دورات وورش حضرتها','grow'],['give','دورات وورش قدّمتها','grow'],['lesson','دروس نموذجية وتبادل زيارات','teach'],['media','وسائل وإنتاج تعليمي','teach'],['act','أنشطة وفعاليات','init'],['comp','مسابقات','init'],['init','مبادرات ومشاريع','init'],['gift','رعاية الموهوبين','gift'],['team','لجان وفرق عمل','init'],['comm','شراكة مع أولياء الأمور والمجتمع','part'],['honor','شكر وتكريم','grow'],['write','بحوث ومؤلفات','grow'],['other','أخرى','init']],
    ph:'عنوان الإنجاز، مثل: ورشة في تصميم الوسائل التعليمية',rep:'اكتب التقرير هنا: ما الذي تم؟ ولمن؟ وما أثره؟',skel:'الهدف: \nما تم: \nالمستفيدون: \nالأثر: '},
@@ -108,7 +109,7 @@ function sjSheet(k,R,p,o){o=o||{};const S=SJ[k],ed=o.mode==='edit',part=o.part||
   const x=ed&&o.sel>=0?ph[o.sel]:null;
   const pb=(a,v,on,l)=>`<button type="button" data-tk="${a}" data-v="${v}" aria-pressed="${on}">${l}</button>`;
   const bar=ed&&ph.length?`<div class="sjp-bar"><button type="button" class="sjp-b pri" data-tk="sjadd"${ph.length>=6||busy?' disabled':''}>${sjI('plus','')}${busy?'تُجهَّز الصور…':`أضف صورة (${ph.length}/6)`}</button>${ph.length>1&&tp.n>1?`<button type="button" class="sjp-b" data-tk="sjtpl">${sjI('swap','')}بدّل الترتيب</button>`:''}${p.only?'':`<i>مساحة الصور:</i><span class="sjp-seg" role="group" aria-label="مساحة الصور">${pb('sjsz','s',p.sz==='s','صغيرة')}${pb('sjsz','m',p.sz!=='s'&&p.sz!=='l','متوسطة')}${pb('sjsz','l',p.sz==='l','كبيرة')}</span>`}<button type="button" class="sjp-b" data-tk="sjonly" aria-pressed="${!!p.only}">صور فقط</button></div>${x?`<div class="sjp-bar"><i>الصورة ${o.sel+1}:</i><button type="button" class="sjp-b" data-tk="sjmv" data-d="-1"${o.sel<1?' disabled':''}>قدّمها</button><button type="button" class="sjp-b" data-tk="sjmv" data-d="1"${o.sel>=ph.length-1?' disabled':''}>أخّرها</button><button type="button" class="sjp-b" data-tk="sjfit">${sjI('fit','')}${x.fit?'املأ بها الإطار':'أظهرها كاملة'}</button>${x.fit?'':`<button type="button" class="sjp-b" data-tk="sjpos">${sjI('pos','')}${['القص من الوسط','القص من الأعلى','القص من الأسفل'][x.pos||0]}</button>`}<button type="button" class="sjp-b warn" data-tk="sjphx">${sjI('trash','')}احذفها</button></div><div class="sjp-bar"><input class="sjp-capin" data-tki="sjcap" maxlength="80" value="${esc(x.cap||'')}" placeholder="تعليق يظهر على الصورة (اختياري)" aria-label="تعليق الصورة ${o.sel+1}"></div>`:'<p class="sjp-hint">المس صورة لتقديمها أو تأخيرها، أو لتعليق عليها أو حذفها.</p>'}`:'';
-  const logo=R.logo&&!o.thumb&&!cont?(o.meas?'<i class="sjp-logo"></i>':`<img class="sjp-logo" ${!o.print&&sjUrls.get('sj:logo:'+k)?`src="${sjUrls.get('sj:logo:'+k)}"`:`data-sjk="sj:logo:${k}"`} alt="">`):'';
+  const logo=R.logo&&!o.thumb&&!cont?(o.meas?'<i class="sjp-logo sjp-logo-ph"></i>':`<img class="sjp-logo" ${!o.print&&sjUrls.get('sj:logo:'+k)?`src="${sjUrls.get('sj:logo:'+k)}"`:`data-sjk="sj:logo:${k}"`} alt="">`):'';
   const title=ed?`<textarea class="sjp-title" rows="1" data-tki="sjf" data-f="t" data-grow maxlength="120" placeholder="${esc(S.ph)}" aria-label="عنوان الصفحة">${esc(p.t||'')}</textarea>`:`<${hT} class="sjp-title">${esc(p.t||'بلا عنوان')}${cont&&!part.att?' <small>(تابع)</small>':''}</${hT}>`;
   const sub=cont?'':k==='t'?(ed?`<input class="sjp-sub" data-tki="sjf" data-f="sub" maxlength="160" value="${esc(p.sub||'')}" placeholder="سطر تعريفي (اختياري): الجهة أو المكان، ودورك فيه" aria-label="سطر تعريفي">`:(String(p.sub||'').trim()?`<p class="sjp-sub">${esc(p.sub)}</p>`:'')):`<div data-sjwho>${sjWho(k,p,ed)}</div>`;
   const head=`<header class="sjp-hd"><div><span class="sjp-cat">${cont&&part.att?'التقرير المرفق':esc(sjCat(k,p.c)||S.name)}</span>${title}${sub}</div><div class="sjp-when">${logo}<span data-sjwhen style="display:contents">${cont?'':sjWhen(R,p)}</span></div></header>`;
@@ -124,16 +125,24 @@ function sjCover(k,R,L){const F=sjFlt[k],who=k==='s'?F.st:'',cns=k==='s'&&(F.st|
   return `<section class="ps sjp sjp-fix sjp-cover"><div class="sjp-c"><div class="sjp-in"><i class="sjp-mark"></i><div class="sjp-cv-top">${R.logo?`<img class="sjp-logo" data-sjk="sj:logo:${k}" alt="">`:''}${R.org?`<span>${esc(R.org)}</span>`:''}${R.school?`<b>${esc(R.school)}</b>`:''}</div>
    <div class="sjp-cv-mid"><span class="sjp-cat">العام الدراسي ${esc(R.year||F.y||sjYear(tkToday()))}${F.c&&sjCat(k,F.c)?' · '+esc(sjCat(k,F.c)):''}</span><h1>${title}</h1><hr>${l1?`<p class="sjp-cv-name">${esc(l1)}</p>`:''}${l2?`<p class="sjp-cv-job">${esc(l2)}</p>`:''}</div>
    <div class="sjp-cv-nums">${nums.map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')}</div></div></div></section>`}
-function sjIndex(k,R,rows){let lastC=null;const sec=R.po!=='d';
-  const tr=rows.map((r,i)=>{const p=r.p;let s='';if(sec&&p.c!==lastC){lastC=p.c;s=`<tr class="sec"><td colspan="4">${esc(sjCat(k,p.c)||'بلا قسم')}</td></tr>`}
-    return s+`<tr><td>${i+1}</td><td>${esc(p.t||'بلا عنوان')}${k==='s'&&p.st.length?`<br><small>${esc(p.st.join('، '))}</small>`:''}</td><td>${esc(sjDate(p.d))}</td><td>${r.no}</td></tr>`}).join('');
-  return `<section class="ps sjp sjp-fix sjp-flow"><div class="sjp-c"><div class="sjp-in"><header class="sjp-hd"><div><span class="sjp-cat">${SJ[k].name}</span><h2 class="sjp-title">الفهرس</h2></div></header><table class="sjp-idx"><thead><tr><th>م</th><th>الإنجاز</th><th>التاريخ</th><th>الصفحة</th></tr></thead><tbody>${tr}</tbody></table></div></div></section>`}
+/* الفهرس أوراق ثابتة كسائر الصفحات: تُقاس صفوفه خارج الشاشة وتُوزَّع على ما يلزم من أوراق، وعنوان القسم لا يبقى وحده آخر الورقة */
+function sjIndex(k,R,rows){const S=SJ[k],sec=R.po!=='d',trs=[];let lastC=null;
+  rows.forEach((r,i)=>{const p=r.p;if(sec&&p.c!==lastC){lastC=p.c;trs.push([1,`<tr class="sec"><td colspan="4">${esc(sjCat(k,p.c)||'بلا قسم')}</td></tr>`])}
+    trs.push([0,`<tr><td>${i+1}</td><td>${esc(p.t||'بلا عنوان')}${k==='s'&&p.st.length?`<br><small>${esc(p.st.join('، '))}</small>`:''}</td><td>${esc(sjDate(p.d))}</td><td>${r.no}</td></tr>`])});
+  const foot=esc([S.name,R.name,R.school].filter(Boolean).join(' · '));
+  const sheet=(body,i,n)=>`<section class="ps sjp sjp-fix sjp-index"><div class="sjp-c"><div class="sjp-in"><header class="sjp-hd"><div><span class="sjp-cat">${S.name}</span><h2 class="sjp-title">الفهرس${i?' <small>(تابع)</small>':''}</h2></div></header><div class="sjp-body"><table class="sjp-idx"><thead><tr><th>م</th><th>الإنجاز</th><th>التاريخ</th><th>الصفحة</th></tr></thead><tbody>${body}</tbody></table></div><footer class="sjp-ft"><span>${foot}</span><span class="sjp-ft-e">${n>1?`الفهرس ${i+1} من ${n}`:'الفهرس'}</span></footer></div></div></section>`;
+  const m=sjMeasEl();m.innerHTML=sheet(trs.map(t=>t[1]).join(''),0,1);
+  const body=m.querySelector('.sjp-body'),th=m.querySelector('thead'),avail=body.clientHeight-(th?th.offsetHeight:0)-6,hs=[...m.querySelectorAll('tbody tr')].map(tr=>tr.offsetHeight);m.innerHTML='';
+  const groups=[[]];let used=0;
+  trs.forEach((t,i)=>{let g=groups[groups.length-1];const need=(hs[i]||0)+(t[0]&&trs[i+1]?(hs[i+1]||0):0);if(g.length&&used+need>avail){g=[];groups.push(g);used=0}g.push(t[1]);used+=hs[i]||0});
+  return groups.map((g,i)=>sheet(g.join(''),i,groups.length)).join('')}
 function sjOrder(k,R,pages){const L=pages.slice(),byD=(a,b)=>String(a.d||'').localeCompare(String(b.d||''))||(a.ts||0)-(b.ts||0);if(R.po==='d')return L.sort(byD);
   const ord=SJ[k].cats.map(c=>c[0]),rank=c=>{const i=ord.indexOf(c);return i<0?ord.length-1.5:i};
   return L.sort((a,b)=>rank(a.c)-rank(b.c)||String(a.c||'').localeCompare(String(b.c||''),'ar')||byD(a,b))}
 /* ---------- اتّساع التقرير: يُقاس على ورقة ثابتة خارج الشاشة بعرض ١٨٦ مم ---------- */
+function sjMeasEl(){let m=document.getElementById('sjMeas');if(!m){m=document.createElement('div');m.id='sjMeas';m.setAttribute('aria-hidden','true');document.body.appendChild(m)}return m}
 function sjFit(k,R,p,ph){const txt=String(p.txt||'').trim();ph=ph||p.ph;if(!txt)return [{txt:'',fs:0,cont:false,last:true}];
-  let m=document.getElementById('sjMeas');if(!m){m=document.createElement('div');m.id='sjMeas';m.setAttribute('aria-hidden','true');document.body.appendChild(m)}
+  const m=sjMeasEl();
   /* يُترك سطر احتياط: فرق التفاف كلمة بين الشاشة والطابعة لا يقصّ سطرًا */
   const mount=(cont,fs)=>{m.innerHTML=sjSheet(k,R,p,{mode:'fix',meas:1,ph,part:{txt:'س',fs,cont,att:cont,last:true}});const b=m.querySelector('.sjp-txt');if(b){b._s=(parseFloat(getComputedStyle(b).lineHeight)||27)*.85;b.textContent='';b._i=b.appendChild(document.createElement('div'))}return b};
   const fits=(b,t)=>{if(!b)return false;b._i.textContent=t;return b._i.offsetHeight<=b.clientHeight-b._s};
@@ -235,16 +244,43 @@ async function sjImport(k,file){if(sjWork||!file)return;const S=SJ[k];let z,D=nu
   catch(e){console.error(e);toast('تعذّرت استعادة النسخة كاملة: تحقق من مساحة الجهاز');sjWork='';if(sjOn(k))sjRe();return}
   sjWork='';sjDropUrls('sj:');if(tkCur===S.id)sjRe();toast(add||upd?`استُعيدت النسخة: ${add?sjCnt(add,'صفحة جديدة','صفحتان جديدتان','صفحات جديدة','صفحة جديدة'):''}${add&&upd?'، و':''}${upd?'حُدّثت '+sjCnt(upd,'صفحة','صفحتان','صفحات','صفحة'):''}`:'لا صفحات في هذه النسخة')}
 /* ---------- الطباعة ---------- */
+/* المستند: غلاف وفهرس وأوراق، بصور بلا عناوين بعد (data-sjk)، يأخذه مسار الطباعة ومسار PDF */
+async function sjDoc(k,pages,o){const S=SJ[k],R0=sjS(k),L=o.single?pages.slice():sjOrder(k,R0,pages),blobs={};
+  for(const p of L)for(const x of p.ph){const b=await sjGet('sj:p:'+x.id);if(b)blobs['sj:p:'+x.id]=b}
+  let R=R0;if(R0.logo){const b=await sjGet('sj:logo:'+k);if(b)blobs['sj:logo:'+k]=b;else R=Object.assign({},R0,{logo:0})}
+  let no=0,html='';const rows=[];
+  for(const p of L){const ph=p.ph.filter(x=>blobs['sj:p:'+x.id]),parts=sjFit(k,R,p,ph);rows.push({p,no:no+1});parts.forEach(pt=>{no++;html+=sjSheet(k,R,p,{mode:'fix',print:1,ph,part:pt,no})})}
+  const front=o.single?'':((R.pc!==0?sjCover(k,R,L):'')+(R.pi!==0&&L.length>1?sjIndex(k,R,rows):''));
+  return {html:front+html,blobs,title:o.single?(L[0].t||S.name):[k==='s'&&sjFlt.s.st?'سجل إنجاز المتعلم':S.name,k==='s'?sjFlt.s.st:R.name].filter(Boolean).join(' — ')}}
 async function sjPrint(k,pages,o){o=o||{};if(sjWork)return;if(!pages.length){toast('لا صفحات للطباعة');return}const S=SJ[k];sjWork='print';if(tkCur===S.id)sjRe();
-  try{const R0=sjS(k),L=o.single?pages.slice():sjOrder(k,R0,pages),blobs={};
-    for(const p of L)for(const x of p.ph){const b=await sjGet('sj:p:'+x.id);if(b)blobs['sj:p:'+x.id]=b}
-    let R=R0;if(R0.logo){const b=await sjGet('sj:logo:'+k);if(b)blobs['sj:logo:'+k]=b;else R=Object.assign({},R0,{logo:0})}
-    let no=0,html='';const rows=[];
-    for(const p of L){const ph=p.ph.filter(x=>blobs['sj:p:'+x.id]),parts=sjFit(k,R,p,ph);rows.push({p,no:no+1});parts.forEach(pt=>{no++;html+=sjSheet(k,R,p,{mode:'fix',print:1,ph,part:pt,no})})}
-    const front=o.single?'':((R.pc!==0?sjCover(k,R,L):'')+(R.pi!==0&&L.length>1?sjIndex(k,R,rows):''));
-    await sjPrintGo(front+html,blobs,o.single?(L[0].t||S.name):[S.name,k==='s'?sjFlt.s.st:R.name].filter(Boolean).join(' — '))}
+  try{const D=await sjDoc(k,pages,o);await sjPrintGo(D.html,D.blobs,D.title)}
   catch(e){console.error(e);toast('تعذّر تجهيز الطباعة')}
   sjWork='';if(tkCur===S.id)sjRe()}
+/* خلية الصورة في ملف PDF: الرسّام (html2canvas) لا يعرف object-fit، فتُقصّ الصورة بنسبة خليتها وموضع قصّها، أو تُحتوى على خلفية الخلية، قبل رسمها */
+async function sjCrop(b,cw,ch,fit,pos,ok){if(!(cw>0&&ch>0))return null;let src='';
+  try{src=ok?URL.createObjectURL(b):await mdData(b);const img=await new Promise(res=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>res(null);i.src=src});if(!img||!img.naturalWidth)return null;
+    const iw=img.naturalWidth,ih=img.naturalHeight,c=document.createElement('canvas'),x=c.getContext('2d');let W=cw*2,H=ch*2;
+    const up=fit?Math.min(W/iw,H/ih):Math.max(W/iw,H/ih);if(up>1){W/=up;H/=up}W=Math.max(1,Math.round(W));H=Math.max(1,Math.round(H));c.width=W;c.height=H;x.imageSmoothingQuality='high';
+    if(fit){const z=Math.min(W/iw,H/ih),dw=iw*z,dh=ih*z;x.fillStyle='rgb(247,246,251)';x.fillRect(0,0,W,H);x.drawImage(img,(W-dw)/2,(H-dh)/2,dw,dh)}
+    else{const z=Math.max(W/iw,H/ih),sw=W/z,sh=H/z;x.drawImage(img,(iw-sw)/2,pos===1?0:pos===2?ih-sh:(ih-sh)/2,sw,sh,0,0,W,H)}
+    const out=await new Promise(res=>c.toBlob(res,'image/jpeg',.9));c.width=c.height=0;return out}
+  catch(e){return null}finally{sjFree(src)}}
+/* ملف PDF مباشر: الأوراق نفسها تُرسم صورًا وتُجمع في ملف (tkPdf)، لمن لا يعرف «حفظ PDF» من نافذة الطباعة، وحيث لا تُفتح النافذة.
+   اسم الملف يدل على ما فيه: عنوان الصفحة، أو اسم السجل ومعه المتعلم أو الصف أو القسم المعروض ثم التاريخ */
+function sjFile(t){return String(t||'').replace(/[\\/:*?"<>|«»“”·\u200e\u200f]/g,' ').trim().replace(/\s+/g,'-').slice(0,48)}
+async function sjPdf(k,pages,o){o=o||{};if(sjWork){toast('انتظر حتى ينتهي التجهيز الجاري');return}if(!pages.length){toast('لا صفحات في الملف');return}
+  const S=SJ[k],F=sjFlt[k],made=[],ov=tkPdfOv();sjWork='pdf';ov.msg('تُجهَّز الأوراق…');ov.bar(.01);if(tkCur===S.id)sjRe();
+  try{const D=await sjDoc(k,pages,o),ok=await sjBlobOk,m=sjMeasEl();m.innerHTML=D.html;const imgs=[...m.querySelectorAll('img[data-sjk]')];let n=0;
+    for(const im of imgs){const b=D.blobs[im.dataset.sjk],fig=im.closest('.sjp-ph');im.removeAttribute('data-sjk');im.removeAttribute('data-box');n++;if(!b){im.remove();continue}let out=b;
+      if(fig){const r=fig.getBoundingClientRect(),cl=fig.classList;out=(await sjCrop(b,r.width,r.height,cl.contains('fit'),cl.contains('p1')?1:cl.contains('p2')?2:0,ok))||b;cl.remove('fit','p1','p2')}
+      if(ok){const u=URL.createObjectURL(out);made.push(u);im.src=u}else im.src=await mdData(out);
+      ov.msg('تُجهَّز الصور: '+n+' من '+imgs.length);ov.bar(.01+.04*n/imgs.length)}
+    const html=m.innerHTML,sheets=m.querySelectorAll('.ps').length;m.innerHTML='';
+    const cns=k==='s'&&!o.single&&F.ck&&!F.st?[...new Set(pages.map(p=>p.cn).filter(Boolean))]:[];
+    const name=(o.single?[sjFile(D.title)||sjFile(S.name)]:[sjFile(k==='s'&&F.st?'سجل إنجاز المتعلم':S.name),sjFile(k==='s'&&F.st?F.st:cns.length===1?cns[0]:''),sjFile(F.c?sjCat(k,F.c):''),tkToday()]).filter(Boolean).join('_')+'.pdf';
+    await tkPdf(html,name,{title:D.title,scale:sheets>12?1.8:2,q:.88,solo:true,err:'تعذّر تجهيز ملف PDF. تحقّق من اتصال الإنترنت وأعد المحاولة، أو استعمل زر «اطبع».'})}
+  catch(e){console.error(e);toast('تعذّر تجهيز ملف PDF. أعد المحاولة، أو استعمل زر «اطبع».')}
+  ov.close();made.forEach(sjFree);sjWork='';if(tkCur===S.id)sjRe()}
 /* صورة الطباعة: تُصغَّر إلى ما تحتاجه خليتها عند ٢٠٠ نقطة في البوصة، فيخفّ ملف PDF ولا تتغير الصورة المحفوظة */
 async function sjLean(b,box,ok){const v=String(box||'').split(',').map(Number),cw=v[0],ch=v[1],iw=v[2],ih=v[3];if(!(cw>0&&ch>0&&iw>0&&ih>0))return b;
   const need=Math.round((v[4]?Math.min(cw,ch*iw/ih):Math.max(cw,ch*iw/ih))/25.4*200);if(need>=iw*.8)return b;
@@ -273,11 +309,11 @@ function sjHome(k,R,M){const S=SJ[k],F=sjFlt[k];if(sjCur){sjDropUrls('sj:p:');sj
   const stale=all.length&&(!R.exp||(R.mod||0)>R.exp+1000);
   const card=p=>`<a class="sj-card" href="#tk/${S.id}/p-${p.id}"><div class="sj-mini" aria-hidden="true">${sjSheet(k,R,p,{mode:'fix',thumb:1})}</div><b>${esc(p.t||'بلا عنوان')}</b><small>${esc(sjDate(p.d))}${p.at.length?sjI('clip'):''}</small>${k==='s'&&p.st.length?`<small>${esc(p.st.join('، '))}</small>`:''}</a>`;
   M.innerHTML=`<div class="sj-top"><p class="sj-stats">${all.length?`<b>${sjCnt(all.length,'صفحة واحدة','صفحتان','صفحات','صفحة')}</b> · ${sjCnt(nPh,'صورة واحدة','صورتان','صور','صورة')}${nAt?' · '+sjCnt(nAt,'مرفق واحد','مرفقان','مرفقات','مرفقًا'):''}${size?' · نحو '+sjSize(size)+' على جهازك':''}`:'كل إنجاز صفحة: عنوان وتاريخ، وصور حتى 6، وتقرير تحتها أو ملف مرفق.'}</p>
-    <div class="tk-row-btns"><button class="tk-btn pri" data-tk="sjnew">${tkI('plus')}صفحة جديدة</button><button class="tk-btn" data-tk="sjprint"${L.length&&!sjWork?'':' disabled'}>${tkI('print')}${sjWork==='print'?'يُجهَّز السجل…':'اطبع أو احفظ PDF'}</button><button class="tk-btn" data-tk="sjexp"${all.length&&!sjWork?'':' disabled'}>${tkI('dl')}${sjWork==='exp'?'تُجهَّز النسخة…':'نزّل نسخة بالصور'}</button><button class="tk-btn" data-tk="sjimp"${sjWork?' disabled':''}>${tkI('ul')}${sjWork==='imp'?'تُستعاد النسخة…':'استعد نسخة'}</button></div></div>
+    <div class="tk-row-btns"><button class="tk-btn pri" data-tk="sjnew">${tkI('plus')}صفحة جديدة</button><button class="tk-btn" data-tk="sjpdf"${L.length&&!sjWork?'':' disabled'}>${tkI('dl')}${sjWork==='pdf'?'يُجهَّز الملف…':'نزّل PDF'}</button><button class="tk-btn" data-tk="sjprint"${L.length&&!sjWork?'':' disabled'}>${tkI('print')}${sjWork==='print'?'يُجهَّز السجل…':'اطبع'}</button></div></div>
    ${all.length?`<div class="sj-filters">${all.length>7||F.q?`<input class="tk-in sj-q" type="search" data-tki="sjq" value="${esc(F.q)}" placeholder="ابحث في العناوين والتقارير" aria-label="ابحث في السجل" autocomplete="off" enterkeyhint="search">`:''}<div class="x9-chips">${chip('','الكل',all.length)}${cats.map(([c,l])=>chip(c,l,all.filter(p=>p.c===c).length)).join('')}</div>${years.length>1?tkSel('sjfy',[['','كل الأعوام']].concat(years.map(y=>[y,y])),F.y,'aria-label="العام الدراسي"'):''}${cls.length>1?tkSel('sjfk',[['','كل الصفوف']].concat(cls),F.ck,'aria-label="الصف"'):''}${stu.length?tkSel('sjfs',[['','كل المتعلمين']].concat(stu.map(n=>[n,n])),F.st,'aria-label="سجل متعلم بعينه"'):''}</div>
     <div class="sj-grid"><button class="sj-add" data-tk="sjnew">${tkI('plus')}<span>صفحة جديدة</span></button>${L.map(card).join('')}</div>${L.length?'':'<p class="tk-tip">لا صفحات بهذه التصفية.</p>'}
-    ${F.c||F.y||F.q||F.ck||F.st?`<p class="tk-tip">الطباعة تأخذ المعروض وحده: ${sjCnt(L.length,'صفحة واحدة','صفحتان','صفحات','صفحة')}${k==='s'&&F.st?'، وغلافها باسم «'+esc(F.st)+'»':''}.</p>`:''}`
-   :`<div class="tk-empty"><b>${k==='t'?'ابدأ سجلّك بأول صفحة':'ابدأ سجلّ طلابك بأول صفحة'}</b><span>${k==='t'?'ورشة قدّمتها، أو دورة حضرتها، أو مبادرة، أو تكريم: صوّرها واكتب عنها سطرين، والسجل يرتّبها ويطبعها ملفًا واحدًا بغلاف وفهرس.':'مشروع، أو بحث، أو مسابقة، أو عمل مميّز: صوّره وانسبه إلى أصحابه، والسجل يرتّبه بالصف والمتعلم، ويطبع لكل متعلم سجلّه.'}</span><button class="tk-btn pri big" data-tk="sjnew">${tkI('plus')}صفحة جديدة</button></div>`}
+    ${F.c||F.y||F.q||F.ck||F.st?`<p class="tk-tip">ملف PDF والطباعة يأخذان المعروض وحده: ${sjCnt(L.length,'صفحة واحدة','صفحتان','صفحات','صفحة')}${k==='s'&&F.st?'، وغلافها باسم «'+esc(F.st)+'»':''}.</p>`:''}`
+   :`<div class="tk-empty"><b>${k==='t'?'ابدأ سجلّك بأول صفحة':'ابدأ سجلّ طلابك بأول صفحة'}</b><span>${k==='t'?'ورشة قدّمتها، أو دورة حضرتها، أو مبادرة، أو تكريم: صوّرها واكتب عنها سطرين، والسجل يرتّبها ويطبعها ملفًا واحدًا بغلاف وفهرس.':'مشروع، أو بحث، أو مسابقة، أو عمل مميّز: صوّره وانسبه إلى أصحابه، والسجل يرتّبه بالصف والمتعلم، ويطبع لكل متعلم سجلّه.'}</span><button class="tk-btn pri big" data-tk="sjnew">${tkI('plus')}صفحة جديدة</button><button class="tk-btn" data-tk="sjimp"${sjWork?' disabled':''}>${tkI('ul')}${sjWork==='imp'?'تُستعاد النسخة…':'استعد نسخة محفوظة'}</button></div>`}
    <section class="tk-card"><div class="tk-card-h"><h3>${tkI('edit')}الغلاف والتذييل وخيارات الطباعة</h3></div>
     <div class="sj-form">${inf('name',k==='t'?'اسمك كما يظهر على الغلاف':'اسم المعلم')}${inf('job','المسمى والمادة','مثل: معلم التربية الإسلامية')}${inf('school','المدرسة')}${inf('org','سطر أعلى الغلاف','مثل: وزارة التربية · المنطقة التعليمية',100)}${inf('year','العام الدراسي على الغلاف',sjYear(tkToday()),20)}</div>
     <div class="sj-logo">${R.logo?`<img data-sjk="sj:logo:${k}" alt="الشعار">`:''}<button class="tk-btn sm" data-tk="sjlogo">${sjI('img')}${R.logo?'بدّل الشعار':'أضف شعار المدرسة'}</button>${R.logo?`<button class="tk-btn sm" data-tk="sjlogox">${tkI('trash')}أزله</button>`:''}</div>
@@ -285,7 +321,8 @@ function sjHome(k,R,M){const S=SJ[k],F=sjFlt[k];if(sjCur){sjDropUrls('sj:p:');sj
      <span class="tk-seg sm" role="group" aria-label="ترتيب الصفحات عند الطباعة"><button data-tk="sjpo" data-v="c" aria-pressed="${R.po!=='d'}">رتّب بالأقسام</button><button data-tk="sjpo" data-v="d" aria-pressed="${R.po==='d'}">رتّب بالتاريخ</button></span></div>
     <p class="tk-tip">يظهر الاسم والمدرسة في تذييل كل صفحة. والتاريخ الهجري بتقويم أم القرى، وقد يختلف يومًا عن الرؤية.</p></section>
    ${k==='s'?`<p class="x9-note">في مدارس الموهوبين: نتاج المتعلم ملك له ويُنسب إليه، ولا يُعرض لدى جهة خارجية إلا بموافقة رئيس المكتب وموافقة ولي الأمر الكتابية (مادة 52). <a href="#p2-s5">اقرأه في الدليل</a>. وصوّر العمل نفسه، واجعل ظهور المتعلمين في الصور بما تجيزه مدرستك. وهذا سجلّك أنت لتوثيق إنجازاتهم، وليس الملف التراكمي الرسمي.</p>`:`<p class="tk-tip">السجل يحفظ الصور والتقارير نفسها. أما فهرس الشواهد على بنود تقييم الأداء فمكانه <a href="#tk/proof">ملف أدلة الأداء</a>، وتضيف إليه أي صفحة من هنا بزر واحد.</p>`}
-   <p class="tk-tip">${stale?'<b>في السجل ما لم يُنسخ بعد.</b> ':''}«النسخة الاحتياطية الشاملة» تحفظ نصوص السجل وحدها. أما الصور والمرفقات فتُحفظ من هنا بزر «نزّل نسخة بالصور»: ملف واحد تستعيده على هذا الجهاز أو غيره.</p>
+   <section class="tk-card"><div class="tk-card-h"><h3>${tkSvg('M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8')}نسخة السجل بصوره</h3><div class="tk-row-btns"><button class="tk-btn" data-tk="sjexp"${all.length&&!sjWork?'':' disabled'}>${tkI('dl')}${sjWork==='exp'?'تُجهَّز النسخة…':'نزّل نسخة بالصور'}</button><button class="tk-btn" data-tk="sjimp"${sjWork?' disabled':''}>${tkI('ul')}${sjWork==='imp'?'تُستعاد النسخة…':'استعد نسخة'}</button></div></div>
+    <p class="tk-tip">${stale?'<b>في السجل ما لم يُنسخ بعد.</b> ':''}«النسخة الاحتياطية الشاملة» تحفظ نصوص السجل وحدها. أما الصور والمرفقات فتُحفظ في هذه النسخة: ملف واحد تستعيده على هذا الجهاز أو غيره، وتعود به صفحاتك قابلة للتحرير. وملف PDF للعرض والإرسال لا للاستعادة.</p></section>
    <p class="tk-priv">${tkI('lock')}<span>النصوص والصور والمرفقات على جهازك وحده، لا يُرفع منها شيء.</span></p>`;
   sjFill(M)}
 /* ---------- صفحة التحرير ---------- */
@@ -301,10 +338,10 @@ function sjEditor(k,R,p,M){const S=SJ[k],fresh=sjCur!==p.id;if(fresh){sjDropUrls
   const linked=k==='t'&&p.pf&&pfS().items.some(x=>x.id===p.pf);
   let sheet;if(sjPv){let no=0;sheet=sjFit(k,R,p,p.ph).map(pt=>sjSheet(k,R,p,{mode:'fix',part:pt,no:++no})).join('')}else sheet=sjSheet(k,R,p,{mode:'edit',sel:sjSel})+(p.only&&p.ph.length?sjSheet2(k,p):'');
   M.innerHTML=`<div class="sj-edit"><div class="sj-nav"><a class="tk-btn sm" href="#tk/${S.id}">${tkI('back')}السجل</a><span class="sj-pos">صفحة ${i+1} من ${L.length}</span>${prev?`<a class="tk-ib" href="#tk/${S.id}/p-${prev.id}" aria-label="الصفحة الأحدث" title="الصفحة الأحدث">${tkI('back')}</a>`:''}${next?`<a class="tk-ib" href="#tk/${S.id}/p-${next.id}" aria-label="الصفحة الأقدم" title="الصفحة الأقدم">${tkI('next')}</a>`:''}<span class="sj-sp"></span>
-     <button class="tk-btn sm${sjPv?' on':''}" data-tk="sjpv" aria-pressed="${sjPv}">${tkI('eye')}${sjPv?'عُد إلى التحرير':'معاينة'}</button><button class="tk-btn sm" data-tk="sjprint1"${sjWork?' disabled':''}>${tkI('print')}${sjWork==='print'?'تُجهَّز…':'اطبع الصفحة'}</button></div>
+     <button class="tk-btn sm${sjPv?' on':''}" data-tk="sjpv" aria-pressed="${sjPv}">${tkI('eye')}${sjPv?'عُد إلى التحرير':'معاينة'}</button><span class="sj-acts"><button class="tk-btn sm" data-tk="sjpdf1"${sjWork?' disabled':''}>${tkI('dl')}${sjWork==='pdf'?'يُجهَّز الملف…':'نزّل الصفحة PDF'}</button><button class="tk-btn sm" data-tk="sjprint1"${sjWork?' disabled':''}>${tkI('print')}${sjWork==='print'?'تُجهَّز…':'اطبع الصفحة'}</button></span></div>
     <section class="tk-card sj-data"><div class="tk-card-h"><h3>${tkI('edit')}بيانات الصفحة</h3></div><div class="tk-bar"><label class="tk-lb tk-grow">القسم${tkSel('sjc',cats.concat([['+','قسم جديد…']]),sjNewCat?'+':p.c)}</label><label class="tk-lb">التاريخ<input class="tk-in" type="date" data-tki="sjf" data-f="d" value="${esc(p.d||'')}" max="2100-12-31"></label></div>
      ${sjNewCat?`<div class="tk-bar"><label class="tk-lb tk-grow">اسم القسم الجديد<input class="tk-in" id="sjCatNew" maxlength="40" autocomplete="off"></label><button class="tk-btn" data-tk="sjcatok">اعتمده</button></div>`:''}${stu}</section>
-    <div class="sj-stage">${sheet}${sjPv?'<p class="tk-tip">هكذا تُطبع الصفحة. عُد إلى التحرير لتغيّر فيها.</p>':'<p class="sj-fit" id="sjFit" role="status"></p>'}</div>
+    <div class="sj-stage">${sheet}${sjPv?'<p class="tk-tip">هكذا تخرج الصفحة مطبوعةً وفي ملف PDF. عُد إلى التحرير لتغيّر فيها.</p>':'<p class="sj-fit" id="sjFit" role="status"></p>'}</div>
     <div class="sj-more">${more}<section class="tk-card"><div class="tk-card-h"><h3>${sjI('clip')}التقرير المرفق والملفات</h3></div>${p.at.length?`<ul class="sj-att">${p.at.map(a=>`<li><span><bdi>${esc(a.n)}</bdi><small>${sjSize(a.z||0)}</small></span><button class="tk-ib" data-tk="sjattdl" data-id="${a.id}" aria-label="نزّل ${esc(a.n)}" title="نزّله">${tkI('dl')}</button><button class="tk-ib" data-tk="sjattx" data-id="${a.id}" aria-label="احذف ${esc(a.n)}" title="احذفه">${tkI('trash')}</button></li>`).join('')}</ul>`:''}
       <div class="tk-row-btns"><button class="tk-btn" data-tk="sjatt"${p.at.length>=5||sjWork?' disabled':''}>${tkI('plus')}${sjWork==='at'?'يُحفظ الملف…':'أرفق ملفًا'}</button></div>
       <p class="tk-tip">ملف التقرير كما هو: PDF أو Word أو صورة، حتى 20 ميغابايت. يُذكر اسمه أسفل الصفحة، ويُحفظ الملف نفسه مع نسخة السجل. وإن كان تقريرك ورقة مصوّرة فأضفها صورةً واختر «صور فقط».</p></section>
@@ -327,6 +364,7 @@ const sjTool=k=>({render(M,args){const R=sjS(k),a=(args&&args[0])||'',pid=a.star
   if(a==='sjnew'){if(R.pages.length>=600){toast('بلغ السجل 600 صفحة: نزّل نسخة منه وابدأ سجلًّا جديدًا');return}const c=F.c||R.lc||S.cats[0][0],ck=k==='s'?(F.ck||R.lk||''):'',cl=ck?tkClass(ck):null;const p=sjNewPage(k,R,{c,ck:cl?ck:'',cn:cl?cl.name:''});location.hash='#tk/'+S.id+'/p-'+p.id;return}
   if(a==='sjfc'){F.c=t.dataset.c||'';sjRe();return}
   if(a==='sjprint'){sjPrint(k,sjFiltered(k,R));return}
+  if(a==='sjpdf'){sjPdf(k,sjFiltered(k,R));return}
   if(a==='sjexp'){sjExport(k);return}
   if(a==='sjimp'){sjPick('.zip,application/zip,application/x-zip-compressed',false,fs=>sjImport(k,fs[0]));return}
   if(a==='sjpo'){R.po=t.dataset.v==='d'?'d':'c';tkSave();sjRe();return}
@@ -335,6 +373,7 @@ const sjTool=k=>({render(M,args){const R=sjS(k),a=(args&&args[0])||'',pid=a.star
   const p=R.pages.find(x=>x.id===sjPid());if(!p)return;const x=p.ph[sjSel];
   if(a==='sjpv'){sjPv=!sjPv;sjSel=-1;sjRe();return}
   if(a==='sjprint1'){sjPrint(k,[p],{single:1});return}
+  if(a==='sjpdf1'){sjPdf(k,[p],{single:1});return}
   if(a==='sjadd'){if(p.ph.length>=6){toast('في الصفحة 6 صور، وهو الحد الأعلى');return}sjPick('image/*',true,fs=>sjAddPhotos(k,p,fs));return}
   if(a==='sjsel'){const i=+t.dataset.i;sjSel=sjSel===i?-1:i;sjRe();return}
   if(a==='sjtpl'){const tp=sjTplOf(p.ph,p.tpl,sjAreaH(p));if(!tp||tp.n<2)return;p.tpl=((tp.i+1)%tp.n)+1;sjReFit(p);sjTouch(R,p);sjRe();return}
