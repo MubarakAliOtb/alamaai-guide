@@ -24916,7 +24916,7 @@ function sjArrange(p){const n=Math.min(6,p.ph.length),L=SJ_TPL[n]||[];if(n<2||p.
     walk(ph.map((_,i)=>i),0,a=>{let l=0,mv=0;for(let i=0;i<n;i++){l+=M[i][a[i]];mv+=Math.abs(a[i]-i)}l=l/A+ti*.004+mv*.0004;if(l<bl){bl=l;best=a.slice()}})});
   if(best)p.ph=best.map(i=>ph[i]).concat(p.ph.slice(n))}
 /* صورة لا تشبه خليتها (شهادة طولية في مساحة عرضية): تُعرض كاملة بدل أن يُقصّ أكثر من نصفها، وللمعلم أن يملأ بها الإطار */
-function sjAutoFit(p){const n=Math.min(6,p.ph.length);if(!n)return;const H=sjAreaH(p),tp=sjTplOf(p.ph,p.tpl,H);if(!tp)return;const C=sjCellsOf(tp.T,186,H),lim=n===1?.45:.6;
+function sjAutoFit(p){const n=Math.min(6,p.ph.length);if(!n)return;const H=sjAreaH(p),tp=sjTplOf(p.ph,p.tpl,H);if(!tp)return;const C=sjCellsOf(tp.T,186,H),lim=n===1?.45:.72;
   p.ph.slice(0,n).forEach((x,i)=>{if(x.fit!=null||!x.w||!x.h)return;const rp=x.w/x.h;x.fit=1-Math.min(C[i].r/rp,rp/C[i].r)>lim?1:0;x.af=1})}
 /* ما قرّره sjAutoFit (af) يُعاد تقديره كلما تغيّر التخطيط؛ وما اختاره المعلم بيده يبقى */
 function sjReFit(p){p.ph.forEach(x=>{if(x.af){delete x.fit;delete x.af}});sjAutoFit(p)}
