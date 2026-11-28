@@ -24915,6 +24915,9 @@ function sjArrange(p){const n=Math.min(6,p.ph.length),L=SJ_TPL[n]||[];if(n<2||p.
   L.forEach((T,ti)=>{const C=sjCellsOf(T,186,H),A=C.reduce((x,c)=>x+c.a,0),M=C.map(c=>ph.map(x=>sjCellLoss(c,x)));
     walk(ph.map((_,i)=>i),0,a=>{let l=0,mv=0;for(let i=0;i<n;i++){l+=M[i][a[i]];mv+=Math.abs(a[i]-i)}l=l/A+ti*.004+mv*.0004;if(l<bl){bl=l;best=a.slice()}})});
   if(best)p.ph=best.map(i=>ph[i]).concat(p.ph.slice(n))}
+/* صورة لا تشبه خليتها (شهادة طولية في مساحة عرضية): تُعرض كاملة بدل أن يُقصّ أكثر من نصفها، وللمعلم أن يملأ بها الإطار */
+function sjAutoFit(p){const n=Math.min(6,p.ph.length);if(!n)return;const H=sjAreaH(p),tp=sjTplOf(p.ph,p.tpl,H);if(!tp)return;const C=sjCellsOf(tp.T,186,H),lim=n===1?.45:.6;
+  p.ph.slice(0,n).forEach((x,i)=>{if(x.fit!=null||!x.w||!x.h)return;const rp=x.w/x.h;x.fit=1-Math.min(C[i].r/rp,rp/C[i].r)>lim?1:0})}
 /* ---------- الورقة: تحرير (edit) أو ثابتة للمعاينة والطباعة والمصغّرات (fix) ---------- */
 const sjWhen=(R,p)=>`<span>${esc(sjDate(p.d))}</span>${R.hij&&sjHij(p.d)?`<small>${esc(sjHij(p.d))}</small>`:''}`;
 const sjFoot=(k,R,p,no)=>`<span>${esc([SJ[k].name,R.name,R.school].filter(Boolean).join(' · '))}</span><span class="sjp-ft-e">${esc(sjYear(p.d))}${no?`<b>${no}</b>`:''}</span>`;
@@ -25005,7 +25008,7 @@ async function sjAddPhotos(k,p,files){if(sjWork){toast('انتظر حتى ينت
   sjWork='ph';if(sjOn(k,p))sjRe();let ok=0,bad=0,full=false;
   for(const f of imgs.slice(0,room)){if(f.size>40e6){bad++;continue}const r=await sjImg(f,{thumb:1});if(!r){bad++;continue}const id=tkUid();
     if(!(await sjPut('sj:p:'+id,r.blob))){full=true;break}await sjPut('sj:t:'+id,r.thumb||r.blob);p.ph.push({id,w:r.w,h:r.h,z:r.blob.size});ok++}
-  sjWork='';if(ok){p.tpl=0;sjArrange(p);sjSel=-1;sjTouch(sjS(k),p);try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{})}catch(e){}}
+  sjWork='';if(ok){p.tpl=0;sjArrange(p);sjAutoFit(p);sjSel=-1;sjTouch(sjS(k),p);try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{})}catch(e){}}
   if(tkCur===SJ[k].id)sjRe();
   toast(full?'تعذّر حفظ الصورة على هذا الجهاز: التخزين ممتلئ أو غير متاح':bad?(ok?`أُضيف ${ok}، وتعذّرت قراءة ${bad}: جرّب صيغة JPG أو PNG`:'تعذّرت قراءة الصورة: جرّب صيغة JPG أو PNG'):imgs.length>room?`أُضيفت ${ok} فقط: الحد 6 صور في الصفحة`:ok===1?'أُضيفت الصورة':ok===2?'أُضيفت صورتان':`أُضيفت ${ok} صور`)}
 /* ---------- ZIP بلا ضغط: يُكتب ويُقرأ هنا بلا مكتبة، فيعمل بلا إنترنت ---------- */
